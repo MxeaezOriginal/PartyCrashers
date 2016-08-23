@@ -106,10 +106,6 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        Debug.Log(gameObject.name + " X -> " + otherPlayerX.gameObject.name);
-        Debug.Log(gameObject.name + " Z -> " + otherPlayerZ.gameObject.name);
-        Debug.Log(" ");
-
         if (x >= maxMovementX) // if the greatest distance if greater than what is allowed, stop movement
         {
             stopMovementX = true;
