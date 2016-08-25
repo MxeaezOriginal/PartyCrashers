@@ -20,6 +20,81 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
+--- !u!1 &107784
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 430428}
+  m_Layer: 0
+  m_Name: FirePoint_4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &133624
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 445060}
+  m_Layer: 0
+  m_Name: FirePoint_2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &139498
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 481880}
+  m_Layer: 0
+  m_Name: FirePoint_1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &149362
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 490592}
+  m_Layer: 0
+  m_Name: FirePoint_5
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &172210
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 417796}
+  m_Layer: 0
+  m_Name: FirePoint_3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &178698
 GameObject:
   m_ObjectHideFlags: 0
@@ -76,6 +151,30 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
+--- !u!4 &417796
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 172210}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -1, z: 0.6600004}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 480814}
+  m_RootOrder: 2
+--- !u!4 &430428
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 107784}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3, y: 0.09999998, z: 0.6600004}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 480814}
+  m_RootOrder: 3
 --- !u!4 &443546
 Transform:
   m_ObjectHideFlags: 1
@@ -83,12 +182,24 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 180630}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 34, y: 3.62, z: 15.6}
+  m_LocalPosition: {x: 28.94, y: 3.62, z: 15.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 497092}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!4 &445060
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 133624}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0.6600004}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 480814}
+  m_RootOrder: 1
 --- !u!4 &456420
 Transform:
   m_ObjectHideFlags: 1
@@ -110,9 +221,38 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.7, y: 0.61, z: -0.31}
   m_LocalScale: {x: 0.12297158, y: 0.8342137, z: 0.56363213}
-  m_Children: []
+  m_Children:
+  - {fileID: 481880}
+  - {fileID: 445060}
+  - {fileID: 417796}
+  - {fileID: 430428}
+  - {fileID: 490592}
   m_Father: {fileID: 497092}
   m_RootOrder: 1
+--- !u!4 &481880
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 139498}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.1, z: 0.66}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 480814}
+  m_RootOrder: 0
+--- !u!4 &490592
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 149362}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3, y: 0.09999998, z: 0.6600004}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 480814}
+  m_RootOrder: 4
 --- !u!4 &497092
 Transform:
   m_ObjectHideFlags: 1
@@ -264,7 +404,10 @@ MonoBehaviour:
   m_Anim: {fileID: 0}
   m_Damage: 0
   m_AttackSpeed: 0
-  m_PrimarySounds: []
+  m_PrimarySounds:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   m_SecondarySounds: []
   m_SoundsOnHit: []
 --- !u!114 &11442208
@@ -279,15 +422,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Anim: {fileID: 0}
-  m_Damage: 0
-  m_AttackSpeed: 0
+  m_Damage: 10
+  m_AttackSpeed: 0.2
   m_PrimarySounds: []
   m_SecondarySounds: []
   m_SoundsOnHit: []
-  m_Projectile: {fileID: 0}
-  m_FirePoint: []
-  m_ProjectileSpeed: 0
-  m_ProjectileAcceleration: 0
+  m_Projectile: {fileID: 184478, guid: d05e7a665ab0ec6468bdd70b7dd708f6, type: 2}
+  m_FirePoint:
+  - {fileID: 139498}
+  - {fileID: 133624}
+  - {fileID: 172210}
+  - {fileID: 107784}
+  - {fileID: 149362}
+  m_ProjectileSpeed: 1500
   m_MaxSpeed: 0
 --- !u!114 &11458736
 MonoBehaviour:
@@ -318,9 +465,9 @@ MonoBehaviour:
   jump: 20
   maxMovementX: 20
   maxMovementZ: 18
-  jumpButton: Jump_P2
-  horizontalButton: Horizontal_P3
-  verticalButton: Vertical_P3
+  jumpButton: Jump_
+  horizontalButton: Horizontal_
+  verticalButton: Vertical_
 --- !u!114 &11477312
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -336,8 +483,8 @@ MonoBehaviour:
   m_AttackSpeed: 0
   m_Gold: 0
   m_Health: 0
-  m_Weapon: 0
-  m_PrimaryAttack: Primary_P3
+  m_WeaponID: 0
+  m_PrimaryAttack: Primary_
   m_SecondaryAttack: Secondary_
   m_Interact: Interact_
   m_Silly: Silly_

@@ -12,8 +12,7 @@ public class Sword : Melee {
 	
 	// Update is called once per frame
 	void Update () {
-	
-	}
+    }
 
     override public void primaryAttack()
     {
