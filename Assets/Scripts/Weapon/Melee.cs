@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Weapon : MonoBehaviour {
+public abstract class Melee : Weapon {
 
 	// Use this for initialization
 	void Start () {
@@ -12,5 +12,4 @@ public class Weapon : MonoBehaviour {
 	void Update () {
 	
 	}
-
 }
