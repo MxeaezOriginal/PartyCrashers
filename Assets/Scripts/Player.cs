@@ -1,10 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
-public class Player : MonoBehaviour
-{
+public class Player : MonoBehaviour {
 
     private enum ATTACKTYPE
     {
@@ -17,8 +14,6 @@ public class Player : MonoBehaviour
     public float m_AttackSpeed;
     public int m_Gold;
     public int m_Health;
-    public int m_MaxHealth = 100;
-    public int m_Collect;
     public WEAPONTYPE m_WeaponID;
     private Transform m_Weapon;
 
@@ -30,23 +25,12 @@ public class Player : MonoBehaviour
     public string m_Stats = "Stats_";
     public string m_Pause = "Pause_";
 
-    public Text m_HealthText;
-    public Text m_Score;
-
-    // Use this for initialization
-    void Start()
-    {
-        m_Health = m_MaxHealth;
-        //m_collect = 0;
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        m_HealthText.text = "Health: " + m_Health.ToString();
-        //m_Score.text = "Score: " + m_Score.ToString();
-
+	// Use this for initialization
+	void Start () {
+	}
+	
+	// Update is called once per frame
+	void Update () {
         updateWeapon();
         if (Input.GetMouseButtonDown(0))
         {
@@ -56,9 +40,9 @@ public class Player : MonoBehaviour
         {
             attack(ATTACKTYPE.SECONDARY);
         }
-        if (Input.GetButtonDown(m_Pause))
+        if(Input.GetButtonDown(m_Pause))
         {
-            if (m_WeaponID == WEAPONTYPE.SWORD)
+            if(m_WeaponID == WEAPONTYPE.SWORD)
             {
                 setWeapon(WEAPONTYPE.BOW);
             }
@@ -74,7 +58,7 @@ public class Player : MonoBehaviour
         Transform weapons = transform.FindChild("Weapon");
         foreach (Transform child in weapons)
         {
-            if (child.gameObject.GetComponent<WeaponID>().m_WeaponType == m_WeaponID)
+            if(child.gameObject.GetComponent<WeaponID>().m_WeaponType == m_WeaponID)
             {
                 child.gameObject.SetActive(true);
                 m_Weapon = child;
@@ -100,7 +84,7 @@ public class Player : MonoBehaviour
                 {
                     m_Weapon.gameObject.GetComponent<Sword>().primaryAttack();
                 }
-                else if (a == ATTACKTYPE.SECONDARY)
+                else if(a == ATTACKTYPE.SECONDARY)
                 {
                     m_Weapon.gameObject.GetComponent<Sword>().secondaryAttack();
                 }
@@ -130,47 +114,5 @@ public class Player : MonoBehaviour
             Destroy(other.gameObject);
             setWeapon(WEAPONTYPE.SWORD);
         }
-    }
-
-    public void OnCollisionEnter(Collision coll)
-    {
-
-        if (coll.gameObject.tag == "Enemy")
-        {
-
-            m_Health = m_Health - 1;
-
-            //CheckWinCondition();
-            //}
-        }
-
-        else
-        {
-
-        }
-    }
-
-    public void OnTriggerStay(Collider other)
-    {
-        if (other.tag == "Health")
-        {
-            if (m_Health <= 90)
-            {
-                m_Health = m_Health + 10;
-            }
-            else if (m_Health > 90 && m_Health < m_MaxHealth)
-            {
-                m_Health = m_MaxHealth;
-            }
-            else // FizzPop
-            {
-
-            }
-            other.gameObject.SetActive(false);
-        }
-        //else if (other.tag == "Coins")
-        //{
-        //    m_Score
-        //}
     }
 }
