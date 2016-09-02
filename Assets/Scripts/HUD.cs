@@ -23,7 +23,7 @@ public class HUD : MonoBehaviour
 
     private void Start()
     {
-        GameObject go = GameObject.Find("Score");
+        GameObject go = GameObject.Find("P1 Score");
         if (go != null)
         {
             ScoreField = go.GetComponent<Text>();
@@ -39,7 +39,7 @@ public class HUD : MonoBehaviour
         m_Score += value;
         if (ScoreField != null)
         {
-            ScoreField.text = "Score: " + m_Score;
+            ScoreField.text = "" + m_Score;
         }
     }
 
