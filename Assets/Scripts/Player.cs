@@ -47,11 +47,19 @@ public class Player : MonoBehaviour
         m_HealthText.text = "Health: " + m_Health.ToString();
 
         updateWeapon();
-        if (Input.GetMouseButtonDown(0))
+        /*if (Input.GetMouseButtonDown(0))
         {
             attack(ATTACKTYPE.PRIMARY);
         }
         if (Input.GetMouseButtonDown(1))
+        {
+            attack(ATTACKTYPE.SECONDARY);
+        }*/
+        if (Input.GetButtonDown(m_PrimaryAttack))
+        {
+            attack(ATTACKTYPE.PRIMARY);
+        }
+        if (Input.GetButtonDown(m_SecondaryAttack))
         {
             attack(ATTACKTYPE.SECONDARY);
         }

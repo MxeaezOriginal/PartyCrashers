@@ -3,11 +3,11 @@ using System.Collections;
 
 public class Sword : Melee {
 
-    PlayerController m_Controller;
+    //PlayerController m_Controller;
 
 	// Use this for initialization
 	void Start () {
-        m_Controller = GetComponentInParent<PlayerController>();
+        //m_Controller = GetComponentInParent<PlayerController>();
 	}
 	
 	// Update is called once per frame
