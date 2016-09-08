@@ -12,8 +12,17 @@ public class Player : MonoBehaviour
         SECONDARY
     }
 
+    public enum PLAYER
+    {
+        P1,
+        P2,
+        P3,
+        P4
+    }
+
     // Player stats
     public string m_PlayerName;
+    public PLAYER m_Player;
     public float m_AttackSpeed;
     public int m_Gold;
     public int m_Health;
@@ -33,18 +42,22 @@ public class Player : MonoBehaviour
     public Text m_HealthText;
     public Text m_Score;
 
+    float trap_Timer;
+    bool canMove;
+    PlayerController p_Control;
+
     // Use this for initialization
     void Start()
     {
         m_Health = m_MaxHealth;
         //m_collect = 0;
-
+        p_Control = GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        m_HealthText.text = "Health: " + m_Health.ToString();
+        //m_HealthText.text = "Health: " + m_Health.ToString();
 
         updateWeapon();
        /* if (Input.GetMouseButtonDown(0))
@@ -121,6 +134,92 @@ public class Player : MonoBehaviour
                 {
                     m_Weapon.gameObject.GetComponent<Bow>().secondaryAttack();
                 }
+                break;
+        }
+    }
+
+    public void save()
+    {
+        switch (m_Player)
+        {
+            case PLAYER.P1:
+                GameManager.m_Instance.m_Player1.name = m_PlayerName;
+                GameManager.m_Instance.m_Player1.player = m_Player;
+                GameManager.m_Instance.m_Player1.attackSpeed = m_AttackSpeed;
+                GameManager.m_Instance.m_Player1.gold = m_Gold;
+                GameManager.m_Instance.m_Player1.health = m_Health;
+                GameManager.m_Instance.m_Player1.maxHealth = m_MaxHealth;
+                GameManager.m_Instance.m_Player1.weaponID = m_WeaponID;
+                break;
+            case PLAYER.P2:
+                GameManager.m_Instance.m_Player2.name = m_PlayerName;
+                GameManager.m_Instance.m_Player2.player = m_Player;
+                GameManager.m_Instance.m_Player2.attackSpeed = m_AttackSpeed;
+                GameManager.m_Instance.m_Player2.gold = m_Gold;
+                GameManager.m_Instance.m_Player2.health = m_Health;
+                GameManager.m_Instance.m_Player2.maxHealth = m_MaxHealth;
+                GameManager.m_Instance.m_Player2.weaponID = m_WeaponID;
+                break;
+            case PLAYER.P3:
+                GameManager.m_Instance.m_Player3.name = m_PlayerName;
+                GameManager.m_Instance.m_Player3.player = m_Player;
+                GameManager.m_Instance.m_Player3.attackSpeed = m_AttackSpeed;
+                GameManager.m_Instance.m_Player3.gold = m_Gold;
+                GameManager.m_Instance.m_Player3.health = m_Health;
+                GameManager.m_Instance.m_Player3.maxHealth = m_MaxHealth;
+                GameManager.m_Instance.m_Player3.weaponID = m_WeaponID;
+                break;
+            case PLAYER.P4:
+                GameManager.m_Instance.m_Player4.name = m_PlayerName;
+                GameManager.m_Instance.m_Player4.player = m_Player;
+                GameManager.m_Instance.m_Player4.attackSpeed = m_AttackSpeed;
+                GameManager.m_Instance.m_Player4.gold = m_Gold;
+                GameManager.m_Instance.m_Player4.health = m_Health;
+                GameManager.m_Instance.m_Player4.maxHealth = m_MaxHealth;
+                GameManager.m_Instance.m_Player4.weaponID = m_WeaponID;
+                break;
+        }
+    }
+
+    public void load()
+    {
+        switch (m_Player)
+        {
+            case PLAYER.P1:
+                m_PlayerName = GameManager.m_Instance.m_Player1.name;
+                m_Player = GameManager.m_Instance.m_Player1.player;
+                m_AttackSpeed = GameManager.m_Instance.m_Player1.attackSpeed;
+                m_Gold = GameManager.m_Instance.m_Player1.gold;
+                m_Health = GameManager.m_Instance.m_Player1.health;
+                m_MaxHealth = GameManager.m_Instance.m_Player1.maxHealth;
+                m_WeaponID = GameManager.m_Instance.m_Player1.weaponID;
+                break;
+            case PLAYER.P2:
+                m_PlayerName = GameManager.m_Instance.m_Player2.name;
+                m_Player = GameManager.m_Instance.m_Player2.player;
+                m_AttackSpeed = GameManager.m_Instance.m_Player2.attackSpeed;
+                m_Gold = GameManager.m_Instance.m_Player2.gold;
+                m_Health = GameManager.m_Instance.m_Player2.health;
+                m_MaxHealth = GameManager.m_Instance.m_Player2.maxHealth;
+                m_WeaponID = GameManager.m_Instance.m_Player2.weaponID;
+                break;
+            case PLAYER.P3:
+                m_PlayerName = GameManager.m_Instance.m_Player3.name;
+                m_Player = GameManager.m_Instance.m_Player3.player;
+                m_AttackSpeed = GameManager.m_Instance.m_Player3.attackSpeed;
+                m_Gold = GameManager.m_Instance.m_Player3.gold;
+                m_Health = GameManager.m_Instance.m_Player3.health;
+                m_MaxHealth = GameManager.m_Instance.m_Player3.maxHealth;
+                m_WeaponID = GameManager.m_Instance.m_Player3.weaponID;
+                break;
+            case PLAYER.P4:
+                m_PlayerName = GameManager.m_Instance.m_Player4.name;
+                m_Player = GameManager.m_Instance.m_Player4.player;
+                m_AttackSpeed = GameManager.m_Instance.m_Player4.attackSpeed;
+                m_Gold = GameManager.m_Instance.m_Player4.gold;
+                m_Health = GameManager.m_Instance.m_Player4.health;
+                m_MaxHealth = GameManager.m_Instance.m_Player4.maxHealth;
+                m_WeaponID = GameManager.m_Instance.m_Player4.weaponID;
                 break;
         }
     }
