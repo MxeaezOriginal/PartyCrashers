@@ -7,64 +7,98 @@ public class EnemyAI : MonoBehaviour
     GameObject target;
     public float moveSpeed = 4;
     NavMeshAgent agent;
-    public float navD;
     public float chaseDist = 50;
-    //public float 
-    //public bool canSeePlayer;
+    public float m_ShootRange = 40;
+    public float m_Distance;
+    public float m_StopGettingCloser = 5;
+
+    public float m_FireInterval = 1f;
+    public GameObject ShotPrefab;
+    public Transform ShotLocation;
+
+    public float m_ReloadTime = 5f;
+
+    private float m_LastShotTime;
+    public int m_Bullet;
+    public int m_MaxBullet = 10;
 
     // Use this for initialization
     void Start()
     {
         players = GameObject.FindGameObjectsWithTag("Player");
         agent = gameObject.GetComponent<NavMeshAgent>();
-        
+
+        m_LastShotTime = Time.time;
+        m_Bullet = m_MaxBullet;
     }
 
     // Update is called once per frame
     void Update()
     {
-        for(int i = 0; i < players.Length; i++)
+        for (int i = 0; i < players.Length; i++)
         {
-            if(i == 0)
+            if (i == 0)
             {
-                navD = Vector3.Distance(players[i].transform.position, transform.position);
+                m_Distance = Vector3.Distance(players[i].transform.position, transform.position);
                 target = players[i];
             }
             else
             {
-                if(Vector3.Distance(players[i].transform.position, transform.position) < navD)
+                if (Vector3.Distance(players[i].transform.position, transform.position) < m_Distance)
                 {
-                    navD = Vector3.Distance(players[i].transform.position, transform.position);
+                    m_Distance = Vector3.Distance(players[i].transform.position, transform.position);
                     target = players[i];
                 }
             }
         }
 
-        if (navD > chaseDist)
+        bool CanShoot = (m_LastShotTime + m_FireInterval) < Time.time;
+        bool HaveAmmo = m_Bullet > 0;
+        if (m_Bullet <= 0)
+        {
+            bool Reloading = (m_LastShotTime + m_ReloadTime) < Time.time;
+            if (Reloading)
+            {
+                m_Bullet = m_MaxBullet;
+            }
+        }
+        if (CanShoot && m_Distance <= m_ShootRange && HaveAmmo)
+        {
+            transform.LookAt(target.transform.position);
+            if (m_Bullet > 0)
+            {
+
+                // Shoot!
+                if (ShotPrefab != null)
+                {
+                    if (ShotLocation != null)
+                    {
+                        GameObject shot = Instantiate(ShotPrefab, ShotLocation.position, ShotLocation.rotation) as GameObject;
+                    }
+                    else
+                    {
+                        GameObject shot = GameObject.Instantiate<GameObject>(ShotPrefab);
+                        shot.transform.position = transform.position;
+                        shot.transform.forward = transform.forward;
+                        shot.transform.up = transform.up;
+                    }
+                    m_LastShotTime = Time.time;
+                }
+                --m_Bullet;
+            }
+        }
+
+        if (m_Distance > chaseDist || m_Distance < m_StopGettingCloser)
         {
             agent.Stop();
         }
-        else if(navD > 2)
+        else if (m_Distance > 2)
         {
             chase();
         }
     }
 
-    /*void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == ("Player"))
-        {
-           agent.Stop();
-        }
-    }
 
-    void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.tag == ("Player"))
-        {
-            agent.Resume();
-        }
-    }*/
 
     void chase()
     {

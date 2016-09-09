@@ -258,11 +258,13 @@ public class Player : MonoBehaviour
 
     public void OnTriggerStay(Collider other)
     {
+        Health health = other.GetComponent<Health>();
+
         if (other.tag == "Health")
         {
             if (m_Health <= 90)
             {
-                m_Health = m_Health + 10;
+                m_Health = m_Health + health.Health_value;
             }
             else if (m_Health > 90 && m_Health < m_MaxHealth)
             {
