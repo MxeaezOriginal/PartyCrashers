@@ -7,20 +7,9 @@ public class EnemyAI : MonoBehaviour
     GameObject target;
     public float moveSpeed = 4;
     NavMeshAgent agent;
-    public float chaseDist = 50;
-    public float m_ShootRange = 40;
+    public float m_ChaseDist = 50;
     public float m_Distance;
-    public float m_StopGettingCloser = 5;
-
-    public float m_FireInterval = 1f;
-    public GameObject ShotPrefab;
-    public Transform ShotLocation;
-
-    public float m_ReloadTime = 5f;
-
-    private float m_LastShotTime;
-    public int m_Bullet;
-    public int m_MaxBullet = 10;
+    public float m_StopDistance = 5;
 
     public Vector3 m_Origin;
 
@@ -30,15 +19,14 @@ public class EnemyAI : MonoBehaviour
         players = GameManager.m_Instance.m_Players;
         agent = gameObject.GetComponent<NavMeshAgent>();
 
-        m_LastShotTime = Time.time;
-        m_Bullet = m_MaxBullet;
-
         m_Origin = gameObject.transform.position;
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        //Get closest player
         for (int i = 0; i < players.Length; i++)
         {
             if (i == 0)
@@ -56,49 +44,17 @@ public class EnemyAI : MonoBehaviour
             }
         }
 
-        bool CanShoot = (m_LastShotTime + m_FireInterval) < Time.time;
-        bool HaveAmmo = m_Bullet > 0;
-        if (m_Bullet <= 0)
+        if (m_Distance < m_ChaseDist)
         {
-            bool Reloading = (m_LastShotTime + m_ReloadTime) < Time.time;
-            if (Reloading)
-            {
-                m_Bullet = m_MaxBullet;
-            }
+            chase();
         }
-        if (CanShoot && m_Distance <= m_ShootRange && HaveAmmo)
-        {
-            transform.LookAt(target.transform.position);
-            if (m_Bullet > 0)
-            {
-
-                // Shoot!
-                if (ShotPrefab != null)
-                {
-                    if (ShotLocation != null)
-                    {
-                        GameObject shot = Instantiate(ShotPrefab, ShotLocation.position, ShotLocation.rotation) as GameObject;
-                    }
-                    else
-                    {
-                        GameObject shot = GameObject.Instantiate<GameObject>(ShotPrefab);
-                        shot.transform.position = transform.position;
-                        shot.transform.forward = transform.forward;
-                        shot.transform.up = transform.up;
-                    }
-                    m_LastShotTime = Time.time;
-                }
-                --m_Bullet;
-            }
-        }
-
-        if (m_Distance > chaseDist || m_Distance < m_StopGettingCloser)
+        if(m_Distance < m_StopDistance)
         {
             agent.Stop();
         }
-        else if (m_Distance > 2)
+        if (m_Distance > m_ChaseDist)
         {
-            chase();
+            returnToOrigin();
         }
     }
 
@@ -108,5 +64,20 @@ public class EnemyAI : MonoBehaviour
     {
         agent.SetDestination(target.transform.position);
         agent.Resume();
+        transform.LookAt(new Vector3(target.transform.position.x, transform.position.y, target.transform.position.z));
+    }
+
+    void returnToOrigin()
+    {
+        agent.SetDestination(m_Origin);
+        agent.Resume();
+    }
+
+    void look(Transform other)
+    {
+        Vector3 lookPosition = other.position - transform.position;
+        lookPosition.y = 0;
+        Quaternion rotation = Quaternion.LookRotation(lookPosition);
+        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 5f);
     }
 }

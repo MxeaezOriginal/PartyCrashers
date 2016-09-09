@@ -9,20 +9,23 @@ public class StickyTrap : Trap {
 
 	// Use this for initialization
 	void Start () {
-	
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
 	
 	}
-    public void OnTriggerStay(Collider other)
+    public void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
+            Debug.Log("Player Entered");
+            Debug.Log(m_Cooldown);
             playerController = other.GetComponent<PlayerController>(); 
-            if (m_Cooldown <= Time.time - m_Cooldown)
+            if (m_CurrentCooldown <= Time.time - m_Cooldown || m_CurrentCooldown == 0)
             {
+                Debug.Log("Stuck");
                 playerController.m_CantMove = true;
 
                 m_CurrentCooldown = Time.time;

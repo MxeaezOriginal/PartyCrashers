@@ -3,7 +3,7 @@ using System.Collections;
 
 public abstract class Trap : MonoBehaviour {
 
-    public float m_Cooldown;
+    public float m_Cooldown = 0;
 
     protected float m_CurrentCooldown;
 

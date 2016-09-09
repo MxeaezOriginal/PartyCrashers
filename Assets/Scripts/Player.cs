@@ -64,14 +64,20 @@ public class Player : MonoBehaviour
         {
             attack(ATTACKTYPE.SECONDARY);
         }*/
+
+        //Primary Attack
         if (Input.GetButtonDown(m_PrimaryAttack))
         {
             attack(ATTACKTYPE.PRIMARY);
         }
+
+        //Secondary Attack
         if (Input.GetButtonDown(m_SecondaryAttack))
         {
             attack(ATTACKTYPE.SECONDARY);
         }
+
+        //Pause
         if (Input.GetButtonDown(m_Pause))
         {
             if (m_WeaponID == WEAPONTYPE.SWORD)
@@ -82,6 +88,11 @@ public class Player : MonoBehaviour
             {
                 setWeapon(WEAPONTYPE.SWORD);
             }
+        }
+
+        if(Input.GetButtonDown(m_Interact))
+        {
+
         }
     }
 

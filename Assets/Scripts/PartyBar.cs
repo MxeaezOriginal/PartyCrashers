@@ -5,6 +5,8 @@ using System.Collections;
 
 public class PartyBar : MonoBehaviour {
 
+    public bool m_Active;
+
     Image m_Bar;
 
     float m_TempTimer;
@@ -16,14 +18,17 @@ public class PartyBar : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (m_TempTimer <= Time.time - .1f)
+        if (m_Active)
         {
-            m_Bar.fillAmount -= 0.01f;
-            m_TempTimer = Time.time;
-        }
-        if(m_Bar.fillAmount <= 0)
-        {
-            loadMinigame();
+            if (m_TempTimer <= Time.time - .1f)
+            {
+                m_Bar.fillAmount -= 0.01f;
+                m_TempTimer = Time.time;
+            }
+            if (m_Bar.fillAmount <= 0)
+            {
+                loadMinigame();
+            }
         }
     }
 
