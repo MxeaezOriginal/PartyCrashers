@@ -7,7 +7,7 @@ public class Sword : Melee {
 
 	// Use this for initialization
 	void Start () {
-        m_Controller = GetComponentInParent<PlayerController>();
+        //m_Controller = GetComponentInParent<PlayerController>();
 	}
 	
 	// Update is called once per frame

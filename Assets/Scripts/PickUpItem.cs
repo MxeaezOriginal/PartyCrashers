@@ -15,7 +15,7 @@ public class PickUpItem : MonoBehaviour
     {
         if (other.tag == ("Player"))
         {
-            gameObject.active = false;
+            gameObject.SetActive(false);
         }
     }
 }

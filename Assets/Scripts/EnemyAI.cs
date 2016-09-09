@@ -22,14 +22,18 @@ public class EnemyAI : MonoBehaviour
     public int m_Bullet;
     public int m_MaxBullet = 10;
 
+    public Vector3 m_Origin;
+
     // Use this for initialization
     void Start()
     {
-        players = GameObject.FindGameObjectsWithTag("Player");
+        players = GameManager.m_Instance.m_Players;
         agent = gameObject.GetComponent<NavMeshAgent>();
 
         m_LastShotTime = Time.time;
         m_Bullet = m_MaxBullet;
+
+        m_Origin = gameObject.transform.position;
     }
 
     // Update is called once per frame

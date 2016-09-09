@@ -42,16 +42,12 @@ public class Player : MonoBehaviour
     public Text m_HealthText;
     public Text m_Score;
 
-    float trap_Timer;
-    bool canMove;
-    PlayerController p_Control;
 
     // Use this for initialization
     void Start()
     {
         m_Health = m_MaxHealth;
         //m_collect = 0;
-        p_Control = GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
@@ -275,23 +271,6 @@ public class Player : MonoBehaviour
 
             }
             other.gameObject.SetActive(false);
-        }
-
-        else if( other.tag == "Trap" )
-        {
-            m_Health = m_Health - 1;
-        }
-
-        else if( other.tag == "StickyTrap" )
-        {
-            if( trap_Timer <= Time.time - 10.0f )
-            {
-                canMove = false;
-                p_Control.canMove = canMove;
-
-                trap_Timer = Time.time;
-                StartCoroutine( "getUnstuck" );
-            }
         }
         //else if (other.tag == "Coins")
         //{

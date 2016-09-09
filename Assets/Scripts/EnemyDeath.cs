@@ -17,7 +17,7 @@ public class EnemyDeath : MonoBehaviour
             }
             else
             {
-                gameObject.active = false;
+                gameObject.SetActive(false);
 
                 Instantiate(coin, this.gameObject.transform.position, this.gameObject.transform.rotation);
             }
@@ -34,7 +34,7 @@ public class EnemyDeath : MonoBehaviour
             }
             else
             {
-                gameObject.active = false;
+                gameObject.SetActive(false);
 
                 Instantiate(coin, this.gameObject.transform.position, this.gameObject.transform.rotation);
             }

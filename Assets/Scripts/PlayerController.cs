@@ -4,7 +4,7 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour
 {
-    public bool canMove;
+    public bool m_CantMove;
     public float m_Speed = 5.0f;
     public float m_TurnSpeed = 5.0f;
     public float m_Gravity = 100f;
@@ -29,8 +29,7 @@ public class PlayerController : MonoBehaviour
 
     private bool m_StopMovementX = false;
     private bool m_StopMovementZ = false;
-    float timer = 0;
-    public float stickytime = 3.0f;
+
     //private Rigidbody rigidBody;
     CharacterController controller;
 
@@ -45,7 +44,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if( canMove )
+        if(! m_CantMove )
         {
             checkMovement();
             if( controller.isGrounded )
