@@ -7,9 +7,13 @@ public class BossAi : MonoBehaviour
     float y;
     float z;
     Vector3 RandomLocation;
+    Vector3 TrapLocation;
+    public Vector3 GetLoc;
 
     public GameObject enemyPrefab;
     public GameObject trapPrefab;
+    public GameObject trapLoc;
+    public GameObject trap;
     public float timer;
     public float spawnTime = 2.0f;
     //public Vector3 SpawnEnemyLocation;
@@ -48,8 +52,8 @@ public class BossAi : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //BossAttackMode2();
         //BossAttackMode1();
+        //BossAttackMode2();
         BossAttackMode3();
     }
 
@@ -218,22 +222,48 @@ public class BossAi : MonoBehaviour
         }
     }
 
+    public Vector3 GetRandomLocation()
+    {
+        x = Random.Range(0, 50);
+        y = 10;
+        z = Random.Range(0, 50);
+        RandomLocation = new Vector3(x, y, z);
+        return RandomLocation;
+    }
+
+    
+
     public Vector3 GetRandomLocationForTrap()
     {
         x = Random.Range(0, 50);
         y = 10;
         z = Random.Range(0, 50);
         RandomLocation = new Vector3(x, y, z);
+        //TrapLocation = new Vector3(x, 0.1f, z);
         //transform.position = SpawnEnemyLocation;
         return RandomLocation;
     }
+
+    //public Vector3 GetPreLocationForTrap()
+    //{
+    //    x = Random.Range(0, 50);
+    //    y = 0.1f;
+    //    z = Random.Range(0, 50);
+    //    RandomLocation = new Vector3(x, y, z);
+    //    //transform.position = SpawnEnemyLocation;
+    //    return TrapLocation;
+    //}
 
     void BossAttackMode3() // spawn trap at random location
     {
         timer -= Time.deltaTime;
         if (timer <= 0)
         {
-            Instantiate(trapPrefab, GetRandomLocationForTrap(), transform.rotation);
+            trap = (GameObject) Instantiate(trapPrefab, GetRandomLocationForTrap(), transform.rotation);
+            GetLoc = new Vector3(trap.transform.position.x, 0.1f, trap.transform.position.z);
+            Instantiate(trapLoc, GetLoc, transform.rotation);
+            //trap.transform.position
+
             timer = spawnTime;
         }
     }
