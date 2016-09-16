@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class GameManager : MonoBehaviour {
@@ -26,7 +27,7 @@ public class GameManager : MonoBehaviour {
 	// Use this for initialization
 	void Awake () {
         if (m_Instance == null)
-        {
+        { 
             DontDestroyOnLoad(gameObject);
             m_Instance = this;
             GameManager.m_Instance.m_Players = GameObject.FindGameObjectsWithTag("Player");
