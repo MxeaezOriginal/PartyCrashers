@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour {
         public int gold;
         public int health;
         public int maxHealth;
-        public WEAPONTYPE weaponID;
+        public WEAPONTYPE weaponID; 
     }
 
     public static GameManager m_Instance;

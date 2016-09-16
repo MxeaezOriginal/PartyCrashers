@@ -38,6 +38,5 @@ public class PartyBar : MonoBehaviour {
 
         GameManager.m_Instance.savePlayers();
         SceneManager.LoadScene(randomNumber);
-
     }
 }
