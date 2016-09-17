@@ -107,15 +107,15 @@ public class P1_HeartSystem : MonoBehaviour {
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.T))
+        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             TakeDamage();
         }
-        if (Input.GetKeyDown(KeyCode.Y))
+        if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             Heal();
         }
-        if (Input.GetKeyDown(KeyCode.U))
+        if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             AddHeart();
         }
