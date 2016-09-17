@@ -4,7 +4,7 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour
 {
-
+    public bool m_CantMove;
     public float m_Speed = 5.0f;
     public float m_TurnSpeed = 5.0f;
     public float m_Gravity = 100f;
@@ -44,47 +44,51 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        checkMovement();
-        if (controller.isGrounded)
+        if(! m_CantMove )
         {
-            if (m_StopMovementX == false && m_StopMovementZ == false)
+            checkMovement();
+            if( controller.isGrounded )
             {
-                m_MoveDir = new Vector3(Input.GetAxis(m_HorizontalButton), 0, Input.GetAxis(m_VerticalButton));
-            }
-            //cant move in x direction
-            else if(m_StopMovementX == true && m_StopMovementZ == false)
-            {
-                m_MoveDir = new Vector3(0, 0, Input.GetAxis(m_VerticalButton));
-            }
-            //cant move in z direction
-            else if(m_StopMovementX == false && m_StopMovementZ == true)
-            {
-                m_MoveDir = new Vector3(Input.GetAxis(m_HorizontalButton), 0, 0);
-            }
-            //cant move in either direction
-            else if(m_StopMovementX == true && m_StopMovementZ == true)
-            {
-                m_MoveDir = new Vector3(0, 0, 0);
-            }
-            //moveDir = transform.TransformDirection(moveDir);
-            m_MoveDir *= m_Speed;
-            if (Input.GetButton(m_JumpButton))
-                m_MoveDir.y = m_Jump;
+                if( m_StopMovementX == false && m_StopMovementZ == false )
+                {
+                    m_MoveDir = new Vector3( Input.GetAxis( m_HorizontalButton ), 0, Input.GetAxis( m_VerticalButton ) );
+                }
+                //cant move in x direction
+                else if( m_StopMovementX == true && m_StopMovementZ == false )
+                {
+                    m_MoveDir = new Vector3( 0, 0, Input.GetAxis( m_VerticalButton ) );
+                }
+                //cant move in z direction
+                else if( m_StopMovementX == false && m_StopMovementZ == true )
+                {
+                    m_MoveDir = new Vector3( Input.GetAxis( m_HorizontalButton ), 0, 0 );
+                }
+                //cant move in either direction
+                else if( m_StopMovementX == true && m_StopMovementZ == true )
+                {
+                    m_MoveDir = new Vector3( 0, 0, 0 );
+                }
+                //moveDir = transform.TransformDirection(moveDir);
+                m_MoveDir *= m_Speed;
+                if( Input.GetButton( m_JumpButton ) )
+                    m_MoveDir.y = m_Jump;
 
+            }
+            if( Input.GetAxis( m_HorizontalRotationButton ) != 0 )
+            {
+                m_CurrentHorizontalRotation = Input.GetAxis( m_HorizontalRotationButton );
+            }
+            if( Input.GetAxis( m_VerticalRotationButton ) != 0 )
+            {
+                m_CurrentVerticalRotation = Input.GetAxis( m_VerticalRotationButton );
+            }
+            m_MoveDir.y -= m_Gravity * Time.deltaTime;
+            controller.Move( m_MoveDir * Time.deltaTime );
+            //transform.rotation = Quaternion.LookRotation(new Vector3(m_CurrentHorizontalRotation, 0, m_CurrentVerticalRotation), Vector3.up);
+            float angle = Mathf.Atan2( m_CurrentHorizontalRotation * -1, m_CurrentVerticalRotation * -1 ) * Mathf.Rad2Deg;
+            //transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, angle, 0), m_TurnSpeed * Time.deltaTime);
+            transform.rotation = Quaternion.AngleAxis( angle * -1, Vector3.up );
         }
-        if (Input.GetAxis(m_HorizontalRotationButton) != 0)
-        {
-            m_CurrentHorizontalRotation = Input.GetAxis(m_HorizontalRotationButton);
-        }
-        if(Input.GetAxis(m_VerticalRotationButton) != 0)
-        {
-            m_CurrentVerticalRotation = Input.GetAxis(m_VerticalRotationButton);
-        }
-        m_MoveDir.y -= m_Gravity * Time.deltaTime;
-        controller.Move(m_MoveDir * Time.deltaTime);
-        transform.rotation = Quaternion.LookRotation(new Vector3(m_CurrentHorizontalRotation, 0, m_CurrentVerticalRotation), Vector3.up);
-        /*float angle = Mathf.Atan2(m_CurrentHorizontalRotation, m_CurrentVerticalRotation) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, angle, 0), Time.deltaTime);*/
     }
 
     void LateUpdate()

@@ -459,15 +459,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44435725686e6eb45914198900aeb417, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 7
-  turnSpeed: 5
-  gravity: 100
-  jump: 20
-  maxMovementX: 20
-  maxMovementZ: 18
-  jumpButton: Jump_
-  horizontalButton: Horizontal_
-  verticalButton: Vertical_
+  m_Speed: 5
+  m_TurnSpeed: 3
+  m_Gravity: 100
+  m_Jump: 30
+  m_MaxMovementX: 14
+  m_MaxMovementZ: 18
+  m_JumpButton: Jump_
+  m_HorizontalButton: JoystickLeftX_
+  m_VerticalButton: JoystickLeftY_
+  m_HorizontalRotationButton: JoystickRightY_
+  m_VerticalRotationButton: JoystickRightX_
 --- !u!114 &11477312
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -483,6 +485,8 @@ MonoBehaviour:
   m_AttackSpeed: 0
   m_Gold: 0
   m_Health: 0
+  m_MaxHealth: 100
+  m_Collect: 0
   m_WeaponID: 0
   m_PrimaryAttack: Primary_
   m_SecondaryAttack: Secondary_
@@ -490,6 +494,8 @@ MonoBehaviour:
   m_Silly: Silly_
   m_Stats: Stats_
   m_Pause: Pause_
+  m_HealthText: {fileID: 0}
+  m_Score: {fileID: 0}
 --- !u!114 &11478534
 MonoBehaviour:
   m_ObjectHideFlags: 1

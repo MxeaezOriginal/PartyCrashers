@@ -7,68 +7,77 @@ public class EnemyAI : MonoBehaviour
     GameObject target;
     public float moveSpeed = 4;
     NavMeshAgent agent;
-    public float navD;
-    public float chaseDist = 50;
-    //public float 
-    //public bool canSeePlayer;
+    public float m_ChaseDist = 50;
+    public float m_Distance;
+    public float m_StopDistance = 5;
+
+    public Vector3 m_Origin;
 
     // Use this for initialization
     void Start()
     {
-        players = GameObject.FindGameObjectsWithTag("Player");
+        players = GameManager.m_Instance.m_Players;
         agent = gameObject.GetComponent<NavMeshAgent>();
-        
+
+        m_Origin = gameObject.transform.position;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        for(int i = 0; i < players.Length; i++)
+        //Get closest player
+        for (int i = 0; i < players.Length; i++)
         {
-            if(i == 0)
+            if (i == 0)
             {
-                navD = Vector3.Distance(players[i].transform.position, transform.position);
+                m_Distance = Vector3.Distance(players[i].transform.position, transform.position);
                 target = players[i];
             }
             else
             {
-                if(Vector3.Distance(players[i].transform.position, transform.position) < navD)
+                if (Vector3.Distance(players[i].transform.position, transform.position) < m_Distance)
                 {
-                    navD = Vector3.Distance(players[i].transform.position, transform.position);
+                    m_Distance = Vector3.Distance(players[i].transform.position, transform.position);
                     target = players[i];
                 }
             }
         }
 
-        if (navD > chaseDist)
-        {
-            agent.Stop();
-        }
-        else if(navD > 2)
+        if (m_Distance < m_ChaseDist)
         {
             chase();
         }
-    }
-
-    /*void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == ("Player"))
+        if(m_Distance < m_StopDistance)
         {
-           agent.Stop();
+            agent.Stop();
+        }
+        if (m_Distance > m_ChaseDist)
+        {
+            returnToOrigin();
         }
     }
 
-    void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.tag == ("Player"))
-        {
-            agent.Resume();
-        }
-    }*/
+
 
     void chase()
     {
         agent.SetDestination(target.transform.position);
         agent.Resume();
+        transform.LookAt(new Vector3(target.transform.position.x, transform.position.y, target.transform.position.z));
+    }
+
+    void returnToOrigin()
+    {
+        agent.SetDestination(m_Origin);
+        agent.Resume();
+    }
+
+    void look(Transform other)
+    {
+        Vector3 lookPosition = other.position - transform.position;
+        lookPosition.y = 0;
+        Quaternion rotation = Quaternion.LookRotation(lookPosition);
+        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 5f);
     }
 }
