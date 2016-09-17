@@ -2,7 +2,8 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class HeartSystem : MonoBehaviour {
+public class P4_HeartSystem : MonoBehaviour
+{
 
     private int maxHearts = 7;
     private int startHearts = 5;
@@ -16,7 +17,14 @@ public class HeartSystem : MonoBehaviour {
     public Image[] heartImages;
     public Sprite[] heartSprites;
 
-	void Start()
+    Player player;
+
+    void Awake()
+    {
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+    }
+
+    void Start()
     {
         curHealth = startHearts * healthPerHeart;
         maxHealth = maxHearts * healthPerHeart;
@@ -24,12 +32,12 @@ public class HeartSystem : MonoBehaviour {
         CheckHealthAmount();
 
     }
-	
+
     void CheckHealthAmount()//shuts down couple hearts ar Start()
     {
-        for(int i = 0; i < maxHearts; i++)
+        for (int i = 0; i < maxHearts; i++)
         {
-            if(startHearts <= i)
+            if (startHearts <= i)
             {
                 heartImages[i].enabled = false;
             }
@@ -46,16 +54,16 @@ public class HeartSystem : MonoBehaviour {
         bool empty = false;
         int i = 0;
 
-        foreach(Image image in heartImages)
+        foreach (Image image in heartImages)
         {
-            if(empty)
+            if (empty)
             {
                 image.sprite = heartSprites[0];//0 is an empty heart.
             }
             else
             {
                 i++;
-                if(curHealth >= i * healthPerHeart)
+                if (curHealth >= i * healthPerHeart)
                 {
                     image.sprite = heartSprites[heartSprites.Length - 1];//.Length - 1 is a full heart
                 }

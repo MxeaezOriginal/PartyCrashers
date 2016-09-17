@@ -25,8 +25,8 @@ public class Player : MonoBehaviour
     public PLAYER m_Player;
     public float m_AttackSpeed;
     public int m_Gold;
-    public int m_Health;
-    public int m_MaxHealth = 100;
+    public int m_Health = 10;
+    public int m_MaxHealth = 14;
     public int m_Collect;
     public WEAPONTYPE m_WeaponID;
     private Transform m_Weapon;
