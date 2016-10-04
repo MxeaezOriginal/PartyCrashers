@@ -9,6 +9,7 @@ public class ActivateGO : MonoBehaviour
 
     void Start()
     {
+        gameobject.SetActive(false);
 
     }
     
