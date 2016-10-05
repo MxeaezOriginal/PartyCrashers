@@ -66,7 +66,7 @@ public class Player : MonoBehaviour
         }*/
 
         //Primary Attack
-        if (Input.GetButtonDown(m_PrimaryAttack))
+        if (Input.GetButton(m_PrimaryAttack))
         {
             attack(ATTACKTYPE.PRIMARY);
         }

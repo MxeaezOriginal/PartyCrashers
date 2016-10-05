@@ -10,6 +10,7 @@ public abstract class Weapon : MonoBehaviour {
     public AudioClip[] m_SecondarySounds;
     public AudioClip[] m_SoundsOnHit;
     protected float m_CoolDown;
+    protected float m_CoolDown02;
 
 	// Use this for initialization
 	void Start () {
