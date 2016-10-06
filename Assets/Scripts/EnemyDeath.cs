@@ -26,18 +26,21 @@ public class EnemyDeath : MonoBehaviour
 
     void OnTriggerStay(Collider other)
     {
-        if (other.tag == ("Melee"))
-        {
-            if (m_EnemyHealth > 0)
+        if(Sword.attack == true)
             {
-                m_EnemyHealth = m_EnemyHealth - 10;
-            }
-            else
-            {
-                gameObject.SetActive(false);
+            if (other.tag == ("Melee"))
+           {
+                    if (m_EnemyHealth > 0)
+                    {
+                        m_EnemyHealth = m_EnemyHealth - 0;
+                    }
+                    else
+                    {
+                        gameObject.SetActive(false);
 
-                Instantiate(coin, this.gameObject.transform.position, this.gameObject.transform.rotation);
-            }
-        }
+                        Instantiate(coin, this.gameObject.transform.position, this.gameObject.transform.rotation);
+                   }
+             }               
+          }
+       }
     }
-}
