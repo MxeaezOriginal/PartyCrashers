@@ -6,8 +6,12 @@ public class PlayerController : MonoBehaviour
 {
     public bool m_CantMove;
     public float m_Speed = 5.0f;
+    public float m_MaxSpeed = 10f;
+    public float m_Acceleration = 1f;
+    public float m_Friction = 1f;
     public float m_TurnSpeed = 5.0f;
-    public float m_Gravity = 100f;
+    public float m_NormalGravity = 70f;
+    public float m_JumpGravity = 30f;
     public float m_Jump = 30.0f;
 
     public float m_MaxMovementX = 14f;
@@ -23,7 +27,12 @@ public class PlayerController : MonoBehaviour
     private float m_CurrentHorizontalRotation;
     private float m_CurrentVerticalRotation;
 
+    private float m_CurrentAcceleration;
+    private float m_CurrentMaxSpeed;
+    private float m_CurrentGravity;
+
     private Vector3 m_MoveDir = Vector3.zero;
+    private Vector3 m_Velocity = Vector3.zero;
 
     private GameObject[] m_Players;
 
@@ -44,50 +53,116 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(! m_CantMove )
+        if (!m_CantMove)
         {
             checkMovement();
-            if( controller.isGrounded )
-            {
-                if( m_StopMovementX == false && m_StopMovementZ == false )
-                {
-                    m_MoveDir = new Vector3( Input.GetAxis( m_HorizontalButton ), 0, Input.GetAxis( m_VerticalButton ) );
-                }
-                //cant move in x direction
-                else if( m_StopMovementX == true && m_StopMovementZ == false )
-                {
-                    m_MoveDir = new Vector3( 0, 0, Input.GetAxis( m_VerticalButton ) );
-                }
-                //cant move in z direction
-                else if( m_StopMovementX == false && m_StopMovementZ == true )
-                {
-                    m_MoveDir = new Vector3( Input.GetAxis( m_HorizontalButton ), 0, 0 );
-                }
-                //cant move in either direction
-                else if( m_StopMovementX == true && m_StopMovementZ == true )
-                {
-                    m_MoveDir = new Vector3( 0, 0, 0 );
-                }
-                //moveDir = transform.TransformDirection(moveDir);
-                m_MoveDir *= m_Speed;
-                if( Input.GetButton( m_JumpButton ) )
-                    m_MoveDir.y = m_Jump;
 
-            }
-            if( Input.GetAxis( m_HorizontalRotationButton ) != 0 )
+            if (m_StopMovementX == false && m_StopMovementZ == false)
             {
-                m_CurrentHorizontalRotation = Input.GetAxis( m_HorizontalRotationButton );
+                m_MoveDir = new Vector3(Input.GetAxis(m_HorizontalButton), 0, Input.GetAxis(m_VerticalButton));
             }
-            if( Input.GetAxis( m_VerticalRotationButton ) != 0 )
+            //cant move in x direction
+            else if (m_StopMovementX == true && m_StopMovementZ == false)
             {
-                m_CurrentVerticalRotation = Input.GetAxis( m_VerticalRotationButton );
+                m_MoveDir = new Vector3(0, 0, Input.GetAxis(m_VerticalButton));
             }
-            m_MoveDir.y -= m_Gravity * Time.deltaTime;
-            controller.Move( m_MoveDir * Time.deltaTime );
+            //cant move in z direction
+            else if (m_StopMovementX == false && m_StopMovementZ == true)
+            {
+                m_MoveDir = new Vector3(Input.GetAxis(m_HorizontalButton), 0, 0);
+            }
+            //cant move in either direction
+            else if (m_StopMovementX == true && m_StopMovementZ == true)
+            {
+                m_MoveDir = new Vector3(0, 0, 0);
+            }
+            //moveDir = transform.TransformDirection(moveDir);
+
+
+            //Move
+
+            //Jump
+            if (controller.isGrounded)
+            {
+                if (Input.GetButton(m_JumpButton))
+                    m_Velocity.y = m_Jump;
+                m_CurrentGravity = m_NormalGravity;
+            }else
+            {
+                if (Input.GetButton(m_JumpButton))
+                {
+                    m_CurrentGravity = m_JumpGravity;
+                }else
+                {
+                    m_CurrentGravity = m_NormalGravity;
+                }
+            }
+
+            //Horizontal
+            if (controller.isGrounded)
+            {
+                m_CurrentAcceleration = m_MoveDir.x * m_Acceleration;
+            }else
+            {
+                m_CurrentAcceleration = (m_MoveDir.x * m_Acceleration)/2;
+            }
+            m_CurrentMaxSpeed = m_MoveDir.x * m_MaxSpeed;
+            if (Mathf.Abs(m_Velocity.x) <= Mathf.Abs(m_CurrentMaxSpeed))
+            {
+                m_Velocity.x += m_CurrentAcceleration;
+            }
+            if (Mathf.Abs(m_Velocity.x) > Mathf.Abs(m_CurrentMaxSpeed))
+            {
+                m_Velocity.x -= m_Friction * Mathf.Sign(m_Velocity.x);
+            }
+
+            if (m_MoveDir.x == 0f && Mathf.Abs(m_Velocity.x) < m_Friction)
+            {
+                m_Velocity.x = 0f;
+            }
+
+
+            //Vertical
+            if (controller.isGrounded)
+            {
+                m_CurrentAcceleration = m_MoveDir.z * m_Acceleration;
+            }
+            else
+            {
+                m_CurrentAcceleration = (m_MoveDir.z * m_Acceleration) / 2;
+            }
+            m_CurrentMaxSpeed = m_MoveDir.z * m_MaxSpeed;
+            if (Mathf.Abs(m_Velocity.z) <= Mathf.Abs(m_CurrentMaxSpeed))
+            {
+                m_Velocity.z += m_CurrentAcceleration;
+            }
+            if (Mathf.Abs(m_Velocity.z) > Mathf.Abs(m_CurrentMaxSpeed))
+            {
+                m_Velocity.z -= m_Friction * Mathf.Sign(m_Velocity.z);
+            }
+
+            if (m_MoveDir.z == 0f && Mathf.Abs(m_Velocity.z) < m_Friction)
+            {
+                m_Velocity.z = 0f;
+            }
+
+
+            if (Input.GetAxis(m_HorizontalRotationButton) != 0)
+            {
+                m_CurrentHorizontalRotation = Input.GetAxis(m_HorizontalRotationButton);
+            }
+            if (Input.GetAxis(m_VerticalRotationButton) != 0)
+            {
+                m_CurrentVerticalRotation = Input.GetAxis(m_VerticalRotationButton);
+            }
+            //Gravity
+            m_Velocity.y -= m_CurrentGravity * Time.deltaTime;
+            //MOVE
+            controller.Move(m_Velocity * Time.deltaTime);
             //transform.rotation = Quaternion.LookRotation(new Vector3(m_CurrentHorizontalRotation, 0, m_CurrentVerticalRotation), Vector3.up);
-            float angle = Mathf.Atan2( m_CurrentHorizontalRotation * -1, m_CurrentVerticalRotation * -1 ) * Mathf.Rad2Deg;
+            float angle = Mathf.Atan2(m_CurrentHorizontalRotation * -1, m_CurrentVerticalRotation * -1) * Mathf.Rad2Deg;
             //transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, angle, 0), m_TurnSpeed * Time.deltaTime);
-            transform.rotation = Quaternion.AngleAxis( angle * -1, Vector3.up );
+            transform.rotation = Quaternion.AngleAxis(angle * -1, Vector3.up);
         }
     }
 
