@@ -29,6 +29,7 @@ public class Timer : MonoBehaviour
         else
         {
             remainingSeconds = 0;
+            //Tranfer to end minigame screen
           
         }
 
