@@ -4,11 +4,19 @@ using System;
 
 public class Bow : Ranged {
 
-    public float m_Pressed = 0;
-    public Player player;
+    private float m_timePressed = 0;
+    private float m_lastPressed = 0;
 
-	// Use this for initialization
-	void Start () {
+    public float m_speed = 1;
+    public float m_speedMultiplier = 1.3f;
+
+    public bool m_fire = false;
+
+    public Player player;
+    public GameObject playerObject;
+
+    // Use this for initialization
+    void Start () {
 
         player = GetComponentInParent<Player>();
     }
@@ -19,42 +27,89 @@ public class Bow : Ranged {
 
     public override void primaryAttack()
     {
-        
 
         if (m_CoolDown <= Time.time - m_AttackSpeed || m_CoolDown == 0)
         {
 
-            m_Pressed = Input.GetAxis(player.m_PrimaryAttack);
+            m_lastPressed = m_timePressed;
 
-            Debug.Log(m_Pressed);
+            if (m_timePressed <= m_MaxSpeed)
+            {
+                m_timePressed += Input.GetAxis(player.m_PrimaryAttack) * Time.deltaTime;
+            }
 
-            /*
-            GameObject balloon;
-            balloon = (GameObject)Instantiate(m_Projectile, m_FirePoint[0].gameObject.transform.position, m_FirePoint[0].gameObject.transform.rotation);
+            if (m_lastPressed != m_timePressed)
+            {
+                m_fire = true;
+            }
 
-            balloon.GetComponent<Rigidbody>().AddForce(balloon.transform.forward * m_ProjectileSpeed02);
+            Debug.Log(m_timePressed);
 
-            m_CoolDown = Time.time;
-            */
+            if (m_fire)
+            {
+                if ((m_timePressed >= 0) && (m_timePressed >= (m_MaxSpeed * 0.75)))
+                {
+                    Debug.Log("Charge 01");
+
+                    GameObject balloon01;
+                    balloon01 = (GameObject)Instantiate(m_Projectile, m_FirePoint[0].gameObject.transform.position, m_FirePoint[0].gameObject.transform.rotation);
+
+                    balloon01.GetComponent<Rigidbody>().AddForce(balloon01.transform.forward * m_ProjectileSpeed);
+
+                    m_timePressed = 0;
+
+                    m_CoolDown = Time.time;
+
+                    m_fire = false;
+
+                }
+                else if ((m_timePressed >= (m_MaxSpeed * 0.75)) && (m_timePressed <= m_MaxSpeed))
+                {
+                    Debug.Log("Charge 02");
+
+                    GameObject balloon02;
+                    balloon02 = (GameObject)Instantiate(m_Projectile, m_FirePoint[0].gameObject.transform.position, m_FirePoint[0].gameObject.transform.rotation);
+
+                    balloon02.GetComponent<Rigidbody>().AddForce(balloon02.transform.forward * m_ProjectileSpeed * m_speedMultiplier);
+
+                    m_timePressed = 0;
+
+                    m_CoolDown = Time.time;
+
+                    m_fire = false;
+
+                }
+                else if (m_timePressed >= m_MaxSpeed)
+                {
+                    Debug.Log("Charge 03");
+
+                    GameObject balloon03;
+                    balloon03 = (GameObject)Instantiate(m_Projectile, m_FirePoint[0].gameObject.transform.position, m_FirePoint[0].gameObject.transform.rotation);
+
+                    balloon03.GetComponent<Rigidbody>().AddForce(balloon03.transform.forward * m_ProjectileSpeed * m_speedMultiplier * m_speedMultiplier);
+
+                    m_timePressed = 0;
+
+                    m_CoolDown = Time.time;
+
+                    m_fire = false;
+
+                }
+
+            }
+
         }
     }
 
     public override void secondaryAttack()
     {
 
-        Debug.Log("BOW");
+        GameObject bigBalloon;
+        bigBalloon = (GameObject)Instantiate(m_Projectile02, m_FirePoint[0].gameObject.transform.position, m_FirePoint[0].gameObject.transform.rotation);
 
-        if (m_CoolDown <= Time.time - m_AttackSpeed || m_CoolDown == 0)
-        {
-            for (int i = 0; i < m_FirePoint.Length; i++)
-            {
+        bigBalloon.GetComponent<Rigidbody>().AddForce(bigBalloon.transform.forward * m_ProjectileSpeed02);
 
-                GameObject bullet;
-                bullet = (GameObject)Instantiate(m_Projectile, m_FirePoint[i].gameObject.transform.position, m_FirePoint[i].gameObject.transform.rotation);
+        m_CoolDown = Time.time;
 
-                bullet.GetComponent<Rigidbody>().AddForce(bullet.transform.forward * m_ProjectileSpeed);
-                //Destroy(bullet, 10f);
-            }
-        }
     }
 }
