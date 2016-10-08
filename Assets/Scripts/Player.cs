@@ -42,7 +42,6 @@ public class Player : MonoBehaviour
     public Text m_HealthText;
     public Text m_Score;
 
-
     // Use this for initialization
     void Start()
     {

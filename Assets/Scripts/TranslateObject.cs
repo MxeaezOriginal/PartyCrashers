@@ -33,7 +33,7 @@ public class TranslateObject : MonoBehaviour {
     };
     public forceType projectileForceType;
 
-    private string forceString;
+    //private string forceString;
     private Vector3 appliedVector;
     private Vector3 radiusPoint;
 
@@ -41,7 +41,7 @@ public class TranslateObject : MonoBehaviour {
     void Start()
     {
 
-        forceString = "ForceMode" + projectileForceType.ToString();
+        //forceString = "ForceMode" + projectileForceType.ToString();
         appliedVector = Vector3.forward * distanceSpeed;
 
         if (initialForce)

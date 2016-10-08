@@ -23,7 +23,7 @@ public class ProjectileCollision : MonoBehaviour {
     {
         if (onStart)
         {
-            GameObject effects = GameObject.Instantiate(startEffect, effectPoint.transform.position, effectPoint.transform.rotation) as GameObject;
+            GameObject.Instantiate(startEffect, effectPoint.transform.position, effectPoint.transform.rotation);
         }
         
     }
@@ -32,7 +32,7 @@ public class ProjectileCollision : MonoBehaviour {
     {
         if (onAlways)
         {
-            GameObject effects = GameObject.Instantiate(alwaysEffect, effectPoint.transform.position, effectPoint.transform.rotation) as GameObject;
+            GameObject.Instantiate(alwaysEffect, effectPoint.transform.position, effectPoint.transform.rotation);
         }
     }
 
@@ -42,7 +42,7 @@ public class ProjectileCollision : MonoBehaviour {
         {
            if (onDestroy)
            {
-                GameObject effects = GameObject.Instantiate(destroyEffect, effectPoint.transform.position, effectPoint.transform.rotation) as GameObject;
+                GameObject.Instantiate(destroyEffect, effectPoint.transform.position, effectPoint.transform.rotation);
            }
 
            Destroy(this.gameObject);

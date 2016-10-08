@@ -8,7 +8,6 @@ public class ProjectileEnemy : MonoBehaviour {
     float dis;
     public float bulletImpulse = 20.0f;
     Transform target;
-    private bool onRange = false;
     float timer;
     public float bulletwaitingtime = 3.0f;
     public Rigidbody projectile;

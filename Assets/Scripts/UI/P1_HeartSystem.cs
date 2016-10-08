@@ -16,11 +16,11 @@ public class P1_HeartSystem : MonoBehaviour {
     public Image[] heartImages;
     public Sprite[] heartSprites;
 
-    Player player;
+    //Player player;
 
     void Awake()
     {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        //player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
 
 	void Start()

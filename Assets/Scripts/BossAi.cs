@@ -100,7 +100,7 @@ public class BossAi : MonoBehaviour
                 {
                     if (ShotLocation1 != null)
                     {
-                        GameObject shot = Instantiate(ShotPrefab, ShotLocation1.position, ShotLocation1.rotation) as GameObject;
+                        Instantiate(ShotPrefab, ShotLocation1.position, ShotLocation1.rotation);
                     }
                     else
                     {
@@ -115,7 +115,7 @@ public class BossAi : MonoBehaviour
                 {
                     if (ShotLocation2 != null)
                     {
-                        GameObject shot = Instantiate(ShotPrefab, ShotLocation2.position, ShotLocation2.rotation) as GameObject;
+                        Instantiate(ShotPrefab, ShotLocation2.position, ShotLocation2.rotation);
                     }
                     else
                     {
@@ -130,7 +130,7 @@ public class BossAi : MonoBehaviour
                 {
                     if (ShotLocation3 != null)
                     {
-                        GameObject shot = Instantiate(ShotPrefab, ShotLocation3.position, ShotLocation3.rotation) as GameObject;
+                        Instantiate(ShotPrefab, ShotLocation3.position, ShotLocation3.rotation);
                     }
                     else
                     {
@@ -145,7 +145,7 @@ public class BossAi : MonoBehaviour
                 {
                     if (ShotLocation4 != null)
                     {
-                        GameObject shot = Instantiate(ShotPrefab, ShotLocation4.position, ShotLocation4.rotation) as GameObject;
+                        Instantiate(ShotPrefab, ShotLocation4.position, ShotLocation4.rotation);
                     }
                     else
                     {
@@ -160,7 +160,7 @@ public class BossAi : MonoBehaviour
                 {
                     if (ShotLocation5 != null)
                     {
-                        GameObject shot = Instantiate(ShotPrefab, ShotLocation5.position, ShotLocation5.rotation) as GameObject;
+                        Instantiate(ShotPrefab, ShotLocation5.position, ShotLocation5.rotation);
                     }
                     else
                     {
@@ -175,7 +175,7 @@ public class BossAi : MonoBehaviour
                 {
                     if (ShotLocation6 != null)
                     {
-                        GameObject shot = Instantiate(ShotPrefab, ShotLocation6.position, ShotLocation6.rotation) as GameObject;
+                        Instantiate(ShotPrefab, ShotLocation6.position, ShotLocation6.rotation);
                     }
                     else
                     {
@@ -190,7 +190,7 @@ public class BossAi : MonoBehaviour
                 {
                     if (ShotLocation7 != null)
                     {
-                        GameObject shot = Instantiate(ShotPrefab, ShotLocation7.position, ShotLocation7.rotation) as GameObject;
+                        Instantiate(ShotPrefab, ShotLocation7.position, ShotLocation7.rotation);
                     }
                     else
                     {
@@ -205,7 +205,7 @@ public class BossAi : MonoBehaviour
                 {
                     if (ShotLocation8 != null)
                     {
-                        GameObject shot = Instantiate(ShotPrefab, ShotLocation8.position, ShotLocation8.rotation) as GameObject;
+                        Instantiate(ShotPrefab, ShotLocation8.position, ShotLocation8.rotation);
                     }
                     else
                     {

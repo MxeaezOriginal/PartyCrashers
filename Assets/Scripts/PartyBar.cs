@@ -34,7 +34,7 @@ public class PartyBar : MonoBehaviour {
 
     void loadMinigame()
     {
-        int randomNumber = Random.Range(1, 3);
+        //int randomNumber = Random.Range(1, 3);
 
         GameManager.m_Instance.savePlayers();
         SceneManager.LoadScene("MinigameReward");

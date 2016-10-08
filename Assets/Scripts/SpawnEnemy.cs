@@ -9,11 +9,12 @@ public class SpawnEnemy : MonoBehaviour
     public float range;
     public float spawnTime = 5.0f;
     public float activedRange = 10f;
-    bool setActive;
+    //bool setActive;
+
     void Start()
     {
         timer = spawnTime;
-        setActive = false;
+        //setActive = false;
     }
 
     // Update is called once per frame

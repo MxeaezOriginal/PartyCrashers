@@ -25,7 +25,7 @@ public class KickMeTrap : Trap {
                 {
                     if (hitColliders[i].gameObject.CompareTag(m_EnemiesToAffect[j]))
                     {
-                        Transform enemy = hitColliders[i].transform;
+                        //Transform enemy = hitColliders[i].transform;
                         EnemyAI ai = hitColliders[i].GetComponent<EnemyAI>();
 
                         ai.m_ChaseDist += chaseIncrease;
