@@ -12,27 +12,21 @@ public class ActivateGO : MonoBehaviour
         gameobject.SetActive(false);
 
     }
-    
-
-
-    public void OnCollisionEnter(Collider other)
-    {
-        if(other != null)
-        {
-            if(other.CompareTag("Player"))
-            {
-                gameobject.SetActive(true);
-            }
-        }
-        else
-        {
-
-        }
-    }
 	
 	// Update is called once per frame
 	void Update ()
     {
 	
 	}
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other != null)
+        {
+            if (other.CompareTag("Player"))
+            {
+                gameobject.SetActive(true);
+            }
+        }
+    }
 }

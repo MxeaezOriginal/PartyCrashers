@@ -19,8 +19,6 @@ public class RewardManager : MonoBehaviour {
     public Player.PLAYER m_Third;
     public Player.PLAYER m_Fourth;
 
-    private Player.PLAYER m_CurrentPicker;
-
     private int m_PickCounter = 0;
 
     // Use this for initialization
@@ -34,8 +32,6 @@ public class RewardManager : MonoBehaviour {
             m_Second = Player.PLAYER.P2;
             m_Third = Player.PLAYER.P3;
             m_Fourth = Player.PLAYER.P4;
-
-            m_CurrentPicker = m_First;
 
             m_PickRewardText.text = "Choose reward: " + m_First.ToString();
 

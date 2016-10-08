@@ -11,12 +11,12 @@ public class Sword : Melee {
 
     public static bool attack = false;
 
-    PlayerController m_PlayerController;
+    //PlayerController m_PlayerController;
     CharacterController m_CharacterController;
 
 	// Use this for initialization
 	void Start () {
-        m_PlayerController = GetComponentInParent<PlayerController>();
+        //m_PlayerController = GetComponentInParent<PlayerController>();
         m_CharacterController = GetComponentInParent<CharacterController>();
     }
 	
