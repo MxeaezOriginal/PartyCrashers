@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour {
 
@@ -25,6 +26,9 @@ public class GameManager : MonoBehaviour {
 
     public GameObject[] m_Players;
 
+    public List<string> m_TutorialCoins;
+    public List<string> m_TutorialEnemies;
+
 	// Use this for initialization
 	void Awake () {
         if (m_Instance == null)
@@ -38,32 +42,6 @@ public class GameManager : MonoBehaviour {
             GameManager.m_Instance.m_Players = GameObject.FindGameObjectsWithTag("Player");
             GameManager.m_Instance.loadPlayers();
 
-            //If loading back to tutorial scene, set players location to their last
-            if (SceneManager.GetActiveScene().name == "CVG_Tut01")
-            {
-                Debug.Log("Hey");
-                foreach (GameObject p in m_Instance.m_Players)
-                {
-                    Player player = p.GetComponent<Player>();
-                    switch (player.m_Player)
-                    {
-                        case Player.PLAYER.P1:
-                            p.transform.position = m_Instance.m_Player1.lastLocation;
-                            Debug.Log("Player 1 location: X: " + p.transform.position.x + " Z: " + p.transform.position.z + " Y: " + p.transform.position.y);
-                            break;
-                        case Player.PLAYER.P2:
-                            p.transform.position = m_Instance.m_Player2.lastLocation;
-                            Debug.Log("Player 2 location: X: " + p.transform.position.x + " Z: " + p.transform.position.z + " Y: " + p.transform.position.y);
-                            break;
-                        case Player.PLAYER.P3:
-                            p.transform.position = m_Instance.m_Player3.lastLocation;
-                            break;
-                        case Player.PLAYER.P4:
-                            p.transform.position = m_Instance.m_Player4.lastLocation;
-                            break;
-                    }
-                }
-            }
             Destroy(gameObject);
         }
     }

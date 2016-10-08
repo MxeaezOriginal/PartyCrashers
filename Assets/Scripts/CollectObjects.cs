@@ -28,6 +28,8 @@ public class CollectObjects : MonoBehaviour
                 partyBar.m_Current += collectible.score;
             }
 
+            GameManager.m_Instance.m_TutorialCoins.Add(other.gameObject.name);
+
             if(collectible.type == Collectible.Type.Death)
             {
                 //lose health

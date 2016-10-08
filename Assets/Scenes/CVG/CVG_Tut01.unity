@@ -2130,7 +2130,7 @@ Transform:
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071067}
   m_LocalPosition: {x: 78.81, y: 5.94123, z: 188.72}
   m_LocalScale: {x: 8, y: 1.25, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
   m_Children:
   - {fileID: 945398366}
   - {fileID: 677711835}
@@ -7522,7 +7522,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 165310, guid: 70a6e5df92fc1f44c936dd18e964f37e, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 70a6e5df92fc1f44c936dd18e964f37e, type: 2}
@@ -8616,6 +8616,46 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1
   m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!1 &812600884
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 812600886}
+  - 114: {fileID: 812600885}
+  m_Layer: 0
+  m_Name: TutorialManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &812600885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 812600884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b8b79eed94de6d4c943f811ba513f1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &812600886
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 812600884}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 15.159572, y: -38.611275, z: 83.713}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 20
 --- !u!1 &821107907 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 103998, guid: 5153af79980f5c24a8ce38b6f542b25a, type: 2}
@@ -13784,7 +13824,7 @@ Prefab:
       objectReference: {fileID: 2100000, guid: 51631fabe1cebee47beacb24ceee099c, type: 2}
     - target: {fileID: 179692, guid: c0d4599cda93dc54785f1e84c5383933, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6514090, guid: c0d4599cda93dc54785f1e84c5383933, type: 2}
       propertyPath: m_IsTrigger
