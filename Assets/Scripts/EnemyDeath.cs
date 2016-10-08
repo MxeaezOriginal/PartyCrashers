@@ -25,7 +25,7 @@ public class EnemyDeath : MonoBehaviour
                 //tutorial
                 if (SceneManager.GetActiveScene().name == GameManager.m_Instance.m_TutorialLevel)
                 {
-                    GameManager.m_Instance.m_TutorialEnemies.Add(other.gameObject.name);
+                    GameManager.m_Instance.m_TutorialEnemies.Add(gameObject.name);
                 }
             }
         }
