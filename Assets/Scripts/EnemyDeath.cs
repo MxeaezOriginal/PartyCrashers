@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class EnemyDeath : MonoBehaviour
@@ -20,6 +21,12 @@ public class EnemyDeath : MonoBehaviour
                 gameObject.SetActive(false);
 
                 Instantiate(coin, this.gameObject.transform.position, this.gameObject.transform.rotation);
+
+                //tutorial
+                if (SceneManager.GetActiveScene().name == GameManager.m_Instance.m_TutorialLevel)
+                {
+                    GameManager.m_Instance.m_TutorialEnemies.Add(other.gameObject.name);
+                }
             }
         }
     }
@@ -39,7 +46,12 @@ public class EnemyDeath : MonoBehaviour
                         gameObject.SetActive(false);
 
                         Instantiate(coin, this.gameObject.transform.position, this.gameObject.transform.rotation);
-                   }
+                    //tutorial
+                    if (SceneManager.GetActiveScene().name == GameManager.m_Instance.m_TutorialLevel)
+                    {
+                        GameManager.m_Instance.m_TutorialEnemies.Add(other.gameObject.name);
+                    }
+                }
              }               
           }
        }

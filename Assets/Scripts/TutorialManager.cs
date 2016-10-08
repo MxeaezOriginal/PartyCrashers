@@ -4,6 +4,9 @@ using System.Collections;
 
 public class TutorialManager : MonoBehaviour {
 
+    public string m_CoinList = "R1_Coins";
+    public string m_EnemyList = "Enemies";
+
 	// Use this for initialization
 	void Start () {
         //If loading back to tutorial scene, set players location to their last
@@ -27,10 +30,22 @@ public class TutorialManager : MonoBehaviour {
                 }
             }
 
-        Transform coins = GameObject.Find("R1_Coins").transform;
+        Transform coins = GameObject.Find(m_CoinList).transform;
         foreach (Transform child in coins)
         {
             foreach(string name in GameManager.m_Instance.m_TutorialCoins)
+            {
+                if (child.gameObject.name == name)
+                {
+                    child.gameObject.SetActive(false);
+                }
+            }
+        }
+
+        Transform enemies = GameObject.Find(m_EnemyList).transform;
+        foreach (Transform child in enemies)
+        {
+            foreach (string name in GameManager.m_Instance.m_TutorialEnemies)
             {
                 if (child.gameObject.name == name)
                 {

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class CollectObjects : MonoBehaviour
@@ -28,13 +29,17 @@ public class CollectObjects : MonoBehaviour
                 partyBar.m_Current += collectible.score;
             }
 
-            GameManager.m_Instance.m_TutorialCoins.Add(other.gameObject.name);
-
             if(collectible.type == Collectible.Type.Death)
             {
                 //lose health
             }
             other.gameObject.SetActive(false);
+
+            //tutorial
+            if(SceneManager.GetActiveScene().name == GameManager.m_Instance.m_TutorialLevel)
+            {
+                GameManager.m_Instance.m_TutorialCoins.Add(other.gameObject.name);
+            }
         }
     }
 }

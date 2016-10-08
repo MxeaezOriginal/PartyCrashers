@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour {
 
     public List<string> m_TutorialCoins;
     public List<string> m_TutorialEnemies;
+    public string m_TutorialLevel = "CVG_Tut01";
 
 	// Use this for initialization
 	void Awake () {
