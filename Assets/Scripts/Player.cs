@@ -29,6 +29,7 @@ public class Player : MonoBehaviour
     public int m_MaxHealth = 100;
     public int m_Collect;
     public WEAPONTYPE m_WeaponID;
+    public Vector3 m_LastLocation;
     private Transform m_Weapon;
 
     //Input
@@ -156,6 +157,7 @@ public class Player : MonoBehaviour
                 GameManager.m_Instance.m_Player1.health = m_Health;
                 GameManager.m_Instance.m_Player1.maxHealth = m_MaxHealth;
                 GameManager.m_Instance.m_Player1.weaponID = m_WeaponID;
+                GameManager.m_Instance.m_Player1.lastLocation = m_LastLocation;
                 break;
             case PLAYER.P2:
                 GameManager.m_Instance.m_Player2.name = m_PlayerName;
@@ -165,6 +167,7 @@ public class Player : MonoBehaviour
                 GameManager.m_Instance.m_Player2.health = m_Health;
                 GameManager.m_Instance.m_Player2.maxHealth = m_MaxHealth;
                 GameManager.m_Instance.m_Player2.weaponID = m_WeaponID;
+                GameManager.m_Instance.m_Player2.lastLocation = m_LastLocation;
                 break;
             case PLAYER.P3:
                 GameManager.m_Instance.m_Player3.name = m_PlayerName;
@@ -174,6 +177,7 @@ public class Player : MonoBehaviour
                 GameManager.m_Instance.m_Player3.health = m_Health;
                 GameManager.m_Instance.m_Player3.maxHealth = m_MaxHealth;
                 GameManager.m_Instance.m_Player3.weaponID = m_WeaponID;
+                GameManager.m_Instance.m_Player3.lastLocation = m_LastLocation;
                 break;
             case PLAYER.P4:
                 GameManager.m_Instance.m_Player4.name = m_PlayerName;
@@ -183,6 +187,7 @@ public class Player : MonoBehaviour
                 GameManager.m_Instance.m_Player4.health = m_Health;
                 GameManager.m_Instance.m_Player4.maxHealth = m_MaxHealth;
                 GameManager.m_Instance.m_Player4.weaponID = m_WeaponID;
+                GameManager.m_Instance.m_Player4.lastLocation = m_LastLocation;
                 break;
         }
     }
@@ -199,6 +204,7 @@ public class Player : MonoBehaviour
                 m_Health = GameManager.m_Instance.m_Player1.health;
                 m_MaxHealth = GameManager.m_Instance.m_Player1.maxHealth;
                 m_WeaponID = GameManager.m_Instance.m_Player1.weaponID;
+                m_LastLocation = GameManager.m_Instance.m_Player1.lastLocation;
                 break;
             case PLAYER.P2:
                 m_PlayerName = GameManager.m_Instance.m_Player2.name;
@@ -208,6 +214,7 @@ public class Player : MonoBehaviour
                 m_Health = GameManager.m_Instance.m_Player2.health;
                 m_MaxHealth = GameManager.m_Instance.m_Player2.maxHealth;
                 m_WeaponID = GameManager.m_Instance.m_Player2.weaponID;
+                m_LastLocation = GameManager.m_Instance.m_Player2.lastLocation;
                 break;
             case PLAYER.P3:
                 m_PlayerName = GameManager.m_Instance.m_Player3.name;
@@ -217,6 +224,7 @@ public class Player : MonoBehaviour
                 m_Health = GameManager.m_Instance.m_Player3.health;
                 m_MaxHealth = GameManager.m_Instance.m_Player3.maxHealth;
                 m_WeaponID = GameManager.m_Instance.m_Player3.weaponID;
+                m_LastLocation = GameManager.m_Instance.m_Player3.lastLocation;
                 break;
             case PLAYER.P4:
                 m_PlayerName = GameManager.m_Instance.m_Player4.name;
@@ -226,6 +234,7 @@ public class Player : MonoBehaviour
                 m_Health = GameManager.m_Instance.m_Player4.health;
                 m_MaxHealth = GameManager.m_Instance.m_Player4.maxHealth;
                 m_WeaponID = GameManager.m_Instance.m_Player4.weaponID;
+                m_LastLocation = GameManager.m_Instance.m_Player4.lastLocation;
                 break;
         }
     }

@@ -4,22 +4,33 @@ using System.Collections;
 public class CollectObjects : MonoBehaviour
 {
 
-    public Player player1;
+    private Player player;
+    private PartyBar partyBar;
+
+    void Start()
+    {
+        player = gameObject.GetComponent<Player>();
+        partyBar = GameObject.Find("PartyBar_Game").transform.FindChild("Content").GetComponent<PartyBar>();
+    }
+
     public void OnTriggerEnter(Collider other)
     {
         Collectible collectible = other.GetComponent<Collectible>();
 
         if (collectible != null)
         {
+            player.m_Gold += collectible.score;
+            
             HUD.Instance.AdjustScore(collectible.score);
-            if (player1 != null)
+
+            if(partyBar != null)
             {
-                player1.m_Collect += collectible.score;
-                //player1.CheckWinCondition();
+                partyBar.m_Current += collectible.score;
             }
-            if (collectible.type == Collectible.Type.Death)
+
+            if(collectible.type == Collectible.Type.Death)
             {
-                Destroy(this.gameObject);
+                //lose health
             }
             other.gameObject.SetActive(false);
         }

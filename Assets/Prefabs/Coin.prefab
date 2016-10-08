@@ -9,11 +9,11 @@ GameObject:
   m_Component:
   - 4: {fileID: 403494}
   - 33: {fileID: 3381466}
-  - 65: {fileID: 6558654}
   - 23: {fileID: 2306680}
   - 114: {fileID: 11421032}
   - 114: {fileID: 11470582}
   - 114: {fileID: 11480870}
+  - 135: {fileID: 13535022}
   m_Layer: 0
   m_Name: Coin
   m_TagString: Coins
@@ -28,8 +28,9 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 103998}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 32.4, y: 1.033, z: 36.57}
+  m_LocalPosition: {x: -0.68, y: 0.5, z: 36.16}
   m_LocalScale: {x: 0.15, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -66,18 +67,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 103998}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!65 &6558654
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 103998}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2, y: 2, z: 2}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &11421032
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -101,7 +90,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92b934353d7506d448b2b4f6ae02ca8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  score: 1000
+  score: 1
   type: 0
 --- !u!114 &11480870
 MonoBehaviour:
@@ -114,7 +103,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a11a2e153cf270e458e8364eaaf579b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spin: {x: 25, y: 0, z: 0}
+  spin: {x: 0, y: 0, z: 0}
+--- !u!135 &13535022
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 103998}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

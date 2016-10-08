@@ -21,17 +21,20 @@ public class PartyBar : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+        //set bar equal to percentage
+        m_Bar.fillAmount = (float)m_Current / m_Max;
+
         if (m_Active)
         {
-            //set bar equal to percentage
-            m_Bar.fillAmount = (float) m_Current / m_Max;
-
+        
+            /*
             if (m_TempTimer <= Time.time - .1f)
             {
                 m_Current += 1;
                 m_TempTimer = Time.time;
             }
-
+            */
             //if bar hits 0 load minigame
             if (m_Current >= m_Max)
             {
@@ -44,7 +47,26 @@ public class PartyBar : MonoBehaviour {
     {
         //int randomNumber = Random.Range(1, 3);
 
+        foreach (GameObject p in GameManager.m_Instance.m_Players)
+        {
+            Player player = p.GetComponent<Player>();
+            switch(player.m_Player)
+            {
+                case Player.PLAYER.P1:
+                    player.m_LastLocation = p.transform.position;
+                    break;
+                case Player.PLAYER.P2:
+                    player.m_LastLocation = p.transform.position;
+                    break;
+                case Player.PLAYER.P3:
+                    player.m_LastLocation = p.transform.position;
+                    break;
+                case Player.PLAYER.P4:
+                    player.m_LastLocation = p.transform.position;
+                    break;
+            }
+        }
         GameManager.m_Instance.savePlayers();
-        SceneManager.LoadScene("MinigameReward");
+        SceneManager.LoadScene(6); //ballroom blitz
     }
 }
