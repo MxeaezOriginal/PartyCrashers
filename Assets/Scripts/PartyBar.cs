@@ -5,6 +5,9 @@ using System.Collections;
 
 public class PartyBar : MonoBehaviour {
 
+    public int m_Max = 100;
+    public int m_Current = 0;
+
     public bool m_Active;
 
     Image m_Bar;
@@ -20,12 +23,17 @@ public class PartyBar : MonoBehaviour {
 	void Update () {
         if (m_Active)
         {
+            //set bar equal to percentage
+            m_Bar.fillAmount = (float) m_Current / m_Max;
+
             if (m_TempTimer <= Time.time - .1f)
             {
-                m_Bar.fillAmount -= 0.01f;
+                m_Current += 1;
                 m_TempTimer = Time.time;
             }
-            if (m_Bar.fillAmount <= 0)
+
+            //if bar hits 0 load minigame
+            if (m_Current >= m_Max)
             {
                 loadMinigame();
             }
