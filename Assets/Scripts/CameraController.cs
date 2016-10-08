@@ -28,6 +28,8 @@ public class CameraController : MonoBehaviour {
         float x2 = 0;
         float z2 = 0;
 
+        float y = height;
+
         //Loop through players and set x to greatest x distance, and y to greatest y distance between current player and any other player
         for (int i = 0; i < players.Length; i++)
         {
@@ -38,6 +40,16 @@ public class CameraController : MonoBehaviour {
                     xDistance = Mathf.Abs(players[i].transform.position.x - players[j].transform.position.x);
                     x1 = players[i].transform.position.x; // update x to the new greatest distance
                     x2 = players[j].transform.position.x; // set this gamobject to the other player that this player has the greatest distance with
+                }
+
+                if (players[i].transform.position.y < players[j].transform.position.y)
+                {
+                    y = players[i].transform.position.y;
+                }
+
+                if (players[i].transform.position.y > players[j].transform.position.y)
+                {
+                    y = players[j].transform.position.y;
                 }
 
                 if (Mathf.Abs(players[i].transform.position.z - players[j].transform.position.z) > zDistance)
@@ -51,7 +63,8 @@ public class CameraController : MonoBehaviour {
 
         float averageX = (x1 + x2) / 2;
         float averageZ = (z1 + z2) / 2;
-        gameObject.transform.position = new Vector3(averageX, transform.position.y, averageZ - distanceOffset);
-
+        float Y = y;
+        gameObject.transform.position = new Vector3(averageX, Y + height , averageZ - distanceOffset);
+        //Y + height
     }
 }
