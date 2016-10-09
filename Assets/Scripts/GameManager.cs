@@ -26,6 +26,8 @@ public class GameManager : MonoBehaviour {
 
     public GameObject[] m_Players;
 
+    public PartyBar m_PartyBarGame;
+
     public List<string> m_TutorialCoins;
     public List<string> m_TutorialEnemies;
     public string m_TutorialLevel = "CVG_Tut01";
@@ -37,10 +39,12 @@ public class GameManager : MonoBehaviour {
             DontDestroyOnLoad(gameObject);
             m_Instance = this;
             GameManager.m_Instance.m_Players = GameObject.FindGameObjectsWithTag("Player");
+            GameManager.m_Instance.m_PartyBarGame = GameObject.FindGameObjectWithTag("Partybar").GetComponent<PartyBar>();
         }
         else
         {
             GameManager.m_Instance.m_Players = GameObject.FindGameObjectsWithTag("Player");
+            GameManager.m_Instance.m_PartyBarGame = GameObject.FindGameObjectWithTag("Partybar").GetComponent<PartyBar>();
             GameManager.m_Instance.loadPlayers();
 
             Destroy(gameObject);

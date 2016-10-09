@@ -31,7 +31,11 @@ public class Bow : Ranged {
         if (m_CoolDown <= Time.time - m_AttackSpeed || m_CoolDown == 0)
         {
 
-            m_lastPressed = m_timePressed;
+            GameObject balloon01;
+            balloon01 = (GameObject)Instantiate(m_Projectile, m_FirePoint[0].gameObject.transform.position, m_FirePoint[0].gameObject.transform.rotation);
+            balloon01.GetComponent<Rigidbody>().AddForce(balloon01.transform.forward * m_ProjectileSpeed);
+            m_CoolDown = Time.time;
+            /*m_lastPressed = m_timePressed;
 
             if (m_timePressed <= m_MaxSpeed)
             {
@@ -96,7 +100,7 @@ public class Bow : Ranged {
 
                 }
 
-            }
+        }*/
 
         }
     }
@@ -104,12 +108,12 @@ public class Bow : Ranged {
     public override void secondaryAttack()
     {
 
-        GameObject bigBalloon;
+       /* GameObject bigBalloon;
         bigBalloon = (GameObject)Instantiate(m_Projectile02, m_FirePoint[0].gameObject.transform.position, m_FirePoint[0].gameObject.transform.rotation);
 
         bigBalloon.GetComponent<Rigidbody>().AddForce(bigBalloon.transform.forward * m_ProjectileSpeed02);
 
         m_CoolDown = Time.time;
-
+        */
     }
 }
