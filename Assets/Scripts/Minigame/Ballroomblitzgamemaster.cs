@@ -50,14 +50,9 @@ public class Ballroomblitzgamemaster : MonoBehaviour {
     //begin fire routine
     void beginFire()
     {
-        if(difficultyTimer < 5)
+        if(difficultyTimer < 10)
         {
             incrementAmmount = 1;
-            StartCoroutine(beginFireShot(incrementAmmount));
-        }
-        else if (difficultyTimer < 20)
-        {
-            incrementAmmount = 0.5f;
             StartCoroutine(beginFireShot(incrementAmmount));
         }
         else if (difficultyTimer < 30)
@@ -66,6 +61,11 @@ public class Ballroomblitzgamemaster : MonoBehaviour {
             StartCoroutine(beginFireShot(incrementAmmount));
         }
         else if (difficultyTimer < 45)
+        {
+            incrementAmmount = 0.5f;
+            StartCoroutine(beginFireShot(incrementAmmount));
+        }
+        else if (difficultyTimer < 60)
         {
             incrementAmmount = 0.001f;
             StartCoroutine(beginFireShot(incrementAmmount));
@@ -79,7 +79,7 @@ public class Ballroomblitzgamemaster : MonoBehaviour {
         yield return new WaitForSeconds(settime);
         difficultyTimer = (difficultyTimer +  incrementAmmount);
         SingleFire();
-        if(difficultyTimer > 20)
+        if(difficultyTimer > 30)
         {
             SingleFire();
         }
