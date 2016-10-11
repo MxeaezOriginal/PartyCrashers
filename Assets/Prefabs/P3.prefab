@@ -239,7 +239,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 103422}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 35, y: 3, z: 15}
+  m_LocalPosition: {x: 20.062387, y: 0.5, z: 16.431702}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 421952}
@@ -482,6 +482,7 @@ MonoBehaviour:
   m_MaxHealth: 100
   m_Collect: 0
   m_WeaponID: 0
+  m_LastLocation: {x: 0, y: 0, z: 0}
   m_PrimaryAttack: Primary_P3
   m_SecondaryAttack: Secondary_P3
   m_Interact: Interact_P3
@@ -503,8 +504,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_CantMove: 0
   m_Speed: 5
+  m_MaxSpeed: 10
+  m_Acceleration: 1
+  m_Friction: 1
   m_TurnSpeed: 3
-  m_Gravity: 100
+  m_NormalGravity: 70
+  m_JumpGravity: 30
   m_Jump: 30
   m_MaxMovementX: 14
   m_MaxMovementZ: 18
@@ -549,20 +554,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Anim: {fileID: 0}
-  m_Damage: 10
+  m_Damage: 4
   m_AttackSpeed: 0.2
   m_PrimarySounds: []
   m_SecondarySounds: []
   m_SoundsOnHit: []
   m_Projectile: {fileID: 184478, guid: d05e7a665ab0ec6468bdd70b7dd708f6, type: 2}
+  m_Projectile02: {fileID: 0}
   m_FirePoint:
   - {fileID: 182702}
   - {fileID: 143936}
   - {fileID: 116232}
   - {fileID: 138756}
   - {fileID: 175482}
-  m_ProjectileSpeed: 1500
-  m_MaxSpeed: 0
+  m_ProjectileSpeed: 4000
+  m_ProjectileSpeed02: 100
+  m_MaxSpeed: 1.5
+  player: {fileID: 11429300}
+  playerObject: {fileID: 103422}
 --- !u!114 &11469578
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -585,6 +594,7 @@ MonoBehaviour:
   m_SoundsOnHit: []
   dashDistance: 25
   dashDelay: 0.1
+  smooth: 20
 --- !u!114 &11482360
 MonoBehaviour:
   m_ObjectHideFlags: 1

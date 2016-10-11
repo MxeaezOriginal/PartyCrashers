@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     public float m_MaxSpeed = 10f;
     public float m_Acceleration = 1f;
     public float m_Friction = 1f;
-    public float m_TurnSpeed = 5.0f;
+    public float m_TurnSpeed = 0.1f;
     public float m_NormalGravity = 70f;
     public float m_JumpGravity = 30f;
     public float m_Jump = 30.0f;
@@ -85,8 +85,10 @@ public class PlayerController : MonoBehaviour
             if (controller.isGrounded)
             {
                 if (Input.GetButtonDown(m_JumpButton))
+                {
                     m_Velocity.y = m_Jump;
-                m_CurrentGravity = m_NormalGravity;
+                }
+                m_CurrentGravity = 0f;
             }
             else
             {
@@ -152,22 +154,17 @@ public class PlayerController : MonoBehaviour
             //Rotate / Aim
 
 
-            if (Input.GetAxis(m_HorizontalRotationButton) != 0)
+            if (Input.GetAxis(m_HorizontalRotationButton) != 0 || Input.GetAxis(m_VerticalRotationButton) != 0)
             {
                 m_CurrentHorizontalRotation = Input.GetAxis(m_HorizontalRotationButton);
-            }
-            else
-            {
-                m_CurrentHorizontalRotation = Input.GetAxis(m_HorizontalButton);
-            }
-            if (Input.GetAxis(m_VerticalRotationButton) != 0)
-            {
                 m_CurrentVerticalRotation = Input.GetAxis(m_VerticalRotationButton);
             }
-            else
+            else if (Input.GetAxis(m_HorizontalButton) != 0 || Input.GetAxis(m_VerticalButton) != 0)
             {
-                m_CurrentVerticalRotation = Input.GetAxis(m_VerticalButton);
+                m_CurrentHorizontalRotation = Input.GetAxis(m_HorizontalButton) ;
+                m_CurrentVerticalRotation = Input.GetAxis(m_VerticalButton) * -1f;
             }
+
             //Gravity
             m_Velocity.y -= m_CurrentGravity * Time.deltaTime;
             //MOVE
@@ -175,6 +172,7 @@ public class PlayerController : MonoBehaviour
             //transform.rotation = Quaternion.LookRotation(new Vector3(m_CurrentHorizontalRotation, 0, m_CurrentVerticalRotation), Vector3.up);
             float angle = Mathf.Atan2(m_CurrentHorizontalRotation * -1, m_CurrentVerticalRotation * -1) * Mathf.Rad2Deg + 180f;
             //transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, angle, 0), m_TurnSpeed * Time.deltaTime);
+
 
             transform.rotation = Quaternion.AngleAxis(angle * -1, Vector3.up);
 
