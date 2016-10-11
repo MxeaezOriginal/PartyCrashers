@@ -6,6 +6,7 @@ public class CameraController : MonoBehaviour {
     public Vector3 rotation = new Vector3(45, 0, 0);
     public int height = 10;
     public int distanceOffset = 10;
+    public float y = 0;
 
     GameObject[] players;
 	// Use this for initialization
@@ -28,7 +29,6 @@ public class CameraController : MonoBehaviour {
         float x2 = 0;
         float z2 = 0;
 
-        float y = height;
 
         //Loop through players and set x to greatest x distance, and y to greatest y distance between current player and any other player
         for (int i = 0; i < players.Length; i++)
@@ -42,15 +42,27 @@ public class CameraController : MonoBehaviour {
                     x2 = players[j].transform.position.x; // set this gamobject to the other player that this player has the greatest distance with
                 }
 
-                if (players[i].transform.position.y < players[j].transform.position.y)
+                CharacterController iController = players[i].GetComponent<CharacterController>();
+                CharacterController jController = players[j].GetComponent<CharacterController>();
+                if (iController.isGrounded && jController.isGrounded)
                 {
-                    y = players[i].transform.position.y;
+                    float iRounded = Mathf.Round(players[i].transform.position.y * 10f) / 10f;
+                    float jRounded = Mathf.Round(players[j].transform.position.y * 10f) / 10f;
+
+                    if (players[i].transform.position.y < players[j].transform.position.y)
+                    {
+                        Debug.Log("i");
+                        //y = players[i].transform.position.y;
+                        y = iRounded;
+                    }
+                    if (players[i].transform.position.y > players[j].transform.position.y)
+                    {
+                        Debug.Log("j");
+                        //y = players[j].transform.position.y;
+                        y = jRounded;
+                    }
                 }
 
-                if (players[i].transform.position.y > players[j].transform.position.y)
-                {
-                    y = players[j].transform.position.y;
-                }
 
                 if (Mathf.Abs(players[i].transform.position.z - players[j].transform.position.z) > zDistance)
                 {
@@ -60,11 +72,16 @@ public class CameraController : MonoBehaviour {
                 }
             }
         }
+        
 
         float averageX = (x1 + x2) / 2;
         float averageZ = (z1 + z2) / 2;
-        float Y = y;
-        gameObject.transform.position = new Vector3(averageX, Y + height , averageZ - distanceOffset);
+        //float Y = y;
+        
+
+        gameObject.transform.position = new Vector3(averageX, Mathf.Lerp(transform.position.y, y + height, .1f) , averageZ - distanceOffset);
         //Y + height
+
+       
     }
 }

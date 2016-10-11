@@ -8,7 +8,6 @@ public abstract class Ranged : Weapon {
     public GameObject[] m_FirePoint;
     public float m_ProjectileSpeed;
     public float m_ProjectileSpeed02;
-    public float m_MaxSpeed;
 
 
 	// Use this for initialization
