@@ -31,6 +31,13 @@ public class Bow : Ranged {
         if (m_CoolDown <= Time.time - m_AttackSpeed || m_CoolDown == 0)
         {
 
+            GameObject bigBalloon;
+            bigBalloon = (GameObject)Instantiate(m_Projectile02, m_FirePoint[0].gameObject.transform.position, m_FirePoint[0].gameObject.transform.rotation);
+
+            bigBalloon.GetComponent<Rigidbody>().AddForce(bigBalloon.transform.forward * m_ProjectileSpeed02);
+
+            m_CoolDown = Time.time;
+
             //Temp Script
             /*
             GameObject balloon01;
@@ -39,6 +46,7 @@ public class Bow : Ranged {
             m_CoolDown = Time.time;
             */
 
+            /*
             //The New Script
             m_lastPressed = m_timePressed;
             
@@ -57,12 +65,11 @@ public class Bow : Ranged {
             if (m_fire)
             {
                 {
-                    Debug.Log("Charge 01");
 
-                    GameObject balloon01;
-                    balloon01 = (GameObject)Instantiate(m_Projectile, m_FirePoint[0].gameObject.transform.position, m_FirePoint[0].gameObject.transform.rotation);
+                    GameObject balloon;
+                    balloon = (GameObject)Instantiate(m_Projectile, m_FirePoint[0].gameObject.transform.position, m_FirePoint[0].gameObject.transform.rotation);
 
-                    balloon01.GetComponent<Rigidbody>().AddForce(balloon01.transform.forward * m_ProjectileSpeed);
+                    balloon.GetComponent<Rigidbody>().AddForce(balloon.transform.forward * m_ProjectileSpeed * m_timePressed);
 
                     m_timePressed = 0;
 
@@ -74,7 +81,7 @@ public class Bow : Ranged {
 
         }
         //New Script End
-
+        */
         }
     }
 
