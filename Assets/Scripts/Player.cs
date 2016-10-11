@@ -72,7 +72,7 @@ public class Player : MonoBehaviour
         }
 
         //Secondary Attack
-        if (Input.GetButtonDown(m_SecondaryAttack))
+        if (Input.GetButton(m_SecondaryAttack))
         {
             attack(ATTACKTYPE.SECONDARY);
         }

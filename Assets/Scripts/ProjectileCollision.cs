@@ -23,7 +23,7 @@ public class ProjectileCollision : MonoBehaviour {
     {
         if (onStart)
         {
-            GameObject.Instantiate(startEffect, effectPoint.transform.position, effectPoint.transform.rotation);
+ 
         }
         
     }
