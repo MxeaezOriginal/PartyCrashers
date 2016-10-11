@@ -4,6 +4,8 @@ using System.Collections;
 public class Ballroomblitzgamemaster : MonoBehaviour {
 
     public GameObject ShotPrefab;
+    public GameObject FirePoint;
+    public int fireSpeed;
     public Transform Leftwall_ShotLocation1;
     public Transform Leftwall_ShotLocation2;
     public Transform Leftwall_ShotLocation3;
@@ -38,6 +40,7 @@ public class Ballroomblitzgamemaster : MonoBehaviour {
     {
         //shooting needs to be fixed
         int FireLocation = Random.Range(1, 7);
+        FireLocation = 1;
         if (FireLocation == 1)
         {
             fire_Leftwall_ShotLocation1();
@@ -74,8 +77,11 @@ public class Ballroomblitzgamemaster : MonoBehaviour {
     void fire_Leftwall_ShotLocation1()
     {
         //Fix Shooting
-        Vector3 fireposition1 = Leftwall_ShotLocation1.transform.position;
-        GameObject basicEnemy = GameObject.Instantiate(ShotPrefab, fireposition1, transform.rotation) as GameObject;
+
+        GameObject dodgeball;
+        dodgeball = (GameObject)Instantiate(ShotPrefab, FirePoint.gameObject.transform.position, FirePoint.gameObject.transform.rotation);
+
+        dodgeball.GetComponent<Rigidbody>().AddForce(dodgeball.transform.forward * fireSpeed);
     }
     void fire_Leftwall_ShotLocation2()
     {
