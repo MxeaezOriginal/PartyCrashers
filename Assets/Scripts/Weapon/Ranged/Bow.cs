@@ -19,6 +19,19 @@ public class Bow : Ranged {
 	
 	// Update is called once per frame
 	void Update () {
+
+        if (m_CoolDown <= Time.time - m_AttackSpeed || m_CoolDown == 0)
+        {
+            //Shoot if button up
+            if (Input.GetButtonUp(player.m_PrimaryAttack))
+            {
+
+                shoot();
+                m_CoolDown = Time.time;
+            }
+        }
+
+
     }
 
     public override void primaryAttack()
@@ -43,18 +56,10 @@ public class Bow : Ranged {
                 m_timePressed += Input.GetAxis(player.m_PrimaryAttack) * Time.deltaTime;
             }
 
-            if (Input.GetButtonUp(player.m_PrimaryAttack) || m_timePressed >= m_MaxSpeed) 
+            if (m_timePressed >= m_MaxSpeed) 
             {
-
-                GameObject balloon;
-                balloon = (GameObject)Instantiate(m_Projectile, m_FirePoint[0].gameObject.transform.position, m_FirePoint[0].gameObject.transform.rotation);
-                 
-                balloon.GetComponent<Rigidbody>().AddForce(balloon.transform.forward * m_ProjectileSpeed * m_timePressed);
-
-                m_timePressed = 0;
-
+                shoot();
                 m_CoolDown = Time.time;
-
             }
 
             Debug.Log(m_timePressed);
@@ -74,5 +79,15 @@ public class Bow : Ranged {
 
         m_CoolDown = Time.time;
         
+    }
+
+    private void shoot()
+    {
+        GameObject balloon;
+        balloon = (GameObject)Instantiate(m_Projectile, m_FirePoint[0].gameObject.transform.position, m_FirePoint[0].gameObject.transform.rotation);
+
+        balloon.GetComponent<Rigidbody>().AddForce(balloon.transform.forward * m_ProjectileSpeed * m_timePressed);
+
+        m_timePressed = 0;
     }
 }
