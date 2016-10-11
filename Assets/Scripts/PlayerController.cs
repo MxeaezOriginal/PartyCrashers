@@ -84,15 +84,17 @@ public class PlayerController : MonoBehaviour
             //Jump
             if (controller.isGrounded)
             {
-                if (Input.GetButton(m_JumpButton))
+                if (Input.GetButtonDown(m_JumpButton))
                     m_Velocity.y = m_Jump;
                 m_CurrentGravity = m_NormalGravity;
-            }else
+            }
+            else
             {
                 if (Input.GetButton(m_JumpButton))
                 {
                     m_CurrentGravity = m_JumpGravity;
-                }else
+                }
+                else
                 {
                     m_CurrentGravity = m_NormalGravity;
                 }
@@ -102,9 +104,10 @@ public class PlayerController : MonoBehaviour
             if (controller.isGrounded)
             {
                 m_CurrentAcceleration = m_MoveDir.x * m_Acceleration;
-            }else
+            }
+            else
             {
-                m_CurrentAcceleration = (m_MoveDir.x * m_Acceleration)/2;
+                m_CurrentAcceleration = (m_MoveDir.x * m_Acceleration) / 2;
             }
             m_CurrentMaxSpeed = m_MoveDir.x * m_MaxSpeed;
             if (Mathf.Abs(m_Velocity.x) <= Mathf.Abs(m_CurrentMaxSpeed))
@@ -146,23 +149,36 @@ public class PlayerController : MonoBehaviour
                 m_Velocity.z = 0f;
             }
 
+            //Rotate / Aim
+
 
             if (Input.GetAxis(m_HorizontalRotationButton) != 0)
             {
                 m_CurrentHorizontalRotation = Input.GetAxis(m_HorizontalRotationButton);
             }
+            else
+            {
+                m_CurrentHorizontalRotation = Input.GetAxis(m_HorizontalButton);
+            }
             if (Input.GetAxis(m_VerticalRotationButton) != 0)
             {
                 m_CurrentVerticalRotation = Input.GetAxis(m_VerticalRotationButton);
+            }
+            else
+            {
+                m_CurrentVerticalRotation = Input.GetAxis(m_VerticalButton);
             }
             //Gravity
             m_Velocity.y -= m_CurrentGravity * Time.deltaTime;
             //MOVE
             controller.Move(m_Velocity * Time.deltaTime);
             //transform.rotation = Quaternion.LookRotation(new Vector3(m_CurrentHorizontalRotation, 0, m_CurrentVerticalRotation), Vector3.up);
-            float angle = Mathf.Atan2(m_CurrentHorizontalRotation * -1, m_CurrentVerticalRotation * -1) * Mathf.Rad2Deg;
+            float angle = Mathf.Atan2(m_CurrentHorizontalRotation * -1, m_CurrentVerticalRotation * -1) * Mathf.Rad2Deg + 180f;
             //transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, angle, 0), m_TurnSpeed * Time.deltaTime);
+
             transform.rotation = Quaternion.AngleAxis(angle * -1, Vector3.up);
+
+
         }
     }
 
