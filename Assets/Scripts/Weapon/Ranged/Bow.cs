@@ -32,13 +32,14 @@ public class Bow : Ranged {
         {
 
             //Temp Script
-            /*
+            
             GameObject balloon01;
             balloon01 = (GameObject)Instantiate(m_Projectile, m_FirePoint[0].gameObject.transform.position, m_FirePoint[0].gameObject.transform.rotation);
             balloon01.GetComponent<Rigidbody>().AddForce(balloon01.transform.forward * m_ProjectileSpeed);
             m_CoolDown = Time.time;
-            */
+            
 
+            /*
             //The New Script
             m_lastPressed = m_timePressed;
             
@@ -107,6 +108,7 @@ public class Bow : Ranged {
 
         }
         //New Script End
+        */
 
         }
     }

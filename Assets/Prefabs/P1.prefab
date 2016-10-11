@@ -835,6 +835,7 @@ MonoBehaviour:
   m_SoundsOnHit: []
   dashDistance: 25
   dashDelay: 0.1
+  smooth: 20
 --- !u!114 &11428590
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -879,6 +880,7 @@ MonoBehaviour:
   m_MaxHealth: 100
   m_Collect: 0
   m_WeaponID: 100
+  m_LastLocation: {x: 0, y: 0, z: 0}
   m_PrimaryAttack: Primary_P1
   m_SecondaryAttack: Secondary_P1
   m_Interact: Interact_P1
@@ -922,7 +924,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9957292c81333447833081810640974, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player1: {fileID: 11429116}
 --- !u!114 &11469220
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -941,6 +942,7 @@ MonoBehaviour:
   m_SecondarySounds: []
   m_SoundsOnHit: []
   m_Projectile: {fileID: 168656, guid: 7a46eb7ba6bc72c42a62a7a411339452, type: 2}
+  m_Projectile02: {fileID: 0}
   m_FirePoint:
   - {fileID: 108118}
   - {fileID: 111862}
@@ -948,6 +950,7 @@ MonoBehaviour:
   - {fileID: 129226}
   - {fileID: 109728}
   m_ProjectileSpeed: 4000
+  m_ProjectileSpeed02: 0
   m_MaxSpeed: 4000
 --- !u!114 &11473580
 MonoBehaviour:
@@ -974,8 +977,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_CantMove: 0
   m_Speed: 5
+  m_MaxSpeed: 10
+  m_Acceleration: 1
+  m_Friction: 1
   m_TurnSpeed: 3
-  m_Gravity: 100
+  m_NormalGravity: 70
+  m_JumpGravity: 30
   m_Jump: 30
   m_MaxMovementX: 14
   m_MaxMovementZ: 18
@@ -1002,10 +1009,17 @@ MonoBehaviour:
   m_SecondarySounds: []
   m_SoundsOnHit: []
   m_Projectile: {fileID: 150382, guid: af711eaa29756584fa36f3fccfaec720, type: 2}
+  m_Projectile02: {fileID: 0}
   m_FirePoint:
   - {fileID: 111862}
-  m_ProjectileSpeed: 100
-  m_MaxSpeed: 3
+  m_ProjectileSpeed: 1000
+  m_ProjectileSpeed02: 20
+  m_MaxSpeed: 2.5
+  m_speed: 1
+  m_speedMultiplier: 1.3
+  m_fire: 0
+  player: {fileID: 11429116}
+  playerObject: {fileID: 179692}
 --- !u!124 &12438636
 Behaviour:
   m_ObjectHideFlags: 1
