@@ -5,6 +5,8 @@ public class Ballroomblitzgamemaster : MonoBehaviour {
 
     public GameObject ShotPrefab;
     public int fireSpeed;
+    private float difficultyTimer;//seconds passed
+    private float incrementAmmount;
     //Fire Locations
     #region
     public Transform FirePoint_Leftwall_ShotLocation1;
@@ -41,26 +43,49 @@ public class Ballroomblitzgamemaster : MonoBehaviour {
     #endregion
     void Start()
     {
+        float difficultyTimer = 0;
         beginFire();
     }
 
     //begin fire routine
     void beginFire()
     {
-        StartCoroutine(TimebetweenShots(0.5f));
-        SingleFire();
-        beginFire();
-    }
+        if(difficultyTimer < 5)
+        {
+            incrementAmmount = 1;
+            StartCoroutine(beginFireShot(incrementAmmount));
+        }
+        else if (difficultyTimer < 20)
+        {
+            incrementAmmount = 0.5f;
+            StartCoroutine(beginFireShot(incrementAmmount));
+        }
+        else if (difficultyTimer < 30)
+        {
+            incrementAmmount = 0.5f;
+            StartCoroutine(beginFireShot(incrementAmmount));
+        }
+        else if (difficultyTimer < 45)
+        {
+            incrementAmmount = 0.001f;
+            StartCoroutine(beginFireShot(incrementAmmount));
+        }
 
+    }
 
     //coroutines
-    IEnumerator TimebetweenShots(float settime)
+    IEnumerator beginFireShot(float settime)
     {
         yield return new WaitForSeconds(settime);
-        
+        difficultyTimer = (difficultyTimer +  incrementAmmount);
+        SingleFire();
+        if(difficultyTimer > 20)
+        {
+            SingleFire();
+        }
+        beginFire();
 
     }
-
     //fire rates
     void SingleFire()
     {
