@@ -7,8 +7,8 @@ public class Bow : Ranged {
     private float m_timePressed = 0;
     private float m_lastPressed = 0;
 
-    public float m_speed = 1;
-    public float m_speedMultiplier = 1.3f;
+    public float m_speed = 2;
+    public float m_speedMultiplier = 1.5f;
 
     public bool m_fire = false;
 
@@ -31,12 +31,17 @@ public class Bow : Ranged {
         if (m_CoolDown <= Time.time - m_AttackSpeed || m_CoolDown == 0)
         {
 
+            //Temp Script
+            /*
             GameObject balloon01;
             balloon01 = (GameObject)Instantiate(m_Projectile, m_FirePoint[0].gameObject.transform.position, m_FirePoint[0].gameObject.transform.rotation);
             balloon01.GetComponent<Rigidbody>().AddForce(balloon01.transform.forward * m_ProjectileSpeed);
             m_CoolDown = Time.time;
-            /*m_lastPressed = m_timePressed;
+            */
 
+            //The New Script
+            m_lastPressed = m_timePressed;
+            
             if (m_timePressed <= m_MaxSpeed)
             {
                 m_timePressed += Input.GetAxis(player.m_PrimaryAttack) * Time.deltaTime;
@@ -100,7 +105,8 @@ public class Bow : Ranged {
 
                 }
 
-        }*/
+        }
+        //New Script End
 
         }
     }
