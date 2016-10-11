@@ -65,9 +65,14 @@ public class Ballroomblitzgamemaster : MonoBehaviour {
             incrementAmmount = 0.5f;
             StartCoroutine(beginFireShot(incrementAmmount));
         }
-        else if (difficultyTimer < 60)
+        else if (difficultyTimer < 55)
         {
-            incrementAmmount = 0.001f;
+            incrementAmmount = 0.3f;
+            StartCoroutine(beginFireShot(incrementAmmount));
+        }
+        else if (difficultyTimer < 59)
+        {
+            incrementAmmount = 0.01f;
             StartCoroutine(beginFireShot(incrementAmmount));
         }
 
@@ -80,6 +85,10 @@ public class Ballroomblitzgamemaster : MonoBehaviour {
         difficultyTimer = (difficultyTimer +  incrementAmmount);
         SingleFire();
         if(difficultyTimer > 30)
+        {
+            SingleFire();
+        }
+        if (difficultyTimer > 55)
         {
             SingleFire();
         }
