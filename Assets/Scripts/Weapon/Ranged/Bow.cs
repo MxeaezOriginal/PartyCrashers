@@ -32,14 +32,13 @@ public class Bow : Ranged {
         {
 
             //Temp Script
-            
+            /*
             GameObject balloon01;
             balloon01 = (GameObject)Instantiate(m_Projectile, m_FirePoint[0].gameObject.transform.position, m_FirePoint[0].gameObject.transform.rotation);
             balloon01.GetComponent<Rigidbody>().AddForce(balloon01.transform.forward * m_ProjectileSpeed);
             m_CoolDown = Time.time;
-            
+            */
 
-            /*
             //The New Script
             m_lastPressed = m_timePressed;
             
@@ -57,7 +56,6 @@ public class Bow : Ranged {
 
             if (m_fire)
             {
-                if ((m_timePressed >= 0) && (m_timePressed >= (m_MaxSpeed * 0.75)))
                 {
                     Debug.Log("Charge 01");
 
@@ -73,42 +71,9 @@ public class Bow : Ranged {
                     m_fire = false;
 
                 }
-                else if ((m_timePressed >= (m_MaxSpeed * 0.75)) && (m_timePressed <= m_MaxSpeed))
-                {
-                    Debug.Log("Charge 02");
-
-                    GameObject balloon02;
-                    balloon02 = (GameObject)Instantiate(m_Projectile, m_FirePoint[0].gameObject.transform.position, m_FirePoint[0].gameObject.transform.rotation);
-
-                    balloon02.GetComponent<Rigidbody>().AddForce(balloon02.transform.forward * m_ProjectileSpeed * m_speedMultiplier);
-
-                    m_timePressed = 0;
-
-                    m_CoolDown = Time.time;
-
-                    m_fire = false;
-
-                }
-                else if (m_timePressed >= m_MaxSpeed)
-                {
-                    Debug.Log("Charge 03");
-
-                    GameObject balloon03;
-                    balloon03 = (GameObject)Instantiate(m_Projectile, m_FirePoint[0].gameObject.transform.position, m_FirePoint[0].gameObject.transform.rotation);
-
-                    balloon03.GetComponent<Rigidbody>().AddForce(balloon03.transform.forward * m_ProjectileSpeed * m_speedMultiplier * m_speedMultiplier);
-
-                    m_timePressed = 0;
-
-                    m_CoolDown = Time.time;
-
-                    m_fire = false;
-
-                }
 
         }
         //New Script End
-        */
 
         }
     }
