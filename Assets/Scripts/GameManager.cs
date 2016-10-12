@@ -94,6 +94,7 @@ public class GameManager : MonoBehaviour {
             switch (player.m_Player)
             {
                 case Player.PLAYER.P1:
+                    Debug.Log(GameObject.Find("UI Canvas/P1_StatsWindow/Stats").name);
                     stats.anim = GameObject.Find("UI Canvas/P1_StatsWindow/Stats").GetComponent<Animator>();
                     break;
                 case Player.PLAYER.P2:
