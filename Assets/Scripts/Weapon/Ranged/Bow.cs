@@ -27,7 +27,6 @@ public class Bow : Ranged {
             {
 
                 shoot();
-                m_CoolDown = Time.time;
             }
         }
 
@@ -58,8 +57,8 @@ public class Bow : Ranged {
 
             if (m_timePressed >= m_MaxSpeed) 
             {
-                shoot();
-                m_CoolDown = Time.time;
+                m_timePressed = m_MaxSpeed;
+
             }
 
             Debug.Log(m_timePressed);
@@ -89,5 +88,7 @@ public class Bow : Ranged {
         balloon.GetComponent<Rigidbody>().AddForce(balloon.transform.forward * m_ProjectileSpeed * m_timePressed);
 
         m_timePressed = 0;
+
+        m_CoolDown = Time.time;
     }
 }
