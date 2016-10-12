@@ -30,26 +30,33 @@ public class TutorialManager : MonoBehaviour {
                 }
             }
 
-        Transform coins = GameObject.Find(m_CoinList).transform;
-        foreach (Transform child in coins)
+        if (GameObject.Find(m_CoinList) != null)
         {
-            foreach(string name in GameManager.m_Instance.m_TutorialCoins)
+            Transform coins = GameObject.Find(m_CoinList).transform;
+
+            foreach (Transform child in coins)
             {
-                if (child.gameObject.name == name)
+                foreach (string name in GameManager.m_Instance.m_TutorialCoins)
                 {
-                    child.gameObject.SetActive(false);
+                    if (child.gameObject.name == name)
+                    {
+                        child.gameObject.SetActive(false);
+                    }
                 }
             }
         }
 
-        Transform enemies = GameObject.Find(m_EnemyList).transform;
-        foreach (Transform child in enemies)
+        if (GameObject.Find(m_EnemyList) != null)
         {
-            foreach (string name in GameManager.m_Instance.m_TutorialEnemies)
+            Transform enemies = GameObject.Find(m_EnemyList).transform;
+            foreach (Transform child in enemies)
             {
-                if (child.gameObject.name == name)
+                foreach (string name in GameManager.m_Instance.m_TutorialEnemies)
                 {
-                    child.gameObject.SetActive(false);
+                    if (child.gameObject.name == name)
+                    {
+                        child.gameObject.SetActive(false);
+                    }
                 }
             }
         }
