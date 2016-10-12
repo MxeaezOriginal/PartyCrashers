@@ -66,13 +66,13 @@ public class Player : MonoBehaviour
         }*/
 
         //Primary Attack
-        if (Input.GetButton(m_PrimaryAttack))
+        if (Input.GetAxisRaw(m_PrimaryAttack) == 1)
         {
             attack(ATTACKTYPE.PRIMARY);
         }
 
         //Secondary Attack
-        if (Input.GetButton(m_SecondaryAttack))
+        if (Input.GetAxisRaw(m_SecondaryAttack) == 1)
         {
             attack(ATTACKTYPE.SECONDARY);
         }

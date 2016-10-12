@@ -11,7 +11,10 @@ public class CollectObjects : MonoBehaviour
     void Start()
     {
         player = gameObject.GetComponent<Player>();
-        partyBar = GameObject.Find("PartyBar_Game").transform.FindChild("Content").GetComponent<PartyBar>();
+        if (GameObject.Find("PartyBar_Game").transform.FindChild("Content") != null)
+        {
+            partyBar = GameObject.Find("PartyBar_Game").transform.FindChild("Content").GetComponent<PartyBar>();
+        }
     }
 
     public void OnTriggerEnter(Collider other)

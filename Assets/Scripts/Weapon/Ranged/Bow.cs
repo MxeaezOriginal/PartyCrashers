@@ -11,6 +11,8 @@ public class Bow : Ranged {
     public Player player;
     public GameObject playerObject;
 
+    private bool wasDown = false;
+
     // Use this for initialization
     void Start () {
 
@@ -23,10 +25,11 @@ public class Bow : Ranged {
         if (m_CoolDown <= Time.time - m_AttackSpeed || m_CoolDown == 0)
         {
             //Shoot if button up
-            if (Input.GetButtonUp(player.m_PrimaryAttack))
+            if (Input.GetAxisRaw(player.m_PrimaryAttack) == 0 && wasDown)
             {
 
                 shoot();
+                wasDown = false;
             }
         }
 
@@ -49,15 +52,15 @@ public class Bow : Ranged {
 
             if (m_timePressed <= m_MaxSpeed)
             {
-                m_timePressed += Input.GetAxis(player.m_PrimaryAttack) * Time.deltaTime;
+                m_timePressed += Input.GetAxisRaw(player.m_PrimaryAttack) * Time.deltaTime;
             }
 
             if (m_timePressed >= m_MaxSpeed) 
             {
                 m_timePressed = m_MaxSpeed;
-
             }
 
+            wasDown = true;
             Debug.Log(m_timePressed);
 
         }
@@ -66,12 +69,17 @@ public class Bow : Ranged {
     public override void secondaryAttack()
     {
 
-       GameObject bigBalloon;
-        bigBalloon = (GameObject)Instantiate(m_Projectile02, m_FirePoint[0].gameObject.transform.position, m_FirePoint[0].gameObject.transform.rotation);
+        if (m_SecondaryCoolDown <= Time.time - m_SecondaryAttackSpeed || m_SecondaryCoolDown == 0)
+        {
 
-        bigBalloon.GetComponent<Rigidbody>().AddForce(bigBalloon.transform.forward * m_ProjectileSpeed02);
+            GameObject bigBalloon;
+            bigBalloon = (GameObject)Instantiate(m_Projectile02, m_FirePoint[0].gameObject.transform.position, m_FirePoint[0].gameObject.transform.rotation);
 
-        m_CoolDown = Time.time;
+            bigBalloon.GetComponent<Rigidbody>().AddForce(bigBalloon.transform.forward * m_ProjectileSpeed02);
+
+            m_SecondaryCoolDown = Time.time;
+
+        }
         
     }
 

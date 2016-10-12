@@ -21,6 +21,8 @@ public class WaterBombCombo : MonoBehaviour
         if(other.tag == target)
         {
 
+            Debug.Log("EXPLODE");
+
             GameObject explosion;
             explosion = (GameObject)Instantiate(explosionObject, objectSpawn.gameObject.transform.position, objectSpawn.gameObject.transform.rotation);
             explosion.transform.localScale = new Vector3(explosionRadius,explosionRadius,explosionRadius);
