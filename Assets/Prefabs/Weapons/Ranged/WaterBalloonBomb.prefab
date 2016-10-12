@@ -1,5 +1,20 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &140778
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 466370}
+  m_Layer: 0
+  m_Name: Spawnpoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &183000
 GameObject:
   m_ObjectHideFlags: 0
@@ -14,6 +29,8 @@ GameObject:
   - 114: {fileID: 11409356}
   - 54: {fileID: 5482416}
   - 65: {fileID: 6573528}
+  - 114: {fileID: 11434548}
+  - 135: {fileID: 13526166}
   m_Layer: 0
   m_Name: WaterBalloonBomb
   m_TagString: Untagged
@@ -28,10 +45,23 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 183000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 21.00035, y: 1.04, z: 18.2729}
+  m_LocalPosition: {x: 5, y: 5, z: 30}
   m_LocalScale: {x: 2, y: 1.5, z: 2}
-  m_Children: []
+  m_Children:
+  - {fileID: 466370}
   m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!4 &466370
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 140778}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.6666667, z: 0.5}
+  m_Children: []
+  m_Father: {fileID: 413660}
   m_RootOrder: 0
 --- !u!23 &2305608
 MeshRenderer:
@@ -107,12 +137,29 @@ MonoBehaviour:
   hitTarget: 0
   target: {fileID: 0}
   effectPoint: {fileID: 0}
-  onStart: 1
-  startEffect: {fileID: 194016, guid: 263867d4955e3644f9a1dfa779ab7d1e, type: 2}
+  onStart: 0
+  startEffect: {fileID: 0}
   onAlways: 0
   alwaysEffect: {fileID: 0}
   onDestroy: 0
   destroyEffect: {fileID: 0}
+--- !u!114 &11434548
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 183000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7284d7928b7926343a93fa59281537c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: Projectile
+  explosionRadius: 5
+  damage: 4
+  balloonDelay: 1
+  explosionObject: {fileID: 153624, guid: 67c10eec924ecd8428316f06ee1f5103, type: 2}
+  explosionSpawn: {fileID: 140778}
 --- !u!114 &11482670
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -125,6 +172,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delay: 30
+--- !u!135 &13526166
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 183000}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.6
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

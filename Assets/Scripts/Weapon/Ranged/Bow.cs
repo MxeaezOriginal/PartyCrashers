@@ -47,9 +47,6 @@ public class Bow : Ranged {
             m_CoolDown = Time.time;
             */
 
-            
-        //The New Script
-
             if (m_timePressed <= m_MaxSpeed)
             {
                 m_timePressed += Input.GetAxis(player.m_PrimaryAttack) * Time.deltaTime;
@@ -62,8 +59,6 @@ public class Bow : Ranged {
             }
 
             Debug.Log(m_timePressed);
-
-            //New Script End
 
         }
     }
