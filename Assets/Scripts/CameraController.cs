@@ -51,13 +51,11 @@ public class CameraController : MonoBehaviour {
 
                     if (players[i].transform.position.y < players[j].transform.position.y)
                     {
-                        Debug.Log("i");
                         //y = players[i].transform.position.y;
                         y = iRounded;
                     }
                     if (players[i].transform.position.y > players[j].transform.position.y)
                     {
-                        Debug.Log("j");
                         //y = players[j].transform.position.y;
                         y = jRounded;
                     }

@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class P2_HeartSystem : MonoBehaviour
+public class HeartSystem : MonoBehaviour
 {
 
     private int maxHearts = 7;
@@ -11,11 +11,8 @@ public class P2_HeartSystem : MonoBehaviour
     public int curHealth;
     private int healthPerHeart = 2;
 
-    private int damage = -1;
-    private int heal = 1;
-
-    public Image[] heartImages;
-    public Sprite[] heartSprites;
+    public Image[] heartImages = new Image[7];
+    public Sprite[] heartSprites = new Sprite[3];
 
     //Player player;
 
@@ -26,6 +23,7 @@ public class P2_HeartSystem : MonoBehaviour
 
     void Start()
     {
+
         curHealth = startHearts * healthPerHeart;
         maxHealth = maxHearts * healthPerHeart;
 
@@ -80,14 +78,14 @@ public class P2_HeartSystem : MonoBehaviour
         }
     }
 
-    public void TakeDamage()
+    public void TakeDamage(int damage)
     {
-        curHealth += damage;
+        curHealth -= damage;
         curHealth = Mathf.Clamp(curHealth, 0, startHearts * healthPerHeart);
         UpdateHearts();
     }
 
-    public void Heal()
+    public void Heal(int heal)
     {
         curHealth += heal;
         curHealth = Mathf.Clamp(curHealth, 0, startHearts * healthPerHeart);
@@ -106,19 +104,26 @@ public class P2_HeartSystem : MonoBehaviour
         CheckHealthAmount();
     }
 
+    public void IsDead()
+    {
+        if (curHealth == 0)
+            print("Oh no cupcake, you died!");
+    }
+
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha4))
+        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            TakeDamage();
+            TakeDamage(1);
         }
-        if (Input.GetKeyDown(KeyCode.Alpha5))
+        if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            Heal();
+            Heal(1);
         }
-        if (Input.GetKeyDown(KeyCode.Alpha6))
+        if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             AddHeart();
         }
     }
+
 }

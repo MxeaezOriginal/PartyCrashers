@@ -20,7 +20,7 @@ public class PartyBarMinigame : MonoBehaviour
     {
         m_Bar = GetComponent<Image>();
 
-        Debug.Log(GameManager.m_Instance.m_Player2.lastLocation);
+        //Debug.Log(GameManager.m_Instance.m_Player2.lastLocation);
     }
 
     // Update is called once per frame

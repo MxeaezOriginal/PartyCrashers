@@ -117,8 +117,9 @@ GameObject:
   - 114: {fileID: 11463592}
   - 143: {fileID: 14370906}
   - 114: {fileID: 11408334}
-  - 114: {fileID: 11491824}
   - 114: {fileID: 11480854}
+  - 114: {fileID: 11419936}
+  - 114: {fileID: 11438696}
   m_Layer: 8
   m_Name: P2
   m_TagString: Player
@@ -492,6 +493,31 @@ MonoBehaviour:
   m_Pause: Pause_P2
   m_HealthText: {fileID: 0}
   m_Score: {fileID: 0}
+--- !u!114 &11419936
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 165310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6585aba7859682d42a3087b16a41db0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 0
+  curHealth: 0
+  heartImages:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  heartSprites:
+  - {fileID: 21300000, guid: b796a1cefd39f89469605c5d133c2454, type: 3}
+  - {fileID: 21300002, guid: b796a1cefd39f89469605c5d133c2454, type: 3}
+  - {fileID: 21300004, guid: b796a1cefd39f89469605c5d133c2454, type: 3}
 --- !u!114 &11428200
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -515,6 +541,18 @@ MonoBehaviour:
   dashDistance: 25
   dashDelay: 0.1
   smooth: 20
+--- !u!114 &11438696
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 165310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70cc660203e0e344cb94f9d4594fc062, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 0}
 --- !u!114 &11440950
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -595,31 +633,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9957292c81333447833081810640974, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &11491824
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 165310}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51652da3bb3fe8140a663094db01aafa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 0
-  curHealth: 0
-  heartImages:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  heartSprites:
-  - {fileID: 21300000, guid: b796a1cefd39f89469605c5d133c2454, type: 3}
-  - {fileID: 21300002, guid: b796a1cefd39f89469605c5d133c2454, type: 3}
-  - {fileID: 21300004, guid: b796a1cefd39f89469605c5d133c2454, type: 3}
 --- !u!114 &11498346
 MonoBehaviour:
   m_ObjectHideFlags: 1

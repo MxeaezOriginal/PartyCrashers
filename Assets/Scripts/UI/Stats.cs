@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class P2_Stats : MonoBehaviour
+public class Stats : MonoBehaviour
 {
 
-    Animator anim;
+    public Animator anim;
 
     void Awake()
     {
@@ -13,22 +13,22 @@ public class P2_Stats : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.D))
+        if (Input.GetKeyDown(KeyCode.S))
         {
             OpenWindow();
         }
-        if (Input.GetKeyUp(KeyCode.D))
+        if (Input.GetKeyUp(KeyCode.S))
         {
             CloseWindow();
         }
     }
 
-    void OpenWindow()
+    public void OpenWindow()
     {
         anim.SetBool("Open", true);
     }
 
-    void CloseWindow()
+    public void CloseWindow()
     {
         anim.SetBool("Open", false);
     }

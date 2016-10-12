@@ -90,9 +90,13 @@ public class Player : MonoBehaviour
             }
         }
 
-        if(Input.GetButtonDown(m_Interact))
+        if (Input.GetButtonDown(m_Stats))
         {
-
+            GetComponent<Stats>().OpenWindow();
+        }
+        if (Input.GetButtonUp(m_Stats))
+        {
+            GetComponent<Stats>().CloseWindow();
         }
     }
 
