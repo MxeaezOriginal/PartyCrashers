@@ -9,9 +9,11 @@ public class WaterBombCombo : MonoBehaviour
     public float explosionRadius;
     public float damage;
     public float balloonDelay;
+    public float effectDelay;
 
     public GameObject explosionObject;
-    public GameObject explosionSpawn;
+    public GameObject effectObject;
+    public GameObject objectSpawn;
 
     void OnTriggerEnter(Collider other)
     {
@@ -20,8 +22,12 @@ public class WaterBombCombo : MonoBehaviour
         {
 
             GameObject explosion;
-            explosion = (GameObject)Instantiate(explosionObject, explosionSpawn.gameObject.transform.position, explosionSpawn.gameObject.transform.rotation);
+            explosion = (GameObject)Instantiate(explosionObject, objectSpawn.gameObject.transform.position, objectSpawn.gameObject.transform.rotation);
             explosion.transform.localScale = new Vector3(explosionRadius,explosionRadius,explosionRadius);
+
+            GameObject effect;
+            effect = (GameObject)Instantiate(effectObject, objectSpawn.gameObject.transform.position, objectSpawn.gameObject.transform.rotation);
+            Destroy(effect, effectDelay);
 
             Destroy(this.gameObject,balloonDelay);
 
