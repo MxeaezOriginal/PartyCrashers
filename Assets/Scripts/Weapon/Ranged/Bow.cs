@@ -9,7 +9,6 @@ public class Bow : Ranged {
     public float m_MaxSpeed;
 
     public Player player;
-    public GameObject playerObject;
 
     private bool wasDown = false;
 

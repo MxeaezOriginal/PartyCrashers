@@ -104,10 +104,14 @@ public class HeartSystem : MonoBehaviour
         CheckHealthAmount();
     }
 
-    public void IsDead()
+    public bool IsDead()
     {
         if (curHealth == 0)
+        {
             print("Oh no cupcake, you died!");
+            return true;
+        }
+        return false;
     }
 
     void Update()

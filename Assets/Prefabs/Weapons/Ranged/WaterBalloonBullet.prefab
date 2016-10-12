@@ -14,6 +14,7 @@ GameObject:
   - 114: {fileID: 11416592}
   - 54: {fileID: 5491360}
   - 135: {fileID: 13534556}
+  - 114: {fileID: 11423628}
   m_Layer: 0
   m_Name: WaterBalloonBullet
   m_TagString: Projectile
@@ -30,6 +31,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 22.149178, y: 1.72, z: 16.14}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -101,6 +103,19 @@ MonoBehaviour:
   alwaysEffect: {fileID: 0}
   onDestroy: 0
   destroyEffect: {fileID: 0}
+--- !u!114 &11423628
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 150382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc4755ec1c8085f4eab1a7c9e1467fef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explosionhehexd: {fileID: 191186, guid: 079954accd64b32419ec069129c81273, type: 2}
+  hitenemyhehexd: {fileID: 194062, guid: 8c27aeead6d968e4ba986702d6b84335, type: 2}
 --- !u!114 &11451874
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -120,7 +135,7 @@ SphereCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 150382}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
