@@ -3,10 +3,13 @@ using System.Collections;
 
 public class Ballroomblitzgamemaster : MonoBehaviour {
 
-    public GameObject ShotPrefab;
+    private GameObject ShotPrefab;
+    public GameObject BounceBallPrefab;
+    public GameObject ProjectilePrefab;
     public int fireSpeed;
     private float difficultyTimer;//seconds passed
     private float incrementAmmount;
+    private bool bounceBallActive;
     //Fire Locations
     #region
     public Transform FirePoint_Leftwall_ShotLocation1;
@@ -24,6 +27,7 @@ public class Ballroomblitzgamemaster : MonoBehaviour {
     public Transform FirePoint_Rightwall_ShotLocation5;
     public Transform FirePoint_Rightwall_ShotLocation6;
     public Transform FirePoint_Rightwall_ShotLocation7;
+    public Transform FirePoint_Rightwall_ShotLocation8;
 
     public Transform FirePoint_Backwall_ShotLocation1;
     public Transform FirePoint_Backwall_ShotLocation2;
@@ -40,10 +44,14 @@ public class Ballroomblitzgamemaster : MonoBehaviour {
     public Transform FirePoint_Frontwall_ShotLocation5;
     public Transform FirePoint_Frontwall_ShotLocation6;
     public Transform FirePoint_Frontwall_ShotLocation7;
+    public Transform FirePoint_Frontwall_ShotLocation8;
     #endregion
     void Start()
     {
-        float difficultyTimer = 0;
+        difficultyTimer = 0;
+        bounceBallActive = false;
+        ShotPrefab = ProjectilePrefab;
+
         beginFire();
     }
 
@@ -55,22 +63,17 @@ public class Ballroomblitzgamemaster : MonoBehaviour {
             incrementAmmount = 1;
             StartCoroutine(beginFireShot(incrementAmmount));
         }
-        else if (difficultyTimer < 30)
-        {
-            incrementAmmount = 0.5f;
-            StartCoroutine(beginFireShot(incrementAmmount));
-        }
         else if (difficultyTimer < 45)
         {
             incrementAmmount = 0.5f;
             StartCoroutine(beginFireShot(incrementAmmount));
         }
-        else if (difficultyTimer < 59)
+        else if (difficultyTimer < 58)
         {
             incrementAmmount = 0.3f;
             StartCoroutine(beginFireShot(incrementAmmount));
         }
-        else if (difficultyTimer > 59)
+        else if (difficultyTimer > 57)
         {
             incrementAmmount = 0.01f;
             StartCoroutine(beginFireShot(incrementAmmount));
@@ -84,7 +87,17 @@ public class Ballroomblitzgamemaster : MonoBehaviour {
         yield return new WaitForSeconds(settime);
         difficultyTimer = (difficultyTimer +  incrementAmmount);
         SingleFire();
-        if(difficultyTimer > 30)
+        if (difficultyTimer > 30 && bounceBallActive == false)
+        {
+            ShotPrefab = BounceBallPrefab;
+            SingleFire();
+            bounceBallActive = true;
+        }
+        if(ShotPrefab == BounceBallPrefab)
+        {
+            ShotPrefab = ProjectilePrefab;
+        }
+        if(difficultyTimer > 45)
         {
             SingleFire();
         }
@@ -101,7 +114,13 @@ public class Ballroomblitzgamemaster : MonoBehaviour {
         //shooting needs to be fixed
         int FireDirection = Random.Range(1, 5);
         int FireLocation = Random.Range(1, 8);
-        //Right Wall
+        if (FireDirection == 4 | FireDirection == 2)
+        {
+            FireLocation = Random.Range(1, 9);
+        }
+
+        
+        //Left Wall
         #region
         if (FireDirection == 1)
         {
@@ -137,7 +156,7 @@ public class Ballroomblitzgamemaster : MonoBehaviour {
             }
         }
         #endregion
-        //Left Wall
+        //Right Wall
         #region
         if (FireDirection == 2)
         {
@@ -170,6 +189,10 @@ public class Ballroomblitzgamemaster : MonoBehaviour {
             else if (FireLocation == 7)
             {
                 fire_Rightwall_ShotLocation7();
+            }
+            else if (FireLocation == 8)
+            {
+                fire_Rightwall_ShotLocation8();
             }
         }
         #endregion
@@ -243,6 +266,10 @@ public class Ballroomblitzgamemaster : MonoBehaviour {
             {
                 fire_Frontwall_ShotLocation7();
             }
+            else if (FireLocation == 8)
+            {
+                fire_Frontwall_ShotLocation8();
+            }
         }
         #endregion
 
@@ -252,39 +279,32 @@ public class Ballroomblitzgamemaster : MonoBehaviour {
     //LeftWall
     void fire_Leftwall_ShotLocation1()
     {
-        //Fix Shooting
-
-        GameObject dodgeball;
-        dodgeball = (GameObject)Instantiate(ShotPrefab, FirePoint_Leftwall_ShotLocation1.gameObject.transform.position, FirePoint_Leftwall_ShotLocation1.gameObject.transform.rotation);
-
-        dodgeball.GetComponent<Rigidbody>().AddForce(dodgeball.transform.forward * fireSpeed);
+         GameObject dodgeball;
+         dodgeball = (GameObject)Instantiate(ShotPrefab, FirePoint_Leftwall_ShotLocation1.gameObject.transform.position, FirePoint_Leftwall_ShotLocation1.gameObject.transform.rotation);
+         dodgeball.GetComponent<Rigidbody>().AddForce(dodgeball.transform.forward * fireSpeed);
     }
     void fire_Leftwall_ShotLocation2()
     {
         GameObject dodgeball;
         dodgeball = (GameObject)Instantiate(ShotPrefab, FirePoint_Leftwall_ShotLocation2.gameObject.transform.position, FirePoint_Leftwall_ShotLocation2.gameObject.transform.rotation);
-
         dodgeball.GetComponent<Rigidbody>().AddForce(dodgeball.transform.forward * fireSpeed);
     }
     void fire_Leftwall_ShotLocation3()
     {
         GameObject dodgeball;
         dodgeball = (GameObject)Instantiate(ShotPrefab, FirePoint_Leftwall_ShotLocation3.gameObject.transform.position, FirePoint_Leftwall_ShotLocation3.gameObject.transform.rotation);
-
         dodgeball.GetComponent<Rigidbody>().AddForce(dodgeball.transform.forward * fireSpeed);
     }
     void fire_Leftwall_ShotLocation4()
     {
         GameObject dodgeball;
-        dodgeball = (GameObject)Instantiate(ShotPrefab, FirePoint_Leftwall_ShotLocation4.gameObject.transform.position, FirePoint_Leftwall_ShotLocation4.gameObject.transform.rotation);
-
-        dodgeball.GetComponent<Rigidbody>().AddForce(dodgeball.transform.forward * fireSpeed);
+            dodgeball = (GameObject)Instantiate(ShotPrefab, FirePoint_Leftwall_ShotLocation4.gameObject.transform.position, FirePoint_Leftwall_ShotLocation4.gameObject.transform.rotation);
+            dodgeball.GetComponent<Rigidbody>().AddForce(dodgeball.transform.forward * fireSpeed);
     }
     void fire_Leftwall_ShotLocation5()
     {
         GameObject dodgeball;
         dodgeball = (GameObject)Instantiate(ShotPrefab, FirePoint_Leftwall_ShotLocation5.gameObject.transform.position, FirePoint_Leftwall_ShotLocation5.gameObject.transform.rotation);
-
         dodgeball.GetComponent<Rigidbody>().AddForce(dodgeball.transform.forward * fireSpeed);
     }
     void fire_Leftwall_ShotLocation6()
@@ -348,6 +368,13 @@ public class Ballroomblitzgamemaster : MonoBehaviour {
     {
         GameObject dodgeball;
         dodgeball = (GameObject)Instantiate(ShotPrefab, FirePoint_Rightwall_ShotLocation7.gameObject.transform.position, FirePoint_Rightwall_ShotLocation7.gameObject.transform.rotation);
+
+        dodgeball.GetComponent<Rigidbody>().AddForce(dodgeball.transform.forward * fireSpeed);
+    }
+    void fire_Rightwall_ShotLocation8()
+    {
+        GameObject dodgeball;
+        dodgeball = (GameObject)Instantiate(ShotPrefab, FirePoint_Rightwall_ShotLocation8.gameObject.transform.position, FirePoint_Rightwall_ShotLocation8.gameObject.transform.rotation);
 
         dodgeball.GetComponent<Rigidbody>().AddForce(dodgeball.transform.forward * fireSpeed);
     }
@@ -448,6 +475,13 @@ public class Ballroomblitzgamemaster : MonoBehaviour {
     {
         GameObject dodgeball;
         dodgeball = (GameObject)Instantiate(ShotPrefab, FirePoint_Frontwall_ShotLocation7.gameObject.transform.position, FirePoint_Frontwall_ShotLocation7.gameObject.transform.rotation);
+
+        dodgeball.GetComponent<Rigidbody>().AddForce(dodgeball.transform.forward * fireSpeed);
+    }
+    void fire_Frontwall_ShotLocation8()
+    {
+        GameObject dodgeball;
+        dodgeball = (GameObject)Instantiate(ShotPrefab, FirePoint_Frontwall_ShotLocation8.gameObject.transform.position, FirePoint_Frontwall_ShotLocation8.gameObject.transform.rotation);
 
         dodgeball.GetComponent<Rigidbody>().AddForce(dodgeball.transform.forward * fireSpeed);
     }
