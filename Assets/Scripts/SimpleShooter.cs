@@ -29,7 +29,7 @@ public class SimpleShooter : MonoBehaviour
 
         GameObject bullet;
         bullet = (GameObject)Instantiate(projectile, firepoint.transform.position, firepoint.transform.rotation);
-        StartCoroutine("Delay");
+        StartCoroutine("BetweenFire");
 
         bullet.GetComponent<Rigidbody>().AddForce(bullet.transform.forward * projectileSpeed,ForceMode.Impulse);
     }
