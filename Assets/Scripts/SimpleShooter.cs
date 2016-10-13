@@ -16,8 +16,11 @@ public class SimpleShooter : MonoBehaviour
 
         Fire();
 
-        GameObject mesh;
-        mesh = (GameObject)Instantiate(shooterMesh, this.gameObject.transform.position, this.gameObject.transform.rotation);
+        if (shooterMesh)
+        {
+            GameObject mesh;
+            mesh = (GameObject)Instantiate(shooterMesh, this.gameObject.transform.position, this.gameObject.transform.rotation);
+        }
 
     }
 
