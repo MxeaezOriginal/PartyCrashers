@@ -20,6 +20,7 @@ public class SimpleShooter : MonoBehaviour
         {
             GameObject mesh;
             mesh = (GameObject)Instantiate(shooterMesh, this.gameObject.transform.position, this.gameObject.transform.rotation);
+            mesh.gameObject.transform.parent = this.gameObject.transform;
         }
 
     }
