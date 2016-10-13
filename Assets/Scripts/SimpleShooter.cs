@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[RequireComponent(typeof(Rigidbody))]
 public class SimpleShooter : MonoBehaviour
 {
 
@@ -16,6 +15,9 @@ public class SimpleShooter : MonoBehaviour
     {
 
         Fire();
+
+        GameObject mesh;
+        mesh = (GameObject)Instantiate(shooterMesh, this.gameObject.transform.position, this.gameObject.transform.rotation);
 
     }
 
