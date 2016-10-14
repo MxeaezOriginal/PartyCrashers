@@ -33,7 +33,7 @@ GameObject:
   - 114: {fileID: 11459512}
   - 114: {fileID: 11410788}
   m_Layer: 0
-  m_Name: ChaseEnemy
+  m_Name: Chaser Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48,6 +48,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -0.97}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 492622}
   m_RootOrder: 0
@@ -58,8 +59,9 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 128216}
   m_LocalRotation: {x: -0, y: 0.60119957, z: 0, w: -0.7990989}
-  m_LocalPosition: {x: 2.2, y: 0, z: 2.38}
+  m_LocalPosition: {x: -17.868538, y: 1.31, z: 10.869829}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: -73.9117, z: 0}
   m_Children:
   - {fileID: 431270}
   m_Father: {fileID: 0}
@@ -74,7 +76,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 8151129af6b95c3489108cf59793f9ce, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -100,7 +102,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 8151129af6b95c3489108cf59793f9ce, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -154,6 +156,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EnemyHealth: 5
+  m_PartyBarAmount: 2
   coin: {fileID: 0}
 --- !u!114 &11459512
 MonoBehaviour:
