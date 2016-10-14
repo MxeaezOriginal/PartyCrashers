@@ -34,7 +34,7 @@ public class ChillerOpen : MonoBehaviour {
     void GiveItem()
     {
 
-        GameObject[] loot = new GameObject[Random.Range(0,)]; 
+        GameObject[] loot = new GameObject[Random.Range(0,0)]; 
 
     }
 }
