@@ -127,7 +127,7 @@ public class MenuManager : MonoBehaviour
         exitCanvas.SetActive(false);
 
 
-        //Disabling buttons of MainMenu
+        //Disabling buttons of MainMenu but don't hide
         foreach (Transform child in mainMenuCanvas.transform)
         {
             child.GetComponentInChildren<Button>().interactable = false;
@@ -173,9 +173,24 @@ public class MenuManager : MonoBehaviour
     {
         exitPrompt = true;
     }
-    public void ExitButton()
+    public void ExitPromptYes()
     {
         exitActive = true;
+
+        exitPrompt = false;
+        exitPromptCanvas.SetActive(false);
+        mainMenuCanvas.SetActive(false);
+    }
+    public void ExitPromptNo()
+    {
+        exitPrompt = false;
+        exitPromptCanvas.SetActive(false);
+
+        //Enabling buttons of MainMenu but don't hide
+        foreach (Transform child in mainMenuCanvas.transform)
+        {
+            child.GetComponentInChildren<Button>().interactable = true;
+        }
     }
     public void BackButton()
     {
