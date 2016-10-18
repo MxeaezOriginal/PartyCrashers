@@ -25,9 +25,9 @@ public class Player : MonoBehaviour
     public PLAYER m_Player;
     public float m_AttackSpeed;
     public int m_Gold;
-    public int m_Health;
-    public int m_MaxHealth = 100;
-    public int m_Collect;
+    //public int m_Health;
+    //public int m_MaxHealth = 100;
+    //public int m_Collect;
     public WEAPONTYPE m_WeaponID;
     public Vector3 m_LastLocation;
     private Transform m_Weapon;
@@ -46,7 +46,7 @@ public class Player : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        m_Health = m_MaxHealth;
+        //m_Health = m_MaxHealth;
         //m_collect = 0;
     }
 
@@ -56,29 +56,32 @@ public class Player : MonoBehaviour
         //m_HealthText.text = "Health: " + m_Health.ToString();
 
         updateWeapon();
-       /* if (Input.GetMouseButtonDown(0))
-        {
-            attack(ATTACKTYPE.PRIMARY);
-        }
-        if (Input.GetMouseButtonDown(1))
-        {
-            attack(ATTACKTYPE.SECONDARY);
-        }*/
+        /* if (Input.GetMouseButtonDown(0))
+         {
+             attack(ATTACKTYPE.PRIMARY);
+         }
+         if (Input.GetMouseButtonDown(1))
+         {
+             attack(ATTACKTYPE.SECONDARY);
+         }*/
 
         //Primary Attack
-        if (Input.GetAxisRaw(m_PrimaryAttack) == 1)
+        if (Input.GetAxisRaw(m_PrimaryAttack) == 1 || (m_Player == PLAYER.P1 && Input.GetButton("Primary_Keyboard")))
         {
             attack(ATTACKTYPE.PRIMARY);
         }
 
         //Secondary Attack
-        if (Input.GetAxisRaw(m_SecondaryAttack) == 1)
+        if (Input.GetAxisRaw(m_SecondaryAttack) == 1 || (m_Player == PLAYER.P1 && Input.GetButton("Secondary_Keyboard")))
         {
             attack(ATTACKTYPE.SECONDARY);
         }
 
+        //Interact
+        if(Input.GetButtonDown(m_Interact) || (m_Player == PLAYER.P1 && Input.GetButton("Interact_Keyboard")))
+
         //Pause
-        if (Input.GetButtonDown(m_Pause))
+        if (Input.GetButtonDown(m_Pause) || (m_Player == PLAYER.P1 && Input.GetButton("Primary_Keyboard")))
         {
             if (m_WeaponID == WEAPONTYPE.SWORD)
             {
@@ -90,11 +93,11 @@ public class Player : MonoBehaviour
             }
         }
 
-        if (Input.GetButtonDown(m_Stats))
+        if (Input.GetButtonDown(m_Stats) || (m_Player == PLAYER.P1 && Input.GetButtonDown("Stats_Keyboard")))
         {
             GetComponent<Stats>().OpenWindow();
         }
-        if (Input.GetButtonUp(m_Stats))
+        if (Input.GetButtonUp(m_Stats) || (m_Player == PLAYER.P1 && Input.GetButtonUp("Stats_Keyboard")))
         {
             GetComponent<Stats>().CloseWindow();
         }
@@ -158,8 +161,8 @@ public class Player : MonoBehaviour
                 GameManager.m_Instance.m_Player1.player = m_Player;
                 GameManager.m_Instance.m_Player1.attackSpeed = m_AttackSpeed;
                 GameManager.m_Instance.m_Player1.gold = m_Gold;
-                GameManager.m_Instance.m_Player1.health = m_Health;
-                GameManager.m_Instance.m_Player1.maxHealth = m_MaxHealth;
+                //GameManager.m_Instance.m_Player1.health = m_Health;
+                //GameManager.m_Instance.m_Player1.maxHealth = m_MaxHealth;
                 GameManager.m_Instance.m_Player1.weaponID = m_WeaponID;
                 GameManager.m_Instance.m_Player1.lastLocation = m_LastLocation;
                 break;
@@ -168,8 +171,8 @@ public class Player : MonoBehaviour
                 GameManager.m_Instance.m_Player2.player = m_Player;
                 GameManager.m_Instance.m_Player2.attackSpeed = m_AttackSpeed;
                 GameManager.m_Instance.m_Player2.gold = m_Gold;
-                GameManager.m_Instance.m_Player2.health = m_Health;
-                GameManager.m_Instance.m_Player2.maxHealth = m_MaxHealth;
+                //GameManager.m_Instance.m_Player2.health = m_Health;
+                //GameManager.m_Instance.m_Player2.maxHealth = m_MaxHealth;
                 GameManager.m_Instance.m_Player2.weaponID = m_WeaponID;
                 GameManager.m_Instance.m_Player2.lastLocation = m_LastLocation;
                 break;
@@ -178,8 +181,8 @@ public class Player : MonoBehaviour
                 GameManager.m_Instance.m_Player3.player = m_Player;
                 GameManager.m_Instance.m_Player3.attackSpeed = m_AttackSpeed;
                 GameManager.m_Instance.m_Player3.gold = m_Gold;
-                GameManager.m_Instance.m_Player3.health = m_Health;
-                GameManager.m_Instance.m_Player3.maxHealth = m_MaxHealth;
+                //GameManager.m_Instance.m_Player3.health = m_Health;
+                //GameManager.m_Instance.m_Player3.maxHealth = m_MaxHealth;
                 GameManager.m_Instance.m_Player3.weaponID = m_WeaponID;
                 GameManager.m_Instance.m_Player3.lastLocation = m_LastLocation;
                 break;
@@ -188,8 +191,8 @@ public class Player : MonoBehaviour
                 GameManager.m_Instance.m_Player4.player = m_Player;
                 GameManager.m_Instance.m_Player4.attackSpeed = m_AttackSpeed;
                 GameManager.m_Instance.m_Player4.gold = m_Gold;
-                GameManager.m_Instance.m_Player4.health = m_Health;
-                GameManager.m_Instance.m_Player4.maxHealth = m_MaxHealth;
+                //GameManager.m_Instance.m_Player4.health = m_Health;
+                //GameManager.m_Instance.m_Player4.maxHealth = m_MaxHealth;
                 GameManager.m_Instance.m_Player4.weaponID = m_WeaponID;
                 GameManager.m_Instance.m_Player4.lastLocation = m_LastLocation;
                 break;
@@ -205,8 +208,8 @@ public class Player : MonoBehaviour
                 m_Player = GameManager.m_Instance.m_Player1.player;
                 m_AttackSpeed = GameManager.m_Instance.m_Player1.attackSpeed;
                 m_Gold = GameManager.m_Instance.m_Player1.gold;
-                m_Health = GameManager.m_Instance.m_Player1.health;
-                m_MaxHealth = GameManager.m_Instance.m_Player1.maxHealth;
+                //m_Health = GameManager.m_Instance.m_Player1.health;
+                //m_MaxHealth = GameManager.m_Instance.m_Player1.maxHealth;
                 m_WeaponID = GameManager.m_Instance.m_Player1.weaponID;
                 m_LastLocation = GameManager.m_Instance.m_Player1.lastLocation;
                 break;
@@ -215,8 +218,8 @@ public class Player : MonoBehaviour
                 m_Player = GameManager.m_Instance.m_Player2.player;
                 m_AttackSpeed = GameManager.m_Instance.m_Player2.attackSpeed;
                 m_Gold = GameManager.m_Instance.m_Player2.gold;
-                m_Health = GameManager.m_Instance.m_Player2.health;
-                m_MaxHealth = GameManager.m_Instance.m_Player2.maxHealth;
+                //m_Health = GameManager.m_Instance.m_Player2.health;
+                //m_MaxHealth = GameManager.m_Instance.m_Player2.maxHealth;
                 m_WeaponID = GameManager.m_Instance.m_Player2.weaponID;
                 m_LastLocation = GameManager.m_Instance.m_Player2.lastLocation;
                 break;
@@ -225,8 +228,8 @@ public class Player : MonoBehaviour
                 m_Player = GameManager.m_Instance.m_Player3.player;
                 m_AttackSpeed = GameManager.m_Instance.m_Player3.attackSpeed;
                 m_Gold = GameManager.m_Instance.m_Player3.gold;
-                m_Health = GameManager.m_Instance.m_Player3.health;
-                m_MaxHealth = GameManager.m_Instance.m_Player3.maxHealth;
+                //m_Health = GameManager.m_Instance.m_Player3.health;
+                //m_MaxHealth = GameManager.m_Instance.m_Player3.maxHealth;
                 m_WeaponID = GameManager.m_Instance.m_Player3.weaponID;
                 m_LastLocation = GameManager.m_Instance.m_Player3.lastLocation;
                 break;
@@ -235,8 +238,8 @@ public class Player : MonoBehaviour
                 m_Player = GameManager.m_Instance.m_Player4.player;
                 m_AttackSpeed = GameManager.m_Instance.m_Player4.attackSpeed;
                 m_Gold = GameManager.m_Instance.m_Player4.gold;
-                m_Health = GameManager.m_Instance.m_Player4.health;
-                m_MaxHealth = GameManager.m_Instance.m_Player4.maxHealth;
+                //m_Health = GameManager.m_Instance.m_Player4.health;
+                //m_MaxHealth = GameManager.m_Instance.m_Player4.maxHealth;
                 m_WeaponID = GameManager.m_Instance.m_Player4.weaponID;
                 m_LastLocation = GameManager.m_Instance.m_Player4.lastLocation;
                 break;
@@ -263,7 +266,7 @@ public class Player : MonoBehaviour
         if (coll.gameObject.tag == "Enemy")
         {
 
-            m_Health = m_Health - 1;
+            //m_Health = m_Health - 1;
 
             //CheckWinCondition();
             //}
@@ -275,7 +278,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void OnTriggerStay(Collider other)
+    /*public void OnTriggerStay(Collider other)
     {
         Health health = other.GetComponent<Health>();
 
@@ -299,5 +302,5 @@ public class Player : MonoBehaviour
         //{
         //    m_Score
         //}
-    }
+    }*/
 }

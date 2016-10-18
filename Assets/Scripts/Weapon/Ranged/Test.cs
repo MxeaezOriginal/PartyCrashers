@@ -19,6 +19,7 @@ public class Test : MonoBehaviour
             Destroy(bloodeffect, 2);
 
             hearts.TakeDamage(1);
+
             if(hearts.IsDead())
             {
                 p.SetActive(false);
