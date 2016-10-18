@@ -8,19 +8,36 @@ public class BossAi : MonoBehaviour
     float z;
     Vector3 RandomLocation;
     Vector3 TrapLocation;
-    public Vector3 GetLoc;
+    Vector3 GetLoc;
 
     public GameObject enemyPrefab;
     public GameObject trapPrefab;
     public GameObject trapLoc;
     public GameObject trap;
     public float timer;
-    public float spawnTime = 2.0f;
+
+    public float CountDownBeforeAttack = 10f;
+    public float AttackCoolDown = 5f;
+    public float AttackTime = 30f;
+
+    // Boss attack mode 1 variables --- spawn enemy
+    public float Mode1EnemySpawnTime = 2.0f;
+    public int Mode1Range = 10;
+
+    // Boss attack mode 2 variables --- 360 shooting
+    public Vector3 Mode2BossSpin;
+    public float Mode2ReloadTime = 5f;
+    public int Mode2MaxBullet = 100;
+    public float Mode2FireInterval = 1f;
+
+    // Boss attack mode 3 variables --- spawn trap
+    public float Mode3TrapSpawnTime = 2.0f;
+    public int Mode3Range = 10;
     //public Vector3 SpawnEnemyLocation;
 
-    public Vector3 spin;
+
+    public int m_Bullet;
         
-    public float m_FireInterval = 1f;
     public GameObject ShotPrefab;
     public Transform ShotLocation1;
     public Transform ShotLocation2;
@@ -31,37 +48,94 @@ public class BossAi : MonoBehaviour
     public Transform ShotLocation7;
     public Transform ShotLocation8;
 
-    public float m_ReloadTime = 5f;
-
     private float m_LastShotTime;
-    public int m_Bullet;
-    public int m_MaxBullet = 10;
+    private float m_LastAttackTime;
 
-
+    private int GetMode = 1;
 
     // Use this for initialization
     void Start()
     {
         m_LastShotTime = Time.time;
-        m_Bullet = m_MaxBullet;
-        timer = spawnTime;
-
-
+        m_LastAttackTime = Time.time;
+        m_Bullet = Mode2MaxBullet;
+        timer = Mode1EnemySpawnTime;
     }
 
     // Update is called once per frame
     void Update()
     {
-        //BossAttackMode1();
-        //BossAttackMode2();
-        BossAttackMode3();
+        Attacking();
+
+    }
+
+    void Attacking()
+    {
+        bool StartAttack = (m_LastAttackTime + CountDownBeforeAttack) < Time.time;
+        bool CoolDown = (m_LastAttackTime + AttackCoolDown) < Time.time;
+        bool Attack = (m_LastAttackTime + AttackTime) < Time.time;
+
+        //  Get Random Attack Mode Needs to fix!!! 
+
+        //if(StartAttack )//&& distance)
+        //{
+        // if (CanAttack && CoolDown)
+        //{
+        if (CoolDown)
+            {
+                if (GetMode == 1)
+                {
+                    // spawn chasing enemy in random location
+                    BossAttackMode1();
+                    Debug.Log("Attack Mode 1");
+                    if (Attack)
+                    {
+                        GetMode =  GetRandomAttackMode();
+                        m_LastAttackTime = Time.time;
+                    }
+                }
+
+                if (GetMode == 2)
+                {
+                    // 360 degree shooting
+                    BossAttackMode2();
+                    Debug.Log("Attack Mode 2");
+                    if(Attack)
+                    {
+                        m_LastAttackTime = Time.time;
+                        GetMode = GetRandomAttackMode();
+                    }
+                }
+
+                if (GetMode == 3)
+                {
+                    // spawn trap at random location
+                    BossAttackMode3();
+                    Debug.Log("Attack Mode 3");
+                    if (Attack)
+                    {
+                        m_LastAttackTime = Time.time;
+                        GetMode = GetRandomAttackMode();
+                    }
+                }
+
+            }
+
+            //}
+
+        //}
+    }
+
+    int GetRandomAttackMode()
+    {
+        return Random.Range(1, 4);
     }
 
     public Vector3 GetRandomLocationForEnemy()
     {
-        x = Random.Range(0, 50);
+        x = Random.Range(0, Mode1Range);
         y = 1;
-        z = Random.Range(0, 50);
+        z = Random.Range(0, Mode1Range);
         RandomLocation = new Vector3(x, y, z);
         //transform.position = SpawnEnemyLocation;
         return RandomLocation;
@@ -73,22 +147,22 @@ public class BossAi : MonoBehaviour
         if(timer <= 0 )
         {
             Instantiate(enemyPrefab, GetRandomLocationForEnemy(), transform.rotation);
-            timer = spawnTime;
+            timer = Mode1EnemySpawnTime;
         }
     }
 
     void BossAttackMode2() // 360 degree shooting
     {
-        transform.Rotate(spin * Time.deltaTime);
+        transform.Rotate(Mode2BossSpin * Time.deltaTime);
 
-        bool CanShoot = (m_LastShotTime + m_FireInterval) < Time.time;
+        bool CanShoot = (m_LastShotTime + Mode2FireInterval) < Time.time;
         bool HaveAmmo = m_Bullet > 0;
         if (m_Bullet <= 0)
         {
-            bool Reloading = (m_LastShotTime + m_ReloadTime) < Time.time;
+            bool Reloading = (m_LastShotTime + Mode2ReloadTime) < Time.time;
             if (Reloading)
             {
-                m_Bullet = m_MaxBullet;
+                m_Bullet = Mode2MaxBullet;
             }
         }
         if (CanShoot && HaveAmmo)
@@ -222,37 +296,25 @@ public class BossAi : MonoBehaviour
         }
     }
 
-    public Vector3 GetRandomLocation()
-    {
-        x = Random.Range(0, 50);
-        y = 10;
-        z = Random.Range(0, 50);
-        RandomLocation = new Vector3(x, y, z);
-        return RandomLocation;
-    }
-
-    
+    //public Vector3 GetRandomLocation()
+    //{
+    //    x = Random.Range(0, 50);
+    //    y = 10;
+    //    z = Random.Range(0, 50);
+    //    RandomLocation = new Vector3(x, y, z);
+    //    return RandomLocation;
+    //}
 
     public Vector3 GetRandomLocationForTrap()
     {
-        x = Random.Range(0, 50);
+        x = Random.Range(0, Mode3Range);
         y = 10;
-        z = Random.Range(0, 50);
+        z = Random.Range(0, Mode3Range);
         RandomLocation = new Vector3(x, y, z);
         //TrapLocation = new Vector3(x, 0.1f, z);
         //transform.position = SpawnEnemyLocation;
         return RandomLocation;
     }
-
-    //public Vector3 GetPreLocationForTrap()
-    //{
-    //    x = Random.Range(0, 50);
-    //    y = 0.1f;
-    //    z = Random.Range(0, 50);
-    //    RandomLocation = new Vector3(x, y, z);
-    //    //transform.position = SpawnEnemyLocation;
-    //    return TrapLocation;
-    //}
 
     void BossAttackMode3() // spawn trap at random location
     {
@@ -264,7 +326,7 @@ public class BossAi : MonoBehaviour
             Instantiate(trapLoc, GetLoc, transform.rotation);
             //trap.transform.position
 
-            timer = spawnTime;
+            timer = Mode3TrapSpawnTime;
         }
     }
 }
