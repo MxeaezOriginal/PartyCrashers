@@ -9,13 +9,13 @@ public class EnemyDeath : MonoBehaviour
     public int m_PartyBarAmount = 2;
     public GameObject coin;
 
-    void OnCollisionEnter(Collision col)
+    void OnTriggerEnter(Collider col)
     {
-        if (col.gameObject.tag == "Range")
+        if (col.gameObject.tag == "Projectile")
         {
             if (m_EnemyHealth > 0)
             {
-                m_EnemyHealth = m_EnemyHealth - 10;
+                m_EnemyHealth = m_EnemyHealth - 5;
             }
             else
             {
@@ -25,7 +25,7 @@ public class EnemyDeath : MonoBehaviour
                     GameManager.m_Instance.m_TutorialEnemies.Add(gameObject.name);
                 }
 
-                GameManager.m_Instance.m_PartyBarGame.m_Current += m_PartyBarAmount;
+                //GameManager.m_Instance.m_PartyBarGame.m_Current += m_PartyBarAmount;
 
                 gameObject.SetActive(false);
 
@@ -39,11 +39,11 @@ public class EnemyDeath : MonoBehaviour
     {
         if(Sword.attack == true)
             {
-            if (other.tag == ("Melee"))
+            if (other.tag == ("Physical"))
            {
                     if (m_EnemyHealth > 0)
                     {
-                        m_EnemyHealth = m_EnemyHealth - 0;
+                         m_EnemyHealth--;
                     }
                     else
                     {
