@@ -9,6 +9,7 @@ public class SimpleShooter : MonoBehaviour
     public GameObject projectile;
 
     public float projectileSpeed;
+    [Range(0.1f,3f)]
     public float delay;
 
     void Start()
