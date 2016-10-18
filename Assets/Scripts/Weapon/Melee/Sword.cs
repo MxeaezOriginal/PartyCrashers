@@ -37,8 +37,7 @@ public class Sword : Melee
     {
 
 
-        if (m_CoolDown <= Time.time - m_AttackSpeed || m_CoolDown == 0)
-        {
+       
             if (attack == true)
             {
                 triggerLife -= Time.deltaTime;
@@ -60,30 +59,42 @@ public class Sword : Melee
                 swordTrigger.SetActive(false);
             }
 
-            m_CoolDown = Time.time;
-        }
+            //m_CoolDown = Time.time;
+        
     }
 
     override public void primaryAttack()
     {
-        attack = true;
+        if (m_CoolDown <= Time.time - m_AttackSpeed || m_CoolDown == 0)
+        {
+            attack = true;
+            m_CoolDown = Time.time;
+        }
     }
 
     override public void secondaryAttack()
     {
-        if (m_SecondaryCoolDown <= Time.time - m_AttackSpeed || m_CoolDown == 0)
+        if (m_SecondaryCoolDown <= Time.time - m_AttackSpeed || m_SecondaryCoolDown == 0)
         {
 
             attack = true;
             m_CharacterController.Move(m_CharacterController.transform.forward * Time.deltaTime * 50f);
 
-            m_SecondaryCoolDown = Time.time;
+            StartCoroutine(dash());
+
         }
+
+
     }
+
+  
 
     IEnumerator dash()
     {
         yield return new WaitForSeconds(dashDelay);
-        m_CharacterController.Move(m_CharacterController.transform.forward * Time.deltaTime * 10f);
+
+        m_SecondaryCoolDown = Time.time;
+
+        //m_CharacterController.Move(m_CharacterController.transform.forward * Time.deltaTime * 10f);
     }
 }
