@@ -61,7 +61,6 @@ public class PlayerController : MonoBehaviour
                 if (!m_UsingKeyboard)
                 {
                     m_MoveDir = new Vector3(Input.GetAxis(m_HorizontalButton), 0, Input.GetAxis(m_VerticalButton));
-                    Debug.Log("Hey");
                 }
                 else
                 {
