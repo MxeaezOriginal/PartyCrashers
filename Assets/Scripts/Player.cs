@@ -26,11 +26,12 @@ public class Player : MonoBehaviour
     public float m_AttackSpeed;
     public int m_Gold;
     //public int m_Health;
-    //public int m_MaxHealth = 100;
+    //public int m_MaxHealth;
     //public int m_Collect;
     public WEAPONTYPE m_WeaponID;
     public Vector3 m_LastLocation;
     private Transform m_Weapon;
+    private HeartSystem m_Heart;
 
     //Input
     public string m_PrimaryAttack = "Primary_";
@@ -46,6 +47,7 @@ public class Player : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        m_Heart = GetComponent<HeartSystem>();
         //m_Health = m_MaxHealth;
         //m_collect = 0;
     }
@@ -257,6 +259,11 @@ public class Player : MonoBehaviour
         {
             Destroy(other.gameObject);
             setWeapon(WEAPONTYPE.SWORD);
+        }
+
+        if(other.gameObject.CompareTag("Health"))
+        {
+            m_Heart.Heal(2);
         }
     }
 

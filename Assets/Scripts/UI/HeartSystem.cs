@@ -10,6 +10,7 @@ public class HeartSystem : MonoBehaviour
     public int maxHealth;
     public int curHealth;
     private int healthPerHeart = 2;
+    public static HeartSystem m_Instance;
 
     public Image[] heartImages = new Image[7];
     public Sprite[] heartSprites = new Sprite[3];
