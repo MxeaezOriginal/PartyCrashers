@@ -69,7 +69,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!m_UsingKeyboard)
+        if (!m_UsingKeyboard && m_UsingKeyboardSave == true)
         {
             m_PrimaryAttack = m_PrimaryAttackSave;
             m_SecondaryAttack = m_SecondaryAttackSave;
@@ -77,8 +77,10 @@ public class Player : MonoBehaviour
             m_Silly = m_SillySave;
             m_Stats = m_StatsSave;
             m_Pause = m_PauseSave;
+
+            m_UsingKeyboardSave = false;
         }
-        else
+        else if(m_UsingKeyboard && m_UsingKeyboardSave == false)
         {
             m_PrimaryAttack = "Primary_Keyboard";
             m_SecondaryAttack = "Secondary_Keyboard";
@@ -86,6 +88,8 @@ public class Player : MonoBehaviour
             m_Silly = "Silly_Keyboard";
             m_Stats = "Stats_Keyboard";
             m_Pause = "Pause_Keyboard";
+
+            m_UsingKeyboardSave = true;
         }
         updateWeapon();
 
