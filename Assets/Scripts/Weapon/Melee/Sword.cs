@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Sword : Melee {
+public class Sword : Melee
+{
 
     public int dashDistance = 25;
 
@@ -11,40 +12,65 @@ public class Sword : Melee {
 
     public static bool attack = false;
 
+    public float triggerLife = 0.5f;
+
+    public GameObject swordTrigger;
+
     //PlayerController m_PlayerController;
     CharacterController m_CharacterController;
 
-	// Use this for initialization
-	void Start () {
+
+
+
+    // Use this for initialization
+    void Start()
+    {
         //m_PlayerController = GetComponentInParent<PlayerController>();
         m_CharacterController = GetComponentInParent<CharacterController>();
+
+        swordTrigger.SetActive(false);
+
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (attack == true)
+        {
+            triggerLife -= Time.deltaTime;
+
+        }
+        if (triggerLife <= 0)
+        {
+            Debug.Log("time left = 0");
+            attack = false;
+            triggerLife = 0.5f;
+
+        }
+        if (attack == true)
+        {
+            swordTrigger.SetActive(true);
+        }
+        if (attack == false)
+        {
+            swordTrigger.SetActive(false);
+        }
     }
 
     override public void primaryAttack()
     {
         attack = true;
-        if (attack == true)
-            {
-            Quaternion newRotation = new Quaternion(transform.rotation.x, transform.rotation.y, transform.rotation.z, transform.rotation.w); ;
-            newRotation *= Quaternion.Euler(90, 0, 0);
-            transform.rotation = Quaternion.Slerp(transform.rotation, newRotation, 10 * Time.deltaTime);
-            Debug.Log("primary");
-            attack = false;
-        }
     }
 
     override public void secondaryAttack()
     {
-        m_CharacterController.Move(Vector3.forward * Time.deltaTime * 50f);
+        attack = true;
+        m_CharacterController.Move(m_CharacterController.transform.forward * Time.deltaTime * 50f);
     }
 
     IEnumerator dash()
     {
         yield return new WaitForSeconds(dashDelay);
-        m_CharacterController.Move(Vector3.forward * Time.deltaTime * 10f);
+        m_CharacterController.Move(m_CharacterController.transform.forward * Time.deltaTime * 10f);
     }
 }

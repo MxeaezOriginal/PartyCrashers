@@ -702,6 +702,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1acba1d11a02873459dca3ddb342a957, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Max: 100
+  m_Current: 0
   m_Active: 0
 --- !u!1 &528076724
 GameObject:
@@ -1074,6 +1076,46 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 839428735}
+--- !u!1 &873661686
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 873661687}
+  - 65: {fileID: 873661688}
+  m_Layer: 8
+  m_Name: SwordTrigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &873661687
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 873661686}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.3615731, y: 1.0543529, z: 1.3532976}
+  m_Children: []
+  m_Father: {fileID: 1565997113}
+  m_RootOrder: 0
+--- !u!65 &873661688
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 873661686}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &920273405
 GameObject:
   m_ObjectHideFlags: 0
@@ -1160,7 +1202,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 455468, guid: c0d4599cda93dc54785f1e84c5383933, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 3.62
+      value: 0.65
       objectReference: {fileID: 0}
     - target: {fileID: 455468, guid: c0d4599cda93dc54785f1e84c5383933, type: 2}
       propertyPath: m_LocalPosition.z
@@ -1184,7 +1226,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 455468, guid: c0d4599cda93dc54785f1e84c5383933, type: 2}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 11429116, guid: c0d4599cda93dc54785f1e84c5383933, type: 2}
       propertyPath: m_HealthText
@@ -1194,6 +1236,26 @@ Prefab:
       propertyPath: m_Score
       value: 
       objectReference: {fileID: 652676759}
+    - target: {fileID: 11429116, guid: c0d4599cda93dc54785f1e84c5383933, type: 2}
+      propertyPath: m_WeaponID
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 183980, guid: c0d4599cda93dc54785f1e84c5383933, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 127874, guid: c0d4599cda93dc54785f1e84c5383933, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6554142, guid: c0d4599cda93dc54785f1e84c5383933, type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11404970, guid: c0d4599cda93dc54785f1e84c5383933, type: 2}
+      propertyPath: swordTrigger
+      value: 
+      objectReference: {fileID: 873661686}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c0d4599cda93dc54785f1e84c5383933, type: 2}
   m_IsPrefabParent: 0
@@ -1800,6 +1862,10 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1535449300}
+--- !u!4 &1565997113 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 454110, guid: c0d4599cda93dc54785f1e84c5383933, type: 2}
+  m_PrefabInternal: {fileID: 971596203}
 --- !u!1 &1586094845
 GameObject:
   m_ObjectHideFlags: 0
