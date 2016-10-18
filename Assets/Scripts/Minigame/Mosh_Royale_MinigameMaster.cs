@@ -12,6 +12,10 @@ public class Mosh_Royale_MinigameMaster : MonoBehaviour {
     public GameObject enemySpawnpoint6;
     public GameObject enemySpawnpoint7;
     public GameObject enemySpawnpoint8;
+    public GameObject enemySpawnpoint9;
+    public GameObject enemySpawnpoint10;
+    public GameObject enemySpawnpoint11;
+    public GameObject enemySpawnpoint12;
     private float difficultyTimer;//seconds passed
     private float incrementAmmount;
 
@@ -28,6 +32,10 @@ public class Mosh_Royale_MinigameMaster : MonoBehaviour {
         enemyTest1 = (GameObject)Instantiate( moshpitEnemy, enemySpawnpoint6.gameObject.transform.position, enemySpawnpoint6.gameObject.transform.rotation);
         enemyTest1 = (GameObject)Instantiate( moshpitEnemy, enemySpawnpoint7.gameObject.transform.position, enemySpawnpoint7.gameObject.transform.rotation);
         enemyTest1 = (GameObject)Instantiate( moshpitEnemy, enemySpawnpoint8.gameObject.transform.position, enemySpawnpoint8.gameObject.transform.rotation);
+        enemyTest1 = (GameObject)Instantiate( moshpitEnemy, enemySpawnpoint9.gameObject.transform.position, enemySpawnpoint9.gameObject.transform.rotation);
+        enemyTest1 = (GameObject)Instantiate( moshpitEnemy, enemySpawnpoint10.gameObject.transform.position, enemySpawnpoint10.gameObject.transform.rotation);
+        enemyTest1 = (GameObject)Instantiate( moshpitEnemy, enemySpawnpoint11.gameObject.transform.position, enemySpawnpoint11.gameObject.transform.rotation);
+        enemyTest1 = (GameObject)Instantiate (moshpitEnemy, enemySpawnpoint12.gameObject.transform.position, enemySpawnpoint12.gameObject.transform.rotation);
        
 	}
 	
