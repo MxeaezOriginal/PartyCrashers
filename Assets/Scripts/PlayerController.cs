@@ -24,6 +24,8 @@ public class PlayerController : MonoBehaviour
     public string m_HorizontalRotationButton = "JoystickRightY_";
     public string m_VerticalRotationButton = "JoystickRightX_";
 
+    public bool m_UsingKeyboard = false;
+
     private float m_CurrentHorizontalRotation;
     private float m_CurrentVerticalRotation;
 
@@ -33,8 +35,6 @@ public class PlayerController : MonoBehaviour
 
     private Vector3 m_MoveDir = Vector3.zero;
     private Vector3 m_Velocity = Vector3.zero;
-
-    private GameObject[] m_Players;
 
     private bool m_StopMovementX = false;
     private bool m_StopMovementZ = false;
@@ -47,7 +47,6 @@ public class PlayerController : MonoBehaviour
     {
         //rigidBody = gameObject.GetComponent<Rigidbody>();
         controller = gameObject.GetComponent<CharacterController>();
-        m_Players = GameObject.FindGameObjectsWithTag("Player");
     }
 
     // Update is called once per frame
@@ -59,17 +58,39 @@ public class PlayerController : MonoBehaviour
 
             if (m_StopMovementX == false && m_StopMovementZ == false)
             {
-                m_MoveDir = new Vector3(Input.GetAxis(m_HorizontalButton), 0, Input.GetAxis(m_VerticalButton));
+                if (!m_UsingKeyboard)
+                {
+                    m_MoveDir = new Vector3(Input.GetAxis(m_HorizontalButton), 0, Input.GetAxis(m_VerticalButton));
+                    Debug.Log("Hey");
+                }
+                else
+                {
+                    m_MoveDir = new Vector3(Input.GetAxis("Horizontal_Keyboard"), 0, Input.GetAxis("Vertical_Keyboard"));
+                }
             }
             //cant move in x direction
             else if (m_StopMovementX == true && m_StopMovementZ == false)
             {
-                m_MoveDir = new Vector3(0, 0, Input.GetAxis(m_VerticalButton));
+                if (!m_UsingKeyboard)
+                {
+                    m_MoveDir = new Vector3(0, 0, Input.GetAxis(m_VerticalButton));
+                }
+                else
+                {
+                    m_MoveDir = new Vector3(0, 0, Input.GetAxis("Vertical_Keyboard"));
+                }
             }
             //cant move in z direction
             else if (m_StopMovementX == false && m_StopMovementZ == true)
             {
-                m_MoveDir = new Vector3(Input.GetAxis(m_HorizontalButton), 0, 0);
+                if (!m_UsingKeyboard)
+                {
+                    m_MoveDir = new Vector3(Input.GetAxis(m_HorizontalButton), 0, 0);
+                }
+                else
+                {
+                    m_MoveDir = new Vector3(Input.GetAxis("Horizontal_Keyboard"), 0, 0);
+                }
             }
             //cant move in either direction
             else if (m_StopMovementX == true && m_StopMovementZ == true)
@@ -84,21 +105,45 @@ public class PlayerController : MonoBehaviour
             //Jump
             if (controller.isGrounded)
             {
-                if (Input.GetButtonDown(m_JumpButton))
+                if (!m_UsingKeyboard)
                 {
-                    m_Velocity.y = m_Jump;
+                    if (Input.GetButtonDown(m_JumpButton))
+                    {
+                        m_Velocity.y = m_Jump;
+                    }
+                }
+                else
+                {
+                    if (Input.GetButtonDown("Jump_Keyboard"))
+                    {
+                        m_Velocity.y = m_Jump;
+                    }
                 }
                 m_CurrentGravity = 0f;
             }
             else
             {
-                if (Input.GetButton(m_JumpButton))
+                if (!m_UsingKeyboard)
                 {
-                    m_CurrentGravity = m_JumpGravity;
+                    if (Input.GetButton(m_JumpButton))
+                    {
+                        m_CurrentGravity = m_JumpGravity;
+                    }
+                    else
+                    {
+                        m_CurrentGravity = m_NormalGravity;
+                    }
                 }
                 else
                 {
-                    m_CurrentGravity = m_NormalGravity;
+                    if (Input.GetButton("Jump_Keyboard"))
+                    {
+                        m_CurrentGravity = m_JumpGravity;
+                    }
+                    else
+                    {
+                        m_CurrentGravity = m_NormalGravity;
+                    }
                 }
             }
 
@@ -154,15 +199,31 @@ public class PlayerController : MonoBehaviour
             //Rotate / Aim
 
 
-            if (Input.GetAxis(m_HorizontalRotationButton) != 0 || Input.GetAxis(m_VerticalRotationButton) != 0)
+            if (!m_UsingKeyboard)
             {
-                m_CurrentHorizontalRotation = Input.GetAxis(m_HorizontalRotationButton);
-                m_CurrentVerticalRotation = Input.GetAxis(m_VerticalRotationButton);
+                if (Input.GetAxis(m_HorizontalRotationButton) != 0 || Input.GetAxis(m_VerticalRotationButton) != 0)
+                {
+                    m_CurrentHorizontalRotation = Input.GetAxis(m_HorizontalRotationButton);
+                    m_CurrentVerticalRotation = Input.GetAxis(m_VerticalRotationButton);
+                }
+                else if (Input.GetAxis(m_HorizontalButton) != 0 || Input.GetAxis(m_VerticalButton) != 0)
+                {
+                    m_CurrentHorizontalRotation = Input.GetAxis(m_HorizontalButton);
+                    m_CurrentVerticalRotation = Input.GetAxis(m_VerticalButton) * -1f;
+                }
             }
-            else if (Input.GetAxis(m_HorizontalButton) != 0 || Input.GetAxis(m_VerticalButton) != 0)
+            else
             {
-                m_CurrentHorizontalRotation = Input.GetAxis(m_HorizontalButton) ;
-                m_CurrentVerticalRotation = Input.GetAxis(m_VerticalButton) * -1f;
+                if (Input.GetAxis("RotateHorizontal_Keyboard") != 0 || Input.GetAxis("RotateVertical_Keyboard") != 0)
+                {
+                    m_CurrentHorizontalRotation = Input.GetAxis("RotateHorizontal_Keyboard");
+                    m_CurrentVerticalRotation = Input.GetAxis("RotateVertical_Keyboard") * -1f;
+                }
+                else if (Input.GetAxis("Horizontal_Keyboard") != 0 || Input.GetAxis("Vertical_Keyboard") != 0)
+                {
+                    m_CurrentHorizontalRotation = Input.GetAxis("Horizontal_Keyboard");
+                    m_CurrentVerticalRotation = Input.GetAxis("Vertical_Keyboard") * -1f;
+                }
             }
 
             //Gravity
@@ -197,18 +258,18 @@ public class PlayerController : MonoBehaviour
         GameObject otherPlayerZ = null;
 
         //Loop through players and set x to greatest x distance, and y to greatest y distance between current player and any other player
-        for (int i = 0; i < m_Players.Length; i++)
+        for (int i = 0; i < GameManager.m_Instance.m_Players.Length; i++)
         {
-            if (Mathf.Abs(transform.position.x - m_Players[i].transform.position.x) > x) // if the distance is greater than current
+            if (Mathf.Abs(transform.position.x - GameManager.m_Instance.m_Players[i].transform.position.x) > x) // if the distance is greater than current
             {
-                x = Mathf.Abs(transform.position.x - m_Players[i].transform.position.x); // update x to the new greatest distance
-                otherPlayerX = m_Players[i]; // set this gamobject to the other player that this player has the greatest distance with
+                x = Mathf.Abs(transform.position.x - GameManager.m_Instance.m_Players[i].transform.position.x); // update x to the new greatest distance
+                otherPlayerX = GameManager.m_Instance.m_Players[i]; // set this gamobject to the other player that this player has the greatest distance with
             }
 
-            if (Mathf.Abs(transform.position.z - m_Players[i].transform.position.z) > z)
+            if (Mathf.Abs(transform.position.z - GameManager.m_Instance.m_Players[i].transform.position.z) > z)
             {
-                z = Mathf.Abs(transform.position.z - m_Players[i].transform.position.z);
-                otherPlayerZ = m_Players[i];
+                z = Mathf.Abs(transform.position.z - GameManager.m_Instance.m_Players[i].transform.position.z);
+                otherPlayerZ = GameManager.m_Instance.m_Players[i];
             }
         }
 
