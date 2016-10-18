@@ -35,25 +35,32 @@ public class Sword : Melee
     // Update is called once per frame
     void Update()
     {
-        if (attack == true)
-        {
-            triggerLife -= Time.deltaTime;
 
-        }
-        if (triggerLife <= 0)
-        {
-            Debug.Log("time left = 0");
-            attack = false;
-            triggerLife = 0.5f;
 
-        }
-        if (attack == true)
+        if (m_CoolDown <= Time.time - m_AttackSpeed || m_CoolDown == 0)
         {
-            swordTrigger.SetActive(true);
-        }
-        if (attack == false)
-        {
-            swordTrigger.SetActive(false);
+            if (attack == true)
+            {
+                triggerLife -= Time.deltaTime;
+
+            }
+            if (triggerLife <= 0)
+            {
+                Debug.Log("time left = 0");
+                attack = false;
+                triggerLife = 0.5f;
+
+            }
+            if (attack == true)
+            {
+                swordTrigger.SetActive(true);
+            }
+            if (attack == false)
+            {
+                swordTrigger.SetActive(false);
+            }
+
+            m_CoolDown = Time.time;
         }
     }
 
@@ -64,8 +71,14 @@ public class Sword : Melee
 
     override public void secondaryAttack()
     {
-        attack = true;
-        m_CharacterController.Move(m_CharacterController.transform.forward * Time.deltaTime * 50f);
+        if (m_SecondaryCoolDown <= Time.time - m_AttackSpeed || m_CoolDown == 0)
+        {
+
+            attack = true;
+            m_CharacterController.Move(m_CharacterController.transform.forward * Time.deltaTime * 50f);
+
+            m_SecondaryCoolDown = Time.time;
+        }
     }
 
     IEnumerator dash()

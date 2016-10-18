@@ -83,6 +83,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &124566
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 437582}
+  - 65: {fileID: 6510708}
+  m_Layer: 8
+  m_Name: SwordTrigger
+  m_TagString: Physical
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &127874
 GameObject:
   m_ObjectHideFlags: 1
@@ -102,7 +118,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &129226
 GameObject:
   m_ObjectHideFlags: 1
@@ -244,7 +260,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &188306
 GameObject:
   m_ObjectHideFlags: 0
@@ -334,6 +350,18 @@ Transform:
   - {fileID: 475416}
   m_Father: {fileID: 455468}
   m_RootOrder: 2
+--- !u!4 &437582
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 124566}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.3615731, y: 1.0543529, z: 1.3532976}
+  m_Children: []
+  m_Father: {fileID: 454110}
+  m_RootOrder: 0
 --- !u!4 &439326
 Transform:
   m_ObjectHideFlags: 1
@@ -379,7 +407,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.26, y: 1.01, z: 0.34}
   m_LocalScale: {x: 0.3, y: 3, z: 0.3}
-  m_Children: []
+  m_Children:
+  - {fileID: 437582}
   m_Father: {fileID: 465732}
   m_RootOrder: 0
 --- !u!4 &455240
@@ -401,7 +430,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 179692}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.5, y: 6.15123, z: 158.7}
+  m_LocalPosition: {x: 25.21, y: 0.65, z: 15.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 465732}
@@ -811,6 +840,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 198804}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &6510708
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 124566}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &6554142
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -819,7 +860,7 @@ BoxCollider:
   m_GameObject: {fileID: 183980}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 0.7, z: 1}
   m_Center: {x: 0, y: 0.15, z: 0}
@@ -842,9 +883,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Anim: {fileID: 0}
-  m_Damage: 0
-  m_AttackSpeed: 0
-  m_SecondaryAttackSpeed: 0
+  m_Damage: 2
+  m_AttackSpeed: 1
+  m_SecondaryAttackSpeed: 10
   m_PrimarySounds:
   - {fileID: 0}
   - {fileID: 0}
@@ -854,6 +895,8 @@ MonoBehaviour:
   dashDistance: 25
   dashDelay: 0.1
   smooth: 20
+  triggerLife: 0.5
+  swordTrigger: {fileID: 124566}
 --- !u!114 &11429116
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -872,7 +915,7 @@ MonoBehaviour:
   m_Health: 0
   m_MaxHealth: 100
   m_Collect: 0
-  m_WeaponID: 100
+  m_WeaponID: 0
   m_LastLocation: {x: 0, y: 0, z: 0}
   m_PrimaryAttack: Primary_P1
   m_SecondaryAttack: Secondary_P1
