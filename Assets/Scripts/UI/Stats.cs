@@ -5,12 +5,6 @@ public class Stats : MonoBehaviour
 {
 
     public Animator anim;
-
-    void Awake()
-    {
-        anim = GetComponent<Animator>();
-    }
-
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.S))

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour {
 
+    public int amountOfPlayers;
     public struct PlayerStats
     {
         public string name;
@@ -94,6 +95,7 @@ public class GameManager : MonoBehaviour {
             switch (player.m_Player)
             {
                 case Player.PLAYER.P1:
+
                     Debug.Log(GameObject.Find("UI Canvas/P1_StatsWindow/Stats").name);
                     stats.anim = GameObject.Find("UI Canvas/P1_StatsWindow/Stats").GetComponent<Animator>();
                     break;
