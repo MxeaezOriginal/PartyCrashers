@@ -41,49 +41,78 @@ public class Player : MonoBehaviour
     public string m_Stats = "Stats_";
     public string m_Pause = "Pause_";
 
-    public Text m_HealthText;
-    public Text m_Score;
+    public bool m_UsingKeyboard = false;
+
+    private bool m_UsingKeyboardSave;
+
+    private string m_PrimaryAttackSave;
+    private string m_SecondaryAttackSave;
+    private string m_InteractSave;
+    private string m_SillySave;
+    private string m_StatsSave;
+    private string m_PauseSave;
 
     // Use this for initialization
     void Start()
     {
         m_Heart = GetComponent<HeartSystem>();
-        //m_Health = m_MaxHealth;
-        //m_collect = 0;
+        m_PrimaryAttackSave = m_PrimaryAttack;
+        m_SecondaryAttackSave = m_SecondaryAttack;
+        m_InteractSave = m_Interact;
+        m_SillySave = m_Silly;
+        m_StatsSave = m_Stats;
+        m_PauseSave = m_Pause;
+
+        m_UsingKeyboardSave = m_UsingKeyboard;
     }
 
     // Update is called once per frame
     void Update()
     {
-        //m_HealthText.text = "Health: " + m_Health.ToString();
+        if (!m_UsingKeyboard && m_UsingKeyboardSave == true)
+        {
+            m_PrimaryAttack = m_PrimaryAttackSave;
+            m_SecondaryAttack = m_SecondaryAttackSave;
+            m_Interact = m_InteractSave;
+            m_Silly = m_SillySave;
+            m_Stats = m_StatsSave;
+            m_Pause = m_PauseSave;
 
+            m_UsingKeyboardSave = false;
+        }
+        else if(m_UsingKeyboard && m_UsingKeyboardSave == false)
+        {
+            m_PrimaryAttack = "Primary_Keyboard";
+            m_SecondaryAttack = "Secondary_Keyboard";
+            m_Interact = "Interact_Keyboard";
+            m_Silly = "Silly_Keyboard";
+            m_Stats = "Stats_Keyboard";
+            m_Pause = "Pause_Keyboard";
+
+            m_UsingKeyboardSave = true;
+        }
         updateWeapon();
-        /* if (Input.GetMouseButtonDown(0))
-         {
-             attack(ATTACKTYPE.PRIMARY);
-         }
-         if (Input.GetMouseButtonDown(1))
-         {
-             attack(ATTACKTYPE.SECONDARY);
-         }*/
 
         //Primary Attack
-        if (Input.GetAxisRaw(m_PrimaryAttack) == 1 || (m_Player == PLAYER.P1 && Input.GetButton("Primary_Keyboard")))
+        if (Input.GetAxisRaw(m_PrimaryAttack) == 1)
         {
             attack(ATTACKTYPE.PRIMARY);
         }
 
         //Secondary Attack
-        if (Input.GetAxisRaw(m_SecondaryAttack) == 1 || (m_Player == PLAYER.P1 && Input.GetButton("Secondary_Keyboard")))
+        if (Input.GetAxisRaw(m_SecondaryAttack) == 1)
         {
             attack(ATTACKTYPE.SECONDARY);
         }
 
         //Interact
-        if(Input.GetButtonDown(m_Interact) || (m_Player == PLAYER.P1 && Input.GetButton("Interact_Keyboard")))
+        if (Input.GetButtonDown(m_Interact))
+        {
+
+        }
 
         //Pause
-        if (Input.GetButtonDown(m_Pause) || (m_Player == PLAYER.P1 && Input.GetButton("Primary_Keyboard")))
+        if (Input.GetButtonDown(m_Pause))
         {
             if (m_WeaponID == WEAPONTYPE.SWORD)
             {
@@ -95,11 +124,11 @@ public class Player : MonoBehaviour
             }
         }
 
-        if (Input.GetButtonDown(m_Stats) || (m_Player == PLAYER.P1 && Input.GetButtonDown("Stats_Keyboard")))
+        if (Input.GetButtonDown(m_Stats))
         {
             GetComponent<Stats>().OpenWindow();
         }
-        if (Input.GetButtonUp(m_Stats) || (m_Player == PLAYER.P1 && Input.GetButtonUp("Stats_Keyboard")))
+        if (Input.GetButtonUp(m_Stats))
         {
             GetComponent<Stats>().CloseWindow();
         }
@@ -261,27 +290,22 @@ public class Player : MonoBehaviour
             setWeapon(WEAPONTYPE.SWORD);
         }
 
-        if(other.gameObject.CompareTag("Health"))
+        if (other.gameObject.CompareTag("Health"))
         {
             m_Heart.Heal(2);
         }
     }
 
-    public void OnCollisionEnter(Collision coll)
+    public void OnCollisionEnter(Collision collision)
     {
 
-        if (coll.gameObject.tag == "Enemy")
+        if (collision.gameObject.tag == "Enemy")
         {
 
             //m_Health = m_Health - 1;
 
             //CheckWinCondition();
             //}
-        }
-
-        else
-        {
-
         }
     }
 

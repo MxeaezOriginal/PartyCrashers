@@ -15,7 +15,7 @@ public class MenuManager : MonoBehaviour
     public GameObject exitCanvas; //Exit Canvas
 
     public bool mainMenuActive, playActive, settingsActive, creditsActive, exitPrompt, exitActive;
-
+    public bool waitedForADelay;
     Animator anim;
     
     void Awake()
@@ -33,11 +33,11 @@ public class MenuManager : MonoBehaviour
         if (mainMenuActive)
             MainMenu();
         if (playActive)
-            Play();
+            StartCoroutine(Play());
         if (settingsActive)
-            Settings();
+            StartCoroutine(Settings());
         if (creditsActive)
-            Credits();
+            StartCoroutine(Credits());
         if (exitPrompt)
             ExitPrompt();
         if (exitActive)
@@ -56,8 +56,6 @@ public class MenuManager : MonoBehaviour
         //Setting ****Active bool to false to prevent multiple function runs
         mainMenuActive = false;
 
-        StartCoroutine(WaitBeforeDisplayingCanvas());
-
         //Toggle on and off Canvases
         mainMenuCanvas.SetActive(true);
         playCanvas.SetActive(false);
@@ -66,7 +64,7 @@ public class MenuManager : MonoBehaviour
         exitPromptCanvas.SetActive(false);
         exitCanvas.SetActive(false);
     }
-    void Play()
+    IEnumerator Play()
     {
         anim.SetBool("Play", true);
         anim.SetBool("Settings", false);
@@ -74,16 +72,17 @@ public class MenuManager : MonoBehaviour
         anim.SetBool("Exit", false);
 
         playActive = false;
-        StartCoroutine(WaitBeforeDisplayingCanvas());
 
         mainMenuCanvas.SetActive(false);
-        playCanvas.SetActive(true);
         settingsCanvas.SetActive(false);
         creditsCanvas.SetActive(false);
         exitPromptCanvas.SetActive(false);
         exitCanvas.SetActive(false);
+
+        yield return new WaitForSeconds(1.5f);
+        playCanvas.SetActive(true);
     }
-    void Settings()
+    IEnumerator Settings()
     {
         anim.SetBool("Play", false);
         anim.SetBool("Settings", true);
@@ -91,16 +90,17 @@ public class MenuManager : MonoBehaviour
         anim.SetBool("Exit", false);
 
         settingsActive = false;
-        StartCoroutine(WaitBeforeDisplayingCanvas());
 
         mainMenuCanvas.SetActive(false);
         playCanvas.SetActive(false);
-        settingsCanvas.SetActive(true);
         creditsCanvas.SetActive(false);
         exitPromptCanvas.SetActive(false);
         exitCanvas.SetActive(false);
+
+        yield return new WaitForSeconds(1.5f);
+        settingsCanvas.SetActive(true);
     }
-    void Credits()
+    IEnumerator Credits()
     {
         anim.SetBool("Play", false);
         anim.SetBool("Settings", false);
@@ -108,14 +108,15 @@ public class MenuManager : MonoBehaviour
         anim.SetBool("Exit", false);
 
         creditsActive = false;
-        StartCoroutine(WaitBeforeDisplayingCanvas());
 
         mainMenuCanvas.SetActive(false);
         playCanvas.SetActive(false);
         settingsCanvas.SetActive(false);
-        creditsCanvas.SetActive(true);
         exitPromptCanvas.SetActive(false);
         exitCanvas.SetActive(false);
+
+        yield return new WaitForSeconds(1.5f);
+        creditsCanvas.SetActive(true);
     }
     void ExitPrompt()
     {
@@ -141,7 +142,6 @@ public class MenuManager : MonoBehaviour
         anim.SetBool("Exit", true);
 
         exitActive = false;
-        StartCoroutine(WaitBeforeDisplayingCanvas());
 
         mainMenuCanvas.SetActive(false);
         playCanvas.SetActive(false);
@@ -149,11 +149,6 @@ public class MenuManager : MonoBehaviour
         creditsCanvas.SetActive(false);
         exitPromptCanvas.SetActive(false);
         exitCanvas.SetActive(true);
-    }
-
-    IEnumerator WaitBeforeDisplayingCanvas()
-    {
-        yield return new WaitForSeconds(0.25f);
     }
 
     //Functions assigned to buttons in main menu - SETTING ****Active bool to true;

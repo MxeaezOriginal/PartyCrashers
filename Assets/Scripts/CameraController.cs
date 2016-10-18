@@ -29,44 +29,75 @@ public class CameraController : MonoBehaviour {
         float x2 = 0;
         float z2 = 0;
 
-
-        //Loop through players and set x to greatest x distance, and y to greatest y distance between current player and any other player
-        for (int i = 0; i < players.Length; i++)
+        if (players.Length > 1)
         {
-            for (int j = i; j < players.Length; j++)
+            //Loop through players and set x to greatest x distance, and y to greatest y distance between current player and any other player
+            for (int i = 0; i < players.Length; i++)
             {
-                if (Mathf.Abs(players[i].transform.position.x - players[j].transform.position.x) > xDistance) // if the distance is greater than current
+                for (int j = i; j < players.Length; j++)
                 {
-                    xDistance = Mathf.Abs(players[i].transform.position.x - players[j].transform.position.x);
-                    x1 = players[i].transform.position.x; // update x to the new greatest distance
-                    x2 = players[j].transform.position.x; // set this gamobject to the other player that this player has the greatest distance with
-                }
-
-                CharacterController iController = players[i].GetComponent<CharacterController>();
-                CharacterController jController = players[j].GetComponent<CharacterController>();
-                if (iController.isGrounded && jController.isGrounded)
-                {
-                    float iRounded = Mathf.Round(players[i].transform.position.y * 10f) / 10f;
-                    float jRounded = Mathf.Round(players[j].transform.position.y * 10f) / 10f;
-
-                    if (players[i].transform.position.y < players[j].transform.position.y)
+                    if (Mathf.Abs(players[i].transform.position.x - players[j].transform.position.x) > xDistance) // if the distance is greater than current
                     {
-                        //y = players[i].transform.position.y;
+                        xDistance = Mathf.Abs(players[i].transform.position.x - players[j].transform.position.x);
+                        x1 = players[i].transform.position.x; // update x to the new greatest distance
+                        x2 = players[j].transform.position.x; // set this gamobject to the other player that this player has the greatest distance with
+                    }
+
+                    CharacterController iController = players[i].GetComponent<CharacterController>();
+                    CharacterController jController = players[j].GetComponent<CharacterController>();
+                    if (iController.isGrounded && jController.isGrounded)
+                    {
+                        float iRounded = Mathf.Round(players[i].transform.position.y * 10f) / 10f;
+                        float jRounded = Mathf.Round(players[j].transform.position.y * 10f) / 10f;
+                    
+                        if (players[i].transform.position.y < players[j].transform.position.y)
+                        {
+                            //y = players[i].transform.position.y;
+                            y = iRounded;
+                        }
+                        if (players[i].transform.position.y > players[j].transform.position.y)
+                        {
+                            //y = players[j].transform.position.y;
+                            y = jRounded;
+                        }
+                        
+                    }
+
+
+                    if (Mathf.Abs(players[i].transform.position.z - players[j].transform.position.z) > zDistance)
+                    {
+                        zDistance = Mathf.Abs(players[i].transform.position.z - players[j].transform.position.z);
+                        z1 = players[i].transform.position.z;
+                        z2 = players[j].transform.position.z;
+                    }
+                }
+            }
+        }
+        else
+        {
+            for (int i = 0; i < players.Length; i++)
+            {
+                for (int j = i; j < players.Length; j++)
+                {
+                    if (Mathf.Abs(players[i].transform.position.x - players[j].transform.position.x) > xDistance) // if the distance is greater than current
+                    {
+                        xDistance = Mathf.Abs(players[i].transform.position.x - players[j].transform.position.x);
+                        x1 = players[i].transform.position.x; // update x to the new greatest distance
+                        x2 = players[j].transform.position.x; // set this gamobject to the other player that this player has the greatest distance with
+                    }
+
+                    CharacterController iController = players[i].GetComponent<CharacterController>();
+                    if (iController.isGrounded)
+                    {
+                        float iRounded = Mathf.Round(players[i].transform.position.y * 10f) / 10f;
                         y = iRounded;
                     }
-                    if (players[i].transform.position.y > players[j].transform.position.y)
+                    if (Mathf.Abs(players[i].transform.position.z - players[j].transform.position.z) > zDistance)
                     {
-                        //y = players[j].transform.position.y;
-                        y = jRounded;
+                        zDistance = Mathf.Abs(players[i].transform.position.z - players[j].transform.position.z);
+                        z1 = players[i].transform.position.z;
+                        z2 = players[j].transform.position.z;
                     }
-                }
-
-
-                if (Mathf.Abs(players[i].transform.position.z - players[j].transform.position.z) > zDistance)
-                {
-                    zDistance = Mathf.Abs(players[i].transform.position.z - players[j].transform.position.z);
-                    z1 = players[i].transform.position.z;
-                    z2 = players[j].transform.position.z;
                 }
             }
         }
