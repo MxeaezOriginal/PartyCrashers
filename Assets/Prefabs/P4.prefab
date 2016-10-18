@@ -127,7 +127,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 489546}
   - 33: {fileID: 3372068}
-  - 65: {fileID: 6567254}
+  - 136: {fileID: 13626886}
   - 23: {fileID: 2320212}
   - 114: {fileID: 11476508}
   - 143: {fileID: 14357864}
@@ -445,18 +445,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.7, z: 1}
   m_Center: {x: 0, y: 0.15, z: 0}
---- !u!65 &6567254
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 171896}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!92 &9262782
 Behaviour:
   m_ObjectHideFlags: 1
@@ -503,6 +491,7 @@ MonoBehaviour:
   m_Anim: {fileID: 0}
   m_Damage: 4
   m_AttackSpeed: 0.5
+  m_SecondaryAttackSpeed: 0
   m_PrimarySounds: []
   m_SecondarySounds: []
   m_SoundsOnHit: []
@@ -518,7 +507,6 @@ MonoBehaviour:
   m_ProjectileSpeed02: 100
   m_MaxSpeed: 1.5
   player: {fileID: 11492956}
-  playerObject: {fileID: 171896}
 --- !u!114 &11446092
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -562,14 +550,14 @@ MonoBehaviour:
   m_TurnSpeed: 3
   m_NormalGravity: 70
   m_JumpGravity: 30
-  m_Jump: 30
+  m_Jump: 15
   m_MaxMovementX: 14
   m_MaxMovementZ: 18
   m_JumpButton: Jump_P4
   m_HorizontalButton: JoystickLeftX_P4
   m_VerticalButton: JoystickLeftY_P4
-  m_HorizontalRotationButton: JoystickRightY_P4
-  m_VerticalRotationButton: JoystickRightX_P4
+  m_HorizontalRotationButton: JoystickRightX_P4
+  m_VerticalRotationButton: JoystickRightY_P4
 --- !u!114 &11486570
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -584,6 +572,7 @@ MonoBehaviour:
   m_Anim: {fileID: 0}
   m_Damage: 0
   m_AttackSpeed: 0
+  m_SecondaryAttackSpeed: 0
   m_PrimarySounds:
   - {fileID: 0}
   - {fileID: 0}
@@ -640,6 +629,19 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 163456}
   m_Enabled: 1
+--- !u!136 &13626886
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 171896}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!136 &13660284
 CapsuleCollider:
   m_ObjectHideFlags: 1
