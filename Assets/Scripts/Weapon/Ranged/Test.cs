@@ -22,7 +22,6 @@ public class Test : MonoBehaviour
 
             if(hearts.IsDead())
             {
-                p.SetActive(false);
 
                 GameObject effect = (GameObject)Instantiate(explosionhehexd, p.gameObject.transform.position, p.gameObject.transform.rotation);
                 Destroy(effect, 2);
