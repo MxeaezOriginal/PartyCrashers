@@ -28,6 +28,8 @@ public class CameraController : MonoBehaviour {
         float z1 = 0;
         float x2 = 0;
         float z2 = 0;
+        float averageX;
+        float averageZ;
 
         if (players.Length > 1)
         {
@@ -62,8 +64,6 @@ public class CameraController : MonoBehaviour {
                         }
                         
                     }
-
-
                     if (Mathf.Abs(players[i].transform.position.z - players[j].transform.position.z) > zDistance)
                     {
                         zDistance = Mathf.Abs(players[i].transform.position.z - players[j].transform.position.z);
@@ -72,39 +72,63 @@ public class CameraController : MonoBehaviour {
                     }
                 }
             }
+            averageX = (x1 + x2) / 2;
+            averageZ = (z1 + z2) / 2;
         }
+        //else
+        //{
+        //    for (int i = 0; i < players.Length; i++)
+        //    {
+        //        for (int j = i; j < players.Length; j++)
+        //        {
+        //            if (Mathf.Abs(players[i].transform.position.x - players[j].transform.position.x) > xDistance) // if the distance is greater than current
+        //            {
+        //                xDistance = Mathf.Abs(players[i].transform.position.x - players[j].transform.position.x);
+        //                x1 = players[i].transform.position.x; // update x to the new greatest distance
+        //                x2 = players[j].transform.position.x; // set this gamobject to the other player that this player has the greatest distance with
+        //            }
+
+        //            CharacterController iController = players[i].GetComponent<CharacterController>();
+        //            if (iController.isGrounded)
+        //            {
+        //                float iRounded = Mathf.Round(players[i].transform.position.y * 10f) / 10f;
+        //                y = iRounded;
+        //            }
+        //            if (Mathf.Abs(players[i].transform.position.z - players[j].transform.position.z) > zDistance)
+        //            {
+        //                zDistance = Mathf.Abs(players[i].transform.position.z - players[j].transform.position.z);
+        //                z1 = players[i].transform.position.z;
+        //                z2 = players[j].transform.position.z;
+        //            }
+        //        }
+        //    }
+        //}
         else
         {
             for (int i = 0; i < players.Length; i++)
             {
-                for (int j = i; j < players.Length; j++)
+                    xDistance = players[i].transform.position.x; // update x to the new greatest distance
+                    //x2 = players[j].transform.position.x; // set this gamobject to the other player that this player has the greatest distance with
+                
+
+                CharacterController iController = players[i].GetComponent<CharacterController>();
+                if (iController.isGrounded)
                 {
-                    if (Mathf.Abs(players[i].transform.position.x - players[j].transform.position.x) > xDistance) // if the distance is greater than current
-                    {
-                        xDistance = Mathf.Abs(players[i].transform.position.x - players[j].transform.position.x);
-                        x1 = players[i].transform.position.x; // update x to the new greatest distance
-                        x2 = players[j].transform.position.x; // set this gamobject to the other player that this player has the greatest distance with
-                    }
-
-                    CharacterController iController = players[i].GetComponent<CharacterController>();
-                    if (iController.isGrounded)
-                    {
-                        float iRounded = Mathf.Round(players[i].transform.position.y * 10f) / 10f;
-                        y = iRounded;
-                    }
-                    if (Mathf.Abs(players[i].transform.position.z - players[j].transform.position.z) > zDistance)
-                    {
-                        zDistance = Mathf.Abs(players[i].transform.position.z - players[j].transform.position.z);
-                        z1 = players[i].transform.position.z;
-                        z2 = players[j].transform.position.z;
-                    }
+                    float iRounded = Mathf.Round(players[i].transform.position.y * 10f) / 10f;
+                    y = iRounded;
                 }
+                
+                    zDistance = players[i].transform.position.z;
+                    //z2 = players[j].transform.position.z;
+                
+                
             }
+            averageX = xDistance;
+            averageZ = zDistance;
         }
-        
 
-        float averageX = (x1 + x2) / 2;
-        float averageZ = (z1 + z2) / 2;
+        //float averageX = (x1 + x2) / 2;
+        //float averageZ = (z1 + z2) / 2;
         //float Y = y;
         
 
