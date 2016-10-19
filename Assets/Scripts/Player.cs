@@ -69,6 +69,10 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(m_Heart.IsDead())
+        {
+            respawn();
+        }
         if (!m_UsingKeyboard && m_UsingKeyboardSave == true)
         {
             m_PrimaryAttack = m_PrimaryAttackSave;
@@ -181,6 +185,17 @@ public class Player : MonoBehaviour
                 }
                 break;
         }
+    }
+
+    public void respawn()
+    {
+        CameraController camController = Camera.main.gameObject.GetComponent<CameraController>();
+        Vector3 respawnPosition = camController.mPosition;
+        gameObject.transform.position = respawnPosition;
+
+        m_Heart.curHealth = m_Heart.maxHealth;
+        m_Heart.UpdateHearts();
+        Debug.Log("Respawned");
     }
 
     public void save()

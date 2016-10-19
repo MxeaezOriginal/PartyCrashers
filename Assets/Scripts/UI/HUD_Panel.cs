@@ -21,20 +21,20 @@ public class HUD_Panel : MonoBehaviour
 
     void Awake()
     {
-        P1_Panel = GameObject.Find("UI Canvas/P1_Panel");
-        P2_Panel = GameObject.Find("UI Canvas/P2_Panel");
-        P3_Panel = GameObject.Find("UI Canvas/P3_Panel");
-        P4_Panel = GameObject.Find("UI Canvas/P4_Panel");
+        P1_Panel = GameObject.Find("Dungeon_HUD_Canvas/P1_Panel");
+        P2_Panel = GameObject.Find("Dungeon_HUD_Canvas/P2_Panel");
+        P3_Panel = GameObject.Find("Dungeon_HUD_Canvas/P3_Panel");
+        P4_Panel = GameObject.Find("Dungeon_HUD_Canvas/P4_Panel");
 
-        P1_PanelTransform = GameObject.Find("UI Canvas/P1_Panel").GetComponent<RectTransform>();
-        P2_PanelTransform = GameObject.Find("UI Canvas/P2_Panel").GetComponent<RectTransform>();
-        P3_PanelTransform = GameObject.Find("UI Canvas/P3_Panel").GetComponent<RectTransform>();
-        P4_PanelTransform = GameObject.Find("UI Canvas/P4_Panel").GetComponent<RectTransform>();
+        P1_PanelTransform = GameObject.Find("Dungeon_HUD_Canvas/P1_Panel").GetComponent<RectTransform>();
+        P2_PanelTransform = GameObject.Find("Dungeon_HUD_Canvas/P2_Panel").GetComponent<RectTransform>();
+        P3_PanelTransform = GameObject.Find("Dungeon_HUD_Canvas/P3_Panel").GetComponent<RectTransform>();
+        P4_PanelTransform = GameObject.Find("Dungeon_HUD_Canvas/P4_Panel").GetComponent<RectTransform>();
 
-        P1_StatsWindow = GameObject.Find("UI Canvas/P1_StatsWindow").GetComponent<RectTransform>();
-        P2_StatsWindow = GameObject.Find("UI Canvas/P2_StatsWindow").GetComponent<RectTransform>();
-        P3_StatsWindow = GameObject.Find("UI Canvas/P3_StatsWindow").GetComponent<RectTransform>();
-        P4_StatsWindow = GameObject.Find("UI Canvas/P4_StatsWindow").GetComponent<RectTransform>();
+        P1_StatsWindow = GameObject.Find("Dungeon_HUD_Canvas/P1_StatsWindow").GetComponent<RectTransform>();
+        P2_StatsWindow = GameObject.Find("Dungeon_HUD_Canvas/P2_StatsWindow").GetComponent<RectTransform>();
+        P3_StatsWindow = GameObject.Find("Dungeon_HUD_Canvas/P3_StatsWindow").GetComponent<RectTransform>();
+        P4_StatsWindow = GameObject.Find("Dungeon_HUD_Canvas/P4_StatsWindow").GetComponent<RectTransform>();
     }
 
     void Start()
