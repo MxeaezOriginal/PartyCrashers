@@ -7,12 +7,14 @@ public class CameraController : MonoBehaviour {
     public int height = 10;
     public int distanceOffset = 10;
     public float y = 0;
+    public Vector3 mPosition;
 
     GameObject[] players;
 	// Use this for initialization
 	void Start () {
         transform.position = new Vector3(0, height, 0);
         players = GameObject.FindGameObjectsWithTag("Player");
+        mPosition = gameObject.transform.position;
     }
 
     // Update is called once per frame
@@ -111,6 +113,6 @@ public class CameraController : MonoBehaviour {
         gameObject.transform.position = new Vector3(averageX, Mathf.Lerp(transform.position.y, y + height, .1f) , averageZ - distanceOffset);
         //Y + height
 
-       
+       mPosition = new Vector3(averageX, y, averageZ);
     }
 }

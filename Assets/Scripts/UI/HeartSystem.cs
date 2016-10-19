@@ -48,7 +48,7 @@ public class HeartSystem : MonoBehaviour
         UpdateHearts();
     }
 
-    void UpdateHearts()
+    public void UpdateHearts()
     {
         bool empty = false;
         int i = 0;
