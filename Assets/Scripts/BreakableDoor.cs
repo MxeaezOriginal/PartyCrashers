@@ -26,4 +26,23 @@ public class BreakableDoor : MonoBehaviour {
         }
 
     }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Projectile")
+        {
+            GameObject explosion;
+            explosion = (GameObject)Instantiate(explosionObject, particleLocation.gameObject.transform.position, particleLocation.gameObject.transform.rotation);
+            explosion.transform.localScale = new Vector3(explosionRadius, explosionRadius, explosionRadius);
+            Destroy(gameObject);
+        }
+        else if(other.tag == "Melee")
+        {
+            GameObject explosion;
+            explosion = (GameObject)Instantiate(explosionObject, particleLocation.gameObject.transform.position, particleLocation.gameObject.transform.rotation);
+            explosion.transform.localScale = new Vector3(explosionRadius, explosionRadius, explosionRadius);
+            Destroy(gameObject);
+        }
+
+    }
 }
