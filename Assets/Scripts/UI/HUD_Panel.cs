@@ -51,32 +51,32 @@ public class HUD_Panel : MonoBehaviour
             P3_Panel.SetActive(false);
             P4_Panel.SetActive(false);
 
-            P1_PanelTransform.anchoredPosition = new Vector2(0, 32);
+            P1_PanelTransform.anchoredPosition = new Vector2(0, 10);
             //StatsWindow(s)
-            P1_StatsWindow.anchoredPosition = new Vector2(360, 60);
+            P1_StatsWindow.anchoredPosition = new Vector2(357, 35);
         }
         if (GameManager.m_Instance.m_Players.Length == 2)
         {
             P3_Panel.SetActive(false);
             P4_Panel.SetActive(false);
 
-            P1_PanelTransform.anchoredPosition = new Vector2(-95, 32);
-            P2_PanelTransform.anchoredPosition = new Vector2(95, 32);
+            P1_PanelTransform.anchoredPosition = new Vector2(-70, 10);
+            P2_PanelTransform.anchoredPosition = new Vector2(70, 10);
             //StatsWindow(s)
-            P1_StatsWindow.anchoredPosition = new Vector2(265, 60);
-            P2_StatsWindow.anchoredPosition = new Vector2(455, 60);
+            P1_StatsWindow.anchoredPosition = new Vector2(287, 35);
+            P2_StatsWindow.anchoredPosition = new Vector2(428, 35);
         }
         if (GameManager.m_Instance.m_Players.Length == 3)
         {
             P4_Panel.SetActive(false);
 
-            P1_PanelTransform.anchoredPosition = new Vector2(-210, 32);
-            P2_PanelTransform.anchoredPosition = new Vector2(0, 32);
-            P3_PanelTransform.anchoredPosition = new Vector2(210, 32);
+            P1_PanelTransform.anchoredPosition = new Vector2(-140, 10);
+            P2_PanelTransform.anchoredPosition = new Vector2(0, 10);
+            P3_PanelTransform.anchoredPosition = new Vector2(140, 10);
             //StatsWindow(s)
-            P1_StatsWindow.anchoredPosition = new Vector2(150, 60);
-            P2_StatsWindow.anchoredPosition = new Vector2(360, 60);
-            P3_StatsWindow.anchoredPosition = new Vector2(570, 60);
+            P1_StatsWindow.anchoredPosition = new Vector2(218, 35);
+            P2_StatsWindow.anchoredPosition = new Vector2(358, 35);
+            P3_StatsWindow.anchoredPosition = new Vector2(498, 35);
         }
         if (GameManager.m_Instance.m_Players.Length == 4)
         {
