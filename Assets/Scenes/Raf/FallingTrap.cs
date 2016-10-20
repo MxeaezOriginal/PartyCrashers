@@ -27,7 +27,7 @@ public class FallingTrap : MonoBehaviour {
     {
         if (other.tag == "Player")
         {
-            Debug.Log("Falling trap Activated.");
+         //   Debug.Log("Falling trap Activated.");
 
             Rigidbody rb = mTrap.GetComponent<Rigidbody>();
             rb.mass = mMass;
