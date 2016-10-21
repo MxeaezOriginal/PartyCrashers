@@ -1221,7 +1221,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 446626, guid: bb357c33b7ba83c4686b1b253e07a0e2, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0.026272774
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 446626, guid: bb357c33b7ba83c4686b1b253e07a0e2, type: 2}
       propertyPath: m_LocalPosition.y
@@ -1229,7 +1229,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 446626, guid: bb357c33b7ba83c4686b1b253e07a0e2, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 43.995934
+      value: 49.4
       objectReference: {fileID: 0}
     - target: {fileID: 446626, guid: bb357c33b7ba83c4686b1b253e07a0e2, type: 2}
       propertyPath: m_LocalRotation.x
@@ -1259,6 +1259,22 @@ Prefab:
       propertyPath: ShotPrefab
       value: 
       objectReference: {fileID: 145818, guid: 136f6b85049c12d45854cdfc62d4fd0a, type: 2}
+    - target: {fileID: 11464212, guid: bb357c33b7ba83c4686b1b253e07a0e2, type: 2}
+      propertyPath: Mode2FireInterval
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 11464212, guid: bb357c33b7ba83c4686b1b253e07a0e2, type: 2}
+      propertyPath: Mode2MaxBullet
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 11464212, guid: bb357c33b7ba83c4686b1b253e07a0e2, type: 2}
+      propertyPath: Mode2ReloadTime
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 11464212, guid: bb357c33b7ba83c4686b1b253e07a0e2, type: 2}
+      propertyPath: Mode2BossSpin.y
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bb357c33b7ba83c4686b1b253e07a0e2, type: 2}
   m_IsPrefabParent: 0
@@ -20770,6 +20786,27 @@ Prefab:
     - {fileID: 0}
   m_ParentPrefab: {fileID: 100100000, guid: 5153af79980f5c24a8ce38b6f542b25a, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1126824367 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 153100, guid: bb357c33b7ba83c4686b1b253e07a0e2, type: 2}
+  m_PrefabInternal: {fileID: 39521587}
+--- !u!114 &1126824376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1126824367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90c021e464d5dac4caad6d632e8b299e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartPosX: 0
+  StartPosY: 1
+  StartPosZ: 50
+  RunAwayDistance: 10
+  m_Distance: 0
+  BossMoveSpeed: 0.5
 --- !u!1 &1127192296 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 103998, guid: 5153af79980f5c24a8ce38b6f542b25a, type: 2}

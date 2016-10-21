@@ -65,8 +65,7 @@ public class EnemyAI : MonoBehaviour
         look(GameObject.FindGameObjectWithTag("Player").transform);
         agent.SetDestination(target.transform.position);
         agent.Resume();
-        //transform.LookAt(new Vector3(target.transform.position.x, transform.position.y, target.transform.position.z));
-    }
+        }
 
     void returnToOrigin()
     {
@@ -82,14 +81,4 @@ public class EnemyAI : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * m_RotationSpeed);
     }
 
-    //void SmoothLook(Vector3 newDirection)
-    //{
-    //    transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(newDirection), Time.deltaTime * m_RotationSpeed);
-    //}
-
-    //void SmoothLook(Vector3 newDirection)
-    //{
-    //    transform.rotation = Quaternion.AngleAxis(direction, newDirection.y);
-    //    float direction = Mathf.LerpAngle(transform. , newDirection.y, Time.deltaTime * m_RotationSpeed);
-    //}
 }
