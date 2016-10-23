@@ -75,6 +75,7 @@ GameObject:
   - 114: {fileID: 11479848}
   - 54: {fileID: 5422912}
   - 114: {fileID: 11464212}
+  - 114: {fileID: 11485530}
   m_Layer: 0
   m_Name: Boss
   m_TagString: Enemy
@@ -215,7 +216,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 153100}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: -0.00000016292068}
-  m_LocalPosition: {x: 25.9, y: 1.63, z: 24.08}
+  m_LocalPosition: {x: 0, y: 1, z: 3.55}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 482560}
@@ -393,16 +394,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6ab906bd3d718d4099ec4a3e89caf59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GetLoc: {x: 0, y: 0, z: 0}
-  enemyPrefab: {fileID: 0}
+  enemyPrefab: {fileID: 128216, guid: ff6906de941c1804e9e04da544397b94, type: 2}
   trapPrefab: {fileID: 187356, guid: 0b721afdc3e777e40b9f45a5fd947bba, type: 2}
   trapLoc: {fileID: 193470, guid: 51186418c5113c34b8c7e60a116af739, type: 2}
   trap: {fileID: 187356, guid: 0b721afdc3e777e40b9f45a5fd947bba, type: 2}
   timer: 0
-  spawnTime: 1
-  spin: {x: 0, y: 250, z: 0}
-  m_FireInterval: 0.2
-  ShotPrefab: {fileID: 184478, guid: d05e7a665ab0ec6468bdd70b7dd708f6, type: 2}
+  CountDownBeforeAttack: 10
+  AttackCoolDown: 5
+  AttackTime: 10
+  Mode1EnemySpawnTime: 2
+  Mode1Range: 10
+  Mode2BossSpin: {x: 0, y: 100, z: 0}
+  Mode2ReloadTime: 0.5
+  Mode2MaxBullet: 10
+  Mode2FireInterval: 0.05
+  Mode3TrapSpawnTime: 2
+  Mode3Range: 10
+  m_Bullet: 0
+  ShotPrefab: {fileID: 145818, guid: 136f6b85049c12d45854cdfc62d4fd0a, type: 2}
   ShotLocation1: {fileID: 426824}
   ShotLocation2: {fileID: 494112}
   ShotLocation3: {fileID: 453360}
@@ -411,9 +420,6 @@ MonoBehaviour:
   ShotLocation6: {fileID: 440788}
   ShotLocation7: {fileID: 422592}
   ShotLocation8: {fileID: 466524}
-  m_ReloadTime: 2
-  m_Bullet: 0
-  m_MaxBullet: 100
 --- !u!114 &11479848
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -425,8 +431,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fe10f3a9b1fc73469935b46d1f7b400, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EnemyHealth: 10
+  m_EnemyHealth: 1000
+  m_PartyBarAmount: 2
   coin: {fileID: 0}
+--- !u!114 &11485530
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 153100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90c021e464d5dac4caad6d632e8b299e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartPosX: 0
+  StartPosY: 1
+  StartPosZ: 3
+  RunAwayDistance: 10
+  m_Distance: 0
+  BossMoveSpeed: 0.5
 --- !u!136 &13616852
 CapsuleCollider:
   m_ObjectHideFlags: 1
