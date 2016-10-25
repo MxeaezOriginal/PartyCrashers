@@ -32,6 +32,7 @@ public class Player : MonoBehaviour
     public Vector3 m_LastLocation;
     private Transform m_Weapon;
     private HeartSystem m_Heart;
+    public float delay = 2.0f;
 
     //Input
     public string m_PrimaryAttack = "Primary_";
@@ -309,18 +310,25 @@ public class Player : MonoBehaviour
         {
             m_Heart.Heal(2);
         }
+
+        if (other.gameObject.CompareTag("Range"))
+        {
+            m_Heart.TakeDamage(1);
+            Destroy(other.gameObject);
+        }
+
     }
 
-    public void OnCollisionEnter(Collision collision)
+    void OnTriggerStay(Collider other)
     {
-
-        if (collision.gameObject.tag == "Enemy")
+        if (other.gameObject.CompareTag("MeleeEnemy"))
         {
-
-            //m_Health = m_Health - 1;
-
-            //CheckWinCondition();
-            //}
+            m_Heart.lastDamage += Time.deltaTime;
+            if(m_Heart.lastDamage >= 2)
+            {
+                m_Heart.TakeDamage(2);
+                m_Heart.lastDamage = 0;
+            }
         }
     }
 
