@@ -95,18 +95,16 @@ public class GameManager : MonoBehaviour {
             switch (player.m_Player)
             {
                 case Player.PLAYER.P1:
-
-                    Debug.Log(GameObject.Find("Dungeon_HUD_Canvas/P1_StatsWindow/Stats").name);
-                    stats.anim = GameObject.Find("Dungeon_HUD_Canvas/P1_StatsWindow/Stats").GetComponent<Animator>();
+                    stats.anim = GameObject.Find("Dungeon_HUD_Canvas/P1_Panel/Stats").GetComponent<Animator>();
                     break;
                 case Player.PLAYER.P2:
-                    stats.anim = GameObject.Find("Dungeon_HUD_Canvas/P2_StatsWindow/Stats").GetComponent<Animator>();
+                    stats.anim = GameObject.Find("Dungeon_HUD_Canvas/P2_Panel/Stats").GetComponent<Animator>();
                     break;
                 case Player.PLAYER.P3:
-                    stats.anim = GameObject.Find("Dungeon_HUD_Canvas/P3_StatsWindow/Stats").GetComponent<Animator>();
+                    stats.anim = GameObject.Find("Dungeon_HUD_Canvas/P3_Panel/Stats").GetComponent<Animator>();
                     break;
                 case Player.PLAYER.P4:
-                    stats.anim = GameObject.Find("Dungeon_HUD_Canvas/P4_StatsWindow/Stats").GetComponent<Animator>();
+                    stats.anim = GameObject.Find("Dungeon_HUD_Canvas/P4_Panel/Stats").GetComponent<Animator>();
                     break;
             }
         }

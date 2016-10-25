@@ -31,10 +31,10 @@ public class HUD_Panel : MonoBehaviour
         P3_PanelTransform = GameObject.Find("Dungeon_HUD_Canvas/P3_Panel").GetComponent<RectTransform>();
         P4_PanelTransform = GameObject.Find("Dungeon_HUD_Canvas/P4_Panel").GetComponent<RectTransform>();
 
-        P1_StatsWindow = GameObject.Find("Dungeon_HUD_Canvas/P1_StatsWindow").GetComponent<RectTransform>();
-        P2_StatsWindow = GameObject.Find("Dungeon_HUD_Canvas/P2_StatsWindow").GetComponent<RectTransform>();
-        P3_StatsWindow = GameObject.Find("Dungeon_HUD_Canvas/P3_StatsWindow").GetComponent<RectTransform>();
-        P4_StatsWindow = GameObject.Find("Dungeon_HUD_Canvas/P4_StatsWindow").GetComponent<RectTransform>();
+        P1_StatsWindow = GameObject.Find("Dungeon_HUD_Canvas/P1_Panel/Stats").GetComponent<RectTransform>();
+        P2_StatsWindow = GameObject.Find("Dungeon_HUD_Canvas/P2_Panel/Stats").GetComponent<RectTransform>();
+        P3_StatsWindow = GameObject.Find("Dungeon_HUD_Canvas/P3_Panel/Stats").GetComponent<RectTransform>();
+        P4_StatsWindow = GameObject.Find("Dungeon_HUD_Canvas/P4_Panel/Stats").GetComponent<RectTransform>();
     }
 
     void Start()
@@ -45,42 +45,45 @@ public class HUD_Panel : MonoBehaviour
     void UpdateUIPanels()
     {
 
+        print(P1_StatsWindow.GetSiblingIndex());
+
         if (GameManager.m_Instance.m_Players.Length == 1)
         {
             P2_Panel.SetActive(false);
             P3_Panel.SetActive(false);
             P4_Panel.SetActive(false);
+            print("1");
 
-            P1_PanelTransform.anchoredPosition = new Vector2(0, 32);
+            P1_PanelTransform.anchoredPosition = new Vector2(0, 30);
             //StatsWindow(s)
-            P1_StatsWindow.anchoredPosition = new Vector2(360, 60);
         }
         if (GameManager.m_Instance.m_Players.Length == 2)
         {
             P3_Panel.SetActive(false);
             P4_Panel.SetActive(false);
 
-            P1_PanelTransform.anchoredPosition = new Vector2(-95, 32);
-            P2_PanelTransform.anchoredPosition = new Vector2(95, 32);
+            P1_PanelTransform.anchoredPosition = new Vector2(-67, 30);
+            P2_PanelTransform.anchoredPosition = new Vector2(67, 30);
             //StatsWindow(s)
-            P1_StatsWindow.anchoredPosition = new Vector2(265, 60);
-            P2_StatsWindow.anchoredPosition = new Vector2(455, 60);
+            //P1_StatsWindow.anchoredPosition = new Vector2(265, 60);
+            //P2_StatsWindow.anchoredPosition = new Vector2(455, 60);
         }
         if (GameManager.m_Instance.m_Players.Length == 3)
         {
             P4_Panel.SetActive(false);
 
-            P1_PanelTransform.anchoredPosition = new Vector2(-210, 32);
-            P2_PanelTransform.anchoredPosition = new Vector2(0, 32);
-            P3_PanelTransform.anchoredPosition = new Vector2(210, 32);
+            P1_PanelTransform.anchoredPosition = new Vector2(-130, 30);
+            P2_PanelTransform.anchoredPosition = new Vector2(0, 30);
+            P3_PanelTransform.anchoredPosition = new Vector2(130, 30);
             //StatsWindow(s)
-            P1_StatsWindow.anchoredPosition = new Vector2(150, 60);
-            P2_StatsWindow.anchoredPosition = new Vector2(360, 60);
-            P3_StatsWindow.anchoredPosition = new Vector2(570, 60);
+            //P1_StatsWindow.anchoredPosition = new Vector2(150, 60);
+            //P2_StatsWindow.anchoredPosition = new Vector2(360, 60);
+            //P3_StatsWindow.anchoredPosition = new Vector2(570, 60);
         }
         if (GameManager.m_Instance.m_Players.Length == 4)
         {
             return;
+            // -200, -67, 67, 200
         }
     }
 }
