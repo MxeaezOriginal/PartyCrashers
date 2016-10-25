@@ -3,6 +3,7 @@ using System.Collections;
 
 public class BossAi : MonoBehaviour
 {
+
     float x;
     float y;
     float z;
@@ -52,9 +53,11 @@ public class BossAi : MonoBehaviour
 
     private int GetMode = 2;
 
+    BossMovement bossmovement; 
     // Use this for initialization
     void Start()
     {
+        bossmovement = GetComponent<BossMovement>(); 
         m_LastShotTime = Time.time;
         m_LastAttackTime = Time.time;
         m_Bullet = Mode2MaxBullet;
@@ -78,40 +81,49 @@ public class BossAi : MonoBehaviour
         //{
         if (CoolDown)
             {
-                if (GetMode == 1)
-                {
-                    // spawn chasing enemy in random location
-                    BossAttackMode1();
-                    Debug.Log("Attack Mode 1");
-                    if (Attack)
-                    {
-                        GetMode =  GetRandomAttackMode();
-                        m_LastAttackTime = Time.time;
-                    }
-                }
-                if (GetMode == 2)
-                {
-                    // 360 degree shooting
-                    BossAttackMode2();
-                    Debug.Log("Attack Mode 2");
-                    if(Attack)
-                    {
-                        m_LastAttackTime = Time.time;
-                        GetMode = GetRandomAttackMode();
-                    }
-                }
-                if (GetMode == 3)
-                {
-                    // spawn trap at random location
-                    BossAttackMode3();
-                    Debug.Log("Attack Mode 3");
-                    if (Attack)
-                    {
-                        m_LastAttackTime = Time.time;
-                        GetMode = GetRandomAttackMode();
-                    }
-                }
+            if(bossmovement.m_Distance <= bossmovement.RunAwayDistance)
+            {
+                BossAttackMode2();
             }
+            else if (bossmovement.m_Distance > bossmovement.ChaseDistance && bossmovement.m_Distance < bossmovement.StayDistance)
+            {
+                BossAttackMode1();
+                BossAttackMode3();
+            }
+            //if (GetMode == 1)
+            //{
+            //    // spawn chasing enemy in random location
+            //    BossAttackMode1();
+            //    Debug.Log("Attack Mode 1");
+            //    if (Attack)
+            //    {
+            //        GetMode = GetRandomAttackMode();
+            //        m_LastAttackTime = Time.time;
+            //    }
+            //}
+            //if (GetMode == 2)
+            //{
+            //    // 360 degree shooting
+            //    BossAttackMode2();
+            //    Debug.Log("Attack Mode 2");
+            //    if (Attack)
+            //    {
+            //        m_LastAttackTime = Time.time;
+            //        GetMode = GetRandomAttackMode();
+            //    }
+            //}
+            //if (GetMode == 3)
+            //{
+            //    // spawn trap at random location
+            //    BossAttackMode3();
+            //    Debug.Log("Attack Mode 3");
+            //    if (Attack)
+            //    {
+            //        m_LastAttackTime = Time.time;
+            //        GetMode = GetRandomAttackMode();
+            //    }
+            //}
+        }
     }
 
     int GetRandomAttackMode()
