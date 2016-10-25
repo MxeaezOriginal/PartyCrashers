@@ -11,7 +11,8 @@ public class BossMovement : MonoBehaviour {
     public float ChaseDistance = 10;
     public float StayDistance = 20;
     public float m_Distance;
-    public float BossMoveSpeed = 20;
+    public float BossRunAwaySpeed = 0.01f;
+    public float BossChaseSpeed = 0.005f;
 
     Vector3 StartPos;
 
@@ -29,7 +30,8 @@ public class BossMovement : MonoBehaviour {
         float NewZ = transform.position.z;
 
         Vector3 MoveBackward;
-        Vector3 MoveToward;
+        Vector3 Flee;
+        //Vector3 MoveToward;
 
         // Get closest player
         for (int i = 0; i < players.Length; i++)
@@ -38,18 +40,21 @@ public class BossMovement : MonoBehaviour {
             {
                 m_Distance = Vector3.Distance(players[i].transform.position, transform.position);
                 MoveBackward = transform.position - players[i].transform.position;
-                MoveToward = players[i].transform.position - transform.position;
+                Flee = transform.position + MoveBackward;
+                //MoveToward = players[i].transform.position - transform.position;
                 if (m_Distance <= RunAwayDistance)
                 {
-                    transform.position += MoveBackward * BossMoveSpeed * Time.deltaTime;
+                    transform.position = Vector3.Lerp(transform.position, Flee, BossRunAwaySpeed);
+                    //transform.position += MoveBackward * BossMoveSpeed * Time.deltaTime;
                 }
                 else if (m_Distance > ChaseDistance && m_Distance < StayDistance)
                 {
-                    transform.position += MoveToward * BossMoveSpeed * Time.deltaTime;
+                    transform.position = Vector3.Lerp(transform.position, players[i].transform.position, BossChaseSpeed);
+                    //transform.position += MoveToward * BossMoveSpeed * Time.deltaTime;
                 }
                 else if (m_Distance >= StayDistance)
                 {
-                    transform.position = Vector3.Lerp(transform.position, StartPos, BossMoveSpeed * Time.deltaTime);
+                    transform.position = Vector3.Lerp(transform.position, StartPos, BossRunAwaySpeed);
                 }
             }
             else
@@ -58,18 +63,21 @@ public class BossMovement : MonoBehaviour {
                 {
                     m_Distance = Vector3.Distance(players[i].transform.position, transform.position);
                     MoveBackward = transform.position - players[i].transform.position;
-                    MoveToward = players[i].transform.position - transform.position;
+                    Flee = transform.position + MoveBackward;
+                    //MoveToward = players[i].transform.position - transform.position;
                     if (m_Distance <= RunAwayDistance)
                     {
-                        transform.position += MoveBackward * BossMoveSpeed * Time.deltaTime;
+                        transform.position = Vector3.Lerp(transform.position, Flee, BossRunAwaySpeed);
+                        //transform.position += MoveBackward * BossMoveSpeed * Time.deltaTime;
                     }
                     else if (m_Distance > ChaseDistance && m_Distance < StayDistance)
                     {
-                        transform.position += MoveToward * BossMoveSpeed * Time.deltaTime;
+                        transform.position = Vector3.Lerp(transform.position, players[i].transform.position, BossChaseSpeed);
+                        //transform.position += MoveToward * BossMoveSpeed * Time.deltaTime;
                     }
                     else if (m_Distance >= StayDistance)
                     {
-                        transform.position = Vector3.Lerp(transform.position, StartPos, BossMoveSpeed * Time.deltaTime);
+                        transform.position = Vector3.Lerp(transform.position, StartPos, BossRunAwaySpeed);
                     }
                 }
             }

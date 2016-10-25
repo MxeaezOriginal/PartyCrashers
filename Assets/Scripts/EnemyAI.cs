@@ -65,7 +65,7 @@ public class EnemyAI : MonoBehaviour
         look(GameObject.FindGameObjectWithTag("Player").transform);
         agent.SetDestination(target.transform.position);
         agent.Resume();
-        }
+    }
 
     void returnToOrigin()
     {

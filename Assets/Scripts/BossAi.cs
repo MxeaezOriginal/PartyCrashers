@@ -18,8 +18,8 @@ public class BossAi : MonoBehaviour
     public float timer;
 
     //public float CountDownBeforeAttack = 10f;
-    //public float AttackCoolDown = 5f;
-    //public float AttackTime = 30f;
+    public float AttackCoolDown = 5f;
+    public float AttackTime = 10f;
 
     // Boss attack mode 1 variables --- spawn enemy
     public float Mode1EnemySpawnTime = 2.0f;
@@ -40,7 +40,7 @@ public class BossAi : MonoBehaviour
     //public Vector3 SpawnEnemyLocation;
 
     public int m_Bullet;
-        
+
     public GameObject ShotPrefab;
     public Transform ShotLocation1;
     public Transform ShotLocation2;
@@ -56,11 +56,11 @@ public class BossAi : MonoBehaviour
 
     private int GetMode = 2;
 
-    BossMovement bossmovement; 
+    BossMovement bossmovement;
     // Use this for initialization
     void Start()
     {
-        bossmovement = GetComponent<BossMovement>(); 
+        bossmovement = GetComponent<BossMovement>();
         m_LastShotTime = Time.time;
         m_LastAttackTime = Time.time;
         //m_Bullet = Mode2MaxBullet;
@@ -71,39 +71,74 @@ public class BossAi : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Attacking();
+        //Attacking();
     }
 
     void Attacking()
     {
         //bool StartAttack = (m_LastAttackTime + CountDownBeforeAttack) < Time.time;
-        //bool CoolDown = (m_LastAttackTime + AttackCoolDown) < Time.time;
-        //bool Attack = (m_LastAttackTime + AttackTime) < Time.time;
+        bool CoolDown = (m_LastAttackTime + AttackCoolDown) < Time.time;
+        bool Attack = (m_LastAttackTime + AttackTime) < Time.time;
         //if(StartAttack )//&& distance)
         //{
         // if (CanAttack && CoolDown)
         //{
         //if (CoolDown)
-            //{
-            if(bossmovement.m_Distance <= bossmovement.RunAwayDistance)
+        //{
+        if (bossmovement.m_Distance <= bossmovement.RunAwayDistance)
+        {
+            //bool Shoot = (m_LastShotTime + BossShootCounter) < Time.time;
+            //bool StopShooting = (m_LastShotTime + BossShootInterval) < Time.time;
+            if (CoolDown)
             {
-                bool Shoot = (m_LastShotTime + BossShootCounter) < Time.time;
-                bool StopShooting = (m_LastShotTime + BossShootInterval) < Time.time;
-                //if (Shoot)
-                //{
-                    BossAttackMode2();
-                    //if (StopShooting)
-                    //{
-                    //    // Doing nothing;
-                    //}
-                //}
+                BossAttackMode2();
             }
-            //else if (bossmovement.m_Distance > bossmovement.ChaseDistance && bossmovement.m_Distance < bossmovement.StayDistance)
+
+        }
+        else if (bossmovement.m_Distance > bossmovement.ChaseDistance && bossmovement.m_Distance < bossmovement.StayDistance)
+        {
             //{
             //    BossAttackMode1();
             //    BossAttackMode3();
             //}
-        //}
+            //}
+            if (CoolDown)
+            {
+                if (GetMode == 1)
+                {
+                    // spawn chasing enemy in random location
+                    BossAttackMode1();
+                    Debug.Log("Attack Mode 1");
+                    if (Attack)
+                    {
+                        GetMode = GetRandomAttackMode();
+                        m_LastAttackTime = Time.time;
+                    }
+                }
+                if (GetMode == 2)
+                {
+                    // 360 degree shooting
+                    BossAttackMode2();
+                    Debug.Log("Attack Mode 2");
+                    if (Attack)
+                    {
+                        m_LastAttackTime = Time.time;
+                        GetMode = GetRandomAttackMode();
+                    }
+                }
+                if (GetMode == 3)
+                {
+                    // spawn trap at random location
+                    BossAttackMode3();
+                    Debug.Log("Attack Mode 3");
+                    if (Attack)
+                    {
+                        m_LastAttackTime = Time.time;
+                        GetMode = GetRandomAttackMode();
+                    }
+                }
+            }
+        }
     }
 
     int GetRandomAttackMode()
@@ -124,7 +159,7 @@ public class BossAi : MonoBehaviour
     void BossAttackMode1() // spawn chasing enemy in random location
     {
         timer -= Time.deltaTime;
-        if(timer <= 0 )
+        if (timer <= 0)
         {
             Instantiate(enemyPrefab, GetRandomLocationForEnemy(), transform.rotation);
             timer = Mode1EnemySpawnTime;
@@ -301,7 +336,7 @@ public class BossAi : MonoBehaviour
         timer -= Time.deltaTime;
         if (timer <= 0)
         {
-            trap = (GameObject) Instantiate(trapPrefab, GetRandomLocationForTrap(), transform.rotation);
+            trap = (GameObject)Instantiate(trapPrefab, GetRandomLocationForTrap(), transform.rotation);
             GetLoc = new Vector3(trap.transform.position.x, 0.1f, trap.transform.position.z);
             Instantiate(trapLoc, GetLoc, transform.rotation);
             timer = Mode3TrapSpawnTime;
