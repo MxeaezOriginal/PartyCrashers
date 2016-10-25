@@ -304,6 +304,11 @@ public class Player : MonoBehaviour
             Destroy(other.gameObject);
             setWeapon(WEAPONTYPE.SWORD);
         }
+        if (other.gameObject.CompareTag("fizzypopgun"))
+        {
+            Destroy(other.gameObject);
+            setWeapon(WEAPONTYPE.FIZZYPOPGUN);
+        }
 
         if (other.gameObject.CompareTag("Health"))
         {

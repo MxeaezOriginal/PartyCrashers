@@ -8,5 +8,7 @@ public enum WEAPONTYPE {
 
     //RANED
     BOW = 100,
-    RAVEGUN = 200
+    RAVEGUN = 101,
+    FIZZYPOPGUN = 102,
+    
 }
