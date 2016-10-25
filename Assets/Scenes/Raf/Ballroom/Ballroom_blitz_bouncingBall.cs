@@ -7,7 +7,7 @@ public class Ballroom_blitz_bouncingBall : MonoBehaviour {
 //    private Ballroomblitzgamemaster gM;
 //    private GameObject bBall;
     private Rigidbody rb;
-    //public int initSpeed;
+    public int initSpeed;
 
 
     void Start()
