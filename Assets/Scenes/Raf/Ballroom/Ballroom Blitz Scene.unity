@@ -85,6 +85,33 @@ NavMeshSettings:
     cellSize: 0.16666667
     manualCellSize: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &1712566
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1712567}
+  m_Layer: 0
+  m_Name: Frontwall_Ball_Cannon 8
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1712567
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1712566}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 14
 --- !u!1 &9687082
 GameObject:
   m_ObjectHideFlags: 0
@@ -116,7 +143,7 @@ RectTransform:
   m_RootOrder: 4
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 426.1, y: 241.7}
+  m_AnchoredPosition: {x: 227, y: -238}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &9687084
@@ -218,7 +245,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
 --- !u!1 &150066928
 GameObject:
   m_ObjectHideFlags: 0
@@ -277,7 +304,7 @@ RectTransform:
   m_RootOrder: 2
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -161.5, y: 241.7}
+  m_AnchoredPosition: {x: -161.5, y: -238}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &185593042
@@ -338,7 +365,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d56b1f014442d54e983ed6bc844f3fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isAlive: 1
 --- !u!1 &242787787
 GameObject:
   m_ObjectHideFlags: 0
@@ -365,17 +391,12 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 242787787}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071067}
-  m_LocalPosition: {x: -900.82477, y: -445.60953, z: -88.7282}
+  m_LocalPosition: {x: -13, y: 1, z: 9}
   m_LocalScale: {x: 2, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 1280912201}
-<<<<<<< HEAD:Assets/Scenes/Raf/Ballroom/Ballroom Blitz Scene.unity
-  m_Father: {fileID: 853799055}
-  m_RootOrder: 15
-=======
   m_Father: {fileID: 0}
   m_RootOrder: 25
->>>>>>> origin/master:Assets/Scenes/Raf/Ballroom Blitz Scene.unity
 --- !u!114 &242787789
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -387,6 +408,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b10b067e735ff5842b9cb7f00d141680, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FireInterval: 1
+  ShotPrefab: {fileID: 139288, guid: 47a6f0a63dc889b4396dec70bf4186df, type: 2}
+  ShotLocation: {fileID: 1280912201}
+  Attach: 0
 --- !u!23 &242787790
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -516,6 +541,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b10b067e735ff5842b9cb7f00d141680, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FireInterval: 1
+  ShotPrefab: {fileID: 139288, guid: 47a6f0a63dc889b4396dec70bf4186df, type: 2}
+  ShotLocation: {fileID: 367548268}
+  Attach: 0
 --- !u!23 &274985141
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -568,17 +597,12 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 274985139}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -892.32477, y: -445.60953, z: -84.7282}
+  m_LocalPosition: {x: -4.5, y: 1, z: 13}
   m_LocalScale: {x: 2, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 367548268}
-<<<<<<< HEAD:Assets/Scenes/Raf/Ballroom/Ballroom Blitz Scene.unity
-  m_Father: {fileID: 853799055}
-  m_RootOrder: 26
-=======
   m_Father: {fileID: 0}
   m_RootOrder: 36
->>>>>>> origin/master:Assets/Scenes/Raf/Ballroom Blitz Scene.unity
 --- !u!1 &320758745
 GameObject:
   m_ObjectHideFlags: 0
@@ -611,19 +635,19 @@ Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 357390111}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 455468, guid: c0d4599cda93dc54785f1e84c5383933, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -2.6494932
       objectReference: {fileID: 0}
     - target: {fileID: 455468, guid: c0d4599cda93dc54785f1e84c5383933, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 2.588
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 455468, guid: c0d4599cda93dc54785f1e84c5383933, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.68712085
       objectReference: {fileID: 0}
     - target: {fileID: 455468, guid: c0d4599cda93dc54785f1e84c5383933, type: 2}
       propertyPath: m_LocalRotation.x
@@ -643,7 +667,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 455468, guid: c0d4599cda93dc54785f1e84c5383933, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 179692, guid: c0d4599cda93dc54785f1e84c5383933, type: 2}
       propertyPath: m_IsActive
@@ -668,38 +692,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c0d4599cda93dc54785f1e84c5383933, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &357390110
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 357390111}
-  m_Layer: 8
-  m_Name: Players
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &357390111
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 357390110}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.6494932, y: 0.5, z: 0.68712085}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1837266566}
-  - {fileID: 1559391367}
-  - {fileID: 221815658}
-  - {fileID: 1354319148}
-  - {fileID: 2104565741}
-  m_Father: {fileID: 0}
-  m_RootOrder: 7
 --- !u!1 &357452623
 GameObject:
   m_ObjectHideFlags: 0
@@ -757,6 +749,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b10b067e735ff5842b9cb7f00d141680, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FireInterval: 1
+  ShotPrefab: {fileID: 139288, guid: 47a6f0a63dc889b4396dec70bf4186df, type: 2}
+  ShotLocation: {fileID: 499505413}
+  Attach: 0
 --- !u!23 &367154299
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -809,17 +805,12 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 367154297}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071067}
-  m_LocalPosition: {x: -874.82477, y: -445.60953, z: -102.2282}
+  m_LocalPosition: {x: 13, y: 1, z: -4.5}
   m_LocalScale: {x: 2, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 499505413}
-<<<<<<< HEAD:Assets/Scenes/Raf/Ballroom/Ballroom Blitz Scene.unity
-  m_Father: {fileID: 853799055}
-  m_RootOrder: 18
-=======
   m_Father: {fileID: 0}
   m_RootOrder: 28
->>>>>>> origin/master:Assets/Scenes/Raf/Ballroom Blitz Scene.unity
 --- !u!1 &367548267
 GameObject:
   m_ObjectHideFlags: 0
@@ -900,17 +891,12 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 429710456}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071067}
-  m_LocalPosition: {x: -900.82477, y: -445.60953, z: -91.7282}
+  m_LocalPosition: {x: -13, y: 1, z: 6}
   m_LocalScale: {x: 2, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 1584580011}
-<<<<<<< HEAD:Assets/Scenes/Raf/Ballroom/Ballroom Blitz Scene.unity
-  m_Father: {fileID: 853799055}
-  m_RootOrder: 14
-=======
   m_Father: {fileID: 0}
   m_RootOrder: 24
->>>>>>> origin/master:Assets/Scenes/Raf/Ballroom Blitz Scene.unity
 --- !u!114 &429710458
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -922,6 +908,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b10b067e735ff5842b9cb7f00d141680, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FireInterval: 1
+  ShotPrefab: {fileID: 139288, guid: 47a6f0a63dc889b4396dec70bf4186df, type: 2}
+  ShotLocation: {fileID: 1584580011}
+  Attach: 0
 --- !u!23 &429710459
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -997,6 +987,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b10b067e735ff5842b9cb7f00d141680, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FireInterval: 1
+  ShotPrefab: {fileID: 139288, guid: 47a6f0a63dc889b4396dec70bf4186df, type: 2}
+  ShotLocation: {fileID: 2029833815}
+  Attach: 0
 --- !u!23 &430648351
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1049,17 +1043,12 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 430648349}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -889.32477, y: -445.60953, z: -84.7282}
+  m_LocalPosition: {x: -1.5, y: 1, z: 13}
   m_LocalScale: {x: 2, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 2029833815}
-<<<<<<< HEAD:Assets/Scenes/Raf/Ballroom/Ballroom Blitz Scene.unity
-  m_Father: {fileID: 853799055}
-  m_RootOrder: 27
-=======
   m_Father: {fileID: 0}
   m_RootOrder: 37
->>>>>>> origin/master:Assets/Scenes/Raf/Ballroom Blitz Scene.unity
 --- !u!1 &433683344
 GameObject:
   m_ObjectHideFlags: 0
@@ -1087,22 +1076,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2042081120}
   m_RootOrder: 0
---- !u!1 &453901963 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 165310, guid: 70a6e5df92fc1f44c936dd18e964f37e, type: 2}
-  m_PrefabInternal: {fileID: 1386671859}
---- !u!114 &453901973
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 453901963}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d56b1f014442d54e983ed6bc844f3fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isAlive: 0
 --- !u!1 &469336539
 GameObject:
   m_ObjectHideFlags: 0
@@ -1250,8 +1223,7 @@ Prefab:
       propertyPath: m_RootOrder
       value: 6
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 11478484, guid: 1512c6e2d8c3fea4b8c47cd60c796b72, type: 2}
+    m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1512c6e2d8c3fea4b8c47cd60c796b72, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &597561439
@@ -1307,17 +1279,12 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 618806155}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071067}
-  m_LocalPosition: {x: -900.82477, y: -445.60953, z: -100.7282}
+  m_LocalPosition: {x: -13, y: 1, z: -3}
   m_LocalScale: {x: 2, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 1399738762}
-<<<<<<< HEAD:Assets/Scenes/Raf/Ballroom/Ballroom Blitz Scene.unity
-  m_Father: {fileID: 853799055}
-  m_RootOrder: 11
-=======
   m_Father: {fileID: 0}
   m_RootOrder: 21
->>>>>>> origin/master:Assets/Scenes/Raf/Ballroom Blitz Scene.unity
 --- !u!114 &618806157
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1329,6 +1296,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b10b067e735ff5842b9cb7f00d141680, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FireInterval: 1
+  ShotPrefab: {fileID: 139288, guid: 47a6f0a63dc889b4396dec70bf4186df, type: 2}
+  ShotLocation: {fileID: 1399738762}
+  Attach: 0
 --- !u!23 &618806158
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1404,6 +1375,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b10b067e735ff5842b9cb7f00d141680, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FireInterval: 1
+  ShotPrefab: {fileID: 139288, guid: 47a6f0a63dc889b4396dec70bf4186df, type: 2}
+  ShotLocation: {fileID: 540562685}
+  Attach: 0
 --- !u!23 &642712571
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1456,17 +1431,12 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 642712569}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071067}
-  m_LocalPosition: {x: -874.82477, y: -445.60953, z: -96.2282}
+  m_LocalPosition: {x: 13, y: 1, z: 1.5}
   m_LocalScale: {x: 2, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 540562685}
-<<<<<<< HEAD:Assets/Scenes/Raf/Ballroom/Ballroom Blitz Scene.unity
-  m_Father: {fileID: 853799055}
-  m_RootOrder: 19
-=======
   m_Father: {fileID: 0}
   m_RootOrder: 29
->>>>>>> origin/master:Assets/Scenes/Raf/Ballroom Blitz Scene.unity
 --- !u!1 &644922236
 GameObject:
   m_ObjectHideFlags: 0
@@ -1497,6 +1467,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b10b067e735ff5842b9cb7f00d141680, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FireInterval: 1
+  ShotPrefab: {fileID: 139288, guid: 47a6f0a63dc889b4396dec70bf4186df, type: 2}
+  ShotLocation: {fileID: 357452624}
+  Attach: 0
 --- !u!23 &644922238
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1549,17 +1523,12 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 644922236}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071067}
-  m_LocalPosition: {x: -874.82477, y: -445.60953, z: -108.2282}
+  m_LocalPosition: {x: 13, y: 1, z: -10.5}
   m_LocalScale: {x: 2, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 357452624}
-<<<<<<< HEAD:Assets/Scenes/Raf/Ballroom/Ballroom Blitz Scene.unity
-  m_Father: {fileID: 853799055}
-  m_RootOrder: 16
-=======
   m_Father: {fileID: 0}
   m_RootOrder: 26
->>>>>>> origin/master:Assets/Scenes/Raf/Ballroom Blitz Scene.unity
 --- !u!1 &655277490
 GameObject:
   m_ObjectHideFlags: 0
@@ -1590,6 +1559,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b10b067e735ff5842b9cb7f00d141680, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FireInterval: 1
+  ShotPrefab: {fileID: 139288, guid: 47a6f0a63dc889b4396dec70bf4186df, type: 2}
+  ShotLocation: {fileID: 1464815544}
+  Attach: 0
 --- !u!23 &655277492
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1642,14 +1615,10 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 655277490}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071067}
-  m_LocalPosition: {x: -874.82477, y: -445.60953, z: -99.2282}
+  m_LocalPosition: {x: 13, y: 1, z: -1.5}
   m_LocalScale: {x: 2, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 1464815544}
-<<<<<<< HEAD:Assets/Scenes/Raf/Ballroom/Ballroom Blitz Scene.unity
-  m_Father: {fileID: 853799055}
-  m_RootOrder: 23
-=======
   m_Father: {fileID: 0}
   m_RootOrder: 33
 --- !u!1001 &676046354
@@ -1810,7 +1779,6 @@ GameObject:
 GameObject:
   m_PrefabParentObject: {fileID: 180600, guid: 2056d511a4529ad4fbfd321aa279e7d3, type: 2}
   m_PrefabInternal: {fileID: 676046354}
->>>>>>> origin/master:Assets/Scenes/Raf/Ballroom Blitz Scene.unity
 --- !u!1 &721211976
 GameObject:
   m_ObjectHideFlags: 0
@@ -1823,7 +1791,7 @@ GameObject:
   - 64: {fileID: 721211978}
   - 23: {fileID: 721211977}
   m_Layer: 0
-  m_Name: Floor
+  m_Name: Recomended playing field size
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1881,29 +1849,29 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 721211976}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -887.82477, y: -446.60953, z: -97.7282}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2.5, y: 1, z: 2.5}
   m_Children: []
-  m_Father: {fileID: 853799055}
-  m_RootOrder: 33
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
 --- !u!1001 &729274129
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 357390111}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 439830, guid: bae93eb041cdc804a9db3e13f94c95fc, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 1.9920206
+      value: -0.6574726
       objectReference: {fileID: 0}
     - target: {fileID: 439830, guid: bae93eb041cdc804a9db3e13f94c95fc, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 24.2
+      value: 24.7
       objectReference: {fileID: 0}
     - target: {fileID: 439830, guid: bae93eb041cdc804a9db3e13f94c95fc, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -15.05212
+      value: -14.365
       objectReference: {fileID: 0}
     - target: {fileID: 439830, guid: bae93eb041cdc804a9db3e13f94c95fc, type: 2}
       propertyPath: m_LocalRotation.x
@@ -1925,10 +1893,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 439830, guid: bae93eb041cdc804a9db3e13f94c95fc, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 11409526, guid: bae93eb041cdc804a9db3e13f94c95fc, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: bae93eb041cdc804a9db3e13f94c95fc, type: 2}
@@ -1938,19 +1902,19 @@ Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 853799055}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 400000, guid: 28f68dd4f36c7ba4a9b09e20e7532474, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -900.42474
+      value: -12.6
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 28f68dd4f36c7ba4a9b09e20e7532474, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -446.60953
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 28f68dd4f36c7ba4a9b09e20e7532474, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -110.198204
+      value: -12.47
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 28f68dd4f36c7ba4a9b09e20e7532474, type: 2}
       propertyPath: m_LocalRotation.x
@@ -1970,7 +1934,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 28f68dd4f36c7ba4a9b09e20e7532474, type: 2}
       propertyPath: m_RootOrder
-      value: 30
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 28f68dd4f36c7ba4a9b09e20e7532474, type: 2}
       propertyPath: m_LocalScale.x
@@ -1982,7 +1946,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 28f68dd4f36c7ba4a9b09e20e7532474, type: 2}
       propertyPath: m_Name
-      value: BigWall_1
+      value: Wall_West
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 28f68dd4f36c7ba4a9b09e20e7532474, type: 2}
@@ -2017,6 +1981,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b10b067e735ff5842b9cb7f00d141680, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FireInterval: 1
+  ShotPrefab: {fileID: 139288, guid: 47a6f0a63dc889b4396dec70bf4186df, type: 2}
+  ShotLocation: {fileID: 1835837538}
+  Attach: 0
 --- !u!23 &821081083
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2069,17 +2037,12 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 821081081}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071067}
-  m_LocalPosition: {x: -874.82477, y: -445.60953, z: -87.2282}
+  m_LocalPosition: {x: 13, y: 1, z: 10.5}
   m_LocalScale: {x: 2, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 1835837538}
-<<<<<<< HEAD:Assets/Scenes/Raf/Ballroom/Ballroom Blitz Scene.unity
-  m_Father: {fileID: 853799055}
-  m_RootOrder: 22
-=======
   m_Father: {fileID: 0}
   m_RootOrder: 32
->>>>>>> origin/master:Assets/Scenes/Raf/Ballroom Blitz Scene.unity
 --- !u!1 &845016189
 GameObject:
   m_ObjectHideFlags: 0
@@ -2110,6 +2073,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b10b067e735ff5842b9cb7f00d141680, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FireInterval: 1
+  ShotPrefab: {fileID: 139288, guid: 47a6f0a63dc889b4396dec70bf4186df, type: 2}
+  ShotLocation: {fileID: 1518400786}
+  Attach: 0
 --- !u!23 &845016191
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2162,74 +2129,12 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 845016189}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: -0.00000016292068}
-  m_LocalPosition: {x: -896.82477, y: -445.60953, z: -110.7282}
+  m_LocalPosition: {x: -9, y: 1, z: -13}
   m_LocalScale: {x: 2, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 1518400786}
-  m_Father: {fileID: 853799055}
-  m_RootOrder: 2
---- !u!1 &853799054
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 853799055}
-  m_Layer: 0
-  m_Name: Walls
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &853799055
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 853799054}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 887.82477, y: 446.60953, z: 97.7282}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1153057495}
-  - {fileID: 2042081120}
-  - {fileID: 845016194}
-  - {fileID: 1996139988}
-  - {fileID: 1692491436}
-  - {fileID: 1739484207}
-  - {fileID: 1530804517}
-  - {fileID: 950727508}
-  - {fileID: 1915253237}
-  - {fileID: 1776482669}
-  - {fileID: 1533172852}
-  - {fileID: 618806156}
-  - {fileID: 1879022915}
-  - {fileID: 954148060}
-  - {fileID: 429710457}
-  - {fileID: 242787788}
-  - {fileID: 644922241}
-  - {fileID: 1137394067}
-  - {fileID: 367154302}
-  - {fileID: 642712574}
-  - {fileID: 1153208799}
-  - {fileID: 870258432}
-  - {fileID: 821081086}
-  - {fileID: 655277495}
-  - {fileID: 1150957363}
-  - {fileID: 1432570388}
-  - {fileID: 274985144}
-  - {fileID: 430648354}
-  - {fileID: 1564915249}
-  - {fileID: 1468421906}
-  - {fileID: 1267488167}
-  - {fileID: 1391212255}
-  - {fileID: 1892111640}
-  - {fileID: 721211980}
-  - {fileID: 1635503813}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 42
 --- !u!1 &870258427
 GameObject:
   m_ObjectHideFlags: 0
@@ -2260,6 +2165,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b10b067e735ff5842b9cb7f00d141680, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FireInterval: 1
+  ShotPrefab: {fileID: 139288, guid: 47a6f0a63dc889b4396dec70bf4186df, type: 2}
+  ShotLocation: {fileID: 274911855}
+  Attach: 0
 --- !u!23 &870258429
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2312,17 +2221,12 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 870258427}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071067}
-  m_LocalPosition: {x: -874.82477, y: -445.60953, z: -90.2282}
+  m_LocalPosition: {x: 13, y: 1, z: 7.5}
   m_LocalScale: {x: 2, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 274911855}
-<<<<<<< HEAD:Assets/Scenes/Raf/Ballroom/Ballroom Blitz Scene.unity
-  m_Father: {fileID: 853799055}
-  m_RootOrder: 21
-=======
   m_Father: {fileID: 0}
   m_RootOrder: 31
->>>>>>> origin/master:Assets/Scenes/Raf/Ballroom Blitz Scene.unity
 --- !u!1 &939128664
 GameObject:
   m_ObjectHideFlags: 0
@@ -2408,13 +2312,12 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 1499089167}
-  - {fileID: 1766663769}
+  - {fileID: 1692513779}
   - {fileID: 185593041}
   - {fileID: 2122184557}
   - {fileID: 9687083}
-  - {fileID: 1082534513}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 13
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -2450,6 +2353,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b10b067e735ff5842b9cb7f00d141680, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FireInterval: 1
+  ShotPrefab: {fileID: 139288, guid: 47a6f0a63dc889b4396dec70bf4186df, type: 2}
+  ShotLocation: {fileID: 1789424245}
+  Attach: 0
 --- !u!23 &950727505
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2502,12 +2409,12 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 950727503}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: -0.00000016292068}
-  m_LocalPosition: {x: -881.82477, y: -445.60953, z: -110.7282}
+  m_LocalPosition: {x: 6, y: 1, z: -13}
   m_LocalScale: {x: 2, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 1789424245}
-  m_Father: {fileID: 853799055}
-  m_RootOrder: 7
+  m_Father: {fileID: 0}
+  m_RootOrder: 47
 --- !u!1 &954148059
 GameObject:
   m_ObjectHideFlags: 0
@@ -2534,17 +2441,12 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 954148059}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071067}
-  m_LocalPosition: {x: -900.82477, y: -445.60953, z: -94.7282}
+  m_LocalPosition: {x: -13, y: 1, z: 3}
   m_LocalScale: {x: 2, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 1670304605}
-<<<<<<< HEAD:Assets/Scenes/Raf/Ballroom/Ballroom Blitz Scene.unity
-  m_Father: {fileID: 853799055}
-  m_RootOrder: 13
-=======
   m_Father: {fileID: 0}
   m_RootOrder: 23
->>>>>>> origin/master:Assets/Scenes/Raf/Ballroom Blitz Scene.unity
 --- !u!114 &954148061
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2556,6 +2458,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b10b067e735ff5842b9cb7f00d141680, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FireInterval: 1
+  ShotPrefab: {fileID: 139288, guid: 47a6f0a63dc889b4396dec70bf4186df, type: 2}
+  ShotLocation: {fileID: 1670304605}
+  Attach: 0
 --- !u!23 &954148062
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2601,45 +2507,24 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 954148059}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &988572558 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 172684, guid: 1512c6e2d8c3fea4b8c47cd60c796b72, type: 2}
-  m_PrefabInternal: {fileID: 564951565}
---- !u!114 &988572559
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 988572558}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d948f7bd93d45844bdb5a28424eebf9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  amountOfPlayers: 0
-  m_Players: []
-  m_PartyBarGame: {fileID: 0}
-  m_TutorialCoins: []
-  m_TutorialEnemies: []
-  m_TutorialLevel: CVG_Tut01
 --- !u!1001 &1017288233
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 357390111}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 489546, guid: 60d76573613101c4fa8b3a544bc5bbec, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 4.543912
+      value: 1.894419
       objectReference: {fileID: 0}
     - target: {fileID: 489546, guid: 60d76573613101c4fa8b3a544bc5bbec, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 489546, guid: 60d76573613101c4fa8b3a544bc5bbec, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -4.2906938
+      value: -3.6035728
       objectReference: {fileID: 0}
     - target: {fileID: 489546, guid: 60d76573613101c4fa8b3a544bc5bbec, type: 2}
       propertyPath: m_LocalRotation.x
@@ -2728,23 +2613,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
---- !u!1 &1057960099 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 103422, guid: 1cc1cf5cc72082b46a4dad206a8ffc4d, type: 2}
-  m_PrefabInternal: {fileID: 1816297726}
---- !u!114 &1057960108
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1057960099}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d56b1f014442d54e983ed6bc844f3fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isAlive: 0
+  m_RootOrder: 12
 --- !u!1 &1082534511
 GameObject:
   m_ObjectHideFlags: 0
@@ -2772,10 +2641,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c3ac4f878d053e47b158dad95d583ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  p1text: {fileID: 1766663770}
-  p2text: {fileID: 185593042}
-  p3text: {fileID: 2122184558}
-  p4text: {fileID: 9687084}
   remainingSeconds: 60
   timerText: {fileID: 1499089168}
 --- !u!4 &1082534513
@@ -2785,11 +2650,11 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1082534511}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -379.75095, y: -10, z: 0}
+  m_LocalPosition: {x: 386.24905, y: 386.08517, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 939128668}
-  m_RootOrder: 5
+  m_Father: {fileID: 0}
+  m_RootOrder: 15
 --- !u!1 &1137394062
 GameObject:
   m_ObjectHideFlags: 0
@@ -2820,6 +2685,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b10b067e735ff5842b9cb7f00d141680, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FireInterval: 1
+  ShotPrefab: {fileID: 139288, guid: 47a6f0a63dc889b4396dec70bf4186df, type: 2}
+  ShotLocation: {fileID: 557212352}
+  Attach: 0
 --- !u!23 &1137394064
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2872,17 +2741,12 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1137394062}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071067}
-  m_LocalPosition: {x: -874.82477, y: -445.60953, z: -105.2282}
+  m_LocalPosition: {x: 13, y: 1, z: -7.5}
   m_LocalScale: {x: 2, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 557212352}
-<<<<<<< HEAD:Assets/Scenes/Raf/Ballroom/Ballroom Blitz Scene.unity
-  m_Father: {fileID: 853799055}
-  m_RootOrder: 17
-=======
   m_Father: {fileID: 0}
   m_RootOrder: 27
->>>>>>> origin/master:Assets/Scenes/Raf/Ballroom Blitz Scene.unity
 --- !u!1 &1150957358
 GameObject:
   m_ObjectHideFlags: 0
@@ -2913,6 +2777,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b10b067e735ff5842b9cb7f00d141680, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FireInterval: 1
+  ShotPrefab: {fileID: 139288, guid: 47a6f0a63dc889b4396dec70bf4186df, type: 2}
+  ShotLocation: {fileID: 320758746}
+  Attach: 0
 --- !u!23 &1150957360
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2965,17 +2833,12 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1150957358}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -898.32477, y: -445.60953, z: -84.7282}
+  m_LocalPosition: {x: -10.5, y: 1, z: 13}
   m_LocalScale: {x: 2, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 320758746}
-<<<<<<< HEAD:Assets/Scenes/Raf/Ballroom/Ballroom Blitz Scene.unity
-  m_Father: {fileID: 853799055}
-  m_RootOrder: 24
-=======
   m_Father: {fileID: 0}
   m_RootOrder: 34
->>>>>>> origin/master:Assets/Scenes/Raf/Ballroom Blitz Scene.unity
 --- !u!1 &1153057490
 GameObject:
   m_ObjectHideFlags: 0
@@ -3006,6 +2869,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b10b067e735ff5842b9cb7f00d141680, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FireInterval: 1
+  ShotPrefab: {fileID: 139288, guid: 47a6f0a63dc889b4396dec70bf4186df, type: 2}
+  ShotLocation: {fileID: 424615722}
+  Attach: 0
 --- !u!23 &1153057492
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3058,12 +2925,12 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1153057490}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -880.32477, y: -445.60953, z: -84.7282}
+  m_LocalPosition: {x: 7.5, y: 1, z: 13}
   m_LocalScale: {x: 2, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 424615722}
-  m_Father: {fileID: 853799055}
-  m_RootOrder: 0
+  m_Father: {fileID: 0}
+  m_RootOrder: 40
 --- !u!1 &1153208794
 GameObject:
   m_ObjectHideFlags: 0
@@ -3094,6 +2961,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b10b067e735ff5842b9cb7f00d141680, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FireInterval: 1
+  ShotPrefab: {fileID: 139288, guid: 47a6f0a63dc889b4396dec70bf4186df, type: 2}
+  ShotLocation: {fileID: 1168313435}
+  Attach: 0
 --- !u!23 &1153208796
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3146,17 +3017,12 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1153208794}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071067}
-  m_LocalPosition: {x: -874.82477, y: -445.60953, z: -93.2282}
+  m_LocalPosition: {x: 13, y: 1, z: 4.5}
   m_LocalScale: {x: 2, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 1168313435}
-<<<<<<< HEAD:Assets/Scenes/Raf/Ballroom/Ballroom Blitz Scene.unity
-  m_Father: {fileID: 853799055}
-  m_RootOrder: 20
-=======
   m_Father: {fileID: 0}
   m_RootOrder: 30
->>>>>>> origin/master:Assets/Scenes/Raf/Ballroom Blitz Scene.unity
 --- !u!1 &1168313434
 GameObject:
   m_ObjectHideFlags: 0
@@ -3184,22 +3050,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1153208799}
   m_RootOrder: 0
---- !u!1 &1220750914 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 171896, guid: 60d76573613101c4fa8b3a544bc5bbec, type: 2}
-  m_PrefabInternal: {fileID: 1017288233}
---- !u!114 &1220750923
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1220750914}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d56b1f014442d54e983ed6bc844f3fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isAlive: 0
 --- !u!1 &1267488163 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100000, guid: 28f68dd4f36c7ba4a9b09e20e7532474, type: 2}
@@ -3216,10 +3066,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 4.9999995, y: 4.6851273, z: 0.05487465}
   m_Center: {x: -2.4999998, y: 2.0719004, z: 0.027437326}
---- !u!4 &1267488167 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 400000, guid: 28f68dd4f36c7ba4a9b09e20e7532474, type: 2}
-  m_PrefabInternal: {fileID: 774892508}
 --- !u!1 &1274257547
 GameObject:
   m_ObjectHideFlags: 0
@@ -3301,28 +3147,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1739484207}
   m_RootOrder: 0
---- !u!4 &1354319148 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 489546, guid: 60d76573613101c4fa8b3a544bc5bbec, type: 2}
-  m_PrefabInternal: {fileID: 1017288233}
 --- !u!1001 &1386671859
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 357390111}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 473754, guid: 70a6e5df92fc1f44c936dd18e964f37e, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 4.7192407
+      value: 2.0697474
       objectReference: {fileID: 0}
     - target: {fileID: 473754, guid: 70a6e5df92fc1f44c936dd18e964f37e, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 473754, guid: 70a6e5df92fc1f44c936dd18e964f37e, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -0.018392742
+      value: 0.6687281
       objectReference: {fileID: 0}
     - target: {fileID: 473754, guid: 70a6e5df92fc1f44c936dd18e964f37e, type: 2}
       propertyPath: m_LocalRotation.x
@@ -3342,7 +3184,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 473754, guid: 70a6e5df92fc1f44c936dd18e964f37e, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 165310, guid: 70a6e5df92fc1f44c936dd18e964f37e, type: 2}
       propertyPath: m_IsActive
@@ -3367,10 +3209,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 4.9999995, y: 4.6851273, z: 0.05487465}
   m_Center: {x: -2.4999998, y: 2.0719004, z: 0.027437326}
---- !u!4 &1391212255 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 400000, guid: 28f68dd4f36c7ba4a9b09e20e7532474, type: 2}
-  m_PrefabInternal: {fileID: 2092738725}
 --- !u!1 &1399738761
 GameObject:
   m_ObjectHideFlags: 0
@@ -3428,6 +3266,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b10b067e735ff5842b9cb7f00d141680, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FireInterval: 1
+  ShotPrefab: {fileID: 139288, guid: 47a6f0a63dc889b4396dec70bf4186df, type: 2}
+  ShotLocation: {fileID: 1274257548}
+  Attach: 0
 --- !u!23 &1432570385
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3480,17 +3322,12 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1432570383}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -895.32477, y: -445.60953, z: -84.7282}
+  m_LocalPosition: {x: -7.5, y: 1, z: 13}
   m_LocalScale: {x: 2, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 1274257548}
-<<<<<<< HEAD:Assets/Scenes/Raf/Ballroom/Ballroom Blitz Scene.unity
-  m_Father: {fileID: 853799055}
-  m_RootOrder: 25
-=======
   m_Father: {fileID: 0}
   m_RootOrder: 35
->>>>>>> origin/master:Assets/Scenes/Raf/Ballroom Blitz Scene.unity
 --- !u!1 &1444910187
 GameObject:
   m_ObjectHideFlags: 0
@@ -3612,10 +3449,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 655277495}
   m_RootOrder: 0
---- !u!4 &1468421906 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 465514, guid: 9b36521d9b366cb45a29c3ca426e0b14, type: 2}
-  m_PrefabInternal: {fileID: 1655586082}
 --- !u!1 &1499089166
 GameObject:
   m_ObjectHideFlags: 0
@@ -3627,7 +3460,7 @@ GameObject:
   - 222: {fileID: 1499089169}
   - 114: {fileID: 1499089168}
   m_Layer: 5
-  m_Name: Timer
+  m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3746,6 +3579,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b10b067e735ff5842b9cb7f00d141680, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FireInterval: 1
+  ShotPrefab: {fileID: 139288, guid: 47a6f0a63dc889b4396dec70bf4186df, type: 2}
+  ShotLocation: {fileID: 150066929}
+  Attach: 0
 --- !u!23 &1530804514
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3798,12 +3635,12 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1530804512}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: -0.00000016292068}
-  m_LocalPosition: {x: -884.82477, y: -445.60953, z: -110.7282}
+  m_LocalPosition: {x: 3, y: 1, z: -13}
   m_LocalScale: {x: 2, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 150066929}
-  m_Father: {fileID: 853799055}
-  m_RootOrder: 6
+  m_Father: {fileID: 0}
+  m_RootOrder: 46
 --- !u!1 &1533172851
 GameObject:
   m_ObjectHideFlags: 0
@@ -3830,17 +3667,12 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1533172851}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071067}
-  m_LocalPosition: {x: -900.82477, y: -445.60953, z: -103.7282}
+  m_LocalPosition: {x: -13, y: 1, z: -6}
   m_LocalScale: {x: 2, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 469336540}
-<<<<<<< HEAD:Assets/Scenes/Raf/Ballroom/Ballroom Blitz Scene.unity
-  m_Father: {fileID: 853799055}
-  m_RootOrder: 10
-=======
   m_Father: {fileID: 0}
   m_RootOrder: 20
->>>>>>> origin/master:Assets/Scenes/Raf/Ballroom Blitz Scene.unity
 --- !u!114 &1533172853
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3852,6 +3684,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b10b067e735ff5842b9cb7f00d141680, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FireInterval: 1
+  ShotPrefab: {fileID: 139288, guid: 47a6f0a63dc889b4396dec70bf4186df, type: 2}
+  ShotLocation: {fileID: 469336540}
+  Attach: 0
 --- !u!23 &1533172854
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3980,15 +3816,11 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1558343815}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.114868164, y: 4.966675, z: -1.059317}
+  m_LocalPosition: {x: 0.11487647, y: 4.9666624, z: -1.059317}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
---- !u!4 &1559391367 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 473754, guid: 70a6e5df92fc1f44c936dd18e964f37e, type: 2}
-  m_PrefabInternal: {fileID: 1386671859}
+  m_RootOrder: 16
 --- !u!1 &1564915244
 GameObject:
   m_ObjectHideFlags: 0
@@ -4019,6 +3851,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b10b067e735ff5842b9cb7f00d141680, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FireInterval: 1
+  ShotPrefab: {fileID: 139288, guid: 47a6f0a63dc889b4396dec70bf4186df, type: 2}
+  ShotLocation: {fileID: 261178352}
+  Attach: 0
 --- !u!23 &1564915246
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4071,17 +3907,12 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1564915244}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -883.32477, y: -445.60953, z: -84.7282}
+  m_LocalPosition: {x: 4.5, y: 1, z: 13}
   m_LocalScale: {x: 2, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 261178352}
-<<<<<<< HEAD:Assets/Scenes/Raf/Ballroom/Ballroom Blitz Scene.unity
-  m_Father: {fileID: 853799055}
-  m_RootOrder: 28
-=======
   m_Father: {fileID: 0}
   m_RootOrder: 38
->>>>>>> origin/master:Assets/Scenes/Raf/Ballroom Blitz Scene.unity
 --- !u!1 &1584580010
 GameObject:
   m_ObjectHideFlags: 0
@@ -4114,19 +3945,19 @@ Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 853799055}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 400000, guid: 28f68dd4f36c7ba4a9b09e20e7532474, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -875.2248
+      value: 12.6
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 28f68dd4f36c7ba4a9b09e20e7532474, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -446.60953
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 28f68dd4f36c7ba4a9b09e20e7532474, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -85.058205
+      value: 12.67
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 28f68dd4f36c7ba4a9b09e20e7532474, type: 2}
       propertyPath: m_LocalRotation.x
@@ -4146,7 +3977,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 28f68dd4f36c7ba4a9b09e20e7532474, type: 2}
       propertyPath: m_RootOrder
-      value: 32
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 28f68dd4f36c7ba4a9b09e20e7532474, type: 2}
       propertyPath: m_LocalScale.x
@@ -4158,7 +3989,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 28f68dd4f36c7ba4a9b09e20e7532474, type: 2}
       propertyPath: m_Name
-      value: BigWall_3
+      value: Wall_West (2)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 28f68dd4f36c7ba4a9b09e20e7532474, type: 2}
@@ -4179,10 +4010,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 4.9999995, y: 4.6851273, z: 0.05487465}
   m_Center: {x: -2.4999998, y: 2.0719004, z: 0.027437326}
---- !u!4 &1635503813 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 400000, guid: 28f68dd4f36c7ba4a9b09e20e7532474, type: 2}
-  m_PrefabInternal: {fileID: 1872609087}
 --- !u!1 &1646351005
 GameObject:
   m_ObjectHideFlags: 0
@@ -4215,19 +4042,19 @@ Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 853799055}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 465514, guid: 9b36521d9b366cb45a29c3ca426e0b14, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -886.32477
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 465514, guid: 9b36521d9b366cb45a29c3ca426e0b14, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -445.60953
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 465514, guid: 9b36521d9b366cb45a29c3ca426e0b14, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -84.7282
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 465514, guid: 9b36521d9b366cb45a29c3ca426e0b14, type: 2}
       propertyPath: m_LocalRotation.x
@@ -4247,7 +4074,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 465514, guid: 9b36521d9b366cb45a29c3ca426e0b14, type: 2}
       propertyPath: m_RootOrder
-      value: 29
+      value: 39
       objectReference: {fileID: 0}
     - target: {fileID: 101974, guid: 9b36521d9b366cb45a29c3ca426e0b14, type: 2}
       propertyPath: m_Name
@@ -4313,6 +4140,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b10b067e735ff5842b9cb7f00d141680, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FireInterval: 1
+  ShotPrefab: {fileID: 139288, guid: 47a6f0a63dc889b4396dec70bf4186df, type: 2}
+  ShotLocation: {fileID: 1646351006}
+  Attach: 0
 --- !u!23 &1692491433
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4365,12 +4196,85 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1692491431}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: -0.00000016292068}
-  m_LocalPosition: {x: -890.82477, y: -445.60953, z: -110.7282}
+  m_LocalPosition: {x: -3, y: 1, z: -13}
   m_LocalScale: {x: 2, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 1646351006}
-  m_Father: {fileID: 853799055}
-  m_RootOrder: 4
+  m_Father: {fileID: 0}
+  m_RootOrder: 44
+--- !u!1 &1692513778
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 224: {fileID: 1692513779}
+  - 222: {fileID: 1692513781}
+  - 114: {fileID: 1692513780}
+  m_Layer: 5
+  m_Name: 'Score Player 1:'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1692513779
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1692513778}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 939128668}
+  m_RootOrder: 1
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -324, y: -238}
+  m_SizeDelta: {x: 160, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1692513780
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1692513778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 'Score Player 1:'
+--- !u!222 &1692513781
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1692513778}
 --- !u!1 &1739484202
 GameObject:
   m_ObjectHideFlags: 0
@@ -4401,6 +4305,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b10b067e735ff5842b9cb7f00d141680, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FireInterval: 1
+  ShotPrefab: {fileID: 139288, guid: 47a6f0a63dc889b4396dec70bf4186df, type: 2}
+  ShotLocation: {fileID: 1312590202}
+  Attach: 0
 --- !u!23 &1739484204
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4453,85 +4361,12 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1739484202}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: -0.00000016292068}
-  m_LocalPosition: {x: -887.82477, y: -445.60953, z: -110.7282}
+  m_LocalPosition: {x: 0, y: 1, z: -13}
   m_LocalScale: {x: 2, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 1312590202}
-  m_Father: {fileID: 853799055}
-  m_RootOrder: 5
---- !u!1 &1766663768
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 224: {fileID: 1766663769}
-  - 222: {fileID: 1766663771}
-  - 114: {fileID: 1766663770}
-  m_Layer: 5
-  m_Name: Score Player 1
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1766663769
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1766663768}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 939128668}
-  m_RootOrder: 1
-  m_AnchorMin: {x: 0.5, y: 1}
-  m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -401.7, y: -56.8}
-  m_SizeDelta: {x: 160, y: 33}
-  m_Pivot: {x: 0.5, y: 1}
---- !u!114 &1766663770
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1766663768}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
-    m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 0
-    m_MaxSize: 60
-    m_Alignment: 0
-    m_AlignByGeometry: 0
-    m_RichText: 1
-    m_HorizontalOverflow: 1
-    m_VerticalOverflow: 1
-    m_LineSpacing: 1
-  m_Text: 'Player 1:'
---- !u!222 &1766663771
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1766663768}
+  m_Father: {fileID: 0}
+  m_RootOrder: 45
 --- !u!1 &1776482664
 GameObject:
   m_ObjectHideFlags: 0
@@ -4562,6 +4397,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b10b067e735ff5842b9cb7f00d141680, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FireInterval: 1
+  ShotPrefab: {fileID: 139288, guid: 47a6f0a63dc889b4396dec70bf4186df, type: 2}
+  ShotLocation: {fileID: 1444910188}
+  Attach: 0
 --- !u!23 &1776482666
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4614,17 +4453,12 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1776482664}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071067}
-  m_LocalPosition: {x: -900.82477, y: -445.60953, z: -106.7282}
+  m_LocalPosition: {x: -13, y: 1, z: -9}
   m_LocalScale: {x: 2, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 1444910188}
-<<<<<<< HEAD:Assets/Scenes/Raf/Ballroom/Ballroom Blitz Scene.unity
-  m_Father: {fileID: 853799055}
-  m_RootOrder: 9
-=======
   m_Father: {fileID: 0}
   m_RootOrder: 19
->>>>>>> origin/master:Assets/Scenes/Raf/Ballroom Blitz Scene.unity
 --- !u!1 &1789424244
 GameObject:
   m_ObjectHideFlags: 0
@@ -4657,19 +4491,19 @@ Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 357390111}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 452172, guid: 1cc1cf5cc72082b46a4dad206a8ffc4d, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0.13126588
+      value: -2.5182273
       objectReference: {fileID: 0}
     - target: {fileID: 452172, guid: 1cc1cf5cc72082b46a4dad206a8ffc4d, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 452172, guid: 1cc1cf5cc72082b46a4dad206a8ffc4d, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -4.082685
+      value: -3.395564
       objectReference: {fileID: 0}
     - target: {fileID: 452172, guid: 1cc1cf5cc72082b46a4dad206a8ffc4d, type: 2}
       propertyPath: m_LocalRotation.x
@@ -4689,7 +4523,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 452172, guid: 1cc1cf5cc72082b46a4dad206a8ffc4d, type: 2}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 103422, guid: 1cc1cf5cc72082b46a4dad206a8ffc4d, type: 2}
       propertyPath: m_IsActive
@@ -4728,7 +4562,6 @@ MonoBehaviour:
   BounceBallPrefab: {fileID: 107716, guid: 1bdb51dffe8d9064eb416956a0501284, type: 2}
   ProjectilePrefab: {fileID: 121640, guid: 47a6f0a63dc889b4396dec70bf4186df, type: 2}
   fireSpeed: 1250
-  bounceBallActive: 0
   FirePoint_Leftwall_ShotLocation1: {fileID: 1444910188}
   FirePoint_Leftwall_ShotLocation2: {fileID: 469336540}
   FirePoint_Leftwall_ShotLocation3: {fileID: 1399738762}
@@ -4770,11 +4603,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-<<<<<<< HEAD:Assets/Scenes/Raf/Ballroom/Ballroom Blitz Scene.unity
-  m_RootOrder: 4
-=======
   m_RootOrder: 18
->>>>>>> origin/master:Assets/Scenes/Raf/Ballroom Blitz Scene.unity
 --- !u!1 &1835837537
 GameObject:
   m_ObjectHideFlags: 0
@@ -4802,28 +4631,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 821081086}
   m_RootOrder: 0
---- !u!4 &1837266566 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 452172, guid: 1cc1cf5cc72082b46a4dad206a8ffc4d, type: 2}
-  m_PrefabInternal: {fileID: 1816297726}
 --- !u!1001 &1872609087
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 853799055}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 400000, guid: 28f68dd4f36c7ba4a9b09e20e7532474, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -875.1048
+      value: 12.72
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 28f68dd4f36c7ba4a9b09e20e7532474, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -446.60953
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 28f68dd4f36c7ba4a9b09e20e7532474, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -110.0482
+      value: -12.32
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 28f68dd4f36c7ba4a9b09e20e7532474, type: 2}
       propertyPath: m_LocalRotation.x
@@ -4843,7 +4668,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 28f68dd4f36c7ba4a9b09e20e7532474, type: 2}
       propertyPath: m_RootOrder
-      value: 34
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 28f68dd4f36c7ba4a9b09e20e7532474, type: 2}
       propertyPath: m_LocalScale.x
@@ -4855,15 +4680,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 28f68dd4f36c7ba4a9b09e20e7532474, type: 2}
       propertyPath: m_Name
-      value: BigWall_4(Invisible)
+      value: Wall_West (3)
       objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: 28f68dd4f36c7ba4a9b09e20e7532474, type: 2}
       propertyPath: m_Enabled
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: 28f68dd4f36c7ba4a9b09e20e7532474, type: 2}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 28f68dd4f36c7ba4a9b09e20e7532474, type: 2}
@@ -4894,17 +4715,12 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1879022914}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071067}
-  m_LocalPosition: {x: -900.82477, y: -445.60953, z: -97.7282}
+  m_LocalPosition: {x: -13, y: 1, z: 0}
   m_LocalScale: {x: 2, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 1449665384}
-<<<<<<< HEAD:Assets/Scenes/Raf/Ballroom/Ballroom Blitz Scene.unity
-  m_Father: {fileID: 853799055}
-  m_RootOrder: 12
-=======
   m_Father: {fileID: 0}
   m_RootOrder: 22
->>>>>>> origin/master:Assets/Scenes/Raf/Ballroom Blitz Scene.unity
 --- !u!114 &1879022916
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4916,6 +4732,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b10b067e735ff5842b9cb7f00d141680, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FireInterval: 1
+  ShotPrefab: {fileID: 139288, guid: 47a6f0a63dc889b4396dec70bf4186df, type: 2}
+  ShotLocation: {fileID: 1449665384}
+  Attach: 0
 --- !u!23 &1879022917
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4977,10 +4797,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 4.9999995, y: 4.6851273, z: 0.05487465}
   m_Center: {x: -2.4999998, y: 2.0719004, z: 0.027437326}
---- !u!4 &1892111640 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 400000, guid: 28f68dd4f36c7ba4a9b09e20e7532474, type: 2}
-  m_PrefabInternal: {fileID: 1634237491}
 --- !u!1 &1915253232
 GameObject:
   m_ObjectHideFlags: 0
@@ -5011,6 +4827,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b10b067e735ff5842b9cb7f00d141680, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FireInterval: 1
+  ShotPrefab: {fileID: 139288, guid: 47a6f0a63dc889b4396dec70bf4186df, type: 2}
+  ShotLocation: {fileID: 597561440}
+  Attach: 0
 --- !u!23 &1915253234
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5063,12 +4883,12 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1915253232}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: -0.00000016292068}
-  m_LocalPosition: {x: -878.82477, y: -445.60953, z: -110.7282}
+  m_LocalPosition: {x: 9, y: 1, z: -13}
   m_LocalScale: {x: 2, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 597561440}
-  m_Father: {fileID: 853799055}
-  m_RootOrder: 8
+  m_Father: {fileID: 0}
+  m_RootOrder: 48
 --- !u!1 &1996139983
 GameObject:
   m_ObjectHideFlags: 0
@@ -5099,6 +4919,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b10b067e735ff5842b9cb7f00d141680, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FireInterval: 1
+  ShotPrefab: {fileID: 139288, guid: 47a6f0a63dc889b4396dec70bf4186df, type: 2}
+  ShotLocation: {fileID: 1554486569}
+  Attach: 0
 --- !u!23 &1996139985
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5151,12 +4975,12 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1996139983}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: -0.00000016292068}
-  m_LocalPosition: {x: -893.82477, y: -445.60953, z: -110.7282}
+  m_LocalPosition: {x: -6, y: 1, z: -13}
   m_LocalScale: {x: 2, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 1554486569}
-  m_Father: {fileID: 853799055}
-  m_RootOrder: 3
+  m_Father: {fileID: 0}
+  m_RootOrder: 43
 --- !u!1 &2029833814
 GameObject:
   m_ObjectHideFlags: 0
@@ -5214,6 +5038,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b10b067e735ff5842b9cb7f00d141680, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FireInterval: 1
+  ShotPrefab: {fileID: 139288, guid: 47a6f0a63dc889b4396dec70bf4186df, type: 2}
+  ShotLocation: {fileID: 433683345}
+  Attach: 0
 --- !u!23 &2042081117
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5266,30 +5094,30 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2042081115}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -877.32477, y: -445.60953, z: -84.7282}
+  m_LocalPosition: {x: 10.5, y: 1, z: 13}
   m_LocalScale: {x: 2, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 433683345}
-  m_Father: {fileID: 853799055}
-  m_RootOrder: 1
+  m_Father: {fileID: 0}
+  m_RootOrder: 41
 --- !u!1001 &2092738725
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 853799055}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 400000, guid: 28f68dd4f36c7ba4a9b09e20e7532474, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -900.57477
+      value: -12.75
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 28f68dd4f36c7ba4a9b09e20e7532474, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -446.60953
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 28f68dd4f36c7ba4a9b09e20e7532474, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -85.128204
+      value: 12.6
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 28f68dd4f36c7ba4a9b09e20e7532474, type: 2}
       propertyPath: m_LocalRotation.x
@@ -5309,7 +5137,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 28f68dd4f36c7ba4a9b09e20e7532474, type: 2}
       propertyPath: m_RootOrder
-      value: 31
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 28f68dd4f36c7ba4a9b09e20e7532474, type: 2}
       propertyPath: m_LocalScale.x
@@ -5321,7 +5149,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 28f68dd4f36c7ba4a9b09e20e7532474, type: 2}
       propertyPath: m_Name
-      value: BigWall_2
+      value: Wall_West (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 28f68dd4f36c7ba4a9b09e20e7532474, type: 2}
@@ -5330,10 +5158,6 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 453150, guid: 9b36521d9b366cb45a29c3ca426e0b14, type: 2}
   m_PrefabInternal: {fileID: 1655586082}
---- !u!4 &2104565741 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 439830, guid: bae93eb041cdc804a9db3e13f94c95fc, type: 2}
-  m_PrefabInternal: {fileID: 729274129}
 --- !u!1 &2122184556
 GameObject:
   m_ObjectHideFlags: 0
@@ -5365,7 +5189,7 @@ RectTransform:
   m_RootOrder: 3
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 154, y: 241.7}
+  m_AnchoredPosition: {x: 389, y: -238}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2122184558
