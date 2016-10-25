@@ -9,7 +9,11 @@ public class Ballroomblitzgamemaster : MonoBehaviour {
     public int fireSpeed;
     private float difficultyTimer;//seconds passed
     private float incrementAmmount;
-    private bool bounceBallActive;
+   [HideInInspector]
+    public bool bounceBallActive;
+
+    
+
     //Fire Locations
     #region
     public Transform FirePoint_Leftwall_ShotLocation1;
@@ -53,6 +57,9 @@ public class Ballroomblitzgamemaster : MonoBehaviour {
         ShotPrefab = ProjectilePrefab;
 
         beginFire();
+
+       
+
     }
 
     //begin fire routine

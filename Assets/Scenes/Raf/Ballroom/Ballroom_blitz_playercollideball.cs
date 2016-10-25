@@ -3,21 +3,29 @@ using System.Collections;
 
 public class Ballroom_blitz_playercollideball : MonoBehaviour
 {
+    
+    [HideInInspector]
+    public bool isAlive;  // Using this for score counting.
+    
+    void Start()
+    {
+        isAlive = true;
+    }
 
     void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Minigame Projectile")
         {
             Debug.Log("Dead");
-            StartCoroutine(Respawn(5));
+            gameObject.SetActive(false);    //
+            isAlive = false;                //
         }
-
+        
     }
 
-    IEnumerator Respawn(float settime)
+    IEnumerator Respawn(float setTime)
     {
-
-        yield return new WaitForSeconds(settime);
-        Debug.Log("Alive"); ;
+        yield return new WaitForSeconds(setTime);
+        Debug.Log("Alive");
     }
 }

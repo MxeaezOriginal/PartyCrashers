@@ -9,8 +9,7 @@ public class RewardChest : MonoBehaviour
     public float DestructionDelay;
 
     public GameObject[] items;
-
-    private bool Activated = false;
+    
     private bool mActivated;
 
     GameObject rewardChest;

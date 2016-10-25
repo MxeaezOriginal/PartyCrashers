@@ -8,8 +8,8 @@ public class Timer : MonoBehaviour
     private float score, p1, p2, p3, p4;
     public Text p1text, p2text, p3text, p4text;
     Text text;
-
-
+    
+    
 
     public float remainingSeconds;
     public Text timerText;
@@ -18,9 +18,9 @@ public class Timer : MonoBehaviour
     void Start()
     {
         text = GetComponent<Text>();
-    }
+    }   
 
-
+   
 
     void Update()
     {
