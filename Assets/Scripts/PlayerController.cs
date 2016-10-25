@@ -39,6 +39,8 @@ public class PlayerController : MonoBehaviour
     private bool m_StopMovementX = false;
     private bool m_StopMovementZ = false;
 
+    private float m_RotateAngle;
+
     //private Rigidbody rigidBody;
     CharacterController controller;
 
@@ -210,31 +212,31 @@ public class PlayerController : MonoBehaviour
                     m_CurrentHorizontalRotation = Input.GetAxis(m_HorizontalButton);
                     m_CurrentVerticalRotation = Input.GetAxis(m_VerticalButton) * -1f;
                 }
+
+                m_RotateAngle = Mathf.Atan2(m_CurrentHorizontalRotation * -1, m_CurrentVerticalRotation * -1) * Mathf.Rad2Deg;
+
+                transform.rotation = Quaternion.AngleAxis(m_RotateAngle * -1, Vector3.up);
             }
             else
             {
-                if (Input.GetAxis("RotateHorizontal_Keyboard") != 0 || Input.GetAxis("RotateVertical_Keyboard") != 0)
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+
+                if (Physics.Raycast(ray, out hit, 100))
                 {
-                    m_CurrentHorizontalRotation = Input.GetAxis("RotateHorizontal_Keyboard");
-                    m_CurrentVerticalRotation = Input.GetAxis("RotateVertical_Keyboard") * -1f;
+                    transform.LookAt(new Vector3(hit.point.x, transform.position.y, hit.point.z));
                 }
-                else if (Input.GetAxis("Horizontal_Keyboard") != 0 || Input.GetAxis("Vertical_Keyboard") != 0)
-                {
-                    m_CurrentHorizontalRotation = Input.GetAxis("Horizontal_Keyboard");
-                    m_CurrentVerticalRotation = Input.GetAxis("Vertical_Keyboard") * -1f;
-                }
+
             }
 
             //Gravity
             m_Velocity.y -= m_CurrentGravity * Time.deltaTime;
-            //MOVE
+
+            //Move
             controller.Move(m_Velocity * Time.deltaTime);
+
             //transform.rotation = Quaternion.LookRotation(new Vector3(m_CurrentHorizontalRotation, 0, m_CurrentVerticalRotation), Vector3.up);
-            float angle = Mathf.Atan2(m_CurrentHorizontalRotation * -1, m_CurrentVerticalRotation * -1) * Mathf.Rad2Deg;
             //transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, angle, 0), m_TurnSpeed * Time.deltaTime);
-
-
-            transform.rotation = Quaternion.AngleAxis(angle * -1, Vector3.up);
 
 
         }
