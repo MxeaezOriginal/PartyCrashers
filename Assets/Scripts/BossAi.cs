@@ -3,6 +3,7 @@ using System.Collections;
 
 public class BossAi : MonoBehaviour
 {
+
     float x;
     float y;
     float z;
@@ -16,9 +17,9 @@ public class BossAi : MonoBehaviour
     public GameObject trap;
     public float timer;
 
-    public float CountDownBeforeAttack = 10f;
-    public float AttackCoolDown = 5f;
-    public float AttackTime = 30f;
+    //public float CountDownBeforeAttack = 10f;
+    //public float AttackCoolDown = 5f;
+    //public float AttackTime = 30f;
 
     // Boss attack mode 1 variables --- spawn enemy
     public float Mode1EnemySpawnTime = 2.0f;
@@ -29,6 +30,9 @@ public class BossAi : MonoBehaviour
     public float Mode2ReloadTime = 5f;
     public int Mode2MaxBullet = 100;
     public float Mode2FireInterval = 1f;
+
+    public float BossShootCounter = 4f;
+    public float BossShootInterval = 3f;
 
     // Boss attack mode 3 variables --- spawn trap
     public float Mode3TrapSpawnTime = 2.0f;
@@ -52,12 +56,15 @@ public class BossAi : MonoBehaviour
 
     private int GetMode = 2;
 
+    BossMovement bossmovement; 
     // Use this for initialization
     void Start()
     {
+        bossmovement = GetComponent<BossMovement>(); 
         m_LastShotTime = Time.time;
         m_LastAttackTime = Time.time;
-        m_Bullet = Mode2MaxBullet;
+        //m_Bullet = Mode2MaxBullet;
+        m_Bullet = 0;
         timer = Mode1EnemySpawnTime;
     }
 
@@ -69,49 +76,34 @@ public class BossAi : MonoBehaviour
 
     void Attacking()
     {
-        bool StartAttack = (m_LastAttackTime + CountDownBeforeAttack) < Time.time;
-        bool CoolDown = (m_LastAttackTime + AttackCoolDown) < Time.time;
-        bool Attack = (m_LastAttackTime + AttackTime) < Time.time;
+        //bool StartAttack = (m_LastAttackTime + CountDownBeforeAttack) < Time.time;
+        //bool CoolDown = (m_LastAttackTime + AttackCoolDown) < Time.time;
+        //bool Attack = (m_LastAttackTime + AttackTime) < Time.time;
         //if(StartAttack )//&& distance)
         //{
         // if (CanAttack && CoolDown)
         //{
-        if (CoolDown)
+        //if (CoolDown)
+            //{
+            if(bossmovement.m_Distance <= bossmovement.RunAwayDistance)
             {
-                if (GetMode == 1)
-                {
-                    // spawn chasing enemy in random location
-                    BossAttackMode1();
-                    Debug.Log("Attack Mode 1");
-                    if (Attack)
-                    {
-                        GetMode =  GetRandomAttackMode();
-                        m_LastAttackTime = Time.time;
-                    }
-                }
-                if (GetMode == 2)
-                {
-                    // 360 degree shooting
+                bool Shoot = (m_LastShotTime + BossShootCounter) < Time.time;
+                bool StopShooting = (m_LastShotTime + BossShootInterval) < Time.time;
+                //if (Shoot)
+                //{
                     BossAttackMode2();
-                    Debug.Log("Attack Mode 2");
-                    if(Attack)
-                    {
-                        m_LastAttackTime = Time.time;
-                        GetMode = GetRandomAttackMode();
-                    }
-                }
-                if (GetMode == 3)
-                {
-                    // spawn trap at random location
-                    BossAttackMode3();
-                    Debug.Log("Attack Mode 3");
-                    if (Attack)
-                    {
-                        m_LastAttackTime = Time.time;
-                        GetMode = GetRandomAttackMode();
-                    }
-                }
+                    //if (StopShooting)
+                    //{
+                    //    // Doing nothing;
+                    //}
+                //}
             }
+            //else if (bossmovement.m_Distance > bossmovement.ChaseDistance && bossmovement.m_Distance < bossmovement.StayDistance)
+            //{
+            //    BossAttackMode1();
+            //    BossAttackMode3();
+            //}
+        //}
     }
 
     int GetRandomAttackMode()
