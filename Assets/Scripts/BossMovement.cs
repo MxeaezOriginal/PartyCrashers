@@ -13,8 +13,11 @@ public class BossMovement : MonoBehaviour {
     public float m_Distance;
     public float BossMoveSpeed = 20;
 
+    Vector3 StartPos;
+
 	// Use this for initialization
 	void Start () {
+        StartPos = new Vector3(StartPosX, StartPosY, StartPosZ);
         transform.position = new Vector3(StartPosX, StartPosY, StartPosZ);
         players = GameObject.FindGameObjectsWithTag("Player");
     }
@@ -46,7 +49,7 @@ public class BossMovement : MonoBehaviour {
                 }
                 else if (m_Distance >= StayDistance)
                 {
-                    // Do nothing
+                    transform.position = Vector3.Lerp(transform.position, StartPos, BossMoveSpeed * Time.deltaTime);
                 }
             }
             else
@@ -66,7 +69,7 @@ public class BossMovement : MonoBehaviour {
                     }
                     else if (m_Distance >= StayDistance)
                     {
-                        // Do nothing
+                        transform.position = Vector3.Lerp(transform.position, StartPos, BossMoveSpeed * Time.deltaTime);
                     }
                 }
             }
