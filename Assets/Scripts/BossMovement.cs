@@ -16,6 +16,8 @@ public class BossMovement : MonoBehaviour {
 
     Vector3 StartPos;
 
+    Vector3 MoveBackward;
+    public Vector3 Flee;
 	// Use this for initialization
 	void Start () {
         StartPos = new Vector3(StartPosX, StartPosY, StartPosZ);
@@ -29,8 +31,6 @@ public class BossMovement : MonoBehaviour {
         float NewY = transform.position.y;
         float NewZ = transform.position.z;
 
-        Vector3 MoveBackward;
-        Vector3 Flee;
         //Vector3 MoveToward;
 
         // Get closest player
