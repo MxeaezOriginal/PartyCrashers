@@ -4,8 +4,7 @@ using System.Collections;
 public class BossAi : MonoBehaviour
 {
     GameObject[] players;
-    public int PlayerNumbers;// = GameObject.FindGameObjectsWithTag("Player").Length;
-    //public int playernumbers = players.Length;
+    int PlayerNumbers;
     float x;
     float y;
     float z;
@@ -15,6 +14,8 @@ public class BossAi : MonoBehaviour
     Vector3 GetLoc2;
     Vector3 GetLoc3;
     Vector3 GetLoc4;
+
+    public float GodRadius = 3f;
 
     public GameObject enemyPrefab;
     public GameObject trapPrefab;
@@ -73,7 +74,7 @@ public class BossAi : MonoBehaviour
     void Start()
     {
         PlayerNumbers = GameObject.FindGameObjectsWithTag("Player").Length;
-        players = GameObject.FindGameObjectsWithTag("Player");
+        players = GameManager.m_Instance.m_Players;
         bossmovement = GetComponent<BossMovement>();
         m_LastShotTime = Time.time;
         m_LastAttackTime = Time.time;
@@ -85,8 +86,8 @@ public class BossAi : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Attacking();
-        BossAttackMode3();
+        Attacking();
+        //BossAttackMode1();
     }
 
     void Attacking()
@@ -110,7 +111,7 @@ public class BossAi : MonoBehaviour
             }
 
         }
-        else if (bossmovement.m_Distance > bossmovement.ChaseDistance /*&& bossmovement.m_Distance < bossmovement.StayDistance*/)
+        else if (bossmovement.m_Distance > bossmovement.RunAwayDistance /*&& bossmovement.m_Distance < bossmovement.StayDistance*/)
         {
             if (CoolDown)
             {
@@ -170,11 +171,23 @@ public class BossAi : MonoBehaviour
         return Random.Range(1, 4);
     }
 
-    public Vector3 GetRandomLocationForEnemy()  // WORKING!
+    public Vector3 GetRandomLocationForEnemy()  
     {
         x = Random.Range(transform.position.x - Mode1Range, transform.position.x + Mode1Range);
         y = 1;
         z = Random.Range(transform.position.z - Mode1Range, transform.position.z + Mode1Range);
+
+        for (int i = 0; i < players.Length; i++)
+        {
+            while (x <= players[i].transform.position.x + GodRadius && x >= players[i].transform.position.x - GodRadius && z <= players[i].transform.position.z + GodRadius && z >= players[i].transform.position.z - GodRadius)
+            {
+                x = Random.Range(transform.position.x - Mode1Range, transform.position.x + Mode1Range);
+                z = Random.Range(transform.position.z - Mode1Range, transform.position.z + Mode1Range);
+            }
+            
+
+        }
+        
         RandomLocation = new Vector3(x, y, z);
         //transform.position = SpawnEnemyLocation;
         return RandomLocation;

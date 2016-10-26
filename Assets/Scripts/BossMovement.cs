@@ -14,13 +14,14 @@ public class BossMovement : MonoBehaviour {
     public float BossRunAwaySpeed = 0.01f;
     public float BossChaseSpeed = 0.005f;
 
-    Vector3 StartPos;
+    public Vector3 StartPos;
 
     Vector3 MoveBackward;
     public Vector3 Flee;
 	// Use this for initialization
 	void Start () {
         StartPos = new Vector3(StartPosX, StartPosY, StartPosZ);
+        players = GameManager.m_Instance.m_Players;
         transform.position = new Vector3(StartPosX, StartPosY, StartPosZ);
         players = GameObject.FindGameObjectsWithTag("Player");
     }
