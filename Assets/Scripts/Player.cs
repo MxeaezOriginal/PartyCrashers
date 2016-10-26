@@ -46,7 +46,7 @@ public class Player : MonoBehaviour
     public string m_Stats = "Stats_";
     public string m_Pause = "Pause_";
 
-    public bool m_UsingKeyboard = false;
+    public bool m_UsingKeyboard;
 
     private bool m_UsingKeyboardSave;
 
@@ -73,7 +73,8 @@ public class Player : MonoBehaviour
         m_StatsSave = m_Stats;
         m_PauseSave = m_Pause;
 
-        m_UsingKeyboardSave = m_UsingKeyboard;
+        m_UsingKeyboardSave = !m_UsingKeyboard;
+        Debug.Log(m_UsingKeyboardSave);
     }
 
     // Update is called once per frame
@@ -92,7 +93,7 @@ public class Player : MonoBehaviour
                 m_CurrentCooldown = Time.time;
             }
         }
-        if (!m_UsingKeyboard && m_UsingKeyboardSave == true)
+        if (m_UsingKeyboard == false && m_UsingKeyboardSave == true)
         {
             m_PrimaryAttack = m_PrimaryAttackSave;
             m_SecondaryAttack = m_SecondaryAttackSave;
@@ -103,7 +104,7 @@ public class Player : MonoBehaviour
 
             m_UsingKeyboardSave = false;
         }
-        else if (m_UsingKeyboard && m_UsingKeyboardSave == false)
+        else if (m_UsingKeyboard == true && m_UsingKeyboardSave == false)
         {
             m_PrimaryAttack = "Primary_Keyboard";
             m_SecondaryAttack = "Secondary_Keyboard";
