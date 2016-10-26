@@ -32,35 +32,28 @@ public class EnemyDeath : MonoBehaviour
                 Instantiate(coin, this.gameObject.transform.position, this.gameObject.transform.rotation);
 
             }
-        }
-    }
+        }  
+		if (col.gameObject.CompareTag("Physical"))
+		{
+			if (m_EnemyHealth > 0)
+			{
+				m_EnemyHealth--;
+			}
+			else
+			{
+				//tutorial
+				if (SceneManager.GetActiveScene().name == GameManager.m_Instance.m_TutorialLevel)
+				{
+					GameManager.m_Instance.m_TutorialEnemies.Add(col.gameObject.name);
+				}
 
-    void OnTriggerStay(Collider other)
-    {
-        if(Sword.attack == true)
-            {
-            if (other.tag == ("Physical"))
-           {
-                    if (m_EnemyHealth > 0)
-                    {
-                         m_EnemyHealth--;
-                    }
-                    else
-                    {
-                    //tutorial
-                    if (SceneManager.GetActiveScene().name == GameManager.m_Instance.m_TutorialLevel)
-                    {
-                        GameManager.m_Instance.m_TutorialEnemies.Add(other.gameObject.name);
-                    }
+				//GameManager.m_Instance.m_PartyBarGame.m_Current += m_PartyBarAmount;
 
-                    GameManager.m_Instance.m_PartyBarGame.m_Current += m_PartyBarAmount;
+				gameObject.SetActive(false);
 
-                    gameObject.SetActive(false);
+				Instantiate(coin, this.gameObject.transform.position, this.gameObject.transform.rotation);
 
-                        Instantiate(coin, this.gameObject.transform.position, this.gameObject.transform.rotation);
-
-                }
-             }               
-          }
-       }
-    }
+			}
+		}               
+	}
+}

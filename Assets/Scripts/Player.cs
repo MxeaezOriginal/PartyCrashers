@@ -343,19 +343,33 @@ public class Player : MonoBehaviour
             m_Heart.TakeDamage(1);
             Destroy(other.gameObject);
         }
-
-    }
-
-    void OnTriggerStay(Collider other)
-    {
-        if (other.gameObject.CompareTag("MeleeEnemy"))
-        {
-            m_Heart.lastDamage += Time.deltaTime;
+		if (other.gameObject.CompareTag("MeleeEnemy"))
+		{
+			/*m_Heart.lastDamage += Time.deltaTime;
             if (m_Heart.lastDamage >= 2)
             {
                 m_Heart.TakeDamage(2);
                 m_Heart.lastDamage = 0;
-            }
+            }*/
+			m_Heart.TakeDamage (1);
+			m_Heart.UpdateHearts ();
+
+		}
+    }
+
+    void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.CompareTag("MeleeEnemy"))
+        {
+            /*m_Heart.lastDamage += Time.deltaTime;
+            if (m_Heart.lastDamage >= 2)
+            {
+                m_Heart.TakeDamage(2);
+                m_Heart.lastDamage = 0;
+            }*/
+			m_Heart.TakeDamage (1);
+			m_Heart.UpdateHearts ();
+
         }
     }
 

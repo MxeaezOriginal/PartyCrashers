@@ -10,7 +10,7 @@ public class Sword : Melee
 
     public float smooth = 20f;
 
-    public static bool attack = false;
+    public bool attack = false;
 
     public float triggerLife = 0.5f;
 
@@ -45,7 +45,7 @@ public class Sword : Melee
             }
             if (triggerLife <= 0)
             {
-                Debug.Log("time left = 0");
+                //Debug.Log("time left = 0");
                 attack = false;
                 triggerLife = 0.5f;
 
