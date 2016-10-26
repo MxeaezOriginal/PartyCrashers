@@ -131,11 +131,11 @@ public class Player : MonoBehaviour
 
         if (Input.GetButtonDown(m_Stats))
         {
-            GetComponent<Stats>().OpenWindow();
+            GetComponent<Stats>().ToggleWindow();
         }
         if (Input.GetButtonUp(m_Stats))
         {
-            GetComponent<Stats>().CloseWindow();
+            GetComponent<Stats>().ToggleWindow();
         }
     }
 

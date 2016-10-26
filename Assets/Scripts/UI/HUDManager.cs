@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class HUD_Panel : MonoBehaviour
+public class HUDManager : MonoBehaviour
 {
     //Player HUD Panels
     public GameObject P1_Panel;
