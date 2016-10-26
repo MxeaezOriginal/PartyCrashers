@@ -555,7 +555,7 @@ Transform:
   - {fileID: 1878292944}
   - {fileID: 667100478}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
 --- !u!1 &33595231
 GameObject:
   m_ObjectHideFlags: 0
@@ -736,6 +736,38 @@ Prefab:
       propertyPath: BossRunAwaySpeed
       value: 0.02
       objectReference: {fileID: 0}
+    - target: {fileID: 11464212, guid: bb357c33b7ba83c4686b1b253e07a0e2, type: 2}
+      propertyPath: trapLoc1
+      value: 
+      objectReference: {fileID: 193470, guid: 51186418c5113c34b8c7e60a116af739, type: 2}
+    - target: {fileID: 11464212, guid: bb357c33b7ba83c4686b1b253e07a0e2, type: 2}
+      propertyPath: trapLoc2
+      value: 
+      objectReference: {fileID: 193470, guid: 51186418c5113c34b8c7e60a116af739, type: 2}
+    - target: {fileID: 11464212, guid: bb357c33b7ba83c4686b1b253e07a0e2, type: 2}
+      propertyPath: trapLoc3
+      value: 
+      objectReference: {fileID: 193470, guid: 51186418c5113c34b8c7e60a116af739, type: 2}
+    - target: {fileID: 11464212, guid: bb357c33b7ba83c4686b1b253e07a0e2, type: 2}
+      propertyPath: trapLoc4
+      value: 
+      objectReference: {fileID: 193470, guid: 51186418c5113c34b8c7e60a116af739, type: 2}
+    - target: {fileID: 11464212, guid: bb357c33b7ba83c4686b1b253e07a0e2, type: 2}
+      propertyPath: trap1
+      value: 
+      objectReference: {fileID: 187356, guid: 0b721afdc3e777e40b9f45a5fd947bba, type: 2}
+    - target: {fileID: 11464212, guid: bb357c33b7ba83c4686b1b253e07a0e2, type: 2}
+      propertyPath: trap2
+      value: 
+      objectReference: {fileID: 187356, guid: 0b721afdc3e777e40b9f45a5fd947bba, type: 2}
+    - target: {fileID: 11464212, guid: bb357c33b7ba83c4686b1b253e07a0e2, type: 2}
+      propertyPath: trap3
+      value: 
+      objectReference: {fileID: 187356, guid: 0b721afdc3e777e40b9f45a5fd947bba, type: 2}
+    - target: {fileID: 11464212, guid: bb357c33b7ba83c4686b1b253e07a0e2, type: 2}
+      propertyPath: trap4
+      value: 
+      objectReference: {fileID: 187356, guid: 0b721afdc3e777e40b9f45a5fd947bba, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bb357c33b7ba83c4686b1b253e07a0e2, type: 2}
   m_IsPrefabParent: 0
@@ -6968,6 +7000,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 0
   curHealth: 0
+  lastDamage: 0
   heartImages:
   - {fileID: 0}
   - {fileID: 0}
@@ -7010,6 +7043,7 @@ MonoBehaviour:
   m_Gold: 0
   m_WeaponID: 100
   m_LastLocation: {x: 0, y: 0, z: 0}
+  delay: 2
   m_PrimaryAttack: Primary_P1
   m_SecondaryAttack: Secondary_P1
   m_Interact: Interact_P1

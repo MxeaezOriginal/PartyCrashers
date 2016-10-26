@@ -4,18 +4,29 @@ using System.Collections;
 public class BossAi : MonoBehaviour
 {
     GameObject[] players;
-
+    public int PlayerNumbers;// = GameObject.FindGameObjectsWithTag("Player").Length;
+    //public int playernumbers = players.Length;
     float x;
     float y;
     float z;
     Vector3 RandomLocation;
     Vector3 TrapLocation;
-    Vector3 GetLoc;
+    Vector3 GetLoc1;
+    Vector3 GetLoc2;
+    Vector3 GetLoc3;
+    Vector3 GetLoc4;
 
     public GameObject enemyPrefab;
     public GameObject trapPrefab;
-    public GameObject trapLoc;
-    public GameObject trap;
+    public GameObject trapLoc1;
+    public GameObject trapLoc2;
+    public GameObject trapLoc3;
+    public GameObject trapLoc4;
+
+    public GameObject trap1;
+    public GameObject trap2;
+    public GameObject trap3;
+    public GameObject trap4;
     public float timer;
 
     //public float CountDownBeforeAttack = 10f;
@@ -61,6 +72,7 @@ public class BossAi : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        PlayerNumbers = GameObject.FindGameObjectsWithTag("Player").Length;
         players = GameObject.FindGameObjectsWithTag("Player");
         bossmovement = GetComponent<BossMovement>();
         m_LastShotTime = Time.time;
@@ -100,11 +112,6 @@ public class BossAi : MonoBehaviour
         }
         else if (bossmovement.m_Distance > bossmovement.ChaseDistance /*&& bossmovement.m_Distance < bossmovement.StayDistance*/)
         {
-            //{
-            //    BossAttackMode1();
-            //    BossAttackMode3();
-            //}
-            //}
             if (CoolDown)
             {
                 if (GetMode == 1)
@@ -140,16 +147,30 @@ public class BossAi : MonoBehaviour
                         GetMode = GetRandomAttackMode();
                     }
                 }
+                if (GetMode == 4)
+                {
+                    // Boss Do nothing and return to start Position
+                    BossIdle();
+                    Debug.Log("Attack Mode 4 = Idle");
+                    if (Attack)
+                    {
+                        m_LastAttackTime = Time.time;
+                        GetMode = GetRandomAttackMode();
+                    }
+                }
             }
         }
     }
 
     int GetRandomAttackMode()
     {
+        // if (BossHP >= 60)
+        // return Random.Range(1,5)
+        // else if (BossHp < 60)
         return Random.Range(1, 4);
     }
 
-    public Vector3 GetRandomLocationForEnemy()
+    public Vector3 GetRandomLocationForEnemy()  // WORKING!
     {
         x = Random.Range(transform.position.x - Mode1Range, transform.position.x + Mode1Range);
         y = 1;
@@ -157,6 +178,11 @@ public class BossAi : MonoBehaviour
         RandomLocation = new Vector3(x, y, z);
         //transform.position = SpawnEnemyLocation;
         return RandomLocation;
+    }
+
+    void BossIdle()
+    {
+        //transform.position = Vector3.Lerp(transform.position, bossmovement.StartPos, bossmovement.BossRunAwaySpeed);
     }
 
     void BossAttackMode1() // spawn chasing enemy in random location
@@ -319,31 +345,133 @@ public class BossAi : MonoBehaviour
         return Random.Range(0, 3);
     }
 
-    public Vector3 GetRandomLocationForTrap()
+    //public Vector3 GetRandomLocationForTrap()
+    //{
+    //    for (int i = 0; i < players.Length; i++)
+    //    {
+    //        if (i == 0)
+    //        {
+    //            x = players[i].transform.position.x;
+    //            y = 10;
+    //            z = players[i].transform.position.z;
+    //        }
+    //        else
+    //        {
+    //            x = players[i].transform.position.x;
+    //            y = 10;
+    //            z = players[i].transform.position.z;
+    //        }
+
+    //    }
+
+    //    RandomLocation = new Vector3(x, y, z);
+        
+    //    //x = Random.Range(transform.position.x - Mode3Range, transform.position.x + Mode3Range);
+    //    //y = 10;
+    //    //z = Random.Range(transform.position.z - Mode3Range, transform.position.z + Mode3Range);
+    //    //TrapLocation = new Vector3(x, 0.1f, z);
+    //    //transform.position = SpawnEnemyLocation;
+    //    return RandomLocation;
+    //}
+
+    public Vector3 GetPlayersLocationForTrap1()
     {
         x = players[0].transform.position.x;
         y = 10;
         z = players[0].transform.position.z;
-
         RandomLocation = new Vector3(x, y, z);
-        
-        //x = Random.Range(transform.position.x - Mode3Range, transform.position.x + Mode3Range);
-        //y = 10;
-        //z = Random.Range(transform.position.z - Mode3Range, transform.position.z + Mode3Range);
-        //TrapLocation = new Vector3(x, 0.1f, z);
-        //transform.position = SpawnEnemyLocation;
         return RandomLocation;
     }
-
+    public Vector3 GetPlayersLocationForTrap2()
+    {
+        x = players[1].transform.position.x;
+        y = 10;
+        z = players[1].transform.position.z;
+        RandomLocation = new Vector3(x, y, z);
+        return RandomLocation;
+    }
+    public Vector3 GetPlayersLocationForTrap3()
+    {
+        x = players[2].transform.position.x;
+        y = 10;
+        z = players[2].transform.position.z;
+        RandomLocation = new Vector3(x, y, z);
+        return RandomLocation;
+    }
+    public Vector3 GetPlayersLocationForTrap4()
+    {
+        x = players[3].transform.position.x;
+        y = 10;
+        z = players[3].transform.position.z;
+        RandomLocation = new Vector3(x, y, z);
+        return RandomLocation;
+    }
     void BossAttackMode3() // spawn trap at random location
     {
         timer -= Time.deltaTime;
         if (timer <= 0)
         {
-            trap = (GameObject)Instantiate(trapPrefab, GetRandomLocationForTrap(), transform.rotation);
-            GetLoc = new Vector3(trap.transform.position.x, 0.1f, trap.transform.position.z);
-            Instantiate(trapLoc, GetLoc, transform.rotation);
-            timer = Mode3TrapSpawnTime;
+            if (PlayerNumbers == 1)
+            {
+                Debug.Log("Player Number = 1");
+                trap1 = (GameObject)Instantiate(trapPrefab, GetPlayersLocationForTrap1(), transform.rotation);
+                GetLoc1 = new Vector3(trap1.transform.position.x, 0.1f, trap1.transform.position.z);
+                Instantiate(trapLoc1, GetLoc1, transform.rotation);
+                timer = Mode3TrapSpawnTime;
+            }
+            else if (PlayerNumbers == 2)
+            {
+                Debug.Log("Player Number = 2");
+                trap1 = (GameObject)Instantiate(trapPrefab, GetPlayersLocationForTrap1(), transform.rotation);
+                GetLoc1 = new Vector3(trap1.transform.position.x, 0.1f, trap1.transform.position.z);
+                Instantiate(trapLoc1, GetLoc1, transform.rotation);
+
+                trap2 = (GameObject)Instantiate(trapPrefab, GetPlayersLocationForTrap2(), transform.rotation);
+                GetLoc2 = new Vector3(trap2.transform.position.x, 0.1f, trap2.transform.position.z);
+                Instantiate(trapLoc2, GetLoc2, transform.rotation);
+
+                timer = Mode3TrapSpawnTime;
+            }
+            else if (PlayerNumbers == 3)
+            {
+                Debug.Log("Player Number = 3");
+                trap1 = (GameObject)Instantiate(trapPrefab, GetPlayersLocationForTrap1(), transform.rotation);
+                GetLoc1 = new Vector3(trap1.transform.position.x, 0.1f, trap1.transform.position.z);
+                Instantiate(trapLoc1, GetLoc1, transform.rotation);
+
+                trap2 = (GameObject)Instantiate(trapPrefab, GetPlayersLocationForTrap2(), transform.rotation);
+                GetLoc2 = new Vector3(trap2.transform.position.x, 0.1f, trap2.transform.position.z);
+                Instantiate(trapLoc2, GetLoc2, transform.rotation);
+
+                trap3 = (GameObject)Instantiate(trapPrefab, GetPlayersLocationForTrap3(), transform.rotation);
+                GetLoc3 = new Vector3(trap3.transform.position.x, 0.1f, trap3.transform.position.z);
+                Instantiate(trapLoc3, GetLoc3, transform.rotation);
+
+                timer = Mode3TrapSpawnTime;
+            }
+            else if (PlayerNumbers == 4)
+            {
+                Debug.Log("Player Number = 4");
+                trap1 = (GameObject)Instantiate(trapPrefab, GetPlayersLocationForTrap1(), transform.rotation);
+                GetLoc1 = new Vector3(trap1.transform.position.x, 0.1f, trap1.transform.position.z);
+                Instantiate(trapLoc1, GetLoc1, transform.rotation);
+
+                trap2 = (GameObject)Instantiate(trapPrefab, GetPlayersLocationForTrap2(), transform.rotation);
+                GetLoc2 = new Vector3(trap2.transform.position.x, 0.1f, trap2.transform.position.z);
+                Instantiate(trapLoc2, GetLoc2, transform.rotation);
+
+                trap3 = (GameObject)Instantiate(trapPrefab, GetPlayersLocationForTrap3(), transform.rotation);
+                GetLoc3 = new Vector3(trap3.transform.position.x, 0.1f, trap3.transform.position.z);
+                Instantiate(trapLoc3, GetLoc3, transform.rotation);
+
+                trap4 = (GameObject)Instantiate(trapPrefab, GetPlayersLocationForTrap4(), transform.rotation);
+                GetLoc4 = new Vector3(trap4.transform.position.x, 0.1f, trap4.transform.position.z);
+                Instantiate(trapLoc4, GetLoc4, transform.rotation);
+
+                timer = Mode3TrapSpawnTime;
+            }
+            //trap = (GameObject)Instantiate(trapPrefab, GetRandomLocationForTrap(), transform.rotation);
+            //timer = Mode3TrapSpawnTime;
         }
     }
 
