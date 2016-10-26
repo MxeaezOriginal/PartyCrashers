@@ -9,7 +9,7 @@ public class Test : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
             GameObject p = other.gameObject;
             Player player = p.GetComponent<Player>();
@@ -20,7 +20,7 @@ public class Test : MonoBehaviour
 
             hearts.TakeDamage(1);
 
-            if(hearts.IsDead())
+            if (hearts.IsDead())
             {
 
                 GameObject effect = (GameObject)Instantiate(explosionhehexd, p.gameObject.transform.position, p.gameObject.transform.rotation);

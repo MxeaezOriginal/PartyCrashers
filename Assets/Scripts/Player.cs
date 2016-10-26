@@ -29,10 +29,14 @@ public class Player : MonoBehaviour
     //public int m_MaxHealth;
     //public int m_Collect;
     public WEAPONTYPE m_WeaponID;
+    public float m_CheckLocationCooldown;
+    //To hold location every x seconds to respawn to
+    public Vector3 m_Location;
+    //To hold location when leave scene
     public Vector3 m_LastLocation;
     private Transform m_Weapon;
     private HeartSystem m_Heart;
-    public float delay = 2.0f;
+    private CharacterController m_CharController;
 
     //Input
     public string m_PrimaryAttack = "Primary_";
@@ -52,11 +56,16 @@ public class Player : MonoBehaviour
     private string m_SillySave;
     private string m_StatsSave;
     private string m_PauseSave;
+    public float delay = 2.0f;
+
+    // Cooldown tracker for grabbing current location
+    private float m_CurrentCooldown;
 
     // Use this for initialization
     void Start()
     {
         m_Heart = GetComponent<HeartSystem>();
+        m_CharController = GetComponent<CharacterController>();
         m_PrimaryAttackSave = m_PrimaryAttack;
         m_SecondaryAttackSave = m_SecondaryAttack;
         m_InteractSave = m_Interact;
@@ -70,9 +79,18 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(m_Heart.IsDead())
+        if (m_Heart.IsDead() || Input.GetKeyDown(KeyCode.Y))
         {
             respawn();
+        }
+        if (m_CharController.isGrounded)
+        {
+            if (m_CurrentCooldown <= Time.time - m_CheckLocationCooldown || m_CurrentCooldown == 0)
+            {
+                m_Location = transform.position;
+
+                m_CurrentCooldown = Time.time;
+            }
         }
         if (!m_UsingKeyboard && m_UsingKeyboardSave == true)
         {
@@ -85,7 +103,7 @@ public class Player : MonoBehaviour
 
             m_UsingKeyboardSave = false;
         }
-        else if(m_UsingKeyboard && m_UsingKeyboardSave == false)
+        else if (m_UsingKeyboard && m_UsingKeyboardSave == false)
         {
             m_PrimaryAttack = "Primary_Keyboard";
             m_SecondaryAttack = "Secondary_Keyboard";
@@ -190,13 +208,21 @@ public class Player : MonoBehaviour
 
     public void respawn()
     {
-        CameraController camController = Camera.main.gameObject.GetComponent<CameraController>();
-        Vector3 respawnPosition = camController.mPosition;
-        gameObject.transform.position = respawnPosition;
+        transform.position = m_Location;
 
         m_Heart.curHealth = m_Heart.maxHealth;
         m_Heart.UpdateHearts();
         Debug.Log("Respawned");
+    }
+
+    public void damage(int damageAmount)
+    {
+        m_Heart.TakeDamage(damageAmount);
+    }
+
+    public void heal(int healAmount)
+    {
+        m_Heart.Heal(healAmount);
     }
 
     public void save()
@@ -324,7 +350,7 @@ public class Player : MonoBehaviour
         if (other.gameObject.CompareTag("MeleeEnemy"))
         {
             m_Heart.lastDamage += Time.deltaTime;
-            if(m_Heart.lastDamage >= 2)
+            if (m_Heart.lastDamage >= 2)
             {
                 m_Heart.TakeDamage(2);
                 m_Heart.lastDamage = 0;
