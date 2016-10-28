@@ -358,6 +358,12 @@ public class Player : MonoBehaviour
             m_Heart.UpdateHearts();
 
         }
+        if (other.gameObject.CompareTag("AddHeart"))
+        {
+            m_Heart.AddHeart();
+            m_Heart.Heal(2);
+            m_Heart.UpdateHearts();
+        }
     }
 
     void OnCollisionEnter(Collision other)
