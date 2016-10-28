@@ -17,7 +17,9 @@ public class Ballroom_blitz_playercollideball : MonoBehaviour
         if (collision.gameObject.tag == "Minigame Projectile")
         {
             Debug.Log("Dead");
-            gameObject.SetActive(false);    //
+            Player player = gameObject.GetComponent<Player>();
+            player.respawn();
+            //
             isAlive = false;                //
         }
         

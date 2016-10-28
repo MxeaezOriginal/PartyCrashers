@@ -58,6 +58,9 @@ public class Player : MonoBehaviour
     private string m_PauseSave;
     public float delay = 2.0f;
 
+    //float m_LastShotTime;
+    //public float DamageInterval = 2f;
+
     // Cooldown tracker for grabbing current location
     private float m_CurrentCooldown;
 
@@ -343,22 +346,6 @@ public class Player : MonoBehaviour
             m_Heart.TakeDamage(1);
             Destroy(other.gameObject);
         }
-		if (other.gameObject.CompareTag("MeleeEnemy"))
-		{
-			/*m_Heart.lastDamage += Time.deltaTime;
-            if (m_Heart.lastDamage >= 2)
-            {
-                m_Heart.TakeDamage(2);
-                m_Heart.lastDamage = 0;
-            }*/
-			m_Heart.TakeDamage (1);
-			m_Heart.UpdateHearts ();
-
-		}
-    }
-
-    void OnCollisionEnter(Collision other)
-    {
         if (other.gameObject.CompareTag("MeleeEnemy"))
         {
             /*m_Heart.lastDamage += Time.deltaTime;
@@ -367,9 +354,48 @@ public class Player : MonoBehaviour
                 m_Heart.TakeDamage(2);
                 m_Heart.lastDamage = 0;
             }*/
-			m_Heart.TakeDamage (1);
-			m_Heart.UpdateHearts ();
+            m_Heart.TakeDamage(1);
+            m_Heart.UpdateHearts();
 
+        }
+        if (other.gameObject.CompareTag("AddHeart"))
+        {
+            m_Heart.AddHeart();
+            m_Heart.Heal(2);
+            m_Heart.UpdateHearts();
+        }
+    }
+
+    void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.CompareTag("OneDamage"))
+        {
+            m_Heart.TakeDamage(1);
+            m_Heart.UpdateHearts();
+        }
+        if (other.gameObject.CompareTag("TwoDamage"))
+        {
+            m_Heart.TakeDamage(2);
+            m_Heart.UpdateHearts();
+        }
+        //if (other.gameObject.CompareTag("ChaserEnemy"))
+        //{
+        //    m_Heart.TakeDamage(1);
+        //    m_Heart.UpdateHearts();
+        //}
+    }
+
+    void OnCollisionStay(Collision other)
+    {
+        if (other.gameObject.CompareTag("MeleeEnemy"))
+        {
+            m_Heart.lastDamage += Time.deltaTime;
+            if (m_Heart.lastDamage >= 2)
+            {
+                m_Heart.TakeDamage(1);
+                m_Heart.UpdateHearts();
+                m_Heart.lastDamage = 0;
+            }
         }
     }
 

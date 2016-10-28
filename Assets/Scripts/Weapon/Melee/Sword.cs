@@ -16,6 +16,8 @@ public class Sword : Melee
 
     public GameObject swordTrigger;
 
+    public GameObject effect;
+
     //PlayerController m_PlayerController;
     CharacterController m_CharacterController;
 
@@ -53,7 +55,12 @@ public class Sword : Melee
             if (attack == true)
             {
                 swordTrigger.SetActive(true);
-            }
+
+                GameObject swordEffect;
+                swordEffect = (GameObject)Instantiate(effect, transform.position, transform.rotation);
+                //swordEffect.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+
+        }
             if (attack == false)
             {
                 swordTrigger.SetActive(false);

@@ -115,6 +115,8 @@ GameObject:
   - 114: {fileID: 11444634}
   - 114: {fileID: 11417334}
   - 114: {fileID: 11450342}
+  - 114: {fileID: 11481992}
+  - 114: {fileID: 11464626}
   m_Layer: 8
   m_Name: P4
   m_TagString: Player
@@ -298,8 +300,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 171896}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.6211913, y: 0.5, z: -3.3237858}
+  m_LocalRotation: {x: -0.40821794, y: 0.23456973, z: -0.109381676, w: 0.87542605}
+  m_LocalPosition: {x: -0.16117156, y: -4.723234, z: -0.6997452}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 450938}
@@ -580,6 +582,7 @@ MonoBehaviour:
   attack: 0
   triggerLife: 0.5
   swordTrigger: {fileID: 184014}
+  effect: {fileID: 100748, guid: a7dcf59c103c1fc4ea632b60fae3cd9a, type: 2}
 --- !u!114 &11444634
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -627,6 +630,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_WeaponType: 0
+--- !u!114 &11464626
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 171896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9957292c81333447833081810640974, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11476508
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -655,6 +669,18 @@ MonoBehaviour:
   m_HorizontalRotationButton: JoystickRightX_P4
   m_VerticalRotationButton: JoystickRightY_P4
   m_UsingKeyboard: 0
+--- !u!114 &11481992
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 171896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2efdd3a00233fc64e9504fd173ef4083, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isAlive: 0
 --- !u!114 &11492956
 MonoBehaviour:
   m_ObjectHideFlags: 1

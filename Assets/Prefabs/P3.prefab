@@ -17,6 +17,8 @@ GameObject:
   - 114: {fileID: 11498642}
   - 114: {fileID: 11410422}
   - 114: {fileID: 11495974}
+  - 114: {fileID: 11479084}
+  - 114: {fileID: 11401356}
   m_Layer: 8
   m_Name: P3
   m_TagString: Player
@@ -306,8 +308,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 103422}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.1885643, y: 0.5, z: -3.444661}
+  m_LocalRotation: {x: -0.40821794, y: 0.23456973, z: -0.109381676, w: 0.87542605}
+  m_LocalPosition: {x: -3.8786309, y: -2.8950963, z: 0.83424425}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 421952}
@@ -588,6 +590,17 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 138406}
   m_Enabled: 1
+--- !u!114 &11401356
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 103422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9957292c81333447833081810640974, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11410422
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -695,6 +708,18 @@ MonoBehaviour:
   m_ProjectileSpeed02: 100
   m_MaxSpeed: 1.5
   player: {fileID: 11429300}
+--- !u!114 &11479084
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 103422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2efdd3a00233fc64e9504fd173ef4083, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isAlive: 0
 --- !u!114 &11487472
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -722,6 +747,7 @@ MonoBehaviour:
   attack: 0
   triggerLife: 0.5
   swordTrigger: {fileID: 146328}
+  effect: {fileID: 100748, guid: a7dcf59c103c1fc4ea632b60fae3cd9a, type: 2}
 --- !u!114 &11492916
 MonoBehaviour:
   m_ObjectHideFlags: 1
