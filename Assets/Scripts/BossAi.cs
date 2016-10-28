@@ -28,6 +28,20 @@ public class BossAi : MonoBehaviour
     public GameObject trap2;
     public GameObject trap3;
     public GameObject trap4;
+
+    public GameObject ShotPrefab;
+    public Transform ShotLocation1;
+    public Transform ShotLocation2;
+    public Transform ShotLocation3;
+    public Transform ShotLocation4;
+    public Transform ShotLocation5;
+    public Transform ShotLocation6;
+    public Transform ShotLocation7;
+    public Transform ShotLocation8;
+
+    private float m_LastShotTime;
+    private float m_LastAttackTime;
+    private float m_LastAttackTime2;
     public float timer;
 
     //public float CountDownBeforeAttack = 10f;
@@ -43,34 +57,18 @@ public class BossAi : MonoBehaviour
     public float Mode2ReloadTime = 5f;
     public int Mode2MaxBullet = 100;
     public float Mode2FireInterval = 1f;
-
     public float BossShootCounter = 4f;
     public float BossShootInterval = 3f;
+    public int m_Bullet;
 
-    public float BossActivatedRange = 30f;
+    //public float BossActivatedRange = 30f;
 
     // Boss attack mode 3 variables --- spawn trap
     public float Mode3TrapSpawnTime = 2.0f;
     public int Mode3Range = 10;
     //public Vector3 SpawnEnemyLocation;
 
-    public int m_Bullet;
-
-    public GameObject ShotPrefab;
-    public Transform ShotLocation1;
-    public Transform ShotLocation2;
-    public Transform ShotLocation3;
-    public Transform ShotLocation4;
-    public Transform ShotLocation5;
-    public Transform ShotLocation6;
-    public Transform ShotLocation7;
-    public Transform ShotLocation8;
-
-    private float m_LastShotTime;
-    private float m_LastAttackTime;
-    private float m_LastAttackTime2;
-
-    private int GetMode = 2;
+    private int GetMode = 3;
 
     BossMovement bossmovement;
     // Use this for initialization
@@ -115,7 +113,7 @@ public class BossAi : MonoBehaviour
             }
 
         }
-        else if (bossmovement.m_Distance > bossmovement.RunAwayDistance && bossmovement.m_Distance < BossActivatedRange/*&& bossmovement.m_Distance < bossmovement.StayDistance*/)
+        else if (bossmovement.m_Distance > bossmovement.RunAwayDistance && bossmovement.m_Distance <= bossmovement.AttackDistance/*&& bossmovement.m_Distance < bossmovement.StayDistance*/)
         {
             if (CoolDown)
             {
@@ -154,14 +152,23 @@ public class BossAi : MonoBehaviour
                 }
                 if (GetMode == 4)
                 {
-                    // Boss Do nothing and return to start Position
-                    Debug.Log("Attack Mode 4 = Idle");
-                    BossIdle();
+                    // Spawn trap and shoot
+                    Debug.Log("Attack Mode 4");
+                    BossAttackMode3();
+                    BossAttackMode2();
                     if (Attack)
                     {
                         m_LastAttackTime2 = Time.time;
                         GetMode = GetRandomAttackMode();
                     }
+                    //// Boss Do nothing and return to start Position
+                    //Debug.Log("Attack Mode 4 = Idle");
+                    //BossIdle();
+                    //if (Attack)
+                    //{
+                    //    m_LastAttackTime2 = Time.time;
+                    //    GetMode = GetRandomAttackMode();
+                    //}
                 }
             }
         }
@@ -170,9 +177,10 @@ public class BossAi : MonoBehaviour
     int GetRandomAttackMode()
     {
         // if (BossHP >= 60)
-        // return Random.Range(1,5)
+        // return Random.Range(1,5);
         // else if (BossHp < 60)
-        return Random.Range(1, 4);
+        // return Random.Range(1,4);
+        return Random.Range(1, 5);
     }
 
     public Vector3 GetRandomLocationForEnemy()
@@ -188,8 +196,6 @@ public class BossAi : MonoBehaviour
                 x = Random.Range(transform.position.x - Mode1Range, transform.position.x + Mode1Range);
                 z = Random.Range(transform.position.z - Mode1Range, transform.position.z + Mode1Range);
             }
-
-
         }
 
         RandomLocation = new Vector3(x, y, z);
@@ -361,36 +367,7 @@ public class BossAi : MonoBehaviour
     {
         return Random.Range(0, 3);
     }
-
-    //public Vector3 GetRandomLocationForTrap()
-    //{
-    //    for (int i = 0; i < players.Length; i++)
-    //    {
-    //        if (i == 0)
-    //        {
-    //            x = players[i].transform.position.x;
-    //            y = 10;
-    //            z = players[i].transform.position.z;
-    //        }
-    //        else
-    //        {
-    //            x = players[i].transform.position.x;
-    //            y = 10;
-    //            z = players[i].transform.position.z;
-    //        }
-
-    //    }
-
-    //    RandomLocation = new Vector3(x, y, z);
-
-    //    //x = Random.Range(transform.position.x - Mode3Range, transform.position.x + Mode3Range);
-    //    //y = 10;
-    //    //z = Random.Range(transform.position.z - Mode3Range, transform.position.z + Mode3Range);
-    //    //TrapLocation = new Vector3(x, 0.1f, z);
-    //    //transform.position = SpawnEnemyLocation;
-    //    return RandomLocation;
-    //}
-
+    
     public Vector3 GetPlayersLocationForTrap1()
     {
         x = players[0].transform.position.x;
@@ -487,8 +464,6 @@ public class BossAi : MonoBehaviour
 
                 timer = Mode3TrapSpawnTime;
             }
-            //trap = (GameObject)Instantiate(trapPrefab, GetRandomLocationForTrap(), transform.rotation);
-            //timer = Mode3TrapSpawnTime;
         }
     }
 

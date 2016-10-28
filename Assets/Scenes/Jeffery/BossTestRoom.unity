@@ -1301,11 +1301,19 @@ Prefab:
       objectReference: {fileID: 187356, guid: 0b721afdc3e777e40b9f45a5fd947bba, type: 2}
     - target: {fileID: 11464212, guid: bb357c33b7ba83c4686b1b253e07a0e2, type: 2}
       propertyPath: Mode3TrapSpawnTime
-      value: 1.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11479848, guid: bb357c33b7ba83c4686b1b253e07a0e2, type: 2}
       propertyPath: m_EnemyHealth
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 11485530, guid: bb357c33b7ba83c4686b1b253e07a0e2, type: 2}
+      propertyPath: BossRunAwaySpeed
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 11485530, guid: bb357c33b7ba83c4686b1b253e07a0e2, type: 2}
+      propertyPath: BossChaseSpeed
+      value: 0.001
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bb357c33b7ba83c4686b1b253e07a0e2, type: 2}
@@ -18416,8 +18424,9 @@ MonoBehaviour:
   m_AttackSpeed: 0
   m_Gold: 0
   m_WeaponID: 100
+  m_CheckLocationCooldown: 0
+  m_Location: {x: 0, y: 0, z: 0}
   m_LastLocation: {x: 0, y: 0, z: 0}
-  delay: 2
   m_PrimaryAttack: Primary_P1
   m_SecondaryAttack: Secondary_P1
   m_Interact: Interact_P1
@@ -18425,6 +18434,7 @@ MonoBehaviour:
   m_Stats: Stats_P1
   m_Pause: Swap
   m_UsingKeyboard: 1
+  delay: 2
 --- !u!114 &980327507
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18453,7 +18463,7 @@ MonoBehaviour:
   m_VerticalButton: JoystickLeftY_P1
   m_HorizontalRotationButton: JoystickRightX_P1
   m_VerticalRotationButton: JoystickRightY_P1
-  m_UsingKeyboard: 0
+  m_UsingKeyboard: 1
 --- !u!23 &980327508
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -22185,6 +22195,7 @@ MonoBehaviour:
   dashDistance: 25
   dashDelay: 0.1
   smooth: 20
+  attack: 0
   triggerLife: 0.5
   swordTrigger: {fileID: 639832216}
 --- !u!23 &1200642690
