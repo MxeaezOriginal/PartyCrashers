@@ -152,10 +152,10 @@ public class Player : MonoBehaviour
         {
             GetComponent<Stats>().ToggleWindow();
         }
-        if (Input.GetButtonUp(m_Stats))
-        {
-            GetComponent<Stats>().ToggleWindow();
-        }
+        //if (Input.GetButtonUp(m_Stats))
+        //{
+        //    GetComponent<Stats>().ToggleWindow();
+        //}
     }
 
     void updateWeapon()
