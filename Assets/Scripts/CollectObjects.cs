@@ -24,8 +24,6 @@ public class CollectObjects : MonoBehaviour
         if (collectible != null)
         {
             player.m_Gold += collectible.score;
-            
-            HUD.Instance.AdjustScore(collectible.score);
 
             if(partyBar != null)
             {

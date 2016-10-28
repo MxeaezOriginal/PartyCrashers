@@ -25,6 +25,7 @@ public class Player : MonoBehaviour
     public PLAYER m_Player;
     public float m_AttackSpeed;
     public int m_Gold;
+	public int m_Score;
     //public int m_Health;
     //public int m_MaxHealth;
     //public int m_Collect;
@@ -57,6 +58,9 @@ public class Player : MonoBehaviour
     private string m_StatsSave;
     private string m_PauseSave;
     public float delay = 2.0f;
+
+    //float m_LastShotTime;
+    //public float DamageInterval = 2f;
 
     // Cooldown tracker for grabbing current location
     private float m_CurrentCooldown;
@@ -152,10 +156,10 @@ public class Player : MonoBehaviour
         {
             GetComponent<Stats>().ToggleWindow();
         }
-        if (Input.GetButtonUp(m_Stats))
-        {
-            GetComponent<Stats>().ToggleWindow();
-        }
+        //if (Input.GetButtonUp(m_Stats))
+        //{
+        //    GetComponent<Stats>().ToggleWindow();
+        //}
     }
 
     void updateWeapon()
@@ -234,6 +238,7 @@ public class Player : MonoBehaviour
                 GameManager.m_Instance.m_Player1.name = m_PlayerName;
                 GameManager.m_Instance.m_Player1.player = m_Player;
                 GameManager.m_Instance.m_Player1.attackSpeed = m_AttackSpeed;
+                m_Score = GameManager.m_Instance.m_Player1.score;
                 GameManager.m_Instance.m_Player1.gold = m_Gold;
                 //GameManager.m_Instance.m_Player1.health = m_Health;
                 //GameManager.m_Instance.m_Player1.maxHealth = m_MaxHealth;
@@ -244,6 +249,7 @@ public class Player : MonoBehaviour
                 GameManager.m_Instance.m_Player2.name = m_PlayerName;
                 GameManager.m_Instance.m_Player2.player = m_Player;
                 GameManager.m_Instance.m_Player2.attackSpeed = m_AttackSpeed;
+                m_Score = GameManager.m_Instance.m_Player2.score;
                 GameManager.m_Instance.m_Player2.gold = m_Gold;
                 //GameManager.m_Instance.m_Player2.health = m_Health;
                 //GameManager.m_Instance.m_Player2.maxHealth = m_MaxHealth;
@@ -254,6 +260,7 @@ public class Player : MonoBehaviour
                 GameManager.m_Instance.m_Player3.name = m_PlayerName;
                 GameManager.m_Instance.m_Player3.player = m_Player;
                 GameManager.m_Instance.m_Player3.attackSpeed = m_AttackSpeed;
+                m_Score = GameManager.m_Instance.m_Player3.score;
                 GameManager.m_Instance.m_Player3.gold = m_Gold;
                 //GameManager.m_Instance.m_Player3.health = m_Health;
                 //GameManager.m_Instance.m_Player3.maxHealth = m_MaxHealth;
@@ -264,6 +271,7 @@ public class Player : MonoBehaviour
                 GameManager.m_Instance.m_Player4.name = m_PlayerName;
                 GameManager.m_Instance.m_Player4.player = m_Player;
                 GameManager.m_Instance.m_Player4.attackSpeed = m_AttackSpeed;
+                m_Score = GameManager.m_Instance.m_Player4.score;
                 GameManager.m_Instance.m_Player4.gold = m_Gold;
                 //GameManager.m_Instance.m_Player4.health = m_Health;
                 //GameManager.m_Instance.m_Player4.maxHealth = m_MaxHealth;
@@ -281,6 +289,7 @@ public class Player : MonoBehaviour
                 m_PlayerName = GameManager.m_Instance.m_Player1.name;
                 m_Player = GameManager.m_Instance.m_Player1.player;
                 m_AttackSpeed = GameManager.m_Instance.m_Player1.attackSpeed;
+                m_Score = GameManager.m_Instance.m_Player1.score;
                 m_Gold = GameManager.m_Instance.m_Player1.gold;
                 //m_Health = GameManager.m_Instance.m_Player1.health;
                 //m_MaxHealth = GameManager.m_Instance.m_Player1.maxHealth;
@@ -291,6 +300,7 @@ public class Player : MonoBehaviour
                 m_PlayerName = GameManager.m_Instance.m_Player2.name;
                 m_Player = GameManager.m_Instance.m_Player2.player;
                 m_AttackSpeed = GameManager.m_Instance.m_Player2.attackSpeed;
+                m_Score = GameManager.m_Instance.m_Player2.score;
                 m_Gold = GameManager.m_Instance.m_Player2.gold;
                 //m_Health = GameManager.m_Instance.m_Player2.health;
                 //m_MaxHealth = GameManager.m_Instance.m_Player2.maxHealth;
@@ -301,6 +311,7 @@ public class Player : MonoBehaviour
                 m_PlayerName = GameManager.m_Instance.m_Player3.name;
                 m_Player = GameManager.m_Instance.m_Player3.player;
                 m_AttackSpeed = GameManager.m_Instance.m_Player3.attackSpeed;
+                m_Score = GameManager.m_Instance.m_Player3.score;
                 m_Gold = GameManager.m_Instance.m_Player3.gold;
                 //m_Health = GameManager.m_Instance.m_Player3.health;
                 //m_MaxHealth = GameManager.m_Instance.m_Player3.maxHealth;
@@ -311,6 +322,7 @@ public class Player : MonoBehaviour
                 m_PlayerName = GameManager.m_Instance.m_Player4.name;
                 m_Player = GameManager.m_Instance.m_Player4.player;
                 m_AttackSpeed = GameManager.m_Instance.m_Player4.attackSpeed;
+                m_Score = GameManager.m_Instance.m_Player4.score;
                 m_Gold = GameManager.m_Instance.m_Player4.gold;
                 //m_Health = GameManager.m_Instance.m_Player4.health;
                 //m_MaxHealth = GameManager.m_Instance.m_Player4.maxHealth;
@@ -343,22 +355,6 @@ public class Player : MonoBehaviour
             m_Heart.TakeDamage(1);
             Destroy(other.gameObject);
         }
-		if (other.gameObject.CompareTag("MeleeEnemy"))
-		{
-			/*m_Heart.lastDamage += Time.deltaTime;
-            if (m_Heart.lastDamage >= 2)
-            {
-                m_Heart.TakeDamage(2);
-                m_Heart.lastDamage = 0;
-            }*/
-			m_Heart.TakeDamage (1);
-			m_Heart.UpdateHearts ();
-
-		}
-    }
-
-    void OnCollisionEnter(Collision other)
-    {
         if (other.gameObject.CompareTag("MeleeEnemy"))
         {
             /*m_Heart.lastDamage += Time.deltaTime;
@@ -367,9 +363,48 @@ public class Player : MonoBehaviour
                 m_Heart.TakeDamage(2);
                 m_Heart.lastDamage = 0;
             }*/
-			m_Heart.TakeDamage (1);
-			m_Heart.UpdateHearts ();
+            m_Heart.TakeDamage(1);
+            m_Heart.UpdateHearts();
 
+        }
+        if (other.gameObject.CompareTag("AddHeart"))
+        {
+            m_Heart.AddHeart();
+            m_Heart.Heal(2);
+            m_Heart.UpdateHearts();
+        }
+    }
+
+    void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.CompareTag("OneDamage"))
+        {
+            m_Heart.TakeDamage(1);
+            m_Heart.UpdateHearts();
+        }
+        if (other.gameObject.CompareTag("TwoDamage"))
+        {
+            m_Heart.TakeDamage(2);
+            m_Heart.UpdateHearts();
+        }
+        //if (other.gameObject.CompareTag("ChaserEnemy"))
+        //{
+        //    m_Heart.TakeDamage(1);
+        //    m_Heart.UpdateHearts();
+        //}
+    }
+
+    void OnCollisionStay(Collision other)
+    {
+        if (other.gameObject.CompareTag("MeleeEnemy"))
+        {
+            m_Heart.lastDamage += Time.deltaTime;
+            if (m_Heart.lastDamage >= 2)
+            {
+                m_Heart.TakeDamage(1);
+                m_Heart.UpdateHearts();
+                m_Heart.lastDamage = 0;
+            }
         }
     }
 

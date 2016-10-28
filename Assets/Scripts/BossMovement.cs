@@ -7,9 +7,10 @@ public class BossMovement : MonoBehaviour {
     public float StartPosX = 0;
     public float StartPosY = 1;
     public float StartPosZ = 100;
-    public float RunAwayDistance = 5;
-    public float ChaseDistance = 10;
-    public float StayDistance = 20;
+    public float RunAwayDistance = 5f;
+    public float ChaseDistance = 10f;
+    public float StayDistance = 15f;
+    public float AttackDistance = 20f;
     public float m_Distance;
     public float BossRunAwaySpeed = 0.01f;
     public float BossChaseSpeed = 0.005f;
@@ -17,7 +18,8 @@ public class BossMovement : MonoBehaviour {
     public Vector3 StartPos;
 
     Vector3 MoveBackward;
-    public Vector3 Flee;
+    Vector3 Flee;
+
 	// Use this for initialization
 	void Start () {
         StartPos = new Vector3(StartPosX, StartPosY, StartPosZ);

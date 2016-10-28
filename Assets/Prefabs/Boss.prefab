@@ -394,23 +394,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6ab906bd3d718d4099ec4a3e89caf59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 128216, guid: ff6906de941c1804e9e04da544397b94, type: 2}
+  GodRadius: 3
+  enemyPrefab: {fileID: 116792, guid: fd8eff308a4a0424798e4f65ac7fe3ab, type: 2}
   trapPrefab: {fileID: 187356, guid: 0b721afdc3e777e40b9f45a5fd947bba, type: 2}
-  trapLoc: {fileID: 193470, guid: 51186418c5113c34b8c7e60a116af739, type: 2}
-  trap: {fileID: 187356, guid: 0b721afdc3e777e40b9f45a5fd947bba, type: 2}
-  timer: 0
-  CountDownBeforeAttack: 10
-  AttackCoolDown: 5
-  AttackTime: 10
-  Mode1EnemySpawnTime: 2
-  Mode1Range: 10
-  Mode2BossSpin: {x: 0, y: 100, z: 0}
-  Mode2ReloadTime: 0.5
-  Mode2MaxBullet: 10
-  Mode2FireInterval: 0.05
-  Mode3TrapSpawnTime: 2
-  Mode3Range: 10
-  m_Bullet: 0
+  trapLoc1: {fileID: 193470, guid: 51186418c5113c34b8c7e60a116af739, type: 2}
+  trapLoc2: {fileID: 193470, guid: 51186418c5113c34b8c7e60a116af739, type: 2}
+  trapLoc3: {fileID: 193470, guid: 51186418c5113c34b8c7e60a116af739, type: 2}
+  trapLoc4: {fileID: 193470, guid: 51186418c5113c34b8c7e60a116af739, type: 2}
+  trap1: {fileID: 187356, guid: 0b721afdc3e777e40b9f45a5fd947bba, type: 2}
+  trap2: {fileID: 187356, guid: 0b721afdc3e777e40b9f45a5fd947bba, type: 2}
+  trap3: {fileID: 187356, guid: 0b721afdc3e777e40b9f45a5fd947bba, type: 2}
+  trap4: {fileID: 187356, guid: 0b721afdc3e777e40b9f45a5fd947bba, type: 2}
   ShotPrefab: {fileID: 145818, guid: 136f6b85049c12d45854cdfc62d4fd0a, type: 2}
   ShotLocation1: {fileID: 426824}
   ShotLocation2: {fileID: 494112}
@@ -420,6 +414,20 @@ MonoBehaviour:
   ShotLocation6: {fileID: 440788}
   ShotLocation7: {fileID: 422592}
   ShotLocation8: {fileID: 466524}
+  timer: 0
+  AttackCoolDown: 5
+  AttackTime: 10
+  Mode1EnemySpawnTime: 2
+  Mode1Range: 10
+  Mode2BossSpin: {x: 0, y: 100, z: 0}
+  Mode2ReloadTime: 3.5
+  Mode2MaxBullet: 10
+  Mode2FireInterval: 0.1
+  BossShootCounter: 4
+  BossShootInterval: 3
+  m_Bullet: 0
+  Mode3TrapSpawnTime: 2
+  Mode3Range: 10
 --- !u!114 &11479848
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -431,7 +439,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fe10f3a9b1fc73469935b46d1f7b400, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EnemyHealth: 1000
+  m_EnemyHealth: 250
   m_PartyBarAmount: 2
   coin: {fileID: 0}
 --- !u!114 &11485530
@@ -448,9 +456,14 @@ MonoBehaviour:
   StartPosX: 0
   StartPosY: 1
   StartPosZ: 3
-  RunAwayDistance: 10
+  RunAwayDistance: 5
+  ChaseDistance: 10
+  StayDistance: 15
+  AttackDistance: 20
   m_Distance: 0
-  BossMoveSpeed: 0.5
+  BossRunAwaySpeed: 0.01
+  BossChaseSpeed: 0.001
+  StartPos: {x: 0, y: 0, z: 0}
 --- !u!136 &13616852
 CapsuleCollider:
   m_ObjectHideFlags: 1

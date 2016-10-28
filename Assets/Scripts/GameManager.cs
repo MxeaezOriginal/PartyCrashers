@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour {
         public Player.PLAYER player;
         public float attackSpeed;
         public int gold;
+        public int score;
         public int health;
         public int maxHealth;
         public WEAPONTYPE weaponID;
