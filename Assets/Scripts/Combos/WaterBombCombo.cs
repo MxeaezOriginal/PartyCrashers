@@ -22,6 +22,8 @@ public class WaterBombCombo : MonoBehaviour
         {
 
             Debug.Log("EXPLODE");
+            SphereCollider sc = GetComponent<SphereCollider>();
+            sc.enabled = true;
 
             GameObject explosion;
             explosion = (GameObject)Instantiate(explosionObject, objectSpawn.gameObject.transform.position, objectSpawn.gameObject.transform.rotation);
@@ -30,9 +32,6 @@ public class WaterBombCombo : MonoBehaviour
             GameObject effect;
             effect = (GameObject)Instantiate(effectObject, objectSpawn.gameObject.transform.position, objectSpawn.gameObject.transform.rotation);
             Destroy(effect, effectDelay);
-
-            Destroy(this.gameObject,balloonDelay);
-
 
         }
 
