@@ -59,6 +59,6 @@ public class PartyBarBoss : MonoBehaviour
         //int randomNumber = Random.Range(1, 3);
 
         GameManager.m_Instance.savePlayers();
-        SceneManager.LoadScene(5); //tutorial scene
+        SceneManager.LoadScene(1); //tutorial scene
     }
 }

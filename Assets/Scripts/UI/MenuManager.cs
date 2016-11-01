@@ -214,7 +214,7 @@ public class MenuManager : MonoBehaviour
         }
         if (playCanvas.activeSelf && Input.GetButtonDown("A_P1"))
         {
-            SceneManager.LoadScene(5); //tutorial scene
+            SceneManager.LoadScene(1); //tutorial scene
         }
     }
 }

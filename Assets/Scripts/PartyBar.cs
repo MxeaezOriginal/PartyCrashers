@@ -67,6 +67,6 @@ public class PartyBar : MonoBehaviour {
             }
         }
         GameManager.m_Instance.savePlayers();
-        SceneManager.LoadScene(6); //ballroom blitz
+        SceneManager.LoadScene(2); //ballroom blitz
     }
 }
