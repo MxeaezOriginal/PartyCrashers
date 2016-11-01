@@ -1,10 +1,11 @@
-﻿ using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
-public class GameManager : MonoBehaviour {
+public class GameManager : MonoBehaviour
+{
 
     public int amountOfPlayers;
     public struct PlayerStats
@@ -17,7 +18,7 @@ public class GameManager : MonoBehaviour {
         public int health;
         public int maxHealth;
         public WEAPONTYPE weaponID;
-        public Vector3 lastLocation; 
+        public Vector3 lastLocation;
     }
 
     public static GameManager m_Instance;
@@ -37,12 +38,14 @@ public class GameManager : MonoBehaviour {
     public List<string> m_TutorialEnemies;
     public string m_TutorialLevel = "CVG_Tut01";
 
-	// Use this for initialization
-	void Awake () {
+    // Use this for initialization
+    void Awake()
+    {
         if (m_Instance == null)
-        { 
+        {
             DontDestroyOnLoad(gameObject);
             m_Instance = this;
+            ActivateActivePlayers();
             GameManager.m_Instance.m_Players = GameObject.FindGameObjectsWithTag("Player");
             if (GameObject.FindGameObjectWithTag("Partybar") != null)
             {
@@ -54,21 +57,26 @@ public class GameManager : MonoBehaviour {
         }
         else
         {
+            ActivateActivePlayers();
             GameManager.m_Instance.m_Players = GameObject.FindGameObjectsWithTag("Player");
             if (GameObject.FindGameObjectWithTag("Partybar") != null)
             {
                 GameManager.m_Instance.m_PartyBarGame = GameObject.FindGameObjectWithTag("Partybar").GetComponent<PartyBar>();
             }
-            GameManager.m_Instance.loadPlayers();
+            if (GameManager.m_Instance.m_Player1.name != null)
+            {
+                GameManager.m_Instance.loadPlayers();
+            }
             FindHearts();
             FindStatsWindowAnimator();
 
             Destroy(gameObject);
         }
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update()
+    {
 
     }
 
@@ -83,6 +91,7 @@ public class GameManager : MonoBehaviour {
 
     public void loadPlayers()
     {
+        Debug.Log("Hey");
         for (int i = 0; i < GameManager.m_Instance.m_Players.Length; i++)
         {
             Player currentPlayer = GameManager.m_Instance.m_Players[i].GetComponent<Player>();
@@ -159,6 +168,36 @@ public class GameManager : MonoBehaviour {
                     hearts.heartImages[6] = GameObject.Find("Dungeon_HUD_Canvas/P4_Panel/HP bar/Heart 7").GetComponent<Image>();
                     break;
             }
+        }
+    }
+
+    void ActivateActivePlayers()
+    {
+        Debug.Log("1");
+        switch (m_Instance.m_NumOfPlayers)
+        {
+            case 1:
+                GameObject.Find("Players").transform.FindChild("P1").gameObject.SetActive(true);
+                Debug.Log("2");
+                break;
+            case 2:
+                GameObject.Find("Players").transform.FindChild("P1").gameObject.SetActive(true);
+                GameObject.Find("Players").transform.FindChild("P2").gameObject.SetActive(true);
+                Debug.Log("3");
+                break;
+            case 3:
+                GameObject.Find("Players").transform.FindChild("P1").gameObject.SetActive(true);
+                GameObject.Find("Players").transform.FindChild("P2").gameObject.SetActive(true);
+                GameObject.Find("Players").transform.FindChild("P3").gameObject.SetActive(true);
+                Debug.Log("4");
+                break;
+            case 4:
+                GameObject.Find("Players").transform.FindChild("P1").gameObject.SetActive(true);
+                GameObject.Find("Players").transform.FindChild("P2").gameObject.SetActive(true);
+                GameObject.Find("Players").transform.FindChild("P3").gameObject.SetActive(true);
+                GameObject.Find("Players").transform.FindChild("P4").gameObject.SetActive(true);
+                Debug.Log("5");
+                break;
         }
     }
 }
