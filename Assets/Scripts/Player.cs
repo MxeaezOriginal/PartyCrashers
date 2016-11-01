@@ -394,7 +394,7 @@ public class Player : MonoBehaviour
         //}
     }
 
-    void OnTriggerStay(Collision other)
+    void OnTriggerStay(Collider other)
     {
         if (other.gameObject.CompareTag("MeleeEnemy"))
         {
