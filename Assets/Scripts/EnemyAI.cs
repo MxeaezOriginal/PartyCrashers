@@ -62,12 +62,9 @@ public class EnemyAI : MonoBehaviour
 
     void chase()
     {
-        if (GameObject.FindGameObjectWithTag("Player") != null)
-        {
-            look(GameObject.FindGameObjectWithTag("Player").transform);
-            agent.SetDestination(target.transform.position);
-            agent.Resume();
-        }
+        look(GameObject.FindGameObjectWithTag("Player").transform);
+        agent.SetDestination(target.transform.position);
+        agent.Resume();
     }
 
     void returnToOrigin()

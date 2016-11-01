@@ -21,10 +21,7 @@ public class SpawnEnemy : MonoBehaviour
     void Update()
     {
         timer -= Time.deltaTime;
-        if (GameObject.FindWithTag("Player") != null)
-        {
-            range = Vector3.Distance(GameObject.FindWithTag("Player").transform.position, transform.position);
-        }
+        range = Vector3.Distance(GameObject.FindWithTag("Player").transform.position, transform.position);
         if (timer <= 0 && range <= activedRange)
         {
             //setActive = true;

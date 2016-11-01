@@ -78,7 +78,7 @@ public class Player : MonoBehaviour
         m_PauseSave = m_Pause;
 
         m_UsingKeyboardSave = !m_UsingKeyboard;
-        //Debug.Log(m_UsingKeyboardSave);
+        Debug.Log(m_UsingKeyboardSave);
     }
 
     // Update is called once per frame
