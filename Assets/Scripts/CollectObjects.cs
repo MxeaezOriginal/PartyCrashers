@@ -23,11 +23,11 @@ public class CollectObjects : MonoBehaviour
 
         if (collectible != null)
         {
-            player.m_Gold += collectible.score;
+            player.m_Gold += collectible.gold;
 
             if(partyBar != null)
             {
-                partyBar.m_Current += collectible.score;
+                partyBar.m_Current += collectible.gold;
             }
 
             if(collectible.type == Collectible.Type.Death)

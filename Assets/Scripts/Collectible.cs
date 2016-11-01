@@ -9,7 +9,7 @@ public class Collectible : MonoBehaviour
         Simple,
         Death
     }
-    public int score;
+    public int gold;
     public Type type;
 
 }

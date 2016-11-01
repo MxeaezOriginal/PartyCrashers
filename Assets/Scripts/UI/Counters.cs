@@ -24,20 +24,40 @@ public class Counters : MonoBehaviour {
 
 	void Update() 
 	{
-        //P1
-		scoreCounter[0].text = "" + GameManager.m_Instance.m_Player1.score;
-		goldCounter[0].text = "" + GameManager.m_Instance.m_Player1.gold;
-        //P2
-        scoreCounter[1].text = "" + GameManager.m_Instance.m_Player2.score;
-        goldCounter[1].text = "" + GameManager.m_Instance.m_Player2.gold;
-        //P3
-        scoreCounter[2].text = "" + GameManager.m_Instance.m_Player3.score;
-        goldCounter[2].text = "" + GameManager.m_Instance.m_Player3.gold;
-        //P4
-        scoreCounter[3].text = "" + GameManager.m_Instance.m_Player4.score;
-        goldCounter[3].text = "" + GameManager.m_Instance.m_Player4.gold;
 
-        if(Input.GetKeyDown(KeyCode.K))
+        for (int i = 0; i < GameManager.m_Instance.m_Players.Length; ++i)
+        {
+            Player player = GameManager.m_Instance.m_Players[i].GetComponent<Player>();
+            switch (player.m_Player)
+            {
+                case Player.PLAYER.P1:
+                    //P1
+                    scoreCounter[0].text = "" + player.m_Score;
+                    goldCounter[0].text = "" + player.m_Gold;
+                    break;
+                case Player.PLAYER.P2:
+                    //P2
+                    scoreCounter[1].text = "" + player.m_Score;
+                    goldCounter[1].text = "" + player.m_Gold;
+                    break;
+                case Player.PLAYER.P3:
+                    //P3
+                    scoreCounter[2].text = "" + player.m_Score;
+                    goldCounter[2].text = "" + player.m_Gold;
+                    break;
+                case Player.PLAYER.P4:
+                    //P4
+                    scoreCounter[3].text = "" + player.m_Score;
+                    goldCounter[3].text = "" + player.m_Gold;
+                    break;
+            }
+        }
+
+
+
+
+
+        if (Input.GetKeyDown(KeyCode.K))
         {
             GameManager.m_Instance.m_Player1.gold += 1000;
         }
