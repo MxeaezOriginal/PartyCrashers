@@ -45,14 +45,14 @@ public class HUDManager : MonoBehaviour
     void UpdateUIPanels()
     {
 
-        print(P1_StatsWindow.GetSiblingIndex());
+        //print(P1_StatsWindow.GetSiblingIndex());
 
         if (GameManager.m_Instance.m_Players.Length == 1)
         {
             P2_Panel.SetActive(false);
             P3_Panel.SetActive(false);
             P4_Panel.SetActive(false);
-            print("1");
+            //print("1");
 
             P1_PanelTransform.anchoredPosition = new Vector2(0, 30);
             //StatsWindow(s)
