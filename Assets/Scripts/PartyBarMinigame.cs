@@ -42,7 +42,7 @@ public class PartyBarBoss : MonoBehaviour
 
             if (m_TempTimer <= Time.time - 1f)
             {
-                m_Current -= 10;
+                m_Current -= 1;
                 m_TempTimer = Time.time;
             }
 

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class MiniGameHUDManager : MonoBehaviour
 {
 
-    public Text[] scoreCounter;
+    public Text[] scoreCounter = new Text[4];
 
     public float score;
     public float remainingSeconds;
