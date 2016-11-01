@@ -14,10 +14,10 @@ public class RewardManager : MonoBehaviour {
 
     public Text m_PickRewardText;
 
-    public Player.PLAYER m_First;
-    public Player.PLAYER m_Second;
-    public Player.PLAYER m_Third;
-    public Player.PLAYER m_Fourth;
+    public PlayerDetection m_First;
+    public PlayerDetection m_Second;
+    public PlayerDetection m_Third;
+    public PlayerDetection m_Fourth;
 
     private int m_PickCounter = 0;
 
@@ -28,10 +28,10 @@ public class RewardManager : MonoBehaviour {
         {
             DontDestroyOnLoad(gameObject);
             m_Instance = this;
-            m_First = Player.PLAYER.P1;
-            m_Second = Player.PLAYER.P2;
-            m_Third = Player.PLAYER.P3;
-            m_Fourth = Player.PLAYER.P4;
+            m_First = PlayerDetection.P1;
+            m_Second = PlayerDetection.P2;
+            m_Third = PlayerDetection.P3;
+            m_Fourth = PlayerDetection.P4;
 
             m_PickRewardText.text = "Choose reward: " + m_First.ToString();
 

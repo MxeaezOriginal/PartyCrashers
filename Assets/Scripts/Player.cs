@@ -12,17 +12,9 @@ public class Player : MonoBehaviour
         SECONDARY
     }
 
-    public enum PLAYER
-    {
-        P1 = 1,
-        P2 = 2,
-        P3 = 3,
-        P4 = 4
-    }
-
     // Player stats
     public string m_PlayerName;
-    public PLAYER m_Player;
+    public PlayerDetection m_Player;
     public float m_AttackSpeed;
     public int m_Gold;
 	public int m_Score;
@@ -234,7 +226,7 @@ public class Player : MonoBehaviour
     {
         switch (m_Player)
         {
-            case PLAYER.P1:
+            case PlayerDetection.P1:
                 GameManager.m_Instance.m_Player1.name = m_PlayerName;
                 GameManager.m_Instance.m_Player1.player = m_Player;
                 GameManager.m_Instance.m_Player1.attackSpeed = m_AttackSpeed;
@@ -245,7 +237,7 @@ public class Player : MonoBehaviour
                 GameManager.m_Instance.m_Player1.weaponID = m_WeaponID;
                 GameManager.m_Instance.m_Player1.lastLocation = m_LastLocation;
                 break;
-            case PLAYER.P2:
+            case PlayerDetection.P2:
                 GameManager.m_Instance.m_Player2.name = m_PlayerName;
                 GameManager.m_Instance.m_Player2.player = m_Player;
                 GameManager.m_Instance.m_Player2.attackSpeed = m_AttackSpeed;
@@ -256,7 +248,7 @@ public class Player : MonoBehaviour
                 GameManager.m_Instance.m_Player2.weaponID = m_WeaponID;
                 GameManager.m_Instance.m_Player2.lastLocation = m_LastLocation;
                 break;
-            case PLAYER.P3:
+            case PlayerDetection.P3:
                 GameManager.m_Instance.m_Player3.name = m_PlayerName;
                 GameManager.m_Instance.m_Player3.player = m_Player;
                 GameManager.m_Instance.m_Player3.attackSpeed = m_AttackSpeed;
@@ -267,7 +259,7 @@ public class Player : MonoBehaviour
                 GameManager.m_Instance.m_Player3.weaponID = m_WeaponID;
                 GameManager.m_Instance.m_Player3.lastLocation = m_LastLocation;
                 break;
-            case PLAYER.P4:
+            case PlayerDetection.P4:
                 GameManager.m_Instance.m_Player4.name = m_PlayerName;
                 GameManager.m_Instance.m_Player4.player = m_Player;
                 GameManager.m_Instance.m_Player4.attackSpeed = m_AttackSpeed;
@@ -285,7 +277,7 @@ public class Player : MonoBehaviour
     {
         switch (m_Player)
         {
-            case PLAYER.P1:
+            case PlayerDetection.P1:
                 m_PlayerName = GameManager.m_Instance.m_Player1.name;
                 m_Player = GameManager.m_Instance.m_Player1.player;
                 m_AttackSpeed = GameManager.m_Instance.m_Player1.attackSpeed;
@@ -296,7 +288,7 @@ public class Player : MonoBehaviour
                 m_WeaponID = GameManager.m_Instance.m_Player1.weaponID;
                 m_LastLocation = GameManager.m_Instance.m_Player1.lastLocation;
                 break;
-            case PLAYER.P2:
+            case PlayerDetection.P2:
                 m_PlayerName = GameManager.m_Instance.m_Player2.name;
                 m_Player = GameManager.m_Instance.m_Player2.player;
                 m_AttackSpeed = GameManager.m_Instance.m_Player2.attackSpeed;
@@ -307,7 +299,7 @@ public class Player : MonoBehaviour
                 m_WeaponID = GameManager.m_Instance.m_Player2.weaponID;
                 m_LastLocation = GameManager.m_Instance.m_Player2.lastLocation;
                 break;
-            case PLAYER.P3:
+            case PlayerDetection.P3:
                 m_PlayerName = GameManager.m_Instance.m_Player3.name;
                 m_Player = GameManager.m_Instance.m_Player3.player;
                 m_AttackSpeed = GameManager.m_Instance.m_Player3.attackSpeed;
@@ -318,7 +310,7 @@ public class Player : MonoBehaviour
                 m_WeaponID = GameManager.m_Instance.m_Player3.weaponID;
                 m_LastLocation = GameManager.m_Instance.m_Player3.lastLocation;
                 break;
-            case PLAYER.P4:
+            case PlayerDetection.P4:
                 m_PlayerName = GameManager.m_Instance.m_Player4.name;
                 m_Player = GameManager.m_Instance.m_Player4.player;
                 m_AttackSpeed = GameManager.m_Instance.m_Player4.attackSpeed;

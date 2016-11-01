@@ -15,16 +15,16 @@ public class TutorialManager : MonoBehaviour {
                 Player player = p.GetComponent<Player>();
                 switch (player.m_Player)
                 {
-                    case Player.PLAYER.P1:
+                    case PlayerDetection.P1:
                         p.transform.position = GameManager.m_Instance.m_Player1.lastLocation;
                         break;
-                    case Player.PLAYER.P2:
+                    case PlayerDetection.P2:
                         p.transform.position = GameManager.m_Instance.m_Player2.lastLocation;
                         break;
-                    case Player.PLAYER.P3:
+                    case PlayerDetection.P3:
                         p.transform.position = GameManager.m_Instance.m_Player3.lastLocation;
                         break;
-                    case Player.PLAYER.P4:
+                    case PlayerDetection.P4:
                         p.transform.position = GameManager.m_Instance.m_Player4.lastLocation;
                         break;
                 }

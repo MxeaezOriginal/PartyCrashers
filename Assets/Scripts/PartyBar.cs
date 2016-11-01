@@ -52,16 +52,16 @@ public class PartyBar : MonoBehaviour {
             Player player = p.GetComponent<Player>();
             switch(player.m_Player)
             {
-                case Player.PLAYER.P1:
+                case PlayerDetection.P1:
                     player.m_LastLocation = p.transform.position;
                     break;
-                case Player.PLAYER.P2:
+                case PlayerDetection.P2:
                     player.m_LastLocation = p.transform.position;
                     break;
-                case Player.PLAYER.P3:
+                case PlayerDetection.P3:
                     player.m_LastLocation = p.transform.position;
                     break;
-                case Player.PLAYER.P4:
+                case PlayerDetection.P4:
                     player.m_LastLocation = p.transform.position;
                     break;
             }

@@ -1,4 +1,4 @@
-﻿ using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.Collections;
@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour {
     public struct PlayerStats
     {
         public string name;
-        public Player.PLAYER player;
+        public PlayerDetection player;
         public float attackSpeed;
         public int gold;
         public int score;
@@ -97,16 +97,16 @@ public class GameManager : MonoBehaviour {
             Stats stats = player.GetComponent<Stats>();
             switch (player.m_Player)
             {
-                case Player.PLAYER.P1:
+                case PlayerDetection.P1:
                     stats.anim = GameObject.Find("Dungeon_HUD_Canvas/P1_Panel/Stats").GetComponent<Animator>();
                     break;
-                case Player.PLAYER.P2:
+                case PlayerDetection.P2:
                     stats.anim = GameObject.Find("Dungeon_HUD_Canvas/P2_Panel/Stats").GetComponent<Animator>();
                     break;
-                case Player.PLAYER.P3:
+                case PlayerDetection.P3:
                     stats.anim = GameObject.Find("Dungeon_HUD_Canvas/P3_Panel/Stats").GetComponent<Animator>();
                     break;
-                case Player.PLAYER.P4:
+                case PlayerDetection.P4:
                     stats.anim = GameObject.Find("Dungeon_HUD_Canvas/P4_Panel/Stats").GetComponent<Animator>();
                     break;
             }
@@ -121,7 +121,7 @@ public class GameManager : MonoBehaviour {
             HeartSystem hearts = player.GetComponent<HeartSystem>();
             switch (player.m_Player)
             {
-                case Player.PLAYER.P1:
+                case PlayerDetection.P1:
                     hearts.heartImages[0] = GameObject.Find("Dungeon_HUD_Canvas/P1_Panel/HP bar/Heart 1").GetComponent<Image>();
                     hearts.heartImages[1] = GameObject.Find("Dungeon_HUD_Canvas/P1_Panel/HP bar/Heart 2").GetComponent<Image>();
                     hearts.heartImages[2] = GameObject.Find("Dungeon_HUD_Canvas/P1_Panel/HP bar/Heart 3").GetComponent<Image>();
@@ -130,7 +130,7 @@ public class GameManager : MonoBehaviour {
                     hearts.heartImages[5] = GameObject.Find("Dungeon_HUD_Canvas/P1_Panel/HP bar/Heart 6").GetComponent<Image>();
                     hearts.heartImages[6] = GameObject.Find("Dungeon_HUD_Canvas/P1_Panel/HP bar/Heart 7").GetComponent<Image>();
                     break;
-                case Player.PLAYER.P2:
+                case PlayerDetection.P2:
                     hearts.heartImages[0] = GameObject.Find("Dungeon_HUD_Canvas/P2_Panel/HP bar/Heart 1").GetComponent<Image>();
                     hearts.heartImages[1] = GameObject.Find("Dungeon_HUD_Canvas/P2_Panel/HP bar/Heart 2").GetComponent<Image>();
                     hearts.heartImages[2] = GameObject.Find("Dungeon_HUD_Canvas/P2_Panel/HP bar/Heart 3").GetComponent<Image>();
@@ -139,7 +139,7 @@ public class GameManager : MonoBehaviour {
                     hearts.heartImages[5] = GameObject.Find("Dungeon_HUD_Canvas/P2_Panel/HP bar/Heart 6").GetComponent<Image>();
                     hearts.heartImages[6] = GameObject.Find("Dungeon_HUD_Canvas/P2_Panel/HP bar/Heart 7").GetComponent<Image>();
                     break;
-                case Player.PLAYER.P3:
+                case PlayerDetection.P3:
                     hearts.heartImages[0] = GameObject.Find("Dungeon_HUD_Canvas/P3_Panel/HP bar/Heart 1").GetComponent<Image>();
                     hearts.heartImages[1] = GameObject.Find("Dungeon_HUD_Canvas/P3_Panel/HP bar/Heart 2").GetComponent<Image>();
                     hearts.heartImages[2] = GameObject.Find("Dungeon_HUD_Canvas/P3_Panel/HP bar/Heart 3").GetComponent<Image>();
@@ -148,7 +148,7 @@ public class GameManager : MonoBehaviour {
                     hearts.heartImages[5] = GameObject.Find("Dungeon_HUD_Canvas/P3_Panel/HP bar/Heart 6").GetComponent<Image>();
                     hearts.heartImages[6] = GameObject.Find("Dungeon_HUD_Canvas/P3_Panel/HP bar/Heart 7").GetComponent<Image>();
                     break;
-                case Player.PLAYER.P4:
+                case PlayerDetection.P4:
                     hearts.heartImages[0] = GameObject.Find("Dungeon_HUD_Canvas/P4_Panel/HP bar/Heart 1").GetComponent<Image>();
                     hearts.heartImages[1] = GameObject.Find("Dungeon_HUD_Canvas/P4_Panel/HP bar/Heart 2").GetComponent<Image>();
                     hearts.heartImages[2] = GameObject.Find("Dungeon_HUD_Canvas/P4_Panel/HP bar/Heart 3").GetComponent<Image>();

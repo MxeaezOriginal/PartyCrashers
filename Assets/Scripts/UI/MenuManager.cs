@@ -194,7 +194,15 @@ public class MenuManager : MonoBehaviour
 
     private void PlayerSelect()
     {
-        if (playCanvas.activeSelf && Input.GetButtonDown("Jump_P1")) 
+        if (playCanvas.activeSelf && Input.GetButtonDown("A_P2") || GameManager.m_Instance.m_NumOfPlayers == 1) 
+        {
+
+        }
+        if (playCanvas.activeSelf && Input.GetButtonDown("A_P3") || GameManager.m_Instance.m_NumOfPlayers == 2)
+        {
+
+        }
+        if (playCanvas.activeSelf && Input.GetButtonDown("A_P4") || GameManager.m_Instance.m_NumOfPlayers == 3)
         {
 
         }
