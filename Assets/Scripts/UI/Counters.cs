@@ -9,6 +9,37 @@ public class Counters : MonoBehaviour {
 
 	void Start() 
 	{
+        if (GameManager.m_Instance.m_Players.Length == 1)
+        {
+            //Score
+            scoreCounter[0] = GameObject.Find("Dungeon_HUD_Canvas/P1_Panel/P1 Score").GetComponent<Text>();
+            //Gold
+            goldCounter[0] = GameObject.Find("Dungeon_HUD_Canvas/P1_Panel/P1 Gold").GetComponent<Text>();
+        }
+        if (GameManager.m_Instance.m_Players.Length == 2)
+        {
+            //Score
+            scoreCounter[0] = GameObject.Find("Dungeon_HUD_Canvas/P1_Panel/P1 Score").GetComponent<Text>();
+            scoreCounter[1] = GameObject.Find("Dungeon_HUD_Canvas/P2_Panel/P2 Score").GetComponent<Text>();
+
+            //Gold
+            goldCounter[0] = GameObject.Find("Dungeon_HUD_Canvas/P1_Panel/P1 Gold").GetComponent<Text>();
+            goldCounter[1] = GameObject.Find("Dungeon_HUD_Canvas/P2_Panel/P2 Gold").GetComponent<Text>();
+        }
+        if (GameManager.m_Instance.m_Players.Length == 3)
+        {
+            //Score
+            scoreCounter[0] = GameObject.Find("Dungeon_HUD_Canvas/P1_Panel/P1 Score").GetComponent<Text>();
+            scoreCounter[1] = GameObject.Find("Dungeon_HUD_Canvas/P2_Panel/P2 Score").GetComponent<Text>();
+            scoreCounter[2] = GameObject.Find("Dungeon_HUD_Canvas/P3_Panel/P3 Score").GetComponent<Text>();
+
+            //Gold
+            goldCounter[0] = GameObject.Find("Dungeon_HUD_Canvas/P1_Panel/P1 Gold").GetComponent<Text>();
+            goldCounter[1] = GameObject.Find("Dungeon_HUD_Canvas/P2_Panel/P2 Gold").GetComponent<Text>();
+            goldCounter[2] = GameObject.Find("Dungeon_HUD_Canvas/P3_Panel/P3 Gold").GetComponent<Text>();
+        }
+        if (GameManager.m_Instance.m_Players.Length == 4)
+        {
             //Score
             scoreCounter[0] = GameObject.Find("Dungeon_HUD_Canvas/P1_Panel/P1 Score").GetComponent<Text>();
             scoreCounter[1] = GameObject.Find("Dungeon_HUD_Canvas/P2_Panel/P2 Score").GetComponent<Text>();
@@ -20,7 +51,8 @@ public class Counters : MonoBehaviour {
             goldCounter[1] = GameObject.Find("Dungeon_HUD_Canvas/P2_Panel/P2 Gold").GetComponent<Text>();
             goldCounter[2] = GameObject.Find("Dungeon_HUD_Canvas/P3_Panel/P3 Gold").GetComponent<Text>();
             goldCounter[3] = GameObject.Find("Dungeon_HUD_Canvas/P4_Panel/P4 Gold").GetComponent<Text>();
-	}
+        }
+    }
 
 	void Update() 
 	{
