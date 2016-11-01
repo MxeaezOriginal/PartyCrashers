@@ -50,6 +50,7 @@ public class GameManager : MonoBehaviour {
             }
             FindHearts();
             FindStatsWindowAnimator();
+            m_NumOfPlayers = 1;
         }
         else
         {
