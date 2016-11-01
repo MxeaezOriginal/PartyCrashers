@@ -238,7 +238,7 @@ public class Player : MonoBehaviour
                 GameManager.m_Instance.m_Player1.name = m_PlayerName;
                 GameManager.m_Instance.m_Player1.player = m_Player;
                 GameManager.m_Instance.m_Player1.attackSpeed = m_AttackSpeed;
-                m_Score = GameManager.m_Instance.m_Player1.score;
+                GameManager.m_Instance.m_Player1.score = m_Score;
                 GameManager.m_Instance.m_Player1.gold = m_Gold;
                 //GameManager.m_Instance.m_Player1.health = m_Health;
                 //GameManager.m_Instance.m_Player1.maxHealth = m_MaxHealth;
@@ -249,7 +249,7 @@ public class Player : MonoBehaviour
                 GameManager.m_Instance.m_Player2.name = m_PlayerName;
                 GameManager.m_Instance.m_Player2.player = m_Player;
                 GameManager.m_Instance.m_Player2.attackSpeed = m_AttackSpeed;
-                m_Score = GameManager.m_Instance.m_Player2.score;
+                GameManager.m_Instance.m_Player2.score = m_Score;
                 GameManager.m_Instance.m_Player2.gold = m_Gold;
                 //GameManager.m_Instance.m_Player2.health = m_Health;
                 //GameManager.m_Instance.m_Player2.maxHealth = m_MaxHealth;
@@ -260,7 +260,7 @@ public class Player : MonoBehaviour
                 GameManager.m_Instance.m_Player3.name = m_PlayerName;
                 GameManager.m_Instance.m_Player3.player = m_Player;
                 GameManager.m_Instance.m_Player3.attackSpeed = m_AttackSpeed;
-                m_Score = GameManager.m_Instance.m_Player3.score;
+                GameManager.m_Instance.m_Player3.score = m_Score;
                 GameManager.m_Instance.m_Player3.gold = m_Gold;
                 //GameManager.m_Instance.m_Player3.health = m_Health;
                 //GameManager.m_Instance.m_Player3.maxHealth = m_MaxHealth;
@@ -271,7 +271,7 @@ public class Player : MonoBehaviour
                 GameManager.m_Instance.m_Player4.name = m_PlayerName;
                 GameManager.m_Instance.m_Player4.player = m_Player;
                 GameManager.m_Instance.m_Player4.attackSpeed = m_AttackSpeed;
-                m_Score = GameManager.m_Instance.m_Player4.score;
+                GameManager.m_Instance.m_Player4.score = m_Score;
                 GameManager.m_Instance.m_Player4.gold = m_Gold;
                 //GameManager.m_Instance.m_Player4.health = m_Health;
                 //GameManager.m_Instance.m_Player4.maxHealth = m_MaxHealth;

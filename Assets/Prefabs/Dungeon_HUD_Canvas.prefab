@@ -1079,6 +1079,7 @@ GameObject:
   - 114: {fileID: 11445444}
   - 114: {fileID: 11433306}
   - 114: {fileID: 11473060}
+  - 114: {fileID: 11432144}
   m_Layer: 0
   m_Name: Dungeon_HUD_Canvas
   m_TagString: Untagged
@@ -2827,6 +2828,27 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &11432144
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 150520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0082725b2a830fb40801856d2f1eea26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreCounter:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  goldCounter:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &11432244
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4559,9 +4581,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1acba1d11a02873459dca3ddb342a957, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Max: 25
+  m_Max: 2500
   m_Current: 0
-  m_Active: 0
+  m_Active: 1
 --- !u!114 &11479306
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5040,6 +5062,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Max: 100
   m_Current: 100
+  m_Cooldown: 1
+  m_ReduceBy: 1
   m_Active: 1
 --- !u!114 &11496746
 MonoBehaviour:
