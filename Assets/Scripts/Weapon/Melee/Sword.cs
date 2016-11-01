@@ -21,9 +21,6 @@ public class Sword : Melee
     //PlayerController m_PlayerController;
     CharacterController m_CharacterController;
 
-
-
-
     // Use this for initialization
     void Start()
     {
@@ -58,8 +55,9 @@ public class Sword : Melee
 
                 GameObject swordEffect;
                 swordEffect = (GameObject)Instantiate(effect, transform.position, transform.rotation);
-                //swordEffect.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+            //swordEffect.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
 
+            Destroy(swordEffect, 5);
         }
             if (attack == false)
             {
