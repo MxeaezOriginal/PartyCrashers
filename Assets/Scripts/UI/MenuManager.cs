@@ -191,4 +191,12 @@ public class MenuManager : MonoBehaviour
     {
         mainMenuActive = true;
     }
+
+    private void PlayerSelect()
+    {
+        if (playCanvas.activeSelf && Input.GetButtonDown("Jump_P1")) 
+        {
+
+        }
+    }
 }

@@ -29,6 +29,8 @@ public class GameManager : MonoBehaviour {
 
     public GameObject[] m_Players;
 
+    public int m_NumOfPlayers;
+
     public PartyBar m_PartyBarGame;
 
     public List<string> m_TutorialCoins;

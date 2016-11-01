@@ -15,16 +15,21 @@ public class BallroomPlayerDeaths : MonoBehaviour {
         players = GameObject.FindGameObjectsWithTag("Player");   
     }
 
-    IEnumerator Update()
+    void Update()
     {
         foreach (GameObject p in players)
         {
-            if (!p.active)
+            if (!p.activeSelf)
             {
-                yield return new WaitForSeconds(3);
-                p.SetActive(true);
+                StartCoroutine(waitAndSetActive(p));
             }
         }
+    }
+
+    IEnumerator waitAndSetActive(GameObject p)
+    {
+        yield return new WaitForSeconds(3);
+        p.SetActive(true);
     }
 }
 
