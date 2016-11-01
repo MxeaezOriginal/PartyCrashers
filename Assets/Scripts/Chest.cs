@@ -19,7 +19,7 @@ public class Chest : MonoBehaviour {
         {
             for (int i = 0; i < prefab.Length; i++)
             {
-                GetComponent<Animation>().Play();
+                //GetComponent<Animation>().Play();               //After get animation for chest, uncomment it
                 Instantiate(prefab[i], gameObject.transform.position, gameObject.transform.rotation);
                 alreadyOpen = true;
             }  
