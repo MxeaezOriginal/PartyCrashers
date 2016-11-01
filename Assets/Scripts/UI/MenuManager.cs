@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
@@ -17,7 +18,7 @@ public class MenuManager : MonoBehaviour
     public bool mainMenuActive, playActive, settingsActive, creditsActive, exitPrompt, exitActive;
     public bool waitedForADelay;
     Animator anim;
-    
+
     void Awake()
     {
         anim = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Animator>();
@@ -196,7 +197,7 @@ public class MenuManager : MonoBehaviour
 
     private void PlayerSelect()
     {
-        if (playCanvas.activeSelf && Input.GetButtonDown("A_P2") && GameManager.m_Instance.m_NumOfPlayers == 1) 
+        if (playCanvas.activeSelf && Input.GetButtonDown("A_P2") && GameManager.m_Instance.m_NumOfPlayers == 1)
         {
             Debug.Log("Player 2 has Joined!");
             GameManager.m_Instance.m_NumOfPlayers++;
@@ -210,6 +211,10 @@ public class MenuManager : MonoBehaviour
         {
             Debug.Log("Player 4 has Joined!");
             GameManager.m_Instance.m_NumOfPlayers++;
+        }
+        if (playCanvas.activeSelf && Input.GetButtonDown("A_P1"))
+        {
+            SceneManager.LoadScene(5); //tutorial scene
         }
     }
 }

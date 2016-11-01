@@ -8,9 +8,7 @@ public class MiniGameHUDManager : MonoBehaviour
     public Text[] scoreCounter;
 
     public float score;
-    public float p1, p2, p3, p4;
     public float remainingSeconds;
-    float addingScore;
 
     void Start()
     {
@@ -32,14 +30,14 @@ public class MiniGameHUDManager : MonoBehaviour
         if (GameObject.Find("P1"))
         {
 
-            scoreCounter[0].text = string.Format("{0:0}", p2 + score);
+            scoreCounter[0].text = string.Format("{0:0}", score);
         }
         if (GameObject.Find("P2"))
-            scoreCounter[1].text = string.Format("{0:0}", p2 + score);
+            scoreCounter[1].text = string.Format("{0:0}", score);
         if (GameObject.Find("P3"))
-            scoreCounter[2].text = string.Format("{0:0}", p3 + score);
+            scoreCounter[2].text = string.Format("{0:0}", score);
         if (GameObject.Find("P4"))
-            scoreCounter[3].text = string.Format("{0:0}", p4 + score);
+            scoreCounter[3].text = string.Format("{0:0}", score);
 
         if (!GameObject.Find("P1") && !GameObject.Find("P2") && !GameObject.Find("P3") && !GameObject.Find("P4"))
         {

@@ -48,7 +48,7 @@ public class EnemyAI : MonoBehaviour
         {
             chase();
         }
-        if(m_Distance < m_StopDistance)
+        if (m_Distance < m_StopDistance)
         {
             agent.Stop();
         }
@@ -62,9 +62,12 @@ public class EnemyAI : MonoBehaviour
 
     void chase()
     {
-        look(GameObject.FindGameObjectWithTag("Player").transform);
-        agent.SetDestination(target.transform.position);
-        agent.Resume();
+        if (GameObject.FindGameObjectWithTag("Player") != null)
+        {
+            look(GameObject.FindGameObjectWithTag("Player").transform);
+            agent.SetDestination(target.transform.position);
+            agent.Resume();
+        }
     }
 
     void returnToOrigin()
