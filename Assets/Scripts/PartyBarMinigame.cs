@@ -3,28 +3,23 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections;
 
-public class PartyBarBoss : MonoBehaviour
+public class PartyBarMinigame : MonoBehaviour
 {
 
-    public int m_Max = 100;
-    public int m_Current = 100;
+    public int m_Max = 60;
+    public int m_Current = 60;
+    public float m_Cooldown = 1f;
+    public int m_ReduceBy = 1;
 
-    public bool m_Active;
+    public bool m_Active = true;
 
     Image m_Bar;
 
     float m_TempTimer;
-
-    public EnemyDeath bossDeath;
-
     // Use this for initialization
     void Start()
     {
-
         m_Bar = GetComponent<Image>();
-
-        //Set to starting health
-        m_Max = bossDeath.m_EnemyHealth;
 
         //Debug.Log(GameManager.m_Instance.m_Player2.lastLocation);
     }
@@ -32,9 +27,7 @@ public class PartyBarBoss : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        m_Current = bossDeath.m_EnemyHealth;
-
-        m_Bar.fillAmount = (float) m_Current / m_Max;
+        m_Bar.fillAmount = (float)m_Current / m_Max;
 
         if (m_Active)
         {
