@@ -17,8 +17,7 @@ public class MenuManager : MonoBehaviour
     public GameObject exitPromptCanvas; //Exit Prompt Canvas
     public GameObject exitCanvas; //Exit Canvas
 
-    [Header("Buttons That Need To Be Selected First")]
-    public GameObject firstSelectionPlayButton;
+    public GameObject firstSelectionSplashButton, firstSelectionPlayButton;
 
     [Header("Bools")]
     public bool waitedForADelay;
@@ -26,6 +25,8 @@ public class MenuManager : MonoBehaviour
     Animator anim;
     EventSystem es;
 
+
+    bool testPressed;
     void Awake()
     {
         anim = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Animator>();
@@ -35,6 +36,18 @@ public class MenuManager : MonoBehaviour
     void Start()
     {
         splashActive = true;
+
+        es.enabled = false; es.enabled = true; //IMPORTANT!
+        es.firstSelectedGameObject = firstSelectionSplashButton;
+
+        //while (!testPressed)
+    //        StartCoroutine(Test());
+    }
+
+    IEnumerator Test()
+    {
+        yield return new WaitForSeconds(1f);
+        firstSelectionSplashButton.GetComponent<Text>().enabled = !enabled;
     }
 
     void Update()
