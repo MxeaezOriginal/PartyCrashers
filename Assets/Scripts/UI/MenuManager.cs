@@ -2,12 +2,14 @@
 using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 public class MenuManager : MonoBehaviour
 {
 
     [Header("Different Canvases")]
     //In Hir. assign following things
+    public GameObject splashCanvas; //Splash Canvas
     public GameObject mainMenuCanvas; //MainMenu Canvas
     public GameObject playCanvas; //Play Canvas
     public GameObject settingsCanvas; //Setting Canvas
@@ -15,24 +17,32 @@ public class MenuManager : MonoBehaviour
     public GameObject exitPromptCanvas; //Exit Prompt Canvas
     public GameObject exitCanvas; //Exit Canvas
 
-    public bool mainMenuActive, playActive, settingsActive, creditsActive, exitPrompt, exitActive;
+    [Header("Buttons That Need To Be Selected First")]
+    public GameObject firstSelectionPlayButton;
+
+    [Header("Bools")]
     public bool waitedForADelay;
+    public bool splashActive, mainMenuActive, playActive, settingsActive, creditsActive, exitPrompt, exitActive;
     Animator anim;
+    EventSystem es;
 
     void Awake()
     {
         anim = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Animator>();
+        es = GameObject.Find("Main Menu/EventSystem").GetComponent<EventSystem>();
     }
 
     void Start()
     {
-        mainMenuActive = true;
+        splashActive = true;
     }
 
     void Update()
     {
         PlayerSelect();
 
+        if (splashActive)
+            Splash();
         if (mainMenuActive)
             MainMenu();
         if (playActive)
@@ -48,7 +58,8 @@ public class MenuManager : MonoBehaviour
     }
 
     //Main Functions for setting all the bools
-    void MainMenu()
+
+    void Splash()
     {
         //Setting Animator bools
         anim.SetBool("Play", false);
@@ -57,9 +68,30 @@ public class MenuManager : MonoBehaviour
         anim.SetBool("Exit", false);
 
         //Setting ****Active bool to false to prevent multiple function runs
-        mainMenuActive = false;
+        splashActive = false;
 
         //Toggle on and off Canvases
+        splashCanvas.SetActive(true);
+        mainMenuCanvas.SetActive(false);
+        playCanvas.SetActive(false);
+        settingsCanvas.SetActive(false);
+        creditsCanvas.SetActive(false);
+        exitPromptCanvas.SetActive(false);
+        exitCanvas.SetActive(false);
+    }
+    void MainMenu()
+    {
+        es.enabled = false; es.enabled = true; //IMPORTANT!
+        es.firstSelectedGameObject = firstSelectionPlayButton;
+
+        anim.SetBool("Play", false);
+        anim.SetBool("Settings", false);
+        anim.SetBool("Credits", false);
+        anim.SetBool("Exit", false);
+
+        mainMenuActive = false;
+
+        splashCanvas.SetActive(false);
         mainMenuCanvas.SetActive(true);
         playCanvas.SetActive(false);
         settingsCanvas.SetActive(false);
@@ -76,6 +108,7 @@ public class MenuManager : MonoBehaviour
 
         playActive = false;
 
+        splashCanvas.SetActive(false);
         mainMenuCanvas.SetActive(false);
         settingsCanvas.SetActive(false);
         creditsCanvas.SetActive(false);
@@ -94,6 +127,7 @@ public class MenuManager : MonoBehaviour
 
         settingsActive = false;
 
+        splashCanvas.SetActive(false);
         mainMenuCanvas.SetActive(false);
         playCanvas.SetActive(false);
         creditsCanvas.SetActive(false);
@@ -112,6 +146,7 @@ public class MenuManager : MonoBehaviour
 
         creditsActive = false;
 
+        splashCanvas.SetActive(false);
         mainMenuCanvas.SetActive(false);
         playCanvas.SetActive(false);
         settingsCanvas.SetActive(false);
@@ -123,6 +158,7 @@ public class MenuManager : MonoBehaviour
     }
     void ExitPrompt()
     {
+        splashCanvas.SetActive(false);
         mainMenuCanvas.SetActive(true);
         playCanvas.SetActive(false);
         settingsCanvas.SetActive(false);
@@ -146,6 +182,7 @@ public class MenuManager : MonoBehaviour
 
         exitActive = false;
 
+        splashCanvas.SetActive(false);
         mainMenuCanvas.SetActive(false);
         playCanvas.SetActive(false);
         settingsCanvas.SetActive(false);
@@ -155,6 +192,11 @@ public class MenuManager : MonoBehaviour
     }
 
     //Functions assigned to buttons in main menu - SETTING ****Active bool to true;
+    public void SplashButton()
+    {
+        mainMenuActive = true;
+    }
+
     public void PlayButton()
     {
         playActive = true;
