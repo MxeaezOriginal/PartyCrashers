@@ -40,7 +40,7 @@ public class MenuManager : MonoBehaviour
         es.enabled = false; es.enabled = true; //IMPORTANT!
         es.firstSelectedGameObject = firstSelectionSplashButton;
 
-        InvokeRepeating("test", 0.7f, 0.7f);
+        InvokeRepeating("test", 0.2f, 0.8f);
     }
 
     void Update()
