@@ -5,6 +5,13 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
+    public Rigidbody rb;
+
+    Vector3 KnockBackDirection;
+    Vector3 KnockBack;
+    public float KnockBackSpeed = 1f;
+
+    PlayerController playerController;
 
     private enum ATTACKTYPE
     {
@@ -70,6 +77,7 @@ public class Player : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        rb = GetComponent<Rigidbody>();
         m_Heart = GetComponent<HeartSystem>();
         m_CharController = GetComponent<CharacterController>();
         m_PrimaryAttackSave = m_PrimaryAttack;
@@ -409,26 +417,46 @@ public class Player : MonoBehaviour
             m_Heart.TakeDamage(2);
             m_Heart.UpdateHearts();
         }
-        //if (other.gameObject.CompareTag("ChaserEnemy"))
-        //{
-        //    m_Heart.TakeDamage(1);
-        //    m_Heart.UpdateHearts();
-        //}
-    }
-
-    void OnTriggerStay(Collider other)
-    {
         if (other.gameObject.CompareTag("MeleeEnemy"))
         {
-            m_Heart.lastDamage += Time.deltaTime;
-            if (m_Heart.lastDamage >= 2)
-            {
-                m_Heart.TakeDamage(1);
-                m_Heart.UpdateHearts();
-                m_Heart.lastDamage = 0;
-            }
+            rb.AddForce(transform.forward * 500);
         }
     }
+
+    //void OnCollisionStay(Collision other)
+    //{
+    //    if (other.gameObject.CompareTag("MeleeEnemy"))
+    //    {
+    //        //m_Heart.lastDamage += Time.deltaTime;
+    //        //if (m_Heart.lastDamage >= 2)
+    //        //{
+    //            KnockBackDirection = transform.position - other.transform.position;
+    //            KnockBack = transform.position + KnockBackDirection;
+    //            transform.position = Vector3.Lerp(transform.position, KnockBack, KnockBackSpeed);
+    //            //m_Heart.TakeDamage(1);
+    //            //m_Heart.UpdateHearts();
+    //            //m_Heart.lastDamage = 0;
+    //        //}
+    //    }
+    //}
+
+    //void OnTriggerStay(Collider other)
+    //{
+    //    if (other.gameObject.CompareTag("MeleeEnemy"))
+    //    {
+    //        KnockBackDirection = transform.position - other.transform.position;
+    //        KnockBack = transform.position + KnockBackDirection;
+    //        //transform.position = Vector3.Lerp(transform.position, KnockBack, KnockBackSpeed);
+    //        playerController.m_Velocity = KnockBackDirection * 1000f;
+    //        m_Heart.lastDamage += Time.deltaTime;
+    //        if (m_Heart.lastDamage >= 2)
+    //        {
+    //            m_Heart.TakeDamage(1);
+    //            m_Heart.UpdateHearts();
+    //            m_Heart.lastDamage = 0;
+    //        }
+    //    }
+    //}
 
     /*public void OnTriggerStay(Collider other)
     {

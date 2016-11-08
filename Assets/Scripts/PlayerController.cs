@@ -4,6 +4,10 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour
 {
+    Vector3 KnockBackDirection;
+    Vector3 KnockBack;
+    public float KnockBackSpeed = 1f;
+
     public bool m_CantMove;
     public float m_Speed = 5.0f;
     public float m_MaxSpeed = 10f;
@@ -34,7 +38,7 @@ public class PlayerController : MonoBehaviour
     private float m_CurrentGravity;
 
     private Vector3 m_MoveDir = Vector3.zero;
-    private Vector3 m_Velocity = Vector3.zero;
+    public Vector3 m_Velocity = Vector3.zero;
 
     private bool m_StopMovementX = false;
     private bool m_StopMovementZ = false;
@@ -241,6 +245,17 @@ public class PlayerController : MonoBehaviour
 
         }
     }
+    void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.CompareTag("MeleeEnemy"))
+        {
+            KnockBackDirection = transform.position - other.transform.position;
+            KnockBack = transform.position + KnockBackDirection;
+            //transform.position = Vector3.Lerp(transform.position, KnockBack, KnockBackSpeed);
+            m_Velocity = KnockBackDirection.normalized * KnockBackSpeed;
+
+        }
+    }
 
     void LateUpdate()
     {
@@ -306,4 +321,6 @@ public class PlayerController : MonoBehaviour
             m_StopMovementZ = false;
         }
     }
+
+ 
 }
