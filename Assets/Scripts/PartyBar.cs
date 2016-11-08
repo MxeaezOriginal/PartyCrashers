@@ -7,6 +7,8 @@ public class PartyBar : MonoBehaviour {
 
     public int m_Max = 100;
     public int m_Current = 0;
+    public float m_DecreaseRate = 5f;
+    public int m_DecreaseAmount = 5;
 
     public bool m_Active;
 
@@ -28,13 +30,12 @@ public class PartyBar : MonoBehaviour {
         if (m_Active)
         {
         
-            /*
-            if (m_TempTimer <= Time.time - .1f)
+            if (m_TempTimer <= Time.time - m_DecreaseRate)
             {
-                m_Current += 1;
+                m_Current += m_DecreaseAmount;
                 m_TempTimer = Time.time;
             }
-            */
+
             //if bar hits 0 load minigame
             if (m_Current >= m_Max)
             {

@@ -25,7 +25,7 @@ public class Player : MonoBehaviour
     public PLAYER m_Player;
     public float m_AttackSpeed;
     public int m_Gold;
-	public int m_Score;
+    public int m_Score;
     //public int m_Health;
     //public int m_MaxHealth;
     //public int m_Collect;
@@ -59,6 +59,8 @@ public class Player : MonoBehaviour
     private string m_PauseSave;
     public float delay = 2.0f;
 
+    public string m_Controller;
+
     //float m_LastShotTime;
     //public float DamageInterval = 2f;
 
@@ -84,6 +86,26 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetButton("Interact_P1"))
+        {
+            m_Controller = "P1";
+            m_Player = PLAYER.P1;
+        }
+        else if (Input.GetButton("Interact_P2"))
+        {
+            m_Controller = "P2";
+            m_Player = PLAYER.P2;
+        }
+        else if (Input.GetButton("Interact_P3"))
+        {
+            m_Controller = "P3";
+            m_Player = PLAYER.P3;
+        }
+        else if (Input.GetButton("Interact_P4"))
+        {
+            m_Controller = "P4";
+            m_Player = PLAYER.P4;
+        }
         if (m_Heart.IsDead() || Input.GetKeyDown(KeyCode.Y))
         {
             respawn();
@@ -122,25 +144,25 @@ public class Player : MonoBehaviour
         updateWeapon();
 
         //Primary Attack
-        if (Input.GetAxisRaw(m_PrimaryAttack) == 1)
+        if (Input.GetAxisRaw(m_PrimaryAttack + m_Controller) == 1)
         {
             attack(ATTACKTYPE.PRIMARY);
         }
 
         //Secondary Attack
-        if (Input.GetAxisRaw(m_SecondaryAttack) == 1)
+        if (Input.GetAxisRaw(m_SecondaryAttack + m_Controller) == 1)
         {
             attack(ATTACKTYPE.SECONDARY);
         }
 
         //Interact
-        if (Input.GetButtonDown(m_Interact))
+        if (Input.GetButtonDown(m_Interact + m_Controller))
         {
 
         }
 
         //Pause
-        if (Input.GetButtonDown(m_Pause))
+        if (Input.GetButtonDown(m_Pause + m_Controller))
         {
             if (m_WeaponID == WEAPONTYPE.SWORD)
             {
@@ -152,7 +174,7 @@ public class Player : MonoBehaviour
             }
         }
 
-        if (Input.GetButtonDown(m_Stats))
+        if (Input.GetButtonDown(m_Stats + m_Controller))
         {
             GetComponent<Stats>().ToggleWindow();
         }

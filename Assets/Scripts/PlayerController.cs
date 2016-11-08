@@ -62,7 +62,7 @@ public class PlayerController : MonoBehaviour
             {
                 if (!m_UsingKeyboard)
                 {
-                    m_MoveDir = new Vector3(Input.GetAxis(m_HorizontalButton), 0, Input.GetAxis(m_VerticalButton));
+                    m_MoveDir = new Vector3(Input.GetAxis(m_HorizontalButton + GetComponent<Player>().m_Controller), 0, Input.GetAxis(m_VerticalButton + GetComponent<Player>().m_Controller));
                 }
                 else
                 {
@@ -74,7 +74,7 @@ public class PlayerController : MonoBehaviour
             {
                 if (!m_UsingKeyboard)
                 {
-                    m_MoveDir = new Vector3(0, 0, Input.GetAxis(m_VerticalButton));
+                    m_MoveDir = new Vector3(0, 0, Input.GetAxis(m_VerticalButton + GetComponent<Player>().m_Controller));
                 }
                 else
                 {
@@ -86,7 +86,7 @@ public class PlayerController : MonoBehaviour
             {
                 if (!m_UsingKeyboard)
                 {
-                    m_MoveDir = new Vector3(Input.GetAxis(m_HorizontalButton), 0, 0);
+                    m_MoveDir = new Vector3(Input.GetAxis(m_HorizontalButton + GetComponent<Player>().m_Controller), 0, 0);
                 }
                 else
                 {
@@ -108,7 +108,7 @@ public class PlayerController : MonoBehaviour
             {
                 if (!m_UsingKeyboard)
                 {
-                    if (Input.GetButtonDown(m_JumpButton))
+                    if (Input.GetButtonDown(m_JumpButton + GetComponent<Player>().m_Controller))
                     {
                         m_Velocity.y = m_Jump;
                     }
@@ -126,7 +126,7 @@ public class PlayerController : MonoBehaviour
             {
                 if (!m_UsingKeyboard)
                 {
-                    if (Input.GetButton(m_JumpButton))
+                    if (Input.GetButton(m_JumpButton + GetComponent<Player>().m_Controller))
                     {
                         m_CurrentGravity = m_JumpGravity;
                     }
@@ -202,15 +202,15 @@ public class PlayerController : MonoBehaviour
 
             if (!m_UsingKeyboard)
             {
-                if (Input.GetAxis(m_HorizontalRotationButton) != 0 || Input.GetAxis(m_VerticalRotationButton) != 0)
+                if (Input.GetAxis(m_HorizontalRotationButton + GetComponent<Player>().m_Controller) != 0 || Input.GetAxis(m_VerticalRotationButton + GetComponent<Player>().m_Controller) != 0)
                 {
-                    m_CurrentHorizontalRotation = Input.GetAxis(m_HorizontalRotationButton);
-                    m_CurrentVerticalRotation = Input.GetAxis(m_VerticalRotationButton);
+                    m_CurrentHorizontalRotation = Input.GetAxis(m_HorizontalRotationButton + GetComponent<Player>().m_Controller);
+                    m_CurrentVerticalRotation = Input.GetAxis(m_VerticalRotationButton + GetComponent<Player>().m_Controller);
                 }
-                else if (Input.GetAxis(m_HorizontalButton) != 0 || Input.GetAxis(m_VerticalButton) != 0)
+                else if (Input.GetAxis(m_HorizontalButton + GetComponent<Player>().m_Controller) != 0 || Input.GetAxis(m_VerticalButton + GetComponent<Player>().m_Controller) != 0)
                 {
-                    m_CurrentHorizontalRotation = Input.GetAxis(m_HorizontalButton);
-                    m_CurrentVerticalRotation = Input.GetAxis(m_VerticalButton) * -1f;
+                    m_CurrentHorizontalRotation = Input.GetAxis(m_HorizontalButton + GetComponent<Player>().m_Controller);
+                    m_CurrentVerticalRotation = Input.GetAxis(m_VerticalButton + GetComponent<Player>().m_Controller) * -1f;
                 }
 
                 m_RotateAngle = Mathf.Atan2(m_CurrentHorizontalRotation * -1, m_CurrentVerticalRotation * -1) * Mathf.Rad2Deg;
