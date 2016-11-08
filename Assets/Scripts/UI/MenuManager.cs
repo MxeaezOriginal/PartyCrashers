@@ -40,14 +40,7 @@ public class MenuManager : MonoBehaviour
         es.enabled = false; es.enabled = true; //IMPORTANT!
         es.firstSelectedGameObject = firstSelectionSplashButton;
 
-        //while (!testPressed)
-    //        StartCoroutine(Test());
-    }
-
-    IEnumerator Test()
-    {
-        yield return new WaitForSeconds(1f);
-        firstSelectionSplashButton.GetComponent<Text>().enabled = !enabled;
+        InvokeRepeating("test", 0.7f, 0.7f);
     }
 
     void Update()
@@ -68,6 +61,18 @@ public class MenuManager : MonoBehaviour
             ExitPrompt();
         if (exitActive)
             Exit();
+    }
+
+    void test()
+    {
+        if (es.currentSelectedGameObject.GetComponent<Text>().enabled)
+        {
+            es.currentSelectedGameObject.GetComponent<Text>().enabled = false;
+        }
+        else
+        {
+            es.currentSelectedGameObject.GetComponent<Text>().enabled = true;
+        }
     }
 
     //Main Functions for setting all the bools
