@@ -3,7 +3,14 @@ using System.Collections;
 
 public class SpawnEnemy : MonoBehaviour
 {
-
+    GameObject[] players;
+    float x;
+    float y;
+    float z;
+    Vector3 RandomLocation;
+    public float SpawnRange = 5f;
+    public float GodRadius = 3f;
+    //---------------------------------------------------
     public GameObject enemyPrefab;
     public float timer;
     public float range;
@@ -13,6 +20,7 @@ public class SpawnEnemy : MonoBehaviour
 
     void Start()
     {
+        players = GameManager.m_Instance.m_Players;
         timer = spawnTime;
         //setActive = false;
     }
@@ -24,8 +32,9 @@ public class SpawnEnemy : MonoBehaviour
         range = Vector3.Distance(GameObject.FindWithTag("Player").transform.position, transform.position);
         if (timer <= 0 && range <= activedRange)
         {
+            EnemySpawner();
             //setActive = true;
-            Instantiate(enemyPrefab, gameObject.transform.position, gameObject.transform.rotation);
+            //Instantiate(enemyPrefab, gameObject.transform.position, gameObject.transform.rotation);
             timer = spawnTime;
         }
         else //if (timer > spawnTime || range > activedRange)
@@ -36,5 +45,30 @@ public class SpawnEnemy : MonoBehaviour
         //{
 
         //}
+    }
+
+    
+    public Vector3 GetRandomLocationForEnemy()
+    {
+        x = Random.Range(transform.position.x - SpawnRange, transform.position.x + SpawnRange);
+        y = 1;
+        z = Random.Range(transform.position.z - SpawnRange, transform.position.z + SpawnRange);
+
+        for (int i = 0; i < players.Length; i++)
+        {
+            while (x <= players[i].transform.position.x + GodRadius && x >= players[i].transform.position.x - GodRadius && z <= players[i].transform.position.z + GodRadius && z >= players[i].transform.position.z - GodRadius)
+            {
+                x = Random.Range(transform.position.x - SpawnRange, transform.position.x + SpawnRange);
+                z = Random.Range(transform.position.z - SpawnRange, transform.position.z + SpawnRange);
+            }
+        }
+
+        RandomLocation = new Vector3(x, y, z);
+        return RandomLocation;
+    }
+
+    void EnemySpawner()
+    {
+        Instantiate(enemyPrefab, GetRandomLocationForEnemy(), transform.rotation);
     }
 }
