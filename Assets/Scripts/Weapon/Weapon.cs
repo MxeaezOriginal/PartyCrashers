@@ -5,7 +5,8 @@ public abstract class Weapon : MonoBehaviour {
 
     public Animation m_Anim;
     public int m_Damage = 0;
-    public float m_AttackSpeed = 0;
+    public float m_AttackInterval = 0;
+    protected float m_AttackSpeed = 0;
     public float m_SecondaryAttackSpeed = 0;
     public AudioClip[] m_PrimarySounds;
     public AudioClip[] m_SecondarySounds;
@@ -13,15 +14,11 @@ public abstract class Weapon : MonoBehaviour {
     protected float m_CoolDown;
     protected float m_SecondaryCoolDown;
 
-    // Use this for initialization
-    void Start () {
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	}
+    void Start()
+    {
+        m_AttackSpeed = m_AttackInterval;
+    }
 
     public abstract void primaryAttack();
-
     public abstract void secondaryAttack();
 }

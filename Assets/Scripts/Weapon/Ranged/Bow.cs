@@ -4,7 +4,7 @@ using System;
 
 public class Bow : Ranged {
 
-    private float m_timePressed = 0;
+    protected float m_timePressed = 0;
 
     public float m_MaxSpeed;
 
@@ -19,28 +19,23 @@ public class Bow : Ranged {
     }
 	
 	// Update is called once per frame
-	void Update () {
-
-        if (m_CoolDown <= Time.time - m_AttackSpeed || m_CoolDown == 0)
+	void Update ()
+    {
+        if (m_CoolDown <= Time.time - m_AttackInterval || m_CoolDown == 0)
         {
             //Shoot if button up
             if (Input.GetAxisRaw(player.m_PrimaryAttack) == 0 && wasDown)
             {
-
                 shoot();
                 wasDown = false;
             }
         }
-
-
     }
 
     public override void primaryAttack()
     {
-
-        if (m_CoolDown <= Time.time - m_AttackSpeed || m_CoolDown == 0)
+        if (m_CoolDown <= Time.time - m_AttackInterval || m_CoolDown == 0)
         {
-
             //Temp Script
             /*
             GameObject balloon01;
@@ -60,7 +55,7 @@ public class Bow : Ranged {
             }
 
             wasDown = true;
-            //Debug.Log(m_timePressed);
+            Debug.Log(m_timePressed);
 
         }
     }

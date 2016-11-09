@@ -60,7 +60,7 @@ public class RaveGun : Ranged {
             }
 
             wasDown = true;
-            Debug.Log(m_timePressed);
+            //Debug.Log(m_timePressed);
 
         }
     }
