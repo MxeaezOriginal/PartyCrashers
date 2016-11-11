@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class RecycleBullet : MonoBehaviour
+public class RecycleBullet : Bow
 {
     [SerializeField]
     private float bulletLifeTimer;
+
+   
 
     public void Start()
     {
@@ -13,8 +15,12 @@ public class RecycleBullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag != "Coins")
-            OffBullet();
+        if(!pierce)
+        {
+            if (other.tag != "Coins")
+                OffBullet();
+        }
+
     }
 
     private IEnumerator DeactivateCallback()

@@ -13,7 +13,6 @@ GameObject:
   - 54: {fileID: 5491360}
   - 135: {fileID: 13534556}
   - 114: {fileID: 11400512}
-  - 114: {fileID: 11420062}
   m_Layer: 0
   m_Name: WaterBalloonBullet
   m_TagString: Projectile
@@ -30,7 +29,6 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 22.149178, y: 1.72, z: 16.14}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -93,21 +91,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea7f7446763d8234ab83d9594edd0635, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Anim: {fileID: 0}
+  m_Damage: 0
+  m_AttackInterval: 0
+  m_SecondaryAttackSpeed: 0
+  m_PrimarySounds: []
+  m_SecondarySounds: []
+  m_SoundsOnHit: []
+  m_Projectile: {fileID: 0}
+  m_Projectile02: {fileID: 0}
+  m_FirePoint: []
+  m_ProjectileSpeed: 0
+  m_MaxSpeed: 0
+  m_MinSpeed: 0
+  player: {fileID: 0}
   bulletLifeTimer: 2
---- !u!114 &11420062
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 150382}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7fe03fab23489440a98d205c46996ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  chargingTimer: 0
-  minDistance: 0
-  maxnDistance: 0
 --- !u!135 &13534556
 SphereCollider:
   m_ObjectHideFlags: 1

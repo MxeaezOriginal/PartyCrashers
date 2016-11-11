@@ -4,18 +4,24 @@ using System;
 
 public class Bow : Ranged {
 
-    protected float m_timePressed = 0;
-
-    public float m_MaxSpeed;
-
     public Player player;
+    [SerializeField]
+    public float m_MaxSpeed;
+    [SerializeField]    
+    private float m_MinSpeed;
 
+    protected float m_timePressed = 0;
+   
     private bool wasDown = false;
+    protected bool pierce = false;
+
+    RaycastHit hit;
+    
 
     // Use this for initialization
-    void Start () {
-
-        player = GetComponentInParent<Player>();
+    void Start ()
+    {
+        player = GetComponentInParent<Player>();        
     }
 	
 	// Update is called once per frame
@@ -32,6 +38,15 @@ public class Bow : Ranged {
         }
     }
 
+    void FixedUpdate()
+    {
+        Vector3 fwd = transform.TransformDirection(Vector3.forward);
+
+        if (Physics.Raycast(transform.position, fwd, out hit, 5))
+            Debug.Log(hit.collider.gameObject.name);
+        
+    }
+
     public override void primaryAttack()
     {
         if (m_CoolDown <= Time.time - m_AttackInterval || m_CoolDown == 0)
@@ -43,16 +58,23 @@ public class Bow : Ranged {
             balloon01.GetComponent<Rigidbody>().AddForce(balloon01.transform.forward * m_ProjectileSpeed);
             m_CoolDown = Time.time;
             */
-
-            if (m_timePressed <= m_MaxSpeed)
+    
+            if (m_timePressed < m_MaxSpeed)
             {
-                m_timePressed += Input.GetAxisRaw(player.m_PrimaryAttack) * Time.deltaTime;
+                if(m_timePressed < m_MinSpeed)
+                {
+                    m_timePressed = m_MinSpeed;
+                }
+                m_timePressed += Input.GetAxisRaw(player.m_PrimaryAttack) % Time.deltaTime;
             }
 
             if (m_timePressed >= m_MaxSpeed) 
             {
                 m_timePressed = m_MaxSpeed;
+                pierce = true;
             }
+            //else
+                //pierce = false;
 
             wasDown = true;
             Debug.Log(m_timePressed);
