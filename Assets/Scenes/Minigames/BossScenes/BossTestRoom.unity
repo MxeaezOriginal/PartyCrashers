@@ -1211,7 +1211,7 @@ Transform:
   - {fileID: 428172496}
   - {fileID: 1446906109}
   m_Father: {fileID: 0}
-  m_RootOrder: 25
+  m_RootOrder: 28
 --- !u!1001 &39521587
 Prefab:
   m_ObjectHideFlags: 0
@@ -22528,7 +22528,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Anim: {fileID: 0}
   m_Damage: 2
-  m_AttackSpeed: 1
+  m_AttackInterval: 0
   m_SecondaryAttackSpeed: 10
   m_PrimarySounds:
   - {fileID: 0}
@@ -23144,7 +23144,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Anim: {fileID: 0}
   m_Damage: 5
-  m_AttackSpeed: 0.2
+  m_AttackInterval: 0
   m_SecondaryAttackSpeed: 3
   m_PrimarySounds: []
   m_SecondarySounds: []
@@ -23154,9 +23154,9 @@ MonoBehaviour:
   m_FirePoint:
   - {fileID: 325423661}
   m_ProjectileSpeed: 5000
-  m_ProjectileSpeed02: 100
-  m_MaxSpeed: 1.5
   player: {fileID: 980327506}
+  m_MaxSpeed: 1.5
+  m_MinSpeed: 0
 --- !u!23 &1225846972
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -26834,7 +26834,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 128216, guid: ff6906de941c1804e9e04da544397b94, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 13673056, guid: ff6906de941c1804e9e04da544397b94, type: 2}
       propertyPath: m_IsTrigger

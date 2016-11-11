@@ -3,6 +3,9 @@ using System.Collections;
 
 public class SpawnEnemy : MonoBehaviour
 {
+    GameObject[] getEnemyNum;
+    public int EnemyNum;
+    public int SpawnNum = 5;
     GameObject[] players;
     float x;
     float y;
@@ -28,23 +31,29 @@ public class SpawnEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        getEnemyNum = GameObject.FindGameObjectsWithTag("MeleeEnemy");
+        EnemyNum = getEnemyNum.Length;
         timer -= Time.deltaTime;
         range = Vector3.Distance(GameObject.FindWithTag("Player").transform.position, transform.position);
-        if (timer <= 0 && range <= activedRange)
+        if(EnemyNum < SpawnNum)
         {
-            EnemySpawner();
-            //setActive = true;
-            //Instantiate(enemyPrefab, gameObject.transform.position, gameObject.transform.rotation);
-            timer = spawnTime;
-        }
-        else //if (timer > spawnTime || range > activedRange)
-        {
-            //setActive = false;
-        }
-        //else if (setActive == true)
-        //{
+            if (timer <= 0 && range <= activedRange)
+            {
+                EnemySpawner();
+                //setActive = true;
+                //Instantiate(enemyPrefab, gameObject.transform.position, gameObject.transform.rotation);
+                timer = spawnTime;
+            }
+            else //if (timer > spawnTime || range > activedRange)
+            {
+                //setActive = false;
+            }
+            //else if (setActive == true)
+            //{
 
-        //}
+            //}
+
+        }
     }
 
     
