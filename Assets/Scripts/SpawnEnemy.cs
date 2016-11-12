@@ -3,9 +3,13 @@ using System.Collections;
 
 public class SpawnEnemy : MonoBehaviour
 {
+    //public int[] Num;
+    //public int maxNum;
+    public int individualEnemyNum = 0;
+    public int individualSpawnNum = 4;
     GameObject[] getEnemyNum;
-    public int EnemyNum;
-    public int SpawnNum = 5;
+    public int totalEnemyNum;
+    public int totalSpawnNum = 5;
     GameObject[] players;
     float x;
     float y;
@@ -32,31 +36,46 @@ public class SpawnEnemy : MonoBehaviour
     void Update()
     {
         getEnemyNum = GameObject.FindGameObjectsWithTag("MeleeEnemy");
-        EnemyNum = getEnemyNum.Length;
+        totalEnemyNum = getEnemyNum.Length;
         timer -= Time.deltaTime;
         range = Vector3.Distance(GameObject.FindWithTag("Player").transform.position, transform.position);
-        if(EnemyNum < SpawnNum)
+        if (individualSpawnNum == 0)
         {
-            if (timer <= 0 && range <= activedRange)
+            if (totalEnemyNum < totalSpawnNum)
             {
-                EnemySpawner();
-                //setActive = true;
-                //Instantiate(enemyPrefab, gameObject.transform.position, gameObject.transform.rotation);
-                timer = spawnTime;
+                if (timer <= 0 && range <= activedRange)
+                {
+                    EnemySpawner();
+                    timer = spawnTime;
+                }
             }
-            else //if (timer > spawnTime || range > activedRange)
-            {
-                //setActive = false;
-            }
-            //else if (setActive == true)
-            //{
-
-            //}
-
         }
+        else
+        {
+            if (individualEnemyNum < individualSpawnNum)
+            {
+                if (timer <= 0 && range <= activedRange)
+                {
+                    Instantiate(enemyPrefab, GetRandomLocationForEnemy(), transform.rotation);
+                    individualEnemyNum++;
+                    timer = spawnTime;
+                }
+            }
+        }
+        //for (int i = 0; i < maxNum; i++)
+        //{
+        //    timer -= Time.deltaTime;
+        //    range = Vector3.Distance(GameObject.FindWithTag("Player").transform.position, transform.position);
+
+        //    if (timer <= 0 && range <= activedRange)
+        //    {
+        //        EnemySpawner();
+        //        timer = spawnTime;
+        //    }
+        //}
     }
 
-    
+
     public Vector3 GetRandomLocationForEnemy()
     {
         x = Random.Range(transform.position.x - SpawnRange, transform.position.x + SpawnRange);
