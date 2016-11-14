@@ -4,6 +4,7 @@ using System;
 
 public class Bow : Ranged {
 
+    public PlayerController playerController;
     public Player player;
     [SerializeField]
     public float m_MaxSpeed;
@@ -21,7 +22,8 @@ public class Bow : Ranged {
     // Use this for initialization
     void Start ()
     {
-        player = GetComponentInParent<Player>();        
+        player = GetComponentInParent<Player>();
+        playerController = GetComponent<PlayerController>();        
     }
 	
 	// Update is called once per frame
@@ -32,8 +34,13 @@ public class Bow : Ranged {
             //Shoot if button up
             if (Input.GetAxisRaw(player.m_PrimaryAttack) == 0 && wasDown)
             {
-                shoot();
-                wasDown = false;
+                while(wasDown)
+                {
+                    //playerController.m_MaxSpeed -= Time.deltaTime;
+                    shoot();
+                    wasDown = false;
+                      
+                }
             }
         }
     }
