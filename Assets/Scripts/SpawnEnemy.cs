@@ -5,6 +5,7 @@ public class SpawnEnemy : MonoBehaviour
 {
     //public int[] Num;
     //public int maxNum;
+    public bool infiniteSpawn;
     public int individualEnemyNum = 0;
     public int individualSpawnNum = 4;
     GameObject[] getEnemyNum;
@@ -23,23 +24,63 @@ public class SpawnEnemy : MonoBehaviour
     public float range;
     public float spawnTime = 5.0f;
     public float activedRange = 10f;
+    // run away
+    public float m_Distance;
+    Vector3 MoveDirection;
+    Vector3 RunAwayDirection;
+    public float RunAwayRange = 5f;
+    public float RunSpeed = 0.01f;
+    // Rotation from EnemyAi
+    public float m_RotationSpeed = 5f;
+
     //bool setActive;
 
     void Start()
     {
         players = GameManager.m_Instance.m_Players;
         timer = spawnTime;
+        players = GameObject.FindGameObjectsWithTag("Player");
         //setActive = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        look(GameObject.FindGameObjectWithTag("Player").transform);
+        // run away ----------------------------------------------------------
+        // Get closest player
+        for (int i = 0; i < players.Length; i++)
+        {
+            if (i == 0)
+            {
+                m_Distance = Vector3.Distance(players[i].transform.position, transform.position);
+                MoveDirection = transform.position - players[i].transform.position;
+                RunAwayDirection = transform.position + MoveDirection;
+                if (m_Distance <= RunAwayRange)
+                {
+                    transform.position = Vector3.Lerp(transform.position, RunAwayDirection, RunSpeed);
+                }
+        }
+            else
+            {
+                if (Vector3.Distance(players[i].transform.position, transform.position) < m_Distance)
+                {
+                    m_Distance = Vector3.Distance(players[i].transform.position, transform.position);
+                    MoveDirection = transform.position - players[i].transform.position;
+                    RunAwayDirection = transform.position + MoveDirection;
+                    if (m_Distance <= RunAwayRange)
+                    {
+                        transform.position = Vector3.Lerp(transform.position, RunAwayDirection, RunSpeed);
+                    }
+                }
+        }
+    }
+        // run away finish ---------------------------------------------------
         getEnemyNum = GameObject.FindGameObjectsWithTag("MeleeEnemy");
         totalEnemyNum = getEnemyNum.Length;
         timer -= Time.deltaTime;
         range = Vector3.Distance(GameObject.FindWithTag("Player").transform.position, transform.position);
-        if (individualSpawnNum == 0)
+        if (infiniteSpawn == true)
         {
             if (totalEnemyNum < totalSpawnNum)
             {
@@ -98,5 +139,13 @@ public class SpawnEnemy : MonoBehaviour
     void EnemySpawner()
     {
         Instantiate(enemyPrefab, GetRandomLocationForEnemy(), transform.rotation);
+    }
+
+    void look(Transform other)
+    {
+        Vector3 lookPosition = other.position - transform.position;
+        lookPosition.y = 0;
+        Quaternion rotation = Quaternion.LookRotation(lookPosition);
+        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * m_RotationSpeed);
     }
 }
