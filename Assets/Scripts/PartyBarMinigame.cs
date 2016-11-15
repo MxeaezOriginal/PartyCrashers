@@ -52,6 +52,6 @@ public class PartyBarMinigame : MonoBehaviour
         //int randomNumber = Random.Range(1, 3);
 
         GameManager.m_Instance.savePlayers();
-        SceneManager.LoadScene(1); //tutorial scene
+        SceneManager.LoadScene("Lobby_01"); //tutorial scene
     }
 }
