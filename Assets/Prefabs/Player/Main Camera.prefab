@@ -32,11 +32,12 @@ GameObject:
   - 114: {fileID: 11405196}
   - 114: {fileID: 11452844}
   - 114: {fileID: 11431886}
-  - 114: {fileID: 11414368}
   - 114: {fileID: 11465586}
   - 114: {fileID: 11414072}
-  - 114: {fileID: 11466906}
   - 114: {fileID: 11461926}
+  - 114: {fileID: 11497830}
+  - 114: {fileID: 11477570}
+  - 114: {fileID: 11495654}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -174,31 +175,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Shader: {fileID: 4800000, guid: c1ffdcaa7728ced4fa68c999e5e7f2de, type: 3}
-  Brightness: 33.5
-  Contrast: -2.5
-  ContrastCoeff: {x: 0.5, y: 0.5, z: 0.5}
+  Brightness: 0
+  Contrast: 20
+  ContrastCoeff: {x: 0.294, y: 0.5, z: 0.5}
   Gamma: 1
---- !u!114 &11414368
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 173164}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8feeb07303302b49be4c3647f055b67, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Shader: {fileID: 4800000, guid: ea36d91a0b99bd240ac1a3f17bac241b, type: 3}
-  White: {r: 1, g: 1, b: 1, a: 1}
-  Black: {r: 0, g: 0, b: 0, a: 1}
-  Red: {r: 0.8235294, g: 0.09688581, b: 0.09688581, a: 1}
-  Green: {r: 0.007352948, g: 1, b: 0.007352948, a: 1}
-  Blue: {r: 0.13235295, g: 0.13235295, b: 1, a: 1}
-  Yellow: {r: 1, g: 1, b: 0.4044118, a: 1}
-  Magenta: {r: 1, g: 0.41911763, b: 1, a: 1}
-  Cyan: {r: 0.32352942, g: 1, b: 1, a: 1}
-  Amount: 1
 --- !u!114 &11431886
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -213,7 +193,7 @@ MonoBehaviour:
   Shader: {fileID: 4800000, guid: 0b332438591134c46ada56177c061e99, type: 3}
   MasterHue: 0
   MasterSaturation: -2
-  MasterValue: 0.6
+  MasterValue: -5
   RedsHue: 0
   RedsSaturation: 0
   RedsValue: 0
@@ -250,7 +230,7 @@ MonoBehaviour:
   Color: {r: 1, g: 0, b: 0, a: 1}
   Center: {x: 0.5, y: 0.5}
   Sharpness: 68.3
-  Darkness: 10.7
+  Darkness: 18.8
 --- !u!114 &11461926
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -295,7 +275,7 @@ MonoBehaviour:
   SystemThreadPool: 0
   ForceCPUOnly: 0
   DebugMode: 0
---- !u!114 &11466906
+--- !u!114 &11477570
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -303,12 +283,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 173164}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb697cfaa11881546a01edd0eb62fd76, type: 3}
+  m_Script: {fileID: 11500000, guid: 934871e03470f2048a86d4da39cca2dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Shader: {fileID: 4800000, guid: d4cf7d0874af43d489d668369b513fd1, type: 3}
-  Color: {r: 0.114, g: 0.796, b: 0.918, a: 1}
-  Density: 0.236
+  Shader: {fileID: 4800000, guid: bb3f4da25a5c9184697fb2b1c1ea8c68, type: 3}
+  RedSteepness: 1.25
+  RedGamma: 1
+  GreenSteepness: 1.31
+  GreenGamma: 1
+  BlueSteepness: 1
+  BlueGamma: 1
+  e_ShowCurves: 1
 --- !u!114 &11492224
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -326,6 +311,36 @@ MonoBehaviour:
   blurIterations: 1
   blurType: 0
   fastBloomShader: {fileID: 4800000, guid: 68a00c837b82e4c6d92e7da765dc5f1d, type: 3}
+--- !u!114 &11495654
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 173164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b87ea445a48e9f44ab51e80325d56b0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Shader: {fileID: 4800000, guid: 36a3aa3217d66c645a4665ff1490cb28, type: 3}
+  White: {r: 0.53676474, g: 0.53676474, b: 0.53676474, a: 1}
+  Mode: 1
+--- !u!114 &11497830
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 173164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94d79bfd8cb64234383156801889630f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Shader: {fileID: 4800000, guid: 552900fac0d27b6448ec836d923d985b, type: 3}
+  Hue: 49
+  Range: 180
+  Boost: 0.5
+  Amount: 0.252
 --- !u!124 &12459012
 Behaviour:
   m_ObjectHideFlags: 1

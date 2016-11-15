@@ -46,27 +46,29 @@ LightmapSettings:
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
-    m_IndirectOutputScale: 1
-    m_AlbedoBoost: 1
+    m_IndirectOutputScale: 0.16
+    m_AlbedoBoost: 2.6
     m_TemporalCoherenceThreshold: 1
     m_EnvironmentLightingMode: 0
     m_EnableBakedLightmaps: 1
     m_EnableRealtimeLightmaps: 1
   m_LightmapEditorSettings:
     serializedVersion: 3
-    m_Resolution: 2
-    m_BakeResolution: 40
-    m_TextureWidth: 1024
+    m_Resolution: 20
+    m_BakeResolution: 86.02
+    m_TextureWidth: 2048
     m_TextureHeight: 1024
     m_AOMaxDistance: 1
-    m_Padding: 2
+    m_Padding: 100
     m_CompAOExponent: 0
-    m_LightmapParameters: {fileID: 0}
+    m_LightmapParameters: {fileID: 15200, guid: 0000000000000000f000000000000000,
+      type: 0}
     m_TextureCompression: 1
     m_FinalGather: 0
     m_FinalGatherRayCount: 1024
     m_ReflectionCompression: 2
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000001, guid: f224bcf6215780b49b2536f0384165df,
+    type: 2}
   m_RuntimeCPUUsage: 25
 --- !u!196 &4
 NavMeshSettings:
@@ -23553,11 +23555,12 @@ GameObject:
   - 114: {fileID: 1025839116}
   - 114: {fileID: 1025839106}
   - 114: {fileID: 1025839108}
-  - 114: {fileID: 1025839107}
   - 114: {fileID: 1025839115}
   - 114: {fileID: 1025839120}
-  - 114: {fileID: 1025839119}
   - 114: {fileID: 1025839118}
+  - 114: {fileID: 1025839107}
+  - 114: {fileID: 1025839119}
+  - 114: {fileID: 1025839121}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -23582,29 +23585,24 @@ MonoBehaviour:
   Color: {r: 1, g: 0, b: 0, a: 1}
   Center: {x: 0.5, y: 0.5}
   Sharpness: 68.3
-  Darkness: 10.7
+  Darkness: 18.8
 --- !u!114 &1025839107
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11414368, guid: bae93eb041cdc804a9db3e13f94c95fc,
+  m_PrefabParentObject: {fileID: 11497830, guid: bae93eb041cdc804a9db3e13f94c95fc,
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1025839105}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8feeb07303302b49be4c3647f055b67, type: 3}
+  m_Script: {fileID: 11500000, guid: 94d79bfd8cb64234383156801889630f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Shader: {fileID: 4800000, guid: ea36d91a0b99bd240ac1a3f17bac241b, type: 3}
-  White: {r: 1, g: 1, b: 1, a: 1}
-  Black: {r: 0, g: 0, b: 0, a: 1}
-  Red: {r: 0.8235294, g: 0.09688581, b: 0.09688581, a: 1}
-  Green: {r: 0.007352948, g: 1, b: 0.007352948, a: 1}
-  Blue: {r: 0.13235295, g: 0.13235295, b: 1, a: 1}
-  Yellow: {r: 1, g: 1, b: 0.4044118, a: 1}
-  Magenta: {r: 1, g: 0.41911763, b: 1, a: 1}
-  Cyan: {r: 0.32352942, g: 1, b: 1, a: 1}
-  Amount: 1
+  Shader: {fileID: 4800000, guid: 552900fac0d27b6448ec836d923d985b, type: 3}
+  Hue: 49
+  Range: 180
+  Boost: 0.5
+  Amount: 0.252
 --- !u!114 &1025839108
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23620,7 +23618,7 @@ MonoBehaviour:
   Shader: {fileID: 4800000, guid: 0b332438591134c46ada56177c061e99, type: 3}
   MasterHue: 0
   MasterSaturation: -2
-  MasterValue: 0.6
+  MasterValue: -5
   RedsHue: 0
   RedsSaturation: 0
   RedsValue: 0
@@ -23803,18 +23801,23 @@ MonoBehaviour:
 --- !u!114 &1025839119
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11466906, guid: bae93eb041cdc804a9db3e13f94c95fc,
+  m_PrefabParentObject: {fileID: 11477570, guid: bae93eb041cdc804a9db3e13f94c95fc,
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1025839105}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb697cfaa11881546a01edd0eb62fd76, type: 3}
+  m_Script: {fileID: 11500000, guid: 934871e03470f2048a86d4da39cca2dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Shader: {fileID: 4800000, guid: d4cf7d0874af43d489d668369b513fd1, type: 3}
-  Color: {r: 0.114, g: 0.796, b: 0.918, a: 1}
-  Density: 0.236
+  Shader: {fileID: 4800000, guid: bb3f4da25a5c9184697fb2b1c1ea8c68, type: 3}
+  RedSteepness: 1.25
+  RedGamma: 1
+  GreenSteepness: 1.31
+  GreenGamma: 1
+  BlueSteepness: 1
+  BlueGamma: 1
+  e_ShowCurves: 1
 --- !u!114 &1025839120
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23828,10 +23831,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Shader: {fileID: 4800000, guid: c1ffdcaa7728ced4fa68c999e5e7f2de, type: 3}
-  Brightness: 33.5
-  Contrast: -2.5
-  ContrastCoeff: {x: 0.5, y: 0.5, z: 0.5}
+  Brightness: 0
+  Contrast: 20
+  ContrastCoeff: {x: 0.294, y: 0.5, z: 0.5}
   Gamma: 1
+--- !u!114 &1025839121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11495654, guid: bae93eb041cdc804a9db3e13f94c95fc,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1025839105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b87ea445a48e9f44ab51e80325d56b0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Shader: {fileID: 4800000, guid: 36a3aa3217d66c645a4665ff1490cb28, type: 3}
+  White: {r: 0.53676474, g: 0.53676474, b: 0.53676474, a: 1}
+  Mode: 1
 --- !u!1001 &1026015701
 Prefab:
   m_ObjectHideFlags: 0
