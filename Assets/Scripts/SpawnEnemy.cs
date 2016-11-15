@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 using System.Collections;
 
 public class SpawnEnemy : MonoBehaviour
 {
+    List<GameObject> enemies = new List<GameObject>();
     //public int[] Num;
     //public int maxNum;
     public bool infiniteSpawn;
@@ -46,6 +48,14 @@ public class SpawnEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        foreach(GameObject enemy in enemies)
+        {
+            if(enemy == null)
+            {
+                enemies.Remove(enemy);
+                totalEnemyNum--;
+            }
+        }
         look(GameObject.FindGameObjectWithTag("Player").transform);
         // run away ----------------------------------------------------------
         // Get closest player
@@ -76,8 +86,8 @@ public class SpawnEnemy : MonoBehaviour
         }
     }
         // run away finish ---------------------------------------------------
-        getEnemyNum = GameObject.FindGameObjectsWithTag("MeleeEnemy");
-        totalEnemyNum = getEnemyNum.Length;
+        //getEnemyNum = GameObject.FindGameObjectsWithTag("MeleeEnemy");
+        //totalEnemyNum = getEnemyNum.Length;
         timer -= Time.deltaTime;
         range = Vector3.Distance(GameObject.FindWithTag("Player").transform.position, transform.position);
         if (infiniteSpawn == true)
@@ -86,7 +96,10 @@ public class SpawnEnemy : MonoBehaviour
             {
                 if (timer <= 0 && range <= activedRange)
                 {
-                    EnemySpawner();
+                    GameObject enemy = EnemySpawner();
+
+                    enemies.Add(enemy);
+                    totalEnemyNum++;
                     timer = spawnTime;
                 }
             }
@@ -136,9 +149,11 @@ public class SpawnEnemy : MonoBehaviour
         return RandomLocation;
     }
 
-    void EnemySpawner()
+    GameObject EnemySpawner()
     {
-        Instantiate(enemyPrefab, GetRandomLocationForEnemy(), transform.rotation);
+        GameObject enemy = (GameObject) Instantiate(enemyPrefab, GetRandomLocationForEnemy(), transform.rotation);
+
+        return enemy;
     }
 
     void look(Transform other)
