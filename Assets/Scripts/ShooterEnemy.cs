@@ -1,8 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ProjectileEnemy : MonoBehaviour {
+public class ShooterEnemy : MonoBehaviour {
     public GameObject[] players;
+
+    NavMeshAgent agent;
+    public Vector3 m_Origin;
+
     public float m_distance;
     public float ActivedDis = 20f;
     public float ChaseDis = 15f;
@@ -26,10 +30,11 @@ public class ProjectileEnemy : MonoBehaviour {
     void Start()
     {
         players = GameManager.m_Instance.m_Players;
+        agent = gameObject.GetComponent<NavMeshAgent>();
+        m_Origin = gameObject.transform.position;
     }
     void Update()
     {
-        look(GameObject.FindGameObjectWithTag("Player").transform);
         for (int i = 0; i < players.Length;i++ )
         {
             if(i == 0)
@@ -55,6 +60,7 @@ public class ProjectileEnemy : MonoBehaviour {
                 }
                 else if (m_distance >= ChaseDis && m_distance <= ActivedDis)
                 {
+                    chase();
                     transform.position = Vector3.Lerp(transform.position, players[i].transform.position, ChaseSpeed);
                     Debug.Log("Chasing!");
                 }
@@ -111,31 +117,6 @@ public class ProjectileEnemy : MonoBehaviour {
             //        timer = 0;
             //    }
             //}
-
-            //if (m_distance <= RunAwayDis)
-            //{
-            //    transform.position = Vector3.Lerp(transform.position, Flee, RunAwaySpeed);
-            //    Debug.Log("Running away!");
-            //}
-            //else if (m_distance > RunAwayDis && m_distance < ChaseDis)
-            //{
-            //    timer += Time.deltaTime;
-            //    if (timer > bulletwaitingtime)
-            //    {
-            //        Shoot();
-            //        timer = 0;
-            //    }
-            //    Debug.Log("Shooting!");
-            //}
-            //else if (m_distance >= ChaseDis && m_distance <= ActivedDis)
-            //{
-            //    transform.position = Vector3.Lerp(transform.position, players[i].transform.position, ChaseSpeed);
-            //    Debug.Log("Chasing!");
-            //}
-            //else if (m_distance > ActivedDis)
-            //{
-            //    Debug.Log("Stay!");
-            //}
         }
             
     }
@@ -147,6 +128,20 @@ public class ProjectileEnemy : MonoBehaviour {
         Destroy(bullet.gameObject, 1.0f);
     }
 
+    void chase()
+    {
+        if (GameObject.FindGameObjectWithTag("Player") != null)
+        {
+            look(GameObject.FindGameObjectWithTag("Player").transform);
+            agent.SetDestination(target.transform.position);
+            agent.Resume();
+        }
+    }
+    void returnToOrigin()
+    {
+        agent.SetDestination(m_Origin);
+        agent.Resume();
+    }
     void look(Transform other)
     {
         Vector3 lookPosition = other.position - transform.position;

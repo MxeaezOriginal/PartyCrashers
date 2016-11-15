@@ -23,10 +23,8 @@ public class EnemyDeath : MonoBehaviour
                 {
                     GameManager.m_Instance.m_TutorialEnemies.Add(gameObject.name);
                 }
-
-                //GameManager.m_Instance.m_PartyBarGame.m_Current += m_PartyBarAmount;
+                
                 Destroy(gameObject);
-                //gameObject.SetActive(false);
 
                 Instantiate(coin, this.gameObject.transform.position, this.gameObject.transform.rotation);
 
@@ -51,10 +49,7 @@ public class EnemyDeath : MonoBehaviour
                 {
                     GameManager.m_Instance.m_TutorialEnemies.Add(col.gameObject.name);
                 }
-
-                //GameManager.m_Instance.m_PartyBarGame.m_Current += m_PartyBarAmount;
-
-                //gameObject.SetActive(false);
+                
                 Destroy(gameObject);
 
                 Instantiate(coin, this.gameObject.transform.position, this.gameObject.transform.rotation);

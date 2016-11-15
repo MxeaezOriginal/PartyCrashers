@@ -6,7 +6,6 @@ public class ChaserEnemyAi : MonoBehaviour
 
     GameObject[] players;
     GameObject target;
-    public float moveSpeed = 4;
     NavMeshAgent agent;
     public float m_ChaseDist = 50;
     public float m_Distance;
