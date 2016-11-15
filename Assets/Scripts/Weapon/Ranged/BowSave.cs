@@ -2,45 +2,66 @@
 using System.Collections;
 using System;
 
-public class RaveGun : Ranged {
+public class BowSave : Ranged
+{
 
-    private float m_timePressed = 0;
+    [Header("Bow Setting")]
+    [Tooltip("Maximum Charging Time.")]
+    public float m_MaxCharge = 0;
+    [SerializeField]
+    [Tooltip("Minimum Shooting Speed.")]
+    private float m_MinSpeed = 0;
 
-    public float m_MaxSpeed;
-
-    public Player player;
-
+    [HideInInspector]
+    public float m_timePressed = 0;
+    [HideInInspector]
+    public bool pierce = false;
     private bool wasDown = false;
 
+    Player player;
+    PlayerController playerController;
+    RaycastHit hit;
+
+
     // Use this for initialization
-    void Start () {
-
+    void Start()
+    {
         player = GetComponentInParent<Player>();
+        playerController = GetComponent<PlayerController>();
     }
-	
-	// Update is called once per frame
-	void Update () {
 
+    // Update is called once per frame
+    void Update()
+    {
         if (m_CoolDown <= Time.time - m_Weapon1Cooldown || m_CoolDown == 0)
         {
             //Shoot if button up
             if (Input.GetAxisRaw(player.m_PrimaryAttack) == 0 && wasDown)
             {
+                while (wasDown)
+                {
+                    //playerController.m_MaxSpeed -= Time.deltaTime;
+                    shoot();
+                    wasDown = false;
 
-                shoot();
-                wasDown = false;
+                }
             }
         }
+    }
 
+    void FixedUpdate()
+    {
+        Vector3 fwd = transform.TransformDirection(Vector3.forward);
+
+        if (Physics.Raycast(transform.position, fwd, out hit, 5))
+            Debug.Log(hit.collider.gameObject.name);
 
     }
 
     public override void primaryAttack()
     {
-
         if (m_CoolDown <= Time.time - m_Weapon1Cooldown || m_CoolDown == 0)
         {
-
             //Temp Script
             /*
             GameObject balloon01;
@@ -49,18 +70,25 @@ public class RaveGun : Ranged {
             m_CoolDown = Time.time;
             */
 
-            if (m_timePressed <= m_MaxSpeed)
+            if (m_timePressed < m_MaxCharge)
             {
-                m_timePressed += Input.GetAxisRaw(player.m_PrimaryAttack) * Time.deltaTime;
+                if (m_timePressed < m_MinSpeed)
+                {
+                    m_timePressed = m_MinSpeed;
+                }
+                m_timePressed += Input.GetAxisRaw(player.m_PrimaryAttack) % Time.deltaTime;
             }
 
-            if (m_timePressed >= m_MaxSpeed) 
+            if (m_timePressed >= m_MaxCharge)
             {
-                m_timePressed = m_MaxSpeed;
+                m_timePressed = m_MaxCharge;
+                pierce = true;
             }
+            //else
+            //pierce = false;
 
             wasDown = true;
-            //Debug.Log(m_timePressed);
+            Debug.Log(m_timePressed);
 
         }
     }
@@ -79,7 +107,7 @@ public class RaveGun : Ranged {
             m_SecondaryCoolDown = Time.time;
 
         }
-        
+
     }
 
     private void shoot()

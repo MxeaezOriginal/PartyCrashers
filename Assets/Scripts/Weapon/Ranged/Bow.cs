@@ -4,69 +4,61 @@ using System;
 
 public class Bow : Ranged {
 
-    public PlayerController playerController;
-    public Player player;
-    [SerializeField]
-    public float m_MaxSpeed;
-    [SerializeField]    
-    private float m_MinSpeed;
-
-    protected float m_timePressed = 0;
-   
+    [Header("Bow Setting")]
+    [Tooltip("Maximum Charging Time.")]
+    public float m_MaxCharge = 0;    
+    [SerializeField][Tooltip("Minimum Shooting Speed.")]
+    private float m_MinSpeed = 0;
+    [SerializeField][Tooltip("Shooting Speed between 0 and (MaxCharge / 3) seconds of charge.")]
+    private float m_LowSpeed;
+    [SerializeField][Tooltip("Shooting Speed between (MaxCharge / 3) and (MaxCharge / 2) seconds of charge.")]
+    private float m_MedSpeed;
+    [HideInInspector]
+    public float m_timePressed = 0;
+    [HideInInspector]
+    public bool pierce = false;
     private bool wasDown = false;
-    protected bool pierce = false;
+    private int bulletDamage = 0;
 
+    Player player;
+
+    PlayerController playerController;  // Slow player Movement
     RaycastHit hit;
-    
+   
 
-    // Use this for initialization
     void Start ()
     {
         player = GetComponentInParent<Player>();
-        playerController = GetComponent<PlayerController>();        
+        playerController = GetComponent<PlayerController>();          
     }
 	
-	// Update is called once per frame
 	void Update ()
     {
-        if (m_CoolDown <= Time.time - m_AttackInterval || m_CoolDown == 0)
+        if(m_CoolDown <= Time.time - m_Weapon1Cooldown || m_CoolDown == 0)
         {
-            //Shoot if button up
-            if (Input.GetAxisRaw(player.m_PrimaryAttack) == 0 && wasDown)
+            //Shoot if Button Up
+            if(Input.GetAxisRaw(player.m_PrimaryAttack) == 0 && wasDown)
             {
-                while(wasDown)
-                {
-                    //playerController.m_MaxSpeed -= Time.deltaTime;
-                    shoot();
-                    wasDown = false;
-                      
-                }
+               shoot();
+               wasDown = false;
             }
         }
     }
 
     void FixedUpdate()
     {
-        Vector3 fwd = transform.TransformDirection(Vector3.forward);
+      /*  Vector3 fwd = transform.TransformDirection(Vector3.forward);
 
         if (Physics.Raycast(transform.position, fwd, out hit, 5))
             Debug.Log(hit.collider.gameObject.name);
-        
+        */
     }
 
     public override void primaryAttack()
     {
-        if (m_CoolDown <= Time.time - m_AttackInterval || m_CoolDown == 0)
-        {
-            //Temp Script
-            /*
-            GameObject balloon01;
-            balloon01 = (GameObject)Instantiate(m_Projectile, m_FirePoint[0].gameObject.transform.position, m_FirePoint[0].gameObject.transform.rotation);
-            balloon01.GetComponent<Rigidbody>().AddForce(balloon01.transform.forward * m_ProjectileSpeed);
-            m_CoolDown = Time.time;
-            */
-    
-            if (m_timePressed < m_MaxSpeed)
+        if (m_CoolDown <= Time.time - m_Weapon1Cooldown || m_CoolDown == 0)
+        {         
+            if (m_timePressed < m_MaxCharge)
             {
                 if(m_timePressed < m_MinSpeed)
                 {
@@ -75,46 +67,59 @@ public class Bow : Ranged {
                 m_timePressed += Input.GetAxisRaw(player.m_PrimaryAttack) % Time.deltaTime;
             }
 
-            if (m_timePressed >= m_MaxSpeed) 
+            if (m_timePressed >= m_MaxCharge) 
             {
-                m_timePressed = m_MaxSpeed;
+                m_timePressed = m_MaxCharge;
                 pierce = true;
+                //playerController.m_Speed -= Time.deltaTime;
             }
-            //else
-                //pierce = false;
-
             wasDown = true;
             Debug.Log(m_timePressed);
-
         }
     }
 
     public override void secondaryAttack()
     {
 
-        if (m_SecondaryCoolDown <= Time.time - m_SecondaryAttackSpeed || m_SecondaryCoolDown == 0)
+        if (m_SecondaryCoolDown <= Time.time - m_Weapon2Cooldown || m_SecondaryCoolDown == 0)
         {
-
             GameObject bigBalloon;
-            bigBalloon = (GameObject)Instantiate(m_Projectile02, m_FirePoint[0].gameObject.transform.position, m_FirePoint[0].gameObject.transform.rotation);
+            bigBalloon = (GameObject)Instantiate(m_LeftTriggerProjectile, m_FirePoint[0].gameObject.transform.position, m_FirePoint[0].gameObject.transform.rotation);
 
             bigBalloon.GetComponent<Rigidbody>().AddForce(bigBalloon.transform.forward * m_ProjectileSpeed02);
 
             m_SecondaryCoolDown = Time.time;
-
-        }
-        
+        }        
     }
 
     private void shoot()
     {
         GameObject balloon;
-        balloon = (GameObject)Instantiate(m_Projectile, m_FirePoint[0].gameObject.transform.position, m_FirePoint[0].gameObject.transform.rotation);
+        balloon = (GameObject)Instantiate(m_RightTriggerProjectile, m_FirePoint[0].gameObject.transform.position, m_FirePoint[0].gameObject.transform.rotation);
 
-        balloon.GetComponent<Rigidbody>().AddForce(balloon.transform.forward * m_ProjectileSpeed * m_timePressed);
+        if(m_timePressed < (m_MaxCharge / 2))
+        {
+            bulletDamage = m_Damage % 3;
+            balloon.GetComponent<Rigidbody>().AddForce(balloon.transform.forward * (m_MaxSpeed - m_LowSpeed) * m_timePressed);       
+        }
+        else if(m_timePressed >= (m_MaxCharge / 2) && m_timePressed < m_MaxCharge)
+        {
+            bulletDamage = m_Damage;
+            balloon.GetComponent<Rigidbody>().AddForce(balloon.transform.forward * (m_MaxSpeed - m_MedSpeed) * m_timePressed);
+        }
+        else
+        {
+            bulletDamage = m_Damage * 3;
+            balloon.GetComponent<Rigidbody>().AddForce(balloon.transform.forward * m_MaxSpeed * m_timePressed);
+        }
+        Damage(bulletDamage);
 
         m_timePressed = 0;
+        m_CoolDown = Time.time;        
+    }
 
-        m_CoolDown = Time.time;
+    private void Damage(int dmg)
+    {
+        // Need to fix the Enemy health script
     }
 }

@@ -3,11 +3,16 @@ using System.Collections;
 
 public abstract class Ranged : Weapon
 {
-
-    public GameObject m_Projectile;
-    public GameObject m_Projectile02;
-    public GameObject[] m_FirePoint;
-    public float m_ProjectileSpeed;
+    [Header("Ranged Weapons Settings")]
+    [SerializeField]
+    protected GameObject m_RightTriggerProjectile;
+    [SerializeField]
+    protected GameObject m_LeftTriggerProjectile;
+    [SerializeField]
+    protected GameObject[] m_FirePoint;
+    [SerializeField][Tooltip("Projectile Maximum Speed.")]
+    protected float m_MaxSpeed;
     protected float m_ProjectileSpeed02;
+
 
 }

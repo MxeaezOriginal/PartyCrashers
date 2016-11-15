@@ -70,7 +70,7 @@ public class Sword : Melee
 
     override public void primaryAttack()
     {
-        if (m_CoolDown <= Time.time - m_AttackSpeed || m_CoolDown == 0)
+        if (m_CoolDown <= Time.time - m_Weapon1Cooldown || m_CoolDown == 0)
         {
             attack = true;
             m_CoolDown = Time.time;
@@ -79,7 +79,7 @@ public class Sword : Melee
 
     override public void secondaryAttack()
     {
-        if (m_SecondaryCoolDown <= Time.time - m_AttackSpeed || m_SecondaryCoolDown == 0)
+        if (m_SecondaryCoolDown <= Time.time - m_Weapon1Cooldown || m_SecondaryCoolDown == 0)
         {
 
             attack = true;
