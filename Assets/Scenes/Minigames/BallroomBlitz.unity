@@ -243,6 +243,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ce65b2740421a148b24c11da9e84a06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rb: {fileID: 0}
+  KnockBackSpeed: 1
   m_PlayerName: 
   m_Player: 1
   m_AttackSpeed: 0
@@ -258,8 +260,9 @@ MonoBehaviour:
   m_Silly: Silly_P1
   m_Stats: Stats_P1
   m_Pause: Pause_P1
-  m_UsingKeyboard: 0
+  m_UsingKeyboard: 1
   delay: 2
+  m_Controller: 
 --- !u!114 &221815650
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -338,6 +341,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44435725686e6eb45914198900aeb417, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  KnockBackSpeed: 1
   m_CantMove: 0
   m_Speed: 5
   m_MaxSpeed: 10
@@ -354,7 +358,8 @@ MonoBehaviour:
   m_VerticalButton: JoystickLeftY_P1
   m_HorizontalRotationButton: JoystickRightX_P1
   m_VerticalRotationButton: JoystickRightY_P1
-  m_UsingKeyboard: 0
+  m_UsingKeyboard: 1
+  m_Velocity: {x: 0, y: 0, z: 0}
 --- !u!23 &221815655
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -787,7 +792,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Anim: {fileID: 0}
   m_Damage: 2
-  m_AttackSpeed: 1
+  m_AttackInterval: 0
   m_SecondaryAttackSpeed: 10
   m_PrimarySounds:
   - {fileID: 0}
@@ -2958,6 +2963,14 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11476508, guid: 60d76573613101c4fa8b3a544bc5bbec, type: 2}
+      propertyPath: m_UsingKeyboard
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11492956, guid: 60d76573613101c4fa8b3a544bc5bbec, type: 2}
+      propertyPath: m_UsingKeyboard
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 60d76573613101c4fa8b3a544bc5bbec, type: 2}
   m_IsPrefabParent: 0
@@ -3162,7 +3175,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Anim: {fileID: 0}
   m_Damage: 5
-  m_AttackSpeed: 0.2
+  m_AttackInterval: 0
   m_SecondaryAttackSpeed: 3
   m_PrimarySounds: []
   m_SecondarySounds: []
@@ -3172,9 +3185,10 @@ MonoBehaviour:
   m_FirePoint:
   - {fileID: 2101635406}
   m_ProjectileSpeed: 5000
-  m_ProjectileSpeed02: 100
-  m_MaxSpeed: 1.5
+  playerController: {fileID: 0}
   player: {fileID: 221815649}
+  m_MaxSpeed: 1.5
+  m_MinSpeed: 0
 --- !u!23 &1105058288
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3812,6 +3826,14 @@ Prefab:
     - target: {fileID: 165310, guid: 70a6e5df92fc1f44c936dd18e964f37e, type: 2}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11463592, guid: 70a6e5df92fc1f44c936dd18e964f37e, type: 2}
+      propertyPath: m_UsingKeyboard
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11408334, guid: 70a6e5df92fc1f44c936dd18e964f37e, type: 2}
+      propertyPath: m_UsingKeyboard
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 70a6e5df92fc1f44c936dd18e964f37e, type: 2}
@@ -5221,6 +5243,14 @@ Prefab:
     - target: {fileID: 103422, guid: 1cc1cf5cc72082b46a4dad206a8ffc4d, type: 2}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11432056, guid: 1cc1cf5cc72082b46a4dad206a8ffc4d, type: 2}
+      propertyPath: m_UsingKeyboard
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11429300, guid: 1cc1cf5cc72082b46a4dad206a8ffc4d, type: 2}
+      propertyPath: m_UsingKeyboard
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1cc1cf5cc72082b46a4dad206a8ffc4d, type: 2}
