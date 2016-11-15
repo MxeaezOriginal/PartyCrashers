@@ -3275,8 +3275,9 @@ GameObject:
   - 114: {fileID: 846012272}
   - 114: {fileID: 846012271}
   - 114: {fileID: 846012270}
+  - 95: {fileID: 846012274}
   m_Layer: 5
-  m_Name: PRESS ANY BUTTON
+  m_Name: PRESS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3404,6 +3405,23 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 846012268}
+--- !u!95 &846012274
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 846012268}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7b9d7578e8d94bf4ca1d7154f885ff11, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &878740098
 GameObject:
   m_ObjectHideFlags: 0
@@ -6639,7 +6657,7 @@ MonoBehaviour:
   m_VerticalAxis: Vertical
   m_SubmitButton: Jump_P1
   m_CancelButton: Primary2_P1
-  m_InputActionsPerSecond: 10
+  m_InputActionsPerSecond: 5
   m_RepeatDelay: 0.5
   m_ForceModuleActive: 0
 --- !u!114 &2009399409
@@ -6944,8 +6962,12 @@ MonoBehaviour:
   creditsCanvas: {fileID: 86070202}
   exitPromptCanvas: {fileID: 1971804960}
   exitCanvas: {fileID: 696558434}
-  firstSelectionSplashButton: {fileID: 846012268}
-  firstSelectionPlayButton: {fileID: 1903605551}
+  splashButton: {fileID: 846012268}
+  mainMenuButton: {fileID: 1903605551}
+  playButton: {fileID: 1749456821}
+  settingsButton: {fileID: 1821627193}
+  creditsButton: {fileID: 528520514}
+  exitPromptButton: {fileID: 1590346515}
   waitedForADelay: 0
   splashActive: 0
   mainMenuActive: 0

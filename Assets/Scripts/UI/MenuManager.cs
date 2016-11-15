@@ -17,7 +17,13 @@ public class MenuManager : MonoBehaviour
     public GameObject exitPromptCanvas; //Exit Prompt Canvas
     public GameObject exitCanvas; //Exit Canvas
 
-    public GameObject firstSelectionSplashButton, firstSelectionPlayButton;
+    [Header("Different 'First Selected' Buttons")]
+    public GameObject splashButton;
+    public GameObject mainMenuButton;
+    public GameObject playButton;
+    public GameObject settingsButton;
+    public GameObject creditsButton;
+    public GameObject exitPromptButton;
 
     [Header("Bools")]
     public bool waitedForADelay;
@@ -29,6 +35,14 @@ public class MenuManager : MonoBehaviour
     bool testPressed;
     void Awake()
     {
+        //splashCanvas = GameObject.Find("Main Menu/Splash Canvas");
+        //mainMenuCanvas = GameObject.Find("Main Menu/MainMenu Canvas");
+        //playCanvas = GameObject.Find("Main Menu/Play Canvas");
+        //settingsCanvas = GameObject.Find("Main Menu/Settings Canvas");
+        //creditsCanvas = GameObject.Find("Main Menu/Credits Canvas");
+        //exitPromptCanvas = GameObject.Find("Main Menu/Exit Prompt Canvas");
+        //exitCanvas = GameObject.Find("Main Menu/Exit Canvas");
+
         anim = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Animator>();
         es = GameObject.Find("Main Menu/EventSystem").GetComponent<EventSystem>();
     }
@@ -36,11 +50,8 @@ public class MenuManager : MonoBehaviour
     void Start()
     {
         splashActive = true;
-
-        es.enabled = false; es.enabled = true; //IMPORTANT!
-        es.firstSelectedGameObject = firstSelectionSplashButton;
-
-        InvokeRepeating("test", 0.2f, 0.8f);
+        
+        //InvokeRepeating("test", 0.2f, 0.8f);
     }
 
     void Update()
@@ -48,9 +59,9 @@ public class MenuManager : MonoBehaviour
         PlayerSelect();
 
         if (splashActive)
-            Splash();
+            StartCoroutine(Splash());
         if (mainMenuActive)
-            MainMenu();
+            StartCoroutine(MainMenu());
         if (playActive)
             StartCoroutine(Play());
         if (settingsActive)
@@ -58,9 +69,9 @@ public class MenuManager : MonoBehaviour
         if (creditsActive)
             StartCoroutine(Credits());
         if (exitPrompt)
-            ExitPrompt();
+            StartCoroutine(ExitPrompt());
         if (exitActive)
-            Exit();
+            StartCoroutine(Exit());
     }
 
     void test()
@@ -77,13 +88,14 @@ public class MenuManager : MonoBehaviour
 
     //Main Functions for setting all the bools
 
-    void Splash()
+    IEnumerator Splash()
     {
+        yield return null; es.SetSelectedGameObject(null); es.enabled = false; es.enabled = true; es.SetSelectedGameObject(splashButton); es.firstSelectedGameObject = splashButton;
+
         //Setting Animator bools
         anim.SetBool("Play", false);
         anim.SetBool("Settings", false);
         anim.SetBool("Credits", false);
-        anim.SetBool("Exit", false);
 
         //Setting ****Active bool to false to prevent multiple function runs
         splashActive = false;
@@ -97,15 +109,13 @@ public class MenuManager : MonoBehaviour
         exitPromptCanvas.SetActive(false);
         exitCanvas.SetActive(false);
     }
-    void MainMenu()
+    IEnumerator MainMenu()
     {
-        es.enabled = false; es.enabled = true; //IMPORTANT!
-        es.firstSelectedGameObject = firstSelectionPlayButton;
+        yield return null; es.SetSelectedGameObject(null); es.enabled = false; es.enabled = true; es.SetSelectedGameObject(mainMenuButton); es.firstSelectedGameObject = mainMenuButton;
 
         anim.SetBool("Play", false);
         anim.SetBool("Settings", false);
         anim.SetBool("Credits", false);
-        anim.SetBool("Exit", false);
 
         mainMenuActive = false;
 
@@ -119,10 +129,11 @@ public class MenuManager : MonoBehaviour
     }
     IEnumerator Play()
     {
+        yield return null; es.SetSelectedGameObject(null); es.enabled = false; es.enabled = true; es.SetSelectedGameObject(playButton); es.firstSelectedGameObject = playButton;
+
         anim.SetBool("Play", true);
         anim.SetBool("Settings", false);
         anim.SetBool("Credits", false);
-        anim.SetBool("Exit", false);
 
         playActive = false;
 
@@ -138,10 +149,11 @@ public class MenuManager : MonoBehaviour
     }
     IEnumerator Settings()
     {
+        yield return null; es.SetSelectedGameObject(null); es.enabled = false; es.enabled = true; es.SetSelectedGameObject(settingsButton); es.firstSelectedGameObject = settingsButton;
+
         anim.SetBool("Play", false);
         anim.SetBool("Settings", true);
         anim.SetBool("Credits", false);
-        anim.SetBool("Exit", false);
 
         settingsActive = false;
 
@@ -157,10 +169,11 @@ public class MenuManager : MonoBehaviour
     }
     IEnumerator Credits()
     {
+        yield return null; es.SetSelectedGameObject(null); es.enabled = false; es.enabled = true; es.SetSelectedGameObject(creditsButton); es.firstSelectedGameObject = creditsButton;
+
         anim.SetBool("Play", false);
         anim.SetBool("Settings", false);
         anim.SetBool("Credits", true);
-        anim.SetBool("Exit", false);
 
         creditsActive = false;
 
@@ -174,8 +187,10 @@ public class MenuManager : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
         creditsCanvas.SetActive(true);
     }
-    void ExitPrompt()
+    IEnumerator ExitPrompt()
     {
+        yield return null; es.SetSelectedGameObject(null); es.enabled = false; es.enabled = true; es.SetSelectedGameObject(exitPromptButton); es.firstSelectedGameObject = exitPromptButton;
+
         splashCanvas.SetActive(false);
         mainMenuCanvas.SetActive(true);
         playCanvas.SetActive(false);
@@ -191,12 +206,12 @@ public class MenuManager : MonoBehaviour
             child.GetComponentInChildren<Button>().interactable = false;
         }
     }
-    void Exit()
+    IEnumerator Exit()
     {
+        yield return null;
         anim.SetBool("Play", false);
         anim.SetBool("Settings", false);
         anim.SetBool("Credits", false);
-        anim.SetBool("Exit", true);
 
         exitActive = false;
 
