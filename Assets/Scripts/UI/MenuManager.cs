@@ -27,10 +27,12 @@ public class MenuManager : MonoBehaviour
 
     [Header("Bools")]
     public bool waitedForADelay;
-    public bool splashActive, mainMenuActive, playActive, settingsActive, creditsActive, exitPrompt, exitActive;
+    public bool splashActive, mainMenuActive, playActive, settingsActive, creditsActive, exitPromptActive, exitActive;
     Animator anim;
     EventSystem es;
 
+
+    UnityEngine.UI.Button btn;
 
     bool testPressed;
     void Awake()
@@ -50,7 +52,7 @@ public class MenuManager : MonoBehaviour
     void Start()
     {
         splashActive = true;
-        
+        //Cursor.visible = false;
         //InvokeRepeating("test", 0.2f, 0.8f);
     }
 
@@ -68,10 +70,8 @@ public class MenuManager : MonoBehaviour
             StartCoroutine(Settings());
         if (creditsActive)
             StartCoroutine(Credits());
-        if (exitPrompt)
+        if (exitPromptActive)
             StartCoroutine(ExitPrompt());
-        if (exitActive)
-            StartCoroutine(Exit());
     }
 
     void test()
@@ -107,7 +107,6 @@ public class MenuManager : MonoBehaviour
         settingsCanvas.SetActive(false);
         creditsCanvas.SetActive(false);
         exitPromptCanvas.SetActive(false);
-        exitCanvas.SetActive(false);
     }
     IEnumerator MainMenu()
     {
@@ -125,11 +124,9 @@ public class MenuManager : MonoBehaviour
         settingsCanvas.SetActive(false);
         creditsCanvas.SetActive(false);
         exitPromptCanvas.SetActive(false);
-        exitCanvas.SetActive(false);
     }
     IEnumerator Play()
     {
-        yield return null; es.SetSelectedGameObject(null); es.enabled = false; es.enabled = true; es.SetSelectedGameObject(playButton); es.firstSelectedGameObject = playButton;
 
         anim.SetBool("Play", true);
         anim.SetBool("Settings", false);
@@ -142,15 +139,14 @@ public class MenuManager : MonoBehaviour
         settingsCanvas.SetActive(false);
         creditsCanvas.SetActive(false);
         exitPromptCanvas.SetActive(false);
-        exitCanvas.SetActive(false);
 
         yield return new WaitForSeconds(1.5f);
         playCanvas.SetActive(true);
+
+        yield return null; es.SetSelectedGameObject(null); es.enabled = false; es.enabled = true; es.SetSelectedGameObject(playButton); es.firstSelectedGameObject = playButton;
     }
     IEnumerator Settings()
     {
-        yield return null; es.SetSelectedGameObject(null); es.enabled = false; es.enabled = true; es.SetSelectedGameObject(settingsButton); es.firstSelectedGameObject = settingsButton;
-
         anim.SetBool("Play", false);
         anim.SetBool("Settings", true);
         anim.SetBool("Credits", false);
@@ -162,15 +158,14 @@ public class MenuManager : MonoBehaviour
         playCanvas.SetActive(false);
         creditsCanvas.SetActive(false);
         exitPromptCanvas.SetActive(false);
-        exitCanvas.SetActive(false);
 
         yield return new WaitForSeconds(1.5f);
         settingsCanvas.SetActive(true);
+
+        yield return null; es.SetSelectedGameObject(null); es.enabled = false; es.enabled = true; es.SetSelectedGameObject(settingsButton); es.firstSelectedGameObject = settingsButton;
     }
     IEnumerator Credits()
     {
-        yield return null; es.SetSelectedGameObject(null); es.enabled = false; es.enabled = true; es.SetSelectedGameObject(creditsButton); es.firstSelectedGameObject = creditsButton;
-
         anim.SetBool("Play", false);
         anim.SetBool("Settings", false);
         anim.SetBool("Credits", true);
@@ -182,46 +177,30 @@ public class MenuManager : MonoBehaviour
         playCanvas.SetActive(false);
         settingsCanvas.SetActive(false);
         exitPromptCanvas.SetActive(false);
-        exitCanvas.SetActive(false);
 
         yield return new WaitForSeconds(1.5f);
         creditsCanvas.SetActive(true);
+
+        yield return null; es.SetSelectedGameObject(null); es.enabled = false; es.enabled = true; es.SetSelectedGameObject(creditsButton); es.firstSelectedGameObject = creditsButton;
     }
     IEnumerator ExitPrompt()
     {
-        yield return null; es.SetSelectedGameObject(null); es.enabled = false; es.enabled = true; es.SetSelectedGameObject(exitPromptButton); es.firstSelectedGameObject = exitPromptButton;
-
         splashCanvas.SetActive(false);
         mainMenuCanvas.SetActive(true);
         playCanvas.SetActive(false);
         settingsCanvas.SetActive(false);
         creditsCanvas.SetActive(false);
         exitPromptCanvas.SetActive(true);
-        exitCanvas.SetActive(false);
 
+        exitPromptActive = false;
+
+        yield return null; es.SetSelectedGameObject(null); es.enabled = false; es.enabled = true; es.SetSelectedGameObject(exitPromptButton); es.firstSelectedGameObject = exitPromptButton;
 
         //Disabling buttons of MainMenu but don't hide
         foreach (Transform child in mainMenuCanvas.transform)
         {
             child.GetComponentInChildren<Button>().interactable = false;
         }
-    }
-    IEnumerator Exit()
-    {
-        yield return null;
-        anim.SetBool("Play", false);
-        anim.SetBool("Settings", false);
-        anim.SetBool("Credits", false);
-
-        exitActive = false;
-
-        splashCanvas.SetActive(false);
-        mainMenuCanvas.SetActive(false);
-        playCanvas.SetActive(false);
-        settingsCanvas.SetActive(false);
-        creditsCanvas.SetActive(false);
-        exitPromptCanvas.SetActive(false);
-        exitCanvas.SetActive(true);
     }
 
     //Functions assigned to buttons in main menu - SETTING ****Active bool to true;
@@ -244,19 +223,19 @@ public class MenuManager : MonoBehaviour
     }
     public void ExitPromptButton()
     {
-        exitPrompt = true;
+        exitPromptActive = true;
     }
     public void ExitPromptYes()
     {
         exitActive = true;
 
-        exitPrompt = false;
+        exitPromptActive = false;
         exitPromptCanvas.SetActive(false);
         mainMenuCanvas.SetActive(false);
     }
     public void ExitPromptNo()
     {
-        exitPrompt = false;
+        exitPromptActive = false;
         exitPromptCanvas.SetActive(false);
 
         //Enabling buttons of MainMenu but don't hide
@@ -264,6 +243,8 @@ public class MenuManager : MonoBehaviour
         {
             child.GetComponentInChildren<Button>().interactable = true;
         }
+        mainMenuButton.GetComponent<Button>().Select();
+
     }
     public void BackButton()
     {
