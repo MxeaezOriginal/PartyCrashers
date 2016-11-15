@@ -15,7 +15,7 @@ public class Chest : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
     {
-        if (isOpen == true && alreadyOpen == false && Input.GetButtonDown("Interact_P1"))
+        if (isOpen == true && alreadyOpen == false && (Input.GetButtonDown("Interact_P1")||Input.GetButtonDown("Interact_Keyboard")) )
         {
             for (int i = 0; i < prefab.Length; i++)
             {

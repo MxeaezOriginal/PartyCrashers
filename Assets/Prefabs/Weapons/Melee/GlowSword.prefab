@@ -13,9 +13,11 @@ GameObject:
   - 114: {fileID: 11428284}
   - 114: {fileID: 11446614}
   - 114: {fileID: 11425574}
+  - 114: {fileID: 11406356}
+  - 65: {fileID: 6555636}
   m_Layer: 0
   m_Name: GlowSword
-  m_TagString: Untagged
+  m_TagString: sword
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -110,6 +112,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &6555636
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 124012}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.37308225, y: 1.1474856, z: 0.17006235}
+  m_Center: {x: 0.000000014901161, y: 0.5737428, z: 0}
 --- !u!65 &6566068
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -122,6 +136,17 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &11406356
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 124012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12e045833cf982145b739c84ec945525, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11425574
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -147,7 +172,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Anim: {fileID: 0}
   m_Damage: 2
-  m_AttackSpeed: 1
+  m_AttackInterval: 0
   m_SecondaryAttackSpeed: 10
   m_PrimarySounds:
   - {fileID: 0}
