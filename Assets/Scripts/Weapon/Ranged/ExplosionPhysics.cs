@@ -3,8 +3,8 @@ using System.Collections;
 
 public class ExplosionPhysics : MonoBehaviour {
 
-    
-    public float power = 0f;
+    [SerializeField]
+    private float power = 0f;
 
     private float radius = 4f;
     private EnemyAI enemyAiScript;
@@ -27,7 +27,7 @@ public class ExplosionPhysics : MonoBehaviour {
                     // Disable Enemy AI script
                     enemyAiScript = hit.GetComponent<EnemyAI>();
                     enemyAiScript.enabled = false;
-                    // Add a Rigid Body and set its mass to 0.5
+                    // Add a Rigidbody and set its mass to 0.5
                     hit.gameObject.AddComponent<Rigidbody>();
                     Rigidbody rb = hit.GetComponent<Rigidbody>();
                     rb.mass = 0.5f;

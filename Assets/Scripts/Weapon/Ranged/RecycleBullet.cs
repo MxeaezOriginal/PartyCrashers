@@ -1,40 +1,41 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class RecycleBullet : Bow
+public class RecycleBullet : MonoBehaviour
 {
     [SerializeField]
     private float bulletLifeTimer;
 
-   
+    private Bow bow;
 
     public void Start()
-    {
+    {       
+        bow = GameObject.Find("WaterBalloonBow").GetComponent<Bow>();
         StartCoroutine(DeactivateCallback());
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(!pierce)
+         if (!bow.pierce)
         {
             if (other.tag != "Coins")
-                OffBullet();
+                DestroyBullet();
         }
-
+        if(bow.pierce)
+        {
+          if (other.tag != "MeleeEnemy"  && other.tag != "Coins")
+                DestroyBullet();
+        }        
     }
 
     private IEnumerator DeactivateCallback()
     {
         yield return new WaitForSeconds(bulletLifeTimer);
-        OffBullet();
+        DestroyBullet();
     }
 
-    private void OffBullet()
+    private void DestroyBullet()
     {
-        // Desactivate this game object, need to create bullets pool
-        // gameObject.SetActive(false); // Deactivated until pool is ready
-
-        // Temporary Meassure
         Destroy(gameObject);
     }
 }

@@ -6,30 +6,37 @@ public class Bow : Ranged {
 
     [Header("Bow Setting")]
     [Tooltip("Maximum Charging Time.")]
-    public float m_MaxCharge = 0;    
-    [SerializeField][Tooltip("Minimum Shooting Speed.")]
-    private float m_MinSpeed = 0;
-    [SerializeField][Tooltip("Shooting Speed between 0 and (MaxCharge / 3) seconds of charge.")]
+    public float m_MaxCharge = 0f;
+    [SerializeField][Tooltip("Maximum Shooting Speed.")]
+    private float m_MaxSpeed = 0f;
+    [SerializeField][Tooltip("Medium Shooting Speed.")]
+    private float m_MedSpeed = 0f;
+    [SerializeField][Tooltip("Low Shooting Speed.")]
     private float m_LowSpeed;
-    [SerializeField][Tooltip("Shooting Speed between (MaxCharge / 3) and (MaxCharge / 2) seconds of charge.")]
-    private float m_MedSpeed;
+    [SerializeField][Tooltip("Minimum Shooting Speed.")]
+    private float m_MinSpeed = 0f;
     [HideInInspector]
-    public float m_timePressed = 0;
-    [HideInInspector]
+    public float m_timePressed = 0f;
     public bool pierce = false;
+    [HideInInspector]
     private bool wasDown = false;
     private int bulletDamage = 0;
 
+    //PlayerController playerController;  // Slow player Movement
     Player player;
 
-    PlayerController playerController;  // Slow player Movement
+    Ray ray;
     RaycastHit hit;
-   
+    // Add the fire particle effect to the raycast so that its visible when fully charged
+    // when weapon is fully charged, do not shoot projectile, only raycast particle effect
+    // http://addcomponent.com/lesson-4-shooting-stuff-with-unity-3d-raycasting/
+
+
 
     void Start ()
     {
         player = GetComponentInParent<Player>();
-        playerController = GetComponent<PlayerController>();          
+        //playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();          
     }
 	
 	void Update ()
@@ -47,11 +54,11 @@ public class Bow : Ranged {
 
     void FixedUpdate()
     {
-      /*  Vector3 fwd = transform.TransformDirection(Vector3.forward);
+        Vector3 fwd = transform.TransformDirection(Vector3.forward);
 
         if (Physics.Raycast(transform.position, fwd, out hit, 5))
             Debug.Log(hit.collider.gameObject.name);
-        */
+        
     }
 
     public override void primaryAttack()
@@ -67,11 +74,11 @@ public class Bow : Ranged {
                 m_timePressed += Input.GetAxisRaw(player.m_PrimaryAttack) % Time.deltaTime;
             }
 
-            if (m_timePressed >= m_MaxCharge) 
+            if (m_timePressed >= m_MaxCharge)   //MaxCharge not working correctly
             {
                 m_timePressed = m_MaxCharge;
-                pierce = true;
-                //playerController.m_Speed -= Time.deltaTime;
+                //playerController.m_TurnSpeed = playerController.m_TurnSpeed / 2;
+                pierce = true;                
             }
             wasDown = true;
             Debug.Log(m_timePressed);
@@ -100,12 +107,12 @@ public class Bow : Ranged {
         if(m_timePressed < (m_MaxCharge / 2))
         {
             bulletDamage = m_Damage % 3;
-            balloon.GetComponent<Rigidbody>().AddForce(balloon.transform.forward * (m_MaxSpeed - m_LowSpeed) * m_timePressed);       
+            balloon.GetComponent<Rigidbody>().AddForce(balloon.transform.forward * m_LowSpeed * m_timePressed);       
         }
         else if(m_timePressed >= (m_MaxCharge / 2) && m_timePressed < m_MaxCharge)
         {
             bulletDamage = m_Damage;
-            balloon.GetComponent<Rigidbody>().AddForce(balloon.transform.forward * (m_MaxSpeed - m_MedSpeed) * m_timePressed);
+            balloon.GetComponent<Rigidbody>().AddForce(balloon.transform.forward * m_MedSpeed * m_timePressed);
         }
         else
         {

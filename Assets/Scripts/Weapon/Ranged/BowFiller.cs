@@ -15,7 +15,7 @@ public class BowFiller : MonoBehaviour {
 
     void Start()
     {
-        bow = GetComponent<Bow>();
+        bow = GameObject.Find("WaterBalloonBow").GetComponent<Bow>();
         m_Bar = GetComponent<Image>();
         m_Max = bow.m_MaxCharge;
         m_Current = bow.m_timePressed;

@@ -8,9 +8,9 @@ public abstract class Weapon : MonoBehaviour {
     [SerializeField]
     protected int m_Damage = 0;
     [SerializeField]
-    protected float m_Weapon1Cooldown = 0;
+    protected float m_Weapon1Cooldown = 0f;
     [SerializeField]
-    protected float m_Weapon2Cooldown = 0;
+    protected float m_Weapon2Cooldown = 0f;
     [SerializeField]
     protected AudioClip[] m_PrimarySounds;
     [SerializeField]
