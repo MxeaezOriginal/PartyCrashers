@@ -3,7 +3,7 @@ using System.Collections;
 
 public class ShooterEnemy : MonoBehaviour {
     public GameObject[] players;
-
+    GameObject target;
     NavMeshAgent agent;
     public Vector3 m_Origin;
 
@@ -21,7 +21,7 @@ public class ShooterEnemy : MonoBehaviour {
     //public float range = 50.0f;
     //float dis;
     public float bulletImpulse = 20.0f;
-    Transform target;
+    //Transform target;
     float timer;
     public float bulletwaitingtime = 3.0f;
     public Rigidbody projectile;
@@ -40,6 +40,8 @@ public class ShooterEnemy : MonoBehaviour {
             if(i == 0)
             {
                 m_distance = Vector3.Distance(transform.position, players[i].transform.position);
+                target = players[i];
+                look(target.transform);
                 MoveDir = transform.position - players[i].transform.position;
                 Flee = transform.position + MoveDir;
                 //target = players[i].transform;
@@ -61,7 +63,7 @@ public class ShooterEnemy : MonoBehaviour {
                 else if (m_distance >= ChaseDis && m_distance <= ActivedDis)
                 {
                     chase();
-                    transform.position = Vector3.Lerp(transform.position, players[i].transform.position, ChaseSpeed);
+                    //transform.position = Vector3.Lerp(transform.position, players[i].transform.position, ChaseSpeed);
                     Debug.Log("Chasing!");
                 }
                 else if (m_distance > ActivedDis)
@@ -75,6 +77,8 @@ public class ShooterEnemy : MonoBehaviour {
                 if (Vector3.Distance(transform.position, players[i].transform.position) < m_distance)
                 {
                     m_distance = Vector3.Distance(transform.position, players[i].transform.position);
+                    target = players[i];
+                    look(target.transform);
                     MoveDir = transform.position - players[i].transform.position;
                     Flee = transform.position + MoveDir;
                     //target = players[i].transform;
@@ -95,7 +99,8 @@ public class ShooterEnemy : MonoBehaviour {
                     }
                     else if (m_distance >= ChaseDis && m_distance <= ActivedDis)
                     {
-                        transform.position = Vector3.Lerp(transform.position, players[i].transform.position, ChaseSpeed);
+                        chase();
+                        //transform.position = Vector3.Lerp(transform.position, players[i].transform.position, ChaseSpeed);
                         Debug.Log("Chasing!");
                     }
                     else if (m_distance > ActivedDis)
@@ -132,7 +137,7 @@ public class ShooterEnemy : MonoBehaviour {
     {
         if (GameObject.FindGameObjectWithTag("Player") != null)
         {
-            look(GameObject.FindGameObjectWithTag("Player").transform);
+            //look(GameObject.FindGameObjectWithTag("Player").transform);
             agent.SetDestination(target.transform.position);
             agent.Resume();
         }

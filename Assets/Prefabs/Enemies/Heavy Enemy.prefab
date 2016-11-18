@@ -32,6 +32,7 @@ GameObject:
   - 195: {fileID: 19566810}
   - 114: {fileID: 11478310}
   - 114: {fileID: 11419886}
+  - 114: {fileID: 11439040}
   m_Layer: 0
   m_Name: Heavy Enemy
   m_TagString: MeleeEnemy
@@ -45,8 +46,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 193810}
-  m_LocalRotation: {x: -0, y: 0.60119957, z: 0, w: -0.7990989}
-  m_LocalPosition: {x: -8.981028, y: 5.24, z: 14.094368}
+  m_LocalRotation: {x: 0, y: 0.99999344, z: 0, w: 0.0036185174}
+  m_LocalPosition: {x: -0.45389697, y: 1, z: -4.120014}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 486448}
@@ -156,7 +157,7 @@ MonoBehaviour:
   m_EnemyHealth: 50
   m_PartyBarAmount: 2
   coin: {fileID: 0}
---- !u!114 &11478310
+--- !u!114 &11439040
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -164,14 +165,30 @@ MonoBehaviour:
   m_GameObject: {fileID: 193810}
   m_Enabled: 1
   m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56a90f5a51e51e04dad3396e0048d6f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Distance: 0
+  m_RotationSpeed: 2
+  ViewRange: 120
+  ViewDis: 10
+  m_Origin: {x: 0, y: 0, z: 0}
+  Script_enemydeath: {fileID: 0}
+--- !u!114 &11478310
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 193810}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 67030a5d1ef6f364980f3ebee7b5228f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 2
-  m_ChaseDist: 17
+  m_ChaseDist: 15
   m_Distance: 0
   m_StopDistance: 0
-  m_RotationSpeed: 5
+  m_RotationSpeed: 1
   m_Origin: {x: 0, y: 0, z: 0}
 --- !u!136 &13613680
 CapsuleCollider:
