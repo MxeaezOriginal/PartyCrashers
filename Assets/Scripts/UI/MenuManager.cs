@@ -30,7 +30,7 @@ public class MenuManager : MonoBehaviour
     public bool splashActive, mainMenuActive, playActive, settingsActive, creditsActive, exitPromptActive, exitActive;
     Animator anim;
     EventSystem es;
-
+    CharacterSelect characterSelect;
 
     UnityEngine.UI.Button btn;
 
@@ -47,6 +47,7 @@ public class MenuManager : MonoBehaviour
 
         anim = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Animator>();
         es = GameObject.Find("Main Menu/EventSystem").GetComponent<EventSystem>();
+
     }
 
     void Start()
@@ -58,7 +59,6 @@ public class MenuManager : MonoBehaviour
 
     void Update()
     {
-        PlayerSelect();
 
         if (splashActive)
             StartCoroutine(Splash());
@@ -249,28 +249,5 @@ public class MenuManager : MonoBehaviour
     public void BackButton()
     {
         mainMenuActive = true;
-    }
-
-    private void PlayerSelect()
-    {
-        if (playCanvas.activeSelf && Input.GetButtonDown("A_P2") && GameManager.m_Instance.m_NumOfPlayers == 1)
-        {
-            Debug.Log("Player 2 has Joined!");
-            GameManager.m_Instance.m_NumOfPlayers++;
-        }
-        if (playCanvas.activeSelf && Input.GetButtonDown("A_P3") && GameManager.m_Instance.m_NumOfPlayers == 2)
-        {
-            Debug.Log("Player 3 has Joined!");
-            GameManager.m_Instance.m_NumOfPlayers++;
-        }
-        if (playCanvas.activeSelf && Input.GetButtonDown("A_P4") && GameManager.m_Instance.m_NumOfPlayers == 3)
-        {
-            Debug.Log("Player 4 has Joined!");
-            GameManager.m_Instance.m_NumOfPlayers++;
-        }
-        if (playCanvas.activeSelf && Input.GetButtonDown("A_P1"))
-        {
-            SceneManager.LoadScene(1); //tutorial scene
-        }
     }
 }
