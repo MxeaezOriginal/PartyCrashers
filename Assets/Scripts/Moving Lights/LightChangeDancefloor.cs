@@ -25,7 +25,9 @@ public class LightChangeDancefloor : MonoBehaviour {
 	private float colorSwapTime;
 
 	[SerializeField]
-	private float stoptime = 1;
+	private float scoretime = 4;
+	[SerializeField]
+	private float stoptime = 4;
 
 	private Color CurrentColor;
 	private int CurrentColorInt;
@@ -49,14 +51,15 @@ public class LightChangeDancefloor : MonoBehaviour {
 	{
 		if (stop == true) 
 		{
-			StartCoroutine (Stopedfor (stoptime));
+			StartCoroutine (Stopedfor (scoretime));
 		}
 		else if (stop == false) 
 		{
-			StartCoroutine(Stopfor(stoptime));
-			ColorRandomiser ();
+			StartCoroutine(Stopfor(scoretime));
+			StartCoroutine(ColorRandomiser(stoptime));
+			lt.color = Color.Lerp (CurrentColor, PreviousColor, Mathf.PingPong (Time.time, 1));
 		}
-		lt.color = Color.Lerp (CurrentColor, PreviousColor, Mathf.PingPong (Time.time, 1));
+
 		//For future reference, to make it only go one direction you will need to raise the variable ie.
 		// lt.color = Color.Lerp(CurrentColor, PreviousColor,  "0.1 value raised by x until 1");
 	}
@@ -91,12 +94,14 @@ public class LightChangeDancefloor : MonoBehaviour {
 
 	} 
 
-	void ColorRandomiser()
+	IEnumerator ColorRandomiser(float wait)
 	{
+		yield return new WaitForSeconds(wait);
 		CurrentColorInt = Random.Range (0,7);
 		PreviousColorInt = Random.Range (0,7);
 		if (CurrentColorInt == PreviousColorInt) {
-			ColorRandomiser ();
+			CurrentColorInt = Random.Range (0,7);
+			PreviousColorInt = Random.Range (0,7);
 		} 
 		else//im so sorry
 		{
