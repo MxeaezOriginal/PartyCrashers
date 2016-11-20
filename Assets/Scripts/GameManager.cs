@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
         public int maxHealth;
         public WEAPONTYPE weaponID;
         public Vector3 lastLocation;
+        public string m_Controller;
     }
 
     public static GameManager m_Instance;
@@ -53,7 +54,7 @@ public class GameManager : MonoBehaviour
             }
             FindHearts();
             FindStatsWindowAnimator();
-            m_NumOfPlayers = 1;
+            m_NumOfPlayers = 0;
         }
         else
         {

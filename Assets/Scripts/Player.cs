@@ -94,26 +94,6 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButton("Interact_P1"))
-        {
-            m_Controller = "P1";
-            m_Player = PLAYER.P1;
-        }
-        else if (Input.GetButton("Interact_P2"))
-        {
-            m_Controller = "P2";
-            m_Player = PLAYER.P2;
-        }
-        else if (Input.GetButton("Interact_P3"))
-        {
-            m_Controller = "P3";
-            m_Player = PLAYER.P3;
-        }
-        else if (Input.GetButton("Interact_P4"))
-        {
-            m_Controller = "P4";
-            m_Player = PLAYER.P4;
-        }
         if (m_Heart.IsDead() || Input.GetKeyDown(KeyCode.Y))
         {
             respawn();
@@ -274,6 +254,7 @@ public class Player : MonoBehaviour
                 //GameManager.m_Instance.m_Player1.maxHealth = m_MaxHealth;
                 GameManager.m_Instance.m_Player1.weaponID = m_WeaponID;
                 GameManager.m_Instance.m_Player1.lastLocation = m_LastLocation;
+                GameManager.m_Instance.m_Player1.m_Controller = m_Controller;
                 break;
             case PLAYER.P2:
                 GameManager.m_Instance.m_Player2.name = m_PlayerName;
@@ -285,6 +266,7 @@ public class Player : MonoBehaviour
                 //GameManager.m_Instance.m_Player2.maxHealth = m_MaxHealth;
                 GameManager.m_Instance.m_Player2.weaponID = m_WeaponID;
                 GameManager.m_Instance.m_Player2.lastLocation = m_LastLocation;
+                GameManager.m_Instance.m_Player2.m_Controller = m_Controller;
                 break;
             case PLAYER.P3:
                 GameManager.m_Instance.m_Player3.name = m_PlayerName;
@@ -296,6 +278,7 @@ public class Player : MonoBehaviour
                 //GameManager.m_Instance.m_Player3.maxHealth = m_MaxHealth;
                 GameManager.m_Instance.m_Player3.weaponID = m_WeaponID;
                 GameManager.m_Instance.m_Player3.lastLocation = m_LastLocation;
+                GameManager.m_Instance.m_Player3.m_Controller = m_Controller;
                 break;
             case PLAYER.P4:
                 GameManager.m_Instance.m_Player4.name = m_PlayerName;
@@ -307,6 +290,7 @@ public class Player : MonoBehaviour
                 //GameManager.m_Instance.m_Player4.maxHealth = m_MaxHealth;
                 GameManager.m_Instance.m_Player4.weaponID = m_WeaponID;
                 GameManager.m_Instance.m_Player4.lastLocation = m_LastLocation;
+                GameManager.m_Instance.m_Player4.m_Controller = m_Controller;
                 break;
         }
     }
@@ -325,6 +309,7 @@ public class Player : MonoBehaviour
                 //m_MaxHealth = GameManager.m_Instance.m_Player1.maxHealth;
                 m_WeaponID = GameManager.m_Instance.m_Player1.weaponID;
                 m_LastLocation = GameManager.m_Instance.m_Player1.lastLocation;
+                m_Controller = GameManager.m_Instance.m_Player1.m_Controller;
                 break;
             case PLAYER.P2:
                 m_PlayerName = GameManager.m_Instance.m_Player2.name;
@@ -336,6 +321,7 @@ public class Player : MonoBehaviour
                 //m_MaxHealth = GameManager.m_Instance.m_Player2.maxHealth;
                 m_WeaponID = GameManager.m_Instance.m_Player2.weaponID;
                 m_LastLocation = GameManager.m_Instance.m_Player2.lastLocation;
+                m_Controller = GameManager.m_Instance.m_Player2.m_Controller;
                 break;
             case PLAYER.P3:
                 m_PlayerName = GameManager.m_Instance.m_Player3.name;
@@ -347,6 +333,7 @@ public class Player : MonoBehaviour
                 //m_MaxHealth = GameManager.m_Instance.m_Player3.maxHealth;
                 m_WeaponID = GameManager.m_Instance.m_Player3.weaponID;
                 m_LastLocation = GameManager.m_Instance.m_Player3.lastLocation;
+                m_Controller = GameManager.m_Instance.m_Player3.m_Controller;
                 break;
             case PLAYER.P4:
                 m_PlayerName = GameManager.m_Instance.m_Player4.name;
@@ -358,6 +345,7 @@ public class Player : MonoBehaviour
                 //m_MaxHealth = GameManager.m_Instance.m_Player4.maxHealth;
                 m_WeaponID = GameManager.m_Instance.m_Player4.weaponID;
                 m_LastLocation = GameManager.m_Instance.m_Player4.lastLocation;
+                m_Controller = GameManager.m_Instance.m_Player4.m_Controller;
                 break;
         }
     }
