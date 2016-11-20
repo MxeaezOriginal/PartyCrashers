@@ -17,10 +17,17 @@ public class Bow : Ranged {
     private float m_MinSpeed = 0f;
     [HideInInspector]
     public float m_timePressed = 0f;
+    [HideInInspector]
     public bool pierce = false;
     [HideInInspector]
     private bool wasDown = false;
-    private int bulletDamage = 0;
+    [HideInInspector]
+    public int bulletDamage = 0;
+    [SerializeField][Tooltip("Multiplies the initial Damage the bullet does at Half charge.")]
+    private int midDmgMultiplier;
+    [SerializeField][Tooltip("Multiplies the initial Damage the bullet does at Full charge.")]
+    private int maxDmgMultiplier;
+    Damage dmg;
 
     //PlayerController playerController;  // Slow player Movement
     Player player;
@@ -35,12 +42,13 @@ public class Bow : Ranged {
 
     void Start ()
     {
+        dmg = GetComponent<Damage>();
         player = GetComponentInParent<Player>();
         //playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();          
     }
 	
 	void Update ()
-    {
+    {        
         if(m_CoolDown <= Time.time - m_Weapon1Cooldown || m_CoolDown == 0)
         {
             //Shoot if Button Up
@@ -56,7 +64,7 @@ public class Bow : Ranged {
     {
         Vector3 fwd = transform.TransformDirection(Vector3.forward);
 
-        if (Physics.Raycast(transform.position, fwd, out hit, 5))
+        if (Physics.Raycast(transform.position, fwd, out hit, 5f))
             Debug.Log(hit.collider.gameObject.name);
         
     }
@@ -76,12 +84,12 @@ public class Bow : Ranged {
 
             if (m_timePressed >= m_MaxCharge)   //MaxCharge not working correctly
             {
-                m_timePressed = m_MaxCharge;
+                m_timePressed = m_MaxCharge;                
                 //playerController.m_TurnSpeed = playerController.m_TurnSpeed / 2;
                 pierce = true;                
             }
             wasDown = true;
-            Debug.Log(m_timePressed);
+            //Debug.Log(m_timePressed);
         }
     }
 
@@ -106,27 +114,27 @@ public class Bow : Ranged {
 
         if(m_timePressed < (m_MaxCharge / 2))
         {
-            bulletDamage = m_Damage % 3;
+            bulletDamage = m_Damage;
             balloon.GetComponent<Rigidbody>().AddForce(balloon.transform.forward * m_LowSpeed * m_timePressed);       
         }
         else if(m_timePressed >= (m_MaxCharge / 2) && m_timePressed < m_MaxCharge)
         {
-            bulletDamage = m_Damage;
+            bulletDamage = m_Damage * midDmgMultiplier;
             balloon.GetComponent<Rigidbody>().AddForce(balloon.transform.forward * m_MedSpeed * m_timePressed);
         }
         else
         {
-            bulletDamage = m_Damage * 3;
+            bulletDamage = m_Damage * maxDmgMultiplier;
+            // Activate the beam who is a children of this gameobject
+            //GameObject beam = GameObject.Find("WaterBalloonFullChargeBeam");
+            //beam.SetActive(true);
+            //Destroy it after half a second
             balloon.GetComponent<Rigidbody>().AddForce(balloon.transform.forward * m_MaxSpeed * m_timePressed);
-        }
-        Damage(bulletDamage);
+        }       
 
         m_timePressed = 0;
         m_CoolDown = Time.time;        
     }
 
-    private void Damage(int dmg)
-    {
-        // Need to fix the Enemy health script
-    }
+
 }
