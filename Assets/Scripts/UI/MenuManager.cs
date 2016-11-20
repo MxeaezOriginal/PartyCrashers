@@ -47,7 +47,7 @@ public class MenuManager : MonoBehaviour
 
         anim = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Animator>();
         es = GameObject.Find("Main Menu/EventSystem").GetComponent<EventSystem>();
-
+        characterSelect = GetComponent<CharacterSelect>();
     }
 
     void Start()
@@ -207,6 +207,51 @@ public class MenuManager : MonoBehaviour
     public void SplashButton()
     {
         mainMenuActive = true;
+        StandaloneInputModule inputModule = es.gameObject.GetComponent<StandaloneInputModule>();
+        if (GameManager.m_Instance.m_NumOfPlayers <= 4)
+        {
+            //P2-4 Join
+            if (splashCanvas.activeSelf && Input.GetButtonDown("Jump_P1"))
+            {
+                int players = ++GameManager.m_Instance.m_NumOfPlayers;
+                characterSelect.AssignController("P1");
+                Debug.Log("Player " + players + " has Joined!");
+                inputModule.submitButton = "Jump_P1";
+                inputModule.horizontalAxis = "JoystickLeftX_P1";
+                inputModule.verticalAxis = "JoystickLeftY_P1";
+                characterSelect.P1Join = true;
+            }
+            if (splashCanvas.activeSelf && Input.GetButtonDown("Jump_P2"))
+            {
+                int players = ++GameManager.m_Instance.m_NumOfPlayers;
+                characterSelect.AssignController("P2");
+                Debug.Log("Player " + players + " has Joined!");
+                inputModule.submitButton = "Jump_P2";
+                inputModule.horizontalAxis = "JoystickLeftX_P2";
+                inputModule.verticalAxis = "JoystickLeftY_P2";
+                characterSelect.P2Join = true;
+            }
+            if (splashCanvas.activeSelf && Input.GetButtonDown("Jump_P3"))
+            {
+                int players = ++GameManager.m_Instance.m_NumOfPlayers;
+                characterSelect.AssignController("P3");
+                Debug.Log("Player " + players + " has Joined!");
+                inputModule.submitButton = "Jump_P3";
+                inputModule.horizontalAxis = "JoystickLeftX_P3";
+                inputModule.verticalAxis = "JoystickLeftY_P3";
+                characterSelect.P3Join = true;
+            }
+            if (splashCanvas.activeSelf && Input.GetButtonDown("Jump_P4"))
+            {
+                int players = ++GameManager.m_Instance.m_NumOfPlayers;
+                characterSelect.AssignController("P4");
+                Debug.Log("Player " + players + " has Joined!");
+                inputModule.submitButton = "Jump_P4";
+                inputModule.horizontalAxis = "JoystickLeftX_P4";
+                inputModule.verticalAxis = "JoystickLeftY_P4";
+                characterSelect.P4Join = true;
+            }
+        }
     }
 
     public void PlayButton()
@@ -249,5 +294,16 @@ public class MenuManager : MonoBehaviour
     public void BackButton()
     {
         mainMenuActive = true;
+        GameManager.m_Instance.m_NumOfPlayers = 1;
+        characterSelect.P1Join = false;
+        characterSelect.P2Join = false;
+        characterSelect.P3Join = false;
+        characterSelect.P4Join = false;
+
+        //Set characterSelectIcon to default\
+        characterSelect.P1.characterSelectIcon.sprite = null;
+        characterSelect.P2.characterSelectIcon.sprite = null;
+        characterSelect.P3.characterSelectIcon.sprite = null;
+        characterSelect.P4.characterSelectIcon.sprite = null;
     }
 }
