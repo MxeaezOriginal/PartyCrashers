@@ -37,12 +37,12 @@ public class HeavyEnemy : MonoBehaviour
 
             if (CanSeePlayer())
             {
-                Script_enemydeath.enabled = true;
+                //Script_enemydeath.enabled = true;
                 chase();
             }
             else
             {
-                Script_enemydeath.enabled = false;
+                //Script_enemydeath.enabled = false;
             }
         }
     }
