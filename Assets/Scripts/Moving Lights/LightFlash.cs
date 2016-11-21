@@ -6,8 +6,8 @@ public class LightFlash : MonoBehaviour
     public Light lt;
     public float colorSwapTime;
     public Color[] arrayOfColors;
-    public int I;
-    private 
+    private int I;
+     
 
 
     // Use this for initialization
