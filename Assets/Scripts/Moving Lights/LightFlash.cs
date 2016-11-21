@@ -4,19 +4,16 @@ using System.Collections;
 public class LightFlash : MonoBehaviour
 {
     public Light lt;
-    public Color ColorOne;
-    public Color ColorTwo;
     public float colorSwapTime;
-    private Color CurrentColor;
-    private Color PreviousColor;
-    public int CurrentColorNumber;
+    public Color[] arrayOfColors;
+    public int I;
+    private 
 
 
     // Use this for initialization
     void Start()
     {
-        CurrentColor = ColorOne;
-        CurrentColorNumber = 1;
+        I = -1;
         lt = GetComponent<Light>();
         changeColor();
     }
@@ -24,24 +21,20 @@ public class LightFlash : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        lt.color  = (CurrentColor);
+        lt.color  = (arrayOfColors[I]);
 
 
     }
 
     void changeColor()
     {
-        if (CurrentColorNumber == 1)
+        if (arrayOfColors.Length > (I+1))
         {
-            CurrentColorNumber = 2;
-            CurrentColor = ColorTwo;
-            PreviousColor = ColorOne;
+            I++;
         }
-        else if (CurrentColorNumber == 2)
+        else
         {
-            CurrentColorNumber = 1;
-            CurrentColor = ColorOne;
-            PreviousColor = ColorTwo;
+            I = 0;
         }
 
         Invoke("changeColor", colorSwapTime);
