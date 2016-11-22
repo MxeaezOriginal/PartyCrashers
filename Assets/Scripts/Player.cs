@@ -65,7 +65,7 @@ public class Player : MonoBehaviour
     private string m_StatsSave;
     private string m_PauseSave;
     public float delay = 2.0f;
-
+    public float dotdelay = 2.0f;
     public string m_Controller;
 
     //float m_LastShotTime;
@@ -428,23 +428,20 @@ public class Player : MonoBehaviour
     //    }
     //}
 
-    //void OnTriggerStay(Collider other)
-    //{
-    //    if (other.gameObject.CompareTag("MeleeEnemy"))
-    //    {
-    //        KnockBackDirection = transform.position - other.transform.position;
-    //        KnockBack = transform.position + KnockBackDirection;
-    //        //transform.position = Vector3.Lerp(transform.position, KnockBack, KnockBackSpeed);
-    //        playerController.m_Velocity = KnockBackDirection * 1000f;
-    //        m_Heart.lastDamage += Time.deltaTime;
-    //        if (m_Heart.lastDamage >= 2)
-    //        {
-    //            m_Heart.TakeDamage(1);
-    //            m_Heart.UpdateHearts();
-    //            m_Heart.lastDamage = 0;
-    //        }
-    //    }
-    //}
+    void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.CompareTag("DotTrap"))
+        {
+            dotdelay -= Time.deltaTime;
+            if(dotdelay <= 0)
+            {
+                m_Heart.TakeDamage(1);
+                m_Heart.UpdateHearts();
+                dotdelay = 2.0f;
+            }
+
+        }
+    }
 
     /*public void OnTriggerStay(Collider other)
     {

@@ -15,6 +15,7 @@ public class KickMeTrap : Trap {
 
     public void OnTriggerEnter(Collider other)
     {
+        Debug.Log("RUNING");
         if (other.tag == "Player")
         {
             //EnemyAI.Instance.getDistance(50);
@@ -25,18 +26,21 @@ public class KickMeTrap : Trap {
                 {
                     if (hitColliders[i].gameObject.CompareTag(m_EnemiesToAffect[j]))
                     {
-                        //Transform enemy = hitColliders[i].transform;
-                        EnemyAI ai = hitColliders[i].GetComponent<EnemyAI>();
+                        if (hitColliders[i].GetComponent<ChaserEnemyAi>() != null)
+                        {
+                            //Transform enemy = hitColliders[i].transform;
+                            ChaserEnemyAi ai = hitColliders[i].GetComponent<ChaserEnemyAi>();
 
-                        ai.m_ChaseDist += chaseIncrease;
-                        StartCoroutine(setToDefault(ai));
+                            ai.m_ChaseDist += chaseIncrease;
+                            StartCoroutine(setToDefault(ai));
+                        }
                     }
                 }
             }
         }
     }
 
-    IEnumerator setToDefault(EnemyAI ai)
+    IEnumerator setToDefault(ChaserEnemyAi ai)
     {
         yield return new WaitForSeconds(m_ChasingTime);
         ai.m_ChaseDist -= chaseIncrease;
