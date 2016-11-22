@@ -3296,7 +3296,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 307
+  m_RootOrder: 305
 --- !u!1001 &132282646
 Prefab:
   m_ObjectHideFlags: 0
@@ -6743,7 +6743,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 895
+  m_RootOrder: 893
 --- !u!1001 &267841995
 Prefab:
   m_ObjectHideFlags: 0
@@ -21546,7 +21546,7 @@ Transform:
   m_LocalScale: {x: 4.017611, y: 4.017611, z: 4.424212}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 356
+  m_RootOrder: 354
 --- !u!1001 &831936979
 Prefab:
   m_ObjectHideFlags: 0
@@ -22958,7 +22958,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 680
+  m_RootOrder: 678
 --- !u!1001 &904767482
 Prefab:
   m_ObjectHideFlags: 0
@@ -26640,7 +26640,7 @@ Transform:
   - {fileID: 160084984}
   - {fileID: 1635194903}
   m_Father: {fileID: 0}
-  m_RootOrder: 270
+  m_RootOrder: 268
 --- !u!1001 &1026389574
 Prefab:
   m_ObjectHideFlags: 0
@@ -30573,7 +30573,7 @@ Transform:
   m_Children:
   - {fileID: 1606773638}
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 12
 --- !u!1001 &1156962425
 Prefab:
   m_ObjectHideFlags: 0
@@ -35938,7 +35938,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 896
+  m_RootOrder: 895
 --- !u!1001 &1336358091
 Prefab:
   m_ObjectHideFlags: 0
@@ -42993,17 +42993,23 @@ MonoBehaviour:
   m_PrimarySounds: []
   m_SecondarySounds: []
   m_SoundsOnHit: []
-  m_RightTriggerProjectile: {fileID: 0}
-  m_LeftTriggerProjectile: {fileID: 0}
+  m_RightTriggerProjectile: {fileID: 150382, guid: af711eaa29756584fa36f3fccfaec720,
+    type: 2}
+  m_LeftTriggerProjectile: {fileID: 174722, guid: b59f42cd686fa0041b1e775273f66bb2,
+    type: 2}
   m_FirePoint:
   - {fileID: 1057164411}
-  m_MaxCharge: 0
-  m_MaxSpeed: 1.5
-  m_MedSpeed: 0
-  m_LowSpeed: 0
-  m_MinSpeed: 0
+  m_MaxCharge: 1.5
+  m_MaxSpeed: 3000
+  m_MedSpeed: 2000
+  m_LowSpeed: 1000
+  m_MinSpeed: 0.7
   m_timePressed: 0
   pierce: 0
+  bulletDamage: 0
+  midDmgMultiplier: 2
+  maxDmgMultiplier: 3
+  beamTimer: 5
 --- !u!23 &1607772438
 MeshRenderer:
   m_ObjectHideFlags: 0

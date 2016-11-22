@@ -24,6 +24,8 @@ public class LaserBeam : MonoBehaviour
     private ParticleSystem endEffect;
     Vector3 offset;
 
+   
+
     void Start()
     {
         lineRenderer = GetComponent<LineRenderer>();
@@ -94,6 +96,8 @@ public class LaserBeam : MonoBehaviour
         position = new Vector3[lenght];
         lineRenderer.SetVertexCount(lenght);
     }
+
+
 }
 
 // https://forum.unity3d.com/threads/laser-beam-script-in-c.122500/

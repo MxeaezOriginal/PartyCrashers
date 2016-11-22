@@ -27,6 +27,9 @@ public class Bow : Ranged {
     private int midDmgMultiplier;
     [SerializeField][Tooltip("Multiplies the initial Damage the bullet does at Full charge.")]
     private int maxDmgMultiplier;
+    [SerializeField]
+    private float beamTimer;
+
     Damage dmg;
 
     //PlayerController playerController;  // Slow player Movement
@@ -72,7 +75,7 @@ public class Bow : Ranged {
                 pierce = true;                
             }
             wasDown = true;
-            //Debug.Log(m_timePressed);
+            Debug.Log(m_timePressed);
         }
     }
 
@@ -93,15 +96,17 @@ public class Bow : Ranged {
     private void shoot()
     {
         GameObject balloon;
-        balloon = (GameObject)Instantiate(m_RightTriggerProjectile, m_FirePoint[0].gameObject.transform.position, m_FirePoint[0].gameObject.transform.rotation);
-
-        if(m_timePressed < (m_MaxCharge / 2))
+        LaserBeam beam;
+        
+        if (m_timePressed < (m_MaxCharge / 2))
         {
+            balloon = (GameObject)Instantiate(m_RightTriggerProjectile, m_FirePoint[0].gameObject.transform.position, m_FirePoint[0].gameObject.transform.rotation);
             bulletDamage = m_Damage;
             balloon.GetComponent<Rigidbody>().AddForce(balloon.transform.forward * m_LowSpeed * m_timePressed);       
         }
         else if(m_timePressed >= (m_MaxCharge / 2) && m_timePressed < m_MaxCharge)
         {
+            balloon = (GameObject)Instantiate(m_RightTriggerProjectile, m_FirePoint[0].gameObject.transform.position, m_FirePoint[0].gameObject.transform.rotation);
             bulletDamage = m_Damage * midDmgMultiplier;
             balloon.GetComponent<Rigidbody>().AddForce(balloon.transform.forward * m_MedSpeed * m_timePressed);
         }
@@ -109,15 +114,24 @@ public class Bow : Ranged {
         {
             bulletDamage = m_Damage * maxDmgMultiplier;
             // Activate the beam who is a children of this gameobject
-            //GameObject beam = GameObject.Find("WaterBalloonFullChargeBeam");
-            //beam.SetActive(true);
-            //Destroy it after half a second
-            balloon.GetComponent<Rigidbody>().AddForce(balloon.transform.forward * m_MaxSpeed * m_timePressed);
-        }       
+            beam = GetComponentInChildren<LaserBeam>();
+            beam.enabled = true;
+            //Destroy it after Timer
+            BeamOff();
+            beam.enabled = false;
+            
+            // This 2 lines below will make it shoot a bullet instead of a beam.    
+            // balloon = (GameObject)Instantiate(m_RightTriggerProjectile, m_FirePoint[0].gameObject.transform.position, m_FirePoint[0].gameObject.transform.rotation);
+            // balloon.GetComponent<Rigidbody>().AddForce(balloon.transform.forward * m_MaxSpeed * m_timePressed);
+        }
 
         m_timePressed = 0;
         m_CoolDown = Time.time;        
     }
 
+    IEnumerator BeamOff()
+    {        
+        yield return new WaitForSeconds(beamTimer);      
+    }
 
 }
