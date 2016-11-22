@@ -7,6 +7,14 @@ public class CharacterSelect : MonoBehaviour
 {
     public float cooldown = 0.3f;
 
+    public enum PlayerOne
+    {
+        P1,
+        P2,
+        P3,
+        P4
+    }
+
     [System.Serializable]
     public struct Character
     {
@@ -18,6 +26,8 @@ public class CharacterSelect : MonoBehaviour
     public Character P1, P2, P3, P4;
 
     public bool P1Join, P2Join, P3Join, P4Join;
+    public bool aP1Join, aP2Join, aP3Join, aP4Join;
+    public PlayerOne firstPlayer;
 
     MenuManager menuManager;
     void Awake()
@@ -149,6 +159,10 @@ public class CharacterSelect : MonoBehaviour
 
                     P1.cooldownCounter = Time.time;
                 }
+            }
+            if (Input.GetButtonDown("Jump_" + GameManager.m_Instance.m_Player1.m_Controller)) //LOCK-IN
+            {
+                print("Player 1 locked in!");
             }
         }
     }

@@ -28,6 +28,8 @@ public class MenuManager : MonoBehaviour
     [Header("Bools")]
     public bool waitedForADelay;
     public bool splashActive, mainMenuActive, playActive, settingsActive, creditsActive, exitPromptActive, exitActive;
+    [Header("'Back' Button Available")]
+    public bool canBack;
     Animator anim;
     EventSystem es;
     CharacterSelect characterSelect;
@@ -61,17 +63,37 @@ public class MenuManager : MonoBehaviour
     {
 
         if (splashActive)
+        {
             StartCoroutine(Splash());
+        }
         if (mainMenuActive)
+        {
             StartCoroutine(MainMenu());
+        }
         if (playActive)
+        {
             StartCoroutine(Play());
+        }
         if (settingsActive)
+        {
             StartCoroutine(Settings());
+        }
         if (creditsActive)
+        {
             StartCoroutine(Credits());
+        }
         if (exitPromptActive)
+        {
             StartCoroutine(ExitPrompt());
+        }
+
+        if(canBack)
+        {
+            if(Input.GetButtonDown("Back_" + GameManager.m_Instance.m_Player1.m_Controller)) //PRESS FOR BACK BUTTON
+            {
+                BackButton();
+            }
+        }
     }
 
     void test()
@@ -117,6 +139,7 @@ public class MenuManager : MonoBehaviour
         anim.SetBool("Credits", false);
 
         mainMenuActive = false;
+        canBack = false;
 
         splashCanvas.SetActive(false);
         mainMenuCanvas.SetActive(true);
@@ -127,12 +150,12 @@ public class MenuManager : MonoBehaviour
     }
     IEnumerator Play()
     {
-
         anim.SetBool("Play", true);
         anim.SetBool("Settings", false);
         anim.SetBool("Credits", false);
 
         playActive = false;
+        canBack = true;
 
         splashCanvas.SetActive(false);
         mainMenuCanvas.SetActive(false);
@@ -152,6 +175,7 @@ public class MenuManager : MonoBehaviour
         anim.SetBool("Credits", false);
 
         settingsActive = false;
+        canBack = true;
 
         splashCanvas.SetActive(false);
         mainMenuCanvas.SetActive(false);
@@ -171,6 +195,7 @@ public class MenuManager : MonoBehaviour
         anim.SetBool("Credits", true);
 
         creditsActive = false;
+        canBack = true;
 
         splashCanvas.SetActive(false);
         mainMenuCanvas.SetActive(false);
@@ -220,6 +245,7 @@ public class MenuManager : MonoBehaviour
                 inputModule.horizontalAxis = "JoystickLeftX_P1";
                 inputModule.verticalAxis = "JoystickLeftY_P1";
                 characterSelect.P1Join = true;
+                characterSelect.firstPlayer = CharacterSelect.PlayerOne.P1;
             }
             if (splashCanvas.activeSelf && Input.GetButtonDown("Jump_P2"))
             {
@@ -230,6 +256,7 @@ public class MenuManager : MonoBehaviour
                 inputModule.horizontalAxis = "JoystickLeftX_P2";
                 inputModule.verticalAxis = "JoystickLeftY_P2";
                 characterSelect.P2Join = true;
+                characterSelect.firstPlayer = CharacterSelect.PlayerOne.P2;
             }
             if (splashCanvas.activeSelf && Input.GetButtonDown("Jump_P3"))
             {
@@ -240,6 +267,7 @@ public class MenuManager : MonoBehaviour
                 inputModule.horizontalAxis = "JoystickLeftX_P3";
                 inputModule.verticalAxis = "JoystickLeftY_P3";
                 characterSelect.P3Join = true;
+                characterSelect.firstPlayer = CharacterSelect.PlayerOne.P3;
             }
             if (splashCanvas.activeSelf && Input.GetButtonDown("Jump_P4"))
             {
@@ -250,6 +278,7 @@ public class MenuManager : MonoBehaviour
                 inputModule.horizontalAxis = "JoystickLeftX_P4";
                 inputModule.verticalAxis = "JoystickLeftY_P4";
                 characterSelect.P4Join = true;
+                characterSelect.firstPlayer = CharacterSelect.PlayerOne.P4;
             }
         }
     }
@@ -295,10 +324,30 @@ public class MenuManager : MonoBehaviour
     {
         mainMenuActive = true;
         GameManager.m_Instance.m_NumOfPlayers = 1;
-        characterSelect.P1Join = false;
-        characterSelect.P2Join = false;
-        characterSelect.P3Join = false;
-        characterSelect.P4Join = false;
+
+        switch(characterSelect.firstPlayer)
+        {
+            case CharacterSelect.PlayerOne.P1:
+                characterSelect.P2Join = false;
+                characterSelect.P3Join = false;
+                characterSelect.P4Join = false;
+                break;
+            case CharacterSelect.PlayerOne.P2:
+                characterSelect.P1Join = false;
+                characterSelect.P3Join = false;
+                characterSelect.P4Join = false;
+                break;
+            case CharacterSelect.PlayerOne.P3:
+                characterSelect.P1Join = false;
+                characterSelect.P2Join = false;
+                characterSelect.P4Join = false;
+                break;
+            case CharacterSelect.PlayerOne.P4:
+                characterSelect.P1Join = false;
+                characterSelect.P2Join = false;
+                characterSelect.P3Join = false;
+                break;
+        }
 
         //Set characterSelectIcon to default\
         characterSelect.P1.characterSelectIcon.sprite = null;
