@@ -68,7 +68,7 @@ public class ShooterEnemy : MonoBehaviour {
                 }
                 else if (m_distance > ActivedDis)
                 {
-                    Debug.Log("Stay!");
+                    //Debug.Log("Stay!");
                 }
             }
             

@@ -11,16 +11,16 @@ public class Damage : MonoBehaviour {
     
     void Start()
     {
-        bulletDamage = GameObject.Find("WaterBalloonBomb").GetComponent<Bow>().bulletDamage;
+        //bulletDamage = GameObject.Find("WaterBalloonBomb").GetComponent<Bow>().bulletDamage;
     }
 
-    void OnTriggerEnter(Collider other)
+  /*  void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Enemy" || other.tag == "MeleeEnemy")
         {
             // substract damage from enemy health script
         }
-    }
+    }*/
 	
 	
 }

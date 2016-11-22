@@ -32,14 +32,6 @@ public class Bow : Ranged {
     //PlayerController playerController;  // Slow player Movement
     Player player;
 
-    Ray ray;
-    RaycastHit hit;
-    // Add the fire particle effect to the raycast so that its visible when fully charged
-    // when weapon is fully charged, do not shoot projectile, only raycast particle effect
-    // http://addcomponent.com/lesson-4-shooting-stuff-with-unity-3d-raycasting/
-
-
-
     void Start ()
     {
         dmg = GetComponent<Damage>();
@@ -58,15 +50,6 @@ public class Bow : Ranged {
                wasDown = false;
             }
         }
-    }
-
-    void FixedUpdate()
-    {
-        Vector3 fwd = transform.TransformDirection(Vector3.forward);
-
-        if (Physics.Raycast(transform.position, fwd, out hit, 5f))
-            Debug.Log(hit.collider.gameObject.name);
-        
     }
 
     public override void primaryAttack()
