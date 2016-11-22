@@ -87,16 +87,36 @@ public class MenuManager : MonoBehaviour
             StartCoroutine(ExitPrompt());
         }
 
-        if(canBack)
+        if (canBack)
         {
-            if(Input.GetButtonDown("Back_" + GameManager.m_Instance.m_Player1.m_Controller)) //PRESS FOR BACK BUTTON
+            if (!characterSelect.P1Locked)
             {
-                BackButton();
+                if (Input.GetButtonDown("Back_" + GameManager.m_Instance.m_Player1.m_Controller)) //PRESS FOR BACK BUTTON
+                {
+                    BackButton();
+                }
+            }
+            else
+            {
+                if (Input.GetButtonDown("Back_" + GameManager.m_Instance.m_Player1.m_Controller))
+                {
+                    print("Player 1 Canceled Lock In");
+                    characterSelect.P1Locked = false;
+                }
+            }
+
+            if (characterSelect.P2Locked)
+            {
+                if (Input.GetButtonDown("Back_" + GameManager.m_Instance.m_Player2.m_Controller))
+                {
+                    print("Player 2 Canceled Lock In");
+                    characterSelect.P2Locked = false;
+                }
             }
         }
     }
 
-    void test()
+void test()
     {
         if (es.currentSelectedGameObject.GetComponent<Text>().enabled)
         {
@@ -325,7 +345,7 @@ public class MenuManager : MonoBehaviour
         mainMenuActive = true;
         GameManager.m_Instance.m_NumOfPlayers = 1;
 
-        switch(characterSelect.firstPlayer)
+        switch (characterSelect.firstPlayer)
         {
             case CharacterSelect.PlayerOne.P1:
                 characterSelect.P2Join = false;

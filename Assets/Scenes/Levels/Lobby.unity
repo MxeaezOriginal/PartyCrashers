@@ -9297,6 +9297,7 @@ MonoBehaviour:
   bulletDamage: 0
   midDmgMultiplier: 2
   maxDmgMultiplier: 3
+  beamTimer: 5
 --- !u!23 &434325327
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -29447,7 +29448,7 @@ MonoBehaviour:
   m_Silly: Silly_P1
   m_Stats: Stats_P1
   m_Pause: Pause_P1
-  m_UsingKeyboard: 0
+  m_UsingKeyboard: 1
   delay: 2
   m_Controller: 
 --- !u!114 &1278280343
@@ -29479,7 +29480,7 @@ MonoBehaviour:
   m_VerticalButton: JoystickLeftY_P1
   m_HorizontalRotationButton: JoystickRightX_P1
   m_VerticalRotationButton: JoystickRightY_P1
-  m_UsingKeyboard: 0
+  m_UsingKeyboard: 1
   m_Velocity: {x: 0, y: 0, z: 0}
 --- !u!23 &1278280344
 MeshRenderer:
@@ -35884,6 +35885,7 @@ GameObject:
   - 4: {fileID: 1652287967}
   - 120: {fileID: 1652287969}
   - 114: {fileID: 1652287968}
+  - 114: {fileID: 1652287970}
   m_Layer: 0
   m_Name: LaserTest
   m_TagString: Untagged
@@ -35898,7 +35900,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1652287966}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.2, y: 0.815, z: 1.89}
+  m_LocalPosition: {x: 1.2, y: -2.69, z: 1.89}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 434325324}
@@ -35909,16 +35911,16 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1652287966}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2a42e8ac97390024497ad75914346221, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   laserWidth: 5
   noise: 5
-  maxLenght: 50
+  maxLenght: 5
   color: {r: 1, g: 0, b: 0, a: 1}
-  endEffect: {fileID: 19801364, guid: 5cd5599e01f32bd418f20a3b9eac1c57, type: 2}
+  endEffect: {fileID: 0}
 --- !u!120 &1652287969
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -35958,6 +35960,18 @@ LineRenderer:
       serializedVersion: 2
       rgba: 4294967295
   m_UseWorldSpace: 1
+--- !u!114 &1652287970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1652287966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c14d26e0fc32fe842b75a6c8b6999701, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletDamage: 0
 --- !u!4 &1652396822 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: a04893c925a84f141bc531bfd24cb80f, type: 2}
