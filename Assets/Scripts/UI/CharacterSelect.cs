@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 using UnityEngine.UI;
 
@@ -118,6 +119,10 @@ public class CharacterSelect : MonoBehaviour
                     Debug.Log("Player " + players + " has Joined!");
                     P4Join = true;
                 }
+            }
+            if(GameManager.m_Instance.m_NumOfPlayers >= 2)
+            {
+                SceneManager.LoadScene("Lobby_01");
             }
         }
     }

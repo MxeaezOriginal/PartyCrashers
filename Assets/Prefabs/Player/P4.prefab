@@ -123,7 +123,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &172210
 GameObject:
   m_ObjectHideFlags: 1
@@ -301,7 +301,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 171896}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.16117156, y: -4.723234, z: -0.6997452}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 450938}
@@ -538,23 +538,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Anim: {fileID: 0}
   m_Damage: 4
-  m_AttackSpeed: 0.5
-  m_SecondaryAttackSpeed: 0
+  m_Weapon1Cooldown: 0
+  m_Weapon2Cooldown: 0
   m_PrimarySounds: []
   m_SecondarySounds: []
   m_SoundsOnHit: []
-  m_Projectile: {fileID: 184478, guid: d05e7a665ab0ec6468bdd70b7dd708f6, type: 2}
-  m_Projectile02: {fileID: 0}
+  m_RightTriggerProjectile: {fileID: 0}
+  m_LeftTriggerProjectile: {fileID: 0}
   m_FirePoint:
   - {fileID: 180244}
   - {fileID: 172210}
   - {fileID: 156112}
   - {fileID: 105676}
   - {fileID: 137990}
-  m_ProjectileSpeed: 4000
-  m_ProjectileSpeed02: 100
+  m_MaxCharge: 0
   m_MaxSpeed: 1.5
-  player: {fileID: 11492956}
+  m_MedSpeed: 0
+  m_LowSpeed: 0
+  m_MinSpeed: 0
+  m_timePressed: 0
+  pierce: 0
+  bulletDamage: 0
+  midDmgMultiplier: 0
+  maxDmgMultiplier: 0
 --- !u!114 &11435224
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -568,8 +574,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Anim: {fileID: 0}
   m_Damage: 2
-  m_AttackSpeed: 1
-  m_SecondaryAttackSpeed: 10
+  m_Weapon1Cooldown: 0
+  m_Weapon2Cooldown: 0
   m_PrimarySounds:
   - {fileID: 0}
   - {fileID: 0}
@@ -652,6 +658,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44435725686e6eb45914198900aeb417, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  KnockBackSpeed: 1
   m_CantMove: 0
   m_Speed: 5
   m_MaxSpeed: 10
@@ -669,6 +676,7 @@ MonoBehaviour:
   m_HorizontalRotationButton: JoystickRightX_
   m_VerticalRotationButton: JoystickRightY_
   m_UsingKeyboard: 0
+  m_Velocity: {x: 0, y: 0, z: 0}
 --- !u!114 &11481992
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -693,6 +701,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ce65b2740421a148b24c11da9e84a06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rb: {fileID: 0}
+  KnockBackSpeed: 1
   m_PlayerName: 
   m_Player: 4
   m_AttackSpeed: 0

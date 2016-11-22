@@ -25,7 +25,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &105996
 GameObject:
   m_ObjectHideFlags: 1
@@ -309,7 +309,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 103422}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.8786309, y: -2.8950963, z: 0.83424425}
+  m_LocalPosition: {x: -3.7174592, y: 1.8299999, z: 1.53}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 421952}
@@ -638,6 +638,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ce65b2740421a148b24c11da9e84a06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rb: {fileID: 0}
+  KnockBackSpeed: 1
   m_PlayerName: 
   m_Player: 3
   m_AttackSpeed: 0
@@ -667,6 +669,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44435725686e6eb45914198900aeb417, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  KnockBackSpeed: 1
   m_CantMove: 0
   m_Speed: 5
   m_MaxSpeed: 10
@@ -684,6 +687,7 @@ MonoBehaviour:
   m_HorizontalRotationButton: JoystickRightX_
   m_VerticalRotationButton: JoystickRightY_
   m_UsingKeyboard: 0
+  m_Velocity: {x: 0, y: 0, z: 0}
 --- !u!114 &11461128
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -697,19 +701,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Anim: {fileID: 0}
   m_Damage: 5
-  m_AttackSpeed: 0.2
-  m_SecondaryAttackSpeed: 3
+  m_Weapon1Cooldown: 0
+  m_Weapon2Cooldown: 0
   m_PrimarySounds: []
   m_SecondarySounds: []
   m_SoundsOnHit: []
-  m_Projectile: {fileID: 150382, guid: af711eaa29756584fa36f3fccfaec720, type: 2}
-  m_Projectile02: {fileID: 183000, guid: b59f42cd686fa0041b1e775273f66bb2, type: 2}
+  m_RightTriggerProjectile: {fileID: 0}
+  m_LeftTriggerProjectile: {fileID: 0}
   m_FirePoint:
   - {fileID: 138180}
-  m_ProjectileSpeed: 4000
-  m_ProjectileSpeed02: 100
+  m_MaxCharge: 0
   m_MaxSpeed: 1.5
-  player: {fileID: 11429300}
+  m_MedSpeed: 0
+  m_LowSpeed: 0
+  m_MinSpeed: 0
+  m_timePressed: 0
+  pierce: 0
+  bulletDamage: 0
+  midDmgMultiplier: 0
+  maxDmgMultiplier: 0
 --- !u!114 &11479084
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -736,8 +746,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Anim: {fileID: 0}
   m_Damage: 2
-  m_AttackSpeed: 1
-  m_SecondaryAttackSpeed: 10
+  m_Weapon1Cooldown: 0
+  m_Weapon2Cooldown: 0
   m_PrimarySounds:
   - {fileID: 0}
   - {fileID: 0}

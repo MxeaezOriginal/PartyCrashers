@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 {
 
     public int amountOfPlayers;
+    [System.Serializable]
     public struct PlayerStats
     {
         public string name;
