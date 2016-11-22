@@ -71,6 +71,8 @@ public class BossAi : MonoBehaviour
     private int GetMode = 3;
 
     BossMovement bossmovement;
+
+    PlayerController playercontroller;
     // Use this for initialization
     void Start()
     {
@@ -82,6 +84,7 @@ public class BossAi : MonoBehaviour
         m_LastAttackTime2 = Time.time;
         //m_Bullet = Mode2MaxBullet;
         m_Bullet = 0;
+        playercontroller = gameObject.GetComponent<PlayerController>();
         timer = Mode1EnemySpawnTime;
     }
 

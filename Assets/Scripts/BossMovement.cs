@@ -20,12 +20,15 @@ public class BossMovement : MonoBehaviour {
     Vector3 MoveBackward;
     Vector3 Flee;
 
+    PlayerController playercontroller;
+
 	// Use this for initialization
 	void Start () {
         StartPos = new Vector3(StartPosX, StartPosY, StartPosZ);
         players = GameManager.m_Instance.m_Players;
         transform.position = new Vector3(StartPosX, StartPosY, StartPosZ);
         players = GameObject.FindGameObjectsWithTag("Player");
+        playercontroller = gameObject.GetComponent<PlayerController>();
     }
 	
 	// Update is called once per frame
