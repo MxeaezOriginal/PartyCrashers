@@ -222,8 +222,6 @@ GameObject:
   - 114: {fileID: 221815653}
   - 114: {fileID: 221815652}
   - 114: {fileID: 221815651}
-  - 114: {fileID: 221815650}
-  - 114: {fileID: 221815659}
   m_Layer: 8
   m_Name: P1
   m_TagString: Player
@@ -250,33 +248,19 @@ MonoBehaviour:
   m_AttackSpeed: 0
   m_Gold: 0
   m_Score: 0
-  m_WeaponID: 0
+  m_WeaponID: 100
   m_CheckLocationCooldown: 1
   m_Location: {x: 0, y: 0, z: 0}
   m_LastLocation: {x: 0, y: 0, z: 0}
-  m_PrimaryAttack: Primary_P1
-  m_SecondaryAttack: Secondary_P1
-  m_Interact: Interact_P1
-  m_Silly: Silly_P1
-  m_Stats: Stats_P1
-  m_Pause: Pause_P1
-  m_UsingKeyboard: 1
+  m_PrimaryAttack: Primary_
+  m_SecondaryAttack: Secondary_
+  m_Interact: Interact_
+  m_Silly: Silly_
+  m_Stats: Stats_
+  m_Pause: Pause_
+  m_UsingKeyboard: 0
   delay: 2
   m_Controller: 
---- !u!114 &221815650
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11460468, guid: c0d4599cda93dc54785f1e84c5383933,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 221815648}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2efdd3a00233fc64e9504fd173ef4083, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  respawnTimer: 0
-  isAlive: 0
 --- !u!114 &221815651
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -353,12 +337,12 @@ MonoBehaviour:
   m_Jump: 15
   m_MaxMovementX: 14
   m_MaxMovementZ: 18
-  m_JumpButton: Jump_P1
-  m_HorizontalButton: JoystickLeftX_P1
-  m_VerticalButton: JoystickLeftY_P1
-  m_HorizontalRotationButton: JoystickRightX_P1
-  m_VerticalRotationButton: JoystickRightY_P1
-  m_UsingKeyboard: 1
+  m_JumpButton: Jump_
+  m_HorizontalButton: JoystickLeftX_
+  m_VerticalButton: JoystickLeftY_
+  m_HorizontalRotationButton: JoystickRightX_
+  m_VerticalRotationButton: JoystickRightY_
+  m_UsingKeyboard: 0
   m_Velocity: {x: 0, y: 0, z: 0}
 --- !u!23 &221815655
 MeshRenderer:
@@ -432,23 +416,8 @@ Transform:
   - {fileID: 283213898}
   - {fileID: 876303492}
   - {fileID: 914043870}
-  - {fileID: 1447572376}
-  - {fileID: 2119659903}
   m_Father: {fileID: 2102058095}
   m_RootOrder: 0
---- !u!114 &221815659
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 221815648}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2efdd3a00233fc64e9504fd173ef4083, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  respawnTimer: 1
-  isAlive: 0
 --- !u!33 &221815660
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -730,118 +699,9 @@ Transform:
   m_Children:
   - {fileID: 1855239203}
   - {fileID: 1105058285}
-  - {fileID: 315507986}
+  - {fileID: 370995945}
   m_Father: {fileID: 221815658}
   m_RootOrder: 0
---- !u!1 &315507985
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 171720, guid: c0d4599cda93dc54785f1e84c5383933, type: 2}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 315507986}
-  - 33: {fileID: 315507990}
-  - 23: {fileID: 315507989}
-  - 114: {fileID: 315507988}
-  - 114: {fileID: 315507987}
-  m_Layer: 0
-  m_Name: GlowSword
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &315507986
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 469660, guid: c0d4599cda93dc54785f1e84c5383933, type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 315507985}
-  m_LocalRotation: {x: 0.6427877, y: 0, z: 0, w: 0.7660444}
-  m_LocalPosition: {x: 0.487, y: 0.035, z: 0.058}
-  m_LocalScale: {x: 2, y: 2, z: 2}
-  m_Children:
-  - {fileID: 970816744}
-  m_Father: {fileID: 283213898}
-  m_RootOrder: 2
---- !u!114 &315507987
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11475740, guid: c0d4599cda93dc54785f1e84c5383933,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 315507985}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8dac5bb03cffbb4489d837c7f66148ad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_WeaponType: 0
---- !u!114 &315507988
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11473350, guid: c0d4599cda93dc54785f1e84c5383933,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 315507985}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5bf77cc1cdf026409c92b679ba47895, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Anim: {fileID: 0}
-  m_Damage: 2
-  m_AttackInterval: 0
-  m_SecondaryAttackSpeed: 10
-  m_PrimarySounds:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  m_SecondarySounds: []
-  m_SoundsOnHit: []
-  dashDistance: 25
-  dashDelay: 0.1
-  smooth: 20
-  attack: 0
-  triggerLife: 0.5
-  swordTrigger: {fileID: 970816743}
-  effect: {fileID: 100748, guid: a7dcf59c103c1fc4ea632b60fae3cd9a, type: 2}
---- !u!23 &315507989
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 2375640, guid: c0d4599cda93dc54785f1e84c5383933,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 315507985}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_Materials:
-  - {fileID: 2100000, guid: 2dd208e8074a062469c4ae478818631b, type: 2}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 1
-  m_ReflectionProbeUsage: 1
-  m_ProbeAnchor: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
---- !u!33 &315507990
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 3324756, guid: c0d4599cda93dc54785f1e84c5383933,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 315507985}
-  m_Mesh: {fileID: 4300000, guid: 62ea7cfafcb902e48a5e6119a84df0dd, type: 3}
 --- !u!1 &320758745
 GameObject:
   m_ObjectHideFlags: 0
@@ -1075,6 +935,115 @@ Transform:
   m_Children: []
   m_Father: {fileID: 274985144}
   m_RootOrder: 0
+--- !u!1 &370995944
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 117796, guid: c0d4599cda93dc54785f1e84c5383933, type: 2}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 370995945}
+  - 33: {fileID: 370995949}
+  - 23: {fileID: 370995948}
+  - 114: {fileID: 370995947}
+  - 114: {fileID: 370995946}
+  m_Layer: 0
+  m_Name: GlowSword
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &370995945
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 487686, guid: c0d4599cda93dc54785f1e84c5383933, type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 370995944}
+  m_LocalRotation: {x: 0.6427877, y: 0, z: 0, w: 0.7660444}
+  m_LocalPosition: {x: 0.487, y: 0.035, z: 0.058}
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_Children:
+  - {fileID: 970816744}
+  m_Father: {fileID: 283213898}
+  m_RootOrder: 2
+--- !u!114 &370995946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11460832, guid: c0d4599cda93dc54785f1e84c5383933,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 370995944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dac5bb03cffbb4489d837c7f66148ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_WeaponType: 0
+--- !u!114 &370995947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11415130, guid: c0d4599cda93dc54785f1e84c5383933,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 370995944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5bf77cc1cdf026409c92b679ba47895, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Anim: {fileID: 0}
+  m_Damage: 2
+  m_Weapon1Cooldown: 0
+  m_Weapon2Cooldown: 0
+  m_PrimarySounds:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  m_SecondarySounds: []
+  m_SoundsOnHit: []
+  dashDistance: 25
+  dashDelay: 0.1
+  smooth: 20
+  attack: 0
+  triggerLife: 0.5
+  swordTrigger: {fileID: 970816743}
+  effect: {fileID: 0}
+--- !u!23 &370995948
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 2322738, guid: c0d4599cda93dc54785f1e84c5383933,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 370995944}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_Materials:
+  - {fileID: 2100000, guid: 2dd208e8074a062469c4ae478818631b, type: 2}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 1
+  m_ReflectionProbeUsage: 1
+  m_ProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+--- !u!33 &370995949
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 3355822, guid: c0d4599cda93dc54785f1e84c5383933,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 370995944}
+  m_Mesh: {fileID: 4300000, guid: 62ea7cfafcb902e48a5e6119a84df0dd, type: 3}
 --- !u!1 &424615721
 GameObject:
   m_ObjectHideFlags: 0
@@ -1494,6 +1463,10 @@ Prefab:
     - target: {fileID: 489840, guid: 1512c6e2d8c3fea4b8c47cd60c796b72, type: 2}
       propertyPath: m_RootOrder
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 11478484, guid: 1512c6e2d8c3fea4b8c47cd60c796b72, type: 2}
+      propertyPath: amountOfPlayers
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1512c6e2d8c3fea4b8c47cd60c796b72, type: 2}
@@ -2889,12 +2862,12 @@ Transform:
   m_LocalPosition: {x: 0, y: 0.692, z: 0}
   m_LocalScale: {x: 0.1, y: 1, z: 0.1}
   m_Children: []
-  m_Father: {fileID: 315507986}
+  m_Father: {fileID: 370995945}
   m_RootOrder: 0
 --- !u!54 &970816745
 Rigidbody:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 5451958, guid: c0d4599cda93dc54785f1e84c5383933,
+  m_PrefabParentObject: {fileID: 5483184, guid: c0d4599cda93dc54785f1e84c5383933,
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 970816743}
@@ -3175,20 +3148,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Anim: {fileID: 0}
   m_Damage: 5
-  m_AttackInterval: 0
-  m_SecondaryAttackSpeed: 3
+  m_Weapon1Cooldown: 0
+  m_Weapon2Cooldown: 0
   m_PrimarySounds: []
   m_SecondarySounds: []
   m_SoundsOnHit: []
-  m_Projectile: {fileID: 150382, guid: af711eaa29756584fa36f3fccfaec720, type: 2}
-  m_Projectile02: {fileID: 183000, guid: b59f42cd686fa0041b1e775273f66bb2, type: 2}
+  m_RightTriggerProjectile: {fileID: 150382, guid: af711eaa29756584fa36f3fccfaec720,
+    type: 2}
+  m_LeftTriggerProjectile: {fileID: 183000, guid: b59f42cd686fa0041b1e775273f66bb2,
+    type: 2}
   m_FirePoint:
   - {fileID: 2101635406}
-  m_ProjectileSpeed: 5000
-  playerController: {fileID: 0}
-  player: {fileID: 221815649}
-  m_MaxSpeed: 1.5
-  m_MinSpeed: 0
+  m_MaxCharge: 1.5
+  m_MaxSpeed: 3000
+  m_MedSpeed: 2000
+  m_LowSpeed: 1000
+  m_MinSpeed: 0.1
+  m_timePressed: 0
+  pierce: 0
+  bulletDamage: 0
+  midDmgMultiplier: 0
+  maxDmgMultiplier: 0
 --- !u!23 &1105058288
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4000,46 +3980,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1776482669}
   m_RootOrder: 0
---- !u!1 &1447572375
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1447572376}
-  - 65: {fileID: 1447572377}
-  m_Layer: 8
-  m_Name: Collider
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1447572376
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1447572375}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.1, y: 1.1, z: 1.1}
-  m_Children: []
-  m_Father: {fileID: 221815658}
-  m_RootOrder: 3
---- !u!65 &1447572377
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1447572375}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1449665383
 GameObject:
   m_ObjectHideFlags: 0
@@ -6153,47 +6093,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 914043870}
   m_RootOrder: 0
---- !u!1 &2119659902
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 126240, guid: c0d4599cda93dc54785f1e84c5383933, type: 2}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 2119659903}
-  - 65: {fileID: 2119659904}
-  m_Layer: 8
-  m_Name: Collider
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2119659903
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 416780, guid: c0d4599cda93dc54785f1e84c5383933, type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2119659902}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.1, y: 1.1, z: 1.1}
-  m_Children: []
-  m_Father: {fileID: 221815658}
-  m_RootOrder: 4
---- !u!65 &2119659904
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 6535540, guid: c0d4599cda93dc54785f1e84c5383933,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2119659902}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2131491175
 GameObject:
   m_ObjectHideFlags: 0
