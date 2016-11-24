@@ -83,25 +83,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &117796
-GameObject:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 487686}
-  - 33: {fileID: 3355822}
-  - 23: {fileID: 2322738}
-  - 114: {fileID: 11415130}
-  - 114: {fileID: 11460832}
-  m_Layer: 0
-  m_Name: GlowSword
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &124566
 GameObject:
   m_ObjectHideFlags: 1
@@ -111,7 +92,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 437582}
   - 65: {fileID: 6510708}
-  - 54: {fileID: 5483184}
+  - 54: {fileID: 5486430}
   m_Layer: 8
   m_Name: SwordTrigger
   m_TagString: Physical
@@ -291,6 +272,25 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &194510
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 427024}
+  - 33: {fileID: 3368488}
+  - 23: {fileID: 2309350}
+  - 114: {fileID: 11476134}
+  - 114: {fileID: 11428346}
+  m_Layer: 0
+  m_Name: GlowSword
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &198804
 GameObject:
   m_ObjectHideFlags: 1
@@ -333,6 +333,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 427696}
   m_RootOrder: 0
+--- !u!4 &427024
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 194510}
+  m_LocalRotation: {x: 0.6427877, y: 0, z: 0, w: 0.7660444}
+  m_LocalPosition: {x: 0.487, y: 0.035, z: 0.058}
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_Children:
+  - {fileID: 437582}
+  m_Father: {fileID: 465732}
+  m_RootOrder: 2
 --- !u!4 &427696
 Transform:
   m_ObjectHideFlags: 1
@@ -360,7 +373,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0.692, z: 0}
   m_LocalScale: {x: 0.1, y: 1, z: 0.1}
   m_Children: []
-  m_Father: {fileID: 487686}
+  m_Father: {fileID: 427024}
   m_RootOrder: 0
 --- !u!4 &439326
 Transform:
@@ -463,7 +476,7 @@ Transform:
   m_Children:
   - {fileID: 488248}
   - {fileID: 459012}
-  - {fileID: 487686}
+  - {fileID: 427024}
   m_Father: {fileID: 455468}
   m_RootOrder: 0
 --- !u!4 &470808
@@ -490,19 +503,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 427696}
   m_RootOrder: 4
---- !u!4 &487686
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 117796}
-  m_LocalRotation: {x: 0.6427877, y: 0, z: 0, w: 0.7660444}
-  m_LocalPosition: {x: 0.487, y: 0.035, z: 0.058}
-  m_LocalScale: {x: 2, y: 2, z: 2}
-  m_Children:
-  - {fileID: 437582}
-  m_Father: {fileID: 465732}
-  m_RootOrder: 2
 --- !u!4 &488248
 Transform:
   m_ObjectHideFlags: 1
@@ -576,12 +576,12 @@ Camera:
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
   m_StereoMirrorMode: 0
---- !u!23 &2322738
+--- !u!23 &2309350
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 117796}
+  m_GameObject: {fileID: 194510}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -819,12 +819,12 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 153568}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
---- !u!33 &3355822
+--- !u!33 &3368488
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 117796}
+  m_GameObject: {fileID: 194510}
   m_Mesh: {fileID: 4300000, guid: 62ea7cfafcb902e48a5e6119a84df0dd, type: 3}
 --- !u!33 &3395838
 MeshFilter:
@@ -840,7 +840,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 198804}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
---- !u!54 &5483184
+--- !u!54 &5486430
 Rigidbody:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -874,34 +874,18 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 106690}
   m_Enabled: 1
---- !u!114 &11415130
+--- !u!114 &11428346
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 117796}
+  m_GameObject: {fileID: 194510}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5bf77cc1cdf026409c92b679ba47895, type: 3}
+  m_Script: {fileID: 11500000, guid: 8dac5bb03cffbb4489d837c7f66148ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Anim: {fileID: 0}
-  m_Damage: 2
-  m_Weapon1Cooldown: 0
-  m_Weapon2Cooldown: 0
-  m_PrimarySounds:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  m_SecondarySounds: []
-  m_SoundsOnHit: []
-  dashDistance: 25
-  dashDelay: 0.1
-  smooth: 20
-  attack: 0
-  triggerLife: 0.5
-  swordTrigger: {fileID: 124566}
-  effect: {fileID: 0}
+  m_WeaponType: 0
 --- !u!114 &11429116
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -924,14 +908,15 @@ MonoBehaviour:
   m_CheckLocationCooldown: 1
   m_Location: {x: 0, y: 0, z: 0}
   m_LastLocation: {x: 0, y: 0, z: 0}
-  m_PrimaryAttack: Primary_
-  m_SecondaryAttack: Secondary_
-  m_Interact: Interact_
-  m_Silly: Silly_
-  m_Stats: Stats_
-  m_Pause: Pause_
-  m_UsingKeyboard: 0
+  m_PrimaryAttack: Primary_P1
+  m_SecondaryAttack: Secondary_P1
+  m_Interact: Interact_P1
+  m_Silly: Silly_P1
+  m_Stats: Stats_P1
+  m_Pause: Pause_P1
+  m_UsingKeyboard: 1
   delay: 2
+  dotdelay: 2
   m_Controller: 
 --- !u!114 &11432122
 MonoBehaviour:
@@ -1006,18 +991,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9957292c81333447833081810640974, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &11460832
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 117796}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8dac5bb03cffbb4489d837c7f66148ad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_WeaponType: 0
 --- !u!114 &11469220
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1046,6 +1019,34 @@ MonoBehaviour:
   - {fileID: 109728}
   m_ProjectileSpeed: 4000
   m_ProjectileSpeed02: 0
+--- !u!114 &11476134
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 194510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5bf77cc1cdf026409c92b679ba47895, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Anim: {fileID: 0}
+  m_Damage: 2
+  m_Weapon1Cooldown: 0
+  m_Weapon2Cooldown: 0
+  m_PrimarySounds:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  m_SecondarySounds: []
+  m_SoundsOnHit: []
+  dashDistance: 25
+  dashDelay: 0.1
+  smooth: 20
+  attack: 0
+  triggerLife: 0.5
+  swordTrigger: {fileID: 124566}
+  effect: {fileID: 0}
 --- !u!114 &11486216
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1057,7 +1058,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44435725686e6eb45914198900aeb417, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  KnockBackSpeed: 1
+  KnockBackDis: 40
   m_CantMove: 0
   m_Speed: 5
   m_MaxSpeed: 10
@@ -1069,12 +1070,12 @@ MonoBehaviour:
   m_Jump: 15
   m_MaxMovementX: 14
   m_MaxMovementZ: 18
-  m_JumpButton: Jump_
-  m_HorizontalButton: JoystickLeftX_
-  m_VerticalButton: JoystickLeftY_
-  m_HorizontalRotationButton: JoystickRightX_
-  m_VerticalRotationButton: JoystickRightY_
-  m_UsingKeyboard: 0
+  m_JumpButton: Jump_P1
+  m_HorizontalButton: JoystickLeftX_P1
+  m_VerticalButton: JoystickLeftY_P1
+  m_HorizontalRotationButton: JoystickRightX_P1
+  m_VerticalRotationButton: JoystickRightY_P1
+  m_UsingKeyboard: 1
   m_Velocity: {x: 0, y: 0, z: 0}
 --- !u!114 &11495636
 MonoBehaviour:
@@ -1096,7 +1097,7 @@ MonoBehaviour:
   m_SoundsOnHit: []
   m_RightTriggerProjectile: {fileID: 150382, guid: af711eaa29756584fa36f3fccfaec720,
     type: 2}
-  m_LeftTriggerProjectile: {fileID: 183000, guid: b59f42cd686fa0041b1e775273f66bb2,
+  m_LeftTriggerProjectile: {fileID: 174722, guid: b59f42cd686fa0041b1e775273f66bb2,
     type: 2}
   m_FirePoint:
   - {fileID: 190696}
@@ -1104,12 +1105,13 @@ MonoBehaviour:
   m_MaxSpeed: 3000
   m_MedSpeed: 2000
   m_LowSpeed: 1000
-  m_MinSpeed: 0.1
+  m_MinSpeed: 0.7
   m_timePressed: 0
   pierce: 0
   bulletDamage: 0
-  midDmgMultiplier: 0
-  maxDmgMultiplier: 0
+  midDmgMultiplier: 2
+  maxDmgMultiplier: 3
+  beamTimer: 5
 --- !u!124 &12438636
 Behaviour:
   m_ObjectHideFlags: 1
