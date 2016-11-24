@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     Vector3 KnockBackDirection;
     Vector3 KnockBack;
-    public float KnockBackSpeed = 1f;
+    public float KnockBackDis = 1f;
 
     public bool m_CantMove;
     public float m_Speed = 5.0f;
@@ -252,7 +252,7 @@ public class PlayerController : MonoBehaviour
             KnockBackDirection = transform.position - other.transform.position;
             KnockBack = transform.position + KnockBackDirection;
             //transform.position = Vector3.Lerp(transform.position, KnockBack, KnockBackSpeed);
-            m_Velocity = KnockBackDirection.normalized * KnockBackSpeed;
+            m_Velocity = KnockBackDirection.normalized * KnockBackDis;
 
         }
     }

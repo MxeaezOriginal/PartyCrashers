@@ -170,11 +170,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: babd68167a46d154fafb1795deb38ffd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  limitedSpawnTotalNum: 0
+  limitedSpawnCurrentNum: 0
   infiniteSpawn: 0
-  individualEnemyNum: 0
-  individualSpawnNum: 2
-  totalEnemyNum: 0
-  totalSpawnNum: 4
+  infiniteSpawnInMapNum: 5
+  infiniteSpawnCurrentNum: 0
   SpawnRange: 5
   GodRadius: 3
   enemyPrefab: {fileID: 128216, guid: ff6906de941c1804e9e04da544397b94, type: 2}
@@ -184,8 +184,9 @@ MonoBehaviour:
   activedRange: 20
   m_Distance: 0
   RunAwayRange: 5
-  RunSpeed: 0.01
+  RunSpeed: 0.02
   m_RotationSpeed: 5
+  multiplyBy: 0
 --- !u!114 &11487636
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -207,7 +208,7 @@ CapsuleCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 193492}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
   m_Height: 2

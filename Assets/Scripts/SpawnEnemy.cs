@@ -7,12 +7,19 @@ public class SpawnEnemy : MonoBehaviour
     List<GameObject> enemies = new List<GameObject>();
     //public int[] Num;
     //public int maxNum;
+
+    //public int individualEnemyNum = 0;
+    //public int individualSpawnNum = 4;
+    //public int totalEnemyNum;
+    //public int totalSpawnNum = 5;
+    public int limitedSpawnTotalNum = 4;
+    public int limitedSpawnCurrentNum = 0;
     public bool infiniteSpawn;
-    public int individualEnemyNum = 0;
-    public int individualSpawnNum = 4;
-    GameObject[] getEnemyNum;
-    public int totalEnemyNum;
-    public int totalSpawnNum = 5;
+    public int infiniteSpawnInMapNum = 5;
+    public int infiniteSpawnCurrentNum;
+    GameObject target;
+    NavMeshAgent agent;
+    //GameObject[] getEnemyNum;
     GameObject[] players;
     float x;
     float y;
@@ -34,15 +41,18 @@ public class SpawnEnemy : MonoBehaviour
     public float RunSpeed = 0.01f;
     // Rotation from EnemyAi
     public float m_RotationSpeed = 5f;
-
-    //bool setActive;
+    private float nextTurnTime;
+    private Transform startTransform;
+    public float multiplyBy;
+    Vector3 direction;
+    float fleeDis = 100;
 
     void Start()
     {
         players = GameManager.m_Instance.m_Players;
         timer = spawnTime;
         players = GameObject.FindGameObjectsWithTag("Player");
-        //setActive = false;
+        agent = gameObject.GetComponent<NavMeshAgent>();
     }
 
     // Update is called once per frame
@@ -53,65 +63,80 @@ public class SpawnEnemy : MonoBehaviour
             if(enemy == null)
             {
                 enemies.Remove(enemy);
-                totalEnemyNum--;
+                infiniteSpawnCurrentNum--;
             }
         }
-        look(GameObject.FindGameObjectWithTag("Player").transform);
+        //look(GameObject.FindGameObjectWithTag("Player").transform);
         // run away ----------------------------------------------------------
         // Get closest player
+
         for (int i = 0; i < players.Length; i++)
         {
             if (i == 0)
             {
                 m_Distance = Vector3.Distance(players[i].transform.position, transform.position);
+                target = players[i];
                 MoveDirection = transform.position - players[i].transform.position;
                 RunAwayDirection = transform.position + MoveDirection;
-                if (m_Distance <= RunAwayRange)
-                {
-                    transform.position = Vector3.Lerp(transform.position, RunAwayDirection, RunSpeed);
-                }
-        }
+                direction = (target.transform.position = transform.position).normalized;
+                //if (m_Distance <= RunAwayRange)
+                //{
+                //    transform.position = Vector3.Lerp(transform.position, RunAwayDirection, RunSpeed);
+                //}
+            }
             else
             {
                 if (Vector3.Distance(players[i].transform.position, transform.position) < m_Distance)
                 {
                     m_Distance = Vector3.Distance(players[i].transform.position, transform.position);
+                    target = players[i];
                     MoveDirection = transform.position - players[i].transform.position;
                     RunAwayDirection = transform.position + MoveDirection;
-                    if (m_Distance <= RunAwayRange)
-                    {
-                        transform.position = Vector3.Lerp(transform.position, RunAwayDirection, RunSpeed);
-                    }
+                    direction = (target.transform.position = transform.position).normalized;
+                    //if (m_Distance <= RunAwayRange)
+                    //{
+                    //    transform.position = Vector3.Lerp(transform.position, RunAwayDirection, RunSpeed);
+                    //}
                 }
+            }
         }
-    }
+        if (m_Distance <= RunAwayRange)
+        {
+            GetComponent<NavMeshAgent>().destination = transform.position + direction * fleeDis;
+            //RunFrom(GameObject.FindGameObjectWithTag("Player").transform);
+            //chase();
+        }
         // run away finish ---------------------------------------------------
         //getEnemyNum = GameObject.FindGameObjectsWithTag("MeleeEnemy");
         //totalEnemyNum = getEnemyNum.Length;
+        //public int limitedSpawnTotalNum = 4;
+        //public int limitedSpawnCurrentNum = 0;
+        //public int infiniteSpawnInScreenNum = 5;
+        //public int infiniteSpawnCurrentNum;
         timer -= Time.deltaTime;
         range = Vector3.Distance(GameObject.FindWithTag("Player").transform.position, transform.position);
         if (infiniteSpawn == true)
         {
-            if (totalEnemyNum < totalSpawnNum)
+            if (infiniteSpawnCurrentNum < infiniteSpawnInMapNum)
             {
                 if (timer <= 0 && range <= activedRange)
                 {
                     GameObject enemy = EnemySpawner();
 
                     enemies.Add(enemy);
-                    totalEnemyNum++;
+                    infiniteSpawnCurrentNum++;
                     timer = spawnTime;
                 }
             }
         }
         else
         {
-            if (individualEnemyNum < individualSpawnNum)
+            if (limitedSpawnCurrentNum < limitedSpawnTotalNum)
             {
                 if (timer <= 0 && range <= activedRange)
                 {
                     Instantiate(enemyPrefab, GetRandomLocationForEnemy(), transform.rotation);
-                    individualEnemyNum++;
+                    limitedSpawnCurrentNum++;
                     timer = spawnTime;
                 }
             }
@@ -163,4 +188,55 @@ public class SpawnEnemy : MonoBehaviour
         Quaternion rotation = Quaternion.LookRotation(lookPosition);
         transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * m_RotationSpeed);
     }
+
+    void RunFrom(Transform other)
+    {
+
+        // store the starting transform
+        //startTransform = transform;
+
+        //temporarily point the object to look away from the player
+        transform.rotation = Quaternion.LookRotation(transform.position - transform.position);
+
+        //Then we'll get the position on that rotation that's multiplyBy down the path (you could set a Random.range
+        // for this if you want variable results) and store it in a new Vector3 called runTo
+        Vector3 runTo = transform.position + transform.forward * multiplyBy;
+        //Debug.Log("runTo = " + runTo);
+
+        //So now we've got a Vector3 to run to and we can transfer that to a location on the NavMesh with samplePosition.
+
+        NavMeshHit hit;    // stores the output in a variable called hit
+
+        // 5 is the distance to check, assumes you use default for the NavMesh Layer name
+        NavMesh.SamplePosition(runTo, out hit, 5, 1 << NavMesh.GetNavMeshLayerFromName("Default"));
+        //Debug.Log("hit = " + hit + " hit.position = " + hit.position);
+
+        // just used for testing - safe to ignore
+        //nextTurnTime = Time.time + 5;
+
+        // reset the transform back to our start transform
+        //transform.position = startTransform.position;
+        //transform.rotation = startTransform.rotation;
+
+        // And get it to head towards the found NavMesh position
+        agent.SetDestination(hit.position);
+    }
+
+    //void chase()
+    //{
+    //    if (GameObject.FindGameObjectWithTag("Player") != null)
+    //    {
+    //        look(GameObject.FindGameObjectWithTag("Player").transform);
+    //        agent.SetDestination(target.transform.position);
+    //        agent.Resume();
+    //    }
+    //}
+
+    //void returnToOrigin()
+    //{
+    //    agent.SetDestination(m_Origin);
+    //    agent.Resume();
+    //}
+
+
 }
