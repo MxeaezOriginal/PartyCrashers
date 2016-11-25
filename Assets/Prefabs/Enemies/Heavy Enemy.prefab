@@ -35,11 +35,11 @@ GameObject:
   - 114: {fileID: 11439040}
   m_Layer: 0
   m_Name: Heavy Enemy
-  m_TagString: MeleeEnemy
+  m_TagString: HeavyEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &452322
 Transform:
   m_ObjectHideFlags: 1
@@ -170,7 +170,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Distance: 0
   m_RotationSpeed: 2
-  ViewRange: 120
+  ViewRange: 90
   ViewDis: 10
   m_Origin: {x: 0, y: 0, z: 0}
   Script_enemydeath: {fileID: 0}
@@ -211,7 +211,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 193810}
   m_Enabled: 1
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 10
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120

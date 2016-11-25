@@ -45,6 +45,8 @@ public class PlayerController : MonoBehaviour
 
     private float m_RotateAngle;
 
+    //bool canSee;
+    //HeavyEnemy heavyenemy;
     //private Rigidbody rigidBody;
     CharacterController controller;
 
@@ -53,11 +55,13 @@ public class PlayerController : MonoBehaviour
     {
         //rigidBody = gameObject.GetComponent<Rigidbody>();
         controller = gameObject.GetComponent<CharacterController>();
+        //heavyenemy = gameObject.GetComponent<HeavyEnemy>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        
         if (!m_CantMove)
         {
             checkMovement();
@@ -251,11 +255,21 @@ public class PlayerController : MonoBehaviour
         {
             KnockBackDirection = transform.position - other.transform.position;
             KnockBack = transform.position + KnockBackDirection;
-            //transform.position = Vector3.Lerp(transform.position, KnockBack, KnockBackSpeed);
             m_Velocity = KnockBackDirection.normalized * KnockBackDis;
-
+        }
+        if (other.gameObject.CompareTag("HeavyEnemy"))
+        {
+            KnockBackDirection = transform.position - other.transform.position;
+            KnockBack = transform.position + KnockBackDirection;
+            m_Velocity = KnockBackDirection.normalized * KnockBackDis;
+            //if(canSee)
+            //if (gameObject.GetComponent<HeavyEnemy>().CanSeePlayer())
+            //{
+            //    m_Velocity = KnockBackDirection.normalized * KnockBackDis;
+            //}
         }
     }
+
 
     void LateUpdate()
     {
@@ -322,5 +336,5 @@ public class PlayerController : MonoBehaviour
         }
     }
 
- 
+
 }

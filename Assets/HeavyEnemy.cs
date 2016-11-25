@@ -47,24 +47,24 @@ public class HeavyEnemy : MonoBehaviour
         }
     }
 
-    bool CanSeePlayer()
+    public bool CanSeePlayer()
     {
         for (int i = 0; i < players.Length; i++)
         {
             rayDirection = players[i].transform.position - transform.position;
-            if ((Vector3.Angle(rayDirection, transform.forward)) < ViewRange / 2)
+            if ((Vector3.Angle(rayDirection, transform.forward)) < ViewRange) 
             {
                 if (Physics.Raycast(transform.position, rayDirection, out hit, ViewDis))
                 {
                     if (hit.transform.tag == "Player")
                     {
-                        Debug.Log("I C U!");
+                        //Debug.Log("I C U!");
                         return true;
                     }
                 }
             }
         }
-        Debug.Log("Where R U?");
+        //Debug.Log("Where R U?");
         return false;
     }
 
