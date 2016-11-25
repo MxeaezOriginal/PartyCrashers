@@ -21,7 +21,6 @@ public class Stats : MonoBehaviour
 
     public void ToggleWindow()
     {
-        Debug.Log(anim.name);
         if (toggleWindowTime < Time.time - .5f)
         {
             if(anim.GetBool("Open"))

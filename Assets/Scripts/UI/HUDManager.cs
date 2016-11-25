@@ -44,9 +44,6 @@ public class HUDManager : MonoBehaviour
 
     void UpdateUIPanels()
     {
-
-        print(P1_StatsWindow.GetSiblingIndex());
-
         if (GameManager.m_Instance.m_Players.Length == 1)
         {
             P2_Panel.SetActive(false);

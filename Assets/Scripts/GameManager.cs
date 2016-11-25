@@ -93,7 +93,6 @@ public class GameManager : MonoBehaviour
 
     public void loadPlayers()
     {
-        Debug.Log("Hey");
         for (int i = 0; i < GameManager.m_Instance.m_Players.Length; i++)
         {
             Player currentPlayer = GameManager.m_Instance.m_Players[i].GetComponent<Player>();
