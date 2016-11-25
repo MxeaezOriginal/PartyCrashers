@@ -89,30 +89,30 @@ public class MenuManager : MonoBehaviour
 
         if (canBack)
         {
-            if (!characterSelect.P1Locked)
-            {
+            //if (!characterSelect.P1Locked)
+            //{
                 if (Input.GetButtonDown("Back_" + GameManager.m_Instance.m_Player1.m_Controller)) //PRESS FOR BACK BUTTON
                 {
                     BackButton();
                 }
-            }
-            else
-            {
-                if (Input.GetButtonDown("Back_" + GameManager.m_Instance.m_Player1.m_Controller))
-                {
-                    print("Player 1 Canceled Lock In");
-                    characterSelect.P1Locked = false;
-                }
-            }
+            //}
+            //else
+            //{
+            //    if (Input.GetButtonDown("Back_" + GameManager.m_Instance.m_Player1.m_Controller))
+            //    {
+            //        print("Player 1 Canceled Lock In");
+            //        characterSelect.P1Locked = false;
+            //    }
+            //}
 
-            if (characterSelect.P2Locked)
-            {
-                if (Input.GetButtonDown("Back_" + GameManager.m_Instance.m_Player2.m_Controller))
-                {
-                    print("Player 2 Canceled Lock In");
-                    characterSelect.P2Locked = false;
-                }
-            }
+            //if (characterSelect.P2Locked)
+            //{
+                //if (Input.GetButtonDown("Back_" + GameManager.m_Instance.m_Player2.m_Controller))
+                //{
+                //    print("Player 2 Canceled Lock In");
+                //    //characterSelect.P2Locked = false;
+                //}
+            //}
         }
     }
 

@@ -5,8 +5,6 @@ using UnityEngine.UI;
 
 public class CharacterSelect : MonoBehaviour
 {
-    public float cooldown = 0.3f;
-
     public enum PlayerOne
     {
         P1,
@@ -24,10 +22,11 @@ public class CharacterSelect : MonoBehaviour
         public float cooldownCounter;
     }
     public Character P1, P2, P3, P4;
-
-    public bool P1Join, P2Join, P3Join, P4Join;
-    public bool P1Locked, P2Locked, P3Locked, P4Locked;
+    [Header("Bools & CD on character switch")]
     public PlayerOne firstPlayer;
+    public float cooldown = 0.3f;
+    public bool P1Join, P2Join, P3Join, P4Join;
+    //public bool P1Locked, P2Locked, P3Locked, P4Locked;
 
     MenuManager menuManager;
     void Awake()
@@ -45,7 +44,7 @@ public class CharacterSelect : MonoBehaviour
     {
         JoinGame();//P2-4 Join
         SelectCharacter();
-        LockingIn();
+        //LockingIn();
 
         if (P1.index > 3)
             P1.index = 0;
@@ -133,34 +132,34 @@ public class CharacterSelect : MonoBehaviour
             }
         }
     }
-    void LockingIn()
-    {
-        if (GameManager.m_Instance.m_NumOfPlayers == 1
-            && P1Locked)
-        {
-            print("START WITH 1 PLAYER");
-        }
-        if (GameManager.m_Instance.m_NumOfPlayers == 2
-            && P1Locked && P2Locked)
-        {
-            print("START WITH 2 PLAYER");
-        }
-        if (GameManager.m_Instance.m_NumOfPlayers == 3
-            && P1Locked && P2Locked && P3Locked)
-        {
-            print("START WITH 3 PLAYER");
-        }
-        if (GameManager.m_Instance.m_NumOfPlayers == 4
-            && P1Locked && P2Locked && P3Locked && P4Locked)
-        {
-            print("START WITH 4 PLAYER");
-        }
-    }
+    //void LockingIn()
+    //{
+    //    if (GameManager.m_Instance.m_NumOfPlayers == 1
+    //        && P1Locked)
+    //    {
+    //        print("START WITH 1 PLAYER");
+    //    }
+    //    if (GameManager.m_Instance.m_NumOfPlayers == 2
+    //        && P1Locked && P2Locked)
+    //    {
+    //        print("START WITH 2 PLAYER");
+    //    }
+    //    if (GameManager.m_Instance.m_NumOfPlayers == 3
+    //        && P1Locked && P2Locked && P3Locked)
+    //    {
+    //        print("START WITH 3 PLAYER");
+    //    }
+    //    if (GameManager.m_Instance.m_NumOfPlayers == 4
+    //        && P1Locked && P2Locked && P3Locked && P4Locked)
+    //    {
+    //        print("START WITH 4 PLAYER");
+    //    }
+    //}
     void P1Selection()
     {
-        P1.characterSelectIcon.sprite = P1.characters[P1.index];
-        if (menuManager.playCanvas.activeSelf && !P1Locked)  //If on "PlayCanvas"
+        if (menuManager.playCanvas.activeSelf)// && !P1Locked)  //If on "PlayCanvas"
         {
+            P1.characterSelectIcon.sprite = P1.characters[P1.index];
             if (Input.GetAxisRaw("JoystickLeftX_" + GameManager.m_Instance.m_Player1.m_Controller) < 0)    //Scroll Left
             {
                 if (P1.cooldownCounter < Time.time - cooldown || P1.cooldownCounter == -1)
@@ -179,21 +178,25 @@ public class CharacterSelect : MonoBehaviour
                     P1.cooldownCounter = Time.time;
                 }
             }
-            if (Input.GetButtonDown("Jump_" + GameManager.m_Instance.m_Player1.m_Controller) && !P1Locked) //LOCK-IN
+            if (Input.GetButtonDown("Jump_" + GameManager.m_Instance.m_Player1.m_Controller))// && !P1Locked) //LOCK-IN
             {
-                P1Locked = true;
-                print("Player 1 locked in!");
+                StartGame();
             }
-            if (Input.GetButtonDown("Jump_" + GameManager.m_Instance.m_Player1.m_Controller) && P1Locked)
-            {
-                LockingIn();
-            }
+            //if (Input.GetButtonDown("Jump_" + GameManager.m_Instance.m_Player1.m_Controller))// && !P1Locked) //LOCK-IN
+            //{
+            //    P1Locked = true;
+            //    print("Player 1 locked in!");
+            //}
+            //if (Input.GetButtonDown("Jump_" + GameManager.m_Instance.m_Player1.m_Controller) && P1Locked)
+            //{
+            //    LockingIn();
+            //}
         }
     }
     void P2Selection()
     {
         P2.characterSelectIcon.sprite = P2.characters[P2.index];
-        if (menuManager.playCanvas.activeSelf && !P2Locked)  //If on "PlayCanvas"
+        if (menuManager.playCanvas.activeSelf)// && !P2Locked)  //If on "PlayCanvas"
         {
             if (Input.GetAxisRaw("JoystickLeftX_" + GameManager.m_Instance.m_Player2.m_Controller) < 0)    //Scroll Left
             {
@@ -213,17 +216,17 @@ public class CharacterSelect : MonoBehaviour
                     P2.cooldownCounter = Time.time;
                 }
             }
-            if (Input.GetButtonDown("Jump_" + GameManager.m_Instance.m_Player2.m_Controller)) //LOCK-IN
-            {
-                P2Locked = true;
-                print("Player 2 locked in!");
-            }
+            //if (Input.GetButtonDown("Jump_" + GameManager.m_Instance.m_Player2.m_Controller)) //LOCK-IN
+            //{
+            //    P2Locked = true;
+            //    print("Player 2 locked in!");
+            //}
         }
     }
     void P3Selection()
     {
         P3.characterSelectIcon.sprite = P3.characters[P3.index];
-        if (menuManager.playCanvas.activeSelf && !P3Locked)  //If on "PlayCanvas"
+        if (menuManager.playCanvas.activeSelf)// && !P3Locked)  //If on "PlayCanvas"
         {
             if (Input.GetAxisRaw("JoystickLeftX_" + GameManager.m_Instance.m_Player3.m_Controller) < 0)    //Scroll Left
             {
@@ -243,17 +246,17 @@ public class CharacterSelect : MonoBehaviour
                     P3.cooldownCounter = Time.time;
                 }
             }
-            if (Input.GetButtonDown("Jump_" + GameManager.m_Instance.m_Player3.m_Controller)) //LOCK-IN
-            {
-                P3Locked = true;
-                print("Player 3 locked in!");
-            }
+            //if (Input.GetButtonDown("Jump_" + GameManager.m_Instance.m_Player3.m_Controller)) //LOCK-IN
+            //{
+            //    P3Locked = true;
+            //    print("Player 3 locked in!");
+            //}
         }
     }
     void P4Selection()
     {
         P4.characterSelectIcon.sprite = P4.characters[P4.index];
-        if (menuManager.playCanvas.activeSelf && !P4Locked)  //If on "PlayCanvas"
+        if (menuManager.playCanvas.activeSelf)// && !P4Locked)  //If on "PlayCanvas"
         {
             if (Input.GetAxisRaw("JoystickLeftX_" + GameManager.m_Instance.m_Player4.m_Controller) < 0)    //Scroll Left
             {
@@ -273,11 +276,11 @@ public class CharacterSelect : MonoBehaviour
                     P4.cooldownCounter = Time.time;
                 }
             }
-            if (Input.GetButtonDown("Jump_" + GameManager.m_Instance.m_Player4.m_Controller)) //LOCK-IN
-            {
-                P4Locked = true;
-                print("Player 4 locked in!");
-            }
+            //if (Input.GetButtonDown("Jump_" + GameManager.m_Instance.m_Player4.m_Controller)) //LOCK-IN
+            //{
+            //    P4Locked = true;
+            //    print("Player 4 locked in!");
+            //}
         }
     }
     void SelectCharacter()
@@ -307,5 +310,11 @@ public class CharacterSelect : MonoBehaviour
                 P4Selection();
                 break;
         }
+    }
+
+
+    void StartGame()
+    {
+        SceneManager.LoadScene("Lobby_01");
     }
 }
