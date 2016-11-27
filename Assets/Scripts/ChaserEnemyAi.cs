@@ -3,6 +3,7 @@ using System.Collections;
 
 public class ChaserEnemyAi : MonoBehaviour
 {
+
     GameObject[] players;
     GameObject target;
     NavMeshAgent agent;
@@ -11,7 +12,6 @@ public class ChaserEnemyAi : MonoBehaviour
     public float m_StopDistance = 5;
     public float m_RotationSpeed = 5f;
     public Vector3 m_Origin;
-    public float KnockBackDis = 40f;
 
     // Use this for initialization
     void Start()
@@ -20,7 +20,7 @@ public class ChaserEnemyAi : MonoBehaviour
         agent = gameObject.GetComponent<NavMeshAgent>();
 
         m_Origin = gameObject.transform.position;
-        
+
     }
 
     // Update is called once per frame
@@ -57,6 +57,8 @@ public class ChaserEnemyAi : MonoBehaviour
             returnToOrigin();
         }
     }
+
+
 
     void chase()
     {

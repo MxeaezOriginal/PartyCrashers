@@ -19,8 +19,6 @@ public class HeavyEnemy : MonoBehaviour
 
     public EnemyDeath Script_enemydeath;
 
-    public float KnockBackDis = 40f;
-
     void Start()
     {
         players = GameManager.m_Instance.m_Players;
@@ -60,14 +58,12 @@ public class HeavyEnemy : MonoBehaviour
                 {
                     if (hit.transform.tag == "Player")
                     {
-                        KnockBackDis = 40f;
                         //Debug.Log("I C U!");
                         return true;
                     }
                 }
             }
         }
-        KnockBackDis = 0f;
         //Debug.Log("Where R U?");
         return false;
     }
