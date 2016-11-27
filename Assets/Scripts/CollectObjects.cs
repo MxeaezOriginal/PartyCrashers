@@ -11,7 +11,7 @@ public class CollectObjects : MonoBehaviour
     void Start()
     {
         player = gameObject.GetComponent<Player>();
-        if (GameObject.Find("PartyBar_Game/Content") != null)
+        if (GameObject.Find("PartyBar_Game").transform.FindChild("Content") != null)
         {
             partyBar = GameObject.Find("PartyBar_Game").transform.FindChild("Content").GetComponent<PartyBar>();
         }

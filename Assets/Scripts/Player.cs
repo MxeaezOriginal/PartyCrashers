@@ -36,7 +36,7 @@ public class Player : MonoBehaviour
     //public int m_Health;
     //public int m_MaxHealth;
     //public int m_Collect;
-    //public WEAPONTYPE m_WeaponID;
+    public WEAPONTYPE m_WeaponID;
     public float m_CheckLocationCooldown;
     //To hold location every x seconds to respawn to
     public Vector3 m_Location;
@@ -45,7 +45,6 @@ public class Player : MonoBehaviour
     private Transform m_Weapon;
     private HeartSystem m_Heart;
     private CharacterController m_CharController;
-    private WeaponManager m_WeaponManager;
 
     //Input
     public string m_PrimaryAttack = "Primary_";
@@ -81,7 +80,6 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         m_Heart = GetComponent<HeartSystem>();
         m_CharController = GetComponent<CharacterController>();
-        m_WeaponManager = GetComponent<WeaponManager>();
         m_PrimaryAttackSave = m_PrimaryAttack;
         m_SecondaryAttackSave = m_SecondaryAttack;
         m_InteractSave = m_Interact;
@@ -131,7 +129,7 @@ public class Player : MonoBehaviour
 
             m_UsingKeyboardSave = true;
         }
-        //updateWeapon();
+        updateWeapon();
 
         //Primary Attack
         if (Input.GetAxisRaw(m_PrimaryAttack + m_Controller) == 1)
@@ -154,7 +152,6 @@ public class Player : MonoBehaviour
         //Pause
         if (Input.GetButtonDown(m_Pause + m_Controller))
         {
-            /*
             if (m_WeaponID == WEAPONTYPE.SWORD)
             {
                 setWeapon(WEAPONTYPE.BOW);
@@ -162,7 +159,7 @@ public class Player : MonoBehaviour
             else
             {
                 setWeapon(WEAPONTYPE.SWORD);
-            }*/
+            }
         }
 
         if (Input.GetButtonDown(m_Stats + m_Controller))
@@ -175,33 +172,52 @@ public class Player : MonoBehaviour
         //}
     }
 
-    void attack(ATTACKTYPE a)
+    void updateWeapon()
     {
-        //If Current weapon is not assigned
-        if (m_WeaponManager.m_CurrentWeapon != null)
+        Transform weapons = transform.FindChild("Weapon");
+        foreach (Transform child in weapons)
         {
-            //If current weapon has no component that inherits from Weapon
-            if (m_WeaponManager.m_CurrentWeapon.GetComponent<Weapon>() != null)
+            if (child.gameObject.GetComponent<WeaponID>().m_WeaponType == m_WeaponID)
             {
-                //Use primary attack
-                if (a == ATTACKTYPE.PRIMARY)
-                {
-                    m_WeaponManager.m_CurrentWeapon.GetComponent<Weapon>().primaryAttack();
-                }
-                //Use secondary attack
-                else if (a == ATTACKTYPE.SECONDARY)
-                {
-                    m_WeaponManager.m_CurrentWeapon.GetComponent<Weapon>().secondaryAttack();
-                }
+                child.gameObject.SetActive(true);
+                m_Weapon = child;
             }
             else
             {
-                Debug.Log("Error: Current Weapon has no component that inherits from Weapon");
+                child.gameObject.SetActive(false);
             }
         }
-        else
+    }
+
+    void setWeapon(WEAPONTYPE newWeapon)
+    {
+        m_WeaponID = newWeapon;
+    }
+
+    void attack(ATTACKTYPE a)
+    {
+        switch (m_WeaponID)
         {
-            Debug.Log("Error: Current Weapon is NULL");
+            case WEAPONTYPE.SWORD:
+                if (a == ATTACKTYPE.PRIMARY)
+                {
+                    m_Weapon.gameObject.GetComponent<Sword>().primaryAttack();
+                }
+                else if (a == ATTACKTYPE.SECONDARY)
+                {
+                    m_Weapon.gameObject.GetComponent<Sword>().secondaryAttack();
+                }
+                break;
+            case WEAPONTYPE.BOW:
+                if (a == ATTACKTYPE.PRIMARY)
+                {
+                    m_Weapon.gameObject.GetComponent<Bow>().primaryAttack();
+                }
+                else if (a == ATTACKTYPE.SECONDARY)
+                {
+                    m_Weapon.gameObject.GetComponent<Bow>().secondaryAttack();
+                }
+                break;
         }
     }
 
@@ -236,7 +252,7 @@ public class Player : MonoBehaviour
                 GameManager.m_Instance.m_Player1.gold = m_Gold;
                 //GameManager.m_Instance.m_Player1.health = m_Health;
                 //GameManager.m_Instance.m_Player1.maxHealth = m_MaxHealth;
-                //GameManager.m_Instance.m_Player1.weaponID = m_WeaponID;
+                GameManager.m_Instance.m_Player1.weaponID = m_WeaponID;
                 GameManager.m_Instance.m_Player1.lastLocation = m_LastLocation;
                 GameManager.m_Instance.m_Player1.m_Controller = m_Controller;
                 break;
@@ -248,7 +264,7 @@ public class Player : MonoBehaviour
                 GameManager.m_Instance.m_Player2.gold = m_Gold;
                 //GameManager.m_Instance.m_Player2.health = m_Health;
                 //GameManager.m_Instance.m_Player2.maxHealth = m_MaxHealth;
-                //GameManager.m_Instance.m_Player2.weaponID = m_WeaponID;
+                GameManager.m_Instance.m_Player2.weaponID = m_WeaponID;
                 GameManager.m_Instance.m_Player2.lastLocation = m_LastLocation;
                 GameManager.m_Instance.m_Player2.m_Controller = m_Controller;
                 break;
@@ -260,7 +276,7 @@ public class Player : MonoBehaviour
                 GameManager.m_Instance.m_Player3.gold = m_Gold;
                 //GameManager.m_Instance.m_Player3.health = m_Health;
                 //GameManager.m_Instance.m_Player3.maxHealth = m_MaxHealth;
-                //GameManager.m_Instance.m_Player3.weaponID = m_WeaponID;
+                GameManager.m_Instance.m_Player3.weaponID = m_WeaponID;
                 GameManager.m_Instance.m_Player3.lastLocation = m_LastLocation;
                 GameManager.m_Instance.m_Player3.m_Controller = m_Controller;
                 break;
@@ -272,7 +288,7 @@ public class Player : MonoBehaviour
                 GameManager.m_Instance.m_Player4.gold = m_Gold;
                 //GameManager.m_Instance.m_Player4.health = m_Health;
                 //GameManager.m_Instance.m_Player4.maxHealth = m_MaxHealth;
-                //GameManager.m_Instance.m_Player4.weaponID = m_WeaponID;
+                GameManager.m_Instance.m_Player4.weaponID = m_WeaponID;
                 GameManager.m_Instance.m_Player4.lastLocation = m_LastLocation;
                 GameManager.m_Instance.m_Player4.m_Controller = m_Controller;
                 break;
@@ -291,7 +307,7 @@ public class Player : MonoBehaviour
                 m_Gold = GameManager.m_Instance.m_Player1.gold;
                 //m_Health = GameManager.m_Instance.m_Player1.health;
                 //m_MaxHealth = GameManager.m_Instance.m_Player1.maxHealth;
-                //m_WeaponID = GameManager.m_Instance.m_Player1.weaponID;
+                m_WeaponID = GameManager.m_Instance.m_Player1.weaponID;
                 m_LastLocation = GameManager.m_Instance.m_Player1.lastLocation;
                 m_Controller = GameManager.m_Instance.m_Player1.m_Controller;
                 break;
@@ -303,7 +319,7 @@ public class Player : MonoBehaviour
                 m_Gold = GameManager.m_Instance.m_Player2.gold;
                 //m_Health = GameManager.m_Instance.m_Player2.health;
                 //m_MaxHealth = GameManager.m_Instance.m_Player2.maxHealth;
-                //m_WeaponID = GameManager.m_Instance.m_Player2.weaponID;
+                m_WeaponID = GameManager.m_Instance.m_Player2.weaponID;
                 m_LastLocation = GameManager.m_Instance.m_Player2.lastLocation;
                 m_Controller = GameManager.m_Instance.m_Player2.m_Controller;
                 break;
@@ -315,7 +331,7 @@ public class Player : MonoBehaviour
                 m_Gold = GameManager.m_Instance.m_Player3.gold;
                 //m_Health = GameManager.m_Instance.m_Player3.health;
                 //m_MaxHealth = GameManager.m_Instance.m_Player3.maxHealth;
-                //m_WeaponID = GameManager.m_Instance.m_Player3.weaponID;
+                m_WeaponID = GameManager.m_Instance.m_Player3.weaponID;
                 m_LastLocation = GameManager.m_Instance.m_Player3.lastLocation;
                 m_Controller = GameManager.m_Instance.m_Player3.m_Controller;
                 break;
@@ -327,7 +343,7 @@ public class Player : MonoBehaviour
                 m_Gold = GameManager.m_Instance.m_Player4.gold;
                 //m_Health = GameManager.m_Instance.m_Player4.health;
                 //m_MaxHealth = GameManager.m_Instance.m_Player4.maxHealth;
-                //m_WeaponID = GameManager.m_Instance.m_Player4.weaponID;
+                m_WeaponID = GameManager.m_Instance.m_Player4.weaponID;
                 m_LastLocation = GameManager.m_Instance.m_Player4.lastLocation;
                 m_Controller = GameManager.m_Instance.m_Player4.m_Controller;
                 break;
@@ -336,6 +352,17 @@ public class Player : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+        if (other.gameObject.CompareTag("bow"))
+        {
+            Destroy(other.gameObject);
+            setWeapon(WEAPONTYPE.BOW);
+        }
+        if (other.gameObject.CompareTag("sword"))
+        {
+            Destroy(other.gameObject);
+            setWeapon(WEAPONTYPE.SWORD);
+        }
+
         if (other.gameObject.CompareTag("Health"))
         {
             m_Heart.Heal(2);
@@ -406,7 +433,7 @@ public class Player : MonoBehaviour
         if (other.gameObject.CompareTag("DotTrap"))
         {
             dotdelay -= Time.deltaTime;
-            if (dotdelay <= 0)
+            if(dotdelay <= 0)
             {
                 m_Heart.TakeDamage(1);
                 m_Heart.UpdateHearts();

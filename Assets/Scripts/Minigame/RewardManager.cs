@@ -67,27 +67,27 @@ public class RewardManager : MonoBehaviour {
     {
         EventSystem.current.currentSelectedGameObject.GetComponent<Button>().interactable = false;
         GameObject chosenWeapon = EventSystem.current.currentSelectedGameObject.GetComponent<Reward>().m_Reward;
-        //WEAPONTYPE weaponID = chosenWeapon.GetComponent<WeaponID>().m_WeaponType;
+        WEAPONTYPE weaponID = chosenWeapon.GetComponent<WeaponID>().m_WeaponType;
         switch (m_PickCounter)
         {
             case 0:
-                //GameManager.m_Instance.m_Player1.weaponID = weaponID;
+                GameManager.m_Instance.m_Player1.weaponID = weaponID;
                 Debug.Log("Player 1 weapon set as " + chosenWeapon.name);
                 m_PickRewardText.text = "Choose reward: " + m_Second.ToString();
                 break;
             case 1:
-                //GameManager.m_Instance.m_Player2.weaponID = weaponID;
+                GameManager.m_Instance.m_Player2.weaponID = weaponID;
                 Debug.Log("Player 2 weapon set as " + chosenWeapon.name);
                 m_PickRewardText.text = "Choose reward: " + m_Third.ToString();
                 break;
             case 2:
-                //GameManager.m_Instance.m_Player3.weaponID = weaponID;
+                GameManager.m_Instance.m_Player3.weaponID = weaponID;
                 Debug.Log("Player 3 weapon set as " + chosenWeapon.name);
                 m_PickRewardText.text = "Choose reward: " + m_Fourth.ToString();
                 break;
             case 3:
                 Debug.Log("Player 4 weapon set as " + chosenWeapon.name);
-                //GameManager.m_Instance.m_Player4.weaponID = weaponID;
+                GameManager.m_Instance.m_Player4.weaponID = weaponID;
 
                 PickNewLevel();
                 Debug.Log("Rewards Given Out");

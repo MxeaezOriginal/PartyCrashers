@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
         public int score;
         public int health;
         public int maxHealth;
-        //public WEAPONTYPE weaponID;
+        public WEAPONTYPE weaponID;
         public Vector3 lastLocation;
         public string m_Controller;
     }
