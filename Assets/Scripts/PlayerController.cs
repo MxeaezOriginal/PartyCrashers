@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     Vector3 KnockBackDirection;
     Vector3 KnockBack;
-    public float KnockBackDis = 1f;
+    public float KnockBackDis = 40f;
 
     public bool m_CantMove;
     public float m_Speed = 5.0f;
@@ -49,6 +49,7 @@ public class PlayerController : MonoBehaviour
     //HeavyEnemy heavyenemy;
     //private Rigidbody rigidBody;
     CharacterController controller;
+    //ChaserEnemyAi chaserenemy;
 
     // Use this for initialization
     void Start()
@@ -56,6 +57,7 @@ public class PlayerController : MonoBehaviour
         //rigidBody = gameObject.GetComponent<Rigidbody>();
         controller = gameObject.GetComponent<CharacterController>();
         //heavyenemy = gameObject.GetComponent<HeavyEnemy>();
+        //chaserenemy = gameObject.GetComponent<ChaserEnemyAi>();
     }
 
     // Update is called once per frame
@@ -255,13 +257,13 @@ public class PlayerController : MonoBehaviour
         {
             KnockBackDirection = transform.position - other.transform.position;
             KnockBack = transform.position + KnockBackDirection;
-            m_Velocity = KnockBackDirection.normalized * KnockBackDis;
+            m_Velocity = KnockBackDirection.normalized * other.GetComponent<ChaserEnemyAi>().KnockBackDis;
         }
         if (other.gameObject.CompareTag("HeavyEnemy"))
         {
             KnockBackDirection = transform.position - other.transform.position;
             KnockBack = transform.position + KnockBackDirection;
-            m_Velocity = KnockBackDirection.normalized * KnockBackDis;
+            m_Velocity = KnockBackDirection.normalized * other.GetComponent<HeavyEnemy>().KnockBackDis; ;
             //if(canSee)
             //if (gameObject.GetComponent<HeavyEnemy>().CanSeePlayer())
             //{
