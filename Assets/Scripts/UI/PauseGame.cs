@@ -9,7 +9,7 @@ public class PauseGame : MonoBehaviour
     public Transform optionsMenu;
     public Transform quitMenu;
     //public Transform controlsMenu;
-    public Transform Player;
+  
 
 
 
@@ -87,6 +87,34 @@ public class PauseGame : MonoBehaviour
         {
             quitMenu.gameObject.SetActive(false);
             pauseMenu.gameObject.SetActive(true);
+        }
+    }
+
+    public void QuitBackButton(bool Open)
+    {
+        if (Open)
+        {
+            quitMenu.gameObject.SetActive(false);
+            pauseMenu.gameObject.SetActive(true);
+        }
+        if (!Open)
+        {
+            quitMenu.gameObject.SetActive(true);
+            pauseMenu.gameObject.SetActive(false);
+        }
+    }
+
+           public void OptionsBackButton(bool Open)
+    {
+        if (Open)
+        {
+            optionsMenu.gameObject.SetActive(false);
+            pauseMenu.gameObject.SetActive(true);
+        }
+        if (!Open)
+        {
+            optionsMenu.gameObject.SetActive(true);
+            pauseMenu.gameObject.SetActive(false);
         }
     }
 
