@@ -17,11 +17,8 @@ public class ShooterEnemy : MonoBehaviour {
 
     Vector3 MoveDir;
     Vector3 Flee;
-    
-    //public float range = 50.0f;
-    //float dis;
+
     public float bulletImpulse = 20.0f;
-    //Transform target;
     float timer;
     public float bulletwaitingtime = 3.0f;
     public Rigidbody projectile;
@@ -62,9 +59,7 @@ public class ShooterEnemy : MonoBehaviour {
                 }
                 else if (m_distance >= ChaseDis && m_distance <= ActivedDis)
                 {
-                    chase();
-                    //transform.position = Vector3.Lerp(transform.position, players[i].transform.position, ChaseSpeed);
-                    Debug.Log("Chasing!");
+                    chase(); Debug.Log("Chasing!");
                 }
                 else if (m_distance > ActivedDis)
                 {
@@ -81,7 +76,6 @@ public class ShooterEnemy : MonoBehaviour {
                     look(target.transform);
                     MoveDir = transform.position - players[i].transform.position;
                     Flee = transform.position + MoveDir;
-                    //target = players[i].transform;
                     if (m_distance <= RunAwayDis)
                     {
                         transform.position = Vector3.Lerp(transform.position, Flee, RunAwaySpeed);
@@ -100,7 +94,6 @@ public class ShooterEnemy : MonoBehaviour {
                     else if (m_distance >= ChaseDis && m_distance <= ActivedDis)
                     {
                         chase();
-                        //transform.position = Vector3.Lerp(transform.position, players[i].transform.position, ChaseSpeed);
                         Debug.Log("Chasing!");
                     }
                     else if (m_distance > ActivedDis)
@@ -108,20 +101,7 @@ public class ShooterEnemy : MonoBehaviour {
                         Debug.Log("Stay!");
                     }
                 }
-
-                //transform.LookAt(target);
             }
-
-            //if (m_distance < range)
-            //{
-            //    transform.LookAt(target);
-            //    timer += Time.deltaTime;
-            //    if(timer > bulletwaitingtime)
-            //    {
-            //        Shoot();
-            //        timer = 0;
-            //    }
-            //}
         }
             
     }
@@ -137,7 +117,6 @@ public class ShooterEnemy : MonoBehaviour {
     {
         if (GameObject.FindGameObjectWithTag("Player") != null)
         {
-            //look(GameObject.FindGameObjectWithTag("Player").transform);
             agent.SetDestination(target.transform.position);
             agent.Resume();
         }

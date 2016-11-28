@@ -12,6 +12,7 @@ public class ChaserEnemyAi : MonoBehaviour
     public float m_StopDistance = 5;
     public float m_RotationSpeed = 5f;
     public Vector3 m_Origin;
+    public float KnockBackDis = 40f;
 
     // Use this for initialization
     void Start()
