@@ -130,6 +130,10 @@ public class CharacterSelect : MonoBehaviour
                     P4Join = true;
                 }
             }
+            if(menuManager.playCanvas.activeSelf && Input.GetKeyDown(KeyCode.Space))
+            {
+                SceneManager.LoadScene(GameManager.m_Instance.m_LevelToStart);
+            }
         }
     }
     //void LockingIn()

@@ -40,6 +40,8 @@ public class GameManager : MonoBehaviour
     public List<string> m_TutorialEnemies;
     public string m_TutorialLevel = "CVG_Tut01";
 
+    public string m_LevelToStart;
+
     // Use this for initialization
     void Awake()
     {
@@ -47,6 +49,8 @@ public class GameManager : MonoBehaviour
         {
             DontDestroyOnLoad(gameObject);
             m_Instance = this;
+            m_LevelToStart = SceneManager.GetActiveScene().name;
+            SceneManager.LoadScene(0);
             ActivateActivePlayers();
             GameManager.m_Instance.m_Players = GameObject.FindGameObjectsWithTag("Player");
             if (GameObject.FindGameObjectWithTag("Partybar") != null)
