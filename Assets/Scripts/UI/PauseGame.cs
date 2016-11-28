@@ -8,7 +8,7 @@ public class PauseGame : MonoBehaviour
     public Transform pauseMenu;
     public Transform optionsMenu;
     public Transform quitMenu;
-    //public Transform controlsMenu;
+    public Transform controlsMenu;
   
 
 
@@ -32,7 +32,7 @@ public class PauseGame : MonoBehaviour
                 pauseMenu.gameObject.SetActive(true);
                 optionsMenu.gameObject.SetActive(false);
                 quitMenu.gameObject.SetActive(false);
-                //controlsMenu.gameObject.SetActive(false);
+                controlsMenu.gameObject.SetActive(false);
             }
             canvas.gameObject.SetActive(true);
             Time.timeScale = 0;
@@ -90,6 +90,22 @@ public class PauseGame : MonoBehaviour
         }
     }
 
+
+    
+    public void Controls(bool Open)
+    {
+        if (Open)
+        {
+            controlsMenu.gameObject.SetActive(true);
+            pauseMenu.gameObject.SetActive(false);
+        }
+        if (!Open)
+        {
+            controlsMenu.gameObject.SetActive(false);
+            pauseMenu.gameObject.SetActive(true);
+        }
+    }
+    
     public void QuitBackButton(bool Open)
     {
         if (Open)
@@ -118,19 +134,17 @@ public class PauseGame : MonoBehaviour
         }
     }
 
-    /*
-    public void Controls(bool Open)
+    public void ControlsBackButton(bool Open)
     {
         if (Open)
-        {
-            controlsMenu.gameObject.SetActive(true);
-            pauseMenu.gameObject.SetActive(false);
-        }
-        if (!Open)
         {
             controlsMenu.gameObject.SetActive(false);
             pauseMenu.gameObject.SetActive(true);
         }
+        if (!Open)
+        {
+            controlsMenu.gameObject.SetActive(true);
+            pauseMenu.gameObject.SetActive(false);
+        }
     }
-    */
 }
