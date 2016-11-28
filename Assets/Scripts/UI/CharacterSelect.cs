@@ -132,7 +132,7 @@ public class CharacterSelect : MonoBehaviour
             }
             if(menuManager.playCanvas.activeSelf && Input.GetKeyDown(KeyCode.Space))
             {
-                SceneManager.LoadScene(GameManager.m_Instance.m_LevelToStart);
+                StartGame();
             }
         }
     }
@@ -319,6 +319,6 @@ public class CharacterSelect : MonoBehaviour
 
     void StartGame()
     {
-        SceneManager.LoadScene("Lobby_01");
+        SceneManager.LoadScene(GameManager.m_Instance.m_LevelToStart);
     }
 }
