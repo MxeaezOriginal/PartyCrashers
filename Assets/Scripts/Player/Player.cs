@@ -335,10 +335,10 @@ public class Player : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
 
-        if (other.gameObject.CompareTag("Health"))
-        {
-            m_Heart.Heal(2);
-        }
+        //if (other.gameObject.CompareTag("Health"))
+        //{
+        //    m_Heart.Heal(2);
+        //}
 
         if (other.gameObject.CompareTag("Range"))
         {
@@ -357,12 +357,12 @@ public class Player : MonoBehaviour
             m_Heart.UpdateHearts();
 
         }
-        if (other.gameObject.CompareTag("AddHeart"))
-        {
-            m_Heart.AddHeart();
-            m_Heart.Heal(2);
-            m_Heart.UpdateHearts();
-        }
+        //if (other.gameObject.CompareTag("AddHeart"))
+        //{
+        //    m_Heart.AddHeart();
+        //    m_Heart.Heal(2);
+        //    m_Heart.UpdateHearts();
+        //}
     }
 
     void OnCollisionEnter(Collision other)
