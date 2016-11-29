@@ -28,8 +28,6 @@ public class PlayerController : MonoBehaviour
     public string m_HorizontalRotationButton = "HorizontalRotation_";
     public string m_VerticalRotationButton = "VerticalRotation_";
 
-    public bool m_UsingKeyboard = false;
-
     private float m_CurrentHorizontalRotation;
     private float m_CurrentVerticalRotation;
 
@@ -61,25 +59,25 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
         if (!m_CantMove)
         {
             checkMovement();
 
             if (m_StopMovementX == false && m_StopMovementZ == false)
             {
-                    m_MoveDir = new Vector3(Input.GetAxis(m_HorizontalButton + GetComponent<Player>().getControllerAsString()), 0, Input.GetAxis(m_VerticalButton + GetComponent<Player>().getControllerAsString()));
+                m_MoveDir = new Vector3(Input.GetAxis(m_HorizontalButton + GetComponent<Player>().getControllerAsString()), 0, Input.GetAxis(m_VerticalButton + GetComponent<Player>().getControllerAsString()));
             }
             //cant move in x direction
             else if (m_StopMovementX == true && m_StopMovementZ == false)
             {
 
-                    m_MoveDir = new Vector3(0, 0, Input.GetAxis(m_VerticalButton + GetComponent<Player>().getControllerAsString()));
+                m_MoveDir = new Vector3(0, 0, Input.GetAxis(m_VerticalButton + GetComponent<Player>().getControllerAsString()));
             }
             //cant move in z direction
             else if (m_StopMovementX == false && m_StopMovementZ == true)
             {
-                    m_MoveDir = new Vector3(Input.GetAxis(m_HorizontalButton + GetComponent<Player>().getControllerAsString()), 0, 0);
+                m_MoveDir = new Vector3(Input.GetAxis(m_HorizontalButton + GetComponent<Player>().getControllerAsString()), 0, 0);
             }
             //cant move in either direction
             else if (m_StopMovementX == true && m_StopMovementZ == true)
@@ -95,22 +93,22 @@ public class PlayerController : MonoBehaviour
             if (controller.isGrounded)
             {
 
-                    if (Input.GetButtonDown(m_JumpButton + GetComponent<Player>().getControllerAsString()))
-                    {
-                        m_Velocity.y = m_Jump;
-                    }
+                if (Input.GetButtonDown(m_JumpButton + GetComponent<Player>().getControllerAsString()))
+                {
+                    m_Velocity.y = m_Jump;
+                }
                 m_CurrentGravity = 0f;
             }
             else
             {
-                    if (Input.GetButton(m_JumpButton + GetComponent<Player>().m_Controller))
-                    {
-                        m_CurrentGravity = m_JumpGravity;
-                    }
-                    else
-                    {
-                        m_CurrentGravity = m_NormalGravity;
-                    }
+                if (Input.GetButton(m_JumpButton + GetComponent<Player>().m_Controller))
+                {
+                    m_CurrentGravity = m_JumpGravity;
+                }
+                else
+                {
+                    m_CurrentGravity = m_NormalGravity;
+                }
             }
 
             //Horizontal

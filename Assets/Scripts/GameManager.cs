@@ -233,6 +233,7 @@ public class GameManager : MonoBehaviour
             Player playerComponent = playerClone.GetComponent<Player>();
 
             playerComponent.m_Player = (Player.PLAYER) System.Enum.Parse(typeof(Player.PLAYER), player);
+            Debug.Log(playerComponent.m_Player.ToString());
         }
         else
         {

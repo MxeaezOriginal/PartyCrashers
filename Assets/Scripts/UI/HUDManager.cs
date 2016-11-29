@@ -49,7 +49,6 @@ public class HUDManager : MonoBehaviour
             P2_Panel.SetActive(false);
             P3_Panel.SetActive(false);
             P4_Panel.SetActive(false);
-            print("1");
 
             P1_PanelTransform.anchoredPosition = new Vector2(0, 30);
             //StatsWindow(s)
