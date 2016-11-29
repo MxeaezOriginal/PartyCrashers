@@ -25,9 +25,11 @@ public class Bow : Ranged
     private int m_MidDmgMultiplier;
     [SerializeField]
     [Tooltip("Multiplies the initial Damage the bullet does at Full charge.")]
-    private int m_MaxDmgMultiplier;
+    private int m_LaserDmgMultiplier;
     [SerializeField]
-    private float m_LaserBeamDuration;
+    private float m_LaserTimer;
+    [SerializeField]
+    private float m_LaserLenght;
 
     Damage dmg;
     Player player;
@@ -89,7 +91,7 @@ public class Bow : Ranged
     private void shoot()
     {
         GameObject balloon;
-        //LaserBeam beam;
+        
 
         if (m_TimePressed < (m_MaxCharge / 2))
         {
@@ -106,43 +108,28 @@ public class Bow : Ranged
             balloon.GetComponent<Rigidbody>().AddForce(balloon.transform.forward * m_MedSpeed * m_TimePressed);
         }
         else
-        {
-            StopCoroutine("FireLaser");
-            StartCoroutine("FireLaser");
+        {           
+            m_BulletDamage = m_Damage * m_LaserDmgMultiplier;            
+            m_lineRenderer.enabled = true;
+                      
+            Ray ray = new Ray(transform.position, transform.forward);
+            RaycastHit hit;
+
+            m_lineRenderer.SetPosition(1, ray.GetPoint(m_LaserLenght));
+            m_lineRenderer.SetPosition(0, ray.origin);
 
             
-            m_lineRenderer.enabled = true;
-            Ray ray = new Ray(transform.position, transform.forward);
-            m_lineRenderer.SetPosition(0, ray.origin);
-            m_lineRenderer.SetPosition(1, ray.GetPoint(100));
-
-         
-            //This 2 lines below will make it shoot a bullet instead of a beam.    
-            //balloon = (GameObject)Instantiate(m_RightTriggerProjectile, m_FirePoint[0].gameObject.transform.position, m_FirePoint[0].gameObject.transform.rotation);
-            //balloon.GetComponent<Rigidbody>().AddForce(balloon.transform.forward * m_MaxSpeed * m_TimePressed);
+            StopCoroutine("LaserTimer");
+            StartCoroutine("LaserTimer");      
         }
         m_TimePressed = 0;
         m_CoolDown = Time.time;
     }
 
-    IEnumerator FireLaser()
+    IEnumerator LaserTimer()
     {
-        m_BulletDamage = m_Damage * m_MaxDmgMultiplier;
-        m_lineRenderer.enabled = true;
-        float timer = m_LaserBeamDuration;
-        timer -= Time.deltaTime;
-        
-        Ray ray = new Ray(transform.position, transform.forward);
-        m_lineRenderer.SetPosition(0, ray.origin);
-        m_lineRenderer.SetPosition(1, ray.GetPoint(100));
-        
-        if(timer < 0)
-        {
-            m_lineRenderer.enabled = false;
-            yield return null;            
-        }
-
-        
+        yield return new WaitForSeconds(m_LaserTimer);       
+        m_lineRenderer.enabled = false;
     }
-
+    // https://unity3d.com/learn/tutorials/topics/graphics/fun-lasers
 }
