@@ -9,6 +9,7 @@ public class PartyBar : MonoBehaviour {
     public int m_Current = 0;
     public float m_DecreaseRate = 5f;
     public int m_DecreaseAmount = 5;
+    public float m_fillSpeed = 2f;
 
     public bool m_Active;
 
@@ -25,7 +26,7 @@ public class PartyBar : MonoBehaviour {
 	void Update () {
 
         //set bar equal to percentage
-        m_Bar.fillAmount = (float)m_Current / m_Max;
+        m_Bar.fillAmount = Mathf.Lerp(m_Bar.fillAmount, (float)m_Current / m_Max, m_fillSpeed * Time.deltaTime);
 
         if (m_Active)
         {

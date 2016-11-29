@@ -10,6 +10,7 @@ public class PartyBarMinigame : MonoBehaviour
     public int m_Current = 60;
     public float m_Cooldown = 1f;
     public int m_ReduceBy = 1;
+    public float m_fillSpeed = 2f;
 
     public bool m_Active = true;
 
@@ -27,7 +28,7 @@ public class PartyBarMinigame : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        m_Bar.fillAmount = (float)m_Current / m_Max;
+        m_Bar.fillAmount = Mathf.Lerp(m_Bar.fillAmount, (float)m_Current / m_Max, m_fillSpeed * Time.deltaTime);
 
         if (m_Active)
         {
