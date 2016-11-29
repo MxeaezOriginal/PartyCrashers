@@ -6913,6 +6913,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 559155646}
   m_RootOrder: 0
+--- !u!1 &336229740 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 179692, guid: c0d4599cda93dc54785f1e84c5383933, type: 2}
+  m_PrefabInternal: {fileID: 2096416955}
+--- !u!114 &336229750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 336229740}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9957292c81333447833081810640974, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &338950110
 Prefab:
   m_ObjectHideFlags: 0
@@ -25980,6 +25995,7 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 0}
+    - {fileID: 11470582, guid: 5153af79980f5c24a8ce38b6f542b25a, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 5153af79980f5c24a8ce38b6f542b25a, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &1132111498
@@ -26795,6 +26811,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1
   m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!114 &1172488641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1172488638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cacae2d53ed63143b402767e6cfa793, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gold: 100
+  type: 0
 --- !u!1001 &1173544653
 Prefab:
   m_ObjectHideFlags: 0
@@ -44188,7 +44217,12 @@ Prefab:
       propertyPath: m_UsingKeyboard
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 11460816, guid: c0d4599cda93dc54785f1e84c5383933, type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 11460816, guid: c0d4599cda93dc54785f1e84c5383933, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: c0d4599cda93dc54785f1e84c5383933, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &2096855445
