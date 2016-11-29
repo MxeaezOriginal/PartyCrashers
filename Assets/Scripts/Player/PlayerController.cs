@@ -6,27 +6,27 @@ public class PlayerController : MonoBehaviour
 {
     Vector3 KnockBackDirection;
     Vector3 KnockBack;
-    public float KnockBackDis = 1f;
+    public float KnockBackDis = 40f;
 
     public bool m_CantMove;
     public float m_Speed = 5.0f;
     public float m_MaxSpeed = 10f;
     public float m_Acceleration = 1f;
     public float m_Friction = 1f;
-    public float m_TurnSpeed = 0.1f;
+    public float m_TurnSpeed = 3f;
     public float m_NormalGravity = 70f;
     public float m_JumpGravity = 30f;
-    public float m_Jump = 30.0f;
+    public float m_Jump = 15.0f;
 
     public float m_MaxMovementX = 14f;
     public float m_MaxMovementZ = 18f;
 
     public string m_JumpButton = "Jump_";
-    public string m_HorizontalButton = "JoystickLeftX_";
-    public string m_VerticalButton = "JoystickLeftY_";
+    public string m_HorizontalButton = "Horizontal_";
+    public string m_VerticalButton = "Vertical_";
 
-    public string m_HorizontalRotationButton = "JoystickRightY_";
-    public string m_VerticalRotationButton = "JoystickRightX_";
+    public string m_HorizontalRotationButton = "HorizontalRotation_";
+    public string m_VerticalRotationButton = "VerticalRotation_";
 
     public bool m_UsingKeyboard = false;
 
@@ -68,38 +68,18 @@ public class PlayerController : MonoBehaviour
 
             if (m_StopMovementX == false && m_StopMovementZ == false)
             {
-                if (!m_UsingKeyboard)
-                {
-                    m_MoveDir = new Vector3(Input.GetAxis(m_HorizontalButton + GetComponent<Player>().m_Controller), 0, Input.GetAxis(m_VerticalButton + GetComponent<Player>().m_Controller));
-                }
-                else
-                {
-                    m_MoveDir = new Vector3(Input.GetAxis("Horizontal_Keyboard"), 0, Input.GetAxis("Vertical_Keyboard"));
-                }
+                    m_MoveDir = new Vector3(Input.GetAxis(m_HorizontalButton + GetComponent<Player>().getControllerAsString()), 0, Input.GetAxis(m_VerticalButton + GetComponent<Player>().getControllerAsString()));
             }
             //cant move in x direction
             else if (m_StopMovementX == true && m_StopMovementZ == false)
             {
-                if (!m_UsingKeyboard)
-                {
-                    m_MoveDir = new Vector3(0, 0, Input.GetAxis(m_VerticalButton + GetComponent<Player>().m_Controller));
-                }
-                else
-                {
-                    m_MoveDir = new Vector3(0, 0, Input.GetAxis("Vertical_Keyboard"));
-                }
+
+                    m_MoveDir = new Vector3(0, 0, Input.GetAxis(m_VerticalButton + GetComponent<Player>().getControllerAsString()));
             }
             //cant move in z direction
             else if (m_StopMovementX == false && m_StopMovementZ == true)
             {
-                if (!m_UsingKeyboard)
-                {
-                    m_MoveDir = new Vector3(Input.GetAxis(m_HorizontalButton + GetComponent<Player>().m_Controller), 0, 0);
-                }
-                else
-                {
-                    m_MoveDir = new Vector3(Input.GetAxis("Horizontal_Keyboard"), 0, 0);
-                }
+                    m_MoveDir = new Vector3(Input.GetAxis(m_HorizontalButton + GetComponent<Player>().getControllerAsString()), 0, 0);
             }
             //cant move in either direction
             else if (m_StopMovementX == true && m_StopMovementZ == true)
@@ -114,26 +94,15 @@ public class PlayerController : MonoBehaviour
             //Jump
             if (controller.isGrounded)
             {
-                if (!m_UsingKeyboard)
-                {
-                    if (Input.GetButtonDown(m_JumpButton + GetComponent<Player>().m_Controller))
+
+                    if (Input.GetButtonDown(m_JumpButton + GetComponent<Player>().getControllerAsString()))
                     {
                         m_Velocity.y = m_Jump;
                     }
-                }
-                else
-                {
-                    if (Input.GetButtonDown("Jump_Keyboard"))
-                    {
-                        m_Velocity.y = m_Jump;
-                    }
-                }
                 m_CurrentGravity = 0f;
             }
             else
             {
-                if (!m_UsingKeyboard)
-                {
                     if (Input.GetButton(m_JumpButton + GetComponent<Player>().m_Controller))
                     {
                         m_CurrentGravity = m_JumpGravity;
@@ -142,18 +111,6 @@ public class PlayerController : MonoBehaviour
                     {
                         m_CurrentGravity = m_NormalGravity;
                     }
-                }
-                else
-                {
-                    if (Input.GetButton("Jump_Keyboard"))
-                    {
-                        m_CurrentGravity = m_JumpGravity;
-                    }
-                    else
-                    {
-                        m_CurrentGravity = m_NormalGravity;
-                    }
-                }
             }
 
             //Horizontal
@@ -208,17 +165,17 @@ public class PlayerController : MonoBehaviour
             //Rotate / Aim
 
 
-            if (!m_UsingKeyboard)
+            if (GetComponent<Player>().getControllerAsString() != "Keyboard")
             {
-                if (Input.GetAxis(m_HorizontalRotationButton + GetComponent<Player>().m_Controller) != 0 || Input.GetAxis(m_VerticalRotationButton + GetComponent<Player>().m_Controller) != 0)
+                if (Input.GetAxis(m_HorizontalRotationButton + GetComponent<Player>().getControllerAsString()) != 0 || Input.GetAxis(m_VerticalRotationButton + GetComponent<Player>().getControllerAsString()) != 0)
                 {
-                    m_CurrentHorizontalRotation = Input.GetAxis(m_HorizontalRotationButton + GetComponent<Player>().m_Controller);
-                    m_CurrentVerticalRotation = Input.GetAxis(m_VerticalRotationButton + GetComponent<Player>().m_Controller);
+                    m_CurrentHorizontalRotation = Input.GetAxis(m_HorizontalRotationButton + GetComponent<Player>().getControllerAsString());
+                    m_CurrentVerticalRotation = Input.GetAxis(m_VerticalRotationButton + GetComponent<Player>().getControllerAsString());
                 }
-                else if (Input.GetAxis(m_HorizontalButton + GetComponent<Player>().m_Controller) != 0 || Input.GetAxis(m_VerticalButton + GetComponent<Player>().m_Controller) != 0)
+                else if (Input.GetAxis(m_HorizontalButton + GetComponent<Player>().getControllerAsString()) != 0 || Input.GetAxis(m_VerticalButton + GetComponent<Player>().getControllerAsString()) != 0)
                 {
-                    m_CurrentHorizontalRotation = Input.GetAxis(m_HorizontalButton + GetComponent<Player>().m_Controller);
-                    m_CurrentVerticalRotation = Input.GetAxis(m_VerticalButton + GetComponent<Player>().m_Controller) * -1f;
+                    m_CurrentHorizontalRotation = Input.GetAxis(m_HorizontalButton + GetComponent<Player>().getControllerAsString());
+                    m_CurrentVerticalRotation = Input.GetAxis(m_VerticalButton + GetComponent<Player>().getControllerAsString()) * -1f;
                 }
 
                 m_RotateAngle = Mathf.Atan2(m_CurrentHorizontalRotation * -1, m_CurrentVerticalRotation * -1) * Mathf.Rad2Deg;
@@ -307,7 +264,7 @@ public class PlayerController : MonoBehaviour
         {
             m_StopMovementX = true;
 
-            float playerXInput = Input.GetAxis(m_HorizontalButton) * m_Speed; // sets this variable to the current input the player is giving for horizontal movement
+            float playerXInput = Input.GetAxis(m_HorizontalButton + GetComponent<Player>().getControllerAsString()) * m_Speed; // sets this variable to the current input the player is giving for horizontal movement
 
             if (Mathf.Abs((transform.position.x + playerXInput) - otherPlayerX.transform.position.x) < m_MaxMovementX) // if the input the player is giving plus his current x position is less than max movement
             {
@@ -323,7 +280,7 @@ public class PlayerController : MonoBehaviour
         {
             m_StopMovementZ = true;
 
-            float playerZInput = Input.GetAxis(m_VerticalButton) * m_Speed; //Players input for Z axis
+            float playerZInput = Input.GetAxis(m_VerticalButton + GetComponent<Player>().getControllerAsString()) * m_Speed; //Players input for Z axis
 
             if (Mathf.Abs((transform.position.z + playerZInput) - otherPlayerZ.transform.position.z) < m_MaxMovementZ)
             {

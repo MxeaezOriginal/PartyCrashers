@@ -20,10 +20,12 @@ public class GameManager : MonoBehaviour
         public int maxHealth;
         public WEAPONTYPE weaponID;
         public Vector3 lastLocation;
-        public string m_Controller;
+        public Player.Controller m_Controller;
     }
 
     public static GameManager m_Instance;
+
+    public GameObject m_PlayerPrefab;
 
     public PlayerStats m_Player1;
     public PlayerStats m_Player2;
@@ -51,7 +53,7 @@ public class GameManager : MonoBehaviour
             m_Instance = this;
             m_LevelToStart = SceneManager.GetActiveScene().name;
             SceneManager.LoadScene(0);
-            ActivateActivePlayers();
+            InstantiatePlayers();
             GameManager.m_Instance.m_Players = GameObject.FindGameObjectsWithTag("Player");
             if (GameObject.FindGameObjectWithTag("Partybar") != null)
             {
@@ -63,7 +65,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            ActivateActivePlayers();
+            InstantiatePlayers();
             GameManager.m_Instance.m_Players = GameObject.FindGameObjectsWithTag("Player");
             if (GameObject.FindGameObjectWithTag("Partybar") != null)
             {
@@ -88,18 +90,18 @@ public class GameManager : MonoBehaviour
 
     public void savePlayers()
     {
-        for (int i = 0; i < GameManager.m_Instance.m_Players.Length; i++)
+        foreach(GameObject player in GameManager.m_Instance.m_Players)
         {
-            Player currentPlayer = GameManager.m_Instance.m_Players[i].GetComponent<Player>();
+            Player currentPlayer = player.GetComponent<Player>();
             currentPlayer.save();
         }
     }
 
     public void loadPlayers()
     {
-        for (int i = 0; i < GameManager.m_Instance.m_Players.Length; i++)
+        foreach (GameObject player in GameManager.m_Instance.m_Players)
         {
-            Player currentPlayer = GameManager.m_Instance.m_Players[i].GetComponent<Player>();
+            Player currentPlayer = player.GetComponent<Player>();
             currentPlayer.load();
         }
     }
@@ -176,10 +178,21 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void ActivateActivePlayers()
+    void InstantiatePlayers()
     {
-        Debug.Log("1");
-        switch (m_Instance.m_NumOfPlayers)
+
+        for (int i = 1; i <= m_Instance.m_NumOfPlayers; ++i)
+        {
+            string player = "P" + i;
+            if (GameObject.Find("Players").transform.FindChild(player) != null)
+            {
+                GameObject playerParent = GameObject.Find("Players").transform.FindChild(player).gameObject;
+
+                InstantiatePlayer(playerParent, player);
+            }
+        }
+
+        /*switch (m_Instance.m_NumOfPlayers)
         {
             case 1:
                 GameObject.Find("Players").transform.FindChild("P1").gameObject.SetActive(true);
@@ -203,6 +216,27 @@ public class GameManager : MonoBehaviour
                 GameObject.Find("Players").transform.FindChild("P4").gameObject.SetActive(true);
                 Debug.Log("5");
                 break;
+        }*/
+    }
+
+    private void InstantiatePlayer(GameObject parent, string player)
+    {
+        GameObject playerClone = Instantiate(m_PlayerPrefab, parent.transform.position, Quaternion.identity) as GameObject;
+        playerClone.transform.parent = parent.gameObject.transform;
+        playerClone.transform.localPosition = new Vector3(0, 0, 0);
+        playerClone.transform.localRotation = Quaternion.identity;
+        playerClone.transform.localScale = new Vector3(1, 1, 1);
+        playerClone.name = parent.name;
+
+        if(playerClone.GetComponent<Player>() != null)
+        {
+            Player playerComponent = playerClone.GetComponent<Player>();
+
+            playerComponent.m_Player = (Player.PLAYER) System.Enum.Parse(typeof(Player.PLAYER), player);
+        }
+        else
+        {
+            Debug.Log("Error: Instantiated player doesn't have a Player Component");
         }
     }
 }

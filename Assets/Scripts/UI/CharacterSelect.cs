@@ -10,7 +10,8 @@ public class CharacterSelect : MonoBehaviour
         P1,
         P2,
         P3,
-        P4
+        P4,
+        Keyboard
     }
 
     [System.Serializable]
@@ -25,7 +26,7 @@ public class CharacterSelect : MonoBehaviour
     [Header("Bools & CD on character switch")]
     public PlayerOne firstPlayer;
     public float cooldown = 0.3f;
-    public bool P1Join, P2Join, P3Join, P4Join;
+    public bool P1Join, P2Join, P3Join, P4Join, KeyboardJoin;
     //public bool P1Locked, P2Locked, P3Locked, P4Locked;
 
     MenuManager menuManager;
@@ -67,7 +68,7 @@ public class CharacterSelect : MonoBehaviour
             P4.index = 3;
     }
 
-    public void AssignController(string controller)
+    public void AssignController(Player.Controller controller)
     {
         switch (GameManager.m_Instance.m_NumOfPlayers)
         {
@@ -95,7 +96,7 @@ public class CharacterSelect : MonoBehaviour
                 if (!P1Join)
                 {
                     int players = ++GameManager.m_Instance.m_NumOfPlayers;
-                    AssignController("P1");
+                    AssignController(Player.Controller.P1);
                     Debug.Log("Player " + players + " has Joined!");
                     P1Join = true;
                 }
@@ -105,7 +106,7 @@ public class CharacterSelect : MonoBehaviour
                 if (!P2Join)
                 {
                     int players = ++GameManager.m_Instance.m_NumOfPlayers;
-                    AssignController("P2");
+                    AssignController(Player.Controller.P2);
                     Debug.Log("Player " + players + " has Joined!");
                     P2Join = true;
                 }
@@ -115,7 +116,7 @@ public class CharacterSelect : MonoBehaviour
                 if (!P3Join)
                 {
                     int players = ++GameManager.m_Instance.m_NumOfPlayers;
-                    AssignController("P3");
+                    AssignController(Player.Controller.P3);
                     Debug.Log("Player " + players + " has Joined!");
                     P3Join = true;
                 }
@@ -125,12 +126,22 @@ public class CharacterSelect : MonoBehaviour
                 if (!P4Join)
                 {
                     int players = ++GameManager.m_Instance.m_NumOfPlayers;
-                    AssignController("P4");
+                    AssignController(Player.Controller.P4);
                     Debug.Log("Player " + players + " has Joined!");
                     P4Join = true;
                 }
             }
-            if(menuManager.playCanvas.activeSelf && Input.GetKeyDown(KeyCode.Space))
+            if (menuManager.playCanvas.activeSelf && Input.GetButtonDown("Submit_Keyboard"))
+            {
+                if (!KeyboardJoin)
+                {
+                    int players = ++GameManager.m_Instance.m_NumOfPlayers;
+                    AssignController(Player.Controller.Keyboard);
+                    Debug.Log("Player " + players + " has Joined!");
+                    KeyboardJoin = true;
+                }
+            }
+            if (menuManager.playCanvas.activeSelf && Input.GetKeyDown(KeyCode.Space))
             {
                 StartGame();
             }
@@ -164,7 +175,7 @@ public class CharacterSelect : MonoBehaviour
         if (menuManager.playCanvas.activeSelf)// && !P1Locked)  //If on "PlayCanvas"
         {
             P1.characterSelectIcon.sprite = P1.characters[P1.index];
-            if (Input.GetAxisRaw("JoystickLeftX_" + GameManager.m_Instance.m_Player1.m_Controller) < 0)    //Scroll Left
+            if (Input.GetAxisRaw("Horizontal_" + GameManager.m_Instance.m_Player1.m_Controller) < 0)    //Scroll Left
             {
                 if (P1.cooldownCounter < Time.time - cooldown || P1.cooldownCounter == -1)
                 {
@@ -173,7 +184,7 @@ public class CharacterSelect : MonoBehaviour
                     P1.cooldownCounter = Time.time;
                 }
             }
-            if (Input.GetAxisRaw("JoystickLeftX_" + GameManager.m_Instance.m_Player1.m_Controller) > 0)     //Scroll Right
+            if (Input.GetAxisRaw("Horizontal_" + GameManager.m_Instance.m_Player1.m_Controller) > 0)     //Scroll Right
             {
                 if (P1.cooldownCounter < Time.time - cooldown || P1.cooldownCounter == -1)
                 {
@@ -202,7 +213,7 @@ public class CharacterSelect : MonoBehaviour
         P2.characterSelectIcon.sprite = P2.characters[P2.index];
         if (menuManager.playCanvas.activeSelf)// && !P2Locked)  //If on "PlayCanvas"
         {
-            if (Input.GetAxisRaw("JoystickLeftX_" + GameManager.m_Instance.m_Player2.m_Controller) < 0)    //Scroll Left
+            if (Input.GetAxisRaw("Horizontal_" + GameManager.m_Instance.m_Player2.m_Controller) < 0)    //Scroll Left
             {
                 if (P2.cooldownCounter < Time.time - cooldown || P2.cooldownCounter == -1)
                 {
@@ -211,7 +222,7 @@ public class CharacterSelect : MonoBehaviour
                     P2.cooldownCounter = Time.time;
                 }
             }
-            if (Input.GetAxisRaw("JoystickLeftX_" + GameManager.m_Instance.m_Player2.m_Controller) > 0)     //Scroll Right
+            if (Input.GetAxisRaw("Horizontal_" + GameManager.m_Instance.m_Player2.m_Controller) > 0)     //Scroll Right
             {
                 if (P2.cooldownCounter < Time.time - cooldown || P2.cooldownCounter == -1)
                 {
@@ -232,7 +243,7 @@ public class CharacterSelect : MonoBehaviour
         P3.characterSelectIcon.sprite = P3.characters[P3.index];
         if (menuManager.playCanvas.activeSelf)// && !P3Locked)  //If on "PlayCanvas"
         {
-            if (Input.GetAxisRaw("JoystickLeftX_" + GameManager.m_Instance.m_Player3.m_Controller) < 0)    //Scroll Left
+            if (Input.GetAxisRaw("Horizontal_" + GameManager.m_Instance.m_Player3.m_Controller) < 0)    //Scroll Left
             {
                 if (P3.cooldownCounter < Time.time - cooldown || P3.cooldownCounter == -1)
                 {
@@ -241,7 +252,7 @@ public class CharacterSelect : MonoBehaviour
                     P3.cooldownCounter = Time.time;
                 }
             }
-            if (Input.GetAxisRaw("JoystickLeftX_" + GameManager.m_Instance.m_Player3.m_Controller) > 0)     //Scroll Right
+            if (Input.GetAxisRaw("Horizontal_" + GameManager.m_Instance.m_Player3.m_Controller) > 0)     //Scroll Right
             {
                 if (P3.cooldownCounter < Time.time - cooldown || P3.cooldownCounter == -1)
                 {
@@ -262,7 +273,7 @@ public class CharacterSelect : MonoBehaviour
         P4.characterSelectIcon.sprite = P4.characters[P4.index];
         if (menuManager.playCanvas.activeSelf)// && !P4Locked)  //If on "PlayCanvas"
         {
-            if (Input.GetAxisRaw("JoystickLeftX_" + GameManager.m_Instance.m_Player4.m_Controller) < 0)    //Scroll Left
+            if (Input.GetAxisRaw("Horizontal_" + GameManager.m_Instance.m_Player4.m_Controller) < 0)    //Scroll Left
             {
                 if (P4.cooldownCounter < Time.time - cooldown || P4.cooldownCounter == -1)
                 {
@@ -271,7 +282,7 @@ public class CharacterSelect : MonoBehaviour
                     P4.cooldownCounter = Time.time;
                 }
             }
-            if (Input.GetAxisRaw("JoystickLeftX_" + GameManager.m_Instance.m_Player4.m_Controller) > 0)     //Scroll Right
+            if (Input.GetAxisRaw("Horizontal_" + GameManager.m_Instance.m_Player4.m_Controller) > 0)     //Scroll Right
             {
                 if (P4.cooldownCounter < Time.time - cooldown || P4.cooldownCounter == -1)
                 {

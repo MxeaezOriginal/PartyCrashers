@@ -27,6 +27,15 @@ public class Player : MonoBehaviour
         P4 = 4
     }
 
+    public enum Controller
+    {
+        P1,
+        P2,
+        P3,
+        P4,
+        Keyboard
+    }
+
     // Player stats
     public string m_PlayerName;
     public PLAYER m_Player;
@@ -55,19 +64,9 @@ public class Player : MonoBehaviour
     public string m_Stats = "Stats_";
     public string m_Pause = "Pause_";
 
-    public bool m_UsingKeyboard;
-
-    private bool m_UsingKeyboardSave;
-
-    private string m_PrimaryAttackSave;
-    private string m_SecondaryAttackSave;
-    private string m_InteractSave;
-    private string m_SillySave;
-    private string m_StatsSave;
-    private string m_PauseSave;
     public float delay = 2.0f;
     public float dotdelay = 2.0f;
-    public string m_Controller;
+    public Controller m_Controller;
 
     //float m_LastShotTime;
     //public float DamageInterval = 2f;
@@ -82,15 +81,6 @@ public class Player : MonoBehaviour
         m_Heart = GetComponent<HeartSystem>();
         m_CharController = GetComponent<CharacterController>();
         m_WeaponManager = GetComponent<WeaponManager>();
-        m_PrimaryAttackSave = m_PrimaryAttack;
-        m_SecondaryAttackSave = m_SecondaryAttack;
-        m_InteractSave = m_Interact;
-        m_SillySave = m_Silly;
-        m_StatsSave = m_Stats;
-        m_PauseSave = m_Pause;
-
-        m_UsingKeyboardSave = !m_UsingKeyboard;
-        Debug.Log(m_UsingKeyboardSave);
     }
 
     // Update is called once per frame
@@ -109,49 +99,27 @@ public class Player : MonoBehaviour
                 m_CurrentCooldown = Time.time;
             }
         }
-        if (m_UsingKeyboard == false && m_UsingKeyboardSave == true)
-        {
-            m_PrimaryAttack = m_PrimaryAttackSave;
-            m_SecondaryAttack = m_SecondaryAttackSave;
-            m_Interact = m_InteractSave;
-            m_Silly = m_SillySave;
-            m_Stats = m_StatsSave;
-            m_Pause = m_PauseSave;
-
-            m_UsingKeyboardSave = false;
-        }
-        else if (m_UsingKeyboard == true && m_UsingKeyboardSave == false)
-        {
-            m_PrimaryAttack = "Primary_Keyboard";
-            m_SecondaryAttack = "Secondary_Keyboard";
-            m_Interact = "Interact_Keyboard";
-            m_Silly = "Silly_Keyboard";
-            m_Stats = "Stats_Keyboard";
-            m_Pause = "Pause_Keyboard";
-
-            m_UsingKeyboardSave = true;
-        }
 
         //Primary Attack
-        if (Input.GetAxisRaw(m_PrimaryAttack + m_Controller) == 1)
+        if (Input.GetAxisRaw(m_PrimaryAttack + m_Controller.ToString()) == 1)
         {
             attack(ATTACKTYPE.PRIMARY);
         }
 
         //Secondary Attack
-        if (Input.GetAxisRaw(m_SecondaryAttack + m_Controller) == 1)
+        if (Input.GetAxisRaw(m_SecondaryAttack + m_Controller.ToString()) == 1)
         {
             attack(ATTACKTYPE.SECONDARY);
         }
 
         //Interact
-        if (Input.GetButtonDown(m_Interact + m_Controller))
+        if (Input.GetButtonDown(m_Interact + m_Controller.ToString()))
         {
 
         }
 
         //Pause
-        if (Input.GetButtonDown(m_Pause + m_Controller))
+        if (Input.GetButtonDown(m_Pause + m_Controller.ToString()))
         {
             /*if (m_WeaponID == WEAPONTYPE.SWORD)
             {
@@ -163,7 +131,7 @@ public class Player : MonoBehaviour
             }*/
         }
 
-        if (Input.GetButtonDown(m_Stats + m_Controller))
+        if (Input.GetButtonDown(m_Stats + m_Controller.ToString()))
         {
             GetComponent<Stats>().ToggleWindow();
         }
@@ -220,6 +188,21 @@ public class Player : MonoBehaviour
     public void heal(int healAmount)
     {
         m_Heart.Heal(healAmount);
+    }
+
+    public string getControllerAsString()
+    {
+        return m_Controller.ToString();
+    }
+
+    public Controller getController()
+    {
+        return m_Controller;
+    }
+
+    public void setController(Controller controller)
+    {
+        m_Controller = controller;
     }
 
     public void save()

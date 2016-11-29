@@ -259,45 +259,56 @@ void test()
             if (splashCanvas.activeSelf && Input.GetButtonDown("Jump_P1"))
             {
                 int players = ++GameManager.m_Instance.m_NumOfPlayers;
-                characterSelect.AssignController("P1");
+                characterSelect.AssignController(Player.Controller.P1);
                 Debug.Log("Player " + players + " has Joined!");
                 inputModule.submitButton = "Jump_P1";
-                inputModule.horizontalAxis = "JoystickLeftX_P1";
-                inputModule.verticalAxis = "JoystickLeftY_P1";
+                inputModule.horizontalAxis = "Horizontal_P1";
+                inputModule.verticalAxis = "Vertical_P1";
                 characterSelect.P1Join = true;
                 characterSelect.firstPlayer = CharacterSelect.PlayerOne.P1;
             }
             if (splashCanvas.activeSelf && Input.GetButtonDown("Jump_P2"))
             {
                 int players = ++GameManager.m_Instance.m_NumOfPlayers;
-                characterSelect.AssignController("P2");
+                characterSelect.AssignController(Player.Controller.P2);
                 Debug.Log("Player " + players + " has Joined!");
                 inputModule.submitButton = "Jump_P2";
-                inputModule.horizontalAxis = "JoystickLeftX_P2";
-                inputModule.verticalAxis = "JoystickLeftY_P2";
+                inputModule.horizontalAxis = "Horizontal_P2";
+                inputModule.verticalAxis = "Vertical_P2";
                 characterSelect.P2Join = true;
                 characterSelect.firstPlayer = CharacterSelect.PlayerOne.P2;
             }
             if (splashCanvas.activeSelf && Input.GetButtonDown("Jump_P3"))
             {
                 int players = ++GameManager.m_Instance.m_NumOfPlayers;
-                characterSelect.AssignController("P3");
+                characterSelect.AssignController(Player.Controller.P3);
                 Debug.Log("Player " + players + " has Joined!");
                 inputModule.submitButton = "Jump_P3";
-                inputModule.horizontalAxis = "JoystickLeftX_P3";
-                inputModule.verticalAxis = "JoystickLeftY_P3";
+                inputModule.horizontalAxis = "Horizontal_P3";
+                inputModule.verticalAxis = "Vertical_P3";
                 characterSelect.P3Join = true;
                 characterSelect.firstPlayer = CharacterSelect.PlayerOne.P3;
             }
             if (splashCanvas.activeSelf && Input.GetButtonDown("Jump_P4"))
             {
                 int players = ++GameManager.m_Instance.m_NumOfPlayers;
-                characterSelect.AssignController("P4");
+                characterSelect.AssignController(Player.Controller.P4);
                 Debug.Log("Player " + players + " has Joined!");
                 inputModule.submitButton = "Jump_P4";
-                inputModule.horizontalAxis = "JoystickLeftX_P4";
-                inputModule.verticalAxis = "JoystickLeftY_P4";
+                inputModule.horizontalAxis = "Horizontal_P4";
+                inputModule.verticalAxis = "Vertical_P4";
                 characterSelect.P4Join = true;
+                characterSelect.firstPlayer = CharacterSelect.PlayerOne.P4;
+            }
+            if (splashCanvas.activeSelf && Input.GetButtonDown("Submit_Keyboard"))
+            {
+                int players = ++GameManager.m_Instance.m_NumOfPlayers;
+                characterSelect.AssignController(Player.Controller.Keyboard);
+                Debug.Log("Player " + players + " has Joined!");
+                inputModule.submitButton = "Submit_Keyboard";
+                inputModule.horizontalAxis = "HorizontalRotation_Keyboard";
+                inputModule.verticalAxis = "VerticalRotation_Keyboard";
+                characterSelect.KeyboardJoin = true;
                 characterSelect.firstPlayer = CharacterSelect.PlayerOne.P4;
             }
         }
@@ -351,21 +362,31 @@ void test()
                 characterSelect.P2Join = false;
                 characterSelect.P3Join = false;
                 characterSelect.P4Join = false;
+                characterSelect.KeyboardJoin = false;
                 break;
             case CharacterSelect.PlayerOne.P2:
                 characterSelect.P1Join = false;
                 characterSelect.P3Join = false;
                 characterSelect.P4Join = false;
+                characterSelect.KeyboardJoin = false;
                 break;
             case CharacterSelect.PlayerOne.P3:
                 characterSelect.P1Join = false;
                 characterSelect.P2Join = false;
                 characterSelect.P4Join = false;
+                characterSelect.KeyboardJoin = false;
                 break;
             case CharacterSelect.PlayerOne.P4:
                 characterSelect.P1Join = false;
                 characterSelect.P2Join = false;
                 characterSelect.P3Join = false;
+                characterSelect.KeyboardJoin = false;
+                break;
+            case CharacterSelect.PlayerOne.Keyboard:
+                characterSelect.P1Join = false;
+                characterSelect.P2Join = false;
+                characterSelect.P3Join = false;
+                characterSelect.P4Join = false;
                 break;
         }
 
