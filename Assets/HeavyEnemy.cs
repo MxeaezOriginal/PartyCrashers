@@ -1,8 +1,13 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class HeavyEnemy : MonoBehaviour
 {
+    public int m_EnemyHealth = 20;
+    public int m_PartyBarAmount = 2;
+    public GameObject coin;
+
     GameObject[] players;
     GameObject target;
     NavMeshAgent agent;
@@ -15,36 +20,78 @@ public class HeavyEnemy : MonoBehaviour
     Vector3 rayDirection;
     RaycastHit hit;
 
-    public Vector3 m_Origin;
+    Vector3 m_Origin;
 
     public EnemyDeath Script_enemydeath;
 
     public float KnockBackDis = 40f;
-
+    bool isStun = false;
+    public float m_LastMoveTime;
+    public float StunTime = 2f;
+    public float time;
     void Start()
     {
         players = GameManager.m_Instance.m_Players;
         agent = gameObject.GetComponent<NavMeshAgent>();
         m_Origin = gameObject.transform.position;
         Script_enemydeath = GetComponent<EnemyDeath>();
+        m_LastMoveTime = 0;
     }
 
     void Update()
     {
+        time = Time.time;
         for (int i = 0; i < players.Length; i++)
         {
             rayDirection = players[i].transform.position - transform.position;
             m_Distance = Vector3.Distance(players[i].transform.position, transform.position);
             target = players[i];
 
-            if (CanSeePlayer())
+            if (CanSeePlayer() && !isStun)
             {
-                //Script_enemydeath.enabled = true;
                 chase();
             }
             else
             {
-                //Script_enemydeath.enabled = false;
+            }
+        }
+        if (isStun)
+        {
+            isStun = (m_LastMoveTime + StunTime) > Time.time;
+            Debug.Log("Stun!");
+        }
+        if (!isStun)
+        {
+            Debug.Log("Not Stun!");
+        }
+    }
+
+    void OnTriggerEnter(Collider col)
+    {
+        if (col.gameObject.CompareTag("Physical"))
+        {
+            isStun = true;
+            m_LastMoveTime = Time.time;
+            if (m_EnemyHealth > 0)
+            {
+                m_EnemyHealth = m_EnemyHealth - 1;
+            }
+            else if (m_EnemyHealth <= 0)
+            {
+                if (SceneManager.GetActiveScene().name == GameManager.m_Instance.m_TutorialLevel)
+                {
+                    GameManager.m_Instance.m_TutorialEnemies.Add(gameObject.name);
+                }
+
+                Destroy(gameObject);
+
+                Instantiate(coin, this.gameObject.transform.position, this.gameObject.transform.rotation);
+
+                for (int i = 0; i < GameManager.m_Instance.m_Players.Length; ++i)
+                {
+                    Player player = GameManager.m_Instance.m_Players[i].GetComponent<Player>();
+                    player.m_Score += 100;
+                }
             }
         }
     }
@@ -94,15 +141,6 @@ public class HeavyEnemy : MonoBehaviour
         Quaternion rotation = Quaternion.LookRotation(lookPosition);
         transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * m_RotationSpeed);
     }
-
 }
 
-//if (Physics.Raycast(transform.position, rayDirection, 3))
-//{ // If the player is very close behind the player and in view the enemy will detect the player
-//    if ((hit.transform.tag == "Player") && (m_Distance <= minDectectDis))
-//    {
-//        look(GameObject.FindGameObjectWithTag("Player").transform);
-//        Debug.Log("I C U!");
-//        //return true;
-//    }
-//}
+

@@ -43,8 +43,9 @@ GameObject:
   - 33: {fileID: 3374906}
   - 136: {fileID: 13664622}
   - 23: {fileID: 2330432}
-  - 114: {fileID: 11407364}
   - 114: {fileID: 11442502}
+  - 114: {fileID: 11407364}
+  - 120: {fileID: 12097282}
   m_Layer: 0
   m_Name: WaterBalloonBow
   m_TagString: Untagged
@@ -169,8 +170,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Anim: {fileID: 0}
   m_Damage: 5
-  m_Weapon1Cooldown: 0
-  m_Weapon2Cooldown: 0
+  m_Weapon1Cooldown: 0.5
+  m_Weapon2Cooldown: 3
   m_PrimarySounds: []
   m_SecondarySounds: []
   m_SoundsOnHit: []
@@ -180,17 +181,14 @@ MonoBehaviour:
     type: 2}
   m_FirePoint:
   - {fileID: 125308}
-  m_MaxCharge: 0
-  m_MaxSpeed: 3
-  m_MedSpeed: 0
-  m_LowSpeed: 0
-  m_MinSpeed: 0
-  m_timePressed: 0
-  pierce: 0
-  bulletDamage: 0
-  midDmgMultiplier: 0
-  maxDmgMultiplier: 0
-  beamTimer: 0
+  m_MaxCharge: 2
+  m_MedSpeed: 1000
+  m_MinSpeed: 500
+  m_TimePressed: 0
+  m_BulletDamage: 0
+  m_MidDmgMultiplier: 0
+  m_MaxDmgMultiplier: 0
+  beamTimer: 1
 --- !u!114 &11442502
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -203,6 +201,45 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_WeaponType: 100
+--- !u!120 &12097282
+LineRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 170246}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_Materials:
+  - {fileID: 0}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 1
+  m_ReflectionProbeUsage: 1
+  m_ProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_Positions:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 1}
+  m_Parameters:
+    startWidth: 1
+    endWidth: 1
+    m_StartColor:
+      serializedVersion: 2
+      rgba: 4294967295
+    m_EndColor:
+      serializedVersion: 2
+      rgba: 4294967295
+  m_UseWorldSpace: 1
 --- !u!136 &13664622
 CapsuleCollider:
   m_ObjectHideFlags: 1
