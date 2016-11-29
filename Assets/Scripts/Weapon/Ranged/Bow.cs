@@ -48,7 +48,7 @@ public class Bow : Ranged
         if (m_CoolDown <= Time.time - m_Weapon1Cooldown || m_CoolDown == 0)
         {
             //Shoot if Button Up
-            if (Input.GetAxisRaw(player.m_PrimaryAttack + player.m_Controller) == 0 && m_WasDown)
+            if (Input.GetAxisRaw(player.m_PrimaryAttack + player.getControllerAsString()) == 0 && m_WasDown)
             {
                 shoot();
                 m_WasDown = false;
@@ -62,7 +62,7 @@ public class Bow : Ranged
         {
             if (m_TimePressed < m_MaxCharge)
             {                
-                m_TimePressed += Input.GetAxisRaw(player.m_PrimaryAttack) * Time.deltaTime;
+                m_TimePressed += Input.GetAxisRaw(player.m_PrimaryAttack + player.getControllerAsString()) * Time.deltaTime;
             }
 
             if (m_TimePressed >= m_MaxCharge)
