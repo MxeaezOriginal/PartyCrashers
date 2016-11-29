@@ -2,55 +2,54 @@
 using System.Collections;
 using System;
 
-public class Bow : Ranged {
+public class Bow : Ranged
+{
 
-    [Header("Bow Setting")]
+
     [Tooltip("Maximum Charging Time.")]
     public float m_MaxCharge = 0f;
-    [SerializeField][Tooltip("Maximum Shooting Speed.")]
-    private float m_MaxSpeed = 0f;
+    //[SerializeField][Tooltip("Maximum Shooting Speed.")]
+    //private float m_MaxSpeed = 0f;
     [SerializeField][Tooltip("Medium Shooting Speed.")]
     private float m_MedSpeed = 0f;
-    [SerializeField][Tooltip("Low Shooting Speed.")]
-    private float m_LowSpeed;
     [SerializeField][Tooltip("Minimum Shooting Speed.")]
     private float m_MinSpeed = 0f;
     [HideInInspector]
-    public float m_timePressed = 0f;
+    public float m_TimePressed = 0f;    
     [HideInInspector]
-    public bool pierce = false;
+    private bool m_WasDown = false;
     [HideInInspector]
-    private bool wasDown = false;
-    [HideInInspector]
-    public int bulletDamage = 0;
-    [SerializeField][Tooltip("Multiplies the initial Damage the bullet does at Half charge.")]
-    private int midDmgMultiplier;
-    [SerializeField][Tooltip("Multiplies the initial Damage the bullet does at Full charge.")]
-    private int maxDmgMultiplier;
+    public int m_BulletDamage = 0;
     [SerializeField]
-    private float beamTimer;
+    [Tooltip("Multiplies the initial Damage the bullet does at Half charge.")]
+    private int m_MidDmgMultiplier;
+    [SerializeField]
+    [Tooltip("Multiplies the initial Damage the bullet does at Full charge.")]
+    private int m_MaxDmgMultiplier;
+    [SerializeField]
+    private float m_LaserBeamDuration;
 
     Damage dmg;
-
-    //PlayerController playerController;  // Slow player Movement
     Player player;
+    LineRenderer m_lineRenderer;
 
-    void Start ()
+    void Start()
     {
+        m_lineRenderer = GetComponent<LineRenderer>();
+        m_lineRenderer.enabled = false;
         dmg = GetComponent<Damage>();
         player = GetComponentInParent<Player>();
-        //playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();          
     }
-	
-	void Update ()
-    {        
-        if(m_CoolDown <= Time.time - m_Weapon1Cooldown || m_CoolDown == 0)
+
+    void Update()
+    {
+        if (m_CoolDown <= Time.time - m_Weapon1Cooldown || m_CoolDown == 0)
         {
             //Shoot if Button Up
-            if(Input.GetAxisRaw(player.m_PrimaryAttack) == 0 && wasDown)
+            if (Input.GetAxisRaw(player.m_PrimaryAttack + player.m_Controller) == 0 && m_WasDown)
             {
-               shoot();
-               wasDown = false;
+                shoot();
+                m_WasDown = false;
             }
         }
     }
@@ -58,24 +57,18 @@ public class Bow : Ranged {
     public override void primaryAttack()
     {
         if (m_CoolDown <= Time.time - m_Weapon1Cooldown || m_CoolDown == 0)
-        {         
-            if (m_timePressed < m_MaxCharge)
-            {
-                if(m_timePressed < m_MinSpeed)
-                {
-                    m_timePressed = m_MinSpeed;
-                }
-                m_timePressed += Input.GetAxisRaw(player.m_PrimaryAttack) % Time.deltaTime;
+        {
+            if (m_TimePressed < m_MaxCharge)
+            {                
+                m_TimePressed += Input.GetAxisRaw(player.m_PrimaryAttack) * Time.deltaTime;
             }
 
-            if (m_timePressed >= m_MaxCharge)   //MaxCharge not working correctly
+            if (m_TimePressed >= m_MaxCharge)
             {
-                m_timePressed = m_MaxCharge;                
-                //playerController.m_TurnSpeed = playerController.m_TurnSpeed / 2;
-                pierce = true;                
+                m_TimePressed = m_MaxCharge;
             }
-            wasDown = true;
-            Debug.Log(m_timePressed);
+            m_WasDown = true;
+            Debug.Log(m_TimePressed);
         }
     }
 
@@ -90,48 +83,66 @@ public class Bow : Ranged {
             bigBalloon.GetComponent<Rigidbody>().AddForce(bigBalloon.transform.forward * m_ProjectileSpeed02);
 
             m_SecondaryCoolDown = Time.time;
-        }        
+        }
     }
 
     private void shoot()
     {
         GameObject balloon;
-        LaserBeam beam;
-        
-        if (m_timePressed < (m_MaxCharge / 2))
+        //LaserBeam beam;
+
+        if (m_TimePressed < (m_MaxCharge / 2))
         {
+            m_TimePressed = m_MinSpeed;
+            Debug.Log(m_TimePressed);
             balloon = (GameObject)Instantiate(m_RightTriggerProjectile, m_FirePoint[0].gameObject.transform.position, m_FirePoint[0].gameObject.transform.rotation);
-            bulletDamage = m_Damage;
-            balloon.GetComponent<Rigidbody>().AddForce(balloon.transform.forward * m_LowSpeed * m_timePressed);       
+            m_BulletDamage = m_Damage;
+            balloon.GetComponent<Rigidbody>().AddForce(balloon.transform.forward * m_TimePressed);
         }
-        else if(m_timePressed >= (m_MaxCharge / 2) && m_timePressed < m_MaxCharge)
+        else if (m_TimePressed >= (m_MaxCharge / 2) && m_TimePressed < m_MaxCharge)
         {
             balloon = (GameObject)Instantiate(m_RightTriggerProjectile, m_FirePoint[0].gameObject.transform.position, m_FirePoint[0].gameObject.transform.rotation);
-            bulletDamage = m_Damage * midDmgMultiplier;
-            balloon.GetComponent<Rigidbody>().AddForce(balloon.transform.forward * m_MedSpeed * m_timePressed);
+            m_BulletDamage = m_Damage * m_MidDmgMultiplier;
+            balloon.GetComponent<Rigidbody>().AddForce(balloon.transform.forward * m_MedSpeed * m_TimePressed);
         }
         else
         {
-            bulletDamage = m_Damage * maxDmgMultiplier;
-            // Activate the beam who is a children of this gameobject
-            beam = GetComponentInChildren<LaserBeam>();
-            beam.enabled = true;
-            //Destroy it after Timer
-            BeamOff();
-            beam.enabled = false;
-            
-            // This 2 lines below will make it shoot a bullet instead of a beam.    
-            // balloon = (GameObject)Instantiate(m_RightTriggerProjectile, m_FirePoint[0].gameObject.transform.position, m_FirePoint[0].gameObject.transform.rotation);
-            // balloon.GetComponent<Rigidbody>().AddForce(balloon.transform.forward * m_MaxSpeed * m_timePressed);
-        }
+            StopCoroutine("FireLaser");
+            StartCoroutine("FireLaser");
 
-        m_timePressed = 0;
-        m_CoolDown = Time.time;        
+            
+            m_lineRenderer.enabled = true;
+            Ray ray = new Ray(transform.position, transform.forward);
+            m_lineRenderer.SetPosition(0, ray.origin);
+            m_lineRenderer.SetPosition(1, ray.GetPoint(100));
+
+         
+            //This 2 lines below will make it shoot a bullet instead of a beam.    
+            //balloon = (GameObject)Instantiate(m_RightTriggerProjectile, m_FirePoint[0].gameObject.transform.position, m_FirePoint[0].gameObject.transform.rotation);
+            //balloon.GetComponent<Rigidbody>().AddForce(balloon.transform.forward * m_MaxSpeed * m_TimePressed);
+        }
+        m_TimePressed = 0;
+        m_CoolDown = Time.time;
     }
 
-    IEnumerator BeamOff()
-    {        
-        yield return new WaitForSeconds(beamTimer);      
+    IEnumerator FireLaser()
+    {
+        m_BulletDamage = m_Damage * m_MaxDmgMultiplier;
+        m_lineRenderer.enabled = true;
+        float timer = m_LaserBeamDuration;
+        timer -= Time.deltaTime;
+        
+        Ray ray = new Ray(transform.position, transform.forward);
+        m_lineRenderer.SetPosition(0, ray.origin);
+        m_lineRenderer.SetPosition(1, ray.GetPoint(100));
+        
+        if(timer < 0)
+        {
+            m_lineRenderer.enabled = false;
+            yield return null;            
+        }
+
+        
     }
 
 }

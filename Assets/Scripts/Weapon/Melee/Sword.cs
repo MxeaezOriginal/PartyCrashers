@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Sword : Melee
 {
-
+    [Header("Sword Setting")]
     public int dashDistance = 25;
 
     public float dashDelay = 0.1f;
@@ -14,11 +14,11 @@ public class Sword : Melee
 
     public float triggerLife = 0.5f;
 
-    public GameObject swordTrigger;
+    
 
     public GameObject effect;
 
-    //PlayerController m_PlayerController;
+    //PlayerController m_PlayerController   ;
     CharacterController m_CharacterController;
 
     // Use this for initialization

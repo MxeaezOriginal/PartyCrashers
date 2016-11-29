@@ -13,7 +13,6 @@ GameObject:
   - 54: {fileID: 5491360}
   - 135: {fileID: 13534556}
   - 114: {fileID: 11400512}
-  - 114: {fileID: 11483146}
   - 114: {fileID: 11492060}
   m_Layer: 0
   m_Name: WaterBalloonBullet
@@ -94,18 +93,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletLifeTimer: 2
---- !u!114 &11483146
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 150382}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be459c1647e450f4f97136ae292e3ccb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  power: 10
 --- !u!114 &11492060
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -117,6 +104,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c14d26e0fc32fe842b75a6c8b6999701, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Damage: 0
 --- !u!135 &13534556
 SphereCollider:
   m_ObjectHideFlags: 1
