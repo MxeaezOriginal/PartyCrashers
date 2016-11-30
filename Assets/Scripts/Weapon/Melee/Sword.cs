@@ -53,14 +53,13 @@ public class Sword : Melee
             {
                 swordTrigger.SetActive(true);
 
-			if(effect)
-			{
-                GameObject swordEffect;
-                swordEffect = (GameObject)Instantiate(effect, transform.position, transform.rotation);
-            //swordEffect.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-			}
+			if (effect) {
+				GameObject swordEffect;
+				swordEffect = (GameObject)Instantiate (effect, transform.position, transform.rotation);
+				//swordEffect.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
 
-            Destroy(swordEffect, 5);
+				Destroy (swordEffect, 5);
+			}
         }
             if (attack == false)
             {
