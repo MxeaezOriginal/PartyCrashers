@@ -58,11 +58,11 @@ public class HeavyEnemy : MonoBehaviour
         if (isStun)
         {
             isStun = (m_LastMoveTime + StunTime) > Time.time;
-            Debug.Log("Stun!");
+            //Debug.Log("Stun!");
         }
         if (!isStun)
         {
-            Debug.Log("Not Stun!");
+            //Debug.Log("Not Stun!");
         }
     }
 
@@ -75,6 +75,9 @@ public class HeavyEnemy : MonoBehaviour
             if (m_EnemyHealth > 0)
             {
                 m_EnemyHealth = m_EnemyHealth - 1;
+                //m_EnemyHealth = m_EnemyHealth - ;
+                //m_EnemyHealth = m_EnemyHealth - col.GetComponent<Sword>().m_Damage;
+                //Debug.Log(col.GetComponent<Sword>().m_Damage);
             }
             else if (m_EnemyHealth <= 0)
             {

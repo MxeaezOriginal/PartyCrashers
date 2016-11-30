@@ -31,6 +31,7 @@ GameObject:
   - 4: {fileID: 456764}
   - 65: {fileID: 6566068}
   - 54: {fileID: 5426740}
+  - 114: {fileID: 11451720}
   m_Layer: 8
   m_Name: SwordTrigger
   m_TagString: Physical
@@ -168,12 +169,12 @@ MonoBehaviour:
   - {fileID: 0}
   m_SecondarySounds: []
   m_SoundsOnHit: []
+  swordTrigger: {fileID: 124324}
   dashDistance: 25
   dashDelay: 0.1
   smooth: 20
   attack: 0
   triggerLife: 0.5
-  swordTrigger: {fileID: 124324}
   effect: {fileID: 0}
 --- !u!114 &11446614
 MonoBehaviour:
@@ -187,6 +188,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_WeaponType: 0
+--- !u!114 &11451720
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 124324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c14d26e0fc32fe842b75a6c8b6999701, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Damage: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

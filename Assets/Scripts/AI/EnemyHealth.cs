@@ -8,6 +8,7 @@ public class EnemyHealth : MonoBehaviour {
     public void Kill()
     {
         //death stuff for enemy
+        Destroy(gameObject);
     }
 
     public float GetEnemyHealth()
