@@ -9,10 +9,9 @@ public class CameraController : MonoBehaviour
     public int distanceOffset = 10;
     public float y = 0;
     public Vector3 mPosition;
-    public int m_Zoom = 0;
+    public float m_Zoom = 0;
     [Range(1, 5)]
     public int m_ZoomAmount = 3;
-    public float m_ZoomSpeed = .01f;
 
     public GameObject[] players;
     // Use this for initialization
@@ -129,7 +128,7 @@ public class CameraController : MonoBehaviour
         //float Y = y;
 
 
-        gameObject.transform.position = new Vector3(averageX, Mathf.Lerp(transform.position.y, y + height + m_Zoom, .1f), Mathf.Lerp(transform.position.z, averageZ - distanceOffset - m_Zoom, m_ZoomSpeed * Time.deltaTime));
+        gameObject.transform.position = new Vector3(averageX, Mathf.Lerp(transform.position.y, y + height + m_Zoom, .1f), averageZ - distanceOffset - m_Zoom);
         //Y + height
 
         mPosition = new Vector3(averageX, y, averageZ);

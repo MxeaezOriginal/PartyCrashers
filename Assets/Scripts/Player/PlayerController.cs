@@ -307,15 +307,15 @@ public class PlayerController : MonoBehaviour
 
         if (m_StopMovementX == true && m_StopMovementZ == true)
         {
-            m_CameraController.m_Zoom = (((int)x + (int)z) - ((int)m_MaxMovementX + (int)m_MaxMovementZ)) / m_CameraController.m_ZoomAmount;
+            m_CameraController.m_Zoom = ((x + z) - (m_MaxMovementX + m_MaxMovementZ)) / m_CameraController.m_ZoomAmount;
         }
         else if (m_StopMovementX == true && m_StopMovementZ == false)
         {
-            m_CameraController.m_Zoom = ((int)x - (int)m_MaxMovementX) / m_CameraController.m_ZoomAmount;
+            m_CameraController.m_Zoom = (x - m_MaxMovementX) / m_CameraController.m_ZoomAmount;
         }
         else if (m_StopMovementX == false && m_StopMovementZ == true)
         {
-            m_CameraController.m_Zoom = ((int)z - (int)m_MaxMovementZ) / m_CameraController.m_ZoomAmount;
+            m_CameraController.m_Zoom = (z - m_MaxMovementZ) / m_CameraController.m_ZoomAmount;
         }
         else
         {
