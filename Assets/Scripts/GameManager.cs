@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
-    
+
 public class GameManager : MonoBehaviour
 {
 
@@ -18,8 +18,6 @@ public class GameManager : MonoBehaviour
         public int score;
         public int health;
         public int maxHealth;
-        public WEAPONTYPE weaponID;
-        public Vector3 lastLocation;
         public Player.Controller m_Controller;
     }
 
@@ -37,10 +35,6 @@ public class GameManager : MonoBehaviour
     public int m_NumOfPlayers;
 
     public PartyBar m_PartyBarGame;
-
-    public List<string> m_TutorialCoins;
-    public List<string> m_TutorialEnemies;
-    public string m_TutorialLevel = "CVG_Tut01";
 
     public string m_LevelToStart;
 
@@ -82,15 +76,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public void savePlayers()
     {
-        foreach(GameObject player in GameManager.m_Instance.m_Players)
+        foreach (GameObject player in GameManager.m_Instance.m_Players)
         {
             Player currentPlayer = player.GetComponent<Player>();
             currentPlayer.save();
@@ -228,12 +216,13 @@ public class GameManager : MonoBehaviour
         playerClone.transform.localScale = new Vector3(1, 1, 1);
         playerClone.name = parent.name;
 
-        if(playerClone.GetComponent<Player>() != null)
-        {
-            Player playerComponent = playerClone.GetComponent<Player>();
 
-            playerComponent.m_Player = (Player.PLAYER) System.Enum.Parse(typeof(Player.PLAYER), player);
-            Debug.Log(playerComponent.m_Player.ToString());
+        if (playerClone.GetComponent<Player>() != null)
+        {
+            Player playerComponent = playerClone.gameObject.GetComponent<Player>();
+
+            playerComponent.m_Player = (Player.PLAYER)System.Enum.Parse(typeof(Player.PLAYER), player);
+            playerComponent.save();
         }
         else
         {

@@ -44,13 +44,9 @@ public class Player : MonoBehaviour
     public int m_Score;
     //public int m_Health;
     //public int m_MaxHealth;
-    //public int m_Collect;
-    //public WEAPONTYPE m_WeaponID;
     public float m_CheckLocationCooldown;
     //To hold location every x seconds to respawn to
     public Vector3 m_Location;
-    //To hold location when leave scene
-    public Vector3 m_LastLocation;
     private Transform m_Weapon;
     private HeartSystem m_Heart;
     private CharacterController m_CharController;
@@ -217,9 +213,7 @@ public class Player : MonoBehaviour
                 GameManager.m_Instance.m_Player1.gold = m_Gold;
                 //GameManager.m_Instance.m_Player1.health = m_Health;
                 //GameManager.m_Instance.m_Player1.maxHealth = m_MaxHealth;
-                //GameManager.m_Instance.m_Player1.weaponID = m_WeaponID;
-                GameManager.m_Instance.m_Player1.lastLocation = m_LastLocation;
-                GameManager.m_Instance.m_Player1.m_Controller = m_Controller;
+                //GameManager.m_Instance.m_Player1.m_Controller = m_Controller;
                 break;
             case PLAYER.P2:
                 GameManager.m_Instance.m_Player2.name = m_PlayerName;
@@ -229,9 +223,7 @@ public class Player : MonoBehaviour
                 GameManager.m_Instance.m_Player2.gold = m_Gold;
                 //GameManager.m_Instance.m_Player2.health = m_Health;
                 //GameManager.m_Instance.m_Player2.maxHealth = m_MaxHealth;
-                //GameManager.m_Instance.m_Player2.weaponID = m_WeaponID;
-                GameManager.m_Instance.m_Player2.lastLocation = m_LastLocation;
-                GameManager.m_Instance.m_Player2.m_Controller = m_Controller;
+                //GameManager.m_Instance.m_Player2.m_Controller = m_Controller;
                 break;
             case PLAYER.P3:
                 GameManager.m_Instance.m_Player3.name = m_PlayerName;
@@ -241,9 +233,7 @@ public class Player : MonoBehaviour
                 GameManager.m_Instance.m_Player3.gold = m_Gold;
                 //GameManager.m_Instance.m_Player3.health = m_Health;
                 //GameManager.m_Instance.m_Player3.maxHealth = m_MaxHealth;
-                //GameManager.m_Instance.m_Player3.weaponID = m_WeaponID;
-                GameManager.m_Instance.m_Player3.lastLocation = m_LastLocation;
-                GameManager.m_Instance.m_Player3.m_Controller = m_Controller;
+                //GameManager.m_Instance.m_Player3.m_Controller = m_Controller;
                 break;
             case PLAYER.P4:
                 GameManager.m_Instance.m_Player4.name = m_PlayerName;
@@ -253,9 +243,7 @@ public class Player : MonoBehaviour
                 GameManager.m_Instance.m_Player4.gold = m_Gold;
                 //GameManager.m_Instance.m_Player4.health = m_Health;
                 //GameManager.m_Instance.m_Player4.maxHealth = m_MaxHealth;
-                //GameManager.m_Instance.m_Player4.weaponID = m_WeaponID;
-                GameManager.m_Instance.m_Player4.lastLocation = m_LastLocation;
-                GameManager.m_Instance.m_Player4.m_Controller = m_Controller;
+                //GameManager.m_Instance.m_Player4.m_Controller = m_Controller;
                 break;
         }
     }
@@ -272,8 +260,6 @@ public class Player : MonoBehaviour
                 m_Gold = GameManager.m_Instance.m_Player1.gold;
                 //m_Health = GameManager.m_Instance.m_Player1.health;
                 //m_MaxHealth = GameManager.m_Instance.m_Player1.maxHealth;
-                //m_WeaponID = GameManager.m_Instance.m_Player1.weaponID;
-                m_LastLocation = GameManager.m_Instance.m_Player1.lastLocation;
                 m_Controller = GameManager.m_Instance.m_Player1.m_Controller;
                 break;
             case PLAYER.P2:
@@ -284,8 +270,6 @@ public class Player : MonoBehaviour
                 m_Gold = GameManager.m_Instance.m_Player2.gold;
                 //m_Health = GameManager.m_Instance.m_Player2.health;
                 //m_MaxHealth = GameManager.m_Instance.m_Player2.maxHealth;
-                //m_WeaponID = GameManager.m_Instance.m_Player2.weaponID;
-                m_LastLocation = GameManager.m_Instance.m_Player2.lastLocation;
                 m_Controller = GameManager.m_Instance.m_Player2.m_Controller;
                 break;
             case PLAYER.P3:
@@ -296,8 +280,6 @@ public class Player : MonoBehaviour
                 m_Gold = GameManager.m_Instance.m_Player3.gold;
                 //m_Health = GameManager.m_Instance.m_Player3.health;
                 //m_MaxHealth = GameManager.m_Instance.m_Player3.maxHealth;
-                //m_WeaponID = GameManager.m_Instance.m_Player3.weaponID;
-                m_LastLocation = GameManager.m_Instance.m_Player3.lastLocation;
                 m_Controller = GameManager.m_Instance.m_Player3.m_Controller;
                 break;
             case PLAYER.P4:
@@ -308,44 +290,14 @@ public class Player : MonoBehaviour
                 m_Gold = GameManager.m_Instance.m_Player4.gold;
                 //m_Health = GameManager.m_Instance.m_Player4.health;
                 //m_MaxHealth = GameManager.m_Instance.m_Player4.maxHealth;
-                //m_WeaponID = GameManager.m_Instance.m_Player4.weaponID;
-                m_LastLocation = GameManager.m_Instance.m_Player4.lastLocation;
                 m_Controller = GameManager.m_Instance.m_Player4.m_Controller;
                 break;
         }
     }
 
-    void OnTriggerEnter(Collider other)
+    public void SetPlayer(PLAYER p)
     {
-
-        //if (other.gameObject.CompareTag("Health"))
-        //{
-        //    m_Heart.Heal(2);
-        //}
-
-        if (other.gameObject.CompareTag("Range"))
-        {
-            m_Heart.TakeDamage(1);
-            Destroy(other.gameObject);
-        }
-        if (other.gameObject.CompareTag("MeleeEnemy"))
-        {
-            /*m_Heart.lastDamage += Time.deltaTime;
-            if (m_Heart.lastDamage >= 2)
-            {
-                m_Heart.TakeDamage(2);
-                m_Heart.lastDamage = 0;
-            }*/
-            m_Heart.TakeDamage(1);
-            m_Heart.UpdateHearts();
-
-        }
-        //if (other.gameObject.CompareTag("AddHeart"))
-        //{
-        //    m_Heart.AddHeart();
-        //    m_Heart.Heal(2);
-        //    m_Heart.UpdateHearts();
-        //}
+        m_Player = p;
     }
 
     void OnCollisionEnter(Collision other)
@@ -388,7 +340,7 @@ public class Player : MonoBehaviour
         if (other.gameObject.CompareTag("DotTrap"))
         {
             dotdelay -= Time.deltaTime;
-            if(dotdelay <= 0)
+            if (dotdelay <= 0)
             {
                 m_Heart.TakeDamage(1);
                 m_Heart.UpdateHearts();

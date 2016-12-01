@@ -44,11 +44,6 @@ public class CoinPickUps : MonoBehaviour {
 
                 gameObject.SetActive(false);
             }
-
-            if (SceneManager.GetActiveScene().name == GameManager.m_Instance.m_TutorialLevel)
-            {
-                GameManager.m_Instance.m_TutorialCoins.Add(m_player.gameObject.name);
-            }
         }
         //Collectible collectible = other.GetComponent<Collectible>();
 

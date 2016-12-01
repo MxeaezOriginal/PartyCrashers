@@ -18,11 +18,6 @@ public class EnemyDeath : MonoBehaviour
             }
             else
             {
-                //tutorial
-                if (SceneManager.GetActiveScene().name == GameManager.m_Instance.m_TutorialLevel)
-                {
-                    GameManager.m_Instance.m_TutorialEnemies.Add(gameObject.name);
-                }
                 
                 Destroy(gameObject);
 
@@ -44,11 +39,6 @@ public class EnemyDeath : MonoBehaviour
             }
             else
             {
-                //tutorial
-                if (SceneManager.GetActiveScene().name == GameManager.m_Instance.m_TutorialLevel)
-                {
-                    GameManager.m_Instance.m_TutorialEnemies.Add(col.gameObject.name);
-                }
                 
                 Destroy(gameObject);
 

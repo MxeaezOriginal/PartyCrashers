@@ -47,12 +47,21 @@ public class PlayerController : MonoBehaviour
     //HeavyEnemy heavyenemy;
     //private Rigidbody rigidBody;
     CharacterController controller;
+    CameraController m_CameraController;
 
     // Use this for initialization
     void Start()
     {
         //rigidBody = gameObject.GetComponent<Rigidbody>();
         controller = gameObject.GetComponent<CharacterController>();
+        if(Camera.main.gameObject.GetComponent<CameraController>() != null)
+        {
+            m_CameraController = Camera.main.gameObject.GetComponent<CameraController>();
+        }
+        else
+        {
+            Debug.Log("Error: Main camera doesn't have the CameraController script");
+        }
         //heavyenemy = gameObject.GetComponent<HeavyEnemy>();
     }
 
@@ -64,6 +73,9 @@ public class PlayerController : MonoBehaviour
         {
             checkMovement();
 
+            m_MoveDir = new Vector3(Input.GetAxis(m_HorizontalButton + GetComponent<Player>().getControllerAsString()), 0, Input.GetAxis(m_VerticalButton + GetComponent<Player>().getControllerAsString()));
+
+            /*
             if (m_StopMovementX == false && m_StopMovementZ == false)
             {
                 m_MoveDir = new Vector3(Input.GetAxis(m_HorizontalButton + GetComponent<Player>().getControllerAsString()), 0, Input.GetAxis(m_VerticalButton + GetComponent<Player>().getControllerAsString()));
@@ -84,6 +96,7 @@ public class PlayerController : MonoBehaviour
             {
                 m_MoveDir = new Vector3(0, 0, 0);
             }
+            */
             //moveDir = transform.TransformDirection(moveDir);
 
 
@@ -101,7 +114,7 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                if (Input.GetButton(m_JumpButton + GetComponent<Player>().m_Controller))
+                if (Input.GetButton(m_JumpButton + GetComponent<Player>().getControllerAsString()))
                 {
                     m_CurrentGravity = m_JumpGravity;
                 }
@@ -261,13 +274,14 @@ public class PlayerController : MonoBehaviour
         if (x >= m_MaxMovementX) // if the greatest distance if greater than what is allowed, stop movement
         {
             m_StopMovementX = true;
+            /*
 
             float playerXInput = Input.GetAxis(m_HorizontalButton + GetComponent<Player>().getControllerAsString()) * m_Speed; // sets this variable to the current input the player is giving for horizontal movement
 
             if (Mathf.Abs((transform.position.x + playerXInput) - otherPlayerX.transform.position.x) < m_MaxMovementX) // if the input the player is giving plus his current x position is less than max movement
             {
                 m_StopMovementX = false; // the player is allowed to move again because they will be less than the max movement allowed
-            }
+            }*/
         }
         else // if the greatest distance is still lower than what is allowed the player can move
         {
@@ -278,17 +292,36 @@ public class PlayerController : MonoBehaviour
         {
             m_StopMovementZ = true;
 
+            /*
             float playerZInput = Input.GetAxis(m_VerticalButton + GetComponent<Player>().getControllerAsString()) * m_Speed; //Players input for Z axis
 
             if (Mathf.Abs((transform.position.z + playerZInput) - otherPlayerZ.transform.position.z) < m_MaxMovementZ)
             {
                 m_StopMovementZ = false;
-            }
+            }*/
         }
         else
         {
             m_StopMovementZ = false;
         }
+
+        if (m_StopMovementX == true && m_StopMovementZ == true)
+        {
+            m_CameraController.m_Zoom = (((int)x + (int)z) - ((int)m_MaxMovementX + (int)m_MaxMovementZ)) / m_CameraController.m_ZoomAmount;
+        }
+        else if (m_StopMovementX == true && m_StopMovementZ == false)
+        {
+            m_CameraController.m_Zoom = ((int)x - (int)m_MaxMovementX) / m_CameraController.m_ZoomAmount;
+        }
+        else if (m_StopMovementX == false && m_StopMovementZ == true)
+        {
+            m_CameraController.m_Zoom = ((int)z - (int)m_MaxMovementZ) / m_CameraController.m_ZoomAmount;
+        }
+        else
+        {
+            m_CameraController.m_Zoom = 0;
+        }
+        //Camera.main.gameObject.GetComponent<CameraController>().m_Zoom = Camera.main.gameObject.GetComponent<CameraController>().m_Zoom / Camera.main.gameObject.GetComponent<CameraController>().m_ZoomAmount;
     }
 
 

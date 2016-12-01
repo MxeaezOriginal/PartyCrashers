@@ -49,25 +49,6 @@ public class PartyBar : MonoBehaviour {
     {
         //int randomNumber = Random.Range(1, 3);
 
-        foreach (GameObject p in GameManager.m_Instance.m_Players)
-        {
-            Player player = p.GetComponent<Player>();
-            switch(player.m_Player)
-            {
-                case Player.PLAYER.P1:
-                    player.m_LastLocation = p.transform.position;
-                    break;
-                case Player.PLAYER.P2:
-                    player.m_LastLocation = p.transform.position;
-                    break;
-                case Player.PLAYER.P3:
-                    player.m_LastLocation = p.transform.position;
-                    break;
-                case Player.PLAYER.P4:
-                    player.m_LastLocation = p.transform.position;
-                    break;
-            }
-        }
         GameManager.m_Instance.savePlayers();
         SceneManager.LoadScene("BallroomBlitz"); //ballroom blitz
     }

@@ -36,12 +36,6 @@ public class CollectObjects : MonoBehaviour
             }
 
             other.gameObject.SetActive(false);
-
-            if (SceneManager.GetActiveScene().name == GameManager.m_Instance.m_TutorialLevel)
-            {
-                GameManager.m_Instance.m_TutorialCoins.Add(other.gameObject.name);
-            }
-
             
 
             //tutorial

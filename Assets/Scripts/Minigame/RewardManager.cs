@@ -68,6 +68,7 @@ public class RewardManager : MonoBehaviour {
         EventSystem.current.currentSelectedGameObject.GetComponent<Button>().interactable = false;
         GameObject chosenWeapon = EventSystem.current.currentSelectedGameObject.GetComponent<Reward>().m_Reward;
         WEAPONTYPE weaponID = chosenWeapon.GetComponent<WeaponID>().m_WeaponType;
+        /*
         switch (m_PickCounter)
         {
             case 0:
@@ -92,7 +93,7 @@ public class RewardManager : MonoBehaviour {
                 PickNewLevel();
                 Debug.Log("Rewards Given Out");
                 break;
-        }
+        }*/
         m_PickCounter++;
     }
 

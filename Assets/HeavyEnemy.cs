@@ -81,10 +81,6 @@ public class HeavyEnemy : MonoBehaviour
             }
             else if (m_EnemyHealth <= 0)
             {
-                if (SceneManager.GetActiveScene().name == GameManager.m_Instance.m_TutorialLevel)
-                {
-                    GameManager.m_Instance.m_TutorialEnemies.Add(gameObject.name);
-                }
 
                 Destroy(gameObject);
 

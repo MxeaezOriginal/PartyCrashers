@@ -1,19 +1,25 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CameraController : MonoBehaviour {
+public class CameraController : MonoBehaviour
+{
 
-    public Vector3 rotation = new Vector3(45, 0, 0);
+    public Vector3 rotation = new Vector3(60, 0, 0);
     public int height = 10;
     public int distanceOffset = 10;
     public float y = 0;
     public Vector3 mPosition;
+    public int m_Zoom = 0;
+    [Range(1, 5)]
+    public int m_ZoomAmount = 3;
+    public float m_ZoomSpeed = .01f;
 
-    GameObject[] players;
-	// Use this for initialization
-	void Start () {
+    public GameObject[] players;
+    // Use this for initialization
+    void Start()
+    {
         transform.position = new Vector3(0, height, 0);
-        players = GameObject.FindGameObjectsWithTag("Player");
+        players = GameManager.m_Instance.m_Players;
         mPosition = gameObject.transform.position;
     }
 
@@ -51,7 +57,7 @@ public class CameraController : MonoBehaviour {
                     {
                         float iRounded = Mathf.Round(players[i].transform.position.y * 10f) / 10f;
                         float jRounded = Mathf.Round(players[j].transform.position.y * 10f) / 10f;
-                    
+
                         if (players[i].transform.position.y < players[j].transform.position.y)
                         {
                             //y = players[i].transform.position.y;
@@ -62,7 +68,7 @@ public class CameraController : MonoBehaviour {
                             //y = players[j].transform.position.y;
                             y = jRounded;
                         }
-                        
+
                     }
 
 
@@ -77,6 +83,7 @@ public class CameraController : MonoBehaviour {
         }
         else
         {
+            /*
             for (int i = 0; i < players.Length; i++)
             {
                 for (int j = i; j < players.Length; j++)
@@ -101,18 +108,30 @@ public class CameraController : MonoBehaviour {
                         z2 = players[j].transform.position.z;
                     }
                 }
+            }*/
+            x1 = players[0].transform.position.x;
+            x2 = players[0].transform.position.x;
+
+            CharacterController iController = players[0].GetComponent<CharacterController>();
+            if (iController.isGrounded)
+            {
+                float iRounded = Mathf.Round(players[0].transform.position.y * 10f) / 10f;
+                y = iRounded;
             }
+
+            z1 = players[0].transform.position.z;
+            z2 = players[0].transform.position.z;
         }
-        
+
 
         float averageX = (x1 + x2) / 2;
         float averageZ = (z1 + z2) / 2;
         //float Y = y;
-        
 
-        gameObject.transform.position = new Vector3(averageX, Mathf.Lerp(transform.position.y, y + height, .1f) , averageZ - distanceOffset);
+
+        gameObject.transform.position = new Vector3(averageX, Mathf.Lerp(transform.position.y, y + height + m_Zoom, .1f), Mathf.Lerp(transform.position.z, averageZ - distanceOffset - m_Zoom, m_ZoomSpeed * Time.deltaTime));
         //Y + height
 
-       mPosition = new Vector3(averageX, y, averageZ);
+        mPosition = new Vector3(averageX, y, averageZ);
     }
 }
