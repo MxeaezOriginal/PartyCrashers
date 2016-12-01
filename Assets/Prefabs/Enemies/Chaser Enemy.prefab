@@ -30,9 +30,8 @@ GameObject:
   - 136: {fileID: 13673056}
   - 23: {fileID: 2376368}
   - 195: {fileID: 19516994}
-  - 114: {fileID: 11410788}
-  - 114: {fileID: 11430418}
   - 114: {fileID: 11489884}
+  - 114: {fileID: 11491940}
   m_Layer: 0
   m_Name: Chaser Enemy
   m_TagString: MeleeEnemy
@@ -143,31 +142,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &11410788
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 128216}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fe10f3a9b1fc73469935b46d1f7b400, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_EnemyHealth: 5
-  m_PartyBarAmount: 2
-  coin: {fileID: 103998, guid: 5153af79980f5c24a8ce38b6f542b25a, type: 2}
---- !u!114 &11430418
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 128216}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc0a4406aee15b74c8cdf86c65fbe6f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &11489884
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -185,6 +159,18 @@ MonoBehaviour:
   m_RotationSpeed: 5
   m_Origin: {x: 0, y: 0, z: 0}
   KnockBackDis: 40
+--- !u!114 &11491940
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 128216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb8e4916041e2ac4788b9ecc56227d34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EnemyHealth: 100
 --- !u!136 &13673056
 CapsuleCollider:
   m_ObjectHideFlags: 1
