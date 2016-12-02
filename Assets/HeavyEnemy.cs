@@ -12,57 +12,45 @@ public class HeavyEnemy : MonoBehaviour
     GameObject target;
     NavMeshAgent agent;
     public float m_Distance;
-    //public float minDectectDis=3f;
-    public float m_RotationSpeed = 2f;
     public float ViewRange = 120f;
     public float ViewDis = 10f;
 
     Vector3 rayDirection;
     RaycastHit hit;
-
     Vector3 m_Origin;
 
-    public EnemyDeath Script_enemydeath;
-
     public float KnockBackDis = 40f;
-    bool isStun = false;
+    public float KB;
     public float m_LastMoveTime;
-    public float StunTime = 2f;
-    public float time;
+
+    EnemyAI enemyAi;
+    EnemyEffect enemyEffect;
+
     void Start()
     {
+        KB = KnockBackDis;
         players = GameManager.m_Instance.m_Players;
         agent = gameObject.GetComponent<NavMeshAgent>();
-        m_Origin = gameObject.transform.position;
-        Script_enemydeath = GetComponent<EnemyDeath>();
-        m_LastMoveTime = 0;
+        enemyAi = gameObject.GetComponent<EnemyAI>();
+        enemyEffect = gameObject.GetComponent<EnemyEffect>();
     }
 
     void Update()
     {
-        time = Time.time;
         for (int i = 0; i < players.Length; i++)
         {
             rayDirection = players[i].transform.position - transform.position;
             m_Distance = Vector3.Distance(players[i].transform.position, transform.position);
             target = players[i];
 
-            if (CanSeePlayer() && !isStun)
+            if (CanSeePlayer() && !enemyEffect.isStun)
             {
-                chase();
+                enemyAi.chase();
             }
             else
             {
+                agent.Stop();
             }
-        }
-        if (isStun)
-        {
-            isStun = (m_LastMoveTime + StunTime) > Time.time;
-            //Debug.Log("Stun!");
-        }
-        if (!isStun)
-        {
-            //Debug.Log("Not Stun!");
         }
     }
 
@@ -70,14 +58,9 @@ public class HeavyEnemy : MonoBehaviour
     {
         if (col.gameObject.CompareTag("Physical"))
         {
-            isStun = true;
-            m_LastMoveTime = Time.time;
             if (m_EnemyHealth > 0)
             {
                 m_EnemyHealth = m_EnemyHealth - 1;
-                //m_EnemyHealth = m_EnemyHealth - ;
-                //m_EnemyHealth = m_EnemyHealth - col.GetComponent<Sword>().m_Damage;
-                //Debug.Log(col.GetComponent<Sword>().m_Damage);
             }
             else if (m_EnemyHealth <= 0)
             {
@@ -106,39 +89,16 @@ public class HeavyEnemy : MonoBehaviour
                 {
                     if (hit.transform.tag == "Player")
                     {
-                        KnockBackDis = 40f;
+                        KB = KnockBackDis;
                         //Debug.Log("I C U!");
                         return true;
                     }
                 }
             }
         }
-        KnockBackDis = 0f;
+        KB = 0f;
         //Debug.Log("Where R U?");
         return false;
-    }
-
-    void chase()
-    {
-        if (GameObject.FindGameObjectWithTag("Player") != null)
-        {
-            look(GameObject.FindGameObjectWithTag("Player").transform);
-            agent.SetDestination(target.transform.position);
-            agent.Resume();
-        }
-    }
-    void returnToOrigin()
-    {
-        agent.SetDestination(m_Origin);
-        agent.Resume();
-    }
-
-    void look(Transform other)
-    {
-        Vector3 lookPosition = other.position - transform.position;
-        lookPosition.y = 0;
-        Quaternion rotation = Quaternion.LookRotation(lookPosition);
-        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * m_RotationSpeed);
     }
 }
 

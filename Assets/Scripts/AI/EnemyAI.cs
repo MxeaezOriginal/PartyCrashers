@@ -5,13 +5,10 @@ public class EnemyAI : MonoBehaviour
 {
     GameObject[] players;
     GameObject target;
-    //public float moveSpeed = 4;
     NavMeshAgent agent;
-    public float m_ChaseDist = 50;
-    public float m_Distance;
-    public float m_StopDistance = 5;
-    public float m_RotationSpeed = 5f;
-    public Vector3 m_Origin;
+    float m_Distance;
+    Vector3 m_Origin;
+    public float m_RotationSpeed = 2f;
 
     // Use this for initialization
     void Start()
@@ -43,24 +40,9 @@ public class EnemyAI : MonoBehaviour
                 }
             }
         }
-
-        if (m_Distance < m_ChaseDist)
-        {
-            chase();
-        }
-        if (m_Distance < m_StopDistance)
-        {
-            agent.Stop();
-        }
-        if (m_Distance > m_ChaseDist)
-        {
-            returnToOrigin();
-        }
     }
 
-
-
-    void chase()
+    public void chase()
     {
         if (GameObject.FindGameObjectWithTag("Player") != null)
         {
@@ -70,13 +52,13 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    void returnToOrigin()
+    public void returnToOrigin()
     {
         agent.SetDestination(m_Origin);
         agent.Resume();
     }
 
-    void look(Transform other)
+    public void look(Transform other)
     {
         Vector3 lookPosition = other.position - transform.position;
         lookPosition.y = 0;

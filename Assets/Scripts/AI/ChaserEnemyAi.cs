@@ -14,14 +14,17 @@ public class ChaserEnemyAi : MonoBehaviour
     public Vector3 m_Origin;
     public float KnockBackDis = 40f;
 
+    EnemyAI enemyAi;
+    EnemyEffect enemyEffect;
+
     // Use this for initialization
     void Start()
     {
         players = GameManager.m_Instance.m_Players;
         agent = gameObject.GetComponent<NavMeshAgent>();
 
-        m_Origin = gameObject.transform.position;
-
+        enemyAi = gameObject.GetComponent<EnemyAI>();
+        enemyEffect = gameObject.GetComponent<EnemyEffect>();
     }
 
     // Update is called once per frame
@@ -30,60 +33,35 @@ public class ChaserEnemyAi : MonoBehaviour
         //Get closest player
         for (int i = 0; i < players.Length; i++)
         {
-            if (i == 0)
+
+            m_Distance = Vector3.Distance(players[i].transform.position, transform.position);
+            target = players[i];
+            if (!enemyEffect.isStun)
             {
-                m_Distance = Vector3.Distance(players[i].transform.position, transform.position);
-                target = players[i];
-            }
-            else
-            {
-                if (Vector3.Distance(players[i].transform.position, transform.position) < m_Distance)
+                enemyAi.chase();
+                if (m_Distance < m_ChaseDist)
                 {
-                    m_Distance = Vector3.Distance(players[i].transform.position, transform.position);
-                    target = players[i];
+                    enemyAi.chase();
+                }
+                if (m_Distance < m_StopDistance)
+                {
+                    agent.Stop();
+                }
+                if (m_Distance > m_ChaseDist)
+                {
+                    enemyAi.returnToOrigin();
                 }
             }
+            else 
+            {
+                agent.Stop();
+            }
+
         }
 
-        if (m_Distance < m_ChaseDist)
-        {
-            chase();
-        }
-        if (m_Distance < m_StopDistance)
-        {
-            agent.Stop();
-        }
-        if (m_Distance > m_ChaseDist)
-        {
-            returnToOrigin();
-        }
     }
 
 
-
-    void chase()
-    {
-        if (GameObject.FindGameObjectWithTag("Player") != null)
-        {
-            look(GameObject.FindGameObjectWithTag("Player").transform);
-            agent.SetDestination(target.transform.position);
-            agent.Resume();
-        }
-    }
-
-    void returnToOrigin()
-    {
-        agent.SetDestination(m_Origin);
-        agent.Resume();
-    }
-
-    void look(Transform other)
-    {
-        Vector3 lookPosition = other.position - transform.position;
-        lookPosition.y = 0;
-        Quaternion rotation = Quaternion.LookRotation(lookPosition);
-        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * m_RotationSpeed);
-    }
 
 }
 

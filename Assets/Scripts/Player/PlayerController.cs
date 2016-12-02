@@ -229,7 +229,7 @@ public class PlayerController : MonoBehaviour
         {
             KnockBackDirection = transform.position - other.transform.position;
             KnockBack = transform.position + KnockBackDirection;
-            m_Velocity = KnockBackDirection.normalized * other.GetComponent<HeavyEnemy>().KnockBackDis;
+            m_Velocity = KnockBackDirection.normalized * other.GetComponent<HeavyEnemy>().KB;
             //if(canSee)
             //if (gameObject.GetComponent<HeavyEnemy>().CanSeePlayer())
             //{
