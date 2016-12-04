@@ -3,7 +3,6 @@ using System.Collections;
 
 public class ChaserEnemyAi : MonoBehaviour
 {
-
     GameObject[] players;
     GameObject target;
     NavMeshAgent agent;
@@ -33,7 +32,6 @@ public class ChaserEnemyAi : MonoBehaviour
         //Get closest player
         for (int i = 0; i < players.Length; i++)
         {
-
             m_Distance = Vector3.Distance(players[i].transform.position, transform.position);
             target = players[i];
             if (!enemyEffect.isStun)
