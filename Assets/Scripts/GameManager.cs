@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
         {
             DontDestroyOnLoad(gameObject);
             m_Instance = this;
-            if (Application.isEditor)
+            if (Application.isEditor && SceneManager.GetActiveScene().name != "MainMenu")
             {
                 m_LevelToStart = SceneManager.GetActiveScene().name;
                 SceneManager.LoadScene(0);
