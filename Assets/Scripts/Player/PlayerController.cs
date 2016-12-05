@@ -319,7 +319,8 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            m_CameraController.m_Zoom = 0;
+            // Thiago - 12.04.2016 - commented the line down below since it was breaking the game. We have to fix it later. This is just a temporary solution
+            //m_CameraController.m_Zoom = 0;
         }
         //Camera.main.gameObject.GetComponent<CameraController>().m_Zoom = Camera.main.gameObject.GetComponent<CameraController>().m_Zoom / Camera.main.gameObject.GetComponent<CameraController>().m_ZoomAmount;
     }
