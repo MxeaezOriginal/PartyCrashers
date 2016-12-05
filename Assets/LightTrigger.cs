@@ -10,7 +10,7 @@ public class LightTrigger : MonoBehaviour {
     void Start ()
     {
         lightOn = false;
-        while (lt.Length > (I + 1) )
+        while (lt.Length >= (I + 1) )
         {
             lt[I].GetComponent<Light>().enabled = false;
             I++;
@@ -21,10 +21,10 @@ public class LightTrigger : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-        if(lightOn = false && other.gameObject.tag == "Player")
+        if(lightOn == false && other.gameObject.tag == "Player")
         {
             I = 0;
-            while (lt.Length > (I + 1))
+            while (lt.Length >= (I + 1))
             {
                 lt[I].GetComponent<Light>().enabled = true;
                 I++;
