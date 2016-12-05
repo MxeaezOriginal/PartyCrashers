@@ -45,8 +45,11 @@ public class GameManager : MonoBehaviour
         {
             DontDestroyOnLoad(gameObject);
             m_Instance = this;
-            m_LevelToStart = SceneManager.GetActiveScene().name;
-            SceneManager.LoadScene(0);
+            if (Application.isEditor)
+            {
+                m_LevelToStart = SceneManager.GetActiveScene().name;
+                SceneManager.LoadScene(0);
+            }
             InstantiatePlayers();
             GameManager.m_Instance.m_Players = GameObject.FindGameObjectsWithTag("Player");
             if (GameObject.FindGameObjectWithTag("Partybar") != null)

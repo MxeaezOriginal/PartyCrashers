@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Collections;
 
-public class SpawnEnemy : MonoBehaviour
+public class SpawnEnemy : EnemyAI // Inherits from EnemyAI now instead of Monobehaviour
 {
     List<GameObject> enemies = new List<GameObject>();
     public int limitedSpawnTotalNum = 4;
@@ -10,9 +10,9 @@ public class SpawnEnemy : MonoBehaviour
     public bool infiniteSpawn;
     public int infiniteSpawnInMapNum = 5;
     public int infiniteSpawnCurrentNum;
-    GameObject target;
-    NavMeshAgent agent;
-    GameObject[] players;
+    //GameObject target;
+    //NavMeshAgent agent;
+    //GameObject[] players;
     float x;
     float y;
     float z;
@@ -26,21 +26,22 @@ public class SpawnEnemy : MonoBehaviour
     public float spawnTime = 5.0f;
     public float activedRange = 10f;
     // run away
-    public float m_Distance;
+    //public float m_Distance;
     Vector3 MoveDirection;
     Vector3 RunAwayDirection;
     public float RunAwayRange = 5f;
     public float RunSpeed = 0.01f;
 
-    EnemyAI enemyAi;
+    //EnemyAI enemyAi;
     EnemyEffect enemyEffect;
 
     void Start()
     {
-        players = GameManager.m_Instance.m_Players;
+        initializeVariables();
+        //players = GameManager.m_Instance.m_Players;
         timer = spawnTime;
-        agent = gameObject.GetComponent<NavMeshAgent>();
-        enemyAi = gameObject.GetComponent<EnemyAI>();
+        //agent = gameObject.GetComponent<NavMeshAgent>();
+        //enemyAi = gameObject.GetComponent<EnemyAI>();
         enemyEffect = gameObject.GetComponent<EnemyEffect>();
     }
 
@@ -62,7 +63,7 @@ public class SpawnEnemy : MonoBehaviour
             {
                 m_Distance = Vector3.Distance(players[i].transform.position, transform.position);
                 target = players[i];
-                enemyAi.look(target.transform);
+                look(target.transform);
                 MoveDirection = transform.position - players[i].transform.position;
                 RunAwayDirection = transform.position + MoveDirection;
                 if (m_Distance <= RunAwayRange)

@@ -3,27 +3,47 @@ using System.Collections;
 
 public class EnemyAI : MonoBehaviour
 {
-    GameObject[] players;
-    GameObject target;
-    NavMeshAgent agent;
-    float m_Distance;
-    Vector3 m_Origin;
+    protected GameObject[] players;
+    protected GameObject target;
+    protected NavMeshAgent agent;
+    protected float m_Distance;
+    protected Vector3 m_Origin;
     public float m_RotationSpeed = 2f;
 
-    // Use this for initialization
-    void Start()
+    public void chase()
     {
-        players = GameManager.m_Instance.m_Players;
-        agent = gameObject.GetComponent<NavMeshAgent>();
+        if (target != null)
+        {
+            look(target.transform);
+            agent.SetDestination(target.transform.position);
+            agent.Resume();
+        }
 
-        m_Origin = gameObject.transform.position;
-
+        /*
+        if (GameObject.FindGameObjectWithTag("Player") != null)
+        {
+            look(GameObject.FindGameObjectWithTag("Player").transform);
+            agent.SetDestination(target.transform.position);
+            agent.Resume();
+        }*/
     }
 
-    // Update is called once per frame
-    void Update()
+    public void returnToOrigin()
     {
-        //Get closest player
+        agent.SetDestination(m_Origin);
+        agent.Resume();
+    }
+
+    public void look(Transform other)
+    {
+        Vector3 lookPosition = other.position - transform.position;
+        lookPosition.y = 0;
+        Quaternion rotation = Quaternion.LookRotation(lookPosition);
+        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * m_RotationSpeed);
+    }
+
+    public void getClosestPlayer()
+    {
         for (int i = 0; i < players.Length; i++)
         {
             if (i == 0)
@@ -42,28 +62,10 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    public void chase()
+    public void initializeVariables()
     {
-        if (GameObject.FindGameObjectWithTag("Player") != null)
-        {
-            look(GameObject.FindGameObjectWithTag("Player").transform);
-            agent.SetDestination(target.transform.position);
-            agent.Resume();
-        }
+        players = GameManager.m_Instance.m_Players;
+        agent = gameObject.GetComponent<NavMeshAgent>();
+        m_Origin = gameObject.transform.position;
     }
-
-    public void returnToOrigin()
-    {
-        agent.SetDestination(m_Origin);
-        agent.Resume();
-    }
-
-    public void look(Transform other)
-    {
-        Vector3 lookPosition = other.position - transform.position;
-        lookPosition.y = 0;
-        Quaternion rotation = Quaternion.LookRotation(lookPosition);
-        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * m_RotationSpeed);
-    }
-
 }

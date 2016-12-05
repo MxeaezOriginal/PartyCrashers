@@ -31,7 +31,7 @@ public class Bow : Ranged
     [SerializeField]
     private float m_LaserLenght;
 
-    Damage dmg;
+    //Damage dmg;
     Player player;
     LineRenderer m_lineRenderer;
 
@@ -39,7 +39,7 @@ public class Bow : Ranged
     {
         m_lineRenderer = GetComponent<LineRenderer>();
         m_lineRenderer.enabled = false;
-        dmg = GetComponent<Damage>();
+        //dmg = GetComponent<Damage>();
         player = GetComponentInParent<Player>();
     }
 
@@ -98,13 +98,13 @@ public class Bow : Ranged
             m_TimePressed = m_MinSpeed;
             Debug.Log(m_TimePressed);
             balloon = (GameObject)Instantiate(m_RightTriggerProjectile, m_FirePoint[0].gameObject.transform.position, m_FirePoint[0].gameObject.transform.rotation);
-            m_BulletDamage = m_Damage;
+            assignDamage(balloon, 1);
             balloon.GetComponent<Rigidbody>().AddForce(balloon.transform.forward * m_TimePressed);
         }
         else if (m_TimePressed >= (m_MaxCharge / 2) && m_TimePressed < m_MaxCharge)
         {
             balloon = (GameObject)Instantiate(m_RightTriggerProjectile, m_FirePoint[0].gameObject.transform.position, m_FirePoint[0].gameObject.transform.rotation);
-            m_BulletDamage = m_Damage * m_MidDmgMultiplier;
+            assignDamage(balloon, m_MidDmgMultiplier);
             balloon.GetComponent<Rigidbody>().AddForce(balloon.transform.forward * m_MedSpeed * m_TimePressed);
         }
         else
@@ -124,6 +124,18 @@ public class Bow : Ranged
         }
         m_TimePressed = 0;
         m_CoolDown = Time.time;
+    }
+
+    private void assignDamage(GameObject bullet, int multiplier)
+    {
+        if(bullet.GetComponent<Damage>() != null)
+        {
+            bullet.GetComponent<Damage>().m_Damage = this.m_Damage * multiplier;
+        }
+        else
+        {
+            Debug.Log("Bullet doesn't have a Damage Component");
+        }
     }
 
     IEnumerator LaserTimer()

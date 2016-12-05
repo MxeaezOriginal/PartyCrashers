@@ -1,14 +1,23 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class EnemyHealth : MonoBehaviour {
+public class EnemyHealth : MonoBehaviour
+{
 
     public float m_EnemyHealth = 100f;
+    public GameObject m_Drop;
 
     public void Kill()
     {
-        //death stuff for enemy
         Destroy(gameObject);
+
+        Instantiate(m_Drop, gameObject.transform.position, gameObject.transform.rotation);
+
+        for (int i = 0; i < GameManager.m_Instance.m_Players.Length; ++i)
+        {
+            Player player = GameManager.m_Instance.m_Players[i].GetComponent<Player>();
+            player.m_Score += 100;
+        }
     }
 
     public float GetEnemyHealth()
@@ -18,8 +27,9 @@ public class EnemyHealth : MonoBehaviour {
 
     public void Damage(float health)
     {
+        Debug.Log("Damaged");
         m_EnemyHealth -= health;
-        if(m_EnemyHealth <= 0)
+        if (m_EnemyHealth <= 0)
         {
             Kill();
         }

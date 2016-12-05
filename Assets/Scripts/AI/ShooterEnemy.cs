@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ShooterEnemy : MonoBehaviour
+public class ShooterEnemy : EnemyAI //Inherits from EnemyAI instead of Monobehaviour
 {
-    public GameObject[] players;
-    GameObject target;
-    NavMeshAgent agent;
+    //public GameObject[] players;
+    //GameObject target;
+    //NavMeshAgent agent;
 
-    public float m_distance;
+    //public float m_distance;
     public float ActivedDis = 20f;
     public float ChaseDis = 15f;
     public float ShootDis = 10f;
@@ -23,33 +23,69 @@ public class ShooterEnemy : MonoBehaviour
     public float bulletwaitingtime = 3.0f;
     public Rigidbody projectile;
 
-    EnemyAI enemyAi;
+    //EnemyAI enemyAi;
     EnemyEffect enemyEffect;
 
     void Start()
     {
-        players = GameManager.m_Instance.m_Players;
-        agent = gameObject.GetComponent<NavMeshAgent>();
-        enemyAi = gameObject.GetComponent<EnemyAI>();
+        initializeVariables();
         enemyEffect = gameObject.GetComponent<EnemyEffect>();
     }
     void Update()
     {
+        /*getClosestPlayer();
+
+        look(target.transform);
+        MoveDir = transform.position - target.transform.position;
+        Flee = transform.position + MoveDir;
+        if (!enemyEffect.isStun)
+        {
+            if (m_Distance <= RunAwayDis)
+            {
+                transform.position = Vector3.Lerp(transform.position, Flee, RunAwaySpeed);
+                Debug.Log("Running away!");
+            }
+            if (m_Distance > RunAwayDis && m_Distance < ChaseDis)
+            {
+                timer += Time.deltaTime;
+                if (timer > bulletwaitingtime)
+                {
+                    Shoot();
+                    timer = 0;
+                }
+                Debug.Log("Shooting!");
+            }
+            if (m_Distance >= ChaseDis && m_Distance <= ActivedDis)
+            {
+                chase();
+                Debug.Log("Chasing!");
+            }
+            if (m_Distance > ActivedDis)
+            {
+                returnToOrigin();
+                //Debug.Log("Stay!");
+            }
+        }
+        else
+        {
+            agent.Stop();
+        }*/
+        
         for (int i = 0; i < players.Length; i++)
         {
-            m_distance = Vector3.Distance(transform.position, players[i].transform.position);
+            m_Distance = Vector3.Distance(transform.position, players[i].transform.position);
             target = players[i];
-            enemyAi.look(target.transform);
+            look(target.transform);
             MoveDir = transform.position - players[i].transform.position;
             Flee = transform.position + MoveDir;
             if(!enemyEffect.isStun)
             {
-                if (m_distance <= RunAwayDis)
+                if (m_Distance <= RunAwayDis)
                 {
                     transform.position = Vector3.Lerp(transform.position, Flee, RunAwaySpeed);
                     Debug.Log("Running away!");
                 }
-                if (m_distance > RunAwayDis && m_distance < ChaseDis)
+                if (m_Distance > RunAwayDis && m_Distance < ChaseDis)
                 {
                     timer += Time.deltaTime;
                     if (timer > bulletwaitingtime)
@@ -59,13 +95,13 @@ public class ShooterEnemy : MonoBehaviour
                     }
                     Debug.Log("Shooting!");
                 }
-                if (m_distance >= ChaseDis && m_distance <= ActivedDis)
+                if (m_Distance >= ChaseDis && m_Distance <= ActivedDis)
                 {
-                    enemyAi.chase(); Debug.Log("Chasing!");
+                    chase(); Debug.Log("Chasing!");
                 }
-                if (m_distance > ActivedDis)
+                if (m_Distance > ActivedDis)
                 {
-                    enemyAi.returnToOrigin();
+                    returnToOrigin();
                     //Debug.Log("Stay!");
                 }
             }

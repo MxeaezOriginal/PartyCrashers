@@ -33,7 +33,6 @@ GameObject:
   - 114: {fileID: 11439040}
   - 114: {fileID: 11496950}
   - 114: {fileID: 11422394}
-  - 114: {fileID: 11454752}
   m_Layer: 0
   m_Name: Heavy Enemy
   m_TagString: HeavyEnemy
@@ -167,27 +166,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56a90f5a51e51e04dad3396e0048d6f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_RotationSpeed: 2
   m_EnemyHealth: 20
   m_PartyBarAmount: 2
   coin: {fileID: 0}
-  m_Distance: 0
   ViewRange: 90
   ViewDis: 10
   KnockBackDis: 40
   KB: 0
   m_LastMoveTime: 0
---- !u!114 &11454752
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 193810}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67030a5d1ef6f364980f3ebee7b5228f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_RotationSpeed: 5
 --- !u!114 &11496950
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -200,6 +187,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EnemyHealth: 100
+  m_Drop: {fileID: 0}
 --- !u!136 &13613680
 CapsuleCollider:
   m_ObjectHideFlags: 1

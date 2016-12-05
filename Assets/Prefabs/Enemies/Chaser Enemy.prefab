@@ -32,7 +32,6 @@ GameObject:
   - 195: {fileID: 19516994}
   - 114: {fileID: 11489884}
   - 114: {fileID: 11491940}
-  - 114: {fileID: 11407666}
   - 114: {fileID: 11406454}
   m_Layer: 0
   m_Name: Chaser Enemy
@@ -156,18 +155,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isStun: 0
---- !u!114 &11407666
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 128216}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67030a5d1ef6f364980f3ebee7b5228f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_RotationSpeed: 2
 --- !u!114 &11489884
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -179,11 +166,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6314109ef2091e04fa4b0ea09fb7bd88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ChaseDist: 20
-  m_Distance: 0
-  m_StopDistance: 0
   m_RotationSpeed: 5
-  m_Origin: {x: 0, y: 0, z: 0}
+  m_ChaseDist: 20
+  m_StopDistance: 0
   KnockBackDis: 40
 --- !u!114 &11491940
 MonoBehaviour:
@@ -197,6 +182,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EnemyHealth: 100
+  m_Drop: {fileID: 0}
 --- !u!136 &13673056
 CapsuleCollider:
   m_ObjectHideFlags: 1

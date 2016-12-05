@@ -2,42 +2,53 @@
 using UnityEngine.SceneManagement;
 using System.Collections;
 
-public class HeavyEnemy : MonoBehaviour
+public class HeavyEnemy : EnemyAI //Inherits from EnemyAI now instead of monobehaviour
 {
     public int m_EnemyHealth = 20;
     public int m_PartyBarAmount = 2;
     public GameObject coin;
 
-    GameObject[] players;
-    GameObject target;
-    NavMeshAgent agent;
-    public float m_Distance;
+    //GameObject[] players;
+    //GameObject target;
+    //NavMeshAgent agent;
+    //public float m_Distance;
     public float ViewRange = 120f;
     public float ViewDis = 10f;
 
     Vector3 rayDirection;
     RaycastHit hit;
-    Vector3 m_Origin;
+    //Vector3 m_Origin;
 
     public float KnockBackDis = 40f;
     public float KB;
     public float m_LastMoveTime;
 
-    EnemyAI enemyAi;
+    //EnemyAI enemyAi;
     EnemyEffect enemyEffect;
 
     void Start()
     {
         KB = KnockBackDis;
-        players = GameManager.m_Instance.m_Players;
-        agent = gameObject.GetComponent<NavMeshAgent>();
-        enemyAi = gameObject.GetComponent<EnemyAI>();
+        initializeVariables();
+        //players = GameManager.m_Instance.m_Players;
+        //agent = gameObject.GetComponent<NavMeshAgent>();
+        //enemyAi = gameObject.GetComponent<EnemyAI>();
         enemyEffect = gameObject.GetComponent<EnemyEffect>();
     }
 
     void Update()
     {
-        for (int i = 0; i < players.Length; i++)
+        getClosestPlayer();
+        if (CanSeePlayer() && !enemyEffect.isStun)
+        {
+            chase();
+        }
+        else
+        {
+            agent.Stop();
+        }
+
+        /*for (int i = 0; i < players.Length; i++)
         {
             rayDirection = players[i].transform.position - transform.position;
             m_Distance = Vector3.Distance(players[i].transform.position, transform.position);
@@ -51,10 +62,10 @@ public class HeavyEnemy : MonoBehaviour
             {
                 agent.Stop();
             }
-        }
+        }*/
     }
 
-    void OnTriggerEnter(Collider col)
+    /*void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.CompareTag("Physical"))
         {
@@ -76,7 +87,7 @@ public class HeavyEnemy : MonoBehaviour
                 }
             }
         }
-    }
+    }*/
 
     public bool CanSeePlayer()
     {

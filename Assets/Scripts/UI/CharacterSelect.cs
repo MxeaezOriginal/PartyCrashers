@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEditor;
 using UnityEngine.SceneManagement;
 using System.Collections;
 using UnityEngine.UI;
@@ -327,9 +328,8 @@ public class CharacterSelect : MonoBehaviour
         }
     }
 
-
     void StartGame()
     {
-        SceneManager.LoadScene(GameManager.m_Instance.m_LevelToStart);
+         SceneManager.LoadScene(GameManager.m_Instance.m_LevelToStart);
     }
 }
