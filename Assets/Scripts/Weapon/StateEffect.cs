@@ -12,7 +12,7 @@ public class StateEffect : MonoBehaviour
         {
             EnemyEffect enemyEffect = other.gameObject.GetComponent<EnemyEffect>();
             enemyEffect.Stun(m_StunTime);
-            enemyEffect.KnockBack(m_KnockBack);
+            enemyEffect.KnockBack(m_KnockBack, gameObject);
         }
     }
 }
