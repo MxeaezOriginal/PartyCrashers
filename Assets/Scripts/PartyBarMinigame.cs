@@ -5,18 +5,18 @@ using System.Collections;
 
 public class PartyBarMinigame : MonoBehaviour
 {
+    /*
+    //public int m_Max = 60;
+    //public int m_Current = 60;
+    //public float m_Cooldown = 1f;
+    //public int m_ReduceBy = 1;
+    //public float m_fillSpeed = 2f;
 
-    public int m_Max = 60;
-    public int m_Current = 60;
-    public float m_Cooldown = 1f;
-    public int m_ReduceBy = 1;
-    public float m_fillSpeed = 2f;
+    //public bool m_Active = true;
 
-    public bool m_Active = true;
+    //Image m_Bar;
 
-    Image m_Bar;
-
-    float m_TempTimer;
+    //float m_TempTimer;
     // Use this for initialization
     void Start()
     {
@@ -34,9 +34,9 @@ public class PartyBarMinigame : MonoBehaviour
         {
             //set bar equal to percentage
 
-            if (m_TempTimer <= Time.time - 1f)
+            if (m_TempTimer <= Time.time - m_DecreaseRate)
             {
-                m_Current -= 1;
+                m_Current -= m_DecreaseAmount;
                 m_TempTimer = Time.time;
             }
 
@@ -54,5 +54,5 @@ public class PartyBarMinigame : MonoBehaviour
 
         GameManager.m_Instance.savePlayers();
         SceneManager.LoadScene("Lobby_01"); //tutorial scene
-    }
+    }*/
 }

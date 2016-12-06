@@ -20,8 +20,18 @@ public class GameManager : MonoBehaviour
         public int maxHealth;
         public Player.Controller m_Controller;
     }
+    public enum GameState
+    {
+        Lobby_01,
+        Lobby_02,
+        Lobby_03,
+        Minigame,
+        Main
+    }
 
     public static GameManager m_Instance;
+
+    public GameState m_GameState;
 
     public GameObject m_PlayerPrefab;
 
@@ -34,7 +44,7 @@ public class GameManager : MonoBehaviour
 
     public int m_NumOfPlayers;
 
-    public PartyBar m_PartyBarGame;
+    public PartyBar m_PartyBar;
 
     public string m_LevelToStart;
 
@@ -52,9 +62,13 @@ public class GameManager : MonoBehaviour
             }
             InstantiatePlayers();
             GameManager.m_Instance.m_Players = GameObject.FindGameObjectsWithTag("Player");
-            if (GameObject.FindGameObjectWithTag("Partybar") != null)
+            if (GameObject.Find("PartyBar") != null)
             {
-                GameManager.m_Instance.m_PartyBarGame = GameObject.FindGameObjectWithTag("Partybar").GetComponent<PartyBar>();
+                GameManager.m_Instance.m_PartyBar = GameObject.Find("PartyBar").GetComponentInChildren<PartyBar>();
+            }
+            else
+            {
+                Debug.Log("Partybar not found");
             }
             FindHearts();
             FindStatsWindowAnimator();
@@ -64,9 +78,13 @@ public class GameManager : MonoBehaviour
         {
             InstantiatePlayers();
             GameManager.m_Instance.m_Players = GameObject.FindGameObjectsWithTag("Player");
-            if (GameObject.FindGameObjectWithTag("Partybar") != null)
+            if (GameObject.Find("PartyBar") != null)
             {
-                GameManager.m_Instance.m_PartyBarGame = GameObject.FindGameObjectWithTag("Partybar").GetComponent<PartyBar>();
+                GameManager.m_Instance.m_PartyBar = GameObject.Find("PartyBar").GetComponentInChildren<PartyBar>();
+            }
+            else
+            {
+                Debug.Log("Partybar not found");
             }
             if (GameManager.m_Instance.m_Player1.name != null)
             {
