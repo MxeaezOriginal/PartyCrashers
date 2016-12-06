@@ -2,10 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class BallroomBlitzManager : MonoBehaviour
+public class BallLaunchersManager : MonoBehaviour
 {
-    enum EBallType { Basic, Stun, Bomb };           // Types of balls: Basic(pink), Stun(yellow), and Bomb(black).
-
     // public member variables
     public GameObject           m_BallPrefab;           // Ball prefab.
     public float                m_FastBallSpeed;        // Basic & Stun balls speed.
@@ -119,7 +117,7 @@ public class BallroomBlitzManager : MonoBehaviour
                     {
                         if(Mathf.RoundToInt(m_BallLaunchers[i].position.z) == Mathf.RoundToInt(player.position.z))
                         {
-                            StartCoroutine(Shoot(player.position, i));
+                            Shoot(player.position, i);
                         }
                     }
                 }
@@ -136,7 +134,7 @@ public class BallroomBlitzManager : MonoBehaviour
                         {
                             if (Mathf.RoundToInt(m_BallLaunchers[i].position.x) == Mathf.RoundToInt(player.position.x))
                             {
-                                StartCoroutine(Shoot(player.position, i));
+                                Shoot(player.position, i);
                             }
                         }
                     }
@@ -159,6 +157,7 @@ public class BallroomBlitzManager : MonoBehaviour
         {
             GameObject ball = Instantiate<GameObject>(m_BallPrefab);
             ball.SetActive(false);
+            ball.GetComponent<BallManager>().SetBallLauncherManager(this);
             m_BallPool.Add(ball);
         }
     }
@@ -174,7 +173,7 @@ public class BallroomBlitzManager : MonoBehaviour
         return null;
     }
 
-    void PutBallBackIntoPool(GameObject ball)
+    public void PutBallBackIntoPool(GameObject ball)
     {
         m_BallPool.Add(ball);
         ball.GetComponent<Rigidbody>().velocity = Vector3.zero;
@@ -195,7 +194,7 @@ public class BallroomBlitzManager : MonoBehaviour
         return playersTransforms;
     }
 
-    IEnumerator Shoot(Vector3 playerPosition, int launcherID)
+    void Shoot(Vector3 playerPosition, int launcherID)
     {
         // Check if distance is closer than half the size of the room
         float distance = (playerPosition - m_BallLaunchers[launcherID].position).magnitude;
@@ -207,7 +206,7 @@ public class BallroomBlitzManager : MonoBehaviour
             if(ball == null)
             {
                 Debug.LogAssertion("[BallroomBlitzManager.Shoot] - Ball pool is out of balls!");
-                yield break;
+                return;
             }
             // Set launcher as inactive
             m_ActivatedLaunchers[launcherID] = false;
@@ -225,30 +224,25 @@ public class BallroomBlitzManager : MonoBehaviour
             // If basic ball
             if (randomNumber >= 0.0f && randomNumber <= m_BasicBallChance)
             {
+                ball.GetComponent<BallManager>().SetBallType(BallManager.EBallType.Basic);
                 ball.GetComponent<Rigidbody>().AddForce(ball.transform.forward * m_FastBallSpeed);
                 ball.GetComponent<Renderer>().material = m_BasicBallMaterial;
-
-                yield return new WaitForSeconds(1.2f);
             }
+            // If stun ball
             else if(randomNumber > m_BasicBallChance && randomNumber < m_StunBallChance)
             {
+                ball.GetComponent<BallManager>().SetBallType(BallManager.EBallType.Stun);
                 ball.GetComponent<Rigidbody>().AddForce(ball.transform.forward * m_SlowBallSpeed);
                 ball.GetComponent<Renderer>().material = m_StunBallMaterial;
-
-                yield return new WaitForSeconds(10.0f);
             }
+            // If bomb ball
             else
             {
+                ball.GetComponent<BallManager>().SetBallType(BallManager.EBallType.Bomb);
                 ball.GetComponent<Rigidbody>().AddForce(ball.transform.forward * m_SlowBallSpeed);
                 ball.GetComponent<Renderer>().material = m_BombBallMaterial;
-
-                yield return new WaitForSeconds(Random.Range(2.0f, 8.0f));
             }
 
-            if(ball.activeInHierarchy)
-            {
-                PutBallBackIntoPool(ball);
-            }
         }
     }
 }
