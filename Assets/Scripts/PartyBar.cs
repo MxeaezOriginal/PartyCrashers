@@ -13,7 +13,7 @@ public class PartyBar : MonoBehaviour {
 
     public bool m_Active;
 
-    Image m_Bar;
+    private Image m_Bar;
 
     float m_TempTimer;
 
@@ -25,15 +25,27 @@ public class PartyBar : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+        if(GameManager.m_Instance.m_GameState != GameManager.GameState.Minigame)
+        {
+            dungeonPartyBarDrain();
+        }
+        else if(GameManager.m_Instance.m_GameState == GameManager.GameState.Minigame)
+        {
+            minigamePartyBarDrain();
+        }
+    }
+
+    void dungeonPartyBarDrain()
+    {
         //set bar equal to percentage
         m_Bar.fillAmount = Mathf.Lerp(m_Bar.fillAmount, (float)m_Current / m_Max, m_fillSpeed * Time.deltaTime);
 
         if (m_Active)
         {
-        
+
             if (m_TempTimer <= Time.time - m_DecreaseRate)
             {
-                m_Current += m_DecreaseAmount;
+                m_Current -= m_DecreaseAmount;
                 m_TempTimer = Time.time;
             }
 
@@ -45,11 +57,63 @@ public class PartyBar : MonoBehaviour {
         }
     }
 
+    void minigamePartyBarDrain()
+    {
+        m_Bar.fillAmount = Mathf.Lerp(m_Bar.fillAmount, (float)m_Current / m_Max, m_fillSpeed * Time.deltaTime);
+
+        if (m_Active)
+        {
+            //set bar equal to percentage
+
+            if (m_TempTimer <= Time.time - m_DecreaseRate)
+            {
+                m_Current -= m_DecreaseAmount;
+                m_TempTimer = Time.time;
+            }
+
+            //if bar hits 0 load minigame
+            if (m_Current <= 0)
+            {
+                loadBackToGame();
+            }
+        }
+    }
+
     void loadMinigame()
     {
         //int randomNumber = Random.Range(1, 3);
 
         GameManager.m_Instance.savePlayers();
-        SceneManager.LoadScene("BallroomBlitz"); //ballroom blitz
+
+        if(GameManager.m_Instance.m_GameState == GameManager.GameState.Lobby_01 ||
+            GameManager.m_Instance.m_GameState == GameManager.GameState.Lobby_02 ||
+            GameManager.m_Instance.m_GameState == GameManager.GameState.Lobby_03)
+        {
+            SceneManager.LoadScene("BallroomBlitz02"); //ballroom blitz
+            GameManager.m_Instance.m_GameState++;
+        }
+        else
+        {
+            SceneManager.LoadScene("BallroomBlitz02");
+        }
+    }
+
+    void loadBackToGame()
+    {
+        //int randomNumber = Random.Range(1, 3);
+
+        GameManager.m_Instance.savePlayers();
+
+        if (GameManager.m_Instance.m_GameState == GameManager.GameState.Lobby_01 ||
+    GameManager.m_Instance.m_GameState == GameManager.GameState.Lobby_02 ||
+    GameManager.m_Instance.m_GameState == GameManager.GameState.Lobby_03)
+        {
+            SceneManager.LoadScene(GameManager.m_Instance.m_GameState.ToString()); //ballroom blitz
+            GameManager.m_Instance.m_GameState++;
+        }
+        else
+        {
+            SceneManager.LoadScene("BallroomBlitz02");
+        }
     }
 }

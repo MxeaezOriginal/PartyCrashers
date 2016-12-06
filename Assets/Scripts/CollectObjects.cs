@@ -5,14 +5,18 @@ using System.Collections;
 public class CollectObjects : MonoBehaviour
 {
     private Player player;
-    private PartyBar partyBar;
+    public PartyBar partyBar;
 
     void Start()
     {
         player = gameObject.GetComponent<Player>();
-        if (GameObject.Find("PartyBar_Game").transform.FindChild("Content") != null)
+        if (GameObject.Find("PartyBar").transform.FindChild("Content") != null)
         {
-            partyBar = GameObject.Find("PartyBar_Game").transform.FindChild("Content").GetComponent<PartyBar>();
+            partyBar = GameObject.Find("PartyBar").transform.FindChild("Content").GetComponent<PartyBar>();
+        }
+        else
+        {
+            Debug.Log("Partybar Not Found");
         }
     }
 
