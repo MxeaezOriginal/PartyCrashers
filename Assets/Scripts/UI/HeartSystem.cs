@@ -35,18 +35,21 @@ public class HeartSystem : MonoBehaviour
 
     void CheckHealthAmount()//shuts down couple hearts ar Start()
     {
-        for (int i = 0; i < maxHearts; i++)
+        if (GameManager.m_Instance.m_GameState == GameManager.GameState.Dungeon)
         {
-            if (startHearts <= i)
+            for (int i = 0; i < maxHearts; i++)
             {
-                heartImages[i].enabled = false;
+                if (startHearts <= i)
+                {
+                    heartImages[i].enabled = false;
+                }
+                else
+                {
+                    heartImages[i].enabled = true;
+                }
             }
-            else
-            {
-                heartImages[i].enabled = true;
-            }
+            UpdateHearts();
         }
-        UpdateHearts();
     }
 
     public void UpdateHearts()

@@ -81,39 +81,40 @@ public class PartyBar : MonoBehaviour {
 
     void loadMinigame()
     {
+        GameManager.m_Instance.m_GameState = GameManager.GameState.Minigame;
         //int randomNumber = Random.Range(1, 3);
 
         GameManager.m_Instance.savePlayers();
 
-        if(GameManager.m_Instance.m_GameState == GameManager.GameState.Lobby_01 ||
-            GameManager.m_Instance.m_GameState == GameManager.GameState.Lobby_02 ||
-            GameManager.m_Instance.m_GameState == GameManager.GameState.Lobby_03)
+        if(GameManager.m_Instance.m_Tutorial == GameManager.Tutorial.Lobby_01 ||
+            GameManager.m_Instance.m_Tutorial == GameManager.Tutorial.Lobby_02 ||
+            GameManager.m_Instance.m_Tutorial == GameManager.Tutorial.Lobby_03)
         {
-            SceneManager.LoadScene("BallroomBlitz02"); //ballroom blitz
-            GameManager.m_Instance.m_GameState++;
+            ++GameManager.m_Instance.m_Tutorial;
+            SceneManager.LoadScene("GameLoopTest"); //ballroom blitz
         }
         else
         {
-            SceneManager.LoadScene("BallroomBlitz02");
+            SceneManager.LoadScene("GameLoopTest");
         }
     }
 
     void loadBackToGame()
     {
+        GameManager.m_Instance.m_GameState = GameManager.GameState.Dungeon;
         //int randomNumber = Random.Range(1, 3);
 
         GameManager.m_Instance.savePlayers();
 
-        if (GameManager.m_Instance.m_GameState == GameManager.GameState.Lobby_01 ||
-    GameManager.m_Instance.m_GameState == GameManager.GameState.Lobby_02 ||
-    GameManager.m_Instance.m_GameState == GameManager.GameState.Lobby_03)
+        if (GameManager.m_Instance.m_Tutorial == GameManager.Tutorial.Lobby_01 ||
+    GameManager.m_Instance.m_Tutorial == GameManager.Tutorial.Lobby_02 ||
+    GameManager.m_Instance.m_Tutorial == GameManager.Tutorial.Lobby_03)
         {
-            SceneManager.LoadScene(GameManager.m_Instance.m_GameState.ToString()); //ballroom blitz
-            GameManager.m_Instance.m_GameState++;
+            SceneManager.LoadScene(GameManager.m_Instance.m_Tutorial.ToString()); //ballroom blitz
         }
         else
         {
-            SceneManager.LoadScene("BallroomBlitz02");
+            SceneManager.LoadScene("GameLoopTest");
         }
     }
 }
