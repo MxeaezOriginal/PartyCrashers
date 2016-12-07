@@ -30,7 +30,6 @@ GameObject:
   - 65: {fileID: 6549450}
   - 135: {fileID: 13569980}
   - 114: {fileID: 11486842}
-  - 114: {fileID: 11441794}
   m_Layer: 0
   m_Name: WaterBalloonBomb
   m_TagString: Projectile
@@ -123,18 +122,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.7, y: 0.7, z: 0.7}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &11441794
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 174722}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 402ebe2cbb5d0fb4fbf1c35c885b4cae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  power: 30
 --- !u!114 &11486842
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -146,14 +133,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7284d7928b7926343a93fa59281537c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: Projectile
-  explosionRadius: 5
-  damage: 4
-  balloonDelay: 0
-  effectDelay: 0.7
-  explosionObject: {fileID: 108582, guid: 756022726da01f84fbd424e34e50d795, type: 2}
-  effectObject: {fileID: 191186, guid: 079954accd64b32419ec069129c81273, type: 2}
-  objectSpawn: {fileID: 141012}
+  m_ExplosionRadius: 0
+  m_Damage: 0
+  m_ExplosionEffect: {fileID: 0}
 --- !u!114 &11487946
 MonoBehaviour:
   m_ObjectHideFlags: 1

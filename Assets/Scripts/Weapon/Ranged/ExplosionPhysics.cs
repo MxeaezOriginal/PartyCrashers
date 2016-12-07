@@ -10,8 +10,7 @@ public class ExplosionPhysics : MonoBehaviour {
     private EnemyAI enemyAiScript;
 
     IEnumerator OnTriggerEnter(Collider other)
-    {
-        
+    {  
 
         if (other.tag == "MeleeEnemy" || other.tag == "Enemy")
         {
@@ -28,7 +27,10 @@ public class ExplosionPhysics : MonoBehaviour {
                     enemyAiScript = hit.GetComponent<EnemyAI>();
                     enemyAiScript.enabled = false;
                     // Add a Rigidbody and set its mass to 0.5
-                    hit.gameObject.AddComponent<Rigidbody>();
+                    if (hit.gameObject.GetComponent<Rigidbody>() == null)
+                    {
+                        hit.gameObject.AddComponent<Rigidbody>();
+                    }
                     Rigidbody rb = hit.GetComponent<Rigidbody>();
                     rb.mass = 0.5f;
                     rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationY;

@@ -70,7 +70,7 @@ public class Bow : Ranged
                 m_TimePressed = m_MaxCharge;
             }
             m_WasDown = true;
-            Debug.Log(m_TimePressed);
+            //Debug.Log(m_TimePressed);
         }
     }
 
@@ -96,7 +96,7 @@ public class Bow : Ranged
         if (m_TimePressed < (m_MaxCharge / 2))
         {
             m_TimePressed = m_MinSpeed;
-            Debug.Log(m_TimePressed);
+            //Debug.Log(m_TimePressed);
             balloon = (GameObject)Instantiate(m_RightTriggerProjectile, m_FirePoint[0].gameObject.transform.position, m_FirePoint[0].gameObject.transform.rotation);
             assignDamage(balloon, 1);
             balloon.GetComponent<Rigidbody>().AddForce(balloon.transform.forward * m_TimePressed);
