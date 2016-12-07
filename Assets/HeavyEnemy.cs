@@ -41,11 +41,11 @@ public class HeavyEnemy : EnemyAI //Inherits from EnemyAI now instead of monobeh
         getClosestPlayer();
         if (CanSeePlayer() && !enemyEffect.isStun)
         {
-            chase();
+                chase();
         }
         else
         {
-            agent.Stop();
+                agent.Stop();
         }
 
         /*for (int i = 0; i < players.Length; i++)
@@ -94,14 +94,23 @@ public class HeavyEnemy : EnemyAI //Inherits from EnemyAI now instead of monobeh
         for (int i = 0; i < players.Length; i++)
         {
             rayDirection = players[i].transform.position - transform.position;
+            //Ray ray = gameObject.transform.forward;
             if ((Vector3.Angle(rayDirection, transform.forward)) < ViewRange) 
             {
                 if (Physics.Raycast(transform.position, rayDirection, out hit, ViewDis))
                 {
-                    if (hit.transform.tag == "Player")
+                    if (hit.transform.GetComponent<Weapon>() != null || hit.transform.GetComponent<Player>() != null)
                     {
                         KB = KnockBackDis;
                         //Debug.Log("I C U!");
+                        return true;
+                    }
+                }
+                if (Physics.Raycast(transform.position, transform.forward, out hit, ViewDis))
+                {
+                    if (hit.transform.GetComponent<Weapon>() != null || hit.transform.GetComponent<Player>() != null)
+                    {
+                        KB = KnockBackDis;
                         return true;
                     }
                 }
