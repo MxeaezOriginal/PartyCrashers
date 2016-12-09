@@ -4,13 +4,19 @@ using System.Collections;
 public class EnemyAI : MonoBehaviour
 {
     protected GameObject[] players;
-    protected GameObject target;
+    public GameObject target;
     public NavMeshAgent agent;
     protected float m_Distance;
     protected Vector3 m_Origin;
     public float m_RotationSpeed = 2f;
-
+    [HideInInspector]
+    public float m_Rtts;
     private Rigidbody m_RigidBody;
+
+    void Start()
+    {
+        m_Rtts = m_RotationSpeed;
+    }
 
     public void chase()
     {
@@ -33,7 +39,7 @@ public class EnemyAI : MonoBehaviour
         Vector3 lookPosition = other.position - transform.position;
         lookPosition.y = 0;
         Quaternion rotation = Quaternion.LookRotation(lookPosition);
-        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * m_RotationSpeed);
+        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * m_Rtts);
     }
 
     public void Knockback(Vector3 position, float KB)
@@ -49,14 +55,6 @@ public class EnemyAI : MonoBehaviour
 
         StopCoroutine("reActivateAgent");
         StartCoroutine(reActivateAgent(1/KB));
-        //float agentSpeed = agent.speed;
-        //float agentAcceleration = agent.acceleration;
-        //agent.Stop();
-        //agent.speed = speed;
-        //agent.SetDestination(position * KB);
-        //agent.Resume();
-        //agent.speed = agentSpeed;
-        //agent.acceleration = agentAcceleration;
     }
 
     IEnumerator reActivateAgent(float time)

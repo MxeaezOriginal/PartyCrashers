@@ -6,7 +6,8 @@ public class EnemyHealth : MonoBehaviour
 
     public float m_EnemyHealth = 100f;
     public GameObject m_Drop;
-
+    [HideInInspector]
+    public bool isInvincible = false;
     public void Kill()
     {
         Destroy(gameObject);
@@ -28,7 +29,13 @@ public class EnemyHealth : MonoBehaviour
     public void Damage(float health)
     {
         Debug.Log("Damaged");
-        m_EnemyHealth -= health;
+        if(isInvincible == true)
+        {
+        }
+        if (isInvincible == false)
+        {
+            m_EnemyHealth -= health;
+        }
         if (m_EnemyHealth <= 0)
         {
             Kill();

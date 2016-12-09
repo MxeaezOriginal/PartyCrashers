@@ -39,7 +39,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &431270
 Transform:
   m_ObjectHideFlags: 1
@@ -59,7 +59,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 128216}
   m_LocalRotation: {x: 0, y: -0.026062354, z: 0, w: -0.9996603}
-  m_LocalPosition: {x: 3.04, y: 0, z: -5.82}
+  m_LocalPosition: {x: -5.085994, y: 1, z: -3.3106072}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 431270}
@@ -155,6 +155,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isStun: 0
+  isKB: 0
 --- !u!114 &11489884
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -166,7 +167,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6314109ef2091e04fa4b0ea09fb7bd88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  agent: {fileID: 0}
   m_RotationSpeed: 5
+  m_Rtts: 0
   m_ChaseDist: 20
   m_StopDistance: 0
   KnockBackDis: 10
@@ -183,6 +187,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_EnemyHealth: 100
   m_Drop: {fileID: 0}
+  isInvincible: 0
 --- !u!136 &13673056
 CapsuleCollider:
   m_ObjectHideFlags: 1
