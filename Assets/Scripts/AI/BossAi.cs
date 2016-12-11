@@ -1,9 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BossAi : MonoBehaviour
+public class BossAi : EnemyAI
+
 {
-    GameObject[] players;
+    public float RunAwayDistance = 5f;
+    public float ChaseDistance = 10f;
+    public float StayDistance = 15f;
+    public float AttackDistance = 20f;
+    public float KnockBackDis = 40f;
+    public float BossRunAwaySpeed = 0.01f;
+    Vector3 MoveBackward;
+    Vector3 Flee;
+    EnemyEffect enemyEffect;
+    //GameObject[] players;
     int PlayerNumbers;
     float x;
     float y;
@@ -61,7 +71,7 @@ public class BossAi : MonoBehaviour
     public float BossShootInterval = 3f;
     public int m_Bullet;
 
-    //public float BossActivatedRange = 30f;
+    public float BossActivatedRange = 30f;
 
     // Boss attack mode 3 variables --- spawn trap
     public float Mode3TrapSpawnTime = 2.0f;
@@ -70,53 +80,77 @@ public class BossAi : MonoBehaviour
 
     private int GetMode = 3;
 
-    BossMovement bossmovement;
+    //BossMovement bossmovement;
 
-    PlayerController playercontroller;
+    //PlayerController playercontroller;
     // Use this for initialization
     void Start()
     {
         PlayerNumbers = GameObject.FindGameObjectsWithTag("Player").Length;
-        players = GameManager.m_Instance.m_Players;
-        bossmovement = GetComponent<BossMovement>();
+        //players = GameManager.m_Instance.m_Players;
+        //bossmovement = GetComponent<BossMovement>();
         m_LastShotTime = Time.time;
         m_LastAttackTime = Time.time;
         m_LastAttackTime2 = Time.time;
         //m_Bullet = Mode2MaxBullet;
         m_Bullet = 0;
-        playercontroller = gameObject.GetComponent<PlayerController>();
+        //playercontroller = gameObject.GetComponent<PlayerController>();
         timer = Mode1EnemySpawnTime;
+        initializeVariables();
+        enemyEffect = gameObject.GetComponent<EnemyEffect>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        Attacking();
+        getClosestPlayer();
+        look(target.transform);
+        MoveBackward = transform.position - target.transform.position;
+        Flee = transform.position + MoveBackward;
+        if (m_Distance <= BossActivatedRange)
+        {
+            if(!enemyEffect.isStun)
+            {
+                Attacking();
+                if (m_Distance <= RunAwayDistance)
+                {
+                    transform.position = Vector3.Lerp(transform.position, Flee, BossRunAwaySpeed);
+                    Debug.Log("Running away!");
+                    //transform.position += MoveBackward * BossMoveSpeed * Time.deltaTime;
+                }
+                else if (m_Distance > ChaseDistance && m_Distance < StayDistance)
+                {
+                    chase();
+                    //transform.position = Vector3.Lerp(transform.position, players[i].transform.position, BossChaseSpeed);
+                    //transform.position += MoveToward * BossMoveSpeed * Time.deltaTime;
+                }
+                else if (m_Distance >= StayDistance)
+                {
+                    returnToOrigin();
+                    //transform.position = Vector3.Lerp(transform.position, StartPos, BossRunAwaySpeed);
+                }
+            }
+            else
+            {
+                agent.Stop();
+            }
+        }
         //BossAttackMode3();
     }
 
     void Attacking()
     {
-        //bool StartAttack = (m_LastAttackTime + CountDownBeforeAttack) < Time.time;
         bool CoolDown = (m_LastAttackTime + AttackCoolDown) < Time.time;
         bool Attack = (m_LastAttackTime2 + AttackTime) < Time.time;
-        //if(StartAttack )//&& distance)
-        //{
-        // if (CanAttack && CoolDown)
-        //{
-        //if (CoolDown)
-        //{
-        if (bossmovement.m_Distance <= bossmovement.RunAwayDistance)
+        if (m_Distance <= RunAwayDistance)
         {
-            //bool Shoot = (m_LastShotTime + BossShootCounter) < Time.time;
-            //bool StopShooting = (m_LastShotTime + BossShootInterval) < Time.time;
             if (CoolDown)
             {
                 BossAttackMode2();
             }
 
         }
-        else if (bossmovement.m_Distance > bossmovement.RunAwayDistance && bossmovement.m_Distance <= bossmovement.AttackDistance/*&& bossmovement.m_Distance < bossmovement.StayDistance*/)
+        else if (m_Distance > RunAwayDistance && m_Distance <= AttackDistance/*&& m_Distance < StayDistance*/)
         {
             if (CoolDown)
             {
@@ -208,7 +242,7 @@ public class BossAi : MonoBehaviour
 
     void BossIdle()
     {
-        //transform.position = Vector3.Lerp(transform.position, bossmovement.StartPos, bossmovement.BossRunAwaySpeed);
+        //transform.position = Vector3.Lerp(transform.position, StartPos, BossRunAwaySpeed);
     }
 
     void BossAttackMode1() // spawn chasing enemy in random location

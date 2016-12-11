@@ -72,13 +72,12 @@ GameObject:
   - 136: {fileID: 13616852}
   - 23: {fileID: 2306246}
   - 195: {fileID: 19513022}
-  - 114: {fileID: 11479848}
-  - 54: {fileID: 5422912}
   - 114: {fileID: 11464212}
-  - 114: {fileID: 11485530}
+  - 114: {fileID: 11496414}
+  - 114: {fileID: 11453324}
   m_Layer: 0
   m_Name: Boss
-  m_TagString: Enemy
+  m_TagString: MeleeEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -216,7 +215,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 153100}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: -0.00000016292068}
-  m_LocalPosition: {x: 0, y: 1, z: 3.55}
+  m_LocalPosition: {x: 0, y: 1, z: 49.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 482560}
@@ -356,21 +355,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 153100}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!54 &5422912
-Rigidbody:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 153100}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!65 &6544076
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -383,6 +367,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &11453324
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 153100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb8e4916041e2ac4788b9ecc56227d34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EnemyHealth: 100
+  m_Drop: {fileID: 0}
+  isInvincible: 0
 --- !u!114 &11464212
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -394,6 +392,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6ab906bd3d718d4099ec4a3e89caf59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  agent: {fileID: 0}
+  m_RotationSpeed: 2
+  m_Rtts: 0
+  RunAwayDistance: 5
+  ChaseDistance: 10
+  StayDistance: 15
+  AttackDistance: 20
+  KnockBackDis: 40
+  BossRunAwaySpeed: 0.01
   GodRadius: 3
   enemyPrefab: {fileID: 116792, guid: fd8eff308a4a0424798e4f65ac7fe3ab, type: 2}
   trapPrefab: {fileID: 187356, guid: 0b721afdc3e777e40b9f45a5fd947bba, type: 2}
@@ -426,9 +434,10 @@ MonoBehaviour:
   BossShootCounter: 4
   BossShootInterval: 3
   m_Bullet: 0
-  Mode3TrapSpawnTime: 2
+  BossActivatedRange: 30
+  Mode3TrapSpawnTime: 1
   Mode3Range: 10
---- !u!114 &11479848
+--- !u!114 &11496414
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -436,34 +445,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 153100}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fe10f3a9b1fc73469935b46d1f7b400, type: 3}
+  m_Script: {fileID: 11500000, guid: 7622a3c83a8464048b3885781866b808, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EnemyHealth: 250
-  m_PartyBarAmount: 2
-  coin: {fileID: 0}
---- !u!114 &11485530
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 153100}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90c021e464d5dac4caad6d632e8b299e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  StartPosX: 0
-  StartPosY: 1
-  StartPosZ: 3
-  RunAwayDistance: 5
-  ChaseDistance: 10
-  StayDistance: 15
-  AttackDistance: 20
-  m_Distance: 0
-  BossRunAwaySpeed: 0.01
-  BossChaseSpeed: 0.001
-  StartPos: {x: 0, y: 0, z: 0}
+  isStun: 0
+  isKB: 0
 --- !u!136 &13616852
 CapsuleCollider:
   m_ObjectHideFlags: 1

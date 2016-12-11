@@ -10,9 +10,6 @@ public class SpawnEnemy : EnemyAI // Inherits from EnemyAI now instead of Monobe
     public bool infiniteSpawn;
     public int infiniteSpawnInMapNum = 5;
     public int infiniteSpawnCurrentNum;
-    //GameObject target;
-    //NavMeshAgent agent;
-    //GameObject[] players;
     float x;
     float y;
     float z;
@@ -26,7 +23,6 @@ public class SpawnEnemy : EnemyAI // Inherits from EnemyAI now instead of Monobe
     public float spawnTime = 5.0f;
     public float activedRange = 10f;
     // run away
-    //public float m_Distance;
     Vector3 MoveDirection;
     Vector3 RunAwayDirection;
     public float RunAwayRange = 5f;
@@ -38,10 +34,7 @@ public class SpawnEnemy : EnemyAI // Inherits from EnemyAI now instead of Monobe
     void Start()
     {
         initializeVariables();
-        //players = GameManager.m_Instance.m_Players;
         timer = spawnTime;
-        //agent = gameObject.GetComponent<NavMeshAgent>();
-        //enemyAi = gameObject.GetComponent<EnemyAI>();
         enemyEffect = gameObject.GetComponent<EnemyEffect>();
     }
 
@@ -108,8 +101,6 @@ public class SpawnEnemy : EnemyAI // Inherits from EnemyAI now instead of Monobe
             }
         }
     }
-
-
     public Vector3 GetRandomLocationForEnemy()
     {
         x = Random.Range(transform.position.x - SpawnRange, transform.position.x + SpawnRange);
@@ -128,7 +119,6 @@ public class SpawnEnemy : EnemyAI // Inherits from EnemyAI now instead of Monobe
         RandomLocation = new Vector3(x, y, z);
         return RandomLocation;
     }
-
     GameObject EnemySpawner()
     {
         GameObject enemy = (GameObject)Instantiate(enemyPrefab, GetRandomLocationForEnemy(), transform.rotation);
