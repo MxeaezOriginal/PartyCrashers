@@ -75,6 +75,11 @@ public class PlayerController : MonoBehaviour
 
             m_MoveDir = new Vector3(Input.GetAxis(m_HorizontalButton + GetComponent<Player>().getControllerAsString()), 0, Input.GetAxis(m_VerticalButton + GetComponent<Player>().getControllerAsString()));
 
+            //COOPER MADE THIS CODE FOR ANIM CONTROLLER
+            //gameObject.GetComponent<Animator>().SetFloat("Horizontal", Input.GetAxis(m_HorizontalButton + GetComponent<Player>().getControllerAsString()));
+            //gameObject.GetComponent<Animator>().SetFloat("Vertical", Input.GetAxis(m_VerticalButton + GetComponent<Player>().getControllerAsString()));
+            //DONE
+
             /*
             if (m_StopMovementX == false && m_StopMovementZ == false)
             {
