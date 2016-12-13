@@ -11,7 +11,7 @@ public class EnemyAI : MonoBehaviour
     public float m_RotationSpeed = 2f;
     [HideInInspector]
     public float m_Rtts;
-    private Rigidbody m_RigidBody;
+    public Rigidbody m_RigidBody;
 
     void Start()
     {
@@ -44,6 +44,15 @@ public class EnemyAI : MonoBehaviour
 
     public void Knockback(Vector3 position, float KB)
     {
+        disableAgent();
+
+        m_RigidBody.velocity = position * KB;
+
+        reActivateAgent(1 / KB);
+    }
+
+    public void disableAgent()
+    {
         agent.enabled = false;
         if (gameObject.GetComponent<Rigidbody>() == null)
         {
@@ -51,13 +60,15 @@ public class EnemyAI : MonoBehaviour
         }
         m_RigidBody = gameObject.GetComponent<Rigidbody>();
         m_RigidBody.freezeRotation = true;
-        m_RigidBody.velocity = position * KB;
-
-        StopCoroutine("reActivateAgent");
-        StartCoroutine(reActivateAgent(1/KB));
     }
 
-    IEnumerator reActivateAgent(float time)
+    public void reActivateAgent(float time)
+    {
+        StopCoroutine("reActivateAgentCoroutine");
+        StartCoroutine(reActivateAgentCoroutine(time));
+    }
+
+    IEnumerator reActivateAgentCoroutine(float time)
     {
         yield return new WaitForSeconds(time);
         Destroy(m_RigidBody);
