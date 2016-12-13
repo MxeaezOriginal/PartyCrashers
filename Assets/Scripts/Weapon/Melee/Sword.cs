@@ -3,71 +3,83 @@ using System.Collections;
 
 public class Sword : Melee
 {
-    [Header("Sword Setting")]
-    public int dashDistance = 25;
-
-    public float dashDelay = 0.1f;
-
-    public float smooth = 20f;
-
-    public bool attack = false;
-
-    public float triggerLife = 0.5f;
-
-    
+    [Header("Sword Setting")][SerializeField]
+    private int dashDistance = 25;
+    [SerializeField]
+    private float dashDelay = 0.1f;
+    [SerializeField]
+    private float smooth = 20f;
+    [SerializeField]
+    private float triggerLife = 0.5f;
+    [SerializeField]
+    private bool attack = false;
 
     public GameObject effect;
-
-    //PlayerController m_PlayerController   ;
+    
     CharacterController m_CharacterController;
 
-    // Use this for initialization
     void Start()
     {
-        //m_PlayerController = GetComponentInParent<PlayerController>();
         m_CharacterController = GetComponentInParent<CharacterController>();
 
         swordTrigger.SetActive(false);
-
     }
 
-    // Update is called once per frame
     void Update()
     {
+        if (attack == true)
+        {
+            triggerLife -= Time.deltaTime;
 
+            swordTrigger.SetActive(true);
 
-       
-            if (attack == true)
+            if (effect)
             {
-                triggerLife -= Time.deltaTime;
+                GameObject swordEffect;
+                swordEffect = (GameObject)Instantiate(effect, transform.position, transform.rotation);
 
+                Destroy(swordEffect, 5);
             }
-            if (triggerLife <= 0)
-            {
-                //Debug.Log("time left = 0");
-                attack = false;
-                triggerLife = 0.5f;
-
-            }
-            if (attack == true)
-            {
-                swordTrigger.SetActive(true);
-
-			if (effect) {
-				GameObject swordEffect;
-				swordEffect = (GameObject)Instantiate (effect, transform.position, transform.rotation);
-				//swordEffect.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-
-				Destroy (swordEffect, 5);
-			}
         }
-            if (attack == false)
-            {
-                swordTrigger.SetActive(false);
-            }
 
-            //m_CoolDown = Time.time;
-        
+        if (triggerLife <= 0)
+        {
+            attack = false;
+            swordTrigger.SetActive(false);
+            triggerLife = 0.5f;
+        }
+
+        #region Erase if no bugs
+        //  if (attack == true)
+        //  {
+        //      triggerLife -= Time.deltaTime;
+        //  }
+
+        //  if (triggerLife <= 0)
+        //  {
+        //      attack = false;
+        //      triggerLife = 0.5f;
+
+        //  }
+
+        //  if (attack == true)
+        //  {
+        //      swordTrigger.SetActive(true);
+
+        //if (effect)
+        //      {
+        //	GameObject swordEffect;
+        //	swordEffect = (GameObject)Instantiate (effect, transform.position, transform.rotation);
+
+        //	Destroy (swordEffect, 5);
+        //}
+        //  }
+
+        //  if (attack == false)
+        //  {
+        //      swordTrigger.SetActive(false);
+        //  }        
+        #endregion        
     }
 
     override public void primaryAttack()
@@ -83,25 +95,17 @@ public class Sword : Melee
     {
         if (m_SecondaryCoolDown <= Time.time - m_Weapon1Cooldown || m_SecondaryCoolDown == 0)
         {
-
             attack = true;
             m_CharacterController.Move(m_CharacterController.transform.forward * Time.deltaTime * 50f);
 
             StartCoroutine(dash());
-
         }
-
-
     }
-
-  
 
     IEnumerator dash()
     {
         yield return new WaitForSeconds(dashDelay);
 
-        m_SecondaryCoolDown = Time.time;
-
-        //m_CharacterController.Move(m_CharacterController.transform.forward * Time.deltaTime * 10f);
+        m_SecondaryCoolDown = Time.time;        
     }
 }

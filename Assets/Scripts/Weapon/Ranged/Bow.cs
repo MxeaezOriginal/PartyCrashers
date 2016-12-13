@@ -113,7 +113,7 @@ public class Bow : Ranged
             m_lineRenderer.enabled = true;
                       
             Ray ray = new Ray(transform.position, transform.forward);
-            RaycastHit hit;
+            
 
             m_lineRenderer.SetPosition(1, ray.GetPoint(m_LaserLenght));
             m_lineRenderer.SetPosition(0, ray.origin);
