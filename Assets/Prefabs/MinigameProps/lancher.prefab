@@ -29,7 +29,7 @@ GameObject:
   - 33: {fileID: 3388488}
   - 65: {fileID: 6554412}
   - 23: {fileID: 2347226}
-  - 114: {fileID: 11474682}
+  - 114: {fileID: 11434764}
   m_Layer: 0
   m_Name: lancher
   m_TagString: Untagged
@@ -59,7 +59,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 168606}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.96, y: 0.88, z: 11.99}
+  m_LocalPosition: {x: -11.49, y: 0.88, z: 11.99}
   m_LocalScale: {x: 1.8335388, y: 1.8335395, z: 1.8335395}
   m_Children:
   - {fileID: 486930}
@@ -168,7 +168,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &11474682
+--- !u!114 &11434764
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -176,14 +176,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 168606}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f3ed0dc3a278dd4c8f7d27441b8e361, type: 3}
+  m_Script: {fileID: 11500000, guid: e457777f8574df04a91d81b567d2bd3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FirePoint_Location: {fileID: 438366}
-  minFireRate: 2
-  maxFireRate: 7
-  fireSpeed: 240
-  ProjectilePrefab: {fileID: 174718, guid: fd5deb7189de4624b8e007788b9d9e19, type: 2}
+  FireInterval: 3
+  PlantPrefeb: {fileID: 109000, guid: 631007479e2af494097bbd1e6a0eda87, type: 2}
+  ShotPos: {fileID: 438366}
 --- !u!136 &13691234
 CapsuleCollider:
   m_ObjectHideFlags: 1
