@@ -30,16 +30,17 @@ public class LightTrigger : MonoBehaviour {
                 lt[I].GetComponent<Light>().enabled = true;
                 I++;
             }
+            lightOn = true;
         }
        
-        lightOn = true;
+       
     }
 
-     void OnTriggerExite(Collider other)
+     void OnTriggerExit(Collider other)
     {
          if(turnoffonleave == true)
          {
-             if (lightOn == false && other.gameObject.tag == "Player")
+             if (lightOn == true && other.gameObject.tag == "Player")
              {
                  I = 0;
                  while (lt.Length >= (I + 1))
@@ -47,9 +48,10 @@ public class LightTrigger : MonoBehaviour {
                      lt[I].GetComponent<Light>().enabled = false;
                      I++;
                  }
+                 lightOn = false;
              }
-
-             lightOn = true;
+             
+             
              }
     }
         
