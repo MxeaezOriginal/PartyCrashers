@@ -76,6 +76,7 @@ public class MinigameManager : MonoBehaviour
             {
                 fadingCanvas.alpha += Time.deltaTime / fadeTime;
             }
+            print("UPCOMING STUFF");    
         }
     }
 }
