@@ -21,12 +21,4 @@ public class TrapAnimation : MonoBehaviour {
             ani.enabled = true;
         }
     }
-
-    public void OnTriggerExit(Collider other)
-    {
-        if (other.tag == "Player")
-        {
-            ani.enabled = false;
-        }
-    }
 }
