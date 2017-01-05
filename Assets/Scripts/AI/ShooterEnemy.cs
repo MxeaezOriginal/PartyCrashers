@@ -34,8 +34,9 @@ public class ShooterEnemy : EnemyAI //Inherits from EnemyAI instead of Monobehav
     void Update()
     {
         getClosestPlayer();
-
+        
         look(target.transform);
+
         MoveDir = transform.position - target.transform.position;
         Flee = transform.position + MoveDir;
         if (!enemyEffect.isStun)
