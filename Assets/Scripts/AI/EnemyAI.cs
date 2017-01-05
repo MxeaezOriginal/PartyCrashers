@@ -34,6 +34,14 @@ public class EnemyAI : MonoBehaviour
         agent.Resume();
     }
 
+    //public void aim(Transform other)
+    //{
+    //    if (target != null)
+    //    {
+    //        transform.LookAt(other);
+    //    }
+    //}
+
     public void look(Transform other)
     {
         Vector3 lookPosition = other.position - transform.position;
