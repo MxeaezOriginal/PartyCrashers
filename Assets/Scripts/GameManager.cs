@@ -134,9 +134,11 @@ public class GameManager : MonoBehaviour
             {
                 case Player.PLAYER.P1:
                     stats.anim = GameObject.Find(m_Instance.m_GameState.ToString() + "_HUD_Canvas/P1_Panel/Stats").GetComponent<Animator>();
+                    print("Found P1 Stats");
                     break;
                 case Player.PLAYER.P2:
                     stats.anim = GameObject.Find(m_Instance.m_GameState.ToString() + "_HUD_Canvas/P2_Panel/Stats").GetComponent<Animator>();
+                    print("Found P2 Stats");
                     break;
                 case Player.PLAYER.P3:
                     stats.anim = GameObject.Find(m_Instance.m_GameState.ToString() + "_HUD_Canvas/P3_Panel/Stats").GetComponent<Animator>();
@@ -168,13 +170,13 @@ public class GameManager : MonoBehaviour
                         hearts.heartImages[6] = GameObject.Find(m_Instance.m_GameState.ToString() + "_HUD_Canvas/P1_Panel/HP bar/Heart 7").GetComponent<Image>();
                         break;
                     case Player.PLAYER.P2:
-                        hearts.heartImages[0] = GameObject.Find(m_Instance.m_GameState.ToString() + "_Canvas/P2_Panel/HP bar/Heart 1").GetComponent<Image>();
-                        hearts.heartImages[1] = GameObject.Find(m_Instance.m_GameState.ToString() + "_Canvas/P2_Panel/HP bar/Heart 2").GetComponent<Image>();
-                        hearts.heartImages[2] = GameObject.Find(m_Instance.m_GameState.ToString() + "_Canvas/P2_Panel/HP bar/Heart 3").GetComponent<Image>();
-                        hearts.heartImages[3] = GameObject.Find(m_Instance.m_GameState.ToString() + "_Canvas/P2_Panel/HP bar/Heart 4").GetComponent<Image>();
-                        hearts.heartImages[4] = GameObject.Find(m_Instance.m_GameState.ToString() + "_Canvas/P2_Panel/HP bar/Heart 5").GetComponent<Image>();
-                        hearts.heartImages[5] = GameObject.Find(m_Instance.m_GameState.ToString() + "_Canvas/P2_Panel/HP bar/Heart 6").GetComponent<Image>();
-                        hearts.heartImages[6] = GameObject.Find(m_Instance.m_GameState.ToString() + "_Canvas/P2_Panel/HP bar/Heart 7").GetComponent<Image>();
+                        hearts.heartImages[0] = GameObject.Find(m_Instance.m_GameState.ToString() + "_HUD_Canvas/P2_Panel/HP bar/Heart 1").GetComponent<Image>();
+                        hearts.heartImages[1] = GameObject.Find(m_Instance.m_GameState.ToString() + "_HUD_Canvas/P2_Panel/HP bar/Heart 2").GetComponent<Image>();
+                        hearts.heartImages[2] = GameObject.Find(m_Instance.m_GameState.ToString() + "_HUD_Canvas/P2_Panel/HP bar/Heart 3").GetComponent<Image>();
+                        hearts.heartImages[3] = GameObject.Find(m_Instance.m_GameState.ToString() + "_HUD_Canvas/P2_Panel/HP bar/Heart 4").GetComponent<Image>();
+                        hearts.heartImages[4] = GameObject.Find(m_Instance.m_GameState.ToString() + "_HUD_Canvas/P2_Panel/HP bar/Heart 5").GetComponent<Image>();
+                        hearts.heartImages[5] = GameObject.Find(m_Instance.m_GameState.ToString() + "_HUD_Canvas/P2_Panel/HP bar/Heart 6").GetComponent<Image>();
+                        hearts.heartImages[6] = GameObject.Find(m_Instance.m_GameState.ToString() + "_HUD_Canvas/P2_Panel/HP bar/Heart 7").GetComponent<Image>();
                         break;
                     case Player.PLAYER.P3:
                         hearts.heartImages[0] = GameObject.Find(m_Instance.m_GameState.ToString() + "_HUD_Canvas/P3_Panel/HP bar/Heart 1").GetComponent<Image>();
