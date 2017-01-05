@@ -33,12 +33,10 @@ public class EnemyEffect : MonoBehaviour
             gameObject.GetComponent<EnemyHealth>().isInvincible = true;
             enemyAi.agent.Stop();
             isStun = (m_LastStunTime + m_StunTime) > Time.time;
-            Debug.Log("Stun!");
         }
         if (isStun == false)
         {
             gameObject.GetComponent<EnemyHealth>().isInvincible = false;
-            Debug.Log("Not Stun!");
         }
     }
 

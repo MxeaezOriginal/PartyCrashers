@@ -5,7 +5,9 @@ public class Lancher : MonoBehaviour
 {
     public float FireIntervalMin = 1f;
     public float FireIntervalMax = 20f;
-    public GameObject PlantPrefeb;
+    public GameObject VasePrefeb;
+    public GameObject VasePrefeb1;
+    public GameObject VasePrefeb2;
     public Transform ShotPos;
     private float LastShotTime;
     // Use this for initialization
@@ -21,19 +23,19 @@ public class Lancher : MonoBehaviour
         // Shoot!
         if (canShoot)
         {
-            if (PlantPrefeb != null)
+            if (VasePrefeb != null)
             {
                 if (ShotPos != null)
                 {
-                    GameObject shot = Instantiate(PlantPrefeb, ShotPos.position, ShotPos.rotation) as GameObject;
+                    GameObject shot = Instantiate(VasePrefeb, ShotPos.position, ShotPos.rotation) as GameObject;
                 }
-                else
-                {
-                    GameObject shot = GameObject.Instantiate<GameObject>(PlantPrefeb);
-                    shot.transform.position = transform.position;
-                    shot.transform.forward = transform.forward;
-                    shot.transform.up = transform.up;
-                }
+                //else
+                //{
+                //    GameObject shot = GameObject.Instantiate<GameObject>(VasePrefeb);
+                //    shot.transform.position = transform.position;
+                //    shot.transform.forward = transform.forward;
+                //    shot.transform.up = transform.up;
+                //}
                 LastShotTime = Time.time;
             }
         }

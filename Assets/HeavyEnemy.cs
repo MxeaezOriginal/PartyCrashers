@@ -61,7 +61,6 @@ public class HeavyEnemy : EnemyAI //Inherits from EnemyAI now instead of monobeh
                     if (hit.transform.GetComponent<Weapon>() != null || hit.transform.GetComponent<Player>() != null)
                     {
                         KB = KnockBackDis;
-                        //Debug.Log("I C U!");
                         return true;
                     }
                 }
@@ -76,7 +75,6 @@ public class HeavyEnemy : EnemyAI //Inherits from EnemyAI now instead of monobeh
             }
         }
         KB = 0f;
-        //Debug.Log("Where R U?");
         return false;
     }
 
@@ -93,7 +91,6 @@ public class HeavyEnemy : EnemyAI //Inherits from EnemyAI now instead of monobeh
                 //    if (hit.transform.GetComponent<Weapon>() != null || hit.transform.GetComponent<Player>() != null)
                 //    {
                 //        KB = KnockBackDis;
-                //        //Debug.Log("I C U!");
                 //        return true;
                 //    }
                 //}
@@ -108,7 +105,6 @@ public class HeavyEnemy : EnemyAI //Inherits from EnemyAI now instead of monobeh
             }
         }
         KB = 0f;
-        //Debug.Log("Where R U?");
         return false;
     }
 }

@@ -28,7 +28,7 @@ public class EnemyHealth : MonoBehaviour
 
     public void Damage(float health)
     {
-        Debug.Log("Damaged");
+        //Debug.Log("Damaged");
         if(isInvincible == true)
         {
         }

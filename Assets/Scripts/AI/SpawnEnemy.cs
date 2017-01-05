@@ -62,7 +62,6 @@ public class SpawnEnemy : EnemyAI // Inherits from EnemyAI now instead of Monobe
                 if (m_Distance <= RunAwayRange)
                 {
                     transform.position = Vector3.Lerp(transform.position, RunAwayDirection, RunSpeed);
-                    Debug.Log("Running away!");
                 }
             }
             else
