@@ -35,7 +35,7 @@ public class ShooterEnemy : EnemyAI //Inherits from EnemyAI instead of Monobehav
     {
         getClosestPlayer();
         
-        look(target.transform);
+        aim(target.transform);
 
         MoveDir = transform.position - target.transform.position;
         Flee = transform.position + MoveDir;

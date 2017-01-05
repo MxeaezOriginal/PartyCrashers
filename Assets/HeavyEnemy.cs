@@ -8,7 +8,8 @@ public class HeavyEnemy : EnemyAI //Inherits from EnemyAI now instead of monobeh
     public int m_PartyBarAmount = 2;
     public GameObject coin;
     
-    public float ViewRange = 120f;
+    public float ViewRange = 5f;
+    public float DetectRange = 100f;
     public float ViewDis = 10f;
 
     Vector3 rayDirection;
@@ -53,7 +54,7 @@ public class HeavyEnemy : EnemyAI //Inherits from EnemyAI now instead of monobeh
         {
             rayDirection = players[i].transform.position - transform.position;
             //Ray ray = gameObject.transform.forward;
-            if ((Vector3.Angle(rayDirection, transform.forward)) < ViewRange)
+            if ((Vector3.Angle(rayDirection, transform.forward)) < DetectRange)
             {
                 if (Physics.Raycast(transform.position, rayDirection, out hit, ViewDis))
                 {
