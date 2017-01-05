@@ -13,7 +13,7 @@ public class KickMeTrap : Trap {
 	void Start () {
 	}
 
-    public void OnTriggerEnter(Collider other)
+    public void OnTriggerStay(Collider other)
     {
         Debug.Log("RUNING");
         if (other.tag == "Player")
