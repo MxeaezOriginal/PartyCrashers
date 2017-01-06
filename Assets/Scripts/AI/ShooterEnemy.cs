@@ -34,8 +34,9 @@ public class ShooterEnemy : EnemyAI //Inherits from EnemyAI instead of Monobehav
     void Update()
     {
         getClosestPlayer();
+        
+        aim(target.transform);
 
-        look(target.transform);
         MoveDir = transform.position - target.transform.position;
         Flee = transform.position + MoveDir;
         if (!enemyEffect.isStun)
@@ -43,7 +44,6 @@ public class ShooterEnemy : EnemyAI //Inherits from EnemyAI instead of Monobehav
             if (m_Distance <= RunAwayDis)
             {
                 transform.position = Vector3.Lerp(transform.position, Flee, RunAwaySpeed);
-                Debug.Log("Running away!");
             }
             if (m_Distance > RunAwayDis && m_Distance < ChaseDis)
             {
@@ -53,17 +53,14 @@ public class ShooterEnemy : EnemyAI //Inherits from EnemyAI instead of Monobehav
                     Shoot();
                     timer = 0;
                 }
-                Debug.Log("Shooting!");
             }
             if (m_Distance >= ChaseDis && m_Distance <= ActivedDis)
             {
                 chase();
-                Debug.Log("Chasing!");
             }
             if (m_Distance > ActivedDis)
             {
                 returnToOrigin();
-                //Debug.Log("Stay!");
             }
         }
         else

@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Stats : MonoBehaviour
 {
+    public Player.PLAYER player;
+
 
     public Animator anim;
     int index;
@@ -10,6 +12,7 @@ public class Stats : MonoBehaviour
     //float openWindowTime;
     //float closedWindowTime;
     float toggleWindowTime;
+
 
     void Update()
     {

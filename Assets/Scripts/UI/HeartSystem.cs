@@ -33,7 +33,7 @@ public class HeartSystem : MonoBehaviour
 
     }
 
-    void CheckHealthAmount()//shuts down couple hearts ar Start()
+    void CheckHealthAmount()//shuts down couple hearts at Start()
     {
         if (GameManager.m_Instance.m_GameState == GameManager.GameState.Dungeon)
         {
@@ -46,6 +46,7 @@ public class HeartSystem : MonoBehaviour
                 else
                 {
                     heartImages[i].enabled = true;
+                    print("wtf" + gameObject.name);
                 }
             }
             UpdateHearts();
@@ -101,7 +102,7 @@ public class HeartSystem : MonoBehaviour
     {
         startHearts++;
         startHearts = Mathf.Clamp(startHearts, 0, maxHearts);
-
+        Heal(2);
         //Healing if adding a heart container
         //curHealth = startHearts * healthPerHeart;
         //maxHealth = maxHearts * healthPerHeart;
