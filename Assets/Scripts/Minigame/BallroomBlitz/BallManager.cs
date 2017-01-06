@@ -4,10 +4,9 @@ using System.Collections;
 public class BallManager : MonoBehaviour
 {
     public enum EBallType { Basic, Stun, Bomb };           // Types of balls: Basic(pink), Stun(yellow), and Bomb(black).
-    public float m_StunTime;
 
     private EBallType m_BallType;
-    private BallLaunchersManager m_BallLauncherManager;
+    private BallPoolManager m_BallPoolManager;
     private bool m_IsCoroutineExecuting;
 
     void Start()
@@ -21,23 +20,23 @@ public class BallManager : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        // Check if the collision happened to a player
-        if(other.tag == "Player")
-        {
-            //If it hits a player, we have to check the type of ball that we have
-            switch (m_BallType)
-            {
-                case EBallType.Basic:
-                    break;
-                case EBallType.Stun:
-                    StartCoroutine(ResolveStunCollision(other.gameObject));
-                    break;
-                case EBallType.Bomb:
-                    break;
-                default: Debug.Log("Ball type not set!");
-                    break;
-            }
-        }
+        //// Check if the collision happened to a player
+        //if(other.tag == "Player")
+        //{
+        //    //If it hits a player, we have to check the type of ball that we have
+        //    switch (m_BallType)
+        //    {
+        //        case EBallType.Basic:
+        //            break;
+        //        case EBallType.Stun:
+        //            StartCoroutine(ResolveStunCollision(other.gameObject));
+        //            break;
+        //        case EBallType.Bomb:
+        //            break;
+        //        default: Debug.Log("Ball type not set!");
+        //            break;
+        //    }
+        //}
     }
 
     // When ball leaves playing area (defined by a collision box set as trigger),
@@ -46,7 +45,7 @@ public class BallManager : MonoBehaviour
     {
         if (gameObject.activeInHierarchy && (other.tag == "Player" ||  other.tag == "PlayingVolume"))
         {
-            m_BallLauncherManager.PutBallBackIntoPool(gameObject);
+            m_BallPoolManager.PutBallBackIntoPool(gameObject);
         }
     }
 
@@ -58,15 +57,15 @@ public class BallManager : MonoBehaviour
 
     // Method used by the BallLauncherManager to set itself as the ball manager
     // It's necessary, since the BallLauncherManager controls the ball pool.
-    public void SetBallLauncherManager(BallLaunchersManager manager)
+    public void SetBallPoolManager(BallPoolManager manager)
     {
-        m_BallLauncherManager = manager;
+        m_BallPoolManager = manager;
     }
 
-    IEnumerator ResolveStunCollision(GameObject player)
-    {
-        player.GetComponent<PlayerController>().enabled = false;
-        yield return new WaitForSeconds(m_StunTime);
-        player.GetComponent<PlayerController>().enabled = true;
-    }
+    //IEnumerator ResolveStunCollision(GameObject player)
+    //{
+    //    player.GetComponent<PlayerController>().enabled = false;
+    //    yield return new WaitForSeconds(m_StunBallTimer);
+    //    player.GetComponent<PlayerController>().enabled = true;
+    //}
 }

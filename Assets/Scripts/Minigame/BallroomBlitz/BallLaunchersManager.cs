@@ -5,21 +5,20 @@ using System.Collections.Generic;
 public class BallLaunchersManager : MonoBehaviour
 {
     // public member variables
-    public GameObject           m_BallPrefab;           // Ball prefab.
+    public Transform[]          m_BallLaunchers;        // Array that contains all ball launchers.
+    public float                m_LaunchersTimer;       // Time interval between every launcher reset (randomly active or inactive).
     public float                m_FastBallSpeed;        // Basic & Stun balls speed.
     public float                m_SlowBallSpeed;        // Bomb ball speed.
-    public float                m_LaunchersTimer;       // Time interval between every launcher reset (randomly active or inactive).
     public float                m_BasicBallChance;      // Chance for the basic ball to spawn. Should be between 0.0f and 1.0f.
     public float                m_StunBallChance;       // Chance for the stun ball to spawn. Should be between 0.0f and 1.0f.
     public float                m_BombBallChance;       // Chance for the bomb ball to spawn. Should be between 0.0f and 1.0f.
-    public float                m_BombBallTimer;        // Timer to explode bomb ball.
+    public float                m_StunBallTimer;        // Stunned player time.
+    public float                m_BombBallTimer;        // Time to explode bomb ball.
     public Material             m_BasicBallMaterial;    // Material for the basic ball.
     public Material             m_StunBallMaterial;     // Material for the stun ball.
     public Material             m_BombBallMaterial;     // Material for the bomb ball.
-    public Transform[]          m_BallLaunchers;        // Array that contains all ball launchers.
-
+    
     // private member variables
-    private List<GameObject>    m_BallPool;             // Object pool for balls.
     private bool[]              m_ActivatedLaunchers;   // Array that holds information about the activation status of all launchers.
     private bool[]              m_FiredLaunchers;       // Array that controls if a launcher has been fired since last reset.
     private float               m_FireRange;            // Fire range for launchers.
@@ -27,22 +26,7 @@ public class BallLaunchersManager : MonoBehaviour
 
     void Start()
     {
-        SetBallPool();
-
-        // Set fire range
-        SetFireRange();
-
-        // Allocate memory for array based on the number of launchers
-        m_ActivatedLaunchers = new bool[m_BallLaunchers.Length];
-        m_FiredLaunchers = new bool[m_BallLaunchers.Length];
-
-        // At the beginning, set every launcher as inactive
-        for (int i = 0; i < m_ActivatedLaunchers.Length; ++i)
-        {
-            m_ActivatedLaunchers[i] = false;
-            m_FiredLaunchers[i] = false;
-        }
-
+        SetBallLaunchers();
         m_IsCoroutineExecuting = false;
     }
 
@@ -52,8 +36,9 @@ public class BallLaunchersManager : MonoBehaviour
         ShootBalls();
     }
 
-    void SetFireRange()
+    void SetBallLaunchers()
     {
+        // Set fire range
         float minX = 0.0f, maxX = 0.0f;
         float[] xValues = new float[m_BallLaunchers.Length];
 
@@ -66,8 +51,19 @@ public class BallLaunchersManager : MonoBehaviour
         maxX = Mathf.Max(xValues);
 
         m_FireRange = (maxX - minX) * 0.5f;
-    }
 
+        // Allocate memory for array based on the number of launchers
+        m_ActivatedLaunchers = new bool[m_BallLaunchers.Length];
+        m_FiredLaunchers = new bool[m_BallLaunchers.Length];
+
+        // At the beginning, set every launcher as inactive
+        for (int i = 0; i < m_ActivatedLaunchers.Length; ++i)
+        {
+            m_ActivatedLaunchers[i] = false;
+            m_FiredLaunchers[i] = false;
+        }
+    }
+    
     // Document method
     IEnumerator ResetBallLaunchers(float timer)
     {
@@ -96,6 +92,19 @@ public class BallLaunchersManager : MonoBehaviour
         }
 
         m_IsCoroutineExecuting = false;
+    }
+
+    Transform[] GetPlayersTransforms()
+    {
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        Transform[] playersTransforms = new Transform[players.Length];
+
+        for (int i = 0; i < players.Length; ++i)
+        {
+            playersTransforms[i] = players[i].transform;
+        }
+
+        return playersTransforms;
     }
 
     void ShootBalls()
@@ -147,53 +156,6 @@ public class BallLaunchersManager : MonoBehaviour
         }
     }
 
-    void SetBallPool()
-    {
-        // Create object pool for balls
-        m_BallPool = new List<GameObject>();
-
-        // Instantiate balls (twice the number of launchers) and put them inside the object pool
-        for (int i = 0; i < m_BallLaunchers.Length * 2; ++i)
-        {
-            GameObject ball = Instantiate<GameObject>(m_BallPrefab);
-            ball.SetActive(false);
-            ball.GetComponent<BallManager>().SetBallLauncherManager(this);
-            m_BallPool.Add(ball);
-        }
-    }
-
-    GameObject GetBallFromPool()
-    {
-        if(m_BallPool.Count > 0)
-        {
-            GameObject ball = m_BallPool[0];
-            m_BallPool.RemoveAt(0);
-            return ball;
-        }
-        return null;
-    }
-
-    public void PutBallBackIntoPool(GameObject ball)
-    {
-        m_BallPool.Add(ball);
-        ball.GetComponent<Rigidbody>().velocity = Vector3.zero;
-        ball.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
-        ball.SetActive(false);
-    }
-
-    Transform[] GetPlayersTransforms()
-    {
-        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-        Transform[] playersTransforms = new Transform[players.Length];
-
-        for (int i = 0; i < players.Length; ++i)
-        {
-            playersTransforms[i] = players[i].transform;
-        }
-
-        return playersTransforms;
-    }
-
     void Shoot(Vector3 playerPosition, int launcherID)
     {
         // Check if distance is closer than half the size of the room
@@ -201,18 +163,19 @@ public class BallLaunchersManager : MonoBehaviour
 
         if (distance <= m_FireRange)
         {
-            GameObject ball = GetBallFromPool();
-
-            if(ball == null)
-            {
-                Debug.LogAssertion("[BallroomBlitzManager.Shoot] - Ball pool is out of balls!");
-                return;
-            }
             // Set launcher as inactive
             m_ActivatedLaunchers[launcherID] = false;
 
             // Set launcher as fired.
             m_FiredLaunchers[launcherID] = true;
+
+            GameObject ball = GetComponent<BallPoolManager>().GetBallFromPool();
+
+            if (ball == null)
+            {
+                Debug.LogAssertion("[BallroomBlitzManager.Shoot] - Ball pool is out of balls!");
+                return;
+            }
 
             ball.SetActive(true);
             ball.transform.position = m_BallLaunchers[launcherID].position;
@@ -242,6 +205,7 @@ public class BallLaunchersManager : MonoBehaviour
                 ball.GetComponent<Rigidbody>().AddForce(ball.transform.forward * m_SlowBallSpeed);
                 ball.GetComponent<Renderer>().material = m_BombBallMaterial;
             }
+
 
         }
     }
