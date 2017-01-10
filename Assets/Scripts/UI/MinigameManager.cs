@@ -14,6 +14,8 @@ public class MinigameManager : MonoBehaviour
     Image startCountdownImage;
     public Sprite[] startCountdownTextures;
 
+    public Image P1_ResultBar;
+
     void Awake()
     {
         fadingCanvas = GameObject.Find("Fading Canvas").GetComponent<CanvasGroup>();
@@ -76,7 +78,16 @@ public class MinigameManager : MonoBehaviour
             {
                 fadingCanvas.alpha += Time.deltaTime / fadeTime;
             }
-            print("UPCOMING STUFF");    
+
+            StartCoroutine(Stuff());
         }
+    }
+
+    IEnumerator Stuff()
+    {
+
+        yield return new WaitForSeconds(2f);
+        print(P1_ResultBar.rectTransform.anchoredPosition);
+        P1_ResultBar.rectTransform.anchoredPosition = new Vector2(0, -186);
     }
 }
