@@ -3,6 +3,7 @@ using System.Collections;
 
 public class Vess : MonoBehaviour
 {
+    public float m_StunTime;
     public GameObject m_explosion;
     public GameObject m_BoomEffect;
 
@@ -17,7 +18,7 @@ public class Vess : MonoBehaviour
             Destroy(gameObject);
             Destroy(Boom, 4f);
             Player p = collision.gameObject.GetComponent<Player>();
-            p.stun(1);
+            p.stun(m_StunTime);
             //Debug.Log("Hit Player");
         }
         if (collision.gameObject.tag == "Wall")
