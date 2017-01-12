@@ -320,8 +320,6 @@ public class Player : MonoBehaviour
         }
         if (other.gameObject.CompareTag("MeleeEnemy"))
         {
-            m_Heart.TakeDamage(1);
-            m_Heart.UpdateHearts();
             rb.AddForce(transform.forward * 500);
         }
     }
@@ -330,16 +328,16 @@ public class Player : MonoBehaviour
     //{
     //    if (other.gameObject.CompareTag("MeleeEnemy"))
     //    {
-    //        //m_Heart.lastDamage += Time.deltaTime;
-    //        //if (m_Heart.lastDamage >= 2)
-    //        //{
-    //            KnockBackDirection = transform.position - other.transform.position;
-    //            KnockBack = transform.position + KnockBackDirection;
-    //            transform.position = Vector3.Lerp(transform.position, KnockBack, KnockBackSpeed);
-    //            //m_Heart.TakeDamage(1);
-    //            //m_Heart.UpdateHearts();
-    //            //m_Heart.lastDamage = 0;
-    //        //}
+    //        m_Heart.lastDamage += Time.deltaTime;
+    //        if (m_Heart.lastDamage >= 2)
+    //        {
+    //            //    KnockBackDirection = transform.position - other.transform.position;
+    //            //KnockBack = transform.position + KnockBackDirection;
+    //            //transform.position = Vector3.Lerp(transform.position, KnockBack, KnockBackSpeed);
+    //            m_Heart.TakeDamage(1);
+    //            m_Heart.UpdateHearts();
+    //            m_Heart.lastDamage = 0;
+    //        }
     //    }
     //}
 
@@ -355,12 +353,22 @@ public class Player : MonoBehaviour
                 dotdelay = 2.0f;
             }
         }
-        if (other.gameObject.CompareTag("MeleeEnemy"))
-        {
-            m_Heart.TakeDamage(1);
-            m_Heart.UpdateHearts();
-        }
+        //if (other.gameObject.CompareTag("MeleeEnemy"))
+        //{
+        //    damageDelay -= Time.deltaTime;
+        //    if (damageDelay <= 0)
+        //    {
+        //        m_Heart.TakeDamage(1);
+        //        m_Heart.UpdateHearts();
+        //        damageDelay = 2.0f;
+        //    }
+        //    m_Heart.TakeDamage(1);
+        //    m_Heart.UpdateHearts();
+        //    // Add timer
+
+        //}
     }
+   
 
     /*public void OnTriggerStay(Collider other)
     {
@@ -393,4 +401,5 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(s);
         GetComponent<PlayerController>().m_CantMove = false;
     }
+
 }

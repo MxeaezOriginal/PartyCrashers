@@ -19,7 +19,11 @@ public class HeavyEnemy : EnemyAI //Inherits from EnemyAI now instead of monobeh
     public float KB;
     public float m_LastMoveTime;
     public float RotationSpeed = 1f;
-    
+
+    public int m_Damage = 1;
+    private HeartSystem m_HeartSystem;
+    private bool m_CanDamage = true;
+
     EnemyEffect enemyEffect;
 
     void Start()
@@ -106,6 +110,39 @@ public class HeavyEnemy : EnemyAI //Inherits from EnemyAI now instead of monobeh
         }
         KB = 0f;
         return false;
+    }
+
+    public void OnTriggerStay(Collider other)
+    {
+        if (other.GetComponent<HeartSystem>() != null)
+        {
+            m_HeartSystem = other.GetComponent<HeartSystem>();
+            if (other.tag == "Player")
+            {
+                if (m_CanDamage)
+                {
+                    m_HeartSystem.TakeDamage(m_Damage);
+                    m_CanDamage = false;
+                    StartCoroutine(WaitForSec(2));
+                }
+
+                m_HeartSystem.UpdateHearts();
+            }
+        }
+    }
+
+    public void OnTriggerExit(Collider other)
+    {
+        if (other.GetComponent<HeartSystem>() != null)
+        {
+            m_CanDamage = true;
+        }
+    }
+
+    IEnumerator WaitForSec(float s)
+    {
+        yield return new WaitForSeconds(s);
+        m_CanDamage = true;
     }
 }
 
