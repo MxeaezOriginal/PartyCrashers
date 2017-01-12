@@ -3,53 +3,31 @@ using System.Collections;
 
 public class Vess : MonoBehaviour
 {
-
-    // Use this for initialization
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
+    public GameObject m_explosion;
+    
     void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Player")
         {
             Destroy(gameObject);
-            Debug.Log("Hit Player");
+            //Debug.Log("Hit Player");
         }
         if (collision.gameObject.tag == "Wall")
         {
             Destroy(gameObject);
-            Debug.Log("Hit Wall");
+            //Debug.Log("Hit Wall");
         }
-        //if (collision.gameObject.tag == "Physical")
-        //{
-        //    Destroy(gameObject);
-        //    Debug.Log("Hit Sword");
-        //}
-        //if (collision.gameObject.tag == "Projectile")
-        //{
-        //    Destroy(gameObject);
-        //    Debug.Log("Hit Projectile");
-        //}
-        //------------ Sword -----------------
-        //if (collision.gameObject.tag == "Sword")
-        //{
-        //    Destroy(gameObject);
-        //}
     }
     public void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.GetComponent<StateEffect>() != null)
         {
+            GameObject explosion;
+            explosion = (GameObject)Instantiate(m_explosion, gameObject.transform.position, gameObject.transform.rotation);
+            //StartCoroutine(Test());
             Destroy(gameObject);
-            Debug.Log("Hit Weapon");
+            Destroy(explosion, 4f);
+            //Debug.Log("Hit Weapon");
         }
     }
 }
