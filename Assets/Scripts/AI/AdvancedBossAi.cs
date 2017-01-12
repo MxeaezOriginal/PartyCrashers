@@ -1,8 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class AdvancedBossAi : MonoBehaviour {
+public class AdvancedBossAi : MonoBehaviour
+{
 
+    //Stats
+    public float m_MaxHealth;
+    private float m_Health;
+
+    //Frame
+    private int frame;
+
+    //States
     enum states
     {
         idle,
@@ -11,36 +20,102 @@ public class AdvancedBossAi : MonoBehaviour {
         dead,
         count
     }
-
-    private bool m_Invincible;
+    states currentState;
     states state;
+    //Taking damage
+    private bool m_Invincible;
+    private float m_DamageTaken;
+    private float m_KnockBackMagnitude;
+    private float m_StunTime;
 
-	// Use this for initialization
-	void Start () {
+    //Movement
+    private Rigidbody m_Body;
+    private Vector3 m_Velocity;
+
+
+    // Use this for initialization
+    void Start()
+    {
         state = states.idle;
+        currentState = state;
         m_Invincible = false;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	    //Switch states
-        switch (state){
-            case states.idle: Idle();break;
-        }
-	}
+        frame = 0;
+    }
 
+    // Update is called once per frame
+    void Update()
+    {
+        //Switch states
+        switch (state)
+        {
+            case states.idle: Idle(); break;
+            case states.hurt: Hurt(m_DamageTaken, m_StunTime); break;
+        }
+        frame++;
+
+        Move();
+    }
+
+    void LateUpdate()
+    {
+        if (state != currentState)
+        {
+            frame = 0;
+            currentState = state;
+        }
+    }
+    void Move()
+    {
+        m_Body.velocity = m_Velocity;
+    }
+
+    void Friction(float friction)
+    {
+        //Friction
+        if (m_Velocity.magnitude > 0)
+        {
+            m_Velocity.x -= friction * (m_Velocity.x / m_Velocity.magnitude);
+            m_Velocity.z -= friction * (m_Velocity.z / m_Velocity.magnitude);
+        }
+    }
+
+    #region states
     void Idle()
     {
+        Friction(1f);
+    }
+
+    void Hurt(float damageTaken, float stunTime)
+    {
+        m_Health -= damageTaken;
+
+        if (frame > stunTime)
+        {
+            state = states.idle;
+        }
 
     }
 
-    void Hurt()
+    public void OnTriggerEnter(Collider other)
     {
 
-    }
+        if (other.gameObject.GetComponent<Damage>() != null)
+        {
+            Debug.Log("Hurt");
+        }
+            Damage attacker = other.gameObject.GetComponent<Damage>();
+        StateEffect attackerEffect = other.gameObject.GetComponent<StateEffect>();
+        float dmg = attacker.m_Damage;
+        float knockBack = attackerEffect.m_KnockBack;
+        float stun = attackerEffect.m_StunTime;
 
-    void OnCollisionEnter(Collision col)
-    {
+        m_Velocity = knockBack * Vector3.Normalize(other.transform.position - transform.position);
+
+        state = states.hurt;
+
+        
 
     }
+    #endregion
+
 }
