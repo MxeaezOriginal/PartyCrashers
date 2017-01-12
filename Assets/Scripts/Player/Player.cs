@@ -176,10 +176,10 @@ public class Player : MonoBehaviour
         Debug.Log("Respawned");
     }
 
-    public void stun()
+    public void stun(float secs)
     {
         GetComponent<PlayerController>().m_CantMove = true;
-        StartCoroutine(StunForTwo());
+        StartCoroutine(StunForSec(secs));
     }
 
     public void damage(int damageAmount)
@@ -382,9 +382,9 @@ public class Player : MonoBehaviour
         //}
     }*/
 
-    IEnumerator StunForTwo()
+    IEnumerator StunForSec(float s)
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(s);
         GetComponent<PlayerController>().m_CantMove = false;
     }
 }

@@ -17,7 +17,7 @@ public class Vess : MonoBehaviour
             Destroy(gameObject);
             Destroy(Boom, 4f);
             Player p = collision.gameObject.GetComponent<Player>();
-            p.stun();
+            p.stun(1);
             //Debug.Log("Hit Player");
         }
         if (collision.gameObject.tag == "Wall")

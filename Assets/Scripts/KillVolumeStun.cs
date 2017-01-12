@@ -9,7 +9,7 @@ public class KillVolumeStun : MonoBehaviour {
         {
             Player p = other.gameObject.GetComponent<Player>();
             p.respawn();
-            p.stun();
+            p.stun(2);
         }
     }
 }
