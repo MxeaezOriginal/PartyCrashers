@@ -320,6 +320,8 @@ public class Player : MonoBehaviour
         }
         if (other.gameObject.CompareTag("MeleeEnemy"))
         {
+            m_Heart.TakeDamage(1);
+            m_Heart.UpdateHearts();
             rb.AddForce(transform.forward * 500);
         }
     }
@@ -352,7 +354,11 @@ public class Player : MonoBehaviour
                 m_Heart.UpdateHearts();
                 dotdelay = 2.0f;
             }
-
+        }
+        if (other.gameObject.CompareTag("MeleeEnemy"))
+        {
+            m_Heart.TakeDamage(1);
+            m_Heart.UpdateHearts();
         }
     }
 
