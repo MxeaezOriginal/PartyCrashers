@@ -11,6 +11,7 @@ GameObject:
   - 33: {fileID: 3344742}
   - 23: {fileID: 2346838}
   - 114: {fileID: 11429636}
+  - 65: {fileID: 6505860}
   m_Layer: 0
   m_Name: Pf_Kick_Me_Trap
   m_TagString: Untagged
@@ -64,6 +65,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 150366}
   m_Mesh: {fileID: 4300000, guid: 104d9f0364dc5e8438f4350ff7e726dd, type: 3}
+--- !u!65 &6505860
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 150366}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4.360306, y: 0.05721288, z: 3.9852185}
+  m_Center: {x: -0.094661474, y: 0.02860644, z: 0}
 --- !u!114 &11429636
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -80,6 +93,8 @@ MonoBehaviour:
   m_Radius: 20
   chaseIncrease: 3
   m_ChasingTime: 5
+  m_used: 0
+  m_effect: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

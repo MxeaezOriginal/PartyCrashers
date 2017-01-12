@@ -7,6 +7,7 @@ public class DotTrap : MonoBehaviour {
     public float m_CoolDown = 0;
     float m_Timer = 0;
     private HeartSystem m_HeartSystem;
+    public GameObject m_effect;
     // Use this for initialization
     void Start () {
 	
@@ -17,10 +18,26 @@ public class DotTrap : MonoBehaviour {
 	
 	}
 
+    //public void OnTriggerEnter(Collider other)
+    //{
+    //    if(other.tag == "Player")
+    //    {
+    //        GameObject effect;
+    //        effect = (GameObject)Instantiate(m_effect, gameObject.transform.position, gameObject.transform.rotation);
+    //        Destroy(effect, 3f);
+    //    }
+    //}
+
     public void OnTriggerStay(Collider other)
     {
         if(other.GetComponent<HeartSystem>() != null)
         {
+            if (m_effect != null)
+            {
+                GameObject effect;
+                effect = (GameObject)Instantiate(m_effect, gameObject.transform.position, gameObject.transform.rotation);
+                Destroy(effect, 3f);
+            }
             m_HeartSystem = other.GetComponent<HeartSystem>();
             if (other.tag == "Player")
             {
