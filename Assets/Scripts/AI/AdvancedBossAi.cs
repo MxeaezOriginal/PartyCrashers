@@ -16,9 +16,11 @@ public class AdvancedBossAi : MonoBehaviour
     enum states
     {
         idle,
-        rocket,
         hurt,
         dead,
+        //Attacks
+        rocket,
+        shoot,
         count
     }
     states currentState;
@@ -137,28 +139,39 @@ public class AdvancedBossAi : MonoBehaviour
     }
     void BasicShoot()
     {
+        GameObject player = targetPlayer();
+        Transform pPosition = player.transform;
+        //Vector3 pVelocity = player.GetComponent<PlayerController>();
 
     }
 
     #endregion
 
-    public GameObject getClosestPlayer()
+    GameObject targetPlayer()
+    {
+        GameObject target;
+
+        target = getClosestPlayer();
+
+        return target;
+    } //This is where the decision making for the target player will happen
+    GameObject getClosestPlayer()
     {
 
-        float m_Distance = 0f;
+        float distance = 0f;
         GameObject target = null;
         for (int i = 0; i < players.Length; i++)
         {
             if (i == 0)
             {
-                m_Distance = Vector3.Distance(players[i].transform.position, transform.position);
+                distance = Vector3.Distance(players[i].transform.position, transform.position);
                 target = players[i];
             }
             else
             {
-                if (Vector3.Distance(players[i].transform.position, transform.position) < m_Distance)
+                if (Vector3.Distance(players[i].transform.position, transform.position) < distance)
                 {
-                    m_Distance = Vector3.Distance(players[i].transform.position, transform.position);
+                    distance = Vector3.Distance(players[i].transform.position, transform.position);
                     target = players[i];
                 }
             }
