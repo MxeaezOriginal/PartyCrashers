@@ -4,12 +4,18 @@ using System.Collections;
 public class Vess : MonoBehaviour
 {
     public GameObject m_explosion;
-    
+    public GameObject m_BoomEffect;
+
     void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Player")
         {
             Destroy(gameObject);
+            GameObject Boom;
+            Boom = (GameObject)Instantiate(m_BoomEffect, gameObject.transform.position, gameObject.transform.rotation);
+            //StartCoroutine(Test());
+            Destroy(gameObject);
+            Destroy(Boom, 4f);
             //Debug.Log("Hit Player");
         }
         if (collision.gameObject.tag == "Wall")
