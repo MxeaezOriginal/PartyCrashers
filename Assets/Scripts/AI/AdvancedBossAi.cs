@@ -40,6 +40,9 @@ public class AdvancedBossAi : MonoBehaviour
         currentState = state;
         m_Invincible = false;
         frame = 0;
+        m_Health = m_MaxHealth;
+
+        m_Body = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -82,14 +85,14 @@ public class AdvancedBossAi : MonoBehaviour
     #region states
     void Idle()
     {
-        Friction(1f);
+        //Friction(1f);
     }
 
     void Hurt(float damageTaken, float stunTime)
     {
         m_Health -= damageTaken;
 
-        if (frame > stunTime)
+        if (frame/60 > stunTime)
         {
             state = states.idle;
         }
@@ -101,19 +104,16 @@ public class AdvancedBossAi : MonoBehaviour
 
         if (other.gameObject.GetComponent<Damage>() != null)
         {
-            Debug.Log("Hurt");
-        }
             Damage attacker = other.gameObject.GetComponent<Damage>();
-        StateEffect attackerEffect = other.gameObject.GetComponent<StateEffect>();
-        float dmg = attacker.m_Damage;
-        float knockBack = attackerEffect.m_KnockBack;
-        float stun = attackerEffect.m_StunTime;
+            StateEffect attackerEffect = other.gameObject.GetComponent<StateEffect>();
+            float dmg = attacker.m_Damage;
+            float knockBack = attackerEffect.m_KnockBack;
+            float stun = attackerEffect.m_StunTime;
 
-        m_Velocity = knockBack * Vector3.Normalize(other.transform.position - transform.position);
+            m_Velocity = knockBack * Vector3.Normalize(transform.position - other.transform.position);
 
-        state = states.hurt;
-
-        
+            state = states.hurt;
+        }
 
     }
     #endregion
