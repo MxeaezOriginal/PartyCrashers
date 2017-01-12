@@ -176,6 +176,12 @@ public class Player : MonoBehaviour
         Debug.Log("Respawned");
     }
 
+    public void stun()
+    {
+        GetComponent<PlayerController>().m_CantMove = true;
+        StartCoroutine(StunForTwo());
+    }
+
     public void damage(int damageAmount)
     {
         m_Heart.TakeDamage(damageAmount);
@@ -375,4 +381,10 @@ public class Player : MonoBehaviour
         //    m_Score
         //}
     }*/
+
+    IEnumerator StunForTwo()
+    {
+        yield return new WaitForSeconds(2);
+        GetComponent<PlayerController>().m_CantMove = false;
+    }
 }
