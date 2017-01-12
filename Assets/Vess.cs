@@ -16,6 +16,8 @@ public class Vess : MonoBehaviour
             //StartCoroutine(Test());
             Destroy(gameObject);
             Destroy(Boom, 4f);
+            Player p = collision.gameObject.GetComponent<Player>();
+            p.stun();
             //Debug.Log("Hit Player");
         }
         if (collision.gameObject.tag == "Wall")
@@ -35,5 +37,6 @@ public class Vess : MonoBehaviour
             Destroy(explosion, 4f);
             //Debug.Log("Hit Weapon");
         }
+        
     }
 }
