@@ -43,13 +43,13 @@ public class AdvancedBossAi : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        state = states.idle;
+        state = states.shoot;
         currentState = state;
         m_Invincible = false;
         frame = 0;
-        m_Health = m_BaseMaxHealth;
-
         players = GameManager.m_Instance.m_Players;
+
+        m_Health = m_BaseMaxHealth * (players.Length*m_NumOfPlayersHealthMultiplier);
 
         m_Body = GetComponent<Rigidbody>();
     }
@@ -62,6 +62,9 @@ public class AdvancedBossAi : MonoBehaviour
         {
             case states.idle: Idle(); break;
             case states.hurt: Hurt(m_DamageTaken, m_StunTime); break;
+
+            //Attacks
+            case states.shoot: BasicShoot();break;
         }
         //Manage frame
         frame++;
@@ -115,7 +118,7 @@ public class AdvancedBossAi : MonoBehaviour
             float stun = attackerEffect.m_StunTime;
 
             m_Velocity = knockBack * Vector3.Normalize(transform.position - other.transform.position);
-
+            m_Health -= dmg;
             state = states.hurt;
         }
 
@@ -124,6 +127,12 @@ public class AdvancedBossAi : MonoBehaviour
     #region states
     void Idle()
     {
+        //Look at next player
+
+        GameObject closestPlayer = getClosestPlayer();
+
+        transform.LookAt(closestPlayer.transform.position);
+        //Friction
         Friction(m_Friction);
     }
 
@@ -137,13 +146,29 @@ public class AdvancedBossAi : MonoBehaviour
         }
 
     }
+    #region Attack states
     void BasicShoot()
     {
         GameObject player = targetPlayer();
-        Transform pPosition = player.transform;
-        //Vector3 pVelocity = player.GetComponent<PlayerController>();
+        Vector3 pPosition = player.transform.position;
+        float shootSpeed = 1f;
+        Vector3 bv = (pPosition - transform.position).normalized * shootSpeed;
+        float distance = Vector3.Magnitude(pPosition - transform.position);
+
+
+        PlayerController p = player.GetComponent<PlayerController>();
+        Vector3 pVelocity = new Vector3(p.m_Velocity.x, 0f, p.m_Velocity.z);
+
+        float impactTime = TimeOfImpact(pPosition.x, pPosition.z, pVelocity.x, pVelocity.z, shootSpeed);
+
+        Vector3 shootTarget = pPosition + (pVelocity)/bv.magnitude;
+
+        transform.LookAt(shootTarget);
+
+
 
     }
+    #endregion
 
     #endregion
 
@@ -179,4 +204,22 @@ public class AdvancedBossAi : MonoBehaviour
         return target;
     }
 
+    float TimeOfImpact(float px, float py, float vx, float vy, float s)
+    {
+        float a = s * s - (vx * vx + vy * vy);
+        float b = px * vx + py * vy;
+        float c = px * px + py * py;
+
+        float d = b * b + a * c;
+
+        float t = 0;
+        if (d >= 0)
+        {
+            t = (b + Mathf.Sqrt(d)) / a;
+            if (t < 0)
+                t = 0;
+        }
+
+        return t*Time.deltaTime;
+    }
 }
