@@ -4,12 +4,8 @@ using System;
 
 public class Bow : Ranged
 {
-
-
     [Tooltip("Maximum Charging Time.")]
     public float m_MaxCharge = 0f;
-    //[SerializeField][Tooltip("Maximum Shooting Speed.")]
-    //private float m_MaxSpeed = 0f;
     [SerializeField][Tooltip("Medium Shooting Speed.")]
     private float m_MedSpeed = 0f;
     [SerializeField][Tooltip("Minimum Shooting Speed.")]
@@ -28,18 +24,14 @@ public class Bow : Ranged
     private int m_LaserDmgMultiplier;
     [SerializeField]
     private float m_LaserTimer;
-    [SerializeField]
-    private float m_LaserLenght;
+    public float m_LaserLenght;
 
-    //Damage dmg;
     Player player;
-    LineRenderer m_lineRenderer;
+    GameObject laser;
 
     void Start()
     {
-        m_lineRenderer = GetComponent<LineRenderer>();
-        m_lineRenderer.enabled = false;
-        //dmg = GetComponent<Damage>();
+        laser = transform.FindChild("laser").gameObject;     
         player = GetComponentInParent<Player>();
     }
 
@@ -108,19 +100,13 @@ public class Bow : Ranged
             balloon.GetComponent<Rigidbody>().AddForce(balloon.transform.forward * m_MedSpeed * m_TimePressed);
         }
         else
-        {           
-            m_BulletDamage = m_Damage * m_LaserDmgMultiplier;            
-            m_lineRenderer.enabled = true;
-                      
-            Ray ray = new Ray(transform.position, transform.forward);
-            
+        {
 
-            m_lineRenderer.SetPosition(1, ray.GetPoint(m_LaserLenght));
-            m_lineRenderer.SetPosition(0, ray.origin);
-
+            assignDamage(laser, m_LaserDmgMultiplier);  // Need to figure out what is dealing the damage, add collider to line renderer???
+            laser.GetComponent<LineRenderer>().enabled = true;
             
             StopCoroutine("LaserTimer");
-            StartCoroutine("LaserTimer");      
+            StartCoroutine("LaserTimer");    
         }
         m_TimePressed = 0;
         m_CoolDown = Time.time;
@@ -130,7 +116,7 @@ public class Bow : Ranged
     {
         if(bullet.GetComponent<Damage>() != null)
         {
-            bullet.GetComponent<Damage>().m_Damage = this.m_Damage * multiplier;
+            bullet.GetComponent<Damage>().m_Damage = this.m_DamageOrHeal * multiplier;
         }
         else
         {
@@ -140,8 +126,8 @@ public class Bow : Ranged
 
     IEnumerator LaserTimer()
     {
-        yield return new WaitForSeconds(m_LaserTimer);       
-        m_lineRenderer.enabled = false;
+        yield return new WaitForSeconds(m_LaserTimer);
+        laser.GetComponent<LineRenderer>().enabled = false;
     }
     // https://unity3d.com/learn/tutorials/topics/graphics/fun-lasers
 }
