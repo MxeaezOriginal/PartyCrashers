@@ -32,9 +32,13 @@ public class PartyBarBoss : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+if (m_Bar)
+        {
         m_Current = bossDeath.m_EnemyHealth;
 
-        m_Bar.fillAmount = (float)m_Current / m_Max;
+        
+            m_Bar.fillAmount = (float)m_Current / m_Max;
+        }
 
         if (m_Active)
         {

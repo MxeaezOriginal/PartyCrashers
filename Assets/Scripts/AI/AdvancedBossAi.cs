@@ -108,18 +108,20 @@ public class AdvancedBossAi : MonoBehaviour
     }
     public void OnTriggerEnter(Collider other)
     {
-
-        if (other.gameObject.GetComponent<Damage>() != null)
+        if (!m_Invincible)
         {
-            Damage attacker = other.gameObject.GetComponent<Damage>();
-            StateEffect attackerEffect = other.gameObject.GetComponent<StateEffect>();
-            float dmg = attacker.m_Damage;
-            float knockBack = attackerEffect.m_KnockBack;
-            float stun = attackerEffect.m_StunTime;
+            if (other.gameObject.GetComponent<Damage>() != null)
+            {
+                Damage attacker = other.gameObject.GetComponent<Damage>();
+                StateEffect attackerEffect = other.gameObject.GetComponent<StateEffect>();
+                float dmg = attacker.m_Damage;
+                float knockBack = attackerEffect.m_KnockBack;
+                float stun = attackerEffect.m_StunTime;
 
-            m_Velocity = knockBack * Vector3.Normalize(transform.position - other.transform.position);
-            m_Health -= dmg;
-            state = states.hurt;
+                m_Velocity = knockBack * Vector3.Normalize(transform.position - other.transform.position);
+                m_Health -= dmg;
+                state = states.hurt;
+            }
         }
 
     }
@@ -158,8 +160,6 @@ public class AdvancedBossAi : MonoBehaviour
 
         PlayerController p = player.GetComponent<PlayerController>();
         Vector3 pVelocity = new Vector3(p.m_Velocity.x, 0f, p.m_Velocity.z);
-
-        float impactTime = TimeOfImpact(pPosition.x, pPosition.z, pVelocity.x, pVelocity.z, shootSpeed);
 
         Vector3 shootTarget = pPosition + (pVelocity)/bv.magnitude;
 
@@ -204,22 +204,4 @@ public class AdvancedBossAi : MonoBehaviour
         return target;
     }
 
-    float TimeOfImpact(float px, float py, float vx, float vy, float s)
-    {
-        float a = s * s - (vx * vx + vy * vy);
-        float b = px * vx + py * vy;
-        float c = px * px + py * py;
-
-        float d = b * b + a * c;
-
-        float t = 0;
-        if (d >= 0)
-        {
-            t = (b + Mathf.Sqrt(d)) / a;
-            if (t < 0)
-                t = 0;
-        }
-
-        return t*Time.deltaTime;
-    }
 }
