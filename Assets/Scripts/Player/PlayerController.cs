@@ -43,6 +43,8 @@ public class PlayerController : MonoBehaviour
 
     private float m_RotateAngle;
 
+    private Player m_Player;
+
     //bool canSee;
     //HeavyEnemy heavyenemy;
     //private Rigidbody rigidBody;
@@ -54,6 +56,7 @@ public class PlayerController : MonoBehaviour
     {
         //rigidBody = gameObject.GetComponent<Rigidbody>();
         controller = gameObject.GetComponent<CharacterController>();
+        m_Player = gameObject.GetComponent<Player>();
         if(Camera.main.gameObject.GetComponent<CameraController>() != null)
         {
             m_CameraController = Camera.main.gameObject.GetComponent<CameraController>();
@@ -116,6 +119,7 @@ public class PlayerController : MonoBehaviour
                     m_Velocity.y = m_Jump;
                 }
                 m_CurrentGravity = 0f;
+                m_Player.m_Animator.SetBool("isGrounded", true);
             }
             else
             {
@@ -127,6 +131,7 @@ public class PlayerController : MonoBehaviour
                 {
                     m_CurrentGravity = m_NormalGravity;
                 }
+                m_Player.m_Animator.SetBool("isGrounded", false);
             }
 
             //Horizontal
@@ -153,6 +158,8 @@ public class PlayerController : MonoBehaviour
                 m_Velocity.x = 0f;
             }
 
+            m_Player.m_Animator.SetFloat("Horizontal", m_Velocity.x);
+
 
             //Vertical
             if (controller.isGrounded)
@@ -177,6 +184,8 @@ public class PlayerController : MonoBehaviour
             {
                 m_Velocity.z = 0f;
             }
+
+            m_Player.m_Animator.SetFloat("Vertical", m_Velocity.z);
 
             //Rotate / Aim
 

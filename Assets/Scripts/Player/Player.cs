@@ -36,9 +36,16 @@ public class Player : MonoBehaviour
         Keyboard
     }
 
+    public enum Model
+    {
+        Mascot,
+        Nerd
+    }
+
     // Player stats
     public string m_PlayerName;
     public PLAYER m_Player;
+    public Model m_Model;
     public float m_AttackSpeed;
     public int m_Gold;
     public int m_Score;
@@ -47,6 +54,7 @@ public class Player : MonoBehaviour
     public float m_CheckLocationCooldown;
     //To hold location every x seconds to respawn to
     public Vector3 m_Location;
+    public Animator m_Animator;
     private Transform m_Weapon;
     private HeartSystem m_Heart;
     private CharacterController m_CharController;
@@ -371,7 +379,7 @@ public class Player : MonoBehaviour
 
         //}
     }
-   
+
 
     /*public void OnTriggerStay(Collider other)
     {

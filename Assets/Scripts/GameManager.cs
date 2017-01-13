@@ -41,6 +41,7 @@ public class GameManager : MonoBehaviour
     public Tutorial m_Tutorial;
 
     public GameObject m_PlayerPrefab;
+    public GameObject m_MascotPrefab;
 
     public PlayerStats m_Player1;
     public PlayerStats m_Player2;
@@ -258,6 +259,19 @@ public class GameManager : MonoBehaviour
 
             playerComponent.m_Player = (Player.PLAYER)System.Enum.Parse(typeof(Player.PLAYER), player);
             playerComponent.save();
+
+            switch (playerComponent.m_Model)
+            {
+                case Player.Model.Mascot:
+                    GameObject mascotClone = Instantiate(m_MascotPrefab, parent.transform.position, Quaternion.identity) as GameObject;
+                    mascotClone.transform.parent = playerClone.gameObject.transform;
+                    mascotClone.transform.localPosition = new Vector3(0, 0, 0);
+                    mascotClone.transform.localRotation = Quaternion.identity;
+                    mascotClone.transform.localScale = new Vector3(1, 1, 1);
+                    mascotClone.name = "Model";
+                    playerComponent.m_Animator = mascotClone.GetComponent<Animator>();
+                    break;
+            }
         }
         else
         {

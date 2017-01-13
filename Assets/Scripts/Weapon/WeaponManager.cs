@@ -27,9 +27,9 @@ public class WeaponManager : MonoBehaviour
 
     public void SetWeapon(string weaponPrefabName)
     {
-        if (transform.FindChild("Weapon/" + weaponPrefabName) != null)
+        if (transform.FindChild("Model/Weapon/" + weaponPrefabName) != null)
         {
-            GameObject child = transform.FindChild("Weapon/" + weaponPrefabName).gameObject;
+            GameObject child = transform.FindChild("Model/Weapon/" + weaponPrefabName).gameObject;
             if (m_Weapons.ContainsKey(weaponPrefabName))
             {
                 if (m_CurrentWeapon != null)
