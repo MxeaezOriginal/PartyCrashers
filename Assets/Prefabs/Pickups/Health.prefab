@@ -11,7 +11,6 @@ GameObject:
   - 33: {fileID: 3391536}
   - 65: {fileID: 6573830}
   - 23: {fileID: 2307118}
-  - 114: {fileID: 11415202}
   - 108: {fileID: 10856676}
   - 114: {fileID: 11427296}
   m_Layer: 0
@@ -30,6 +29,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.9357033, y: 5.9928803, z: 141.07426}
   m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -111,18 +111,6 @@ Light:
   m_ShadowRadius: 0
   m_ShadowAngle: 0
   m_AreaSize: {x: 1, y: 1}
---- !u!114 &11415202
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 144340}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85295296ba2481d44a37251c8a6e1ab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spin: {x: 0, y: 100, z: 0}
 --- !u!114 &11427296
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -134,7 +122,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acdf4674d16367f41b5cf10a50f086f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healValue: 5
+  rb: {fileID: 0}
+  m_HealValue: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

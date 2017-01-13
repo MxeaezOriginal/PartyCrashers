@@ -73,6 +73,9 @@ public class Player : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        //COOPER TESTING
+        GetComponent<CharacterController>().attachedRigidbody.mass = 1000f;
+        //
         rb = GetComponent<Rigidbody>();
         m_Heart = GetComponent<HeartSystem>();
         m_CharController = GetComponent<CharacterController>();
