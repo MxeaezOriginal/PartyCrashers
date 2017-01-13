@@ -17,10 +17,12 @@ public class Sword : Melee
     public GameObject effect;
     
     CharacterController m_CharacterController;
+    Player m_Player;
 
     void Start()
     {
         m_CharacterController = GetComponentInParent<CharacterController>();
+        m_Player = GetComponentInParent<Player>();
 
         swordTrigger.SetActive(false);
     }
@@ -84,6 +86,8 @@ public class Sword : Melee
 
     override public void primaryAttack()
     {
+        m_Player.m_Animator.SetBool("isSlashing", true);
+        StartCoroutine(setPrimaryAttackFalse());
         if (m_CoolDown <= Time.time - m_Weapon1Cooldown || m_CoolDown == 0)
         {
             attack = true;
@@ -93,6 +97,8 @@ public class Sword : Melee
 
     override public void secondaryAttack()
     {
+        m_Player.m_Animator.SetBool("isDashing", true);
+        StartCoroutine(setSecondaryAttackFalse());
         if (m_SecondaryCoolDown <= Time.time - m_Weapon1Cooldown || m_SecondaryCoolDown == 0)
         {
             attack = true;
@@ -107,5 +113,17 @@ public class Sword : Melee
         yield return new WaitForSeconds(dashDelay);
 
         m_SecondaryCoolDown = Time.time;        
+    }
+
+    private IEnumerator setPrimaryAttackFalse()
+    {
+        yield return new WaitForSeconds(.1f);
+        m_Player.m_Animator.SetBool("isSlashing", false);
+    }
+
+    private IEnumerator setSecondaryAttackFalse()
+    {
+        yield return new WaitForSeconds(.1f);
+        m_Player.m_Animator.SetBool("isDashing", false);
     }
 }

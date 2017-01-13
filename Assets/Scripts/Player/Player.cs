@@ -82,7 +82,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         //COOPER TESTING
-        GetComponent<CharacterController>().attachedRigidbody.mass = 1000f;
+        //GetComponent<CharacterController>().attachedRigidbody.mass = 1000f;
         //
         rb = GetComponent<Rigidbody>();
         m_Heart = GetComponent<HeartSystem>();

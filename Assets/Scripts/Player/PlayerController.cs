@@ -119,7 +119,10 @@ public class PlayerController : MonoBehaviour
                     m_Velocity.y = m_Jump;
                 }
                 m_CurrentGravity = 0f;
-                m_Player.m_Animator.SetBool("isGrounded", true);
+                if (m_Player.m_Animator != null)
+                {
+                    m_Player.m_Animator.SetBool("isGrounded", true);
+                }
             }
             else
             {
@@ -131,7 +134,10 @@ public class PlayerController : MonoBehaviour
                 {
                     m_CurrentGravity = m_NormalGravity;
                 }
-                m_Player.m_Animator.SetBool("isGrounded", false);
+                if (m_Player.m_Animator != null)
+                {
+                    m_Player.m_Animator.SetBool("isGrounded", false);
+                }
             }
 
             //Horizontal
@@ -158,7 +164,10 @@ public class PlayerController : MonoBehaviour
                 m_Velocity.x = 0f;
             }
 
-            m_Player.m_Animator.SetFloat("Horizontal", m_Velocity.x);
+            if (m_Player.m_Animator != null)
+            {
+                m_Player.m_Animator.SetFloat("Horizontal", m_Velocity.x);
+            }
 
 
             //Vertical
@@ -185,7 +194,10 @@ public class PlayerController : MonoBehaviour
                 m_Velocity.z = 0f;
             }
 
-            m_Player.m_Animator.SetFloat("Vertical", m_Velocity.z);
+            if (m_Player.m_Animator != null)
+            {
+                m_Player.m_Animator.SetFloat("Vertical", m_Velocity.z);
+            }
 
             //Rotate / Aim
 
