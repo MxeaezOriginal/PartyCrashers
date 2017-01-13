@@ -5,7 +5,8 @@ public class AdvancedBossAi : MonoBehaviour
 {
 
     //Stats
-    public float m_MaxHealth;
+    public float m_BaseMaxHealth;
+    public float m_NumOfPlayersHealthMultiplier;
     private float m_Health;
 
     //Frame
@@ -15,9 +16,11 @@ public class AdvancedBossAi : MonoBehaviour
     enum states
     {
         idle,
-        rocket,
         hurt,
         dead,
+        //Attacks
+        rocket,
+        shoot,
         count
     }
     states currentState;
@@ -31,6 +34,10 @@ public class AdvancedBossAi : MonoBehaviour
     //Movement
     private Rigidbody m_Body;
     private Vector3 m_Velocity;
+    public float m_Friction;
+
+    //Get the players
+    protected GameObject[] players;
 
 
     // Use this for initialization
@@ -40,7 +47,9 @@ public class AdvancedBossAi : MonoBehaviour
         currentState = state;
         m_Invincible = false;
         frame = 0;
-        m_Health = m_MaxHealth;
+        m_Health = m_BaseMaxHealth;
+
+        players = GameManager.m_Instance.m_Players;
 
         m_Body = GetComponent<Rigidbody>();
     }
@@ -54,14 +63,19 @@ public class AdvancedBossAi : MonoBehaviour
             case states.idle: Idle(); break;
             case states.hurt: Hurt(m_DamageTaken, m_StunTime); break;
         }
+        //Manage frame
         frame++;
+        if(frame > 1000000) //Just in case the frame gets too big which I doubt it ever will BUT WHATEVER poopy butts stuff
+        {
+            frame = 0;
+        }
 
-        Move();
+        Move(); //Call the move function so the guy actually moves based on it's velocity
     }
 
     void LateUpdate()
     {
-        if (state != currentState)
+        if (state != currentState) //Reset the frame variable back to zero every time the boss changes it's state
         {
             frame = 0;
             currentState = state;
@@ -69,7 +83,7 @@ public class AdvancedBossAi : MonoBehaviour
     }
     void Move()
     {
-        m_Body.velocity = m_Velocity;
+        m_Body.velocity = m_Velocity; //The rigidBody's velocity will always be set to the local Velocity
     }
 
     void Friction(float friction)
@@ -78,27 +92,17 @@ public class AdvancedBossAi : MonoBehaviour
         if (m_Velocity.magnitude > 0)
         {
             m_Velocity.x -= friction * (m_Velocity.x / m_Velocity.magnitude);
+            if(Mathf.Abs(m_Velocity.x) < friction * (m_Velocity.x / m_Velocity.magnitude))
+            {
+                m_Velocity.x = 0;
+            }
             m_Velocity.z -= friction * (m_Velocity.z / m_Velocity.magnitude);
+            if(Mathf.Abs(m_Velocity.z) < friction * (m_Velocity.z / m_Velocity.magnitude))
+            {
+                m_Velocity.z = 0;
+            }
         }
     }
-
-    #region states
-    void Idle()
-    {
-        //Friction(1f);
-    }
-
-    void Hurt(float damageTaken, float stunTime)
-    {
-        m_Health -= damageTaken;
-
-        if (frame/60 > stunTime)
-        {
-            state = states.idle;
-        }
-
-    }
-
     public void OnTriggerEnter(Collider other)
     {
 
@@ -116,6 +120,63 @@ public class AdvancedBossAi : MonoBehaviour
         }
 
     }
+
+    #region states
+    void Idle()
+    {
+        Friction(m_Friction);
+    }
+
+    void Hurt(float damageTaken, float stunTime)
+    {
+        m_Health -= damageTaken;
+
+        if (frame/60 > stunTime)
+        {
+            state = states.idle;
+        }
+
+    }
+    void BasicShoot()
+    {
+        GameObject player = targetPlayer();
+        Transform pPosition = player.transform;
+        //Vector3 pVelocity = player.GetComponent<PlayerController>();
+
+    }
+
     #endregion
+
+    GameObject targetPlayer()
+    {
+        GameObject target;
+
+        target = getClosestPlayer();
+
+        return target;
+    } //This is where the decision making for the target player will happen
+    GameObject getClosestPlayer()
+    {
+
+        float distance = 0f;
+        GameObject target = null;
+        for (int i = 0; i < players.Length; i++)
+        {
+            if (i == 0)
+            {
+                distance = Vector3.Distance(players[i].transform.position, transform.position);
+                target = players[i];
+            }
+            else
+            {
+                if (Vector3.Distance(players[i].transform.position, transform.position) < distance)
+                {
+                    distance = Vector3.Distance(players[i].transform.position, transform.position);
+                    target = players[i];
+                }
+            }
+        }
+        return target;
+    }
 
 }

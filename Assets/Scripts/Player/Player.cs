@@ -73,6 +73,9 @@ public class Player : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        //COOPER TESTING
+        GetComponent<CharacterController>().attachedRigidbody.mass = 1000f;
+        //
         rb = GetComponent<Rigidbody>();
         m_Heart = GetComponent<HeartSystem>();
         m_CharController = GetComponent<CharacterController>();
@@ -176,10 +179,10 @@ public class Player : MonoBehaviour
         Debug.Log("Respawned");
     }
 
-    public void stun()
+    public void stun(float secs)
     {
         GetComponent<PlayerController>().m_CantMove = true;
-        StartCoroutine(StunForTwo());
+        StartCoroutine(StunForSec(secs));
     }
 
     public void damage(int damageAmount)
@@ -328,16 +331,16 @@ public class Player : MonoBehaviour
     //{
     //    if (other.gameObject.CompareTag("MeleeEnemy"))
     //    {
-    //        //m_Heart.lastDamage += Time.deltaTime;
-    //        //if (m_Heart.lastDamage >= 2)
-    //        //{
-    //            KnockBackDirection = transform.position - other.transform.position;
-    //            KnockBack = transform.position + KnockBackDirection;
-    //            transform.position = Vector3.Lerp(transform.position, KnockBack, KnockBackSpeed);
-    //            //m_Heart.TakeDamage(1);
-    //            //m_Heart.UpdateHearts();
-    //            //m_Heart.lastDamage = 0;
-    //        //}
+    //        m_Heart.lastDamage += Time.deltaTime;
+    //        if (m_Heart.lastDamage >= 2)
+    //        {
+    //            //    KnockBackDirection = transform.position - other.transform.position;
+    //            //KnockBack = transform.position + KnockBackDirection;
+    //            //transform.position = Vector3.Lerp(transform.position, KnockBack, KnockBackSpeed);
+    //            m_Heart.TakeDamage(1);
+    //            m_Heart.UpdateHearts();
+    //            m_Heart.lastDamage = 0;
+    //        }
     //    }
     //}
 
@@ -352,9 +355,23 @@ public class Player : MonoBehaviour
                 m_Heart.UpdateHearts();
                 dotdelay = 2.0f;
             }
-
         }
+        //if (other.gameObject.CompareTag("MeleeEnemy"))
+        //{
+        //    damageDelay -= Time.deltaTime;
+        //    if (damageDelay <= 0)
+        //    {
+        //        m_Heart.TakeDamage(1);
+        //        m_Heart.UpdateHearts();
+        //        damageDelay = 2.0f;
+        //    }
+        //    m_Heart.TakeDamage(1);
+        //    m_Heart.UpdateHearts();
+        //    // Add timer
+
+        //}
     }
+   
 
     /*public void OnTriggerStay(Collider other)
     {
@@ -382,9 +399,10 @@ public class Player : MonoBehaviour
         //}
     }*/
 
-    IEnumerator StunForTwo()
+    IEnumerator StunForSec(float s)
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(s);
         GetComponent<PlayerController>().m_CantMove = false;
     }
+
 }

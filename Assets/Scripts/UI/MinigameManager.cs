@@ -4,17 +4,23 @@ using System.Collections;
 
 public class MinigameManager : MonoBehaviour
 {
-    float timeLeft = 1f;
+
+    public static MinigameManager instance;
+
     float fadeTime = 2f;
     bool minigameEnded;
     public float minigameTimer = 0f;
+
+
+    float delayToFadeIn = 1f;
+    float delayToShowResultBar = 2f;
 
     CanvasGroup fadingCanvas;
     CanvasGroup rewardFadeInCanvas;
     Image startCountdownImage;
     public Sprite[] startCountdownTextures;
 
-    public Image P1_ResultBar;
+    public bool showResultBar;
 
     void Awake()
     {
@@ -71,23 +77,19 @@ public class MinigameManager : MonoBehaviour
             player.GetComponent<PlayerController>().m_CantMove = true;
 
         //Black Background Fading Canvas
-        timeLeft -= Time.deltaTime;
-        if (timeLeft < 0)
+        delayToFadeIn -= Time.deltaTime;
+        if (delayToFadeIn < 0)
         {
             if (fadingCanvas.alpha < 0.6)
             {
                 fadingCanvas.alpha += Time.deltaTime / fadeTime;
             }
 
-            StartCoroutine(Stuff());
+            delayToShowResultBar -= Time.deltaTime;
+            if (delayToShowResultBar < 0)
+            {
+                showResultBar = true; //PASSES TO NEIGHBOUR SCRIPT
+            }
         }
-    }
-
-    IEnumerator Stuff()
-    {
-
-        yield return new WaitForSeconds(2f);
-        print(P1_ResultBar.rectTransform.anchoredPosition);
-        P1_ResultBar.rectTransform.anchoredPosition = new Vector2(0, -186);
     }
 }

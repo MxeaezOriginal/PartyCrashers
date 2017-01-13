@@ -9,18 +9,32 @@ public class KickMeTrap : Trap {
     public float chaseIncrease;
     public float m_ChasingTime = 5.0f;
 	public bool m_used = false;
+    public GameObject m_effect;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
 	}
 
+    public void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Player" && m_used == false)
+        {
+            if (m_effect != null)
+            {
+                GameObject effect;
+                effect = (GameObject)Instantiate(m_effect, gameObject.transform.position, gameObject.transform.rotation);
+                Destroy(effect, 3f);
+            }
+        }
+      
+    }
     public void OnTriggerStay(Collider other)
     {
 		//Debug.Log("RUNING");
 		if (other.tag == "Player" && m_used == false)
 		{
-			//EnemyAI.Instance.getDistance(50);
-			Collider[] hitColliders = Physics.OverlapSphere(transform.position, m_Radius);
+            //EnemyAI.Instance.getDistance(50);
+            Collider[] hitColliders = Physics.OverlapSphere(transform.position, m_Radius);
 			for (int i = 0; i < hitColliders.Length; ++i)
 			{
 				for (int j = 0; j < m_EnemiesToAffect.Length; j++)
@@ -38,7 +52,8 @@ public class KickMeTrap : Trap {
 					}
 				}
 			}
-		}
+           
+        }
     }
 
 	public void OnTriggerExit(Collider other)

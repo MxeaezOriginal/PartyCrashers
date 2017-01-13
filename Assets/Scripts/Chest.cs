@@ -7,8 +7,9 @@ public class Chest : MonoBehaviour {
     private GameObject ins;
     public bool isOpen;
     public bool alreadyOpen = false;
-	// Use this for initialization
-	void Start () {
+    public GameObject m_effect;
+    // Use this for initialization
+    void Start () {
 
 	}
 	
@@ -17,12 +18,19 @@ public class Chest : MonoBehaviour {
     {
         if (isOpen == true && alreadyOpen == false && (Input.GetButtonDown("Interact_P1")||Input.GetButtonDown("Interact_Keyboard")) )
         {
+            if (m_effect != null)
+            {
+                GameObject effect;
+                effect = (GameObject)Instantiate(m_effect, gameObject.transform.position, gameObject.transform.rotation);
+                Destroy(effect, 3f);
+            }
             for (int i = 0; i < prefab.Length; i++)
             {
                 //GetComponent<Animation>().Play();               //After get animation for chest, uncomment it
                 Instantiate(prefab[i], gameObject.transform.position, gameObject.transform.rotation);
                 alreadyOpen = true;
-            }  
+            }
+            
         }
 	}
 

@@ -1,38 +1,72 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class DotTrap : MonoBehaviour {
+public class DotTrap : MonoBehaviour
+{
 
-    public int m_DotValue;
-    public float m_CoolDown = 0;
-    float m_Timer = 0;
+    public int m_DotDamage;
+    public float m_CoolDown = 2;
+    //float m_Timer = 2;
     private HeartSystem m_HeartSystem;
-    // Use this for initialization
-    void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    //private EnemyHealth m_EnemyHealth;
+    private bool m_CanDamage = true;
+    public GameObject m_effect;
 
     public void OnTriggerStay(Collider other)
     {
-        if(other.GetComponent<HeartSystem>() != null)
+        if (other.GetComponent<HeartSystem>() != null)
         {
+            if (m_effect != null)
+            {
+                GameObject effect;
+                effect = (GameObject)Instantiate(m_effect, gameObject.transform.position, gameObject.transform.rotation);
+                Destroy(effect, 3f);
+            }
             m_HeartSystem = other.GetComponent<HeartSystem>();
             if (other.tag == "Player")
             {
-                m_Timer += Time.deltaTime;
-                if (m_Timer >= m_CoolDown)
+                if (m_CanDamage)
                 {
-                    m_HeartSystem.TakeDamage(m_DotValue);
-                    m_Timer = 0;
+                    m_HeartSystem.TakeDamage(m_DotDamage);
+                    m_CanDamage = false;
+                    StartCoroutine(WaitForSec(m_CoolDown));
                 }
-
                 m_HeartSystem.UpdateHearts();
             }
         }
+
+        if (other.gameObject.GetComponent<EnemyHealth>() != null)
+        {
+            //m_EnemyHealth = other.GetComponent<EnemyHealth>();
+            EnemyHealth m_EnemyHealth = other.gameObject.GetComponent<EnemyHealth>();
+            //if (other.tag == "MeleeEnemy")
+            //{
+            if (m_CanDamage)
+            {
+                m_EnemyHealth.Damage(m_DotDamage);
+                //m_CanDamage = false;
+                //StartCoroutine(WaitForSec(m_CoolDown));
+            }
+            //}
+        }
+    }
+    
+    public void OnTriggerExit(Collider other)
+    {
+        if (other.GetComponent<HeartSystem>() != null)
+        {
+            m_CanDamage = true;
+        }
+        //if (other.GetComponent<EnemyHealth>() != null)
+        //{
+        //    m_CanDamage = true;
+        //}
+    }
+
+
+    IEnumerator WaitForSec(float s)
+    {
+        yield return new WaitForSeconds(s);
+        m_CanDamage = true;
     }
 }
