@@ -43,7 +43,7 @@ public class AdvancedBossAi : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        state = states.shoot;
+        state = states.idle;
         currentState = state;
         m_Invincible = false;
         frame = 0;
@@ -163,9 +163,7 @@ public class AdvancedBossAi : MonoBehaviour
 
         Vector3 shootTarget = pPosition + (pVelocity)/bv.magnitude;
 
-        transform.LookAt(shootTarget);
-
-
+        transform.LookAt(pPosition);
 
     }
     #endregion
@@ -174,6 +172,7 @@ public class AdvancedBossAi : MonoBehaviour
 
     GameObject targetPlayer()
     {
+        //Right now this whole function is really basic but I'll make it more complicated later
         GameObject target;
 
         target = getClosestPlayer();
