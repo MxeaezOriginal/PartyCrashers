@@ -1,7 +1,48 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[RequireComponent (typeof(LineRenderer))]
+public class LaserBeam : MonoBehaviour
+{
+    Bow bow;
+    LineRenderer m_LineRenderer;
+
+    void Start()
+    {
+        bow = GetComponentInParent<Bow>();       
+        m_LineRenderer = GetComponent<LineRenderer>();
+        m_LineRenderer.enabled = false;
+    }
+
+    void Update()
+    {
+        //m_LineRenderer.SetPosition(1, ray.GetPoint(bow.m_LaserLenght));
+        //m_LineRenderer.SetPosition(0, ray.origin);
+
+        Ray ray = new Ray(transform.position, transform.forward);
+        m_LineRenderer.SetPosition(0, ray.origin);
+
+        RaycastHit[] hits;
+        hits = Physics.RaycastAll(ray, bow.m_LaserLenght);
+        foreach(RaycastHit hit in hits)
+        {
+            //if (hit.transform.gameObject.GetComponent<EnemyHealth> != null)
+
+        }
+                   
+        m_LineRenderer.SetPosition(1, ray.GetPoint(bow.m_LaserLenght));
+
+    }
+}
+
+
+
+
+
+
+
+
+/*
+[RequireComponent(typeof(LineRenderer))]
 public class LaserBeam : MonoBehaviour
 {
 
@@ -24,7 +65,7 @@ public class LaserBeam : MonoBehaviour
     private ParticleSystem endEffect;
     Vector3 offset;
 
-   
+
 
     void Start()
     {
@@ -49,7 +90,7 @@ public class LaserBeam : MonoBehaviour
 
         lineRenderer.SetColors(color, color);
         // Nove through the Array
-        for(int i = 0; i < lenght; i++)
+        for (int i = 0; i < lenght; i++)
         {
             // Set the position here to the current location and project it in the forward direction of the object it is attached to.
             offset.x = myTransform.position.x + i * myTransform.forward.x + Random.Range(-noise, noise);
@@ -63,14 +104,14 @@ public class LaserBeam : MonoBehaviour
 
     void UpdateLenght()
     {
-    // Raycast from the location of the cube forwards.
-    RaycastHit[] hit;
+        // Raycast from the location of the cube forwards.
+        RaycastHit[] hit;
         hit = Physics.RaycastAll(myTransform.position, myTransform.forward, maxLenght);
         int i = 0;
-        while(i < hit.Length)
+        while (i < hit.Length)
         {
             // Check to make sure we arn't hitting triggers but colliders
-            if(!hit[i].collider.isTrigger)
+            if (!hit[i].collider.isTrigger)
             {
                 lenght = (int)Mathf.Round(hit[i].distance) + 2;
                 position = new Vector3[lenght];
@@ -84,10 +125,10 @@ public class LaserBeam : MonoBehaviour
                 lineRenderer.SetVertexCount(lenght);
                 return;
             }
-            i++;            
+            i++;
         }
         // If we're not hitting anything, don't play the particle effects
-        if(endEffect)
+        if (endEffect)
         {
             if (endEffect.isPlaying)
                 endEffect.Stop();
@@ -101,7 +142,7 @@ public class LaserBeam : MonoBehaviour
 }
 
 // https://forum.unity3d.com/threads/laser-beam-script-in-c.122500/
-
+*/
 
 
 

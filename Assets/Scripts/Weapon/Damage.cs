@@ -14,7 +14,7 @@ public class Damage : MonoBehaviour
 		{
             if(m_WeaponTransform.GetComponent<Weapon>() != null)
             {
-                m_Damage = m_WeaponTransform.GetComponent<Weapon>().m_Damage;
+                m_Damage = m_WeaponTransform.GetComponent<Weapon>().m_DamageOrHeal;
                 Debug.Log(m_Damage + " set from weapon " + m_WeaponTransform.name);
                 break;
             }
@@ -30,10 +30,16 @@ public class Damage : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.GetComponent<EnemyHealth>() != null)
+        if (other.gameObject.GetComponent<EnemyHealth>() != null)
         {
             EnemyHealth enemyHealth = other.gameObject.GetComponent<EnemyHealth>();
             enemyHealth.Damage(m_Damage);
         }
+
+        if (other.gameObject.GetComponent<HeartSystem>() != null)
+        {
+            HeartSystem playerHealth = other.gameObject.GetComponent<HeartSystem>();
+            playerHealth.Heal((int)m_Damage);
+        }          
     }
 }

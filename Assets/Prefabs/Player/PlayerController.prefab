@@ -160,6 +160,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -1, z: 0.6600004}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 480814}
   m_RootOrder: 2
@@ -172,6 +173,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3, y: 0.09999998, z: 0.6600004}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 480814}
   m_RootOrder: 3
@@ -184,6 +186,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 28.94, y: 3.62, z: 15.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 497092}
   m_Father: {fileID: 0}
@@ -197,6 +200,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0.6600004}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 480814}
   m_RootOrder: 1
@@ -209,6 +213,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.26, y: 1.01, z: 0.34}
   m_LocalScale: {x: 0.3, y: 3, z: 0.3}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 497092}
   m_RootOrder: 0
@@ -221,6 +226,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.7, y: 0.61, z: -0.31}
   m_LocalScale: {x: 0.12297158, y: 0.8342137, z: 0.56363213}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 481880}
   - {fileID: 445060}
@@ -238,6 +244,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.1, z: 0.66}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 480814}
   m_RootOrder: 0
@@ -250,6 +257,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3, y: 0.09999998, z: 0.6600004}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 480814}
   m_RootOrder: 4
@@ -259,9 +267,10 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 178698}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071067}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
   m_Children:
   - {fileID: 456420}
   - {fileID: 480814}
@@ -403,13 +412,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Anim: {fileID: 0}
   m_Damage: 0
-  m_AttackSpeed: 0
+  m_Weapon1Cooldown: 0
+  m_Weapon2Cooldown: 0
   m_PrimarySounds:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   m_SecondarySounds: []
   m_SoundsOnHit: []
+  swordTrigger: {fileID: 0}
+  dashDistance: 25
+  dashDelay: 0.1
+  smooth: 20
+  triggerLife: 0.5
+  attack: 0
+  effect: {fileID: 0}
 --- !u!114 &11442208
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -423,19 +440,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Anim: {fileID: 0}
   m_Damage: 10
-  m_AttackSpeed: 0.2
+  m_Weapon1Cooldown: 0
+  m_Weapon2Cooldown: 0
   m_PrimarySounds: []
   m_SecondarySounds: []
   m_SoundsOnHit: []
-  m_Projectile: {fileID: 184478, guid: d05e7a665ab0ec6468bdd70b7dd708f6, type: 2}
+  m_RightTriggerProjectile: {fileID: 0}
+  m_LeftTriggerProjectile: {fileID: 0}
   m_FirePoint:
   - {fileID: 139498}
   - {fileID: 133624}
   - {fileID: 172210}
   - {fileID: 107784}
   - {fileID: 149362}
-  m_ProjectileSpeed: 1500
-  m_MaxSpeed: 0
+  m_MaxCharge: 0
+  m_MedSpeed: 0
+  m_MinSpeed: 0
+  m_TimePressed: 0
+  m_BulletDamage: 0
+  m_MidDmgMultiplier: 0
+  m_LaserDmgMultiplier: 0
+  m_LaserTimer: 0
+  m_LaserLenght: 0
 --- !u!114 &11458736
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -459,9 +485,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44435725686e6eb45914198900aeb417, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  KnockBackDis: 40
+  m_CantMove: 0
   m_Speed: 5
+  m_MaxSpeed: 10
+  m_Acceleration: 1
+  m_Friction: 1
   m_TurnSpeed: 3
-  m_Gravity: 100
+  m_NormalGravity: 70
+  m_JumpGravity: 30
   m_Jump: 30
   m_MaxMovementX: 14
   m_MaxMovementZ: 18
@@ -470,6 +502,7 @@ MonoBehaviour:
   m_VerticalButton: JoystickLeftY_
   m_HorizontalRotationButton: JoystickRightY_
   m_VerticalRotationButton: JoystickRightX_
+  m_Velocity: {x: 0, y: 0, z: 0}
 --- !u!114 &11477312
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -481,21 +514,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ce65b2740421a148b24c11da9e84a06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rb: {fileID: 0}
+  KnockBackSpeed: 1
   m_PlayerName: 
+  m_Player: 0
   m_AttackSpeed: 0
   m_Gold: 0
-  m_Health: 0
-  m_MaxHealth: 100
-  m_Collect: 0
-  m_WeaponID: 0
+  m_Score: 0
+  m_CheckLocationCooldown: 0
+  m_Location: {x: 0, y: 0, z: 0}
   m_PrimaryAttack: Primary_
   m_SecondaryAttack: Secondary_
   m_Interact: Interact_
   m_Silly: Silly_
   m_Stats: Stats_
   m_Pause: Pause_
-  m_HealthText: {fileID: 0}
-  m_Score: {fileID: 0}
+  delay: 2
+  dotdelay: 2
+  m_Controller: 0
 --- !u!114 &11478534
 MonoBehaviour:
   m_ObjectHideFlags: 1
