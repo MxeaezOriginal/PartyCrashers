@@ -44,7 +44,7 @@ public class MovingLight : MonoBehaviour {
         }
      
         
-        Invoke("changeTarget", 3);
+        Invoke("changeTarget", resetTime);
 
     }
 }
