@@ -5,6 +5,10 @@ public class BallManager : MonoBehaviour
 {
     public enum EBallType { Basic, Stun, Bomb };           // Types of balls: Basic(pink), Stun(yellow), and Bomb(black).
 
+    [HideInInspector]
+    public float m_StunTime;
+
+    private Vector3 m_KnockBackDirection;
     private EBallType m_BallType;
     private BallPoolManager m_BallPoolManager;
     private bool m_IsCoroutineExecuting;
@@ -18,25 +22,36 @@ public class BallManager : MonoBehaviour
     {
     }
 
+
     void OnTriggerEnter(Collider other)
     {
-        //// Check if the collision happened to a player
-        //if(other.tag == "Player")
-        //{
-        //    //If it hits a player, we have to check the type of ball that we have
-        //    switch (m_BallType)
-        //    {
-        //        case EBallType.Basic:
-        //            break;
-        //        case EBallType.Stun:
-        //            StartCoroutine(ResolveStunCollision(other.gameObject));
-        //            break;
-        //        case EBallType.Bomb:
-        //            break;
-        //        default: Debug.Log("Ball type not set!");
-        //            break;
-        //    }
-        //}
+        // Check if the collision happened to a player
+        if (other.tag == "Player")
+        {
+            //If it hits a player, we have to check the type of ball that we have
+            switch (m_BallType)
+            {
+                case EBallType.Basic:
+                    var playerController = other.GetComponent<PlayerController>();
+                    m_KnockBackDirection = (other.transform.position - transform.position).normalized;
+
+                    // Check if player is stunned
+                    if (playerController.m_CantMove)
+                        playerController.m_CantMove = false;
+
+                    playerController.m_Velocity = m_KnockBackDirection * 30.0f;
+                    break;
+                case EBallType.Stun:
+                    other.GetComponent<Player>().stun(m_StunTime);
+                    break;
+                case EBallType.Bomb:
+                    BombBallExplosion();
+                    break;
+                default:
+                    Debug.Log("Ball type not set!");
+                    break;
+            }
+        }
     }
 
     // When ball leaves playing area (defined by a collision box set as trigger),
@@ -62,10 +77,25 @@ public class BallManager : MonoBehaviour
         m_BallPoolManager = manager;
     }
 
-    //IEnumerator ResolveStunCollision(GameObject player)
-    //{
-    //    player.GetComponent<PlayerController>().enabled = false;
-    //    yield return new WaitForSeconds(m_StunBallTimer);
-    //    player.GetComponent<PlayerController>().enabled = true;
-    //}
+    public void BombBallExplosion()
+    {
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        
+        foreach(var player in players)
+        {
+            var playerController = player.GetComponent<PlayerController>();
+            m_KnockBackDirection = (player.transform.position - transform.position).normalized;
+
+            // Check if player is stunned
+            if (playerController.m_CantMove)
+                playerController.m_CantMove = false;
+
+            playerController.m_Velocity = m_KnockBackDirection * 30.0f;
+        }
+
+        if (gameObject.activeInHierarchy)
+        {
+            m_BallPoolManager.PutBallBackIntoPool(gameObject);
+        }
+    }
 }

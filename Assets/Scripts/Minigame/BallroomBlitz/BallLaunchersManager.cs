@@ -197,6 +197,7 @@ public class BallLaunchersManager : MonoBehaviour
                 ball.GetComponent<BallManager>().SetBallType(BallManager.EBallType.Stun);
                 ball.GetComponent<Rigidbody>().AddForce(ball.transform.forward * m_SlowBallSpeed);
                 ball.GetComponent<Renderer>().material = m_StunBallMaterial;
+                ball.GetComponent<BallManager>().m_StunTime = m_StunBallTimer;
             }
             // If bomb ball
             else
@@ -204,9 +205,20 @@ public class BallLaunchersManager : MonoBehaviour
                 ball.GetComponent<BallManager>().SetBallType(BallManager.EBallType.Bomb);
                 ball.GetComponent<Rigidbody>().AddForce(ball.transform.forward * m_SlowBallSpeed);
                 ball.GetComponent<Renderer>().material = m_BombBallMaterial;
+                StartCoroutine(StartBombBallTimer(ball));
             }
 
 
+        }
+    }
+
+    IEnumerator StartBombBallTimer(GameObject ball)
+    {
+        yield return new WaitForSeconds(m_BombBallTimer);
+
+        if (ball.activeInHierarchy)
+        {
+            ball.GetComponent<BallManager>().BombBallExplosion();
         }
     }
 }
