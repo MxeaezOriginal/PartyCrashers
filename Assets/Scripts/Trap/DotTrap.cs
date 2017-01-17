@@ -9,7 +9,8 @@ public class DotTrap : MonoBehaviour
     //float m_Timer = 2;
     private HeartSystem m_HeartSystem;
     //private EnemyHealth m_EnemyHealth;
-    private bool m_CanDamage = true;
+    private bool m_CanDamagePlayer = true;
+    private bool m_CanDamageEnemy = true;
     public GameObject m_effect;
 
     public void OnTriggerStay(Collider other)
@@ -23,43 +24,49 @@ public class DotTrap : MonoBehaviour
                 Destroy(effect, 3f);
             }
             m_HeartSystem = other.GetComponent<HeartSystem>();
-            if (other.tag == "Player")
+            if (m_CanDamagePlayer)
             {
-                if (m_CanDamage)
-                {
-                    m_HeartSystem.TakeDamage(m_DotDamage);
-                    m_CanDamage = false;
-                    StartCoroutine(WaitForSec(m_CoolDown));
-                }
-                m_HeartSystem.UpdateHearts();
+                m_HeartSystem.TakeDamage(m_DotDamage);
+                m_CanDamagePlayer = false;
+                StartCoroutine(WaitForSec(m_CoolDown));
             }
+            m_HeartSystem.UpdateHearts();
         }
-
         if (other.gameObject.GetComponent<EnemyHealth>() != null)
         {
-            //m_EnemyHealth = other.GetComponent<EnemyHealth>();
             EnemyHealth m_EnemyHealth = other.gameObject.GetComponent<EnemyHealth>();
-            //if (other.tag == "MeleeEnemy")
-            //{
-            if (m_CanDamage)
+            if (m_CanDamageEnemy)
             {
                 m_EnemyHealth.Damage(m_DotDamage);
-                //m_CanDamage = false;
-                //StartCoroutine(WaitForSec(m_CoolDown));
+                m_CanDamageEnemy = false;
+                StartCoroutine(WaitForSec2(m_CoolDown));
             }
-            //}
         }
     }
-    
+
+    public void OnTriggerEnter(Collider other)
+    {
+        //if (other.gameObject.GetComponent<EnemyHealth>() != null)
+        //{
+        //    EnemyHealth m_EnemyHealth = other.gameObject.GetComponent<EnemyHealth>();
+        //    if (m_CanDamageEnemy)
+        //    {
+        //        m_EnemyHealth.Damage(m_DotDamage);
+        //        m_CanDamageEnemy = false;
+        //        StartCoroutine(WaitForSec2(m_CoolDown));
+        //    }
+        //}
+    }
+
     public void OnTriggerExit(Collider other)
     {
         if (other.GetComponent<HeartSystem>() != null)
         {
-            m_CanDamage = true;
+            m_CanDamagePlayer = true;
         }
         //if (other.GetComponent<EnemyHealth>() != null)
         //{
-        //    m_CanDamage = true;
+        //    m_CanDamageEnemy = true;
         //}
     }
 
@@ -67,6 +74,12 @@ public class DotTrap : MonoBehaviour
     IEnumerator WaitForSec(float s)
     {
         yield return new WaitForSeconds(s);
-        m_CanDamage = true;
+        m_CanDamagePlayer = true;
+    }
+
+    IEnumerator WaitForSec2(float s)
+    {
+        yield return new WaitForSeconds(s);
+        m_CanDamageEnemy = true;
     }
 }
