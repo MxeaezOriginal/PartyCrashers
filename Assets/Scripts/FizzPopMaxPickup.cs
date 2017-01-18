@@ -3,17 +3,28 @@ using System.Collections;
 
 public class FizzPopMaxPickup : MonoBehaviour {
 
+    public float speed;
     public Rigidbody rb;
+    public bool is_touched = false;
     private HeartSystem m_HeartSystem;
+    protected GameObject[] m_player;
     // Use this for initialization
     void Start () {
-	
-	}
+        m_player = GameManager.m_Instance.m_Players;
+        rb = GetComponent<Rigidbody>();
+    }
 	
 	// Update is called once per frame
-	void Update () {
-	
-	}
+	void Update ()
+    {
+        for (int i = 0; i < m_player.Length; i++)
+        {
+            if (is_touched == true)
+            {
+                rb.AddForce((transform.position - m_player[i].transform.position) * speed);
+            }
+        }
+    }
 
     void OnTriggerStay(Collider other)
     {
@@ -27,11 +38,21 @@ public class FizzPopMaxPickup : MonoBehaviour {
         }
     }
 
-    void OnCollisionEnter(Collision other)
+    void OnTriggerExit(Collider other)
     {
-        if(other.gameObject.CompareTag("Player"))
+        if (other.GetComponent<HeartSystem>() != null)
         {
-            rb.AddForce(transform.forward * 500);
+            is_touched = false;
         }
+
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.GetComponent<HeartSystem>() != null)
+        {
+            is_touched = true;
+        }
+
     }
 }

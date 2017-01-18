@@ -8,20 +8,23 @@ public class FizzPopPickup : MonoBehaviour {
     public int m_HealValue = 0;
     public bool is_touched = false;
     private HeartSystem m_HeartSystem;
-    public Player m_player;
+    protected GameObject[] m_player;
     Vector3 Dir;
     // Use this for initialization
     void Start () {
+        m_player = GameManager.m_Instance.m_Players;
         rb = GetComponent<Rigidbody>();
-        m_player = GetComponent<Player>();
 	}
 	
 	// Update is called once per frame
 	void Update ()
     {
-        if (is_touched == true)
+        for(int i = 0; i <m_player.Length;i++)
         {
-            rb.AddForce((transform.position - m_player.transform.position) * speed);
+            if (is_touched == true)
+            {
+                rb.AddForce((transform.position - m_player[i].transform.position) * speed);
+            }
         }
     }
 
@@ -53,4 +56,5 @@ public class FizzPopPickup : MonoBehaviour {
         }
 
     }
+
 }
