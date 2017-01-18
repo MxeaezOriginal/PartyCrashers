@@ -25,6 +25,7 @@ public class FallingTrap : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
+		Debug.Log ("HEEEEEY");
         if (other.tag == "Player")
         {
 
