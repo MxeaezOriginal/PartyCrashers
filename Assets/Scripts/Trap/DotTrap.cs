@@ -34,28 +34,22 @@ public class DotTrap : MonoBehaviour
         }
         if (other.gameObject.GetComponent<EnemyHealth>() != null)
         {
+            if (m_effect != null)
+            {
+                GameObject effect;
+                effect = (GameObject)Instantiate(m_effect, gameObject.transform.position, gameObject.transform.rotation);
+                Destroy(effect, 3f);
+            }
             EnemyHealth m_EnemyHealth = other.gameObject.GetComponent<EnemyHealth>();
             if (m_CanDamageEnemy)
             {
+                // After damage enemy 5 times, it stop working!
                 m_EnemyHealth.Damage(m_DotDamage);
                 m_CanDamageEnemy = false;
+                Debug.Log(m_CanDamageEnemy);
                 StartCoroutine(WaitForSec2(m_CoolDown));
             }
         }
-    }
-
-    public void OnTriggerEnter(Collider other)
-    {
-        //if (other.gameObject.GetComponent<EnemyHealth>() != null)
-        //{
-        //    EnemyHealth m_EnemyHealth = other.gameObject.GetComponent<EnemyHealth>();
-        //    if (m_CanDamageEnemy)
-        //    {
-        //        m_EnemyHealth.Damage(m_DotDamage);
-        //        m_CanDamageEnemy = false;
-        //        StartCoroutine(WaitForSec2(m_CoolDown));
-        //    }
-        //}
     }
 
     public void OnTriggerExit(Collider other)
@@ -64,10 +58,11 @@ public class DotTrap : MonoBehaviour
         {
             m_CanDamagePlayer = true;
         }
-        //if (other.GetComponent<EnemyHealth>() != null)
-        //{
-        //    m_CanDamageEnemy = true;
-        //}
+        if (other.GetComponent<EnemyHealth>() != null)
+        {
+            m_CanDamageEnemy = true;
+            Debug.Log("Exit");
+        }
     }
 
 
@@ -79,7 +74,8 @@ public class DotTrap : MonoBehaviour
 
     IEnumerator WaitForSec2(float s)
     {
-        yield return new WaitForSeconds(s);
         m_CanDamageEnemy = true;
+        yield return new WaitForSeconds(s);
+        Debug.Log("Wait sec");
     }
 }
