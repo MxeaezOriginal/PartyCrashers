@@ -13,6 +13,8 @@ public class RandomMeshGenerator : MonoBehaviour {
 
     void Start()
     {
+        transform.GetComponent<MeshRenderer>().enabled = false;
+
         randomNum = Random.Range(0,pickupGameObject.Length);
         GameObject pickup = GameObject.Instantiate(pickupGameObject[randomNum],transform.position,transform.rotation) as GameObject;
         pickup.transform.localScale = new Vector3(scaleValue, scaleValue, scaleValue);
