@@ -56,10 +56,4 @@ public class EnemyEffect : MonoBehaviour
 
         enemyAi.Knockback(KnockBackDirection, KB);
     }
-
-    //void OnDrawGizmos()
-    //{
-    //    Gizmos.color = Color.red;
-    //    Gizmos.DrawLine(transform.position, KnockBackDirection);
-    //}
 }
