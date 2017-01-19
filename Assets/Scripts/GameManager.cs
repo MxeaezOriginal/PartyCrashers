@@ -72,7 +72,7 @@ public class GameManager : MonoBehaviour
             {
                 m_GameState = GameState.Dungeon;
             }
-            else
+            else if (GameObject.Find("MinigameCanvas") != null)
             {
                 m_GameState = GameState.Minigame;
             }
@@ -259,26 +259,15 @@ public class GameManager : MonoBehaviour
         playerClone.transform.localScale = new Vector3(1, 1, 1);
         playerClone.name = parent.name;
 
-
         if (playerClone.GetComponent<Player>() != null)
         {
             Player playerComponent = playerClone.gameObject.GetComponent<Player>();
+            playerComponent.m_PlayerObject = playerClone;
 
             playerComponent.m_Player = (Player.PLAYER)System.Enum.Parse(typeof(Player.PLAYER), player);
             playerComponent.save();
 
-            switch (playerComponent.m_Model)
-            {
-                case Player.Model.Mascot:
-                    GameObject mascotClone = Instantiate(m_MascotPrefab, parent.transform.position, Quaternion.identity) as GameObject;
-                    mascotClone.transform.parent = playerClone.gameObject.transform;
-                    mascotClone.transform.localPosition = new Vector3(0, 0, 0);
-                    mascotClone.transform.localRotation = Quaternion.identity;
-                    mascotClone.transform.localScale = new Vector3(1, 1, 1);
-                    mascotClone.name = "Model";
-                    playerComponent.m_Animator = mascotClone.GetComponent<Animator>();
-                    break;
-            }
+
         }
         else
         {
