@@ -15,7 +15,7 @@ public class MinigameManager : MonoBehaviour
 
     //Tracks and playersScores P1-4 scores in odrder (playersScore1 - highest)
     public int P1_place, P2_place, P3_place, P4_place;      //int from 1 - 4
-    public int place1_score, place2_score, place3_score, place4_score;
+    public int scorePlace1, scorePlace2, scorePlace3, scorePlace4;
 
     //List & Array for sorting players'score
     public List<int> allScoresList = new List<int>();
@@ -25,8 +25,10 @@ public class MinigameManager : MonoBehaviour
     bool test = true;
     bool test2 = true;
     bool test3 = true;
-    float delay = 3.5f;
+    bool test4 = true;
+    float delay1 = 3.5f;
     float delay2 = 7f;
+    float delay3 = 10.5f;
     public int P1_Score, P2_Score, P3_Score, P4_Score;      //TEMP.! REPLACE WITH PLAYERS' ACTUAL SCORE//
     //
 
@@ -71,26 +73,26 @@ public class MinigameManager : MonoBehaviour
             //If statements instead of switch [needs to be a step-by-step removal from the list]
             if (GameManager.m_Instance.m_NumOfPlayers >= 1) //Place 1
             {
-                place1_score = allScores.Max();               //Gives Place 1 the highest score from all players
+                scorePlace1 = allScores.Max();               //Gives Place 1 the highest score from all players
                 allScoresList = allScores.ToList();     //Converts Array to List
                 allScoresList.Remove(allScores.Max());  //Deletes the highest score that was given to Place 1
                 allScores = allScoresList.ToArray();    //Converts List back to Array
             }
             if (GameManager.m_Instance.m_NumOfPlayers >= 2) //Place 2
             {
-                place2_score = allScores.Max(); allScoresList = allScores.ToList();
+                scorePlace2 = allScores.Max(); allScoresList = allScores.ToList();
                 allScoresList.Remove(allScores.Max()); allScores = allScoresList.ToArray();
             }
             if (GameManager.m_Instance.m_NumOfPlayers >= 3) //Place 3
             {
-                place3_score = allScores.Max(); allScoresList = allScores.ToList();
+                scorePlace3 = allScores.Max(); allScoresList = allScores.ToList();
                 allScoresList.Remove(allScores.Max()); allScores = allScoresList.ToArray();
             }
             if (GameManager.m_Instance.m_NumOfPlayers >= 4) //Place 4
             {
-                place4_score = allScores.Max();
+                scorePlace4 = allScores.Max();
                 allScoresList = allScores.ToList(); allScoresList.Remove(allScores.Max()); allScores = allScoresList.ToArray();
-                //Now both Array and List are empty but place1_score, place2_score, place3_score, place4_score have sorted scores
+                //Now both Array and List are empty but scorePlace1, scorePlace2, scorePlace3, scorePlace4 have sorted scores
             }
             scoreSorted = true;
         }
@@ -99,25 +101,25 @@ public class MinigameManager : MonoBehaviour
 
     void SetPlayerPlace()
     {
-        if (P1_Score == place1_score) P1_place = 1;
-        if (P1_Score == place2_score) P1_place = 2;
-        if (P1_Score == place3_score) P1_place = 3;
-        if (P1_Score == place4_score) P1_place = 4;
+        if (P1_Score == scorePlace1) P1_place = 1;
+        if (P1_Score == scorePlace2) P1_place = 2;
+        if (P1_Score == scorePlace3) P1_place = 3;
+        if (P1_Score == scorePlace4) P1_place = 4;
 
-        if (P2_Score == place1_score) P2_place = 1;
-        if (P2_Score == place2_score) P2_place = 2;
-        if (P2_Score == place3_score) P2_place = 3;
-        if (P2_Score == place4_score) P2_place = 4;
+        if (P2_Score == scorePlace1) P2_place = 1;
+        if (P2_Score == scorePlace2) P2_place = 2;
+        if (P2_Score == scorePlace3) P2_place = 3;
+        if (P2_Score == scorePlace4) P2_place = 4;
 
-        if (P3_Score == place1_score) P3_place = 1;
-        if (P3_Score == place2_score) P3_place = 2;
-        if (P3_Score == place3_score) P3_place = 3;
-        if (P3_Score == place4_score) P3_place = 4;
+        if (P3_Score == scorePlace1) P3_place = 1;
+        if (P3_Score == scorePlace2) P3_place = 2;
+        if (P3_Score == scorePlace3) P3_place = 3;
+        if (P3_Score == scorePlace4) P3_place = 4;
 
-        if (P4_Score == place1_score) P4_place = 1;
-        if (P4_Score == place2_score) P4_place = 2;
-        if (P4_Score == place3_score) P4_place = 3;
-        if (P4_Score == place4_score) P4_place = 4;
+        if (P4_Score == scorePlace1) P4_place = 1;
+        if (P4_Score == scorePlace2) P4_place = 2;
+        if (P4_Score == scorePlace3) P4_place = 3;
+        if (P4_Score == scorePlace4) P4_place = 4;
     }
 
     void RaisingResultBar()
@@ -125,52 +127,126 @@ public class MinigameManager : MonoBehaviour
         switch (GameManager.m_Instance.m_NumOfPlayers)
         {
             case 1:
-                P1_Bar.fillAmount = Mathf.Lerp(P1_Bar.fillAmount, resultBarAmount(place1_score, 0, maxScore, 0, 1), speed * Time.deltaTime);
+                P1_Bar.fillAmount = Mathf.Lerp(P1_Bar.fillAmount, resultBarAmount(scorePlace1, 0, maxScore, 0, 1), speed * Time.deltaTime);
                 break;
 
             case 2:
                 if (test)
                 {
-                    P1_Bar.fillAmount = Mathf.Lerp(P1_Bar.fillAmount, resultBarAmount(place2_score, 0, maxScore, 0, 1), speed * Time.deltaTime);
-                    P2_Bar.fillAmount = Mathf.Lerp(P2_Bar.fillAmount, resultBarAmount(place2_score, 0, maxScore, 0, 1), speed * Time.deltaTime);
+                    P1_Bar.fillAmount = Mathf.Lerp(P1_Bar.fillAmount, resultBarAmount(scorePlace2, 0, maxScore, 0, 1), speed * Time.deltaTime);
+                    P2_Bar.fillAmount = Mathf.Lerp(P2_Bar.fillAmount, resultBarAmount(scorePlace2, 0, maxScore, 0, 1), speed * Time.deltaTime);
                 }
 
-                delay -= Time.deltaTime;
-                if (delay < 0)
+                delay1 -= Time.deltaTime;
+                if (delay1 < 0)
                 {
                     test = false;
                     if (P1_place == 1)
-                        P1_Bar.fillAmount = Mathf.Lerp(P1_Bar.fillAmount, resultBarAmount(place1_score, 0, maxScore, 0, 1), speed * Time.deltaTime);
+                        P1_Bar.fillAmount = Mathf.Lerp(P1_Bar.fillAmount, resultBarAmount(scorePlace1, 0, maxScore, 0, 1), speed * Time.deltaTime);
                     if (P2_place == 1)
-                        P2_Bar.fillAmount = Mathf.Lerp(P2_Bar.fillAmount, resultBarAmount(place1_score, 0, maxScore, 0, 1), speed * Time.deltaTime);
+                        P2_Bar.fillAmount = Mathf.Lerp(P2_Bar.fillAmount, resultBarAmount(scorePlace1, 0, maxScore, 0, 1), speed * Time.deltaTime);
                 }
                 break;
 
-            case 3:                 //LAST TIME STOPPED WORKING HERE --------- REDO AS CASE 2 BUT /w 2 delays//
+            case 3:
                 if (test)
                 {
-                    P1_Bar.fillAmount = Mathf.Lerp(P1_Bar.fillAmount, resultBarAmount(place3_score, 0, maxScore, 0, 1), speed * Time.deltaTime);
-                    P2_Bar.fillAmount = Mathf.Lerp(P2_Bar.fillAmount, resultBarAmount(place3_score, 0, maxScore, 0, 1), speed * Time.deltaTime);
-                    P3_Bar.fillAmount = Mathf.Lerp(P3_Bar.fillAmount, resultBarAmount(place3_score, 0, maxScore, 0, 1), speed * Time.deltaTime);
+                    P1_Bar.fillAmount = Mathf.Lerp(P1_Bar.fillAmount, resultBarAmount(scorePlace3, 0, maxScore, 0, 1), speed * Time.deltaTime);
+                    P2_Bar.fillAmount = Mathf.Lerp(P2_Bar.fillAmount, resultBarAmount(scorePlace3, 0, maxScore, 0, 1), speed * Time.deltaTime);
+                    P3_Bar.fillAmount = Mathf.Lerp(P3_Bar.fillAmount, resultBarAmount(scorePlace3, 0, maxScore, 0, 1), speed * Time.deltaTime);
                 }
 
-                delay -= Time.deltaTime;
-                if (delay < 0)
+                delay1 -= Time.deltaTime;
+                if (delay1 < 0)
                 {
                     test = false;
-                    P1_Bar.fillAmount = Mathf.Lerp(P1_Bar.fillAmount, resultBarAmount(place2_score, 0, maxScore, 0, 1), speed * Time.deltaTime);
-                    P2_Bar.fillAmount = Mathf.Lerp(P2_Bar.fillAmount, resultBarAmount(place2_score, 0, maxScore, 0, 1), speed * Time.deltaTime);
-                    P3_Bar.fillAmount = Mathf.Lerp(P3_Bar.fillAmount, resultBarAmount(place2_score, 0, maxScore, 0, 1), speed * Time.deltaTime);
+                    if (test2)
+                    {
+                        if (P1_place == 1 || P1_place == 2)
+                            P1_Bar.fillAmount = Mathf.Lerp(P1_Bar.fillAmount, resultBarAmount(scorePlace2, 0, maxScore, 0, 1), speed * Time.deltaTime);
+                        if (P2_place == 1 || P2_place == 2)
+                            P2_Bar.fillAmount = Mathf.Lerp(P2_Bar.fillAmount, resultBarAmount(scorePlace2, 0, maxScore, 0, 1), speed * Time.deltaTime);
+                        if (P3_place == 1 || P3_place == 2)
+                            P3_Bar.fillAmount = Mathf.Lerp(P3_Bar.fillAmount, resultBarAmount(scorePlace2, 0, maxScore, 0, 1), speed * Time.deltaTime);
+                    }
                 }
 
                 delay2 -= Time.deltaTime;
                 if (delay2 < 0)
                 {
                     test2 = false;
-                    P1_Bar.fillAmount = Mathf.Lerp(P1_Bar.fillAmount, resultBarAmount(place1_score, 0, maxScore, 0, 1), speed * Time.deltaTime);
-                    P2_Bar.fillAmount = Mathf.Lerp(P2_Bar.fillAmount, resultBarAmount(place1_score, 0, maxScore, 0, 1), speed * Time.deltaTime);
-                    P3_Bar.fillAmount = Mathf.Lerp(P3_Bar.fillAmount, resultBarAmount(place1_score, 0, maxScore, 0, 1), speed * Time.deltaTime);
+                    if (test3)
+                    {
+                        if (P1_place == 1)
+                            P1_Bar.fillAmount = Mathf.Lerp(P1_Bar.fillAmount, resultBarAmount(scorePlace1, 0, maxScore, 0, 1), speed * Time.deltaTime);
+                        if (P2_place == 1)
+                            P2_Bar.fillAmount = Mathf.Lerp(P2_Bar.fillAmount, resultBarAmount(scorePlace1, 0, maxScore, 0, 1), speed * Time.deltaTime);
+                        if (P3_place == 1)
+                            P3_Bar.fillAmount = Mathf.Lerp(P3_Bar.fillAmount, resultBarAmount(scorePlace1, 0, maxScore, 0, 1), speed * Time.deltaTime);
+                    }
                 }
+
+                break;
+            case 4:
+                if (test)
+                {
+                    P1_Bar.fillAmount = Mathf.Lerp(P1_Bar.fillAmount, resultBarAmount(scorePlace4, 0, maxScore, 0, 1), speed * Time.deltaTime);
+                    P2_Bar.fillAmount = Mathf.Lerp(P2_Bar.fillAmount, resultBarAmount(scorePlace4, 0, maxScore, 0, 1), speed * Time.deltaTime);
+                    P3_Bar.fillAmount = Mathf.Lerp(P3_Bar.fillAmount, resultBarAmount(scorePlace4, 0, maxScore, 0, 1), speed * Time.deltaTime);
+                    P4_Bar.fillAmount = Mathf.Lerp(P4_Bar.fillAmount, resultBarAmount(scorePlace4, 0, maxScore, 0, 1), speed * Time.deltaTime);
+                }
+
+                delay1 -= Time.deltaTime;
+                if (delay1 < 0)
+                {
+                    test = false;
+                    if (test2)
+                    {
+                        if (P1_place == 1 || P1_place == 2 || P1_place == 3)
+                            P1_Bar.fillAmount = Mathf.Lerp(P1_Bar.fillAmount, resultBarAmount(scorePlace3, 0, maxScore, 0, 1), speed * Time.deltaTime);
+                        if (P2_place == 1 || P2_place == 2 || P2_place == 3)
+                            P2_Bar.fillAmount = Mathf.Lerp(P2_Bar.fillAmount, resultBarAmount(scorePlace3, 0, maxScore, 0, 1), speed * Time.deltaTime);
+                        if (P3_place == 1 || P3_place == 2 || P3_place == 3)
+                            P3_Bar.fillAmount = Mathf.Lerp(P3_Bar.fillAmount, resultBarAmount(scorePlace3, 0, maxScore, 0, 1), speed * Time.deltaTime);
+                        if (P4_place == 1 || P4_place == 2 || P4_place == 3)
+                            P4_Bar.fillAmount = Mathf.Lerp(P4_Bar.fillAmount, resultBarAmount(scorePlace3, 0, maxScore, 0, 1), speed * Time.deltaTime);
+                    }
+                }
+
+                delay2 -= Time.deltaTime;
+                if (delay2 < 0)
+                {
+                    test2 = false;
+                    if (test3)
+                    {
+                        if (P1_place == 1 || P1_place == 2)
+                            P1_Bar.fillAmount = Mathf.Lerp(P1_Bar.fillAmount, resultBarAmount(scorePlace2, 0, maxScore, 0, 1), speed * Time.deltaTime);
+                        if (P2_place == 1 || P2_place == 2)
+                            P2_Bar.fillAmount = Mathf.Lerp(P2_Bar.fillAmount, resultBarAmount(scorePlace2, 0, maxScore, 0, 1), speed * Time.deltaTime);
+                        if (P3_place == 1 || P3_place == 2)
+                            P3_Bar.fillAmount = Mathf.Lerp(P3_Bar.fillAmount, resultBarAmount(scorePlace2, 0, maxScore, 0, 1), speed * Time.deltaTime);
+                        if (P4_place == 1 || P4_place == 2)
+                            P4_Bar.fillAmount = Mathf.Lerp(P4_Bar.fillAmount, resultBarAmount(scorePlace2, 0, maxScore, 0, 1), speed * Time.deltaTime);
+                    }
+                }
+
+                delay3 -= Time.deltaTime;
+                if (delay3 < 0)
+                {
+                    test3 = false;
+                    if (test4)
+                    {
+                        if (P1_place == 1)
+                            P1_Bar.fillAmount = Mathf.Lerp(P1_Bar.fillAmount, resultBarAmount(scorePlace1, 0, maxScore, 0, 1), speed * Time.deltaTime);
+                        if (P2_place == 1)
+                            P2_Bar.fillAmount = Mathf.Lerp(P2_Bar.fillAmount, resultBarAmount(scorePlace1, 0, maxScore, 0, 1), speed * Time.deltaTime);
+                        if (P3_place == 1)
+                            P3_Bar.fillAmount = Mathf.Lerp(P3_Bar.fillAmount, resultBarAmount(scorePlace1, 0, maxScore, 0, 1), speed * Time.deltaTime);
+                        if (P4_place == 1)
+                            P4_Bar.fillAmount = Mathf.Lerp(P4_Bar.fillAmount, resultBarAmount(scorePlace1, 0, maxScore, 0, 1), speed * Time.deltaTime);
+                    }
+                }
+
                 break;
         }
     }

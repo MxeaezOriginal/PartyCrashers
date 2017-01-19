@@ -54,10 +54,20 @@ public class MinigameTracker : MonoBehaviour
             player.GetComponent<PlayerController>().m_CantMove = true;
 
         //3, 2, 1, GO Countdown
-        if (minigameTimer >= 1.5f && minigameTimer <= 2.3f) { startCountdownImage.enabled = true; startCountdownImage.sprite = startCountdownTextures[0]; }
-        else if (minigameTimer >= 2.3f && minigameTimer <= 3.1f) startCountdownImage.sprite = startCountdownTextures[1];
-        else if (minigameTimer >= 3.1 && minigameTimer <= 3.9) startCountdownImage.sprite = startCountdownTextures[2];
-        else if (minigameTimer >= 3.9f && minigameTimer <= 4.7f) startCountdownImage.sprite = startCountdownTextures[3];
+        if (minigameTimer >= 1.5f && minigameTimer <= 2.3f)
+        {
+            startCountdownImage.enabled = true;
+            startCountdownImage.sprite = startCountdownTextures[0];
+        }
+        else if (minigameTimer >= 2.3f && minigameTimer <= 3.1f)
+            startCountdownImage.sprite = startCountdownTextures[1];
+
+        else if (minigameTimer >= 3.1 && minigameTimer <= 3.9)
+            startCountdownImage.sprite = startCountdownTextures[2];
+
+        else if (minigameTimer >= 3.9f && minigameTimer <= 4.7f)
+            startCountdownImage.sprite = startCountdownTextures[3];
+
         else if (minigameTimer >= 5.0f)
         {
             startCountdownImage.enabled = false;
