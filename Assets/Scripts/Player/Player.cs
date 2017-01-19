@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -39,7 +40,8 @@ public class Player : MonoBehaviour
     public enum Model
     {
         Mascot,
-        Nerd
+        Nerd,
+        Pinata
     }
 
     // Player stats
@@ -51,10 +53,13 @@ public class Player : MonoBehaviour
     public int m_Score;
     //public int m_Health;
     //public int m_MaxHealth;
+    public bool m_CanAttack;
     public float m_CheckLocationCooldown;
     //To hold location every x seconds to respawn to
     public Vector3 m_Location;
     public Animator m_Animator;
+    public List<RenderTexture> m_Portraits;
+    public GameObject m_PlayerObject;
     private Transform m_Weapon;
     private HeartSystem m_Heart;
     private CharacterController m_CharController;
@@ -110,13 +115,19 @@ public class Player : MonoBehaviour
         //Primary Attack
         if (Input.GetAxisRaw(m_PrimaryAttack + m_Controller.ToString()) == 1)
         {
-            attack(ATTACKTYPE.PRIMARY);
+            if (m_CanAttack)
+            {
+                attack(ATTACKTYPE.PRIMARY);
+            }
         }
 
         //Secondary Attack
         if (Input.GetAxisRaw(m_SecondaryAttack + m_Controller.ToString()) == 1)
         {
-            attack(ATTACKTYPE.SECONDARY);
+            if (m_CanAttack)
+            {
+                attack(ATTACKTYPE.SECONDARY);
+            }
         }
 
         //Interact
@@ -185,6 +196,44 @@ public class Player : MonoBehaviour
         m_Heart.curHealth = m_Heart.maxHealth;
         m_Heart.UpdateHearts();
         Debug.Log("Respawned");
+    }
+
+    public void updateModel()
+    {
+        if (m_PlayerObject != null)
+        {
+            if (m_PlayerObject.transform.FindChild("Model") != null)
+            {
+                GameObject previousModel = m_PlayerObject.transform.FindChild("Model").gameObject;
+                Destroy(previousModel);
+            }
+            switch (m_Model)
+            {
+                case Player.Model.Mascot:
+                    GameObject mascotClone = Instantiate(GameManager.m_Instance.m_MascotPrefab, transform.position, Quaternion.identity) as GameObject;
+                    mascotClone.transform.parent = m_PlayerObject.gameObject.transform;
+                    mascotClone.transform.localPosition = new Vector3(0, 0, 0);
+                    mascotClone.transform.localRotation = Quaternion.identity;
+                    mascotClone.transform.localScale = new Vector3(1, 1, 1);
+                    mascotClone.name = "Model";
+                    m_Animator = mascotClone.GetComponent<Animator>();
+                    break;
+                case Player.Model.Pinata:
+                    GameObject pinataClone = Instantiate(GameManager.m_Instance.m_MascotPrefab, transform.position, Quaternion.identity) as GameObject;
+                    pinataClone.transform.parent = m_PlayerObject.gameObject.transform;
+                    pinataClone.transform.localPosition = new Vector3(0, 0, 0);
+                    pinataClone.transform.localRotation = Quaternion.identity;
+                    pinataClone.transform.localScale = new Vector3(1, 1, 1);
+                    pinataClone.name = "Model";
+                    m_Animator = pinataClone.GetComponent<Animator>();
+                    break;
+
+            }
+        }
+        else
+        {
+            Debug.Log("Error: Player's 'm_PlayerObject' is not assigned!");
+        }
     }
 
     public void stun(float secs)

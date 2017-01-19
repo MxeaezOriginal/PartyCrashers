@@ -55,30 +55,33 @@ public class HeartSystem : MonoBehaviour
 
     public void UpdateHearts()
     {
-        bool empty = false;
-        int i = 0;
-
-        foreach (Image image in heartImages)
+        if (GameManager.m_Instance.m_GameState == GameManager.GameState.Dungeon)
         {
-            if (empty)
+            bool empty = false;
+            int i = 0;
+
+            foreach (Image image in heartImages)
             {
-                image.sprite = heartSprites[0];//0 is an empty heart.
-            }
-            else
-            {
-                i++;
-                if (curHealth >= i * healthPerHeart)
+                if (empty)
                 {
-                    image.sprite = heartSprites[heartSprites.Length - 1];//.Length - 1 is a full heart
+                    image.sprite = heartSprites[0];//0 is an empty heart.
                 }
                 else
                 {
-                    int currentHeartHealth = (int)(healthPerHeart - (healthPerHeart * i - curHealth));
-                    int healthPerImage = healthPerHeart / (heartSprites.Length - 1);
-                    int imageIndex = currentHeartHealth / healthPerImage;
+                    i++;
+                    if (curHealth >= i * healthPerHeart)
+                    {
+                        image.sprite = heartSprites[heartSprites.Length - 1];//.Length - 1 is a full heart
+                    }
+                    else
+                    {
+                        int currentHeartHealth = (int)(healthPerHeart - (healthPerHeart * i - curHealth));
+                        int healthPerImage = healthPerHeart / (heartSprites.Length - 1);
+                        int imageIndex = currentHeartHealth / healthPerImage;
 
-                    image.sprite = heartSprites[imageIndex];
-                    empty = true;
+                        image.sprite = heartSprites[imageIndex];
+                        empty = true;
+                    }
                 }
             }
         }
