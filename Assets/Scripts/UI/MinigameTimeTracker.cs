@@ -5,15 +5,16 @@ using System.Collections;
 public class MinigameTimeTracker : MonoBehaviour
 {
     MinigameManager minigameManger;
-    //TEMP.!
-    public CanvasGroup fadingCanvas;
-    public CanvasGroup fadingCanvas1;
-    ////////
+
+    public CanvasGroup FirstFadingCanvas;
+    public CanvasGroup SecondFadingCanvas;
+
     CanvasGroup rewardFadeInCanvas;
     Image startCountdownImage;
     public Sprite[] startCountdownTextures;
 
-    public float minigameTimer = 0f;            //Timer for a minigame
+    float minigameTimerRaw;     //floats gets rounded to "minigameTimer" int in Update
+    public int minigameTimer;
 
     float fadeTime = 2f;
 
@@ -23,21 +24,24 @@ public class MinigameTimeTracker : MonoBehaviour
     void Awake()
     {
         minigameManger = GetComponent<MinigameManager>();
-        fadingCanvas = GameObject.Find("Fading Canvas").GetComponent<CanvasGroup>();
+        FirstFadingCanvas = GameObject.Find("First Fading Canvas").GetComponent<CanvasGroup>();
+        SecondFadingCanvas = GameObject.Find("Second Fading Canvas").GetComponent<CanvasGroup>();
         startCountdownImage = GameObject.Find("Start Countdown Image").GetComponent<Image>();
     }
     void Update()
     {
+        minigameTimer = (int)Mathf.Round(minigameTimerRaw);
+
         if (!minigameManger.minigameEnded)
         {
-            minigameTimer += Time.deltaTime;
+            minigameTimerRaw += Time.deltaTime;
             MinigameStart();
         }
         else
             MinigameEnd();
 
-        //Minigame ends in 30s from start (5s is from 3, 2, 1 Countdown in MinigameStart())
-        if (minigameTimer >= 35f)
+        //Minigame ends in 30s from start (6s is from 3, 2, 1 Countdown in MinigameStart())
+        if (minigameTimerRaw >= 36f)
             minigameManger.minigameEnded = true;
 
         //TESTING
@@ -57,28 +61,27 @@ public class MinigameTimeTracker : MonoBehaviour
             player.GetComponent<PlayerController>().m_CantMove = true;
 
         //3, 2, 1, GO Countdown
-        if (minigameTimer >= 1.5f && minigameTimer <= 2.3f)
+        if (minigameTimer == 2)
         {
             startCountdownImage.enabled = true;
             startCountdownImage.sprite = startCountdownTextures[0];
         }
-        else if (minigameTimer >= 2.3f && minigameTimer <= 3.1f)
+        else if (minigameTimer == 3)
             startCountdownImage.sprite = startCountdownTextures[1];
 
-        else if (minigameTimer >= 3.1 && minigameTimer <= 3.9)
+        else if (minigameTimer == 4)
             startCountdownImage.sprite = startCountdownTextures[2];
 
-        else if (minigameTimer >= 3.9f && minigameTimer <= 4.7f)
+        else if (minigameTimer == 5)
             startCountdownImage.sprite = startCountdownTextures[3];
 
-        else if (minigameTimer >= 5.0f)
+        else if (minigameTimer >= 6)
         {
             startCountdownImage.enabled = false;
-
             //Enable Players' movement
             foreach (GameObject player in GameManager.m_Instance.m_Players)
                 player.GetComponent<PlayerController>().m_CantMove = false;
-        }
+        }   
     }
 
     void MinigameEnd()
@@ -90,9 +93,9 @@ public class MinigameTimeTracker : MonoBehaviour
         delayToFadeIn -= Time.deltaTime;
         if (delayToFadeIn < 0)
         {
-            if (fadingCanvas.alpha < 0.6)
+            if (FirstFadingCanvas.alpha < 0.6)
             {
-                fadingCanvas.alpha += Time.deltaTime / fadeTime;
+                FirstFadingCanvas.alpha += Time.deltaTime / fadeTime;
             }
 
             delayToShowResultBar -= Time.deltaTime;
@@ -105,10 +108,9 @@ public class MinigameTimeTracker : MonoBehaviour
 
     void ScreenFading()
     {
-        if (fadingCanvas1.alpha < 0.6)
+        if (SecondFadingCanvas.alpha < 0.6)
         {
-            fadingCanvas1.alpha += Time.deltaTime / fadeTime;
+            SecondFadingCanvas.alpha += Time.deltaTime / fadeTime;
         }
-        //fadingCanvas.transform.SetAsLastSibling();
     }
 }

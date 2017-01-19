@@ -20,14 +20,17 @@ public class MinigameResult : MonoBehaviour
     public List<int> allScoresList = new List<int>();
     public int[] allScores = new int[4];
 
+    //Delays between Raising Result Bars
+    float delay = 3.5f;
+    float firstDelay;
+    float secondDelay;
+    float ThirdDelay;
+
     //TEMP.!!! WILL BE RENAMED/REMOVED//
     bool test = true;
     bool test2 = true;
     bool test3 = true;
     bool test4 = true;
-    float delay1 = 3.5f;
-    float delay2 = 7f;
-    float delay3 = 10.5f;
     float delay4 = 5f;
     public int P1_Score, P2_Score, P3_Score, P4_Score;      //TEMP.! REPLACE WITH PLAYERS' ACTUAL SCORE//
     //
@@ -41,6 +44,10 @@ public class MinigameResult : MonoBehaviour
     {
         minigameManager = GetComponent<MinigameManager>();
         minigameTimeTracker = GetComponent<MinigameTimeTracker>();
+
+        firstDelay = delay;
+        secondDelay = firstDelay + delay;
+        ThirdDelay = secondDelay + delay;
     }
 
     void Update()
@@ -141,8 +148,8 @@ public class MinigameResult : MonoBehaviour
                     P2_Bar.fillAmount = Mathf.Lerp(P2_Bar.fillAmount, resultBarAmount(scorePlace2, 0, maxScore, 0, 1), speed * Time.deltaTime);
                 }
 
-                delay1 -= Time.deltaTime;
-                if (delay1 < 0)
+                firstDelay -= Time.deltaTime;
+                if (firstDelay < 0)
                 {
                     test = false;
                     if (P1_place == 1)
@@ -160,8 +167,8 @@ public class MinigameResult : MonoBehaviour
                     P3_Bar.fillAmount = Mathf.Lerp(P3_Bar.fillAmount, resultBarAmount(scorePlace3, 0, maxScore, 0, 1), speed * Time.deltaTime);
                 }
 
-                delay1 -= Time.deltaTime;
-                if (delay1 < 0)
+                firstDelay -= Time.deltaTime;
+                if (firstDelay < 0)
                 {
                     test = false;
                     if (test2)
@@ -175,8 +182,8 @@ public class MinigameResult : MonoBehaviour
                     }
                 }
 
-                delay2 -= Time.deltaTime;
-                if (delay2 < 0)
+                secondDelay -= Time.deltaTime;
+                if (secondDelay < 0)
                 {
                     test2 = false;
                     if (test3)
@@ -199,8 +206,8 @@ public class MinigameResult : MonoBehaviour
                     P4_Bar.fillAmount = Mathf.Lerp(P4_Bar.fillAmount, resultBarAmount(scorePlace4, 0, maxScore, 0, 1), speed * Time.deltaTime);
                 }
 
-                delay1 -= Time.deltaTime;
-                if (delay1 < 0)
+                firstDelay -= Time.deltaTime;
+                if (firstDelay < 0)
                 {
                     test = false;
                     if (test2)
@@ -216,8 +223,8 @@ public class MinigameResult : MonoBehaviour
                     }
                 }
 
-                delay2 -= Time.deltaTime;
-                if (delay2 < 0)
+                secondDelay -= Time.deltaTime;
+                if (secondDelay < 0)
                 {
                     test2 = false;
                     if (test3)
@@ -233,8 +240,8 @@ public class MinigameResult : MonoBehaviour
                     }
                 }
 
-                delay3 -= Time.deltaTime;
-                if (delay3 < 0)
+                ThirdDelay -= Time.deltaTime;
+                if (ThirdDelay < 0)
                 {
                     test3 = false;
                     if (test4)
