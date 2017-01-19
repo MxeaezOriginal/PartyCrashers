@@ -60,7 +60,7 @@ public class MinigameTimeTracker : MonoBehaviour
         foreach (GameObject player in GameManager.m_Instance.m_Players)
         {
             player.GetComponent<PlayerController>().m_CantMove = true;
-            player.GetComponent<Player>().m_CanAttack = false;
+            player.GetComponent<Player>().m_CantAttack = true;
         }
 
         //3, 2, 1, GO Countdown
@@ -85,7 +85,7 @@ public class MinigameTimeTracker : MonoBehaviour
             foreach (GameObject player in GameManager.m_Instance.m_Players)
             {
                 player.GetComponent<PlayerController>().m_CantMove = false;
-                player.GetComponent<Player>().m_CanAttack = true;
+                player.GetComponent<Player>().m_CantAttack = false;
             }
         }   
     }

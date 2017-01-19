@@ -15,6 +15,7 @@ public class WeaponManager : MonoBehaviour
     private Dictionary<string, GameObject> m_Weapons = new Dictionary<string, GameObject>();
     private GameObject m_WeaponParent;
     private GameObject m_WeaponStandingOn;
+    private GameObject m_WeaponStandingOnPickup;
 
     void Start()
     {
@@ -56,7 +57,7 @@ public class WeaponManager : MonoBehaviour
         DropCurrentWeapon();
 
         GameObject newWeapon = Instantiate(weapon, weapon.transform.position, weapon.transform.rotation) as GameObject;
-        newWeapon.transform.parent = m_WeaponParent.gameObject.transform;
+        newWeapon.transform.parent = child.gameObject.transform;
         newWeapon.transform.localPosition = new Vector3(0, 0, 0);
         newWeapon.transform.localRotation = Quaternion.identity;
         newWeapon.transform.localScale = new Vector3(1, 1, 1);
@@ -77,6 +78,8 @@ public class WeaponManager : MonoBehaviour
 
         newWeapon.name = m_WeaponParent.name;
         m_CurrentWeapon = newWeapon;
+
+        Destroy(m_WeaponStandingOnPickup);
     }
 
     private void DropCurrentWeapon()
@@ -133,6 +136,7 @@ public class WeaponManager : MonoBehaviour
                         //InstantiateWeapon(weapon, child.gameObject);
                         m_WeaponParent = child.gameObject;
                         m_WeaponStandingOn = weapon;
+                        m_WeaponStandingOnPickup = other.gameObject;
                         Debug.Log("Standing on " + weapon.name);
                         break;
                     }
@@ -143,10 +147,12 @@ public class WeaponManager : MonoBehaviour
     }
     public void OnTriggerExit(Collider other)
     {
-        if(m_WeaponStandingOn == other.gameObject)
+        if (m_WeaponStandingOn != null)
         {
+            Debug.Log("Now leaving " + m_WeaponStandingOn.name + " behind.. :'(");
+            m_WeaponParent = null;
             m_WeaponStandingOn = null;
-            Debug.Log("Leaving the " + other.name + " :'(");
+            m_WeaponStandingOnPickup = null;
         }
     }
 }
