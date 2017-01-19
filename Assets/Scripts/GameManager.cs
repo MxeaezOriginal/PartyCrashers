@@ -81,7 +81,7 @@ public class GameManager : MonoBehaviour
                 Debug.Log("Partybar not found");
             }
             FindHearts();
-            FindStatsWindowAnimator();
+            //FindStatsWindowAnimator();
             m_NumOfPlayers = 0;
         }
         else
@@ -101,7 +101,7 @@ public class GameManager : MonoBehaviour
                 GameManager.m_Instance.loadPlayers();
             }
             FindHearts();
-            FindStatsWindowAnimator();
+            //FindStatsWindowAnimator();
 
             Destroy(gameObject);
         }
@@ -125,31 +125,31 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void FindStatsWindowAnimator()
-    {
-        for (int i = 0; i < m_Instance.m_Players.Length; ++i)
-        {
-            Player player = m_Instance.m_Players[i].GetComponent<Player>();
-            Stats stats = player.GetComponent<Stats>();
-            switch (player.m_Player)
-            {
-                case Player.PLAYER.P1:
-                    stats.anim = GameObject.Find(m_Instance.m_GameState.ToString() + "_HUD_Canvas/P1_Panel/Stats").GetComponent<Animator>();
-                    print("Found P1 Stats");
-                    break;
-                case Player.PLAYER.P2:
-                    stats.anim = GameObject.Find(m_Instance.m_GameState.ToString() + "_HUD_Canvas/P2_Panel/Stats").GetComponent<Animator>();
-                    print("Found P2 Stats");
-                    break;
-                case Player.PLAYER.P3:
-                    stats.anim = GameObject.Find(m_Instance.m_GameState.ToString() + "_HUD_Canvas/P3_Panel/Stats").GetComponent<Animator>();
-                    break;
-                case Player.PLAYER.P4:
-                    stats.anim = GameObject.Find(m_Instance.m_GameState.ToString() + "_HUD_Canvas/P4_Panel/Stats").GetComponent<Animator>();
-                    break;
-            }
-        }
-    }
+    //void FindStatsWindowAnimator()
+    //{
+    //    for (int i = 0; i < m_Instance.m_Players.Length; ++i)
+    //    {
+    //        Player player = m_Instance.m_Players[i].GetComponent<Player>();
+    //        Stats stats = player.GetComponent<Stats>();
+    //        switch (player.m_Player)
+    //        {
+    //            case Player.PLAYER.P1:
+    //                stats.anim = GameObject.Find(m_Instance.m_GameState.ToString() + "_HUD_Canvas/P1_Panel/Stats").GetComponent<Animator>();
+    //                print("Found P1 Stats");
+    //                break;
+    //            case Player.PLAYER.P2:
+    //                stats.anim = GameObject.Find(m_Instance.m_GameState.ToString() + "_HUD_Canvas/P2_Panel/Stats").GetComponent<Animator>();
+    //                print("Found P2 Stats");
+    //                break;
+    //            case Player.PLAYER.P3:
+    //                stats.anim = GameObject.Find(m_Instance.m_GameState.ToString() + "_HUD_Canvas/P3_Panel/Stats").GetComponent<Animator>();
+    //                break;
+    //            case Player.PLAYER.P4:
+    //                stats.anim = GameObject.Find(m_Instance.m_GameState.ToString() + "_HUD_Canvas/P4_Panel/Stats").GetComponent<Animator>();
+    //                break;
+    //        }
+    //    }
+    //}
 
     void FindHearts()
     {

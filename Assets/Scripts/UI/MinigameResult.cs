@@ -20,7 +20,7 @@ public class MinigameResult : MonoBehaviour
     public List<int> allScoresList = new List<int>();
     public int[] allScores = new int[4];
 
-    //TEMP.!!!
+    //TEMP.!!! WILL BE RENAMED/REMOVED//
     bool test = true;
     bool test2 = true;
     bool test3 = true;
@@ -28,7 +28,7 @@ public class MinigameResult : MonoBehaviour
     float delay1 = 3.5f;
     float delay2 = 7f;
     float delay3 = 10.5f;
-    float delay4 = 3f;
+    float delay4 = 5f;
     public int P1_Score, P2_Score, P3_Score, P4_Score;      //TEMP.! REPLACE WITH PLAYERS' ACTUAL SCORE//
     //
 
