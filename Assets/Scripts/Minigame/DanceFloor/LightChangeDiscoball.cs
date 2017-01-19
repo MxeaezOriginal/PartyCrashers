@@ -31,7 +31,7 @@ public class LightChangeDiscoball : MonoBehaviour {
     private Color CurrentColor;
     public int CurrentColorInt;
     private Color PreviousColor;
-    private int PreviousColorInt;
+    public int PreviousColorInt;
     //public int CurrentColorNumber;
 
     private bool stop = false;
@@ -42,6 +42,7 @@ public class LightChangeDiscoball : MonoBehaviour {
     {
         //CurrentColorNumber = 1;
         lt = GetComponent<Light>();
+        CurrentColorInt = 8;
         //changeColor();
     }
 
@@ -51,12 +52,14 @@ public class LightChangeDiscoball : MonoBehaviour {
         if (stop == true)
         {
             StartCoroutine(Stopedfor(scoretime));
+            //lt.color = Color.
         }
         if (stop == false)
         {
             StartCoroutine(Stopfor(scoretime));
             StartCoroutine(ColorRandomiser(stoptime));
             lt.color = Color.Lerp(CurrentColor, PreviousColor, Mathf.PingPong(Time.time * 1.5f, 1));
+            PreviousColorInt = CurrentColorInt;
             //lt.color = Color.Lerp(CurrentColor, PreviousColor, 1);
         }
         //Debug.Log(stop);
@@ -84,81 +87,81 @@ public class LightChangeDiscoball : MonoBehaviour {
     IEnumerator ColorRandomiser(float wait)
     {
         yield return new WaitForSeconds(wait);
-        CurrentColorInt = Random.Range(0, 8);
-        PreviousColorInt = Random.Range(0, 8);
-        if (CurrentColorInt == PreviousColorInt)
-        {
-            CurrentColorInt = Random.Range(0, 8);
-            PreviousColorInt = Random.Range(0, 8);
-        }
-        else//im so sorry
-        {
+        CurrentColorInt = Random.Range(0, 7);
+        //PreviousColorInt = Random.Range(0, 8);
+        //if (CurrentColorInt == PreviousColorInt)
+        //{
+        //    CurrentColorInt = Random.Range(0, 8);
+        //    PreviousColorInt = Random.Range(0, 8);
+        //}
+        //else//im so sorry
+        //{
             if (CurrentColorInt == 0)
             {
                 CurrentColor = ColorZero;
             }
-            else if (CurrentColorInt == 1)
+            if (CurrentColorInt == 1)
             {
                 CurrentColor = ColorOne;
             }
-            else if (CurrentColorInt == 2)
+            if (CurrentColorInt == 2)
             {
                 CurrentColor = ColorTwo;
             }
-            else if (CurrentColorInt == 3)
+            if (CurrentColorInt == 3)
             {
                 CurrentColor = ColorThree;
             }
-            else if (CurrentColorInt == 4)
+            if (CurrentColorInt == 4)
             {
                 CurrentColor = ColorFour;
             }
-            else if (CurrentColorInt == 5)
+            if (CurrentColorInt == 5)
             {
                 CurrentColor = ColorFive;
             }
-            else if (CurrentColorInt == 6)
+            if (CurrentColorInt == 6)
             {
                 CurrentColor = ColorSix;
             }
-            else if (CurrentColorInt == 7)
+            if (CurrentColorInt == 7)
             {
                 CurrentColor = ColorSeven;
             }
 
-            if (PreviousColorInt == 0)
-            {
-                CurrentColor = ColorZero;
-            }
-            else if (PreviousColorInt == 1)
-            {
-                CurrentColor = ColorOne;
-            }
-            else if (PreviousColorInt == 2)
-            {
-                CurrentColor = ColorTwo;
-            }
-            else if (PreviousColorInt == 3)
-            {
-                CurrentColor = ColorThree;
-            }
-            else if (PreviousColorInt == 4)
-            {
-                CurrentColor = ColorFour;
-            }
-            else if (PreviousColorInt == 5)
-            {
-                CurrentColor = ColorFive;
-            }
-            else if (PreviousColorInt == 6)
-            {
-                CurrentColor = ColorSix;
-            }
-            else if (PreviousColorInt == 7)
-            {
-                CurrentColor = ColorSeven;
-            }
-        }
+            //if (PreviousColorInt == 0)
+            //{
+            //    CurrentColor = ColorZero;
+            //}
+            //if (PreviousColorInt == 1)
+            //{
+            //    CurrentColor = ColorOne;
+            //}
+            //if (PreviousColorInt == 2)
+            //{
+            //    CurrentColor = ColorTwo;
+            //}
+            //if (PreviousColorInt == 3)
+            //{
+            //    CurrentColor = ColorThree;
+            //}
+            //if (PreviousColorInt == 4)
+            //{
+            //    CurrentColor = ColorFour;
+            //}
+            //if (PreviousColorInt == 5)
+            //{
+            //    CurrentColor = ColorFive;
+            //}
+            //if (PreviousColorInt == 6)
+            //{
+            //    CurrentColor = ColorSix;
+            //}
+            //if (PreviousColorInt == 7)
+            //{
+            //    CurrentColor = ColorSeven;
+            //}
+        //}
 
     }
 }
