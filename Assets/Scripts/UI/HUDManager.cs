@@ -13,11 +13,6 @@ public class HUDManager : MonoBehaviour
     public RectTransform P2_PanelTransform;
     public RectTransform P3_PanelTransform;
     public RectTransform P4_PanelTransform;
-    //Player Stats Windows
-    public RectTransform P1_StatsWindow;
-    public RectTransform P2_StatsWindow;
-    public RectTransform P3_StatsWindow;
-    public RectTransform P4_StatsWindow;
 
     void Awake()
     {

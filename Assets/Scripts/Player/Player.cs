@@ -151,7 +151,7 @@ public class Player : MonoBehaviour
 
         if (Input.GetButtonDown(m_Stats + m_Controller.ToString()))
         {
-            GetComponent<Stats>().ToggleWindow();
+            //GetComponent<Stats>().ToggleWindow();
         }
         //if (Input.GetButtonUp(m_Stats))
         //{
