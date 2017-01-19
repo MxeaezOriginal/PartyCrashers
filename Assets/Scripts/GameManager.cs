@@ -265,6 +265,7 @@ public class GameManager : MonoBehaviour
             playerComponent.m_PlayerObject = playerClone;
 
             playerComponent.m_Player = (Player.PLAYER)System.Enum.Parse(typeof(Player.PLAYER), player);
+            playerComponent.updateModel();
             playerComponent.save();
 
 
