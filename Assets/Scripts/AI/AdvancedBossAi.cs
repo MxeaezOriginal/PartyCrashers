@@ -120,6 +120,7 @@ public class AdvancedBossAi : MonoBehaviour
 
                 m_Velocity = knockBack * Vector3.Normalize(transform.position - other.transform.position);
                 m_Health -= dmg;
+                m_StunTime = stun;
                 state = states.hurt;
             }
         }
