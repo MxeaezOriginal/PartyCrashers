@@ -21,8 +21,8 @@ public class LightChangeDancefloor : MonoBehaviour {
 	private Color ColorSix;
 	[SerializeField]
 	private Color ColorSeven;
-	[SerializeField]
-	private float colorSwapTime;
+	//[SerializeField]
+	//private float colorSwapTime;
 
 	[SerializeField]
 	private float scoretime = 4;
@@ -30,18 +30,18 @@ public class LightChangeDancefloor : MonoBehaviour {
 	private float stoptime = 4;
 
 	private Color CurrentColor;
-	private int CurrentColorInt;
+	public int CurrentColorInt;
 	private Color PreviousColor;
 	private int PreviousColorInt;
-	public int CurrentColorNumber;
+	//public int CurrentColorNumber;
 
-	private bool stop = false;
+	public bool stop = false;
 
 
 	// Use this for initialization
 	void Start()
 	{		
-		CurrentColorNumber = 1;
+		//CurrentColorNumber = 1;
 		lt = GetComponent<Light>();
 		//changeColor();
 	}
@@ -53,30 +53,18 @@ public class LightChangeDancefloor : MonoBehaviour {
 		{
 			StartCoroutine (Stopedfor (scoretime));
 		}
-		else if (stop == false) 
+		if (stop == false) 
 		{
 			StartCoroutine(Stopfor(scoretime));
 			StartCoroutine(ColorRandomiser(stoptime));
-			lt.color = Color.Lerp (CurrentColor, PreviousColor, Mathf.PingPong (Time.time, 1));
-		}
-
+            lt.color = Color.Lerp (CurrentColor, PreviousColor, Mathf.PingPong (Time.time*1.5f, 1));
+            //lt.color = Color.Lerp(CurrentColor, PreviousColor, 1);
+        }
+        //Debug.Log(stop);
 		//For future reference, to make it only go one direction you will need to raise the variable ie.
 		// lt.color = Color.Lerp(CurrentColor, PreviousColor,  "0.1 value raised by x until 1");
 	}
-
-	/*void changeColor()
-	{
-		if (CurrentColorNumber == 1)
-		{
-			CurrentColorNumber = 2;
-		}
-		else if  (CurrentColorNumber == 2)
-		{
-			CurrentColorNumber = 1;
-		}
-		Invoke("changeColor", colorSwapTime);
-	}*/
-
+    
 	IEnumerator Stopfor(float wait) 
 	{
 		//this is the amount of time i want it to wait
@@ -97,11 +85,11 @@ public class LightChangeDancefloor : MonoBehaviour {
 	IEnumerator ColorRandomiser(float wait)
 	{
 		yield return new WaitForSeconds(wait);
-		CurrentColorInt = Random.Range (0,7);
-		PreviousColorInt = Random.Range (0,7);
+		CurrentColorInt = Random.Range (0,8);
+		PreviousColorInt = Random.Range (0,8);
 		if (CurrentColorInt == PreviousColorInt) {
-			CurrentColorInt = Random.Range (0,7);
-			PreviousColorInt = Random.Range (0,7);
+			CurrentColorInt = Random.Range (0,8);
+			PreviousColorInt = Random.Range (0,8);
 		} 
 		else//im so sorry
 		{
