@@ -112,11 +112,15 @@ public class AdvancedBossAi : MonoBehaviour
         {
             if (other.gameObject.GetComponent<Damage>() != null)
             {
+
                 Damage attacker = other.gameObject.GetComponent<Damage>();
                 StateEffect attackerEffect = other.gameObject.GetComponent<StateEffect>();
                 float dmg = attacker.m_Damage;
-                float knockBack = attackerEffect.m_KnockBack;
-                float stun = attackerEffect.m_StunTime;
+                //float knockBack = attackerEffect.m_KnockBack; //These two is how this code is supposed to work but for whatever reason it's not getting these or the values just don't exist
+                //float stun = attackerEffect.m_StunTime;
+
+                float knockBack = 10f;
+                float stun = 10f;
 
                 m_Velocity = knockBack * Vector3.Normalize(transform.position - other.transform.position);
                 m_Health -= dmg;
@@ -143,7 +147,7 @@ public class AdvancedBossAi : MonoBehaviour
     {
         m_Health -= damageTaken;
 
-        if (frame/60 > stunTime)
+        if (frame > stunTime)
         {
             state = states.idle;
         }
