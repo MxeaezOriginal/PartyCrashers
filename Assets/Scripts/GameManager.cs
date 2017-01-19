@@ -13,11 +13,12 @@ public class GameManager : MonoBehaviour
     {
         public string name;
         public Player.PLAYER player;
+        public Player.Model model;
         public float attackSpeed;
         public int gold;
         public int score;
-        public int health;
-        public int maxHealth;
+        //public int health;
+        //public int maxHealth;
         public Player.Controller m_Controller;
     }
     public enum GameState
@@ -42,6 +43,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject m_PlayerPrefab;
     public GameObject m_MascotPrefab;
+    public GameObject m_PinataPrefab;
 
     public PlayerStats m_Player1;
     public PlayerStats m_Player2;
@@ -259,6 +261,7 @@ public class GameManager : MonoBehaviour
         playerClone.transform.localScale = new Vector3(1, 1, 1);
         playerClone.name = parent.name;
 
+        //Set the player values when it's instantiated
         if (playerClone.GetComponent<Player>() != null)
         {
             Player playerComponent = playerClone.gameObject.GetComponent<Player>();
@@ -268,6 +271,23 @@ public class GameManager : MonoBehaviour
             playerComponent.updateModel();
             playerComponent.save();
 
+            if(playerClone.transform.FindChild("Portrait") != null)
+            {
+                Transform portraitTransform = playerClone.transform.FindChild("Portrait");
+
+                if(portraitTransform.GetComponent<RenderTexture>() != null)
+                {
+                    RenderTexture portraitTexture = portraitTransform.GetComponent<RenderTexture>();
+                }
+                else
+                {
+                    Debug.LogError("Portrait under Player Prefab doesn't have RenderTexture component");
+                }
+            }
+            else
+            {
+                Debug.LogError("Unable to find 'Portrait' GameObject under the Player Prefab");
+            }
 
         }
         else
