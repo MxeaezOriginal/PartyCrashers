@@ -21,21 +21,22 @@ public class HUDManager : MonoBehaviour
 
     void Awake()
     {
+        print((GameManager.m_Instance.m_GameState.ToString() + "Canvas/P1_Panel"));
     }
 
     void Start()
     {
-        if (GameObject.Find(GameManager.m_Instance.m_GameState.ToString() + "_HUD_Canvas/P1_Panel") != null)
+        if (GameObject.Find(GameManager.m_Instance.m_GameState.ToString() + "Canvas/P1_Panel") != null)
         {
-            P1_Panel = GameObject.Find(GameManager.m_Instance.m_GameState.ToString() + "_HUD_Canvas/P1_Panel");
-            P2_Panel = GameObject.Find(GameManager.m_Instance.m_GameState.ToString() + "_HUD_Canvas/P2_Panel");
-            P3_Panel = GameObject.Find(GameManager.m_Instance.m_GameState.ToString() + "_HUD_Canvas/P3_Panel");
-            P4_Panel = GameObject.Find(GameManager.m_Instance.m_GameState.ToString() + "_HUD_Canvas/P4_Panel");
+            P1_Panel = GameObject.Find(GameManager.m_Instance.m_GameState.ToString() + "Canvas/P1_Panel");
+            P2_Panel = GameObject.Find(GameManager.m_Instance.m_GameState.ToString() + "Canvas/P2_Panel");
+            P3_Panel = GameObject.Find(GameManager.m_Instance.m_GameState.ToString() + "Canvas/P3_Panel");
+            P4_Panel = GameObject.Find(GameManager.m_Instance.m_GameState.ToString() + "Canvas/P4_Panel");
 
-            P1_PanelTransform = GameObject.Find(GameManager.m_Instance.m_GameState.ToString() + "_HUD_Canvas/P1_Panel").GetComponent<RectTransform>();
-            P2_PanelTransform = GameObject.Find(GameManager.m_Instance.m_GameState.ToString() + "_HUD_Canvas/P2_Panel").GetComponent<RectTransform>();
-            P3_PanelTransform = GameObject.Find(GameManager.m_Instance.m_GameState.ToString() + "_HUD_Canvas/P3_Panel").GetComponent<RectTransform>();
-            P4_PanelTransform = GameObject.Find(GameManager.m_Instance.m_GameState.ToString() + "_HUD_Canvas/P4_Panel").GetComponent<RectTransform>();
+            P1_PanelTransform = GameObject.Find(GameManager.m_Instance.m_GameState.ToString() + "Canvas/P1_Panel").GetComponent<RectTransform>();
+            P2_PanelTransform = GameObject.Find(GameManager.m_Instance.m_GameState.ToString() + "Canvas/P2_Panel").GetComponent<RectTransform>();
+            P3_PanelTransform = GameObject.Find(GameManager.m_Instance.m_GameState.ToString() + "Canvas/P3_Panel").GetComponent<RectTransform>();
+            P4_PanelTransform = GameObject.Find(GameManager.m_Instance.m_GameState.ToString() + "Canvas/P4_Panel").GetComponent<RectTransform>();
 
             //P1_StatsWindow = GameObject.Find(GameManager.m_Instance.m_GameState.ToString() + "_HUD_Canvas/P1_Panel/Stats").GetComponent<RectTransform>();
             //P2_StatsWindow = GameObject.Find(GameManager.m_Instance.m_GameState.ToString() + "_HUD_Canvas/P2_Panel/Stats").GetComponent<RectTransform>();
@@ -61,7 +62,7 @@ public class HUDManager : MonoBehaviour
         }*/
         else
         {
-            Debug.Log("Dungeon_HUD_Canvas/P1_Panel or Minigame_HUD_Canvas/P1_Panel not found");
+            Debug.Log("DungeonCanvas/P1_Panel or MinigameCanvas/P1_Panel not found");
         }
         UpdateUIPanels();
     }

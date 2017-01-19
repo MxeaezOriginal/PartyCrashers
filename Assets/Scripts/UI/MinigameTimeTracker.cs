@@ -5,8 +5,10 @@ using System.Collections;
 public class MinigameTimeTracker : MonoBehaviour
 {
     MinigameManager minigameManger;
+    //TEMP.!
     public CanvasGroup fadingCanvas;
     public CanvasGroup fadingCanvas1;
+    ////////
     CanvasGroup rewardFadeInCanvas;
     Image startCountdownImage;
     public Sprite[] startCountdownTextures;
