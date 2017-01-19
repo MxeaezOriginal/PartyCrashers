@@ -58,7 +58,10 @@ public class MinigameTimeTracker : MonoBehaviour
     {
         //Disable Players' movement
         foreach (GameObject player in GameManager.m_Instance.m_Players)
+        {
             player.GetComponent<PlayerController>().m_CantMove = true;
+            player.GetComponent<Player>().m_CanAttack = false;
+        }
 
         //3, 2, 1, GO Countdown
         if (minigameTimer == 2)
@@ -80,7 +83,10 @@ public class MinigameTimeTracker : MonoBehaviour
             startCountdownImage.enabled = false;
             //Enable Players' movement
             foreach (GameObject player in GameManager.m_Instance.m_Players)
+            {
                 player.GetComponent<PlayerController>().m_CantMove = false;
+                player.GetComponent<Player>().m_CanAttack = true;
+            }
         }   
     }
 
