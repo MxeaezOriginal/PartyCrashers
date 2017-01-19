@@ -2,49 +2,50 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class MinigameTracker : MonoBehaviour
+public class MinigameTimeTracker : MonoBehaviour
 {
-    float fadeTime = 2f;
-    bool minigameEnded;
-    public float minigameTimer = 0f;
-
-
-    float delayToFadeIn = 1f;
-    float delayToShowResultBar = 2f;
-
-    CanvasGroup fadingCanvas;
+    MinigameManager minigameManger;
+    public CanvasGroup fadingCanvas;
+    public CanvasGroup fadingCanvas1;
     CanvasGroup rewardFadeInCanvas;
     Image startCountdownImage;
     public Sprite[] startCountdownTextures;
 
-    public bool showResultBar;
+    public float minigameTimer = 0f;            //Timer for a minigame
 
+    float fadeTime = 2f;
+
+    //Screen Fading floats
+    float delayToFadeIn = 1f;
+    float delayToShowResultBar = 2f;
     void Awake()
     {
+        minigameManger = GetComponent<MinigameManager>();
         fadingCanvas = GameObject.Find("Fading Canvas").GetComponent<CanvasGroup>();
         startCountdownImage = GameObject.Find("Start Countdown Image").GetComponent<Image>();
     }
     void Update()
     {
-        if (!minigameEnded)
+        if (!minigameManger.minigameEnded)
         {
             minigameTimer += Time.deltaTime;
             MinigameStart();
         }
         else
-        {
             MinigameEnd();
-        }
 
         //Minigame ends in 30s from start (5s is from 3, 2, 1 Countdown in MinigameStart())
         if (minigameTimer >= 35f)
-            minigameEnded = true;
+            minigameManger.minigameEnded = true;
 
         //TESTING
         if (Input.GetKeyDown(KeyCode.T))
         {
-            minigameEnded = true;
+            minigameManger.minigameEnded = true;
         }
+        /////////
+        if (minigameManger.barsRaised)
+            ScreenFading();
     }
 
     void MinigameStart()
@@ -95,8 +96,17 @@ public class MinigameTracker : MonoBehaviour
             delayToShowResultBar -= Time.deltaTime;
             if (delayToShowResultBar < 0)
             {
-                showResultBar = true; //PASSES TO NEIGHBOUR SCRIPT
+                minigameManger.showResultBar = true; //PASSES TO NEIGHBOUR SCRIPT
             }
         }
+    }
+
+    void ScreenFading()
+    {
+        if (fadingCanvas1.alpha < 0.6)
+        {
+            fadingCanvas1.alpha += Time.deltaTime / fadeTime;
+        }
+        //fadingCanvas.transform.SetAsLastSibling();
     }
 }
