@@ -65,7 +65,6 @@ public class Player : MonoBehaviour
     //To hold location every x seconds to respawn to
     public Vector3 m_Location;
     public Animator m_Animator;
-    public Dictionary<PLAYER, RenderTexture> m_Portraits;
     public GameObject m_PlayerObject;
     private Transform m_Weapon;
     private HeartSystem m_Heart;
@@ -100,6 +99,7 @@ public class Player : MonoBehaviour
         m_Heart = GetComponent<HeartSystem>();
         m_CharController = GetComponent<CharacterController>();
         m_WeaponManager = GetComponent<WeaponManager>();
+
     }
 
     // Update is called once per frame

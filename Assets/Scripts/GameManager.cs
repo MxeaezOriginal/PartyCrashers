@@ -45,6 +45,8 @@ public class GameManager : MonoBehaviour
     public GameObject m_MascotPrefab;
     public GameObject m_PinataPrefab;
 
+    public RenderTexture[] m_Portraits;
+
     public PlayerStats m_Player1;
     public PlayerStats m_Player2;
     public PlayerStats m_Player3;
@@ -275,13 +277,29 @@ public class GameManager : MonoBehaviour
             {
                 Transform portraitTransform = playerClone.transform.FindChild("Portrait");
 
-                if(portraitTransform.GetComponent<RenderTexture>() != null)
+                if(portraitTransform.GetComponent<Camera>() != null)
                 {
-                    RenderTexture portraitTexture = portraitTransform.GetComponent<RenderTexture>();
+                    Camera portraitCamera = portraitTransform.GetComponent<Camera>();
+
+                    switch(playerComponent.m_Player)
+                    {
+                        case Player.PLAYER.P1:
+                            portraitCamera.targetTexture = m_Portraits[0];
+                            break;
+                        case Player.PLAYER.P2:
+                            portraitCamera.targetTexture = m_Portraits[1];
+                            break;
+                        case Player.PLAYER.P3:
+                            portraitCamera.targetTexture = m_Portraits[2];
+                            break;
+                        case Player.PLAYER.P4:
+                            portraitCamera.targetTexture = m_Portraits[3];
+                            break;
+                    }
                 }
                 else
                 {
-                    Debug.LogError("Portrait under Player Prefab doesn't have RenderTexture component");
+                    Debug.LogError("Portrait under Player Prefab doesn't have Camera component");
                 }
             }
             else
