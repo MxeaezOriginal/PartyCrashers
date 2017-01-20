@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Lancher : MonoBehaviour
 {
-    public float m_FireIntervalMin = 5f;
+    public float m_FireIntervalMin = 5;
     public float m_FireIntervalMax = 10;
     public GameObject m_VasePrefeb;
     public GameObject m_VasePrefeb1;

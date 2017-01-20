@@ -29,38 +29,38 @@ public class DanceFloor : MonoBehaviour {
     {
         if (other.GetComponent<HeartSystem>() != null)
         {
+            // Particle System
             //if (m_effect != null)
             //{
             //    GameObject effect;
             //    effect = (GameObject)Instantiate(m_effect, gameObject.transform.position, gameObject.transform.rotation);
             //    Destroy(effect, 3f);
             //}
-            //Debug.Log("A player is standing on the tile.");
             if (m_Light.GetComponent<LightChangeDancefloor>().stop == false)
             {
-                if (m_CurrentFloorColor == m_CurrentBallColor)
-                {
-                    if(m_GetPoint)
-                    {
-                        // Getting Score.
-                        Debug.Log("Getting Score!");
-                        m_GetPoint = false;
+                //if (m_CurrentFloorColor == m_CurrentBallColor)
+                //{
+                //    if (m_GetPoint)
+                //    {
+                //        // Getting Score.
+                //        Debug.Log("Getting Score!");
+                //        m_GetPoint = false;
 
-                        StartCoroutine(WaitForSec(1f));
-                    }
-                }
-                else if (m_CurrentFloorColor == 7)
-                {
-                    // Lose Score.
-                    Debug.Log("LOSE point!");
-                    m_LosePoint = false;
+                //        StartCoroutine(WaitForSec(1f));
+                //    }
+                //}
+                //else if (m_CurrentFloorColor == 7)
+                //{
+                //    // Lose Score.
+                //    Debug.Log("LOSE point!");
+                //    m_LosePoint = false;
 
-                    StartCoroutine(WaitForSec2(1f));
-                }
-                else
-                {
+                //    StartCoroutine(WaitForSec2(1f));
+                //}
+                //else
+                //{
                     Debug.Log("No point.");
-                }
+                //}
             }
             if (m_Light.GetComponent<LightChangeDancefloor>().stop == true)
             {
@@ -101,3 +101,6 @@ public class DanceFloor : MonoBehaviour {
         m_LosePoint = true;
     }
 }
+
+// How to change Tiles' color:
+// Reference: https://www.youtube.com/watch?v=kN7Rx3uPBuU
