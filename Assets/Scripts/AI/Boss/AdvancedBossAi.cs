@@ -9,8 +9,11 @@ public class AdvancedBossAi : MonoBehaviour
     public float m_NumOfPlayersHealthMultiplier;
     private float m_Health;
 
+    public float m_Difficulty;
+
     //Projectile
     public GameObject m_Projectile;
+    private GameObject[] ProjectilesArray = { null, null ,null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null };
 
     //Frame
     private int frame;
@@ -55,6 +58,13 @@ public class AdvancedBossAi : MonoBehaviour
         m_Health = m_BaseMaxHealth * (players.Length*m_NumOfPlayersHealthMultiplier);
 
         m_Body = GetComponent<Rigidbody>();
+
+        //Projectiles
+        for (int i = 0; i < ProjectilesArray.Length; i++)
+        {
+            ProjectilesArray[i] = (GameObject)Instantiate(m_Projectile, transform.position, transform.rotation);
+            ProjectilesArray[i].gameObject.SetActive(false);
+        }
     }
 
     // Update is called once per frame
@@ -173,7 +183,7 @@ public class AdvancedBossAi : MonoBehaviour
 
         float velocityDistance = Vector3.Magnitude((pPosition + pVelocity) -transform.position);
 
-        Vector3 shootTarget = pPosition + (pVelocity) + bv*(distance/velocityDistance) ;
+        Vector3 shootTarget = pPosition + (pVelocity) + bv*(distance/velocityDistance);
 
         transform.LookAt(shootTarget);
 
@@ -181,16 +191,23 @@ public class AdvancedBossAi : MonoBehaviour
 
         if(frame == 1)
         {
-            GameObject projectile = (GameObject)Instantiate(m_Projectile, transform.position + (shootTarget - transform.position).normalized, transform.rotation);
-            Vector3 projectileVelocity = (shootTarget - transform.position).normalized * shootSpeed;
-            Debug.Log(projectileVelocity);
+            for(int i = 0; i < ProjectilesArray.Length; i++)
+            {
+                if(ProjectilesArray[i].active == false)
+                {
+                    ProjectilesArray[i].SetActive(true);
+                    ProjectilesArray[i].transform.position = transform.position + (shootTarget - transform.position).normalized;
 
-            BossProjectileKamin script = projectile.GetComponent<BossProjectileKamin>();
-
-            script.m_ProjectileVelocity = projectileVelocity;
+                    Vector3 projectileVelocity = (shootTarget - transform.position).normalized * shootSpeed;
+                    BossProjectileKamin script = ProjectilesArray[i].GetComponent<BossProjectileKamin>();
+                    script.m_ProjectileVelocity = projectileVelocity;
+                    break;
+                }
+                
+            }
 
         }
-        if(frame > 60)
+        if(frame > 60/m_Difficulty)
         {
             frame = 0;
         }
