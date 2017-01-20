@@ -151,7 +151,7 @@ public class AdvancedBossAi : MonoBehaviour
 
         GameObject closestPlayer = getClosestPlayer();
 
-        transform.LookAt(closestPlayer.transform.position);
+        //transform.LookAt(closestPlayer.transform.position);
         //Friction
         Friction(m_Friction);
     }
@@ -173,7 +173,7 @@ public class AdvancedBossAi : MonoBehaviour
         //Get Player to shoot at and target where the player is going 
         GameObject player = targetPlayer();
         Vector3 pPosition = player.transform.position;
-        float shootSpeed = 10f;
+        float shootSpeed = 20f;
         Vector3 bv = (pPosition - transform.position).normalized * shootSpeed;
         float distance = Vector3.Magnitude(pPosition - transform.position);
         
@@ -183,9 +183,30 @@ public class AdvancedBossAi : MonoBehaviour
 
         float velocityDistance = Vector3.Magnitude((pPosition + pVelocity) -transform.position);
 
-        Vector3 shootTarget = pPosition + (pVelocity) + bv*(distance/velocityDistance);
+        Vector3 BossPlayerVector = pPosition - transform.position;
+        float BossToPlayerPositionTime = BossPlayerVector.magnitude / shootSpeed;
 
-        transform.LookAt(shootTarget);
+        float totalTime = BossToPlayerPositionTime * (pVelocity.magnitude -shootSpeed);
+        float totalDistance = shootSpeed * totalTime;
+
+        Vector3 totalVector = totalDistance * BossPlayerVector.normalized;
+
+        float AnswerDistance = totalVector.magnitude - BossPlayerVector.magnitude;
+
+        Vector3 shootTarget = transform.position + BossPlayerVector + (pVelocity* BossToPlayerPositionTime);
+
+        Vector3 targetPosition;
+
+        if (pVelocity.magnitude > 1f)
+        {
+            transform.LookAt(shootTarget);
+            targetPosition = shootTarget;
+        }
+        else
+        {
+            transform.LookAt(pPosition);
+            targetPosition = pPosition;
+        }
 
         //Actually shoot something
 
@@ -196,9 +217,9 @@ public class AdvancedBossAi : MonoBehaviour
                 if(ProjectilesArray[i].active == false)
                 {
                     ProjectilesArray[i].SetActive(true);
-                    ProjectilesArray[i].transform.position = transform.position + (shootTarget - transform.position).normalized;
+                    ProjectilesArray[i].transform.position = transform.position + (targetPosition - transform.position).normalized * 3;
 
-                    Vector3 projectileVelocity = (shootTarget - transform.position).normalized * shootSpeed;
+                    Vector3 projectileVelocity = (targetPosition - transform.position).normalized * shootSpeed;
                     BossProjectileKamin script = ProjectilesArray[i].GetComponent<BossProjectileKamin>();
                     script.m_ProjectileVelocity = projectileVelocity;
                     break;
