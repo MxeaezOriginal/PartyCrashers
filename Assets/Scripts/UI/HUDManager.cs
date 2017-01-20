@@ -1,69 +1,40 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
+
 
 public class HUDManager : MonoBehaviour
 {
     //Player HUD Panels
-    public GameObject P1_Panel;
-    public GameObject P2_Panel;
-    public GameObject P3_Panel;
-    public GameObject P4_Panel;
+    GameObject P1_Panel, P2_Panel, P3_Panel, P4_Panel;
     //RectTransofrm of these panels
-    public RectTransform P1_PanelTransform;
-    public RectTransform P2_PanelTransform;
-    public RectTransform P3_PanelTransform;
-    public RectTransform P4_PanelTransform;
-    //Player Stats Windows
-    public RectTransform P1_StatsWindow;
-    public RectTransform P2_StatsWindow;
-    public RectTransform P3_StatsWindow;
-    public RectTransform P4_StatsWindow;
+    RectTransform P1_PanelTransform, P2_PanelTransform, P3_PanelTransform, P4_PanelTransform;
+    //Score Counters
+    public Text P1_ScoreCounter, P2_ScoreCounter, P3_ScoreCounter, P4_ScoreCounter;
 
-    void Awake()
-    {
-    }
 
     void Start()
     {
-        if (GameObject.Find(GameManager.m_Instance.m_GameState.ToString() + "_HUD_Canvas/P1_Panel") != null)
+        if (GameObject.Find(GameManager.m_Instance.m_GameState.ToString() + "Canvas/P1_Panel") != null)
         {
-            P1_Panel = GameObject.Find(GameManager.m_Instance.m_GameState.ToString() + "_HUD_Canvas/P1_Panel");
-            P2_Panel = GameObject.Find(GameManager.m_Instance.m_GameState.ToString() + "_HUD_Canvas/P2_Panel");
-            P3_Panel = GameObject.Find(GameManager.m_Instance.m_GameState.ToString() + "_HUD_Canvas/P3_Panel");
-            P4_Panel = GameObject.Find(GameManager.m_Instance.m_GameState.ToString() + "_HUD_Canvas/P4_Panel");
+            P1_Panel = GameObject.Find(GameManager.m_Instance.m_GameState.ToString() + "Canvas/P1_Panel");
+            P2_Panel = GameObject.Find(GameManager.m_Instance.m_GameState.ToString() + "Canvas/P2_Panel");
+            P3_Panel = GameObject.Find(GameManager.m_Instance.m_GameState.ToString() + "Canvas/P3_Panel");
+            P4_Panel = GameObject.Find(GameManager.m_Instance.m_GameState.ToString() + "Canvas/P4_Panel");
 
-            P1_PanelTransform = GameObject.Find(GameManager.m_Instance.m_GameState.ToString() + "_HUD_Canvas/P1_Panel").GetComponent<RectTransform>();
-            P2_PanelTransform = GameObject.Find(GameManager.m_Instance.m_GameState.ToString() + "_HUD_Canvas/P2_Panel").GetComponent<RectTransform>();
-            P3_PanelTransform = GameObject.Find(GameManager.m_Instance.m_GameState.ToString() + "_HUD_Canvas/P3_Panel").GetComponent<RectTransform>();
-            P4_PanelTransform = GameObject.Find(GameManager.m_Instance.m_GameState.ToString() + "_HUD_Canvas/P4_Panel").GetComponent<RectTransform>();
+            P1_PanelTransform = GameObject.Find(GameManager.m_Instance.m_GameState.ToString() + "Canvas/P1_Panel").GetComponent<RectTransform>();
+            P2_PanelTransform = GameObject.Find(GameManager.m_Instance.m_GameState.ToString() + "Canvas/P2_Panel").GetComponent<RectTransform>();
+            P3_PanelTransform = GameObject.Find(GameManager.m_Instance.m_GameState.ToString() + "Canvas/P3_Panel").GetComponent<RectTransform>();
+            P4_PanelTransform = GameObject.Find(GameManager.m_Instance.m_GameState.ToString() + "Canvas/P4_Panel").GetComponent<RectTransform>();
 
-            P1_StatsWindow = GameObject.Find(GameManager.m_Instance.m_GameState.ToString() + "_HUD_Canvas/P1_Panel/Stats").GetComponent<RectTransform>();
-            P2_StatsWindow = GameObject.Find(GameManager.m_Instance.m_GameState.ToString() + "_HUD_Canvas/P2_Panel/Stats").GetComponent<RectTransform>();
-            P3_StatsWindow = GameObject.Find(GameManager.m_Instance.m_GameState.ToString() + "_HUD_Canvas/P3_Panel/Stats").GetComponent<RectTransform>();
-            P4_StatsWindow = GameObject.Find(GameManager.m_Instance.m_GameState.ToString() + "_HUD_Canvas/P4_Panel/Stats").GetComponent<RectTransform>();
+            P1_ScoreCounter = GameObject.Find("P1 Score").GetComponent<Text>();
+            P2_ScoreCounter = GameObject.Find("P2 Score").GetComponent<Text>();
+            P3_ScoreCounter = GameObject.Find("P3 Score").GetComponent<Text>();
+            P4_ScoreCounter = GameObject.Find("P4 Score").GetComponent<Text>();
         }
-        /*else if(GameObject.Find("Minigame_HUD_Canvas/P1_Panel") != null)
-        {
-            P1_Panel = GameObject.Find("Minigame_HUD_Canvas/P1_Panel");
-            P2_Panel = GameObject.Find("Minigame_HUD_Canvas/P2_Panel");
-            P3_Panel = GameObject.Find("Minigame_HUD_Canvas/P3_Panel");
-            P4_Panel = GameObject.Find("Minigame_HUD_Canvas/P4_Panel");
 
-            P1_PanelTransform = GameObject.Find("Minigame_HUD_Canvas/P1_Panel").GetComponent<RectTransform>();
-            P2_PanelTransform = GameObject.Find("Minigame_HUD_Canvas/P2_Panel").GetComponent<RectTransform>();
-            P3_PanelTransform = GameObject.Find("Minigame_HUD_Canvas/P3_Panel").GetComponent<RectTransform>();
-            P4_PanelTransform = GameObject.Find("Minigame_HUD_Canvas/P4_Panel").GetComponent<RectTransform>();
-
-            P1_StatsWindow = GameObject.Find("Minigame_HUD_Canvas/P1_Panel/Stats").GetComponent<RectTransform>();
-            P2_StatsWindow = GameObject.Find("Minigame_HUD_Canvas/P2_Panel/Stats").GetComponent<RectTransform>();
-            P3_StatsWindow = GameObject.Find("Minigame_HUD_Canvas/P3_Panel/Stats").GetComponent<RectTransform>();
-            P4_StatsWindow = GameObject.Find("Minigame_HUD_Canvas/P4_Panel/Stats").GetComponent<RectTransform>();
-        }*/
-        else
-        {
-            Debug.Log("Dungeon_HUD_Canvas/P1_Panel or Minigame_HUD_Canvas/P1_Panel not found");
-        }
         UpdateUIPanels();
+        UpdateScoreCounters();
     }
 
     void UpdateUIPanels()
@@ -75,7 +46,6 @@ public class HUDManager : MonoBehaviour
             P4_Panel.SetActive(false);
 
             P1_PanelTransform.anchoredPosition = new Vector2(0, 30);
-            //StatsWindow(s)
         }
         if (GameManager.m_Instance.m_Players.Length == 2)
         {
@@ -84,9 +54,6 @@ public class HUDManager : MonoBehaviour
 
             P1_PanelTransform.anchoredPosition = new Vector2(-67, 30);
             P2_PanelTransform.anchoredPosition = new Vector2(67, 30);
-            //StatsWindow(s)
-            //P1_StatsWindow.anchoredPosition = new Vector2(265, 60);
-            //P2_StatsWindow.anchoredPosition = new Vector2(455, 60);
         }
         if (GameManager.m_Instance.m_Players.Length == 3)
         {
@@ -95,15 +62,18 @@ public class HUDManager : MonoBehaviour
             P1_PanelTransform.anchoredPosition = new Vector2(-130, 30);
             P2_PanelTransform.anchoredPosition = new Vector2(0, 30);
             P3_PanelTransform.anchoredPosition = new Vector2(130, 30);
-            //StatsWindow(s)
-            //P1_StatsWindow.anchoredPosition = new Vector2(150, 60);
-            //P2_StatsWindow.anchoredPosition = new Vector2(360, 60);
-            //P3_StatsWindow.anchoredPosition = new Vector2(570, 60);
         }
         if (GameManager.m_Instance.m_Players.Length == 4)
         {
             return;
-            // -200, -67, 67, 200
         }
+    }
+
+    void UpdateScoreCounters()
+    {
+        P1_ScoreCounter.text = GameManager.m_Instance.m_Player1.score.ToString();
+        P2_ScoreCounter.text = GameManager.m_Instance.m_Player2.score.ToString();
+        P3_ScoreCounter.text = GameManager.m_Instance.m_Player3.score.ToString();
+        P4_ScoreCounter.text = GameManager.m_Instance.m_Player4.score.ToString();
     }
 }

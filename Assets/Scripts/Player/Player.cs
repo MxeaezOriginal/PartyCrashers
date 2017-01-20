@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -39,7 +40,14 @@ public class Player : MonoBehaviour
     public enum Model
     {
         Mascot,
-        Nerd
+        Nerd,
+        Pinata
+    }
+
+    public enum State
+    {
+        Alive,
+        Dead
     }
 
     // Player stats
@@ -51,10 +59,13 @@ public class Player : MonoBehaviour
     public int m_Score;
     //public int m_Health;
     //public int m_MaxHealth;
+    public bool m_CantAttack;
+    public State m_State;
     public float m_CheckLocationCooldown;
     //To hold location every x seconds to respawn to
     public Vector3 m_Location;
     public Animator m_Animator;
+    public GameObject m_PlayerObject;
     private Transform m_Weapon;
     private HeartSystem m_Heart;
     private CharacterController m_CharController;
@@ -88,6 +99,7 @@ public class Player : MonoBehaviour
         m_Heart = GetComponent<HeartSystem>();
         m_CharController = GetComponent<CharacterController>();
         m_WeaponManager = GetComponent<WeaponManager>();
+
     }
 
     // Update is called once per frame
@@ -110,42 +122,39 @@ public class Player : MonoBehaviour
         //Primary Attack
         if (Input.GetAxisRaw(m_PrimaryAttack + m_Controller.ToString()) == 1)
         {
-            attack(ATTACKTYPE.PRIMARY);
+            if (!m_CantAttack)
+            {
+                attack(ATTACKTYPE.PRIMARY);
+            }
         }
 
         //Secondary Attack
         if (Input.GetAxisRaw(m_SecondaryAttack + m_Controller.ToString()) == 1)
         {
-            attack(ATTACKTYPE.SECONDARY);
+            if (!m_CantAttack)
+            {
+                attack(ATTACKTYPE.SECONDARY);
+            }
         }
 
         //Interact
         if (Input.GetButtonDown(m_Interact + m_Controller.ToString()))
         {
-
+            if(m_WeaponManager.isStandingOnWeapon())
+            {
+                m_WeaponManager.InstantiateWeapon();
+            }
         }
 
         //Pause
         if (Input.GetButtonDown(m_Pause + m_Controller.ToString()))
         {
-            /*if (m_WeaponID == WEAPONTYPE.SWORD)
-            {
-                setWeapon(WEAPONTYPE.BOW);
-            }
-            else
-            {
-                setWeapon(WEAPONTYPE.SWORD);
-            }*/
         }
 
         if (Input.GetButtonDown(m_Stats + m_Controller.ToString()))
         {
-            GetComponent<Stats>().ToggleWindow();
+            //GetComponent<Stats>().ToggleWindow();
         }
-        //if (Input.GetButtonUp(m_Stats))
-        //{
-        //    GetComponent<Stats>().ToggleWindow();
-        //}
     }
 
     void attack(ATTACKTYPE a)
@@ -180,11 +189,52 @@ public class Player : MonoBehaviour
 
     public void respawn()
     {
+        m_State = State.Dead;
+        m_Model = Model.Pinata;
+        updateModel();
         transform.position = m_Location;
 
         m_Heart.curHealth = m_Heart.maxHealth;
         m_Heart.UpdateHearts();
         Debug.Log("Respawned");
+    }
+
+    public void updateModel()
+    {
+        if (m_PlayerObject != null)
+        {
+            if (m_PlayerObject.transform.FindChild("Model") != null)
+            {
+                GameObject previousModel = m_PlayerObject.transform.FindChild("Model").gameObject;
+                Destroy(previousModel);
+            }
+            switch (m_Model)
+            {
+                case Player.Model.Mascot:
+                    GameObject mascotClone = Instantiate(GameManager.m_Instance.m_MascotPrefab, transform.position, Quaternion.identity) as GameObject;
+                    mascotClone.transform.parent = m_PlayerObject.gameObject.transform;
+                    mascotClone.transform.localPosition = new Vector3(0, 0, 0);
+                    mascotClone.transform.localRotation = Quaternion.identity;
+                    mascotClone.transform.localScale = new Vector3(1, 1, 1);
+                    mascotClone.name = "Model";
+                    m_Animator = mascotClone.GetComponent<Animator>();
+                    break;
+                case Player.Model.Pinata:
+                    GameObject pinataClone = Instantiate(GameManager.m_Instance.m_PinataPrefab, transform.position, Quaternion.identity) as GameObject;
+                    pinataClone.transform.parent = m_PlayerObject.gameObject.transform;
+                    pinataClone.transform.localPosition = new Vector3(0, 0, 0);
+                    pinataClone.transform.localRotation = Quaternion.identity;
+                    pinataClone.transform.localScale = new Vector3(1, 1, 1);
+                    pinataClone.name = "Model";
+                    m_Animator = pinataClone.GetComponent<Animator>();
+                    break;
+
+            }
+        }
+        else
+        {
+            Debug.Log("Error: Player's 'm_PlayerObject' is not assigned!");
+        }
     }
 
     public void stun(float secs)
@@ -225,6 +275,7 @@ public class Player : MonoBehaviour
             case PLAYER.P1:
                 GameManager.m_Instance.m_Player1.name = m_PlayerName;
                 GameManager.m_Instance.m_Player1.player = m_Player;
+                GameManager.m_Instance.m_Player1.model = m_Model;
                 GameManager.m_Instance.m_Player1.attackSpeed = m_AttackSpeed;
                 GameManager.m_Instance.m_Player1.score = m_Score;
                 GameManager.m_Instance.m_Player1.gold = m_Gold;
@@ -235,6 +286,7 @@ public class Player : MonoBehaviour
             case PLAYER.P2:
                 GameManager.m_Instance.m_Player2.name = m_PlayerName;
                 GameManager.m_Instance.m_Player2.player = m_Player;
+                GameManager.m_Instance.m_Player2.model = m_Model;
                 GameManager.m_Instance.m_Player2.attackSpeed = m_AttackSpeed;
                 GameManager.m_Instance.m_Player2.score = m_Score;
                 GameManager.m_Instance.m_Player2.gold = m_Gold;
@@ -245,6 +297,7 @@ public class Player : MonoBehaviour
             case PLAYER.P3:
                 GameManager.m_Instance.m_Player3.name = m_PlayerName;
                 GameManager.m_Instance.m_Player3.player = m_Player;
+                GameManager.m_Instance.m_Player3.model = m_Model;
                 GameManager.m_Instance.m_Player3.attackSpeed = m_AttackSpeed;
                 GameManager.m_Instance.m_Player3.score = m_Score;
                 GameManager.m_Instance.m_Player3.gold = m_Gold;
@@ -255,6 +308,7 @@ public class Player : MonoBehaviour
             case PLAYER.P4:
                 GameManager.m_Instance.m_Player4.name = m_PlayerName;
                 GameManager.m_Instance.m_Player4.player = m_Player;
+                GameManager.m_Instance.m_Player4.model = m_Model;
                 GameManager.m_Instance.m_Player4.attackSpeed = m_AttackSpeed;
                 GameManager.m_Instance.m_Player4.score = m_Score;
                 GameManager.m_Instance.m_Player4.gold = m_Gold;
@@ -272,6 +326,7 @@ public class Player : MonoBehaviour
             case PLAYER.P1:
                 m_PlayerName = GameManager.m_Instance.m_Player1.name;
                 m_Player = GameManager.m_Instance.m_Player1.player;
+                m_Model = GameManager.m_Instance.m_Player1.model;
                 m_AttackSpeed = GameManager.m_Instance.m_Player1.attackSpeed;
                 m_Score = GameManager.m_Instance.m_Player1.score;
                 m_Gold = GameManager.m_Instance.m_Player1.gold;
@@ -282,6 +337,7 @@ public class Player : MonoBehaviour
             case PLAYER.P2:
                 m_PlayerName = GameManager.m_Instance.m_Player2.name;
                 m_Player = GameManager.m_Instance.m_Player2.player;
+                m_Model = GameManager.m_Instance.m_Player2.model;
                 m_AttackSpeed = GameManager.m_Instance.m_Player2.attackSpeed;
                 m_Score = GameManager.m_Instance.m_Player2.score;
                 m_Gold = GameManager.m_Instance.m_Player2.gold;
@@ -292,6 +348,7 @@ public class Player : MonoBehaviour
             case PLAYER.P3:
                 m_PlayerName = GameManager.m_Instance.m_Player3.name;
                 m_Player = GameManager.m_Instance.m_Player3.player;
+                m_Model = GameManager.m_Instance.m_Player3.model;
                 m_AttackSpeed = GameManager.m_Instance.m_Player3.attackSpeed;
                 m_Score = GameManager.m_Instance.m_Player3.score;
                 m_Gold = GameManager.m_Instance.m_Player3.gold;
@@ -302,6 +359,7 @@ public class Player : MonoBehaviour
             case PLAYER.P4:
                 m_PlayerName = GameManager.m_Instance.m_Player4.name;
                 m_Player = GameManager.m_Instance.m_Player4.player;
+                m_Model = GameManager.m_Instance.m_Player4.model;
                 m_AttackSpeed = GameManager.m_Instance.m_Player4.attackSpeed;
                 m_Score = GameManager.m_Instance.m_Player4.score;
                 m_Gold = GameManager.m_Instance.m_Player4.gold;

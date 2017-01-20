@@ -13,11 +13,12 @@ public class GameManager : MonoBehaviour
     {
         public string name;
         public Player.PLAYER player;
+        public Player.Model model;
         public float attackSpeed;
         public int gold;
         public int score;
-        public int health;
-        public int maxHealth;
+        //public int health;
+        //public int maxHealth;
         public Player.Controller m_Controller;
     }
     public enum GameState
@@ -42,6 +43,9 @@ public class GameManager : MonoBehaviour
 
     public GameObject m_PlayerPrefab;
     public GameObject m_MascotPrefab;
+    public GameObject m_PinataPrefab;
+
+    public RenderTexture[] m_Portraits;
 
     public PlayerStats m_Player1;
     public PlayerStats m_Player2;
@@ -68,7 +72,15 @@ public class GameManager : MonoBehaviour
                 m_LevelToStart = SceneManager.GetActiveScene().name;
                 SceneManager.LoadScene(0);
             }
-            m_GameState = GameState.Dungeon;
+            if (GameObject.Find("DungeonCanvas") != null)
+            {
+                m_GameState = GameState.Dungeon;
+            }
+            else if (GameObject.Find("MinigameCanvas") != null)
+            {
+                m_GameState = GameState.Minigame;
+            }
+
             m_Tutorial = Tutorial.Lobby_01;
             InstantiatePlayers();
             GameManager.m_Instance.m_Players = GameObject.FindGameObjectsWithTag("Player");
@@ -80,8 +92,7 @@ public class GameManager : MonoBehaviour
             {
                 Debug.Log("Partybar not found");
             }
-            FindHearts();
-            FindStatsWindowAnimator();
+            //FindStatsWindowAnimator();
             m_NumOfPlayers = 0;
         }
         else
@@ -101,7 +112,7 @@ public class GameManager : MonoBehaviour
                 GameManager.m_Instance.loadPlayers();
             }
             FindHearts();
-            FindStatsWindowAnimator();
+            //FindStatsWindowAnimator();
 
             Destroy(gameObject);
         }
@@ -125,31 +136,31 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void FindStatsWindowAnimator()
-    {
-        for (int i = 0; i < m_Instance.m_Players.Length; ++i)
-        {
-            Player player = m_Instance.m_Players[i].GetComponent<Player>();
-            Stats stats = player.GetComponent<Stats>();
-            switch (player.m_Player)
-            {
-                case Player.PLAYER.P1:
-                    stats.anim = GameObject.Find(m_Instance.m_GameState.ToString() + "_HUD_Canvas/P1_Panel/Stats").GetComponent<Animator>();
-                    print("Found P1 Stats");
-                    break;
-                case Player.PLAYER.P2:
-                    stats.anim = GameObject.Find(m_Instance.m_GameState.ToString() + "_HUD_Canvas/P2_Panel/Stats").GetComponent<Animator>();
-                    print("Found P2 Stats");
-                    break;
-                case Player.PLAYER.P3:
-                    stats.anim = GameObject.Find(m_Instance.m_GameState.ToString() + "_HUD_Canvas/P3_Panel/Stats").GetComponent<Animator>();
-                    break;
-                case Player.PLAYER.P4:
-                    stats.anim = GameObject.Find(m_Instance.m_GameState.ToString() + "_HUD_Canvas/P4_Panel/Stats").GetComponent<Animator>();
-                    break;
-            }
-        }
-    }
+    //void FindStatsWindowAnimator()
+    //{
+    //    for (int i = 0; i < m_Instance.m_Players.Length; ++i)
+    //    {
+    //        Player player = m_Instance.m_Players[i].GetComponent<Player>();
+    //        Stats stats = player.GetComponent<Stats>();
+    //        switch (player.m_Player)
+    //        {
+    //            case Player.PLAYER.P1:
+    //                stats.anim = GameObject.Find(m_Instance.m_GameState.ToString() + "_HUD_Canvas/P1_Panel/Stats").GetComponent<Animator>();
+    //                print("Found P1 Stats");
+    //                break;
+    //            case Player.PLAYER.P2:
+    //                stats.anim = GameObject.Find(m_Instance.m_GameState.ToString() + "_HUD_Canvas/P2_Panel/Stats").GetComponent<Animator>();
+    //                print("Found P2 Stats");
+    //                break;
+    //            case Player.PLAYER.P3:
+    //                stats.anim = GameObject.Find(m_Instance.m_GameState.ToString() + "_HUD_Canvas/P3_Panel/Stats").GetComponent<Animator>();
+    //                break;
+    //            case Player.PLAYER.P4:
+    //                stats.anim = GameObject.Find(m_Instance.m_GameState.ToString() + "_HUD_Canvas/P4_Panel/Stats").GetComponent<Animator>();
+    //                break;
+    //        }
+    //    }
+    //}
 
     void FindHearts()
     {
@@ -162,40 +173,40 @@ public class GameManager : MonoBehaviour
                 switch (player.m_Player)
                 {
                     case Player.PLAYER.P1:
-                        hearts.heartImages[0] = GameObject.Find(m_Instance.m_GameState.ToString() + "_HUD_Canvas/P1_Panel/HP bar/Heart 1").GetComponent<Image>();
-                        hearts.heartImages[1] = GameObject.Find(m_Instance.m_GameState.ToString() + "_HUD_Canvas/P1_Panel/HP bar/Heart 2").GetComponent<Image>();
-                        hearts.heartImages[2] = GameObject.Find(m_Instance.m_GameState.ToString() + "_HUD_Canvas/P1_Panel/HP bar/Heart 3").GetComponent<Image>();
-                        hearts.heartImages[3] = GameObject.Find(m_Instance.m_GameState.ToString() + "_HUD_Canvas/P1_Panel/HP bar/Heart 4").GetComponent<Image>();
-                        hearts.heartImages[4] = GameObject.Find(m_Instance.m_GameState.ToString() + "_HUD_Canvas/P1_Panel/HP bar/Heart 5").GetComponent<Image>();
-                        hearts.heartImages[5] = GameObject.Find(m_Instance.m_GameState.ToString() + "_HUD_Canvas/P1_Panel/HP bar/Heart 6").GetComponent<Image>();
-                        hearts.heartImages[6] = GameObject.Find(m_Instance.m_GameState.ToString() + "_HUD_Canvas/P1_Panel/HP bar/Heart 7").GetComponent<Image>();
+                        hearts.heartImages[0] = GameObject.Find(m_Instance.m_GameState.ToString() + "Canvas/P1_Panel/HP bar/Heart 1").GetComponent<Image>();
+                        hearts.heartImages[1] = GameObject.Find(m_Instance.m_GameState.ToString() + "Canvas/P1_Panel/HP bar/Heart 2").GetComponent<Image>();
+                        hearts.heartImages[2] = GameObject.Find(m_Instance.m_GameState.ToString() + "Canvas/P1_Panel/HP bar/Heart 3").GetComponent<Image>();
+                        hearts.heartImages[3] = GameObject.Find(m_Instance.m_GameState.ToString() + "Canvas/P1_Panel/HP bar/Heart 4").GetComponent<Image>();
+                        hearts.heartImages[4] = GameObject.Find(m_Instance.m_GameState.ToString() + "Canvas/P1_Panel/HP bar/Heart 5").GetComponent<Image>();
+                        hearts.heartImages[5] = GameObject.Find(m_Instance.m_GameState.ToString() + "Canvas/P1_Panel/HP bar/Heart 6").GetComponent<Image>();
+                        hearts.heartImages[6] = GameObject.Find(m_Instance.m_GameState.ToString() + "Canvas/P1_Panel/HP bar/Heart 7").GetComponent<Image>();
                         break;
                     case Player.PLAYER.P2:
-                        hearts.heartImages[0] = GameObject.Find(m_Instance.m_GameState.ToString() + "_HUD_Canvas/P2_Panel/HP bar/Heart 1").GetComponent<Image>();
-                        hearts.heartImages[1] = GameObject.Find(m_Instance.m_GameState.ToString() + "_HUD_Canvas/P2_Panel/HP bar/Heart 2").GetComponent<Image>();
-                        hearts.heartImages[2] = GameObject.Find(m_Instance.m_GameState.ToString() + "_HUD_Canvas/P2_Panel/HP bar/Heart 3").GetComponent<Image>();
-                        hearts.heartImages[3] = GameObject.Find(m_Instance.m_GameState.ToString() + "_HUD_Canvas/P2_Panel/HP bar/Heart 4").GetComponent<Image>();
-                        hearts.heartImages[4] = GameObject.Find(m_Instance.m_GameState.ToString() + "_HUD_Canvas/P2_Panel/HP bar/Heart 5").GetComponent<Image>();
-                        hearts.heartImages[5] = GameObject.Find(m_Instance.m_GameState.ToString() + "_HUD_Canvas/P2_Panel/HP bar/Heart 6").GetComponent<Image>();
-                        hearts.heartImages[6] = GameObject.Find(m_Instance.m_GameState.ToString() + "_HUD_Canvas/P2_Panel/HP bar/Heart 7").GetComponent<Image>();
+                        hearts.heartImages[0] = GameObject.Find(m_Instance.m_GameState.ToString() + "Canvas/P2_Panel/HP bar/Heart 1").GetComponent<Image>();
+                        hearts.heartImages[1] = GameObject.Find(m_Instance.m_GameState.ToString() + "Canvas/P2_Panel/HP bar/Heart 2").GetComponent<Image>();
+                        hearts.heartImages[2] = GameObject.Find(m_Instance.m_GameState.ToString() + "Canvas/P2_Panel/HP bar/Heart 3").GetComponent<Image>();
+                        hearts.heartImages[3] = GameObject.Find(m_Instance.m_GameState.ToString() + "Canvas/P2_Panel/HP bar/Heart 4").GetComponent<Image>();
+                        hearts.heartImages[4] = GameObject.Find(m_Instance.m_GameState.ToString() + "Canvas/P2_Panel/HP bar/Heart 5").GetComponent<Image>();
+                        hearts.heartImages[5] = GameObject.Find(m_Instance.m_GameState.ToString() + "Canvas/P2_Panel/HP bar/Heart 6").GetComponent<Image>();
+                        hearts.heartImages[6] = GameObject.Find(m_Instance.m_GameState.ToString() + "Canvas/P2_Panel/HP bar/Heart 7").GetComponent<Image>();
                         break;
                     case Player.PLAYER.P3:
-                        hearts.heartImages[0] = GameObject.Find(m_Instance.m_GameState.ToString() + "_HUD_Canvas/P3_Panel/HP bar/Heart 1").GetComponent<Image>();
-                        hearts.heartImages[1] = GameObject.Find(m_Instance.m_GameState.ToString() + "_HUD_Canvas/P3_Panel/HP bar/Heart 2").GetComponent<Image>();
-                        hearts.heartImages[2] = GameObject.Find(m_Instance.m_GameState.ToString() + "_HUD_Canvas/P3_Panel/HP bar/Heart 3").GetComponent<Image>();
-                        hearts.heartImages[3] = GameObject.Find(m_Instance.m_GameState.ToString() + "_HUD_Canvas/P3_Panel/HP bar/Heart 4").GetComponent<Image>();
-                        hearts.heartImages[4] = GameObject.Find(m_Instance.m_GameState.ToString() + "_HUD_Canvas/P3_Panel/HP bar/Heart 5").GetComponent<Image>();
-                        hearts.heartImages[5] = GameObject.Find(m_Instance.m_GameState.ToString() + "_HUD_Canvas/P3_Panel/HP bar/Heart 6").GetComponent<Image>();
-                        hearts.heartImages[6] = GameObject.Find(m_Instance.m_GameState.ToString() + "_HUD_Canvas/P3_Panel/HP bar/Heart 7").GetComponent<Image>();
+                        hearts.heartImages[0] = GameObject.Find(m_Instance.m_GameState.ToString() + "Canvas/P3_Panel/HP bar/Heart 1").GetComponent<Image>();
+                        hearts.heartImages[1] = GameObject.Find(m_Instance.m_GameState.ToString() + "Canvas/P3_Panel/HP bar/Heart 2").GetComponent<Image>();
+                        hearts.heartImages[2] = GameObject.Find(m_Instance.m_GameState.ToString() + "Canvas/P3_Panel/HP bar/Heart 3").GetComponent<Image>();
+                        hearts.heartImages[3] = GameObject.Find(m_Instance.m_GameState.ToString() + "Canvas/P3_Panel/HP bar/Heart 4").GetComponent<Image>();
+                        hearts.heartImages[4] = GameObject.Find(m_Instance.m_GameState.ToString() + "Canvas/P3_Panel/HP bar/Heart 5").GetComponent<Image>();
+                        hearts.heartImages[5] = GameObject.Find(m_Instance.m_GameState.ToString() + "Canvas/P3_Panel/HP bar/Heart 6").GetComponent<Image>();
+                        hearts.heartImages[6] = GameObject.Find(m_Instance.m_GameState.ToString() + "Canvas/P3_Panel/HP bar/Heart 7").GetComponent<Image>();
                         break;
                     case Player.PLAYER.P4:
-                        hearts.heartImages[0] = GameObject.Find(m_Instance.m_GameState.ToString() + "_HUD_Canvas/P4_Panel/HP bar/Heart 1").GetComponent<Image>();
-                        hearts.heartImages[1] = GameObject.Find(m_Instance.m_GameState.ToString() + "_HUD_Canvas/P4_Panel/HP bar/Heart 2").GetComponent<Image>();
-                        hearts.heartImages[2] = GameObject.Find(m_Instance.m_GameState.ToString() + "_HUD_Canvas/P4_Panel/HP bar/Heart 3").GetComponent<Image>();
-                        hearts.heartImages[3] = GameObject.Find(m_Instance.m_GameState.ToString() + "_HUD_Canvas/P4_Panel/HP bar/Heart 4").GetComponent<Image>();
-                        hearts.heartImages[4] = GameObject.Find(m_Instance.m_GameState.ToString() + "_HUD_Canvas/P4_Panel/HP bar/Heart 5").GetComponent<Image>();
-                        hearts.heartImages[5] = GameObject.Find(m_Instance.m_GameState.ToString() + "_HUD_Canvas/P4_Panel/HP bar/Heart 6").GetComponent<Image>();
-                        hearts.heartImages[6] = GameObject.Find(m_Instance.m_GameState.ToString() + "_HUD_Canvas/P4_Panel/HP bar/Heart 7").GetComponent<Image>();
+                        hearts.heartImages[0] = GameObject.Find(m_Instance.m_GameState.ToString() + "Canvas/P4_Panel/HP bar/Heart 1").GetComponent<Image>();
+                        hearts.heartImages[1] = GameObject.Find(m_Instance.m_GameState.ToString() + "Canvas/P4_Panel/HP bar/Heart 2").GetComponent<Image>();
+                        hearts.heartImages[2] = GameObject.Find(m_Instance.m_GameState.ToString() + "Canvas/P4_Panel/HP bar/Heart 3").GetComponent<Image>();
+                        hearts.heartImages[3] = GameObject.Find(m_Instance.m_GameState.ToString() + "Canvas/P4_Panel/HP bar/Heart 4").GetComponent<Image>();
+                        hearts.heartImages[4] = GameObject.Find(m_Instance.m_GameState.ToString() + "Canvas/P4_Panel/HP bar/Heart 5").GetComponent<Image>();
+                        hearts.heartImages[5] = GameObject.Find(m_Instance.m_GameState.ToString() + "Canvas/P4_Panel/HP bar/Heart 6").GetComponent<Image>();
+                        hearts.heartImages[6] = GameObject.Find(m_Instance.m_GameState.ToString() + "Canvas/P4_Panel/HP bar/Heart 7").GetComponent<Image>();
                         break;
                 }
             }
@@ -252,26 +263,50 @@ public class GameManager : MonoBehaviour
         playerClone.transform.localScale = new Vector3(1, 1, 1);
         playerClone.name = parent.name;
 
-
+        //Set the player values when it's instantiated
         if (playerClone.GetComponent<Player>() != null)
         {
             Player playerComponent = playerClone.gameObject.GetComponent<Player>();
+            playerComponent.m_PlayerObject = playerClone;
 
             playerComponent.m_Player = (Player.PLAYER)System.Enum.Parse(typeof(Player.PLAYER), player);
+            playerComponent.updateModel();
             playerComponent.save();
 
-            switch (playerComponent.m_Model)
+            if(playerClone.transform.FindChild("Portrait") != null)
             {
-                case Player.Model.Mascot:
-                    GameObject mascotClone = Instantiate(m_MascotPrefab, parent.transform.position, Quaternion.identity) as GameObject;
-                    mascotClone.transform.parent = playerClone.gameObject.transform;
-                    mascotClone.transform.localPosition = new Vector3(0, 0, 0);
-                    mascotClone.transform.localRotation = Quaternion.identity;
-                    mascotClone.transform.localScale = new Vector3(1, 1, 1);
-                    mascotClone.name = "Model";
-                    playerComponent.m_Animator = mascotClone.GetComponent<Animator>();
-                    break;
+                Transform portraitTransform = playerClone.transform.FindChild("Portrait");
+
+                if(portraitTransform.GetComponent<Camera>() != null)
+                {
+                    Camera portraitCamera = portraitTransform.GetComponent<Camera>();
+
+                    switch(playerComponent.m_Player)
+                    {
+                        case Player.PLAYER.P1:
+                            portraitCamera.targetTexture = m_Portraits[0];
+                            break;
+                        case Player.PLAYER.P2:
+                            portraitCamera.targetTexture = m_Portraits[1];
+                            break;
+                        case Player.PLAYER.P3:
+                            portraitCamera.targetTexture = m_Portraits[2];
+                            break;
+                        case Player.PLAYER.P4:
+                            portraitCamera.targetTexture = m_Portraits[3];
+                            break;
+                    }
+                }
+                else
+                {
+                    Debug.LogError("Portrait under Player Prefab doesn't have Camera component");
+                }
             }
+            else
+            {
+                Debug.LogError("Unable to find 'Portrait' GameObject under the Player Prefab");
+            }
+
         }
         else
         {

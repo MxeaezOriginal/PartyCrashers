@@ -30,7 +30,7 @@ public class StickyTrap : Trap {
         }
         if (other.GetComponent<EnemyHealth>() != null)
         {
-            EnemyAI m_EnemyAi = other.gameObject.GetComponent<EnemyAI>();
+            EnemyAI m_EnemyAi = other.gameObject.GetComponent<EnemyAI>() ;
             EnemyEffect m_EnemyEffect = other.gameObject.GetComponent<EnemyEffect>();
             if (m_CurrentCooldown <= Time.time - m_Cooldown || m_CurrentCooldown == 0)
             {
@@ -41,7 +41,8 @@ public class StickyTrap : Trap {
                     Destroy(effect, 3f);
                 }
                 // Trap cannot stun enemy
-                m_EnemyEffect.isStun = true;
+                //m_EnemyEffect.isStun = true;
+                //Debug.Log(m_EnemyEffect.isStun);
                 m_EnemyAi.agent.Stop();
                 m_CurrentCooldown = Time.time;
                 StartCoroutine(getUnstuck2());
@@ -66,8 +67,8 @@ public class StickyTrap : Trap {
         yield return new WaitForSeconds(m_StuckTime);
         if (m_EnemyAi != null)
         {
-            //m_EnemyAi.agent.Resume();
-            m_EnemyEffect.isStun = false;
+            m_EnemyAi.agent.Resume();
+            //m_EnemyEffect.isStun = false;
         }
         else
         {
