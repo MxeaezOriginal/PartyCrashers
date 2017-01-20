@@ -34,4 +34,9 @@ public class BossProjectileKamin : MonoBehaviour {
             gameObject.SetActive(false);
         }
 	}
+
+    void OnCollisionEnter(Collision other)
+    {
+        gameObject.SetActive(false);
+    }
 }
