@@ -9,6 +9,9 @@ public class AdvancedBossAi : MonoBehaviour
     public float m_NumOfPlayersHealthMultiplier;
     private float m_Health;
 
+    //Projectile
+    public GameObject m_Projectile;
+
     //Frame
     private int frame;
 
@@ -43,7 +46,7 @@ public class AdvancedBossAi : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        state = states.idle;
+        state = states.shoot;
         currentState = state;
         m_Invincible = false;
         frame = 0;
@@ -156,19 +159,42 @@ public class AdvancedBossAi : MonoBehaviour
     #region Attack states
     void BasicShoot()
     {
+
+        //Get Player to shoot at and target where the player is going 
         GameObject player = targetPlayer();
         Vector3 pPosition = player.transform.position;
-        float shootSpeed = 1f;
+        float shootSpeed = 10f;
         Vector3 bv = (pPosition - transform.position).normalized * shootSpeed;
         float distance = Vector3.Magnitude(pPosition - transform.position);
-
+        
 
         PlayerController p = player.GetComponent<PlayerController>();
         Vector3 pVelocity = new Vector3(p.m_Velocity.x, 0f, p.m_Velocity.z);
 
-        Vector3 shootTarget = pPosition + (pVelocity)/bv.magnitude;
+        float velocityDistance = Vector3.Magnitude((pPosition + pVelocity) -transform.position);
 
-        transform.LookAt(pPosition);
+        Vector3 shootTarget = pPosition + (pVelocity) + bv*(distance/velocityDistance) ;
+
+        transform.LookAt(shootTarget);
+
+        //Actually shoot something
+
+        if(frame == 1)
+        {
+            GameObject projectile = (GameObject)Instantiate(m_Projectile, transform.position + (shootTarget - transform.position).normalized, transform.rotation);
+            Vector3 projectileVelocity = (shootTarget - transform.position).normalized * shootSpeed;
+            Debug.Log(projectileVelocity);
+
+            BossProjectileKamin script = projectile.GetComponent<BossProjectileKamin>();
+
+            script.m_ProjectileVelocity = projectileVelocity;
+
+        }
+        if(frame > 60)
+        {
+            frame = 0;
+        }
+        
 
     }
     #endregion
