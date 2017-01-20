@@ -5,7 +5,7 @@ public class FizzPopMaxPickup : MonoBehaviour {
 
     public float speed;
     public Rigidbody rb;
-    public bool is_touched = false;
+    private bool []is_touched = new bool[4]{ false,false,false,false};
     private HeartSystem m_HeartSystem;
     protected GameObject[] m_player;
     // Use this for initialization
@@ -19,7 +19,7 @@ public class FizzPopMaxPickup : MonoBehaviour {
     {
         for (int i = 0; i < m_player.Length; i++)
         {
-            if (is_touched == true)
+            if (is_touched[i] == true)
             {
                 rb.AddForce((transform.position - m_player[i].transform.position) * speed);
             }
@@ -40,19 +40,31 @@ public class FizzPopMaxPickup : MonoBehaviour {
 
     void OnTriggerExit(Collider other)
     {
-        if (other.GetComponent<HeartSystem>() != null)
+        for(int i=0;i< m_player.Length; i++)
         {
-            is_touched = false;
-        }
+            if (other.GetComponent<Player>() !=null)
+            {
+                if(other.GetComponent<Player>().m_Player == m_player[i].GetComponent<Player>().m_Player)
+                {
+                    is_touched[i] = false;
+                }
+            }
 
+        }
     }
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<HeartSystem>() != null)
+        for (int i = 0; i < m_player.Length; i++)
         {
-            is_touched = true;
+            if (other.GetComponent<Player>() != null)
+            {
+                if (other.GetComponent<Player>().m_Player == m_player[i].GetComponent<Player>().m_Player)
+                {
+                    Debug.Log("Touched");
+                    is_touched[i] = true;
+                }
+            }
         }
-
     }
 }

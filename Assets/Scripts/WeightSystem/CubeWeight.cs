@@ -1,41 +1,51 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class FizzPopPickup : MonoBehaviour {
+public class CubeWeight : MonoBehaviour {
 
-    public float speed;
-    public Rigidbody rb;
-    public int m_HealValue = 0;
+    private bool m_IsColliding;
+    public float m_speed;
+    public int m_maxNum;
+    public int m_recentNum;
+    private Rigidbody rb;
     private bool[] is_touched = new bool[4] { false, false, false, false };
-    private HeartSystem m_HeartSystem;
     protected GameObject[] m_player;
-    Vector3 Dir;
     // Use this for initialization
     void Start () {
         m_player = GameManager.m_Instance.m_Players;
         rb = GetComponent<Rigidbody>();
-	}
+        rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+    }
 	
 	// Update is called once per frame
 	void Update ()
     {
-        for(int i = 0; i <m_player.Length;i++)
+
+        for (int i=0;i<m_player.Length;i++)
         {
-            if (is_touched[i] == true)
+            if (m_recentNum >= m_maxNum * 2)
             {
-                rb.AddForce((transform.position - m_player[i].transform.position) * speed);
+                if(is_touched[i] == true)
+                {
+                    rb.AddForce((transform.position - m_player[i].transform.position) * m_speed);
+                }              
             }
         }
-    }
+	}
 
-    void OnTriggerStay(Collider other)
+    void OnTriggerEnter(Collider other)
     {
-        if(other.GetComponent<HeartSystem>() != null && (Input.GetButtonDown("Interact_P1") || Input.GetButtonDown("Interact_Keyboard")))
+        for (int i = 0; i < m_player.Length; i++)
         {
-            m_HeartSystem = other.GetComponent<HeartSystem>();
-            m_HeartSystem.Heal(m_HealValue);
-            m_HeartSystem.UpdateHearts();
-            gameObject.SetActive(false);
+            if (other.GetComponent<Player>() != null)
+            {
+                if (other.GetComponent<Player>().m_Player == m_player[i].GetComponent<Player>().m_Player)
+                {
+                    Debug.Log("Touched");
+                    is_touched[i] = true;
+                    m_recentNum++;
+                }
+            }
         }
     }
 
@@ -48,24 +58,9 @@ public class FizzPopPickup : MonoBehaviour {
                 if (other.GetComponent<Player>().m_Player == m_player[i].GetComponent<Player>().m_Player)
                 {
                     is_touched[i] = false;
-                }
-            }
-
-        }
-    }
-
-    void OnTriggerEnter(Collider other)
-    {
-        for (int i = 0; i < m_player.Length; i++)
-        {
-            if (other.GetComponent<Player>() != null)
-            {
-                if (other.GetComponent<Player>().m_Player == m_player[i].GetComponent<Player>().m_Player)
-                {
-                    is_touched[i] = true;
+                    m_recentNum--;
                 }
             }
         }
     }
-
 }
