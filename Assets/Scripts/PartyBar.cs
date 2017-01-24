@@ -91,12 +91,9 @@ public class PartyBar : MonoBehaviour {
             GameManager.m_Instance.m_Tutorial == GameManager.Tutorial.Lobby_03)
         {
             ++GameManager.m_Instance.m_Tutorial;
-            SceneManager.LoadScene("GameLoopTest"); //ballroom blitz
         }
-        else
-        {
-            SceneManager.LoadScene("GameLoopTest");
-        }
+
+        SceneManager.LoadScene(Random.Range(5, 7));
     }
 
     void loadBackToGame()
@@ -114,7 +111,7 @@ public class PartyBar : MonoBehaviour {
         }
         else
         {
-            SceneManager.LoadScene("GameLoopTest");
+            SceneManager.LoadScene(Random.Range(5, 7));
         }
     }
 }

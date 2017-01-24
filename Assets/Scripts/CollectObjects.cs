@@ -10,13 +10,13 @@ public class CollectObjects : MonoBehaviour
     void Start()
     {
         player = gameObject.GetComponent<Player>();
-        if (GameObject.Find("PartyBar").transform.FindChild("Content") != null)
+        if (GameManager.m_Instance.m_PartyBar != null)
         {
-            partyBar = GameObject.Find("PartyBar").transform.FindChild("Content").GetComponent<PartyBar>();
+            partyBar = GameManager.m_Instance.m_PartyBar;
         }
         else
         {
-            Debug.Log("Partybar Not Found");
+            Debug.LogError("Partybar Not Found");
         }
     }
 

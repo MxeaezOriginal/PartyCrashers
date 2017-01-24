@@ -7,7 +7,6 @@ using System.Collections.Generic;
 public class GameManager : MonoBehaviour
 {
 
-    public int amountOfPlayers;
     [System.Serializable]
     public struct PlayerStats
     {
@@ -38,6 +37,7 @@ public class GameManager : MonoBehaviour
 
     public static GameManager m_Instance;
 
+    //public int amountOfPlayers;
     public GameState m_GameState;
     public Tutorial m_Tutorial;
 
@@ -72,6 +72,8 @@ public class GameManager : MonoBehaviour
                 m_LevelToStart = SceneManager.GetActiveScene().name;
                 SceneManager.LoadScene(0);
             }
+
+            //Set State at level start
             if (GameObject.Find("DungeonCanvas") != null)
             {
                 m_GameState = GameState.Dungeon;
@@ -84,35 +86,20 @@ public class GameManager : MonoBehaviour
             m_Tutorial = Tutorial.Lobby_01;
             InstantiatePlayers();
             GameManager.m_Instance.m_Players = GameObject.FindGameObjectsWithTag("Player");
-            if (GameObject.Find("PartyBar") != null)
-            {
-                GameManager.m_Instance.m_PartyBar = GameObject.Find("PartyBar").GetComponentInChildren<PartyBar>();
-            }
-            else
-            {
-                Debug.Log("Partybar not found");
-            }
-            //FindStatsWindowAnimator();
-            m_NumOfPlayers = 0;
+            findPartyBar();
+
+            //m_NumOfPlayers = 0;
         }
         else
         {
             InstantiatePlayers();
             GameManager.m_Instance.m_Players = GameObject.FindGameObjectsWithTag("Player");
-            if (GameObject.Find("PartyBar") != null)
-            {
-                GameManager.m_Instance.m_PartyBar = GameObject.Find("PartyBar").GetComponentInChildren<PartyBar>();
-            }
-            else
-            {
-                Debug.Log("Partybar not found");
-            }
+            findPartyBar();
             if (GameManager.m_Instance.m_Player1.name != null)
             {
                 GameManager.m_Instance.loadPlayers();
             }
             FindHearts();
-            //FindStatsWindowAnimator();
 
             Destroy(gameObject);
         }
@@ -311,6 +298,18 @@ public class GameManager : MonoBehaviour
         else
         {
             Debug.Log("Error: Instantiated player doesn't have a Player Component");
+        }
+    }
+
+    void findPartyBar()
+    {
+        if (GameObject.Find("PartyBar") != null)
+        {
+            GameManager.m_Instance.m_PartyBar = GameObject.Find("PartyBar").GetComponentInChildren<PartyBar>();
+        }
+        else
+        {
+            Debug.LogError("Partybar not found");
         }
     }
 }
