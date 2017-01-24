@@ -7,4 +7,5 @@ public class MinigameManager : MonoBehaviour
     public bool showResultBar;
     public bool scoreSorted;
     public bool barsRaised;
+    public bool showRewardCanvas;
 }

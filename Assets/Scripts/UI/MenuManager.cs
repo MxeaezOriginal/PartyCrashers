@@ -48,7 +48,7 @@ public class MenuManager : MonoBehaviour
         //exitCanvas = GameObject.Find("Main Menu/Exit Canvas");
 
         anim = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Animator>();
-        es = GameObject.Find("Main Menu/EventSystem").GetComponent<EventSystem>();
+        es = GameObject.Find("Main Menu Canvas/EventSystem").GetComponent<EventSystem>();
         characterSelect = GetComponent<CharacterSelect>();
     }
 
