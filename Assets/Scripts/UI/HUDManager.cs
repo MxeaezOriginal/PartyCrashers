@@ -6,9 +6,9 @@ using System.Collections;
 public class HUDManager : MonoBehaviour
 {
     //Player HUD Panels
-    GameObject P1_Panel, P2_Panel, P3_Panel, P4_Panel;
+    public GameObject P1_Panel, P2_Panel, P3_Panel, P4_Panel;
     //RectTransofrm of these panels
-    RectTransform P1_PanelTransform, P2_PanelTransform, P3_PanelTransform, P4_PanelTransform;
+    public RectTransform P1_PanelTransform, P2_PanelTransform, P3_PanelTransform, P4_PanelTransform;
     //Score Counters
     public Text P1_ScoreCounter, P2_ScoreCounter, P3_ScoreCounter, P4_ScoreCounter;
 
