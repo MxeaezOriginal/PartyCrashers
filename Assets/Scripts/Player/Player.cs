@@ -89,6 +89,17 @@ public class Player : MonoBehaviour
     // Cooldown tracker for grabbing current location
     private float m_CurrentCooldown;
 
+
+    //Set up color --------------------------------------------------------------------------------------------------------------------------------------------------
+    [SerializeField]
+    Image PlayerMarker;
+    public Color Player1Color = Color.red;
+    public Color Player2Color = Color.blue;
+    public Color Player3Color = Color.green;
+    public Color Player4Color = Color.yellow;
+    public Color PlayerDamageIndacator = Color.white;
+
+
     // Use this for initialization
     void Start()
     {
@@ -105,6 +116,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        playerindacator();
         if (m_Heart.IsDead() || Input.GetKeyDown(KeyCode.Y))
         {
             respawn();
@@ -471,4 +483,57 @@ public class Player : MonoBehaviour
         GetComponent<PlayerController>().m_CantMove = false;
     }
 
+
+    //Health Indicator Code --------------------------------------------------------------------------------
+    void playerindacator()
+    {
+        if (m_Player == PLAYER.P1)
+        {
+            PlayerMarker.color = Player1Color;
+            if (m_Heart.curHealth <= m_Heart.maxHealth / 2 && m_Heart.curHealth > m_Heart.maxHealth / 4)
+            {
+                PlayerMarker.color = Color.Lerp(Player1Color, PlayerDamageIndacator, Mathf.PingPong(Time.time, 0.9f));
+            }
+            if (m_Heart.curHealth <= m_Heart.maxHealth / 4)
+            {
+                PlayerMarker.color = Color.Lerp(Player1Color, PlayerDamageIndacator, Mathf.PingPong(Time.time, 0.3f));
+            }
+        }
+        if (m_Player == PLAYER.P2)
+        {
+            PlayerMarker.color = Player2Color;
+            if (m_Heart.curHealth <= m_Heart.maxHealth / 2 && m_Heart.curHealth > m_Heart.maxHealth / 4)
+            {
+                PlayerMarker.color = Color.Lerp(Player2Color, PlayerDamageIndacator, Mathf.PingPong(Time.time, 0.9f));
+            }
+            if (m_Heart.curHealth <= m_Heart.maxHealth / 4)
+            {
+                PlayerMarker.color = Color.Lerp(Player2Color, PlayerDamageIndacator, Mathf.PingPong(Time.time, 0.3f));
+            }
+        }
+        if (m_Player == PLAYER.P3)
+        {
+            PlayerMarker.color = Player3Color;
+            if (m_Heart.curHealth <= m_Heart.maxHealth / 2 && m_Heart.curHealth > m_Heart.maxHealth / 4)
+            {
+                PlayerMarker.color = Color.Lerp(Player3Color, PlayerDamageIndacator, Mathf.PingPong(Time.time, 0.9f));
+            }
+            if (m_Heart.curHealth <= m_Heart.maxHealth / 4)
+            {
+                PlayerMarker.color = Color.Lerp(Player3Color, PlayerDamageIndacator, Mathf.PingPong(Time.time, 0.3f));
+            }
+        }
+        if (m_Player == PLAYER.P4)
+        {
+            PlayerMarker.color = Player4Color;
+            if (m_Heart.curHealth <= m_Heart.maxHealth / 2 && m_Heart.curHealth > m_Heart.maxHealth / 4)
+            {
+                PlayerMarker.color = Color.Lerp(Player4Color, PlayerDamageIndacator, Mathf.PingPong(Time.time, 0.9f));
+            }
+            if (m_Heart.curHealth <= m_Heart.maxHealth / 4)
+            {
+                PlayerMarker.color = Color.Lerp(Player4Color, PlayerDamageIndacator, Mathf.PingPong(Time.time, 0.3f));
+            }
+        }
+    }
 }
