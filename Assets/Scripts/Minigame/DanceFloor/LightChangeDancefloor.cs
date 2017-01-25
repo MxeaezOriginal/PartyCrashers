@@ -21,8 +21,6 @@ public class LightChangeDancefloor : MonoBehaviour {
 	private Color ColorSix;
 	[SerializeField]
 	private Color ColorSeven;
-	//[SerializeField]
-	//private float colorSwapTime;
 
 	[SerializeField]
 	private float scoretime = 4;
@@ -32,7 +30,8 @@ public class LightChangeDancefloor : MonoBehaviour {
 	private Color CurrentColor;
 	public int CurrentColorInt;
 	private Color PreviousColor;
-	public int PreviousColorInt;
+    private Color TempColor;
+	public int PreviousColorInt = -1;
 	//public int CurrentColorNumber;
 
 	public bool stop = false;
@@ -43,7 +42,7 @@ public class LightChangeDancefloor : MonoBehaviour {
 	{		
 		//CurrentColorNumber = 1;
 		lt = GetComponent<Light>();
-		//changeColor();
+        CurrentColorInt = -1;
 	}
 
 	// Update is called once per frame
@@ -52,13 +51,18 @@ public class LightChangeDancefloor : MonoBehaviour {
 		if (stop == true) 
 		{
 			StartCoroutine (Stopedfor (scoretime));
-		}
+            if (PreviousColorInt != -1)
+            {
+                lt.color = TempColor;
+            }
+        }
 		if (stop == false) 
 		{
 			StartCoroutine(Stopfor(scoretime));
 			StartCoroutine(ColorRandomiser(stoptime));
             lt.color = Color.Lerp (CurrentColor, PreviousColor, Mathf.PingPong (Time.time*1.5f, 1));
             PreviousColorInt = CurrentColorInt;
+            TempColor = CurrentColor;
             //lt.color = Color.Lerp(CurrentColor, PreviousColor, 1);
         }
         //Debug.Log(stop);

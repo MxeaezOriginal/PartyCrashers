@@ -13,7 +13,6 @@ public class MinigameResult : MonoBehaviour
     int maxScore = 7000;
 
     //Tracks and playersScores P1-4 scores in odrder (playersScore1 - highest)
-    public int P1_place, P2_place, P3_place, P4_place;      //int from 1 - 4
     public int scorePlace1, scorePlace2, scorePlace3, scorePlace4;
 
     //List & Array for sorting players'score
@@ -114,25 +113,25 @@ public class MinigameResult : MonoBehaviour
 
     void SetPlayerPlace()
     {
-        if (P1_Score == scorePlace1) P1_place = 1;
-        if (P1_Score == scorePlace2) P1_place = 2;
-        if (P1_Score == scorePlace3) P1_place = 3;
-        if (P1_Score == scorePlace4) P1_place = 4;
+        if (P1_Score == scorePlace1) minigameManager.P1_place = 1;
+        if (P1_Score == scorePlace2) minigameManager.P1_place = 2;
+        if (P1_Score == scorePlace3) minigameManager.P1_place = 3;
+        if (P1_Score == scorePlace4) minigameManager.P1_place = 4;
 
-        if (P2_Score == scorePlace1) P2_place = 1;
-        if (P2_Score == scorePlace2) P2_place = 2;
-        if (P2_Score == scorePlace3) P2_place = 3;
-        if (P2_Score == scorePlace4) P2_place = 4;
+        if (P2_Score == scorePlace1) minigameManager.P2_place = 1;
+        if (P2_Score == scorePlace2) minigameManager.P2_place = 2;
+        if (P2_Score == scorePlace3) minigameManager.P2_place = 3;
+        if (P2_Score == scorePlace4) minigameManager.P2_place = 4;
 
-        if (P3_Score == scorePlace1) P3_place = 1;
-        if (P3_Score == scorePlace2) P3_place = 2;
-        if (P3_Score == scorePlace3) P3_place = 3;
-        if (P3_Score == scorePlace4) P3_place = 4;
+        if (P3_Score == scorePlace1) minigameManager.P3_place = 1;
+        if (P3_Score == scorePlace2) minigameManager.P3_place = 2;
+        if (P3_Score == scorePlace3) minigameManager.P3_place = 3;
+        if (P3_Score == scorePlace4) minigameManager.P3_place = 4;
 
-        if (P4_Score == scorePlace1) P4_place = 1;
-        if (P4_Score == scorePlace2) P4_place = 2;
-        if (P4_Score == scorePlace3) P4_place = 3;
-        if (P4_Score == scorePlace4) P4_place = 4;
+        if (P4_Score == scorePlace1) minigameManager.P4_place = 1;
+        if (P4_Score == scorePlace2) minigameManager.P4_place = 2;
+        if (P4_Score == scorePlace3) minigameManager.P4_place = 3;
+        if (P4_Score == scorePlace4) minigameManager.P4_place = 4;
     }
 
     void RaisingResultBar()
@@ -157,11 +156,14 @@ public class MinigameResult : MonoBehaviour
                 if (firstDelay < 0)
                 {
                     test = false;
-                    if (P1_place == 1)
+                    if (minigameManager.P1_place == 1)
                         P1_Bar.fillAmount = Mathf.Lerp(P1_Bar.fillAmount, resultBarAmount(scorePlace1, 0, maxScore, 0, 1), speed * Time.deltaTime);
-                    if (P2_place == 1)
+                    if (minigameManager.P2_place == 1)
                         P2_Bar.fillAmount = Mathf.Lerp(P2_Bar.fillAmount, resultBarAmount(scorePlace1, 0, maxScore, 0, 1), speed * Time.deltaTime);
                 }
+                delay4 -= Time.deltaTime;
+                if (delay4 < 0)
+                    minigameManager.barsRaised = true;
                 break;
 
             case 3:
@@ -178,11 +180,11 @@ public class MinigameResult : MonoBehaviour
                     test = false;
                     if (test2)
                     {
-                        if (P1_place == 1 || P1_place == 2)
+                        if (minigameManager.P1_place == 1 || minigameManager.P1_place == 2)
                             P1_Bar.fillAmount = Mathf.Lerp(P1_Bar.fillAmount, resultBarAmount(scorePlace2, 0, maxScore, 0, 1), speed * Time.deltaTime);
-                        if (P2_place == 1 || P2_place == 2)
+                        if (minigameManager.P2_place == 1 || minigameManager.P2_place == 2)
                             P2_Bar.fillAmount = Mathf.Lerp(P2_Bar.fillAmount, resultBarAmount(scorePlace2, 0, maxScore, 0, 1), speed * Time.deltaTime);
-                        if (P3_place == 1 || P3_place == 2)
+                        if (minigameManager.P3_place == 1 || minigameManager.P3_place == 2)
                             P3_Bar.fillAmount = Mathf.Lerp(P3_Bar.fillAmount, resultBarAmount(scorePlace2, 0, maxScore, 0, 1), speed * Time.deltaTime);
                     }
                 }
@@ -193,11 +195,11 @@ public class MinigameResult : MonoBehaviour
                     test2 = false;
                     if (test3)
                     {
-                        if (P1_place == 1)
+                        if (minigameManager.P1_place == 1)
                             P1_Bar.fillAmount = Mathf.Lerp(P1_Bar.fillAmount, resultBarAmount(scorePlace1, 0, maxScore, 0, 1), speed * Time.deltaTime);
-                        if (P2_place == 1)
+                        if (minigameManager.P2_place == 1)
                             P2_Bar.fillAmount = Mathf.Lerp(P2_Bar.fillAmount, resultBarAmount(scorePlace1, 0, maxScore, 0, 1), speed * Time.deltaTime);
-                        if (P3_place == 1)
+                        if (minigameManager.P3_place == 1)
                             P3_Bar.fillAmount = Mathf.Lerp(P3_Bar.fillAmount, resultBarAmount(scorePlace1, 0, maxScore, 0, 1), speed * Time.deltaTime);
                     }
                 }
@@ -217,13 +219,13 @@ public class MinigameResult : MonoBehaviour
                     test = false;
                     if (test2)
                     {
-                        if (P1_place == 1 || P1_place == 2 || P1_place == 3)
+                        if (minigameManager.P1_place == 1 || minigameManager.P1_place == 2 || minigameManager.P1_place == 3)
                             P1_Bar.fillAmount = Mathf.Lerp(P1_Bar.fillAmount, resultBarAmount(scorePlace3, 0, maxScore, 0, 1), speed * Time.deltaTime);
-                        if (P2_place == 1 || P2_place == 2 || P2_place == 3)
+                        if (minigameManager.P2_place == 1 || minigameManager.P2_place == 2 || minigameManager.P2_place == 3)
                             P2_Bar.fillAmount = Mathf.Lerp(P2_Bar.fillAmount, resultBarAmount(scorePlace3, 0, maxScore, 0, 1), speed * Time.deltaTime);
-                        if (P3_place == 1 || P3_place == 2 || P3_place == 3)
+                        if (minigameManager.P3_place == 1 || minigameManager.P3_place == 2 || minigameManager.P3_place == 3)
                             P3_Bar.fillAmount = Mathf.Lerp(P3_Bar.fillAmount, resultBarAmount(scorePlace3, 0, maxScore, 0, 1), speed * Time.deltaTime);
-                        if (P4_place == 1 || P4_place == 2 || P4_place == 3)
+                        if (minigameManager.P4_place == 1 || minigameManager.P4_place == 2 || minigameManager.P4_place == 3)
                             P4_Bar.fillAmount = Mathf.Lerp(P4_Bar.fillAmount, resultBarAmount(scorePlace3, 0, maxScore, 0, 1), speed * Time.deltaTime);
                     }
                 }
@@ -234,13 +236,13 @@ public class MinigameResult : MonoBehaviour
                     test2 = false;
                     if (test3)
                     {
-                        if (P1_place == 1 || P1_place == 2)
+                        if (minigameManager.P1_place == 1 || minigameManager.P1_place == 2)
                             P1_Bar.fillAmount = Mathf.Lerp(P1_Bar.fillAmount, resultBarAmount(scorePlace2, 0, maxScore, 0, 1), speed * Time.deltaTime);
-                        if (P2_place == 1 || P2_place == 2)
+                        if (minigameManager.P2_place == 1 || minigameManager.P2_place == 2)
                             P2_Bar.fillAmount = Mathf.Lerp(P2_Bar.fillAmount, resultBarAmount(scorePlace2, 0, maxScore, 0, 1), speed * Time.deltaTime);
-                        if (P3_place == 1 || P3_place == 2)
+                        if (minigameManager.P3_place == 1 || minigameManager.P3_place == 2)
                             P3_Bar.fillAmount = Mathf.Lerp(P3_Bar.fillAmount, resultBarAmount(scorePlace2, 0, maxScore, 0, 1), speed * Time.deltaTime);
-                        if (P4_place == 1 || P4_place == 2)
+                        if (minigameManager.P4_place == 1 || minigameManager.P4_place == 2)
                             P4_Bar.fillAmount = Mathf.Lerp(P4_Bar.fillAmount, resultBarAmount(scorePlace2, 0, maxScore, 0, 1), speed * Time.deltaTime);
                     }
                 }
@@ -251,22 +253,17 @@ public class MinigameResult : MonoBehaviour
                     test3 = false;
                     if (test4)
                     {
-                        if (P1_place == 1)
+                        if (minigameManager.P1_place == 1)
                             P1_Bar.fillAmount = Mathf.Lerp(P1_Bar.fillAmount, resultBarAmount(scorePlace1, 0, maxScore, 0, 1), speed * Time.deltaTime);
-                        if (P2_place == 1)
+                        if (minigameManager.P2_place == 1)
                             P2_Bar.fillAmount = Mathf.Lerp(P2_Bar.fillAmount, resultBarAmount(scorePlace1, 0, maxScore, 0, 1), speed * Time.deltaTime);
-                        if (P3_place == 1)
+                        if (minigameManager.P3_place == 1)
                             P3_Bar.fillAmount = Mathf.Lerp(P3_Bar.fillAmount, resultBarAmount(scorePlace1, 0, maxScore, 0, 1), speed * Time.deltaTime);
-                        if (P4_place == 1)
+                        if (minigameManager.P4_place == 1)
                             P4_Bar.fillAmount = Mathf.Lerp(P4_Bar.fillAmount, resultBarAmount(scorePlace1, 0, maxScore, 0, 1), speed * Time.deltaTime);
                     }
                 }
                 break;
         }
-    }
-
-    void ChooseUpgrades()
-    {
-
     }
 }

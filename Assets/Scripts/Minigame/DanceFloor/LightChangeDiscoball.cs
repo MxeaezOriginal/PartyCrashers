@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+//This Script is RIGHT.
 public class LightChangeDiscoball : MonoBehaviour {
     [SerializeField]
     private Light lt;
@@ -20,8 +20,6 @@ public class LightChangeDiscoball : MonoBehaviour {
     private Color ColorSix;
     [SerializeField]
     private Color ColorSeven;
-    //[SerializeField]
-    //private float colorSwapTime;
 
     [SerializeField]
     private float scoretime = 4;
@@ -31,7 +29,8 @@ public class LightChangeDiscoball : MonoBehaviour {
     private Color CurrentColor;
     public int CurrentColorInt;
     private Color PreviousColor;
-    public int PreviousColorInt;
+    private Color TempColor;
+    public int PreviousColorInt = -1;
     //public int CurrentColorNumber;
 
     private bool stop = false;
@@ -42,8 +41,7 @@ public class LightChangeDiscoball : MonoBehaviour {
     {
         //CurrentColorNumber = 1;
         lt = GetComponent<Light>();
-        CurrentColorInt = 8;
-        //changeColor();
+        CurrentColorInt = -1;
     }
 
     // Update is called once per frame
@@ -52,7 +50,10 @@ public class LightChangeDiscoball : MonoBehaviour {
         if (stop == true)
         {
             StartCoroutine(Stopedfor(scoretime));
-            //lt.color = Color.
+            if(PreviousColorInt != -1)
+            {
+                lt.color = TempColor;
+            }
         }
         if (stop == false)
         {
@@ -60,6 +61,7 @@ public class LightChangeDiscoball : MonoBehaviour {
             StartCoroutine(ColorRandomiser(stoptime));
             lt.color = Color.Lerp(CurrentColor, PreviousColor, Mathf.PingPong(Time.time * 1.5f, 1));
             PreviousColorInt = CurrentColorInt;
+            TempColor = CurrentColor;
             //lt.color = Color.Lerp(CurrentColor, PreviousColor, 1);
         }
         //Debug.Log(stop);

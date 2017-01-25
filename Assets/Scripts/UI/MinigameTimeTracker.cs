@@ -6,8 +6,9 @@ public class MinigameTimeTracker : MonoBehaviour
 {
     MinigameManager minigameManger;
 
-    public CanvasGroup FirstFadingCanvas;
-    public CanvasGroup SecondFadingCanvas;
+    public Canvas miniGameCanvas;
+    public CanvasGroup firstFadingCanvas;
+    public CanvasGroup secondFadingCanvas;
 
     CanvasGroup rewardFadeInCanvas;
     Image startCountdownImage;
@@ -21,11 +22,13 @@ public class MinigameTimeTracker : MonoBehaviour
     //Screen Fading floats
     float delayToFadeIn = 1f;
     float delayToShowResultBar = 2f;
+    float delayToShowRewards = 2f;
     void Awake()
     {
         minigameManger = GetComponent<MinigameManager>();
-        FirstFadingCanvas = GameObject.Find("First Fading Canvas").GetComponent<CanvasGroup>();
-        SecondFadingCanvas = GameObject.Find("Second Fading Canvas").GetComponent<CanvasGroup>();
+        miniGameCanvas = GameObject.Find("MinigameCanvas").GetComponent<Canvas>();
+        firstFadingCanvas = GameObject.Find("First Fading Canvas").GetComponent<CanvasGroup>();
+        secondFadingCanvas = GameObject.Find("Second Fading Canvas").GetComponent<CanvasGroup>();
         startCountdownImage = GameObject.Find("Start Countdown Image").GetComponent<Image>();
     }
     void Update()
@@ -99,24 +102,37 @@ public class MinigameTimeTracker : MonoBehaviour
         delayToFadeIn -= Time.deltaTime;
         if (delayToFadeIn < 0)
         {
-            if (FirstFadingCanvas.alpha < 0.6)
+            if (firstFadingCanvas.alpha < 0.6)
             {
-                FirstFadingCanvas.alpha += Time.deltaTime / fadeTime;
+                firstFadingCanvas.alpha += Time.deltaTime / fadeTime;
             }
 
             delayToShowResultBar -= Time.deltaTime;
             if (delayToShowResultBar < 0)
             {
                 minigameManger.showResultBar = true; //PASSES TO NEIGHBOUR SCRIPT
+
+
+                //Work-around of canvases hirarchy order
+                secondFadingCanvas.gameObject.transform.SetParent(miniGameCanvas.transform);
+                secondFadingCanvas.gameObject.transform.SetParent(null);
             }
         }
     }
 
     void ScreenFading()
     {
-        if (SecondFadingCanvas.alpha < 0.6)
+        if (secondFadingCanvas.alpha < 0.6)
         {
-            SecondFadingCanvas.alpha += Time.deltaTime / fadeTime;
+            secondFadingCanvas.alpha += Time.deltaTime / fadeTime;
+        }
+        else
+        {
+            delayToShowRewards -= Time.deltaTime;
+            if (delayToShowRewards < 0)
+            {
+                minigameManger.showRewardCanvas = true;
+            }
         }
     }
 }
