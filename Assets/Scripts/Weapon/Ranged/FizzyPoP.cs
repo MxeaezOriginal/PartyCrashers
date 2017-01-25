@@ -97,7 +97,7 @@ public class FizzyPoP : Ranged
     {
         if (bullet.GetComponent<Damage>() != null)
         {
-            bullet.GetComponent<Damage>().m_Damage = this.m_DamageOrHeal;
+            bullet.GetComponent<Damage>().m_Damage = m_Damage;
         }
         else
         {

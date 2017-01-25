@@ -7,8 +7,10 @@ public class PartyBar : MonoBehaviour {
 
     public int m_Max = 100;
     public int m_Current = 0;
-    public float m_DecreaseRate = 5f;
-    public int m_DecreaseAmount = 5;
+    public float m_DecreaseRateDungeon = 5f;
+    public int m_DecreaseAmountDungeon = 5;
+    public float m_DecreaseRateMinigame = 1f;
+    public int m_DecreaseAmountMinigame = 20;
     public float m_fillSpeed = 2f;
 
     public bool m_Active;
@@ -20,7 +22,16 @@ public class PartyBar : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         m_Bar = GetComponent<Image>();
-	}
+
+        if (GameManager.m_Instance.m_GameState == GameManager.GameState.Dungeon)
+        {
+            m_Current = 0;
+        }
+        else if (GameManager.m_Instance.m_GameState == GameManager.GameState.Minigame)
+        {
+            m_Current = 100;
+        }
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -43,9 +54,16 @@ public class PartyBar : MonoBehaviour {
         if (m_Active)
         {
 
-            if (m_TempTimer <= Time.time - m_DecreaseRate)
+            if (m_TempTimer <= Time.time - m_DecreaseRateDungeon)
             {
-                m_Current -= m_DecreaseAmount;
+                if (m_Current >= m_DecreaseAmountDungeon)
+                {
+                    m_Current -= m_DecreaseAmountDungeon;
+                }
+                else
+                {
+                    m_Current = 0;
+                }
                 m_TempTimer = Time.time;
             }
 
@@ -65,9 +83,9 @@ public class PartyBar : MonoBehaviour {
         {
             //set bar equal to percentage
 
-            if (m_TempTimer <= Time.time - m_DecreaseRate)
+            if (m_TempTimer <= Time.time - m_DecreaseRateMinigame)
             {
-                m_Current -= m_DecreaseAmount;
+                m_Current -= m_DecreaseAmountMinigame;
                 m_TempTimer = Time.time;
             }
 
@@ -107,11 +125,11 @@ public class PartyBar : MonoBehaviour {
     GameManager.m_Instance.m_Tutorial == GameManager.Tutorial.Lobby_02 ||
     GameManager.m_Instance.m_Tutorial == GameManager.Tutorial.Lobby_03)
         {
-            SceneManager.LoadScene(GameManager.m_Instance.m_Tutorial.ToString()); //ballroom blitz
+           SceneManager.LoadScene(GameManager.m_Instance.m_Tutorial.ToString()); //ballroom blitz
         }
         else
         {
-            SceneManager.LoadScene(Random.Range(5, 7));
+            SceneManager.LoadScene(Random.Range(8, 9));
         }
     }
 }

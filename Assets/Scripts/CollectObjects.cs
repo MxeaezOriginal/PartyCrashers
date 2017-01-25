@@ -26,13 +26,11 @@ public class CollectObjects : MonoBehaviour
 
         if(collectible != null)
         {
+
             player.m_Gold += collectible.gold;
             player.m_Score += 5;
 
-            if (partyBar != null)
-            {
-                partyBar.m_Current += collectible.gold;
-            }
+            partyBar.m_Current += collectible.gold;
 
             if (collectible.type == Collectible.Type.Death)
             {
@@ -41,8 +39,6 @@ public class CollectObjects : MonoBehaviour
 
             other.gameObject.SetActive(false);
             
-
-            //tutorial
         }
 
     }

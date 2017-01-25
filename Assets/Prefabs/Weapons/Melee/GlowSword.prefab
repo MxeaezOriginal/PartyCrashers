@@ -12,7 +12,6 @@ GameObject:
   - 23: {fileID: 2390610}
   - 114: {fileID: 11428284}
   - 114: {fileID: 11446614}
-  - 114: {fileID: 11425574}
   - 65: {fileID: 6555636}
   - 114: {fileID: 11417792}
   - 26: {fileID: 2696170}
@@ -69,6 +68,7 @@ Transform:
   m_LocalRotation: {x: 0.6427877, y: 0, z: 0, w: 0.7660444}
   m_LocalPosition: {x: 4.9611764, y: 4.464352, z: -0.9534468}
   m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalEulerAnglesHint: {x: 80, y: 0, z: 0}
   m_Children:
   - {fileID: 456764}
   - {fileID: 489962}
@@ -83,6 +83,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.692, z: 0}
   m_LocalScale: {x: 0.1, y: 1, z: 0.1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 444646}
   m_RootOrder: 0
@@ -95,6 +96,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.769, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 444646}
   m_RootOrder: 1
@@ -324,19 +326,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c14d26e0fc32fe842b75a6c8b6999701, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Damage: 0
---- !u!114 &11425574
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 124012}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42fa56874a66d29449f2efa76c7470f8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PlayerDetected: 3
+  m_Damage: 5
 --- !u!114 &11428284
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -349,7 +339,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Anim: {fileID: 0}
-  m_Damage: 2
+  m_Damage: 5
   m_Weapon1Cooldown: 1
   m_Weapon2Cooldown: 20
   m_PrimarySounds:
@@ -362,8 +352,8 @@ MonoBehaviour:
   dashDistance: 25
   dashDelay: 0.1
   smooth: 20
-  attack: 0
   triggerLife: 0.5
+  attack: 0
   effect: {fileID: 0}
 --- !u!114 &11446614
 MonoBehaviour:

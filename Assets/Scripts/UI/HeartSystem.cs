@@ -46,7 +46,7 @@ public class HeartSystem : MonoBehaviour
                 else
                 {
                     heartImages[i].enabled = true;
-                    print("wtf" + gameObject.name);
+                    //print("wtf" + gameObject.name);
                 }
             }
             UpdateHearts();

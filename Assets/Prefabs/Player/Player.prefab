@@ -12,7 +12,7 @@ GameObject:
   - 124: {fileID: 12438636}
   - 92: {fileID: 9204748}
   m_Layer: 8
-  m_Name: P1 Portrait
+  m_Name: Portrait
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -122,9 +122,9 @@ GameObject:
   - 114: {fileID: 11429116}
   - 114: {fileID: 11460816}
   - 114: {fileID: 11456844}
-  - 114: {fileID: 11444864}
   - 114: {fileID: 11424646}
   - 95: {fileID: 9589924}
+  - 114: {fileID: 11413658}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -301,6 +301,20 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &11413658
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 179692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 572a0763b75dd474ba8ff9be34766865, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RespawnCount: 1
+  m_MaxHealth: 5
+  m_CurrentHealth: 0
 --- !u!114 &11424646
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -343,9 +357,12 @@ MonoBehaviour:
   m_AttackSpeed: 0
   m_Gold: 0
   m_Score: 0
+  m_CantAttack: 0
+  m_State: 0
   m_CheckLocationCooldown: 1
   m_Location: {x: 0, y: 0, z: 0}
   m_Animator: {fileID: 0}
+  m_PlayerObject: {fileID: 0}
   m_PrimaryAttack: Primary_
   m_SecondaryAttack: Secondary_
   m_Interact: Interact_
@@ -355,19 +372,6 @@ MonoBehaviour:
   delay: 2
   dotdelay: 2
   m_Controller: 0
---- !u!114 &11444864
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 179692}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70cc660203e0e344cb94f9d4594fc062, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: 0
-  anim: {fileID: 0}
 --- !u!114 &11456844
 MonoBehaviour:
   m_ObjectHideFlags: 1

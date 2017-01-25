@@ -73,16 +73,6 @@ public class GameManager : MonoBehaviour
                 SceneManager.LoadScene(0);
             }
 
-            //Set State at level start
-            if (GameObject.Find("DungeonCanvas") != null)
-            {
-                m_GameState = GameState.Dungeon;
-            }
-            else if (GameObject.Find("MinigameCanvas") != null)
-            {
-                m_GameState = GameState.Minigame;
-            }
-
             m_Tutorial = Tutorial.Lobby_01;
             InstantiatePlayers();
             GameManager.m_Instance.m_Players = GameObject.FindGameObjectsWithTag("Player");
@@ -95,6 +85,16 @@ public class GameManager : MonoBehaviour
             InstantiatePlayers();
             GameManager.m_Instance.m_Players = GameObject.FindGameObjectsWithTag("Player");
             findPartyBar();
+            //Set State at level start
+            if (GameObject.Find("DungeonCanvas") != null)
+            {
+                Debug.Log("heheh");
+                m_GameState = GameState.Dungeon;
+            }
+            else if (GameObject.Find("MinigameCanvas") != null)
+            {
+                m_GameState = GameState.Minigame;
+            }
             if (GameManager.m_Instance.m_Player1.name != null)
             {
                 GameManager.m_Instance.loadPlayers();
@@ -305,11 +305,15 @@ public class GameManager : MonoBehaviour
     {
         if (GameObject.Find("PartyBar") != null)
         {
+            Debug.Log("Partybar Found.");
             GameManager.m_Instance.m_PartyBar = GameObject.Find("PartyBar").GetComponentInChildren<PartyBar>();
         }
         else
         {
-            Debug.LogError("Partybar not found");
+            if (SceneManager.GetActiveScene().name != "MainMenu")
+            {
+                Debug.LogError("Partybar not found");
+            }
         }
     }
 }

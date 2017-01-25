@@ -28,8 +28,6 @@ GameObject:
   - 124: {fileID: 12459012}
   - 81: {fileID: 8181104}
   - 114: {fileID: 11409526}
-  - 114: {fileID: 11492224}
-  - 114: {fileID: 11405196}
   - 114: {fileID: 11452844}
   - 114: {fileID: 11431886}
   - 114: {fileID: 11465586}
@@ -54,6 +52,7 @@ Transform:
   m_LocalRotation: {x: 0.3414562, y: 0, z: 0, w: 0.9398977}
   m_LocalPosition: {x: 0.44, y: 14.72, z: 29.03}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 39.9312, y: 0, z: 0}
   m_Children:
   - {fileID: 465296}
   m_Father: {fileID: 0}
@@ -67,6 +66,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 20}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 439830}
   m_RootOrder: 0
@@ -118,35 +118,6 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 173164}
   m_Enabled: 1
---- !u!114 &11405196
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 173164}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd70d448b18cfbc46af26466f752332c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  visualizeFocus: 0
-  focalLength: 10
-  focalSize: 0.05
-  aperture: 0.5
-  focalTransform: {fileID: 465296}
-  maxBlurSize: 2
-  highResolution: 0
-  blurType: 0
-  blurSampleCount: 2
-  nearBlur: 0
-  foregroundOverlap: 1
-  dofHdrShader: {fileID: 4800000, guid: acd613035ff3e455e8abf23fdc8c8c24, type: 3}
-  dx11BokehShader: {fileID: 4800000, guid: d8e82664aa8686642a424c88ab10164a, type: 3}
-  dx11BokehThreshold: 0.5
-  dx11SpawnHeuristic: 0.0875
-  dx11BokehTexture: {fileID: 2800000, guid: a4cdca73d61814d33ac1587f6c163bca, type: 3}
-  dx11BokehScale: 1.2
-  dx11BokehIntensity: 2.5
 --- !u!114 &11409526
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -297,23 +268,6 @@ MonoBehaviour:
   BlueSteepness: 1
   BlueGamma: 1
   e_ShowCurves: 1
---- !u!114 &11492224
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 173164}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4975a6e437fc3b149a8cd508ce5bdd69, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  threshold: 0.537
-  intensity: 0.75
-  blurSize: 1
-  blurIterations: 1
-  blurType: 0
-  fastBloomShader: {fileID: 4800000, guid: 68a00c837b82e4c6d92e7da765dc5f1d, type: 3}
 --- !u!114 &11495654
 MonoBehaviour:
   m_ObjectHideFlags: 1

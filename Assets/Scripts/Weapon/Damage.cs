@@ -14,8 +14,8 @@ public class Damage : MonoBehaviour
 		{
             if(m_WeaponTransform.GetComponent<Weapon>() != null)
             {
-                m_Damage = m_WeaponTransform.GetComponent<Weapon>().m_DamageOrHeal;
-                Debug.Log(m_Damage + " set from weapon " + m_WeaponTransform.name);
+                m_Damage = m_WeaponTransform.GetComponent<Weapon>().m_Damage;
+                //Debug.Log(m_Damage + " set from weapon " + m_WeaponTransform.name);
                 break;
             }
             else
@@ -38,8 +38,17 @@ public class Damage : MonoBehaviour
 
         if (other.gameObject.GetComponent<HeartSystem>() != null)
         {
-            HeartSystem playerHealth = other.gameObject.GetComponent<HeartSystem>();
-            playerHealth.Heal((int)m_Damage);
-        }          
+            if (other.gameObject.GetComponent<RespawnHealth>() != null)
+            {
+                RespawnHealth playerRespawnHealth = other.gameObject.GetComponent<RespawnHealth>();
+                Player player = playerRespawnHealth.GetComponent<Player>();
+
+                if (player.m_State == Player.State.Dead)
+                {
+                    playerRespawnHealth.damage(1);
+                    Debug.Log("Pinata hit");
+                }
+            }
+        }
     }
 }

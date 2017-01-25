@@ -6,7 +6,7 @@ public abstract class Weapon : MonoBehaviour {
     [SerializeField]
     protected Animation m_Anim;
     [SerializeField]
-    public int m_DamageOrHeal = 0;
+    public int m_Damage = 0;
     [SerializeField]
     protected float m_Weapon1Cooldown = 0f;
     [SerializeField]

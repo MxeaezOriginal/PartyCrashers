@@ -140,7 +140,7 @@ public class Player : MonoBehaviour
         //Interact
         if (Input.GetButtonDown(m_Interact + m_Controller.ToString()))
         {
-            if(m_WeaponManager.isStandingOnWeapon())
+            if (m_WeaponManager.isStandingOnWeapon())
             {
                 m_WeaponManager.InstantiateWeapon();
             }
@@ -190,13 +190,10 @@ public class Player : MonoBehaviour
     public void respawn()
     {
         m_State = State.Dead;
-        m_Model = Model.Pinata;
         updateModel();
         transform.position = m_Location;
 
-        m_Heart.curHealth = m_Heart.maxHealth;
-        m_Heart.UpdateHearts();
-        Debug.Log("Respawned");
+        Debug.Log("Pinata time");
     }
 
     public void updateModel()
@@ -207,6 +204,16 @@ public class Player : MonoBehaviour
             {
                 GameObject previousModel = m_PlayerObject.transform.FindChild("Model").gameObject;
                 Destroy(previousModel);
+            }
+            if (m_State == State.Dead)
+            {
+                GameObject pinataClone = Instantiate(GameManager.m_Instance.m_PinataPrefab, transform.position, Quaternion.identity) as GameObject;
+                pinataClone.transform.parent = m_PlayerObject.gameObject.transform;
+                pinataClone.transform.localPosition = new Vector3(0, 0, 0);
+                pinataClone.transform.localRotation = Quaternion.identity;
+                pinataClone.transform.localScale = new Vector3(1, 1, 1);
+                pinataClone.name = "Model";
+                return;
             }
             switch (m_Model)
             {
@@ -226,7 +233,6 @@ public class Player : MonoBehaviour
                     pinataClone.transform.localRotation = Quaternion.identity;
                     pinataClone.transform.localScale = new Vector3(1, 1, 1);
                     pinataClone.name = "Model";
-                    m_Animator = pinataClone.GetComponent<Animator>();
                     break;
 
             }
