@@ -91,13 +91,16 @@ public class Player : MonoBehaviour
 
 
     //Set up color --------------------------------------------------------------------------------------------------------------------------------------------------
-    [SerializeField]
-    Image PlayerMarker;
-    public Color Player1Color = Color.red;
-    public Color Player2Color = Color.blue;
-    public Color Player3Color = Color.green;
-    public Color Player4Color = Color.yellow;
-    public Color PlayerDamageIndacator = Color.white;
+	[SerializeField]
+	Image PlayerMarker;
+	public Color Player1Color = Color.red;
+	public Color Player2Color = Color.blue;
+	public Color Player3Color = Color.green;
+	public Color Player4Color = Color.yellow;
+	public Color PlayerCurrentColor;
+	public Color PlayerDamageIndacator = Color.white;
+	public bool FlashCheck = true;
+
 
 
     // Use this for initialization
@@ -490,56 +493,99 @@ public class Player : MonoBehaviour
     }
 
 
-    //Health Indicator Code --------------------------------------------------------------------------------
-    void playerindacator()
-    {
-        if (m_Player == PLAYER.P1)
-        {
-            PlayerMarker.color = Player1Color;
-            if (m_Heart.curHealth <= m_Heart.maxHealth / 2 && m_Heart.curHealth > m_Heart.maxHealth / 4)
-            {
-                PlayerMarker.color = Color.Lerp(Player1Color, PlayerDamageIndacator, Mathf.PingPong(Time.time, 0.9f));
-            }
-            if (m_Heart.curHealth <= m_Heart.maxHealth / 4)
-            {
-                PlayerMarker.color = Color.Lerp(Player1Color, PlayerDamageIndacator, Mathf.PingPong(Time.time, 0.3f));
-            }
-        }
-        if (m_Player == PLAYER.P2)
-        {
-            PlayerMarker.color = Player2Color;
-            if (m_Heart.curHealth <= m_Heart.maxHealth / 2 && m_Heart.curHealth > m_Heart.maxHealth / 4)
-            {
-                PlayerMarker.color = Color.Lerp(Player2Color, PlayerDamageIndacator, Mathf.PingPong(Time.time, 0.9f));
-            }
-            if (m_Heart.curHealth <= m_Heart.maxHealth / 4)
-            {
-                PlayerMarker.color = Color.Lerp(Player2Color, PlayerDamageIndacator, Mathf.PingPong(Time.time, 0.3f));
-            }
-        }
-        if (m_Player == PLAYER.P3)
-        {
-            PlayerMarker.color = Player3Color;
-            if (m_Heart.curHealth <= m_Heart.maxHealth / 2 && m_Heart.curHealth > m_Heart.maxHealth / 4)
-            {
-                PlayerMarker.color = Color.Lerp(Player3Color, PlayerDamageIndacator, Mathf.PingPong(Time.time, 0.9f));
-            }
-            if (m_Heart.curHealth <= m_Heart.maxHealth / 4)
-            {
-                PlayerMarker.color = Color.Lerp(Player3Color, PlayerDamageIndacator, Mathf.PingPong(Time.time, 0.3f));
-            }
-        }
-        if (m_Player == PLAYER.P4)
-        {
-            PlayerMarker.color = Player4Color;
-            if (m_Heart.curHealth <= m_Heart.maxHealth / 2 && m_Heart.curHealth > m_Heart.maxHealth / 4)
-            {
-                PlayerMarker.color = Color.Lerp(Player4Color, PlayerDamageIndacator, Mathf.PingPong(Time.time, 0.9f));
-            }
-            if (m_Heart.curHealth <= m_Heart.maxHealth / 4)
-            {
-                PlayerMarker.color = Color.Lerp(Player4Color, PlayerDamageIndacator, Mathf.PingPong(Time.time, 0.3f));
-            }
-        }
-    }
+	//Health Indicator Code --------------------------------------------------------------------------------
+	void playerindacator()
+	{
+		if (m_Player == PLAYER.P1)
+		{
+			PlayerCurrentColor = Player1Color;
+			if (m_Heart.curHealth <= m_Heart.maxHealth / 2 && m_Heart.curHealth > m_Heart.maxHealth / 4)
+			{
+				PlayerMarker.color = Color.Lerp(PlayerCurrentColor, PlayerDamageIndacator, Mathf.PingPong(Time.time, 0.9f));
+			}
+			else if (m_Heart.curHealth <= m_Heart.maxHealth / 4) 
+			{
+				if (FlashCheck == true) 
+				{
+					FlashCheck = false;
+					StartCoroutine (Flash ());
+				}
+			} 
+			else 
+			{				
+				PlayerMarker.color = PlayerCurrentColor;
+			}
+		}
+		if (m_Player == PLAYER.P2)
+		{
+			PlayerCurrentColor = Player2Color;
+			PlayerMarker.color = PlayerCurrentColor;
+			if (m_Heart.curHealth <= m_Heart.maxHealth / 2 && m_Heart.curHealth > m_Heart.maxHealth / 4)
+			{
+				PlayerMarker.color = Color.Lerp(Player2Color, PlayerDamageIndacator, Mathf.PingPong(Time.time, 0.9f));
+			}
+			else if (m_Heart.curHealth <= m_Heart.maxHealth / 4)
+			{
+				if (FlashCheck == true) 
+				{
+					FlashCheck = false;
+					StartCoroutine (Flash ());
+				}
+			}
+			else 
+			{				
+				PlayerMarker.color = PlayerCurrentColor;
+			}
+		}
+		if (m_Player == PLAYER.P3)
+		{
+			PlayerCurrentColor = Player3Color;
+			PlayerMarker.color = PlayerCurrentColor;
+			if (m_Heart.curHealth <= m_Heart.maxHealth / 2 && m_Heart.curHealth > m_Heart.maxHealth / 4)
+			{
+				PlayerMarker.color = Color.Lerp(Player3Color, PlayerDamageIndacator, Mathf.PingPong(Time.time, 0.9f));
+			}
+			else if (m_Heart.curHealth <= m_Heart.maxHealth / 4)
+			{
+				if (FlashCheck == true) 
+				{
+					FlashCheck = false;
+					StartCoroutine (Flash ());
+				}
+			}
+			else 
+			{				
+				PlayerMarker.color = PlayerCurrentColor;
+			}
+		}
+		if (m_Player == PLAYER.P4)
+		{
+			PlayerCurrentColor = Player4Color;
+			PlayerMarker.color = PlayerCurrentColor;
+			if (m_Heart.curHealth <= m_Heart.maxHealth / 2 && m_Heart.curHealth > m_Heart.maxHealth / 4)
+			{
+				PlayerMarker.color = Color.Lerp(Player4Color, PlayerDamageIndacator, Mathf.PingPong(Time.time, 0.9f));
+			}
+			else if (m_Heart.curHealth <= m_Heart.maxHealth / 4)
+			{
+				if (FlashCheck == true) 
+				{
+					FlashCheck = false;
+					StartCoroutine (Flash ());
+				}
+			}
+			else 
+			{				
+				PlayerMarker.color = PlayerCurrentColor;
+			}
+		}
+	}
+	IEnumerator Flash()
+	{		
+		PlayerMarker.color = PlayerDamageIndacator;
+		yield return new WaitForSeconds(.1f);
+		PlayerMarker.color = PlayerCurrentColor;
+		yield return new WaitForSeconds(.1f);
+		FlashCheck = true;
+	}
 }
