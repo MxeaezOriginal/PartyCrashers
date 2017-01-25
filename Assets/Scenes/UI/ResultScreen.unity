@@ -1294,6 +1294,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rewardCanvas: {fileID: 0}
+  rewardButtons:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  firstButtonPressed: 0
+  secondButtonPressed: 0
+  thirdButtonPressed: 0
+  fourthButtonPressed: 0
 --- !u!1 &652249333
 GameObject:
   m_ObjectHideFlags: 0
@@ -1937,7 +1946,7 @@ GameObject:
   - 114: {fileID: 835805202}
   - 114: {fileID: 835805201}
   m_Layer: 5
-  m_Name: Button
+  m_Name: First Reward Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1999,7 +2008,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 835805202}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 617420537}
+        m_MethodName: FirstRewardButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &835805202
@@ -2187,7 +2207,7 @@ GameObject:
   - 114: {fileID: 1058054843}
   - 114: {fileID: 1058054842}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: Second Reward Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2249,7 +2269,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1058054843}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 617420537}
+        m_MethodName: SecondRewardButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1058054843
@@ -3023,7 +3054,7 @@ GameObject:
   - 114: {fileID: 1453844002}
   - 114: {fileID: 1453844001}
   m_Layer: 5
-  m_Name: Button (2)
+  m_Name: Third Reward Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3085,7 +3116,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1453844002}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 617420537}
+        m_MethodName: ThirdRewardButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1453844002
@@ -3890,7 +3932,7 @@ GameObject:
   - 114: {fileID: 1746055775}
   - 114: {fileID: 1746055774}
   m_Layer: 5
-  m_Name: Button (3)
+  m_Name: Fourth Reward Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3952,7 +3994,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1746055775}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 617420537}
+        m_MethodName: FourthRewardButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1746055775
