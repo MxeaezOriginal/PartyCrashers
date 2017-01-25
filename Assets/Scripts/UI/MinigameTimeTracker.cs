@@ -67,7 +67,7 @@ public class MinigameTimeTracker : MonoBehaviour
         }
 
         //Disable partybar for countdown
-        GameManager.m_Instance.m_PartyBar.enabled = false;
+        GameManager.m_Instance.m_PartyBar.m_Active = false;
 
         //3, 2, 1, GO Countdown
         if (minigameTimer == 2)
@@ -94,11 +94,11 @@ public class MinigameTimeTracker : MonoBehaviour
                 player.GetComponent<Player>().m_CantAttack = false;
             }
 
-            GameManager.m_Instance.enabled = true;
+            GameManager.m_Instance.m_PartyBar.m_Active = true;
         }   
     }
 
-    void MinigameEnd()
+    public void MinigameEnd()
     {
         foreach (GameObject player in GameManager.m_Instance.m_Players)
             player.GetComponent<PlayerController>().m_CantMove = true;

@@ -13,8 +13,11 @@ public class MiniGameRewards : MonoBehaviour
 
     public Canvas rewardCanvas;
     public Button[] rewardButtons;
+    public Text rewardTitle;
 
     public bool firstButtonPressed, secondButtonPressed, thirdButtonPressed, fourthButtonPressed;
+
+    public int rewardsSelected = 0;
 
     void Awake()
     {
@@ -27,6 +30,8 @@ public class MiniGameRewards : MonoBehaviour
         rewardButtons[1] = GameObject.Find("Second Reward Button").GetComponent<Button>();
         rewardButtons[2] = GameObject.Find("Third Reward Button").GetComponent<Button>();
         rewardButtons[3] = GameObject.Find("Fourth Reward Button").GetComponent<Button>();
+
+        rewardTitle = GameObject.Find("Pick Reward").GetComponent<Text>();
     }
 
     void Update()
@@ -36,6 +41,7 @@ public class MiniGameRewards : MonoBehaviour
             rewardCanvas.enabled = true;
 
         SetupInput();
+        updateCurrentPlayer();
     }
 
     void SetupInput()
@@ -67,6 +73,7 @@ public class MiniGameRewards : MonoBehaviour
     {
         rewardButtons[0].gameObject.SetActive(false);
         firstButtonPressed = true;
+        ++rewardsSelected;
 
         if (!secondButtonPressed)
             es.SetSelectedGameObject(rewardButtons[1].gameObject);
@@ -81,6 +88,7 @@ public class MiniGameRewards : MonoBehaviour
     {
         rewardButtons[1].gameObject.SetActive(false);
         secondButtonPressed = true;
+        ++rewardsSelected;
 
         if (!firstButtonPressed)
             es.SetSelectedGameObject(rewardButtons[0].gameObject);
@@ -95,6 +103,7 @@ public class MiniGameRewards : MonoBehaviour
     {
         rewardButtons[2].gameObject.SetActive(false);
         thirdButtonPressed = true;
+        ++rewardsSelected;
 
         if (!firstButtonPressed)
             es.SetSelectedGameObject(rewardButtons[0].gameObject);
@@ -109,6 +118,7 @@ public class MiniGameRewards : MonoBehaviour
     {
         rewardButtons[3].gameObject.SetActive(false);
         fourthButtonPressed = true;
+        ++rewardsSelected;
 
         if (!firstButtonPressed)
             es.SetSelectedGameObject(rewardButtons[0].gameObject);
@@ -120,4 +130,36 @@ public class MiniGameRewards : MonoBehaviour
             print("FINISH");
     }
 
+    public bool checkWhenToEndReward()
+    {
+        if(rewardsSelected >= GameManager.m_Instance.m_NumOfPlayers)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    private void updateCurrentPlayer()
+    {
+        switch (rewardsSelected)
+        {
+            case 1:
+                rewardTitle.text = "Choose your reward: Player " + minigameManger.P1_place;
+                break;
+            case 2:
+                rewardTitle.text = "Choose your reward: Player " + minigameManger.P2_place;
+                break;
+            case 3:
+                rewardTitle.text = "Choose your reward: Player " + minigameManger.P3_place;
+                break;
+            case 4:
+                rewardTitle.text = "Choose your reward: Player " + minigameManger.P4_place;
+                break;
+            default:
+                break;
+        }
+    }
 }

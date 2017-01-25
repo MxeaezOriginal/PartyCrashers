@@ -83,16 +83,18 @@ public class PartyBar : MonoBehaviour {
         {
             //set bar equal to percentage
 
-            if (m_TempTimer <= Time.time - m_DecreaseRateMinigame)
+            if (m_Current > 0)
             {
-                m_Current -= m_DecreaseAmountMinigame;
-                m_TempTimer = Time.time;
+                if (m_TempTimer <= Time.time - m_DecreaseRateMinigame)
+                {
+                    m_Current -= m_DecreaseAmountMinigame;
+                    m_TempTimer = Time.time;
+                }
             }
-
             //if bar hits 0 load minigame
-            if (m_Current <= 0)
+            else
             {
-                loadBackToGame();
+                RewardsAndLoadBackToGame();
             }
         }
     }
@@ -111,17 +113,19 @@ public class PartyBar : MonoBehaviour {
             ++GameManager.m_Instance.m_Tutorial;
         }
 
-        SceneManager.LoadScene(Random.Range(5, 7));
+        SceneManager.LoadScene(6);
     }
 
-    void loadBackToGame()
+    void RewardsAndLoadBackToGame()
     {
-        MinigameTimeTracker minigameTimeTracker = GameObject.Find("MinigameManager").GetComponent<MinigameTimeTracker>();
+        MiniGameRewards minigameReward = GameObject.Find("MinigameManager").GetComponent<MiniGameRewards>();
+        MinigameManager miniGameManager = GameObject.Find("MinigameManager").GetComponent<MinigameManager>();
 
-        GameManager.m_Instance.m_GameState = GameManager.GameState.Dungeon;
         //int randomNumber = Random.Range(1, 3);
 
         GameManager.m_Instance.savePlayers();
+
+        miniGameManager.endMinigame();
 
         if (GameManager.m_Instance.m_Tutorial == GameManager.Tutorial.Lobby_01 ||
     GameManager.m_Instance.m_Tutorial == GameManager.Tutorial.Lobby_02 ||
@@ -130,11 +134,19 @@ public class PartyBar : MonoBehaviour {
             //SceneManager.LoadScene(GameManager.m_Instance.m_Tutorial.ToString()); //ballroom blitz
 
             //Reward time
-            //minigameTimeTracker.
+            if(minigameReward.checkWhenToEndReward())
+            {
+                GameManager.m_Instance.m_GameState = GameManager.GameState.Dungeon;
+                SceneManager.LoadScene(GameManager.m_Instance.m_Tutorial.ToString());
+            }
         }
         else
         {
-            //SceneManager.LoadScene(Random.Range(8, 9));
+            if (minigameReward.checkWhenToEndReward())
+            {
+                GameManager.m_Instance.m_GameState = GameManager.GameState.Dungeon;
+                SceneManager.LoadScene(Random.Range(8, 9));
+            }
         }
     }
 }
