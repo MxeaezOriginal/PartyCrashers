@@ -50,11 +50,15 @@ public class Player : MonoBehaviour
         Dead
     }
 
+
     // Player stats
     public string m_PlayerName;
     public PLAYER m_Player;
     public Model m_Model;
     public float m_AttackSpeed;
+    public float m_MovementSpeed;
+    public int m_Damage;
+    public int m_HeartUpgrades;
     public int m_Gold;
     public int m_Score;
     //public int m_Health;
@@ -298,6 +302,9 @@ public class Player : MonoBehaviour
                 GameManager.m_Instance.m_Player1.player = m_Player;
                 GameManager.m_Instance.m_Player1.model = m_Model;
                 GameManager.m_Instance.m_Player1.attackSpeed = m_AttackSpeed;
+                GameManager.m_Instance.m_Player1.movementSpeed = m_MovementSpeed;
+                GameManager.m_Instance.m_Player1.damage = m_Damage;
+                GameManager.m_Instance.m_Player1.heartUpgrades = m_HeartUpgrades;
                 GameManager.m_Instance.m_Player1.score = m_Score;
                 GameManager.m_Instance.m_Player1.gold = m_Gold;
                 //GameManager.m_Instance.m_Player1.health = m_Health;
@@ -309,6 +316,9 @@ public class Player : MonoBehaviour
                 GameManager.m_Instance.m_Player2.player = m_Player;
                 GameManager.m_Instance.m_Player2.model = m_Model;
                 GameManager.m_Instance.m_Player2.attackSpeed = m_AttackSpeed;
+                GameManager.m_Instance.m_Player2.movementSpeed = m_MovementSpeed;
+                GameManager.m_Instance.m_Player2.damage = m_Damage;
+                GameManager.m_Instance.m_Player2.heartUpgrades = m_HeartUpgrades;
                 GameManager.m_Instance.m_Player2.score = m_Score;
                 GameManager.m_Instance.m_Player2.gold = m_Gold;
                 //GameManager.m_Instance.m_Player2.health = m_Health;
@@ -320,6 +330,9 @@ public class Player : MonoBehaviour
                 GameManager.m_Instance.m_Player3.player = m_Player;
                 GameManager.m_Instance.m_Player3.model = m_Model;
                 GameManager.m_Instance.m_Player3.attackSpeed = m_AttackSpeed;
+                GameManager.m_Instance.m_Player3.movementSpeed = m_MovementSpeed;
+                GameManager.m_Instance.m_Player3.damage = m_Damage;
+                GameManager.m_Instance.m_Player3.heartUpgrades = m_HeartUpgrades;
                 GameManager.m_Instance.m_Player3.score = m_Score;
                 GameManager.m_Instance.m_Player3.gold = m_Gold;
                 //GameManager.m_Instance.m_Player3.health = m_Health;
@@ -331,11 +344,37 @@ public class Player : MonoBehaviour
                 GameManager.m_Instance.m_Player4.player = m_Player;
                 GameManager.m_Instance.m_Player4.model = m_Model;
                 GameManager.m_Instance.m_Player4.attackSpeed = m_AttackSpeed;
+                GameManager.m_Instance.m_Player4.movementSpeed = m_MovementSpeed;
+                GameManager.m_Instance.m_Player4.damage = m_Damage;
+                GameManager.m_Instance.m_Player4.heartUpgrades = m_HeartUpgrades;
                 GameManager.m_Instance.m_Player4.score = m_Score;
                 GameManager.m_Instance.m_Player4.gold = m_Gold;
                 //GameManager.m_Instance.m_Player4.health = m_Health;
                 //GameManager.m_Instance.m_Player4.maxHealth = m_MaxHealth;
                 //GameManager.m_Instance.m_Player4.m_Controller = m_Controller;
+                break;
+        }
+    }
+
+    public void saveMain()
+    {
+        switch (m_Player)
+        {
+            case PLAYER.P1:
+                GameManager.m_Instance.m_Player1.player = m_Player;
+                GameManager.m_Instance.m_Player1.model = m_Model;
+                break;
+            case PLAYER.P2:
+                GameManager.m_Instance.m_Player2.player = m_Player;
+                GameManager.m_Instance.m_Player2.model = m_Model;
+                break;
+            case PLAYER.P3:
+                GameManager.m_Instance.m_Player3.player = m_Player;
+                GameManager.m_Instance.m_Player3.model = m_Model;
+                break;
+            case PLAYER.P4:
+                GameManager.m_Instance.m_Player4.player = m_Player;
+                GameManager.m_Instance.m_Player4.model = m_Model;
                 break;
         }
     }
@@ -349,6 +388,9 @@ public class Player : MonoBehaviour
                 m_Player = GameManager.m_Instance.m_Player1.player;
                 m_Model = GameManager.m_Instance.m_Player1.model;
                 m_AttackSpeed = GameManager.m_Instance.m_Player1.attackSpeed;
+                m_MovementSpeed = GameManager.m_Instance.m_Player1.movementSpeed;
+                m_Damage = GameManager.m_Instance.m_Player1.damage;
+                m_HeartUpgrades = GameManager.m_Instance.m_Player1.heartUpgrades;
                 m_Score = GameManager.m_Instance.m_Player1.score;
                 m_Gold = GameManager.m_Instance.m_Player1.gold;
                 //m_Health = GameManager.m_Instance.m_Player1.health;
@@ -360,6 +402,9 @@ public class Player : MonoBehaviour
                 m_Player = GameManager.m_Instance.m_Player2.player;
                 m_Model = GameManager.m_Instance.m_Player2.model;
                 m_AttackSpeed = GameManager.m_Instance.m_Player2.attackSpeed;
+                m_MovementSpeed = GameManager.m_Instance.m_Player2.movementSpeed;
+                m_Damage = GameManager.m_Instance.m_Player2.damage;
+                m_HeartUpgrades = GameManager.m_Instance.m_Player2.heartUpgrades;
                 m_Score = GameManager.m_Instance.m_Player2.score;
                 m_Gold = GameManager.m_Instance.m_Player2.gold;
                 //m_Health = GameManager.m_Instance.m_Player2.health;
@@ -371,6 +416,9 @@ public class Player : MonoBehaviour
                 m_Player = GameManager.m_Instance.m_Player3.player;
                 m_Model = GameManager.m_Instance.m_Player3.model;
                 m_AttackSpeed = GameManager.m_Instance.m_Player3.attackSpeed;
+                m_MovementSpeed = GameManager.m_Instance.m_Player3.movementSpeed;
+                m_Damage = GameManager.m_Instance.m_Player3.damage;
+                m_HeartUpgrades = GameManager.m_Instance.m_Player3.heartUpgrades;
                 m_Score = GameManager.m_Instance.m_Player3.score;
                 m_Gold = GameManager.m_Instance.m_Player3.gold;
                 //m_Health = GameManager.m_Instance.m_Player3.health;
@@ -382,6 +430,9 @@ public class Player : MonoBehaviour
                 m_Player = GameManager.m_Instance.m_Player4.player;
                 m_Model = GameManager.m_Instance.m_Player4.model;
                 m_AttackSpeed = GameManager.m_Instance.m_Player4.attackSpeed;
+                m_MovementSpeed = GameManager.m_Instance.m_Player4.movementSpeed;
+                m_Damage = GameManager.m_Instance.m_Player4.damage;
+                m_HeartUpgrades = GameManager.m_Instance.m_Player4.heartUpgrades;
                 m_Score = GameManager.m_Instance.m_Player4.score;
                 m_Gold = GameManager.m_Instance.m_Player4.gold;
                 //m_Health = GameManager.m_Instance.m_Player4.health;

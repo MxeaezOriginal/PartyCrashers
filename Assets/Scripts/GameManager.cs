@@ -14,6 +14,9 @@ public class GameManager : MonoBehaviour
         public Player.PLAYER player;
         public Player.Model model;
         public float attackSpeed;
+        public float movementSpeed;
+        public int damage;
+        public int heartUpgrades;
         public int gold;
         public int score;
         //public int health;
@@ -258,9 +261,9 @@ public class GameManager : MonoBehaviour
 
             playerComponent.m_Player = (Player.PLAYER)System.Enum.Parse(typeof(Player.PLAYER), player);
             playerComponent.updateModel();
-            playerComponent.save();
+            playerComponent.saveMain();
 
-            if(playerClone.transform.FindChild("Portrait") != null)
+            if (playerClone.transform.FindChild("Portrait") != null)
             {
                 Transform portraitTransform = playerClone.transform.FindChild("Portrait");
 

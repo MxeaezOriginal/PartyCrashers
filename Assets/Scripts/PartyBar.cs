@@ -113,7 +113,7 @@ public class PartyBar : MonoBehaviour {
             ++GameManager.m_Instance.m_Tutorial;
         }
 
-        SceneManager.LoadScene(6);
+        SceneManager.LoadScene(Random.Range(5,6));
     }
 
     void RewardsAndLoadBackToGame()
@@ -122,8 +122,6 @@ public class PartyBar : MonoBehaviour {
         MinigameManager miniGameManager = GameObject.Find("MinigameManager").GetComponent<MinigameManager>();
 
         //int randomNumber = Random.Range(1, 3);
-
-        GameManager.m_Instance.savePlayers();
 
         miniGameManager.endMinigame();
 
