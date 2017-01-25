@@ -116,6 +116,8 @@ public class PartyBar : MonoBehaviour {
 
     void loadBackToGame()
     {
+        MinigameTimeTracker minigameTimeTracker = GameObject.Find("MinigameManager").GetComponent<MinigameTimeTracker>();
+
         GameManager.m_Instance.m_GameState = GameManager.GameState.Dungeon;
         //int randomNumber = Random.Range(1, 3);
 
@@ -125,11 +127,14 @@ public class PartyBar : MonoBehaviour {
     GameManager.m_Instance.m_Tutorial == GameManager.Tutorial.Lobby_02 ||
     GameManager.m_Instance.m_Tutorial == GameManager.Tutorial.Lobby_03)
         {
-           SceneManager.LoadScene(GameManager.m_Instance.m_Tutorial.ToString()); //ballroom blitz
+            //SceneManager.LoadScene(GameManager.m_Instance.m_Tutorial.ToString()); //ballroom blitz
+
+            //Reward time
+            //minigameTimeTracker.
         }
         else
         {
-            SceneManager.LoadScene(Random.Range(8, 9));
+            //SceneManager.LoadScene(Random.Range(8, 9));
         }
     }
 }
