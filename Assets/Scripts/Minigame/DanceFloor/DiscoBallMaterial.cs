@@ -11,7 +11,6 @@ public class DiscoBallMaterial : MonoBehaviour
     public Material m_ColorFour;
     public Material m_ColorFive;
     public Material m_ColorSix;
-    public Material m_ColorSeven;
 
     private float scoretime = 4;
     private float stoptime = 4;
@@ -19,26 +18,22 @@ public class DiscoBallMaterial : MonoBehaviour
     private bool stop = false;
 
     private Material m_DiscoBallON;
-    public Material m_DiscoBallOFF;
-
-    public GameObject m_Light;
-    //public GameObject m_DiscoBall;
+    
+    public GameObject m_DiscoBall;
 
     public int m_CurrentFloorColorInt;
-    //public int m_PreviousFloorColorInt;
 
     private bool m_LightsON = false;
 
     // Use this for initialization
     void Start()
     {
-        //m_PreviousFloorColorInt = m_Light.GetComponent<LightChangeDancefloor>().PreviousColorInt;
     }
 
     // Update is called once per frame
     void Update()
     {
-        m_CurrentFloorColorInt = m_Light.GetComponent<LightChangeDancefloor>().CurrentColorInt;
+        m_CurrentFloorColorInt = m_DiscoBall.GetComponent<LightChangeDiscoball>().CurrentColorInt;
         if (stop == true)
         {
             StartCoroutine(Stopedfor(scoretime));
@@ -53,37 +48,11 @@ public class DiscoBallMaterial : MonoBehaviour
             m_DiscoBallLight.material.SetColor("_EmissionColor", new Color(1f, 1f, 1f) * emission);
         }
 
-
-        //if (Input.GetKey(KeyCode.DownArrow))
-        //{
-        //    m_DiscoBallLight.material = m_DiscoBallON;
-        //    m_LightsON = true;
-        //}
-        //else
-        //{
-        //    m_DiscoBallLight.material = m_DiscoBallOFF;
-        //    m_LightsON = false;
-        //}
-        //if (m_LightsON)
-        //{
-        //    //float floor = 0f;
-        //    //float ceiling = 1f;
-        //    float emission = Mathf.PingPong(Time.time * 1.5f, 1);
-        //    m_DiscoBallLight.material.SetColor("_EmissionColor", new Color(1f, 1f, 1f) * emission);
-        //}
     }
 
     IEnumerator ColorRandomiser(float wait)
     {
-        yield return new WaitForSeconds(wait);
-        //CurrentColorInt = Random.Range(0, 8);
-        //PreviousColorInt = Random.Range (0,8);
-        //if (CurrentColorInt == PreviousColorInt) {
-        //	CurrentColorInt = Random.Range (0,8);
-        //	PreviousColorInt = Random.Range (0,8);
-        //} 
-        //else//im so sorry
-        //{
+        
         if (m_CurrentFloorColorInt == 0)
         {
             m_DiscoBallON = m_ColorZero;
@@ -112,10 +81,8 @@ public class DiscoBallMaterial : MonoBehaviour
         {
             m_DiscoBallON = m_ColorSix;
         }
-        if (m_CurrentFloorColorInt == 7)
-        {
-            m_DiscoBallON = m_ColorSeven;
-        }
+        yield return new WaitForSeconds(wait);
+       
     }
     IEnumerator Stopfor(float wait)
     {
