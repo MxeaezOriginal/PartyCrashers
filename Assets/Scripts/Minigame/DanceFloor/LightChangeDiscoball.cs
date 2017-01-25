@@ -20,8 +20,6 @@ public class LightChangeDiscoball : MonoBehaviour {
     private Color ColorSix;
     [SerializeField]
     private Color ColorSeven;
-    //[SerializeField]
-    //private float colorSwapTime;
 
     [SerializeField]
     private float scoretime = 4;
@@ -43,8 +41,7 @@ public class LightChangeDiscoball : MonoBehaviour {
     {
         //CurrentColorNumber = 1;
         lt = GetComponent<Light>();
-        CurrentColorInt = 8;
-        //changeColor();
+        CurrentColorInt = -1;
     }
 
     // Update is called once per frame

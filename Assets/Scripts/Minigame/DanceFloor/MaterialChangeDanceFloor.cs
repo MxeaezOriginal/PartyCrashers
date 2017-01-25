@@ -19,17 +19,26 @@ public class MaterialChangeDanceFloor : MonoBehaviour {
     private bool stop = false;
 
     private Material m_DiscoBallON;
-
+    private Material m_Temp;
     public GameObject m_Light;
-
     public int m_CurrentFloorColorInt;
+    public int m_PreviousColorInt = -1;
     
+    void Start()
+    {
+        m_CurrentFloorColorInt = -1;
+    }
+
     void Update()
     {
         m_CurrentFloorColorInt = m_Light.GetComponent<LightChangeDancefloor>().CurrentColorInt;
         if (stop == true)
         {
             StartCoroutine(Stopedfor(scoretime));
+            if (m_PreviousColorInt != -1)
+            {
+                m_DiscoBallLight.material = m_Temp;
+            }
         }
         if (stop == false)
         {
@@ -44,6 +53,8 @@ public class MaterialChangeDanceFloor : MonoBehaviour {
             m_DiscoBallLight.material = m_DiscoBallON;
             float emission = Mathf.PingPong(Time.time * 1.5f, 1);
             m_DiscoBallLight.material.SetColor("_EmissionColor", new Color(1f, 1f, 1f) * emission);
+            m_PreviousColorInt = m_CurrentFloorColorInt;
+            m_Temp = m_DiscoBallON;
         }
     }
 
