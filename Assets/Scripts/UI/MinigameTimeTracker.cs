@@ -6,9 +6,9 @@ public class MinigameTimeTracker : MonoBehaviour
 {
     MinigameManager minigameManger;
 
+    public Canvas miniGameCanvas;
     public CanvasGroup firstFadingCanvas;
     public CanvasGroup secondFadingCanvas;
-    public Canvas rewardCanvas;
 
     CanvasGroup rewardFadeInCanvas;
     Image startCountdownImage;
@@ -26,10 +26,10 @@ public class MinigameTimeTracker : MonoBehaviour
     void Awake()
     {
         minigameManger = GetComponent<MinigameManager>();
+        miniGameCanvas = GameObject.Find("MinigameCanvas").GetComponent<Canvas>();
         firstFadingCanvas = GameObject.Find("First Fading Canvas").GetComponent<CanvasGroup>();
         secondFadingCanvas = GameObject.Find("Second Fading Canvas").GetComponent<CanvasGroup>();
         startCountdownImage = GameObject.Find("Start Countdown Image").GetComponent<Image>();
-        rewardCanvas = GameObject.Find("Reward Canvas").GetComponent<Canvas>();
     }
     void Update()
     {
@@ -111,6 +111,11 @@ public class MinigameTimeTracker : MonoBehaviour
             if (delayToShowResultBar < 0)
             {
                 minigameManger.showResultBar = true; //PASSES TO NEIGHBOUR SCRIPT
+
+
+                //Work-around of canvases hirarchy order
+                secondFadingCanvas.gameObject.transform.SetParent(miniGameCanvas.transform);
+                secondFadingCanvas.gameObject.transform.SetParent(null);
             }
         }
     }
@@ -126,13 +131,8 @@ public class MinigameTimeTracker : MonoBehaviour
             delayToShowRewards -= Time.deltaTime;
             if (delayToShowRewards < 0)
             {
-                ChooseReward();
+                minigameManger.showRewardCanvas = true;
             }
         }
-    }
-
-    void ChooseReward()
-    {
-        rewardCanvas.enabled = true;    //Enables Canvas component; NOT GAMEOBJECT!
     }
 }
