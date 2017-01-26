@@ -18,16 +18,17 @@ public class DiscoBallMaterial : MonoBehaviour
     private bool stop = false;
 
     private Material m_DiscoBallON;
-    
     public GameObject m_DiscoBall;
-
     public int m_CurrentFloorColorInt;
-
     private bool m_LightsON = false;
+
+    public int m_PreviousColorInt = -1;
+    private Material m_Temp;
 
     // Use this for initialization
     void Start()
     {
+        m_CurrentFloorColorInt = -1;
     }
 
     // Update is called once per frame
@@ -37,6 +38,10 @@ public class DiscoBallMaterial : MonoBehaviour
         if (stop == true)
         {
             StartCoroutine(Stopedfor(scoretime));
+            if (m_PreviousColorInt != -1)
+            {
+                m_DiscoBallLight.material = m_Temp;
+            }
         }
         if (stop == false)
         {
@@ -46,6 +51,8 @@ public class DiscoBallMaterial : MonoBehaviour
             m_DiscoBallLight.material = m_DiscoBallON;
             float emission = Mathf.PingPong(Time.time * 1.5f, 1);
             m_DiscoBallLight.material.SetColor("_EmissionColor", new Color(1f, 1f, 1f) * emission);
+            m_PreviousColorInt = m_CurrentFloorColorInt;
+            m_Temp = m_DiscoBallON;
         }
 
     }
