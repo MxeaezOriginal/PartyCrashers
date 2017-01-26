@@ -74,6 +74,7 @@ public class Player : MonoBehaviour
     private HeartSystem m_Heart;
     private CharacterController m_CharController;
     private WeaponManager m_WeaponManager;
+    private RespawnHealth m_RespawnHealth;
 
     //Input
     public string m_PrimaryAttack = "Primary_";
@@ -118,6 +119,7 @@ public class Player : MonoBehaviour
         m_Heart = GetComponent<HeartSystem>();
         m_CharController = GetComponent<CharacterController>();
         m_WeaponManager = GetComponent<WeaponManager>();
+        m_RespawnHealth = GetComponent<RespawnHealth>();
 
     }
 
@@ -211,7 +213,10 @@ public class Player : MonoBehaviour
     {
         m_State = State.Dead;
         updateModel();
-        transform.position = m_Location;
+        transform.position = new Vector3(m_Location.x, m_Location.y + 2.5f, m_Location.z);
+        m_RespawnHealth.activate();
+
+        m_Heart.Heal(m_Heart.maxHealth);
 
         Debug.Log("Pinata time");
     }
@@ -253,13 +258,14 @@ public class Player : MonoBehaviour
                     pinataClone.transform.localRotation = Quaternion.identity;
                     pinataClone.transform.localScale = new Vector3(1, 1, 1);
                     pinataClone.name = "Model";
+                    m_Animator = null;
                     break;
 
             }
         }
         else
         {
-            Debug.Log("Error: Player's 'm_PlayerObject' is not assigned!");
+            Debug.LogError("Player's 'm_PlayerObject' is not assigned!");
         }
     }
 

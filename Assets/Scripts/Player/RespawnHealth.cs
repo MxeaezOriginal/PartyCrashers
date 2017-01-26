@@ -15,7 +15,10 @@ public class RespawnHealth : MonoBehaviour
     {
         m_Player = GetComponent<Player>();
         m_PlayerHearts = m_Player.GetComponent<HeartSystem>();
+    }
 
+    public void activate()
+    {
         m_CurrentHealth = m_MaxHealth * m_RespawnCount;
     }
 
@@ -24,7 +27,7 @@ public class RespawnHealth : MonoBehaviour
     {
         m_CurrentHealth -= damage;
 
-        Debug.Log("Current health for pinata: " + m_CurrentHealth + "/" + m_MaxHealth);
+        Debug.Log("Current health for pinata: " + m_CurrentHealth);
         if(m_CurrentHealth <= 0)
         {
             m_PlayerHearts.curHealth = m_PlayerHearts.maxHealth;

@@ -48,6 +48,12 @@ public class Damage : MonoBehaviour
                     playerRespawnHealth.damage(1);
                     Debug.Log("Pinata hit");
                 }
+                else
+                {
+                    HeartSystem playerHearts = other.GetComponent<HeartSystem>();
+
+                    playerHearts.TakeDamage((int) m_Damage);
+                }
             }
         }
     }
