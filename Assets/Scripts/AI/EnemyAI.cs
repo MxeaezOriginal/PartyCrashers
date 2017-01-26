@@ -89,17 +89,36 @@ public class EnemyAI : MonoBehaviour
         {
             if (i == 0)
             {
-                m_Distance = Vector3.Distance(players[i].transform.position, transform.position);
-                target = players[i];
+                if(players[i].GetComponent<Player>().m_State == Player.State.Alive)
+                {
+                    m_Distance = Vector3.Distance(players[i].transform.position, transform.position);
+                    target = players[i];
+                }
+                else
+                {
+                    m_Distance = 10000;
+                }
             }
             else
             {
                 if (Vector3.Distance(players[i].transform.position, transform.position) < m_Distance)
                 {
-                    m_Distance = Vector3.Distance(players[i].transform.position, transform.position);
-                    target = players[i];
+                    //m_Distance = Vector3.Distance(players[i].transform.position, transform.position);
+                    if (players[i].GetComponent<Player>().m_State == Player.State.Alive)
+                    {
+                        m_Distance = Vector3.Distance(players[i].transform.position, transform.position);
+                        target = players[i];
+                    }
+                    else
+                    {
+                        m_Distance = 10000;
+                    }
                 }
             }
+        }
+        if(m_Distance == 10000)
+        {
+            target = null;
         }
     }
 
