@@ -142,6 +142,7 @@ public class AdvancedBossAi : MonoBehaviour
         //Choose attack
         if (frame > 60 * m_Difficulty)
         {
+            Teleport();
             state = DecideAttack();
         }
 
@@ -296,8 +297,10 @@ public class AdvancedBossAi : MonoBehaviour
 
     void Teleport()
     {
-        Vector3 teleportTargetPosition = transform.position; //Set variable for target position
 
+        Vector3 teleportTargetPosition = transform.position; //Set variable for target position
+        int xdir = Random.Range(-1, 1);
+        int zdir = Random.Range(-1, 1);
         for (int i = 0; i < players.Length; i++) //Loop through the number of players 
         {
             playerPositionsArray[i] = players[i].transform; //Set the index's of the player positions array to the transforms of the respective player objects
@@ -305,11 +308,18 @@ public class AdvancedBossAi : MonoBehaviour
         
         teleportTargetPosition = new Vector3( Random.Range( torches[0].position.x, torches[1].position.x), transform.position.y, Random.Range(torches[0].position.z, torches[2].position.z));
         
-        for(int i = 0; i < playerPositionsArray.Length; i++)
+        for(int i = 0; i < playerPositionsArray.Length; i++)//Loop through the player positions and if the teleport position is close to a player, move the teleport position. Will keep looping until it's not close to a player
         {
             if(playerPositionsArray[i] != null)
             {
-
+                float xdif = teleportTargetPosition.x - playerPositionsArray[i].position.x;
+                float zdif = teleportTargetPosition.z - playerPositionsArray[i].position.z;
+                if ( new Vector3(xdif,zdif).magnitude <= 5f)
+                {
+                    teleportTargetPosition.x += Mathf.Abs(xdif)*xdir;
+                    teleportTargetPosition.z += Mathf.Abs(zdif)*zdir;
+                    i = 0;
+                }
             }
         }
 
