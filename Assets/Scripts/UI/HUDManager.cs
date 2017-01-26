@@ -12,7 +12,6 @@ public class HUDManager : MonoBehaviour
     //Score Counters
     public Text P1_ScoreCounter, P2_ScoreCounter, P3_ScoreCounter, P4_ScoreCounter;
 
-
     void Start()
     {
         if (GameObject.Find(GameManager.m_Instance.m_GameState.ToString() + "Canvas/P1_Panel") != null)
