@@ -133,10 +133,10 @@ public class HeavyEnemy : EnemyAI //Inherits from EnemyAI now instead of monobeh
 
     public void OnTriggerExit(Collider other)
     {
-        if (other.GetComponent<HeartSystem>() != null)
-        {
-            m_CanDamage = true;
-        }
+        //if (other.GetComponent<HeartSystem>() != null)
+        //{
+        //    m_CanDamage = true;
+        //}
     }
 
     IEnumerator WaitForSec(float s)
