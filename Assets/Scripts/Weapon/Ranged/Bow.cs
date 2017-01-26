@@ -102,7 +102,7 @@ public class Bow : Ranged
         else
         {
 
-            assignDamage(laser, m_LaserDmgMultiplier);  // Need to figure out what is dealing the damage, add collider to line renderer???
+            assignDamage(laser, m_LaserDmgMultiplier); 
             laser.GetComponent<LineRenderer>().enabled = true;
             
             StopCoroutine("LaserTimer");

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+/*
 public class AdvancedBossAi : MonoBehaviour
 {
 
@@ -273,3 +273,4 @@ public class AdvancedBossAi : MonoBehaviour
     }
 
 }
+*/

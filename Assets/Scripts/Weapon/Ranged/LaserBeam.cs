@@ -14,10 +14,7 @@ public class LaserBeam : MonoBehaviour
     }
 
     void Update()
-    {
-        //m_LineRenderer.SetPosition(1, ray.GetPoint(bow.m_LaserLenght));
-        //m_LineRenderer.SetPosition(0, ray.origin);
-
+    {    
         Ray ray = new Ray(transform.position, transform.forward);
         m_LineRenderer.SetPosition(0, ray.origin);
 

@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections;
-
+/*
 public class PartyBarBoss : MonoBehaviour
 {
 
@@ -66,3 +66,4 @@ if (m_Bar)
         SceneManager.LoadScene(1); //tutorial scene
     }
 }
+*/
