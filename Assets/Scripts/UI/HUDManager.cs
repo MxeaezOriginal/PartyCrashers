@@ -30,17 +30,12 @@ public class HUDManager : MonoBehaviour
             P2_ScoreCounter = GameObject.Find("P2 Score").GetComponent<Text>();
             P3_ScoreCounter = GameObject.Find("P3 Score").GetComponent<Text>();
             P4_ScoreCounter = GameObject.Find("P4 Score").GetComponent<Text>();
-            print("test1");
         }
 
         UpdateUIPanels();
-    }
-
-
-    void Update()
-    {
         UpdateScoreCounters();
     }
+
     void UpdateUIPanels()
     {
         if (GameManager.m_Instance.m_Players.Length == 1)
@@ -75,12 +70,9 @@ public class HUDManager : MonoBehaviour
 
     void UpdateScoreCounters()
     {
-        P1_ScoreCounter.text = GameManager.m_Instance.m_Players[0].GetComponent<Player>().m_Score.ToString();
-        if (GameManager.m_Instance.m_NumOfPlayers >= 2)
-            P2_ScoreCounter.text = GameManager.m_Instance.m_Players[1].GetComponent<Player>().m_Score.ToString();
-        if (GameManager.m_Instance.m_NumOfPlayers >= 3)
-            P3_ScoreCounter.text = GameManager.m_Instance.m_Players[2].GetComponent<Player>().m_Score.ToString();
-        if (GameManager.m_Instance.m_NumOfPlayers >= 4)
-            P4_ScoreCounter.text = GameManager.m_Instance.m_Players[3].GetComponent<Player>().m_Score.ToString();
+        P1_ScoreCounter.text = GameManager.m_Instance.m_Player1.score.ToString();
+        P2_ScoreCounter.text = GameManager.m_Instance.m_Player2.score.ToString();
+        P3_ScoreCounter.text = GameManager.m_Instance.m_Player3.score.ToString();
+        P4_ScoreCounter.text = GameManager.m_Instance.m_Player4.score.ToString();
     }
 }
