@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEditor;
 using System.Collections;
-/*
+
 public class AdvancedBossAi : MonoBehaviour
 {
 
@@ -166,7 +166,6 @@ public class AdvancedBossAi : MonoBehaviour
             attacked = false;
         }
     }
-    #endregion//ALL THIS NEEDS TO CHANGE ONCE ANIMATIONS ARE IN
     public void OnTriggerStay(Collider other) //Get CHANGE THIS ONCE ANIMATIONS ARE IN
     {
         if (!m_Invincible)
@@ -223,7 +222,7 @@ public class AdvancedBossAi : MonoBehaviour
                 state = states.hurt;
             }
         }
-
+        #endregion//ALL THIS NEEDS TO CHANGE ONCE ANIMATIONS ARE IN
     }
     #region Attack states
     void BasicShoot()
@@ -297,12 +296,15 @@ public class AdvancedBossAi : MonoBehaviour
 
     void Teleport()
     {
-        Transform teleportTargetPosition; //Set variable for target position
+        Vector3 teleportTargetPosition = transform.position; //Set variable for target position
 
         for (int i = 0; i < players.Length; i++) //Loop through the number of players 
         {
             playerPositionsArray[i] = players[i].transform; //Set the index's of the player positions array to the transforms of the respective player objects
         }
+        
+        teleportTargetPosition = new Vector3( Random.Range( torches[0].position.x, torches[1].position.x), transform.position.y, Random.Range(torches[0].position.z, torches[2].position.z));
+        
         for(int i = 0; i < playerPositionsArray.Length; i++)
         {
             if(playerPositionsArray[i] != null)
@@ -311,7 +313,7 @@ public class AdvancedBossAi : MonoBehaviour
             }
         }
 
-        
+        transform.position = teleportTargetPosition;
 
     }
 
@@ -359,4 +361,3 @@ public class AdvancedBossAi : MonoBehaviour
     }
 
 }
-*/
