@@ -26,7 +26,6 @@ public class AdvancedBossAi : MonoBehaviour
         idle,
         hurt,
         dead,
-        teleport,
         //Attacks
         rocket,
         shoot,
@@ -269,7 +268,7 @@ public class AdvancedBossAi : MonoBehaviour
 
         //Actually shoot something
 
-        if (frame == 1)
+        if (frame == 2)
         {
             for (int i = 0; i < ProjectilesArray.Length; i++)
             {
@@ -285,9 +284,8 @@ public class AdvancedBossAi : MonoBehaviour
                 }
 
             }
-
         }
-        if (frame > 60 * m_Difficulty)
+        if (frame > 60*m_Difficulty)
         {
             frame = 0;
         }
