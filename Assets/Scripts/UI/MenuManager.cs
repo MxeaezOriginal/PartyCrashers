@@ -9,21 +9,13 @@ public class MenuManager : MonoBehaviour
 
     [Header("Different Canvases")]
     //In Hir. assign following things
-    public GameObject splashCanvas; //Splash Canvas
-    public GameObject mainMenuCanvas; //MainMenu Canvas
-    public GameObject playCanvas; //Play Canvas
-    public GameObject settingsCanvas; //Setting Canvas
-    public GameObject creditsCanvas; //Credits Canvas
-    public GameObject exitPromptCanvas; //Exit Prompt Canvas
-    public GameObject exitCanvas; //Exit Canvas
+    public GameObject[] canvases;
 
     [Header("Different 'First Selected' Buttons")]
-    public GameObject splashButton;
-    public GameObject mainMenuButton;
-    public GameObject playButton;
-    public GameObject settingsButton;
-    public GameObject creditsButton;
-    public GameObject exitPromptButton;
+    public GameObject[] firstSelectedButtons;
+
+    [Header("List of ALL Buttons")]
+    public GameObject[] allButtons;
 
     [Header("Bools")]
     public bool waitedForADelay;
@@ -34,19 +26,8 @@ public class MenuManager : MonoBehaviour
     EventSystem es;
     CharacterSelect characterSelect;
 
-    UnityEngine.UI.Button btn;
-
-    bool testPressed;
     void Awake()
     {
-        //splashCanvas = GameObject.Find("Main Menu/Splash Canvas");
-        //mainMenuCanvas = GameObject.Find("Main Menu/MainMenu Canvas");
-        //playCanvas = GameObject.Find("Main Menu/Play Canvas");
-        //settingsCanvas = GameObject.Find("Main Menu/Settings Canvas");
-        //creditsCanvas = GameObject.Find("Main Menu/Credits Canvas");
-        //exitPromptCanvas = GameObject.Find("Main Menu/Exit Prompt Canvas");
-        //exitCanvas = GameObject.Find("Main Menu/Exit Canvas");
-
         anim = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Animator>();
         es = GameObject.Find("Main Menu Canvas/EventSystem").GetComponent<EventSystem>();
         characterSelect = GetComponent<CharacterSelect>();
@@ -61,78 +42,30 @@ public class MenuManager : MonoBehaviour
 
     void Update()
     {
-
         if (splashActive)
-        {
             StartCoroutine(Splash());
-        }
-        if (mainMenuActive)
-        {
+        else if (mainMenuActive)
             StartCoroutine(MainMenu());
-        }
-        if (playActive)
-        {
+        else if (playActive)
             StartCoroutine(Play());
-        }
-        if (settingsActive)
-        {
+        else if (settingsActive)
             StartCoroutine(Settings());
-        }
-        if (creditsActive)
-        {
+        else if (creditsActive)
             StartCoroutine(Credits());
-        }
-        if (exitPromptActive)
-        {
+        else if (exitPromptActive)
             StartCoroutine(ExitPrompt());
-        }
 
-        if (canBack)
-        {
-            //if (!characterSelect.P1Locked)
-            //{
-                if (Input.GetButtonDown("Back_" + GameManager.m_Instance.m_Player1.m_Controller)) //PRESS FOR BACK BUTTON
-                {
-                    BackButton();
-                }
-            //}
-            //else
-            //{
-            //    if (Input.GetButtonDown("Back_" + GameManager.m_Instance.m_Player1.m_Controller))
-            //    {
-            //        print("Player 1 Canceled Lock In");
-            //        characterSelect.P1Locked = false;
-            //    }
-            //}
+        if (canBack && Input.GetButtonDown("Back_" + GameManager.m_Instance.m_Player1.m_Controller)) //PRESS FOR BACK BUTTON
+            BackButton();
 
-            //if (characterSelect.P2Locked)
-            //{
-                //if (Input.GetButtonDown("Back_" + GameManager.m_Instance.m_Player2.m_Controller))
-                //{
-                //    print("Player 2 Canceled Lock In");
-                //    //characterSelect.P2Locked = false;
-                //}
-            //}
-        }
-    }
-
-void test()
-    {
-        if (es.currentSelectedGameObject.GetComponent<Text>().enabled)
-        {
-            es.currentSelectedGameObject.GetComponent<Text>().enabled = false;
-        }
-        else
-        {
-            es.currentSelectedGameObject.GetComponent<Text>().enabled = true;
-        }
+        SelectedAnimation();
     }
 
     //Main Functions for setting all the bools
 
     IEnumerator Splash()
     {
-        yield return null; es.SetSelectedGameObject(null); es.enabled = false; es.enabled = true; es.SetSelectedGameObject(splashButton); es.firstSelectedGameObject = splashButton;
+        yield return null; es.SetSelectedGameObject(null); es.enabled = false; es.enabled = true; es.SetSelectedGameObject(firstSelectedButtons[0]); es.firstSelectedGameObject = firstSelectedButtons[0];
 
         //Setting Animator bools
         anim.SetBool("Play", false);
@@ -143,17 +76,16 @@ void test()
         splashActive = false;
 
         //Toggle on and off Canvases
-        splashCanvas.SetActive(true);
-        mainMenuCanvas.SetActive(false);
-        playCanvas.SetActive(false);
-        settingsCanvas.SetActive(false);
-        creditsCanvas.SetActive(false);
-        exitPromptCanvas.SetActive(false);
+        canvases[0].SetActive(true);
+        canvases[1].SetActive(false);
+        canvases[2].SetActive(false);
+        canvases[3].SetActive(false);
+        canvases[4].SetActive(false);
+        canvases[5].SetActive(false);
     }
     IEnumerator MainMenu()
     {
-        yield return null; es.SetSelectedGameObject(null); es.enabled = false; es.enabled = true; es.SetSelectedGameObject(mainMenuButton); es.firstSelectedGameObject = mainMenuButton;
-
+        yield return null; es.SetSelectedGameObject(null); es.enabled = false; es.enabled = true; es.SetSelectedGameObject(firstSelectedButtons[1]); es.firstSelectedGameObject = firstSelectedButtons[1];
         anim.SetBool("Play", false);
         anim.SetBool("Settings", false);
         anim.SetBool("Credits", false);
@@ -161,12 +93,12 @@ void test()
         mainMenuActive = false;
         canBack = false;
 
-        splashCanvas.SetActive(false);
-        mainMenuCanvas.SetActive(true);
-        playCanvas.SetActive(false);
-        settingsCanvas.SetActive(false);
-        creditsCanvas.SetActive(false);
-        exitPromptCanvas.SetActive(false);
+        canvases[0].SetActive(false);
+        canvases[1].SetActive(true);
+        canvases[2].SetActive(false);
+        canvases[3].SetActive(false);
+        canvases[4].SetActive(false);
+        canvases[5].SetActive(false);
     }
     IEnumerator Play()
     {
@@ -177,16 +109,14 @@ void test()
         playActive = false;
         canBack = true;
 
-        splashCanvas.SetActive(false);
-        mainMenuCanvas.SetActive(false);
-        settingsCanvas.SetActive(false);
-        creditsCanvas.SetActive(false);
-        exitPromptCanvas.SetActive(false);
+        canvases[0].SetActive(false);
+        canvases[1].SetActive(false);
+        canvases[3].SetActive(false);
+        canvases[4].SetActive(false);
+        canvases[5].SetActive(false);
 
         yield return new WaitForSeconds(1.5f);
-        playCanvas.SetActive(true);
-
-        yield return null; es.SetSelectedGameObject(null); es.enabled = false; es.enabled = true; es.SetSelectedGameObject(playButton); es.firstSelectedGameObject = playButton;
+        canvases[2].SetActive(true);
     }
     IEnumerator Settings()
     {
@@ -197,16 +127,16 @@ void test()
         settingsActive = false;
         canBack = true;
 
-        splashCanvas.SetActive(false);
-        mainMenuCanvas.SetActive(false);
-        playCanvas.SetActive(false);
-        creditsCanvas.SetActive(false);
-        exitPromptCanvas.SetActive(false);
+        canvases[0].SetActive(false);
+        canvases[1].SetActive(false);
+        canvases[2].SetActive(false);
+        canvases[4].SetActive(false);
+        canvases[5].SetActive(false);
 
         yield return new WaitForSeconds(1.5f);
-        settingsCanvas.SetActive(true);
+        canvases[3].SetActive(true);
 
-        yield return null; es.SetSelectedGameObject(null); es.enabled = false; es.enabled = true; es.SetSelectedGameObject(settingsButton); es.firstSelectedGameObject = settingsButton;
+        yield return null; es.SetSelectedGameObject(null); es.enabled = false; es.enabled = true; es.SetSelectedGameObject(firstSelectedButtons[2]); es.firstSelectedGameObject = firstSelectedButtons[2];
     }
     IEnumerator Credits()
     {
@@ -217,35 +147,71 @@ void test()
         creditsActive = false;
         canBack = true;
 
-        splashCanvas.SetActive(false);
-        mainMenuCanvas.SetActive(false);
-        playCanvas.SetActive(false);
-        settingsCanvas.SetActive(false);
-        exitPromptCanvas.SetActive(false);
+        canvases[0].SetActive(false);
+        canvases[1].SetActive(false);
+        canvases[2].SetActive(false);
+        canvases[3].SetActive(false);
+        canvases[5].SetActive(false);
 
         yield return new WaitForSeconds(1.5f);
-        creditsCanvas.SetActive(true);
-
-        yield return null; es.SetSelectedGameObject(null); es.enabled = false; es.enabled = true; es.SetSelectedGameObject(creditsButton); es.firstSelectedGameObject = creditsButton;
+        canvases[4].SetActive(true);
     }
     IEnumerator ExitPrompt()
     {
-        splashCanvas.SetActive(false);
-        mainMenuCanvas.SetActive(true);
-        playCanvas.SetActive(false);
-        settingsCanvas.SetActive(false);
-        creditsCanvas.SetActive(false);
-        exitPromptCanvas.SetActive(true);
+        canvases[0].SetActive(false);
+        canvases[1].SetActive(true);
+        canvases[2].SetActive(false);
+        canvases[3].SetActive(false);
+        canvases[4].SetActive(false);
+        canvases[5].SetActive(true);
 
         exitPromptActive = false;
 
-        yield return null; es.SetSelectedGameObject(null); es.enabled = false; es.enabled = true; es.SetSelectedGameObject(exitPromptButton); es.firstSelectedGameObject = exitPromptButton;
+        yield return null; es.SetSelectedGameObject(null); es.enabled = false; es.enabled = true; es.SetSelectedGameObject(firstSelectedButtons[3]); es.firstSelectedGameObject = firstSelectedButtons[3];
 
         //Disabling buttons of MainMenu but don't hide
-        foreach (Transform child in mainMenuCanvas.transform)
+        foreach (Transform child in canvases[1].transform)
         {
             child.GetComponentInChildren<Button>().interactable = false;
         }
+    }
+
+    void SelectedAnimation()
+    {
+        if (es.currentSelectedGameObject == allButtons[0])
+            allButtons[0].GetComponent<Animator>().SetBool("Selected", true);
+        else
+            allButtons[0].GetComponent<Animator>().SetBool("Selected", false);
+
+        if (es.currentSelectedGameObject == allButtons[1])
+            allButtons[1].GetComponent<Animator>().SetBool("Selected", true);
+        else
+            allButtons[1].GetComponent<Animator>().SetBool("Selected", false);
+
+        if (es.currentSelectedGameObject == allButtons[2])
+            allButtons[2].GetComponent<Animator>().SetBool("Selected", true);
+        else
+            allButtons[2].GetComponent<Animator>().SetBool("Selected", false);
+
+        if (es.currentSelectedGameObject == allButtons[3])
+            allButtons[3].GetComponent<Animator>().SetBool("Selected", true);
+        else
+            allButtons[3].GetComponent<Animator>().SetBool("Selected", false);
+
+        if (es.currentSelectedGameObject == allButtons[4])
+            allButtons[4].GetComponent<Animator>().SetBool("Selected", true);
+        else
+            allButtons[4].GetComponent<Animator>().SetBool("Selected", false);
+
+        if (es.currentSelectedGameObject == allButtons[5])
+            allButtons[5].GetComponent<Animator>().SetBool("Selected", true);
+        else
+            allButtons[5].GetComponent<Animator>().SetBool("Selected", false);
+
+        if (es.currentSelectedGameObject == allButtons[6])
+            allButtons[6].GetComponent<Animator>().SetBool("Selected", true);
+        else
+            allButtons[6].GetComponent<Animator>().SetBool("Selected", false);
     }
 
     //Functions assigned to buttons in main menu - SETTING ****Active bool to true;
@@ -256,7 +222,7 @@ void test()
         if (GameManager.m_Instance.m_NumOfPlayers <= 4)
         {
             //P2-4 Join
-            if (splashCanvas.activeSelf && Input.GetButtonDown("Jump_P1"))
+            if (canvases[0].activeSelf && Input.GetButtonDown("Jump_P1"))
             {
                 int players = ++GameManager.m_Instance.m_NumOfPlayers;
                 characterSelect.AssignController(Player.Controller.P1);
@@ -267,7 +233,7 @@ void test()
                 characterSelect.P1Join = true;
                 characterSelect.firstPlayer = CharacterSelect.PlayerOne.P1;
             }
-            if (splashCanvas.activeSelf && Input.GetButtonDown("Jump_P2"))
+            if (canvases[0].activeSelf && Input.GetButtonDown("Jump_P2"))
             {
                 int players = ++GameManager.m_Instance.m_NumOfPlayers;
                 characterSelect.AssignController(Player.Controller.P2);
@@ -278,7 +244,7 @@ void test()
                 characterSelect.P2Join = true;
                 characterSelect.firstPlayer = CharacterSelect.PlayerOne.P2;
             }
-            if (splashCanvas.activeSelf && Input.GetButtonDown("Jump_P3"))
+            if (canvases[0].activeSelf && Input.GetButtonDown("Jump_P3"))
             {
                 int players = ++GameManager.m_Instance.m_NumOfPlayers;
                 characterSelect.AssignController(Player.Controller.P3);
@@ -289,7 +255,7 @@ void test()
                 characterSelect.P3Join = true;
                 characterSelect.firstPlayer = CharacterSelect.PlayerOne.P3;
             }
-            if (splashCanvas.activeSelf && Input.GetButtonDown("Jump_P4"))
+            if (canvases[0].activeSelf && Input.GetButtonDown("Jump_P4"))
             {
                 int players = ++GameManager.m_Instance.m_NumOfPlayers;
                 characterSelect.AssignController(Player.Controller.P4);
@@ -300,7 +266,7 @@ void test()
                 characterSelect.P4Join = true;
                 characterSelect.firstPlayer = CharacterSelect.PlayerOne.P4;
             }
-            if (splashCanvas.activeSelf && Input.GetButtonDown("Submit_Keyboard"))
+            if (canvases[0].activeSelf && Input.GetButtonDown("Submit_Keyboard"))
             {
                 int players = ++GameManager.m_Instance.m_NumOfPlayers;
                 characterSelect.AssignController(Player.Controller.Keyboard);
@@ -335,20 +301,20 @@ void test()
         exitActive = true;
 
         exitPromptActive = false;
-        exitPromptCanvas.SetActive(false);
-        mainMenuCanvas.SetActive(false);
+        canvases[5].SetActive(false);
+        canvases[1].SetActive(false);
     }
     public void ExitPromptNo()
     {
         exitPromptActive = false;
-        exitPromptCanvas.SetActive(false);
+        canvases[5].SetActive(false);
 
         //Enabling buttons of MainMenu but don't hide
-        foreach (Transform child in mainMenuCanvas.transform)
+        foreach (Transform child in canvases[1].transform)
         {
             child.GetComponentInChildren<Button>().interactable = true;
         }
-        mainMenuButton.GetComponent<Button>().Select();
+        firstSelectedButtons[1].GetComponent<Button>().Select();
 
     }
     public void BackButton()

@@ -91,7 +91,7 @@ public class CharacterSelect : MonoBehaviour
         if (GameManager.m_Instance.m_NumOfPlayers <= 4)
         {
             //P2-4 Join
-            if (menuManager.playCanvas.activeSelf && Input.GetButtonDown("Jump_P1"))
+            if (menuManager.canvases[2].activeSelf && Input.GetButtonDown("Jump_P1"))
             {
                 if (!P1Join)
                 {
@@ -101,7 +101,7 @@ public class CharacterSelect : MonoBehaviour
                     P1Join = true;
                 }
             }
-            if (menuManager.playCanvas.activeSelf && Input.GetButtonDown("Jump_P2"))
+            if (menuManager.canvases[2].activeSelf && Input.GetButtonDown("Jump_P2"))
             {
                 if (!P2Join)
                 {
@@ -111,7 +111,7 @@ public class CharacterSelect : MonoBehaviour
                     P2Join = true;
                 }
             }
-            if (menuManager.playCanvas.activeSelf && Input.GetButtonDown("Jump_P3"))
+            if (menuManager.canvases[2].activeSelf && Input.GetButtonDown("Jump_P3"))
             {
                 if (!P3Join)
                 {
@@ -121,7 +121,7 @@ public class CharacterSelect : MonoBehaviour
                     P3Join = true;
                 }
             }
-            if (menuManager.playCanvas.activeSelf && Input.GetButtonDown("Jump_P4"))
+            if (menuManager.canvases[2].activeSelf && Input.GetButtonDown("Jump_P4"))
             {
                 if (!P4Join)
                 {
@@ -131,7 +131,7 @@ public class CharacterSelect : MonoBehaviour
                     P4Join = true;
                 }
             }
-            if (menuManager.playCanvas.activeSelf && Input.GetButtonDown("Submit_Keyboard"))
+            if (menuManager.canvases[2].activeSelf && Input.GetButtonDown("Submit_Keyboard"))
             {
                 if (!KeyboardJoin)
                 {
@@ -141,7 +141,7 @@ public class CharacterSelect : MonoBehaviour
                     KeyboardJoin = true;
                 }
             }
-            if (menuManager.playCanvas.activeSelf && Input.GetKeyDown(KeyCode.Space))
+            if (menuManager.canvases[2].activeSelf && Input.GetKeyDown(KeyCode.Space))
             {
                 StartGame();
             }
@@ -172,7 +172,7 @@ public class CharacterSelect : MonoBehaviour
     //}
     void P1Selection()
     {
-        if (menuManager.playCanvas.activeSelf)// && !P1Locked)  //If on "PlayCanvas"
+        if (menuManager.canvases[2].activeSelf)// && !P1Locked)  //If on "canvases[2]"
         {
             P1.characterSelectIcon.sprite = P1.characters[P1.index];
             if (Input.GetAxisRaw("Horizontal_" + GameManager.m_Instance.m_Player1.m_Controller) < 0)    //Scroll Left
@@ -211,7 +211,7 @@ public class CharacterSelect : MonoBehaviour
     void P2Selection()
     {
         P2.characterSelectIcon.sprite = P2.characters[P2.index];
-        if (menuManager.playCanvas.activeSelf)// && !P2Locked)  //If on "PlayCanvas"
+        if (menuManager.canvases[2].activeSelf)// && !P2Locked)  //If on "canvases[2]"
         {
             if (Input.GetAxisRaw("Horizontal_" + GameManager.m_Instance.m_Player2.m_Controller) < 0)    //Scroll Left
             {
@@ -241,7 +241,7 @@ public class CharacterSelect : MonoBehaviour
     void P3Selection()
     {
         P3.characterSelectIcon.sprite = P3.characters[P3.index];
-        if (menuManager.playCanvas.activeSelf)// && !P3Locked)  //If on "PlayCanvas"
+        if (menuManager.canvases[2].activeSelf)// && !P3Locked)  //If on "canvases[2]"
         {
             if (Input.GetAxisRaw("Horizontal_" + GameManager.m_Instance.m_Player3.m_Controller) < 0)    //Scroll Left
             {
@@ -271,7 +271,7 @@ public class CharacterSelect : MonoBehaviour
     void P4Selection()
     {
         P4.characterSelectIcon.sprite = P4.characters[P4.index];
-        if (menuManager.playCanvas.activeSelf)// && !P4Locked)  //If on "PlayCanvas"
+        if (menuManager.canvases[2].activeSelf)// && !P4Locked)  //If on "canvases[2]"
         {
             if (Input.GetAxisRaw("Horizontal_" + GameManager.m_Instance.m_Player4.m_Controller) < 0)    //Scroll Left
             {
