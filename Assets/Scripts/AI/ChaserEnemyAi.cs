@@ -51,10 +51,9 @@ public class ChaserEnemyAi : EnemyAI // Used to inherit from monobehaviour
         if (other.GetComponent<HeartSystem>() != null)
         {
             m_HeartSystem = other.GetComponent<HeartSystem>();
-            Player player = other.GetComponent<Player>();
-            if (player.m_State == Player.State.Alive)
+            if (other.tag == "Player")
             {
-                if (m_CanDamage)
+                if(m_CanDamage)
                 {
                     m_HeartSystem.TakeDamage(m_Damage);
                     m_CanDamage = false;
