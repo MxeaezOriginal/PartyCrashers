@@ -26,6 +26,7 @@ public class AdvancedBossAi : MonoBehaviour
         idle,
         hurt,
         dead,
+        teleport,
         //Attacks
         rocket,
         shoot,
@@ -72,6 +73,14 @@ public class AdvancedBossAi : MonoBehaviour
             ProjectilesArray[i] = (GameObject)Instantiate(m_Projectile, transform.position, transform.rotation);
             ProjectilesArray[i].gameObject.SetActive(false);
         }
+        //Debug errors
+        if(m_Projectile == null)
+        {
+            Debug.LogError("Boss projectile object not assigned to boss");
+        }
+        if (torches[0] == null) Debug.LogError("First Torch not assigned to boss");
+        if (torches[1] == null) Debug.LogError("Second Torch not assigned to boss");
+        if (torches[2] == null) Debug.LogError("Third Torch not assigned to boss");
     }
 
     // Update is called once per frame
@@ -82,7 +91,7 @@ public class AdvancedBossAi : MonoBehaviour
         {
             case states.idle: Idle(); break;
             case states.hurt: Hurt(m_DamageTaken, m_StunTime); break;
-
+            case states.teleport: Teleport(60);break;
             //Attacks
             case states.shoot: BasicShoot(); break;
         }
@@ -141,7 +150,6 @@ public class AdvancedBossAi : MonoBehaviour
         //Choose attack
         if (frame > 60 * m_Difficulty)
         {
-            Teleport();
             state = DecideAttack();
         }
 
@@ -293,44 +301,59 @@ public class AdvancedBossAi : MonoBehaviour
 
     }
 
-    void Teleport()
-    {
 
-        Vector3 teleportTargetPosition = transform.position; //Set variable for target position
-        int xdir = Random.Range(-1, 1);
-        int zdir = Random.Range(-1, 1);
-        for (int i = 0; i < players.Length; i++) //Loop through the number of players 
+
+
+
+    #endregion
+
+    #endregion
+    void Teleport(int framesBeforeTP, int recoverFrames)
+    {
+        if(frame == framesBeforeTP)
         {
-            playerPositionsArray[i] = players[i].transform; //Set the index's of the player positions array to the transforms of the respective player objects
-        }
-        
-        teleportTargetPosition = new Vector3( Random.Range( torches[0].position.x, torches[1].position.x), transform.position.y, Random.Range(torches[0].position.z, torches[2].position.z));
-        
-        for(int i = 0; i < playerPositionsArray.Length; i++)//Loop through the player positions and if the teleport position is close to a player, move the teleport position. Will keep looping until it's not close to a player
-        {
-            if(playerPositionsArray[i] != null)
+            Vector3 teleportTargetPosition = transform.position; //Set variable for target position
+            int xdir = Random.Range(-1, 1);
+            int zdir = Random.Range(-1, 1);
+            for (int i = 0; i < players.Length; i++) //Loop through the number of players 
             {
-                float xdif = teleportTargetPosition.x - playerPositionsArray[i].position.x;
-                float zdif = teleportTargetPosition.z - playerPositionsArray[i].position.z;
-                if ( new Vector3(xdif,zdif).magnitude <= 5f)
+                playerPositionsArray[i] = players[i].transform; //Set the index's of the player positions array to the transforms of the respective player objects
+            }
+
+            teleportTargetPosition = new Vector3(Random.Range(torches[0].position.x, torches[1].position.x), transform.position.y, Random.Range(torches[0].position.z, torches[2].position.z));
+
+            for (int i = 0; i < playerPositionsArray.Length; i++)//Loop through the player positions and if the teleport position is close to a player, move the teleport position. Will keep looping until it's not close to a player
+            {
+                if (playerPositionsArray[i] != null)
                 {
-                    teleportTargetPosition.x += Mathf.Abs(xdif)*xdir;
-                    teleportTargetPosition.z += Mathf.Abs(zdif)*zdir;
-                    i = 0;
+                    float xdif = teleportTargetPosition.x - playerPositionsArray[i].position.x;
+                    float zdif = teleportTargetPosition.z - playerPositionsArray[i].position.z;
+                    if (new Vector3(xdif, zdif).magnitude <= 5f)
+                    {
+                        teleportTargetPosition.x += Mathf.Abs(xdif) * xdir;
+                        teleportTargetPosition.z += Mathf.Abs(zdif) * zdir;
+                        i = 0;
+                    }
                 }
             }
+
+            transform.position = teleportTargetPosition;
+        }
+        //Recover
+        if(frame > framesBeforeTP && frame < recoverFrames + framesBeforeTP)
+        {
+            //transform.localRotation += 3;
+        }
+        //Change state
+        if(frame > recoverFrames + framesBeforeTP)
+        {
+            state = states.idle;
         }
 
-        transform.position = teleportTargetPosition;
+
+        
 
     }
-
-
-
-    #endregion
-
-    #endregion
-
     GameObject targetPlayer()
     {
         //Right now this whole function is really basic but I'll make it more complicated later
