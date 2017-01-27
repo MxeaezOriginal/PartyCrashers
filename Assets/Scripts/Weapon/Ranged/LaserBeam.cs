@@ -23,7 +23,7 @@ public class LaserBeam : MonoBehaviour
         foreach(RaycastHit hit in hits)
         {
             //if (hit.transform.gameObject.GetComponent<EnemyHealth> != null)
-
+            
         }
                    
         m_LineRenderer.SetPosition(1, ray.GetPoint(bow.m_LaserLenght));

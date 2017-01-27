@@ -15,6 +15,7 @@ GameObject:
   - 114: {fileID: 11480144}
   - 54: {fileID: 5460938}
   - 65: {fileID: 6591400}
+  - 114: {fileID: 11419672}
   m_Layer: 0
   m_Name: Health
   m_TagString: Health
@@ -93,7 +94,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.2, y: 1.2, z: 1.2}
+  m_Size: {x: 1.5, y: 1.5, z: 1.5}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &6591400
 BoxCollider:
@@ -140,6 +141,19 @@ Light:
   m_ShadowRadius: 0
   m_ShadowAngle: 0
   m_AreaSize: {x: 1, y: 1}
+--- !u!114 &11419672
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 148676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 946426ec69837bc43b44f480f099ddd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StickyTrapPrefab: {fileID: 109038, guid: 39a11850d3a5cf24585ef7c48da9271b, type: 2}
+  m_SetTrap: 0
 --- !u!114 &11480144
 MonoBehaviour:
   m_ObjectHideFlags: 1

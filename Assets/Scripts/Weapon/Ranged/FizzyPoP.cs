@@ -11,17 +11,20 @@ public class FizzyPoP : Ranged
     [SerializeField]
     private float m_MaxSprayCharge = 5f;
     [SerializeField]
-    //private float m_HealShootSpeed = 0f;
+    private float m_HealShootSpeed = 10f;
+    [SerializeField]
+    private float m_AngleModifier = .5f;
     #endregion
 
     #region Bools
     private bool m_IsDown = false;
     private bool m_CanHeal = false;
+
     #endregion
 
     #region Components
     private Player Player;
-    private GameObject FizzyCone;
+    private GameObject FizzyCone;   
     #endregion
 
     void Start()
@@ -45,7 +48,7 @@ public class FizzyPoP : Ranged
 
         #region Secoindary Attack
         // Shoot if Button Down
-        if (Input.GetAxisRaw(Player.m_SecondaryAttack + Player.getControllerAsString()) == 1 && m_CanHeal)
+        if (Input.GetAxisRaw(Player.m_SecondaryAttack + Player.getControllerAsString()) == 0 && m_CanHeal)
         {
             ShootHeal();
         }
@@ -75,6 +78,7 @@ public class FizzyPoP : Ranged
         if (m_SecondaryCoolDown <= Time.time - m_Weapon2Cooldown || m_SecondaryCoolDown == 0)
         {
             m_CanHeal = true;
+            m_SecondaryCoolDown = Time.time;
         }
     }
 
@@ -88,7 +92,8 @@ public class FizzyPoP : Ranged
     {
         GameObject healPrefab;
         healPrefab = (GameObject)Instantiate(m_LeftTriggerProjectile, m_FirePoint[0].gameObject.transform.position, m_FirePoint[0].gameObject.transform.rotation);
-        //healPrefab.GetComponent<Rigidbody>().AddForce(healShoot.transform.up * m_HealShootSpeed);   // Transform Forward is shooting backwards
+        healPrefab.GetComponent<Rigidbody>().AddForce(healPrefab.transform.up * m_HealShootSpeed);
+        healPrefab.GetComponent<FizzyGunSetTrap>().m_SetTrap = true;
         m_CanHeal = false;
     }
 
