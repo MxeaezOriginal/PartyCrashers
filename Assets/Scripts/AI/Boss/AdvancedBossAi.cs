@@ -91,7 +91,7 @@ public class AdvancedBossAi : MonoBehaviour
         {
             case states.idle: Idle(); break;
             case states.hurt: Hurt(m_DamageTaken, m_StunTime); break;
-            case states.teleport: Teleport(60);break;
+            case states.teleport: Teleport(60, 60);break;
             //Attacks
             case states.shoot: BasicShoot(); break;
         }
