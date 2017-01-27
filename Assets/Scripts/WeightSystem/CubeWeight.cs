@@ -3,7 +3,6 @@ using System.Collections;
 
 public class CubeWeight : MonoBehaviour {
 
-    private bool m_IsColliding;
     public float m_speed;
     public int m_maxNum;
     public int m_recentNum;
@@ -20,12 +19,11 @@ public class CubeWeight : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-
         for (int i=0;i<m_player.Length;i++)
         {
-            if (m_recentNum >= m_maxNum * 2)
+            if (is_touched[i] == true)
             {
-                if(is_touched[i] == true)
+                if(m_recentNum >= (m_maxNum * 2))
                 {
                     rb.AddForce((transform.position - m_player[i].transform.position) * m_speed);
                 }              
@@ -41,7 +39,7 @@ public class CubeWeight : MonoBehaviour {
             {
                 if (other.GetComponent<Player>().m_Player == m_player[i].GetComponent<Player>().m_Player)
                 {
-                    Debug.Log("Touched");
+                    Debug.Log("Enter");
                     is_touched[i] = true;
                     m_recentNum++;
                 }
@@ -57,10 +55,12 @@ public class CubeWeight : MonoBehaviour {
             {
                 if (other.GetComponent<Player>().m_Player == m_player[i].GetComponent<Player>().m_Player)
                 {
+                    Debug.Log("Leaved");
                     is_touched[i] = false;
                     m_recentNum--;
                 }
             }
         }
     }
+
 }
