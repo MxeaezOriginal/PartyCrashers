@@ -28,8 +28,10 @@ public class AdvancedBossAi : MonoBehaviour
         dead,
         teleport,
         //Attacks
-        rocket,
+        dash,
+        earthquake,
         shoot,
+        //Count... idunno why I put this here I never use it
         count
     }
     states currentState;
@@ -300,10 +302,10 @@ public class AdvancedBossAi : MonoBehaviour
 
 
     }
+    void EarthQuake()
+    {
 
-
-
-
+    }
 
     #endregion
 
@@ -350,9 +352,6 @@ public class AdvancedBossAi : MonoBehaviour
             state = states.idle;
         }
 
-
-        
-
     }
     GameObject targetPlayer()
     {
@@ -363,7 +362,6 @@ public class AdvancedBossAi : MonoBehaviour
 
         return target;
     } //This is where the decision making for the target player will happen
-
     states DecideAttack()
     {
         return states.shoot;
