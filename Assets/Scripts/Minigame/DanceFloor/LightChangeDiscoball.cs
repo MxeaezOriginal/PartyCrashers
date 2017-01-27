@@ -34,12 +34,14 @@ public class LightChangeDiscoball : MonoBehaviour {
 
     private bool stop = false;
 
+    public GameObject m_GetPointEffect;
+    public GameObject m_LosepointEffect;
 
     // Use this for initialization
     void Start()
     {
         lt = GetComponent<Light>();
-        CurrentColorInt = -1;
+        CurrentColorInt = -2;
     }
 
     // Update is called once per frame

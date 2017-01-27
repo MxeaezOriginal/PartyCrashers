@@ -66,10 +66,10 @@ public class ChaserEnemyAi : EnemyAI // Used to inherit from monobehaviour
 
     public void OnTriggerExit(Collider other)
     {
-        if (other.GetComponent<HeartSystem>() != null)
-        {
-            m_CanDamage = true;
-        }
+        //if (other.GetComponent<HeartSystem>() != null)
+        //{
+        //    m_CanDamage = true;
+        //}
     }
     
     IEnumerator WaitForSec(float s)

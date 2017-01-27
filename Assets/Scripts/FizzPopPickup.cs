@@ -9,7 +9,6 @@ public class FizzPopPickup : MonoBehaviour {
     private bool[] is_touched = new bool[4] { false, false, false, false };
     private HeartSystem m_HeartSystem;
     protected GameObject[] m_player;
-    Vector3 Dir;
     // Use this for initialization
     void Start () {
         m_player = GameManager.m_Instance.m_Players;

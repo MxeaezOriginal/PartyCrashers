@@ -363,7 +363,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_CurrentWeapon: {fileID: 0}
-  m_WeaponOnGameStart: GlowSword
+  m_WeaponOnGameStart: WaterBalloonBow
   m_PickupConcactinateString: _Pickup
   m_DelayBetweenSwaps: 1
   m_WeaponPrefabs:
@@ -372,7 +372,7 @@ MonoBehaviour:
   - {fileID: 168412, guid: fd099ceb78fca8a4693d860d311b5386, type: 2}
   m_WeaponPrefabPickups:
   - {fileID: 112096, guid: a4f22c1be8bdddd44bf193670141d9c9, type: 2}
-  - {fileID: 153624, guid: 67c10eec924ecd8428316f06ee1f5103, type: 2}
+  - {fileID: 196876, guid: 67c10eec924ecd8428316f06ee1f5103, type: 2}
   - {fileID: 147898, guid: 83736713fd45186459dcfeb719d006e5, type: 2}
 --- !u!114 &11429116
 MonoBehaviour:
@@ -391,6 +391,9 @@ MonoBehaviour:
   m_Player: 1
   m_Model: 0
   m_AttackSpeed: 0
+  m_MovementSpeed: 0
+  m_Damage: 0
+  m_HeartUpgrades: 0
   m_Gold: 0
   m_Score: 0
   m_CantAttack: 0
@@ -407,6 +410,7 @@ MonoBehaviour:
   m_Pause: Pause_
   delay: 2
   dotdelay: 2
+  damageDelay: 2
   m_Controller: 0
   PlayerMarker: {fileID: 11448878}
   Player1Color: {r: 1, g: 0, b: 0, a: 1}

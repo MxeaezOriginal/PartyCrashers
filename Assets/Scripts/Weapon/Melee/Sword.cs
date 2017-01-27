@@ -11,8 +11,9 @@ public class Sword : Melee
     private float smooth = 20f;
     [SerializeField]
     private float triggerLife = 0.5f;
+
     [SerializeField]
-    private bool attack = false;
+    public bool attack { get; private set; }
 
     public GameObject effect;
     
