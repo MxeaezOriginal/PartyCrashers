@@ -85,6 +85,7 @@ public class Player : MonoBehaviour
 
     public float delay = 2.0f;
     public float dotdelay = 2.0f;
+    public float damageDelay = 2.0f;
     public Controller m_Controller;
 
     //float m_LastShotTime;
@@ -449,20 +450,20 @@ public class Player : MonoBehaviour
 
     void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.CompareTag("OneDamage"))
-        {
-            m_Heart.TakeDamage(1);
-            m_Heart.UpdateHearts();
-        }
-        if (other.gameObject.CompareTag("TwoDamage"))
-        {
-            m_Heart.TakeDamage(2);
-            m_Heart.UpdateHearts();
-        }
-        if (other.gameObject.CompareTag("MeleeEnemy"))
-        {
-            rb.AddForce(transform.forward * 500);
-        }
+        //if (other.gameObject.CompareTag("OneDamage"))
+        //{
+        //    m_Heart.TakeDamage(1);
+        //    m_Heart.UpdateHearts();
+        //}
+        //if (other.gameObject.CompareTag("TwoDamage"))
+        //{
+        //    m_Heart.TakeDamage(2);
+        //    m_Heart.UpdateHearts();
+        //}
+        //if (other.gameObject.CompareTag("MeleeEnemy"))
+        //{
+        //    rb.AddForce(transform.forward * 500);
+        //}
     }
 
     //void OnCollisionStay(Collision other)

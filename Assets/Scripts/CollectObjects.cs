@@ -28,7 +28,7 @@ public class CollectObjects : MonoBehaviour
         {
 
             player.m_Gold += collectible.gold;
-            player.m_Score += 5;
+            player.m_Score += 100;
 
             partyBar.m_Current += collectible.gold;
 

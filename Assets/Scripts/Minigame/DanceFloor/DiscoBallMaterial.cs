@@ -17,26 +17,30 @@ public class DiscoBallMaterial : MonoBehaviour
 
     private bool stop = false;
 
-    private Material m_DiscoBallON;
-    
+    public Material m_DiscoBallON;
+    private Material m_Temp;
     public GameObject m_DiscoBall;
+    public int m_CurrentBallColorInt;
+    public int m_PreviousColorInt = -1;
 
-    public int m_CurrentFloorColorInt;
-
-    private bool m_LightsON = false;
 
     // Use this for initialization
     void Start()
     {
+        m_CurrentBallColorInt = -1;
     }
 
     // Update is called once per frame
     void Update()
     {
-        m_CurrentFloorColorInt = m_DiscoBall.GetComponent<LightChangeDiscoball>().CurrentColorInt;
+        m_CurrentBallColorInt = m_DiscoBall.GetComponent<LightChangeDiscoball>().CurrentColorInt;
         if (stop == true)
         {
             StartCoroutine(Stopedfor(scoretime));
+            if (m_PreviousColorInt != -1)
+            {
+                m_DiscoBallLight.material = m_Temp;
+            }
         }
         if (stop == false)
         {
@@ -46,38 +50,39 @@ public class DiscoBallMaterial : MonoBehaviour
             m_DiscoBallLight.material = m_DiscoBallON;
             float emission = Mathf.PingPong(Time.time * 1.5f, 1);
             m_DiscoBallLight.material.SetColor("_EmissionColor", new Color(1f, 1f, 1f) * emission);
+            m_PreviousColorInt = m_CurrentBallColorInt;
+            m_Temp = m_DiscoBallON;
         }
-
     }
 
     IEnumerator ColorRandomiser(float wait)
     {
         
-        if (m_CurrentFloorColorInt == 0)
+        if (m_CurrentBallColorInt == 0)
         {
             m_DiscoBallON = m_ColorZero;
         }
-        if (m_CurrentFloorColorInt == 1)
+        if (m_CurrentBallColorInt == 1)
         {
             m_DiscoBallON = m_ColorOne;
         }
-        if (m_CurrentFloorColorInt == 2)
+        if (m_CurrentBallColorInt == 2)
         {
             m_DiscoBallON = m_ColorTwo;
         }
-        if (m_CurrentFloorColorInt == 3)
+        if (m_CurrentBallColorInt == 3)
         {
             m_DiscoBallON = m_ColorThree;
         }
-        if (m_CurrentFloorColorInt == 4)
+        if (m_CurrentBallColorInt == 4)
         {
             m_DiscoBallON = m_ColorFour;
         }
-        if (m_CurrentFloorColorInt == 5)
+        if (m_CurrentBallColorInt == 5)
         {
             m_DiscoBallON = m_ColorFive;
         }
-        if (m_CurrentFloorColorInt == 6)
+        if (m_CurrentBallColorInt == 6)
         {
             m_DiscoBallON = m_ColorSix;
         }

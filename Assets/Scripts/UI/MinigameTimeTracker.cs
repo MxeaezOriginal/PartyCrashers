@@ -11,8 +11,8 @@ public class MinigameTimeTracker : MonoBehaviour
     public CanvasGroup secondFadingCanvas;
 
     CanvasGroup rewardFadeInCanvas;
-    Image startCountdownImage;
-    public Sprite[] startCountdownTextures;
+    [Header("Starting Counter")]
+    public GameObject[] startCounter;
 
     float minigameTimerRaw;     //floats gets rounded to "minigameTimer" int in Update
     public int minigameTimer;
@@ -29,7 +29,7 @@ public class MinigameTimeTracker : MonoBehaviour
         miniGameCanvas = GameObject.Find("MinigameCanvas").GetComponent<Canvas>();
         firstFadingCanvas = GameObject.Find("First Fading Canvas").GetComponent<CanvasGroup>();
         secondFadingCanvas = GameObject.Find("Second Fading Canvas").GetComponent<CanvasGroup>();
-        startCountdownImage = GameObject.Find("Start Countdown Image").GetComponent<Image>();
+        startCounter[0] = GameObject.Find("3"); startCounter[1] = GameObject.Find("2"); startCounter[2] = GameObject.Find("1"); startCounter[3] = GameObject.Find("GO!");
     }
     void Update()
     {
@@ -72,21 +72,41 @@ public class MinigameTimeTracker : MonoBehaviour
         //3, 2, 1, GO Countdown
         if (minigameTimer == 2)
         {
-            startCountdownImage.enabled = true;
-            startCountdownImage.sprite = startCountdownTextures[0];
+            startCounter[0].GetComponent<Text>().enabled = true;
+
+            startCounter[0].transform.GetChild(0).GetComponent<Text>().enabled = true;
         }
         else if (minigameTimer == 3)
-            startCountdownImage.sprite = startCountdownTextures[1];
+        {
+            startCounter[0].GetComponent<Text>().enabled = false;
+            startCounter[1].GetComponent<Text>().enabled = true;
+
+            startCounter[0].transform.GetChild(0).GetComponent<Text>().enabled = false;
+            startCounter[1].transform.GetChild(0).GetComponent<Text>().enabled = true;
+        }
 
         else if (minigameTimer == 4)
-            startCountdownImage.sprite = startCountdownTextures[2];
+        {
+            startCounter[1].GetComponent<Text>().enabled = false;
+            startCounter[2].GetComponent<Text>().enabled = true;
 
+            startCounter[1].transform.GetChild(0).GetComponent<Text>().enabled = false;
+            startCounter[2].transform.GetChild(0).GetComponent<Text>().enabled = true;
+        }
         else if (minigameTimer == 5)
-            startCountdownImage.sprite = startCountdownTextures[3];
+        {
+            startCounter[2].GetComponent<Text>().enabled = false;
+            startCounter[3].GetComponent<Text>().enabled = true;
+
+            startCounter[2].transform.GetChild(0).GetComponent<Text>().enabled = false;
+            startCounter[3].transform.GetChild(0).GetComponent<Text>().enabled = true;
+
+        }
 
         else if (minigameTimer >= 6)
         {
-            startCountdownImage.enabled = false;
+            startCounter[3].GetComponent<Text>().enabled = false;
+            startCounter[3].transform.GetChild(0).GetComponent<Text>().enabled = false;
             //Enable Players' movement
             foreach (GameObject player in GameManager.m_Instance.m_Players)
             {
@@ -95,7 +115,7 @@ public class MinigameTimeTracker : MonoBehaviour
             }
 
             GameManager.m_Instance.m_PartyBar.m_Active = true;
-        }   
+        }
     }
 
     public void MinigameEnd()

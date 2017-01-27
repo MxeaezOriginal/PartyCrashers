@@ -11,13 +11,12 @@ public class RecycleBullet : MonoBehaviour
     public void Start()
     {
         bow = GetComponentInParent<Bow>();
-        //bow = GameObject.Find("WaterBalloonBow").GetComponent<Bow>();
         StartCoroutine(DeactivateCallback());
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag != "Coins")
+        if (other.tag != "Coins" && other.tag != "Player")
             DestroyBullet();
     }
 

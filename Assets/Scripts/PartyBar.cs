@@ -113,7 +113,7 @@ public class PartyBar : MonoBehaviour {
             ++GameManager.m_Instance.m_Tutorial;
         }
 
-        SceneManager.LoadScene(Random.Range(5,6));
+        SceneManager.LoadScene(Random.Range(5,7));
     }
 
     void RewardsAndLoadBackToGame()
@@ -143,7 +143,7 @@ public class PartyBar : MonoBehaviour {
             if (minigameReward.checkWhenToEndReward())
             {
                 GameManager.m_Instance.m_GameState = GameManager.GameState.Dungeon;
-                SceneManager.LoadScene(Random.Range(8, 9));
+                SceneManager.LoadScene(Random.Range(8, 10));
             }
         }
     }

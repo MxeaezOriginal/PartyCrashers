@@ -18,8 +18,8 @@ public class LightChangeDiscoball : MonoBehaviour {
     private Color ColorFive;
     [SerializeField]
     private Color ColorSix;
-    [SerializeField]
-    private Color ColorSeven;
+    //[SerializeField]
+    //private Color ColorSeven;
 
     [SerializeField]
     private float scoretime = 4;
@@ -31,17 +31,17 @@ public class LightChangeDiscoball : MonoBehaviour {
     private Color PreviousColor;
     private Color TempColor;
     public int PreviousColorInt = -1;
-    //public int CurrentColorNumber;
 
     private bool stop = false;
 
+    public GameObject m_GetPointEffect;
+    public GameObject m_LosepointEffect;
 
     // Use this for initialization
     void Start()
     {
-        //CurrentColorNumber = 1;
         lt = GetComponent<Light>();
-        CurrentColorInt = -1;
+        CurrentColorInt = -2;
     }
 
     // Update is called once per frame
@@ -89,7 +89,7 @@ public class LightChangeDiscoball : MonoBehaviour {
     IEnumerator ColorRandomiser(float wait)
     {
         yield return new WaitForSeconds(wait);
-        CurrentColorInt = Random.Range(0, 7);
+        CurrentColorInt = Random.Range(0, 6);
         //PreviousColorInt = Random.Range(0, 8);
         //if (CurrentColorInt == PreviousColorInt)
         //{
@@ -126,10 +126,10 @@ public class LightChangeDiscoball : MonoBehaviour {
             {
                 CurrentColor = ColorSix;
             }
-            if (CurrentColorInt == 7)
-            {
-                CurrentColor = ColorSeven;
-            }
+            //if (CurrentColorInt == 7)
+            //{
+            //    CurrentColor = ColorSeven;
+            //}
 
             //if (PreviousColorInt == 0)
             //{

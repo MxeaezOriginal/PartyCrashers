@@ -11,7 +11,7 @@ public class FizzyPoP : Ranged
     [SerializeField]
     private float m_MaxSprayCharge = 5f;
     [SerializeField]
-    private float m_HealShootSpeed = 0f;
+    //private float m_HealShootSpeed = 0f;
     #endregion
 
     #region Bools
@@ -86,10 +86,9 @@ public class FizzyPoP : Ranged
 
     private void ShootHeal()
     {
-        GameObject healShoot;
-        healShoot = (GameObject)Instantiate(m_LeftTriggerProjectile, m_FirePoint[0].gameObject.transform.position, m_FirePoint[0].gameObject.transform.rotation);
-        assignDamage(healShoot);
-        healShoot.GetComponent<Rigidbody>().AddForce(healShoot.transform.up * m_HealShootSpeed);   // Transform Forward is shooting backwards
+        GameObject healPrefab;
+        healPrefab = (GameObject)Instantiate(m_LeftTriggerProjectile, m_FirePoint[0].gameObject.transform.position, m_FirePoint[0].gameObject.transform.rotation);
+        //healPrefab.GetComponent<Rigidbody>().AddForce(healShoot.transform.up * m_HealShootSpeed);   // Transform Forward is shooting backwards
         m_CanHeal = false;
     }
 

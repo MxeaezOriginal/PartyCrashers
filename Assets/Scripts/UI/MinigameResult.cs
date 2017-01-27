@@ -44,10 +44,10 @@ public class MinigameResult : MonoBehaviour
         minigameManager = GetComponent<MinigameManager>();
         minigameTimeTracker = GetComponent<MinigameTimeTracker>();
 
-        P1_Bar = GameObject.Find("P1_Content").GetComponent<Image>();
-        P2_Bar = GameObject.Find("P2_Content").GetComponent<Image>();
-        P3_Bar = GameObject.Find("P3_Content").GetComponent<Image>();
-        P4_Bar = GameObject.Find("P4_Content").GetComponent<Image>();
+        P1_Bar = GameObject.Find("P1_Panel/Result Bar/Content").GetComponent<Image>();
+        P2_Bar = GameObject.Find("P2_Panel/Result Bar/Content").GetComponent<Image>();
+        P3_Bar = GameObject.Find("P3_Panel/Result Bar/Content").GetComponent<Image>();
+        P4_Bar = GameObject.Find("P4_Panel/Result Bar/Content").GetComponent<Image>();
 
         firstDelay = delay;
         secondDelay = firstDelay + delay;
