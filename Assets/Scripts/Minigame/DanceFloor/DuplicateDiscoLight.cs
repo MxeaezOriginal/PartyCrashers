@@ -40,7 +40,7 @@ public class DuplicateDiscoLight : MonoBehaviour {
     void Start()
     {
         lt = GetComponent<Light>();
-        CurrentColorInt = -1;
+        CurrentColorInt = -2;
     }
 
     // Update is called once per frame

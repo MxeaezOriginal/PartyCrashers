@@ -26,7 +26,7 @@ public class MaterialChangeDanceFloor : MonoBehaviour {
     
     void Start()
     {
-        m_CurrentFloorColorInt = -1;
+        m_CurrentFloorColorInt = -2;
     }
 
     void Update()
@@ -50,6 +50,7 @@ public class MaterialChangeDanceFloor : MonoBehaviour {
             // Color assigned
             // Cannot get / lose point
             StartCoroutine(ColorRandomiser(stoptime));
+
             m_DiscoBallLight.material = m_DiscoBallON;
             float emission = Mathf.PingPong(Time.time * 1.5f, 1);
             m_DiscoBallLight.material.SetColor("_EmissionColor", new Color(1f, 1f, 1f) * emission);
@@ -60,6 +61,7 @@ public class MaterialChangeDanceFloor : MonoBehaviour {
 
     IEnumerator ColorRandomiser(float wait)
     {
+
         if (m_CurrentFloorColorInt == 0)
         {
             m_DiscoBallON = m_ColorZero;
