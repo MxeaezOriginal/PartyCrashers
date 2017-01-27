@@ -58,7 +58,7 @@ public class MenuManager : MonoBehaviour
         if (canBack && Input.GetButtonDown("Back_" + GameManager.m_Instance.m_Player1.m_Controller)) //PRESS FOR BACK BUTTON
             BackButton();
 
-        SelectedAnimation();
+        StartCoroutine(SelectedAnimationWaitForEndOfFrame());
     }
 
     //Main Functions for setting all the bools
@@ -174,6 +174,12 @@ public class MenuManager : MonoBehaviour
         {
             child.GetComponentInChildren<Button>().interactable = false;
         }
+    }
+
+    IEnumerator SelectedAnimationWaitForEndOfFrame()
+    {
+        yield return new WaitForEndOfFrame();
+        SelectedAnimation();
     }
 
     void SelectedAnimation()

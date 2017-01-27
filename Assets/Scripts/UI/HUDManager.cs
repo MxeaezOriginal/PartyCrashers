@@ -26,10 +26,10 @@ public class HUDManager : MonoBehaviour
             P3_PanelTransform = GameObject.Find(GameManager.m_Instance.m_GameState.ToString() + "Canvas/P3_Panel").GetComponent<RectTransform>();
             P4_PanelTransform = GameObject.Find(GameManager.m_Instance.m_GameState.ToString() + "Canvas/P4_Panel").GetComponent<RectTransform>();
 
-            P1_ScoreCounter = GameObject.Find("P1 Score").GetComponent<Text>();
-            P2_ScoreCounter = GameObject.Find("P2 Score").GetComponent<Text>();
-            P3_ScoreCounter = GameObject.Find("P3 Score").GetComponent<Text>();
-            P4_ScoreCounter = GameObject.Find("P4 Score").GetComponent<Text>();
+            P1_ScoreCounter = GameObject.Find("P1_Panel/Score").GetComponent<Text>();
+            P2_ScoreCounter = GameObject.Find("P2_Panel/Score").GetComponent<Text>();
+            P3_ScoreCounter = GameObject.Find("P3_Panel/Score").GetComponent<Text>();
+            P4_ScoreCounter = GameObject.Find("P4_Panel/Score").GetComponent<Text>();
         }
 
         UpdateUIPanels();
@@ -48,23 +48,23 @@ public class HUDManager : MonoBehaviour
             P3_Panel.SetActive(false);
             P4_Panel.SetActive(false);
 
-            P1_PanelTransform.anchoredPosition = new Vector2(0, 30);
+            P1_PanelTransform.anchoredPosition = new Vector2(0, 20);
         }
         if (GameManager.m_Instance.m_Players.Length == 2)
         {
             P3_Panel.SetActive(false);
             P4_Panel.SetActive(false);
 
-            P1_PanelTransform.anchoredPosition = new Vector2(-67, 30);
-            P2_PanelTransform.anchoredPosition = new Vector2(67, 30);
+            P1_PanelTransform.anchoredPosition = new Vector2(-67, 20);
+            P2_PanelTransform.anchoredPosition = new Vector2(67, 20);
         }
         if (GameManager.m_Instance.m_Players.Length == 3)
         {
             P4_Panel.SetActive(false);
 
-            P1_PanelTransform.anchoredPosition = new Vector2(-130, 30);
-            P2_PanelTransform.anchoredPosition = new Vector2(0, 30);
-            P3_PanelTransform.anchoredPosition = new Vector2(130, 30);
+            P1_PanelTransform.anchoredPosition = new Vector2(-130, 20);
+            P2_PanelTransform.anchoredPosition = new Vector2(0, 20);
+            P3_PanelTransform.anchoredPosition = new Vector2(130, 20);
         }
         if (GameManager.m_Instance.m_Players.Length == 4)
         {
