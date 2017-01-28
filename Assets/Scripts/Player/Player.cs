@@ -571,7 +571,6 @@ public class Player : MonoBehaviour
 		if (m_Player == PLAYER.P2)
 		{
 			PlayerCurrentColor = Player2Color;
-			PlayerMarker.color = PlayerCurrentColor;
 			if (m_Heart.curHealth <= m_Heart.maxHealth / 2 && m_Heart.curHealth > m_Heart.maxHealth / 4)
 			{
 				PlayerMarker.color = Color.Lerp(Player2Color, PlayerDamageIndacator, Mathf.PingPong(Time.time, 0.9f));
@@ -592,7 +591,6 @@ public class Player : MonoBehaviour
 		if (m_Player == PLAYER.P3)
 		{
 			PlayerCurrentColor = Player3Color;
-			PlayerMarker.color = PlayerCurrentColor;
 			if (m_Heart.curHealth <= m_Heart.maxHealth / 2 && m_Heart.curHealth > m_Heart.maxHealth / 4)
 			{
 				PlayerMarker.color = Color.Lerp(Player3Color, PlayerDamageIndacator, Mathf.PingPong(Time.time, 0.9f));
@@ -613,7 +611,6 @@ public class Player : MonoBehaviour
 		if (m_Player == PLAYER.P4)
 		{
 			PlayerCurrentColor = Player4Color;
-			PlayerMarker.color = PlayerCurrentColor;
 			if (m_Heart.curHealth <= m_Heart.maxHealth / 2 && m_Heart.curHealth > m_Heart.maxHealth / 4)
 			{
 				PlayerMarker.color = Color.Lerp(Player4Color, PlayerDamageIndacator, Mathf.PingPong(Time.time, 0.9f));
