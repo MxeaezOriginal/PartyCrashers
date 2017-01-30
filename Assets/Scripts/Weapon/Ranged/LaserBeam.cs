@@ -14,7 +14,7 @@ public class LaserBeam : MonoBehaviour
     }
 
     void Update()
-    {    
+    {            
         Ray ray = new Ray(transform.position, transform.forward);
         m_LineRenderer.SetPosition(0, ray.origin);
 
@@ -22,7 +22,11 @@ public class LaserBeam : MonoBehaviour
         hits = Physics.RaycastAll(ray, bow.m_LaserLenght);
         foreach(RaycastHit hit in hits)
         {
-            //if (hit.transform.gameObject.GetComponent<EnemyHealth> != null)
+            if (hit.transform.GetComponent<EnemyHealth>() != null)
+            {
+                Debug.Log(hit);
+            //    bow.assignDamage(this.gameObject, bow.m_LaserDmgMultiplier);    
+            }
             
         }
                    

@@ -8,7 +8,9 @@ public class FizzyGunSetTrap : MonoBehaviour {
     private Rigidbody rb;
     [HideInInspector]
     public bool m_SetTrap = false;
-
+    [SerializeField]
+    private float m_HealDestroyTimer;
+    private float SpawnTrapSafety = 1;
 
     void Start ()
     {
@@ -19,9 +21,14 @@ public class FizzyGunSetTrap : MonoBehaviour {
     {
         if (m_SetTrap == true)
         {
-            Debug.Log("Pickup is going to instantiate trap.");
+            // BUG: TRAP SPAWNS BEFORE HEALTH VELOCITY HITS ZERO.
+            // Guess 1: When Cube hits the floor the velocity turns 0 for a frame, instantiating the trap before time.
+            // Guess 2:
+
+            //Debug.Log("Pickup is going to instantiate trap.");
             if (rb.velocity == Vector3.zero)
             {
+                // StartCoroutine(SpawnTrap());
                 GameObject trapGO = Instantiate<GameObject>(StickyTrapPrefab);
                 trapGO.transform.position = new Vector3(transform.position.x, transform.position.y - 0.5f, transform.position.z);
                 trapGO.AddComponent<Rigidbody>();
@@ -45,10 +52,23 @@ public class FizzyGunSetTrap : MonoBehaviour {
                 newBox.center = new Vector3(0f, 0.05f, 0f);
                 newBox.size = new Vector3(1f, 0.1f, 1f);
                                 
-                
                 m_SetTrap = false;
-                Debug.Log("Trap instantiated.");
+                //Debug.Log("Trap instantiated.");
+                
+                StopCoroutine(DestroyHeal());
+                StartCoroutine(DestroyHeal());
             }
         }
+    }
+
+    private IEnumerator SpawnTrap()
+    {
+        yield return new WaitForSeconds(SpawnTrapSafety);        
+    }
+
+    private IEnumerator DestroyHeal()
+    {
+        yield return new WaitForSeconds(m_HealDestroyTimer);
+        Destroy(this.gameObject);
     }
 }

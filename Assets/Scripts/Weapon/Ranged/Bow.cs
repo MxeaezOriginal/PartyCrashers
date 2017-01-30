@@ -19,9 +19,8 @@ public class Bow : Ranged
     [SerializeField]
     [Tooltip("Multiplies the initial Damage the bullet does at Half charge.")]
     private int m_MidDmgMultiplier;
-    [SerializeField]
     [Tooltip("Multiplies the initial Damage the bullet does at Full charge.")]
-    private int m_LaserDmgMultiplier;
+    public int m_LaserDmgMultiplier;
     [SerializeField]
     private float m_LaserTimer;
     public float m_LaserLenght;
@@ -102,7 +101,7 @@ public class Bow : Ranged
         else
         {
 
-            assignDamage(laser, m_LaserDmgMultiplier); 
+            //assignDamage(laser, m_LaserDmgMultiplier); 
             laser.GetComponent<LineRenderer>().enabled = true;
             
             StopCoroutine("LaserTimer");
@@ -112,7 +111,7 @@ public class Bow : Ranged
         m_CoolDown = Time.time;
     }
 
-    private void assignDamage(GameObject bullet, int multiplier)
+    public void assignDamage(GameObject bullet, int multiplier)
     {
         if(bullet.GetComponent<Damage>() != null)
         {
