@@ -47,7 +47,8 @@ public class Lancher : MonoBehaviour
         //}
         bool canShoot = (m_LastShotTime + Random.Range(m_FireIntervalMin, m_FireIntervalMax)) < Time.time;
 
-        // Launcher disable system
+        // Launcher system
+        // Still need to test to get best values for m_FireIntervalMin and m_FireIntervalMax
         // method 1: Launcher or not
         m_LauncherRandom = Random.Range(0, 2);
         if(m_LauncherRandom == 0)
