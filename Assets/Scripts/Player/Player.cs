@@ -98,12 +98,12 @@ public class Player : MonoBehaviour
     //Set up color --------------------------------------------------------------------------------------------------------------------------------------------------
 	[SerializeField]
 	Image PlayerMarker;
-	public Color Player1Color = Color.red;
-	public Color Player2Color = Color.blue;
-	public Color Player3Color = Color.green;
-	public Color Player4Color = Color.yellow;
-	public Color PlayerCurrentColor;
-	public Color PlayerDamageIndacator = Color.white;
+	public Color playerOneColor = Color.red;
+	public Color playerTwoColor = Color.blue;
+	public Color playerThreeColor = Color.green;
+	public Color playerFourColor = Color.yellow;
+	public Color playerCurrentColor;
+	public Color playerDamageIndacator = Color.white;
 	public bool FlashCheck = true;
 
 
@@ -212,7 +212,6 @@ public class Player : MonoBehaviour
         m_State = State.Dead;
         updateModel();
         transform.position = m_Location;
-
         Debug.Log("Pinata time");
     }
 
@@ -550,10 +549,10 @@ public class Player : MonoBehaviour
 	{
 		if (m_Player == PLAYER.P1)
 		{
-			PlayerCurrentColor = Player1Color;
+			playerCurrentColor = playerOneColor;
 			if (m_Heart.curHealth <= m_Heart.maxHealth / 2 && m_Heart.curHealth > m_Heart.maxHealth / 4)
 			{
-				PlayerMarker.color = Color.Lerp(PlayerCurrentColor, PlayerDamageIndacator, Mathf.PingPong(Time.time, 0.9f));
+				PlayerMarker.color = Color.Lerp(playerOneColor, playerDamageIndacator, Mathf.PingPong(Time.time, 0.9f));
 			}
 			else if (m_Heart.curHealth <= m_Heart.maxHealth / 4) 
 			{
@@ -565,15 +564,15 @@ public class Player : MonoBehaviour
 			} 
 			else 
 			{				
-				PlayerMarker.color = PlayerCurrentColor;
+				PlayerMarker.color = playerCurrentColor;
 			}
 		}
 		if (m_Player == PLAYER.P2)
 		{
-			PlayerCurrentColor = Player2Color;
+			playerCurrentColor = playerTwoColor;
 			if (m_Heart.curHealth <= m_Heart.maxHealth / 2 && m_Heart.curHealth > m_Heart.maxHealth / 4)
 			{
-				PlayerMarker.color = Color.Lerp(Player2Color, PlayerDamageIndacator, Mathf.PingPong(Time.time, 0.9f));
+				PlayerMarker.color = Color.Lerp(playerTwoColor, playerDamageIndacator, Mathf.PingPong(Time.time, 0.9f));
 			}
 			else if (m_Heart.curHealth <= m_Heart.maxHealth / 4)
 			{
@@ -585,15 +584,15 @@ public class Player : MonoBehaviour
 			}
 			else 
 			{				
-				PlayerMarker.color = PlayerCurrentColor;
+				PlayerMarker.color = playerCurrentColor;
 			}
 		}
 		if (m_Player == PLAYER.P3)
 		{
-			PlayerCurrentColor = Player3Color;
+			playerCurrentColor = playerThreeColor;
 			if (m_Heart.curHealth <= m_Heart.maxHealth / 2 && m_Heart.curHealth > m_Heart.maxHealth / 4)
 			{
-				PlayerMarker.color = Color.Lerp(Player3Color, PlayerDamageIndacator, Mathf.PingPong(Time.time, 0.9f));
+				PlayerMarker.color = Color.Lerp(playerThreeColor, playerDamageIndacator, Mathf.PingPong(Time.time, 0.9f));
 			}
 			else if (m_Heart.curHealth <= m_Heart.maxHealth / 4)
 			{
@@ -605,15 +604,15 @@ public class Player : MonoBehaviour
 			}
 			else 
 			{				
-				PlayerMarker.color = PlayerCurrentColor;
+				PlayerMarker.color = playerCurrentColor;
 			}
 		}
 		if (m_Player == PLAYER.P4)
 		{
-			PlayerCurrentColor = Player4Color;
+			playerCurrentColor = playerFourColor;
 			if (m_Heart.curHealth <= m_Heart.maxHealth / 2 && m_Heart.curHealth > m_Heart.maxHealth / 4)
 			{
-				PlayerMarker.color = Color.Lerp(Player4Color, PlayerDamageIndacator, Mathf.PingPong(Time.time, 0.9f));
+				PlayerMarker.color = Color.Lerp(playerFourColor, playerDamageIndacator, Mathf.PingPong(Time.time, 0.9f));
 			}
 			else if (m_Heart.curHealth <= m_Heart.maxHealth / 4)
 			{
@@ -625,15 +624,15 @@ public class Player : MonoBehaviour
 			}
 			else 
 			{				
-				PlayerMarker.color = PlayerCurrentColor;
+				PlayerMarker.color = playerCurrentColor;
 			}
 		}
 	}
 	IEnumerator Flash()
 	{		
-		PlayerMarker.color = PlayerDamageIndacator;
+		PlayerMarker.color = playerDamageIndacator;
 		yield return new WaitForSeconds(.1f);
-		PlayerMarker.color = PlayerCurrentColor;
+		PlayerMarker.color = playerCurrentColor;
 		yield return new WaitForSeconds(.1f);
 		FlashCheck = true;
 	}
