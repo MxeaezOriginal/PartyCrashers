@@ -12,6 +12,7 @@ public class ChaserEnemyAi : EnemyAI // Used to inherit from monobehaviour
     EnemyEffect enemyEffect;
     private HeartSystem m_HeartSystem;
     private bool m_CanDamage = true;
+
     // Use this for initialization
     void Start()
     {
