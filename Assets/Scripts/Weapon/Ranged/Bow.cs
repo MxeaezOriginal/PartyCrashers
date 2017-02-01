@@ -25,6 +25,9 @@ public class Bow : Ranged
     private float m_LaserTimer;
     public float m_LaserLenght;
 
+    //Test
+    public float laserWidth = 1.0f;
+
     Player player;
     GameObject laser;
 
@@ -100,13 +103,12 @@ public class Bow : Ranged
         }
         else
         {
-
-            //assignDamage(laser, m_LaserDmgMultiplier); 
             laser.GetComponent<LineRenderer>().enabled = true;
-            
+
             StopCoroutine("LaserTimer");
-            StartCoroutine("LaserTimer");    
+            StartCoroutine("LaserTimer");                          
         }
+
         m_TimePressed = 0;
         m_CoolDown = Time.time;
     }

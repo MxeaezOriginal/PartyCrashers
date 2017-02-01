@@ -1,20 +1,23 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[RequireComponent(typeof(LineRenderer))]
 public class LaserBeam : MonoBehaviour
-{
+{  
     Bow bow;
     LineRenderer m_LineRenderer;
-
+    
     void Start()
     {
         bow = GetComponentInParent<Bow>();       
-        m_LineRenderer = GetComponent<LineRenderer>();
+        m_LineRenderer = GetComponent<LineRenderer>();        
         m_LineRenderer.enabled = false;
     }
 
     void Update()
     {            
+        m_LineRenderer.SetWidth(bow.laserWidth, bow.laserWidth);
+
         Ray ray = new Ray(transform.position, transform.forward);
         m_LineRenderer.SetPosition(0, ray.origin);
 
@@ -22,10 +25,14 @@ public class LaserBeam : MonoBehaviour
         hits = Physics.RaycastAll(ray, bow.m_LaserLenght);
         foreach(RaycastHit hit in hits)
         {
-            if (hit.transform.GetComponent<EnemyHealth>() != null)
+            if(m_LineRenderer.enabled == true)
             {
-                Debug.Log(hit);
-            //    bow.assignDamage(this.gameObject, bow.m_LaserDmgMultiplier);    
+                if (hit.transform.GetComponent<EnemyHealth>() != null)
+                {
+                    //Debug.Log(hit);
+                    //bow.assignDamage(this.gameObject, bow.m_LaserDmgMultiplier);    
+                    
+                }
             }
             
         }
