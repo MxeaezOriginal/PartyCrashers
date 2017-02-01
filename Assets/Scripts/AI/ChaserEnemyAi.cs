@@ -13,6 +13,10 @@ public class ChaserEnemyAi : EnemyAI // Used to inherit from monobehaviour
     private HeartSystem m_HeartSystem;
     private bool m_CanDamage = true;
 
+	//kavells new code for feedback effects
+	public GameObject takeHitEffect;
+	//kavells new code for feedback effects
+
     // Use this for initialization
     void Start()
     {
@@ -57,6 +61,11 @@ public class ChaserEnemyAi : EnemyAI // Used to inherit from monobehaviour
                 if(m_CanDamage)
                 {
                     m_HeartSystem.TakeDamage(m_Damage);
+					//kavells new code for feedback effects
+					GameObject takeDamage;
+					takeDamage = (GameObject)Instantiate(takeHitEffect, other.transform.position, Random.rotation);
+					Destroy(takeDamage, 0.5f);
+					//kavells new code for feedback effects
                     m_CanDamage = false;
                     StartCoroutine(WaitForSec(2));
                 }

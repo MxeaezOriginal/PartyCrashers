@@ -24,6 +24,10 @@ public class HeavyEnemy : EnemyAI //Inherits from EnemyAI now instead of monobeh
     private HeartSystem m_HeartSystem;
     private bool m_CanDamage = true;
 
+	//kavells new code for feedback effects
+	public GameObject takeHitEffect;
+	//kavells new code for feedback effects
+
     EnemyEffect enemyEffect;
 
     void Start()
@@ -122,6 +126,11 @@ public class HeavyEnemy : EnemyAI //Inherits from EnemyAI now instead of monobeh
                 if (m_CanDamage)
                 {
                     m_HeartSystem.TakeDamage(m_Damage);
+					//kavells new code for feedback effects
+					GameObject takeDamage;
+					takeDamage = (GameObject)Instantiate(takeHitEffect, other.transform.position, Random.rotation);
+					Destroy(takeDamage, 0.5f);
+					//kavells new code for feedback effects
                     m_CanDamage = false;
                     StartCoroutine(WaitForSec(2));
                 }

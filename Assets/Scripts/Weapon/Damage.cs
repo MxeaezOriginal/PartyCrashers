@@ -6,11 +6,9 @@ public class Damage : MonoBehaviour
 
     public float m_Damage;
     private Transform m_WeaponTransform;
-
 	//kavells new code for feedback effects
 	public GameObject landHitEffect;
 	//kavells new code for feedback effects
-
     void Start()
 	{		
         m_WeaponTransform = transform;
@@ -37,14 +35,13 @@ public class Damage : MonoBehaviour
         if (other.gameObject.GetComponent<EnemyHealth>() != null)
         {
             EnemyHealth enemyHealth = other.gameObject.GetComponent<EnemyHealth>();
+			enemyHealth.Damage(m_Damage);
 			//kavells new code for feedback effects
 			GameObject takeDamage;
 			takeDamage = (GameObject)Instantiate(landHitEffect, other.transform.position, Random.rotation);
 			Destroy(takeDamage, 1f);
 			//kavells new code for feedback effects
-            enemyHealth.Damage(m_Damage);
-
-        }
+		}
 
         if (other.gameObject.GetComponent<HeartSystem>() != null)
         {
@@ -61,9 +58,4 @@ public class Damage : MonoBehaviour
             }
         }
     }
-
-	public void spawnlandHitEffect()
-	{
-		
-	}
 }
