@@ -50,7 +50,9 @@ public class MiniGameRewards : MonoBehaviour
             rewardCanvas.enabled = true;
 
         SetupInput();
-        updateCurrentPlayer();
+        UpdateCurrentPlayer();
+
+        print(es.currentSelectedGameObject);
     }
 
     void SetupInput()
@@ -378,7 +380,7 @@ public class MiniGameRewards : MonoBehaviour
     }
 
     //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!       TEMP.!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    private void updateCurrentPlayer()
+    private void UpdateCurrentPlayer()
     {
         switch (rewardsSelected)
         {

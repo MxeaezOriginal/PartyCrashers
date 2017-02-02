@@ -13,7 +13,8 @@ public class MouseInputFix : MonoBehaviour
     void Awake()
     {
         es = GameObject.Find("EventSystem").GetComponent<EventSystem>();
-        menuManager = GameObject.Find("Menu Manager").GetComponent<MenuManager>();
+        if (GameObject.Find("Menu Manager") != null)
+            menuManager = GameObject.Find("Menu Manager").GetComponent<MenuManager>();
     }
 
     void Update()
@@ -30,7 +31,7 @@ public class MouseInputFix : MonoBehaviour
             previouslySelectedGameObject = menuManager.allButtons[4];
         else if (es.currentSelectedGameObject == menuManager.allButtons[5])
             previouslySelectedGameObject = menuManager.allButtons[5];
-        else if(es.currentSelectedGameObject == menuManager.allButtons[6])
+        else if (es.currentSelectedGameObject == menuManager.allButtons[6])
             previouslySelectedGameObject = menuManager.allButtons[6];
 
         es.SetSelectedGameObject(previouslySelectedGameObject);
