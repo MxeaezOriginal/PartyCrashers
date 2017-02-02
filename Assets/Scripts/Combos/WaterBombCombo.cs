@@ -7,6 +7,12 @@ public class WaterBombCombo : MonoBehaviour
     public float m_ExplosionRadius;
     private float m_Damage;
 
+    //sound
+    public GameObject SFXPlayer;
+    public AudioClip[] SFX;
+    private AudioClip SFXtoPlay;
+    //sound end
+
     public GameObject m_ExplosionEffect;
 
     void OnTriggerEnter(Collider other)
@@ -28,6 +34,16 @@ public class WaterBombCombo : MonoBehaviour
 
     void explode()
     {
+        //sound
+        SFXtoPlay = SFX[Random.Range(0, SFX.Length)];
+
+        if (SFXPlayer != null)
+        {
+            AudioSource source = SFXPlayer.GetComponent<AudioSource>();
+            source.clip = SFXtoPlay;
+        }
+        GameObject SFXtest = Instantiate(SFXPlayer, transform.position, transform.rotation) as GameObject;
+        //sound end
 
         Collider[] colliders = Physics.OverlapSphere(transform.position, m_ExplosionRadius);
 
