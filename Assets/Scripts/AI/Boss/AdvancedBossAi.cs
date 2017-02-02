@@ -56,10 +56,14 @@ public class AdvancedBossAi : MonoBehaviour
     //Torches for knowing how big the room is
     public Transform[] torches;
 
+    //Dashing bullshit
+    Transform m_DashTarget;
+    private Vector3 lookingDirection;
+
     // Use this for initialization
     void Start()
     {
-        state = states.shoot;
+        state = states.dash;
         currentState = state;
         m_Invincible = false;
         frame = 0;
@@ -76,10 +80,11 @@ public class AdvancedBossAi : MonoBehaviour
             ProjectilesArray[i].gameObject.SetActive(false);
         }
         //Debug errors
-        if(m_Projectile == null)
+        if (m_Projectile == null)
         {
             Debug.LogError("Boss projectile object not assigned to boss");
         }
+        //Torches for the boss so he knows where to teleport
         if (torches[0] == null) Debug.LogError("First Torch not assigned to boss");
         if (torches[1] == null) Debug.LogError("Second Torch not assigned to boss");
         if (torches[2] == null) Debug.LogError("Third Torch not assigned to boss");
@@ -93,9 +98,10 @@ public class AdvancedBossAi : MonoBehaviour
         {
             case states.idle: Idle(); break;
             case states.hurt: Hurt(m_DamageTaken, m_StunTime); break;
-            case states.teleport: Teleport(60, 60);break;
+            case states.teleport: Teleport(60, 60); break;
             //Attacks
             case states.shoot: BasicShoot(); break;
+            case states.dash: Dash(70, 10, 10); break;
         }
         //Manage frame
         frame++;
@@ -147,7 +153,7 @@ public class AdvancedBossAi : MonoBehaviour
 
         transform.LookAt(closestPlayer.transform.position);
         //Friction
-        Friction(m_Friction);
+        Friction(1f);
 
         //Choose attack
         if (frame > 60 * m_Difficulty)
@@ -235,11 +241,56 @@ public class AdvancedBossAi : MonoBehaviour
         #endregion//ALL THIS NEEDS TO CHANGE ONCE ANIMATIONS ARE IN
     }
     #region Attack states
+
+    void Dash(int windup, int active, int recover)
+    {
+        frame++;
+        m_Invincible = true;
+
+        if (frame == 2)
+        {
+            GameObject playerToTarget = GetTargetPlayer();
+            m_DashTarget = playerToTarget.transform;
+        }
+
+        //Windup
+        if (frame <= windup)
+        {
+            //Apply friction
+            Friction(2f);
+            //Look at target player
+
+            Vector3 targetPosition = m_DashTarget.position;
+            targetPosition = new Vector3(targetPosition.x, 0, targetPosition.z);
+            transform.LookAt(targetPosition);
+            lookingDirection = Vector3.Normalize(targetPosition - transform.position);
+
+        }
+        //Active
+        if (frame > windup && frame <= active + windup)
+        {
+            float chargeSpeed = 50;
+            m_Velocity = chargeSpeed * lookingDirection;
+
+        }
+        //Recover
+        if (frame > windup + active && frame <= windup + active + recover)
+        {
+            Friction(1f);
+        }
+        //Exit dash
+        if (frame > windup + active + recover)
+        {
+            m_Invincible = false;
+            state = states.idle;
+        }
+
+    }
     void BasicShoot()
     {
 
         //Get Player to shoot at and target where the player is going 
-        GameObject player = targetPlayer();
+        GameObject player = GetTargetPlayer();
         Vector3 pPosition = player.transform.position;
         float shootSpeed = 25f;
         Vector3 bv = (pPosition - transform.position).normalized * shootSpeed;
@@ -295,16 +346,34 @@ public class AdvancedBossAi : MonoBehaviour
 
             }
         }
-        if (frame > 60*m_Difficulty)
+        if (frame > 60 * m_Difficulty)
         {
             frame = 0;
         }
 
-
     }
-    void EarthQuake()
+    void EarthQuake(int windup, int recover)
     {
+        //windup
+        if(frame <= windup)
+        {
+            transform.Rotate(new Vector3(transform.rotation.x, transform.rotation.y - 10, transform.rotation.z));
+        }
+        //Shoot
+        if(frame == windup + 1)
+        {
+            Vector3 targetPosition = getClosestPlayer().transform.position;
+            //shoot everywhere
+            for (int i = 0; i < ProjectilesArray.Length; i++)
+            {
+            }
+        }
 
+        //recover
+        if(frame > windup + recover)
+        {
+
+        }
     }
 
     #endregion
@@ -312,7 +381,7 @@ public class AdvancedBossAi : MonoBehaviour
     #endregion
     void Teleport(int framesBeforeTP, int recoverFrames)
     {
-        if(frame == framesBeforeTP)
+        if (frame == framesBeforeTP)
         {
             Vector3 teleportTargetPosition = transform.position; //Set variable for target position
             int xdir = Random.Range(-1, 1);
@@ -342,18 +411,18 @@ public class AdvancedBossAi : MonoBehaviour
             transform.position = teleportTargetPosition;
         }
         //Recover
-        if(frame > framesBeforeTP && frame < recoverFrames + framesBeforeTP)
+        if (frame > framesBeforeTP && frame < recoverFrames + framesBeforeTP)
         {
             //transform.localRotation += 3;
         }
         //Change state
-        if(frame > recoverFrames + framesBeforeTP)
+        if (frame > recoverFrames + framesBeforeTP)
         {
             state = states.idle;
         }
 
     }
-    GameObject targetPlayer()
+    GameObject GetTargetPlayer()
     {
         //Right now this whole function is really basic but I'll make it more complicated later
         GameObject target;
@@ -364,6 +433,13 @@ public class AdvancedBossAi : MonoBehaviour
     } //This is where the decision making for the target player will happen
     states DecideAttack()
     {
+        int attackNumber = Random.Range(0, 3);
+        switch (attackNumber)
+        {
+            case 0: return states.dash;
+            case 1: return states.teleport;
+            case 2: return states.shoot;
+        }
         return states.shoot;
     }//Decision making for which attack to perform
     GameObject getClosestPlayer()
