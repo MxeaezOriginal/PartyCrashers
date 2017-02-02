@@ -25,8 +25,9 @@ public class MiniGameRewards : MonoBehaviour
 
     public bool firstButtonPressed, secondButtonPressed, thirdButtonPressed, fourthButtonPressed;
 
-    public int rewardsSelected = 0;
-    public int i;
+    public int rewardsSelected;
+
+    bool test;
 
     void Awake()
     {
@@ -52,14 +53,15 @@ public class MiniGameRewards : MonoBehaviour
         if (minigameManger.showRewardCanvas)
         {
             rewardCanvas.SetActive(true);
+            if (!test)
+            {
+                test = true;
+                es.SetSelectedGameObject(null); es.enabled = false; es.enabled = true; es.SetSelectedGameObject(rewardButtons[0].gameObject);
+            }
             SetupInput();
+            EndRewards();
+            //UpdateCurrentPlayer();
         }
-
-        if(rewardCanvas.active == true)
-        {
-            print("SSSSSSSSSS");
-        }
-        //UpdateCurrentPlayer();
     }
 
     void SetupInput()
@@ -70,98 +72,112 @@ public class MiniGameRewards : MonoBehaviour
             case 1:
                 sim.horizontalAxis = ("Horizontal_P1");
                 sim.verticalAxis = ("Vertical_P1");
+                sim.submitButton = ("Submit_P1");
                 break;
 
             //PLAYER 2
             case 2:
-                if (i == 0)                                          //FIRST BUTTON PRESS
+                if (rewardsSelected == 0)                                          //FIRST BUTTON PRESS
                 {
                     if (minigameManger.P1_place == 1)
                     {
                         sim.horizontalAxis = ("Horizontal_P1");
                         sim.verticalAxis = ("Vertical_P1");
+                        sim.submitButton = ("Submit_P1");
                     }
                     else if (minigameManger.P2_place == 1)
                     {
                         sim.horizontalAxis = ("Horizontal_P2");
                         sim.verticalAxis = ("Vertical_P2");
+                        sim.submitButton = ("Submit_P2");
                     }
                 }
-                else if (i == 1)                                    //SECOND BUTTON PRESS
+                else if (rewardsSelected == 1)                                    //SECOND BUTTON PRESS
                 {
                     if (minigameManger.P1_place == 2)
                     {
                         sim.horizontalAxis = ("Horizontal_P1");
                         sim.verticalAxis = ("Vertical_P1");
+                        sim.submitButton = ("Submit_P1");
                     }
                     else if (minigameManger.P2_place == 2)
                     {
                         sim.horizontalAxis = ("Horizontal_P2");
                         sim.verticalAxis = ("Vertical_P2");
+                        sim.submitButton = ("Submit_P2");
                     }
                 }
                 break;
 
             //PLAYER 3
             case 3:
-                if (i == 0)                                          //FIRST BUTTON PRESS
+                if (rewardsSelected == 0)                                          //FIRST BUTTON PRESS
                 {
                     if (minigameManger.P1_place == 1)
                     {
                         sim.horizontalAxis = ("Horizontal_P1");
                         sim.verticalAxis = ("Vertical_P1");
+                        sim.submitButton = ("Submit_P1");
                     }
                     else if (minigameManger.P2_place == 1)
                     {
                         sim.horizontalAxis = ("Horizontal_P2");
                         sim.verticalAxis = ("Vertical_P2");
+                        sim.submitButton = ("Submit_P2");
                     }
                     else if (minigameManger.P3_place == 1)
                     {
                         sim.horizontalAxis = ("Horizontal_P3");
                         sim.verticalAxis = ("Vertical_P3");
+                        sim.submitButton = ("Submit_P3");
                     }
                 }
-                else if (i == 1)                                    //SECOND BUTTON PRESS
+                else if (rewardsSelected == 1)                                    //SECOND BUTTON PRESS
                 {
                     if (minigameManger.P1_place == 2)
                     {
                         sim.horizontalAxis = ("Horizontal_P1");
                         sim.verticalAxis = ("Vertical_P1");
+                        sim.submitButton = ("Submit_P1");
                     }
                     else if (minigameManger.P2_place == 2)
                     {
                         sim.horizontalAxis = ("Horizontal_P2");
                         sim.verticalAxis = ("Vertical_P2");
+                        sim.submitButton = ("Submit_P2");
                     }
                     else if (minigameManger.P3_place == 2)
                     {
                         sim.horizontalAxis = ("Horizontal_P3");
                         sim.verticalAxis = ("Vertical_P3");
+                        sim.submitButton = ("Submit_P3");
                     }
                 }
-                else if (i == 2)                                    //THIRD BUTTON PRESS
+                else if (rewardsSelected == 2)                                    //THIRD BUTTON PRESS
                 {
                     if (minigameManger.P1_place == 3)
                     {
                         sim.horizontalAxis = ("Horizontal_P1");
                         sim.verticalAxis = ("Vertical_P1");
+                        sim.submitButton = ("Submit_P1");
                     }
                     else if (minigameManger.P2_place == 3)
                     {
                         sim.horizontalAxis = ("Horizontal_P2");
                         sim.verticalAxis = ("Vertical_P2");
+                        sim.submitButton = ("Submit_P2");
                     }
                     else if (minigameManger.P3_place == 3)
                     {
                         sim.horizontalAxis = ("Horizontal_P3");
                         sim.verticalAxis = ("Vertical_P3");
+                        sim.submitButton = ("Submit_P3");
                     }
                 }
                 break;
-            //PLAYER 3
+            //PLAYER 4
             case 4:
-                if (i == 0)                                          //FIRST BUTTON PRESS
+                if (rewardsSelected == 0)                                          //FIRST BUTTON PRESS
                 {
                     if (minigameManger.P1_place == 1)
                     {
@@ -184,7 +200,7 @@ public class MiniGameRewards : MonoBehaviour
                         sim.verticalAxis = ("Vertical_P4");
                     }
                 }
-                else if (i == 1)                                    //SECOND BUTTON PRESS
+                else if (rewardsSelected == 1)                                    //SECOND BUTTON PRESS
                 {
                     if (minigameManger.P1_place == 2)
                     {
@@ -208,7 +224,7 @@ public class MiniGameRewards : MonoBehaviour
                     }
 
                 }
-                else if (i == 2)                                    //THIRD BUTTON PRESS
+                else if (rewardsSelected == 2)                                    //THIRD BUTTON PRESS
                 {
                     if (minigameManger.P1_place == 3)
                     {
@@ -231,7 +247,7 @@ public class MiniGameRewards : MonoBehaviour
                         sim.verticalAxis = ("Vertical_P4");
                     }
                 }
-                else if (i == 3)                                    //FOURTH BUTTON PRESS
+                else if (rewardsSelected == 3)                                    //FOURTH BUTTON PRESS
                 {
                     if (minigameManger.P1_place == 4)
                     {
@@ -271,22 +287,13 @@ public class MiniGameRewards : MonoBehaviour
         //addReward(Rewards.Damage);
 
         if (!secondButtonPressed)
-        {
             es.SetSelectedGameObject(rewardButtons[1].gameObject);
-            i++;
-        }
+
         else if (!thirdButtonPressed)
-        {
             es.SetSelectedGameObject(rewardButtons[2].gameObject);
-            i++;
-        }
+
         else if (!fourthButtonPressed)
-        {
             es.SetSelectedGameObject(rewardButtons[3].gameObject);
-            i++;
-        }
-        else
-            print("FINISH");
     }
 
     //Hearts Button
@@ -299,22 +306,14 @@ public class MiniGameRewards : MonoBehaviour
         //addReward(Rewards.Hearts);
 
         if (!firstButtonPressed)
-        {
             es.SetSelectedGameObject(rewardButtons[0].gameObject);
-            i++;
-        }
+
         else if (!thirdButtonPressed)
-        {
             es.SetSelectedGameObject(rewardButtons[2].gameObject);
-            i++;
-        }
+
+
         else if (!fourthButtonPressed)
-        {
             es.SetSelectedGameObject(rewardButtons[3].gameObject);
-            i++;
-        }
-        else
-            print("FINISH");
     }
 
     //Attack Speed Button
@@ -327,22 +326,15 @@ public class MiniGameRewards : MonoBehaviour
         //addReward(Rewards.AttackSpeed);
 
         if (!firstButtonPressed)
-        {
             es.SetSelectedGameObject(rewardButtons[0].gameObject);
-            i++;
-        }
+
+
         else if (!secondButtonPressed)
-        {
             es.SetSelectedGameObject(rewardButtons[1].gameObject);
-            i++;
-        }
+
+
         else if (!fourthButtonPressed)
-        {
             es.SetSelectedGameObject(rewardButtons[3].gameObject);
-            i++;
-        }
-        else
-            print("FINISH");
     }
 
     //Movement Speed Button
@@ -355,35 +347,24 @@ public class MiniGameRewards : MonoBehaviour
         //addReward(Rewards.MovementSpeed);
 
         if (!firstButtonPressed)
-        {
             es.SetSelectedGameObject(rewardButtons[0].gameObject);
-            i++;
-        }
+
+
         else if (!secondButtonPressed)
-        {
             es.SetSelectedGameObject(rewardButtons[1].gameObject);
-            i++;
-        }
+
+
         else if (!thirdButtonPressed)
-        {
             es.SetSelectedGameObject(rewardButtons[2].gameObject);
-            i++;
-        }
-        else
-            print("FINISH");
     }
 
-    //public bool checkWhenToEndReward()
-    //{
-    //    if (rewardsSelected >= GameManager.m_Instance.m_NumOfPlayers)
-    //    {
-    //        return true;
-    //    }
-    //    else
-    //    {
-    //        return false;
-    //    }
-    //}
+    public void EndRewards()
+    {
+        if (rewardsSelected >= GameManager.m_Instance.m_NumOfPlayers)
+        {
+            minigameManger.rewardsSelected = true;
+        }
+    }
 
     ////!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!       TEMP.!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     //private void UpdateCurrentPlayer()
