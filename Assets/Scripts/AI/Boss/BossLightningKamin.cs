@@ -36,6 +36,8 @@ public class BossLightningKamin : MonoBehaviour
         {
             gameObject.SetActive(false);
         }
+
+        transform.position = new Vector3(transform.position.x, 5.4f, transform.position.z);
     }
 
     void OnCollisionEnter(Collision other)

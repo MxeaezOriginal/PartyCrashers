@@ -365,6 +365,7 @@ public class AdvancedBossAi : MonoBehaviour
                 {
                     LightningArray[i].SetActive(true);
                     LightningArray[i].transform.position = transform.position + (targetPosition - transform.position).normalized * 3;
+                    LightningArray[i].transform.position = new Vector3(LightningArray[i].transform.position.x, LightningArray[i].transform.position.y + 5.3f, LightningArray[i].transform.position.z);
                    
 
                     Vector3 direction = (new Vector3(targetPosition.x,0, targetPosition.z) - new Vector3(transform.position.x,0, transform.position.z).normalized);
