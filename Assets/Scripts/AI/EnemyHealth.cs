@@ -3,6 +3,10 @@ using System.Collections;
 
 public class EnemyHealth : MonoBehaviour
 {
+    //sound
+    public GameObject SFXPlayer;
+    public AudioClip[] SFX;
+    private AudioClip SFXtoPlay;
 
     public float m_EnemyHealth = 100f;
     public GameObject m_Drop;
@@ -34,6 +38,14 @@ public class EnemyHealth : MonoBehaviour
         }
         if (isInvincible == false)
         {
+            SFXtoPlay = SFX[Random.Range(0, SFX.Length)];
+
+            if (SFXPlayer != null)
+            {
+                AudioSource source = SFXPlayer.GetComponent<AudioSource>();
+                source.clip = SFXtoPlay;
+            }
+            GameObject SFXtest = Instantiate(SFXPlayer, transform.position, transform.rotation) as GameObject;
             m_EnemyHealth -= health;
         }
         if (m_EnemyHealth <= 0)
