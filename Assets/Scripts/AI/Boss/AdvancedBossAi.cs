@@ -15,7 +15,9 @@ public class AdvancedBossAi : MonoBehaviour
 
     //Projectile
     public GameObject m_Projectile;
+    public GameObject m_Lightning;
     private GameObject[] ProjectilesArray = { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null };
+    private GameObject[] LightningArray = { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null };
     public int m_BulletsToShoot = 5;
     private int m_NumberOfBullets;
 
@@ -81,10 +83,19 @@ public class AdvancedBossAi : MonoBehaviour
             ProjectilesArray[i] = (GameObject)Instantiate(m_Projectile, transform.position, transform.rotation);
             ProjectilesArray[i].gameObject.SetActive(false);
         }
+        for (int i = 0; i < LightningArray.Length; i++)
+        {
+            LightningArray[i] = (GameObject)Instantiate(m_Lightning, transform.position, transform.rotation);
+            LightningArray[i].gameObject.SetActive(false);
+        }
         //Debug errors
         if (m_Projectile == null)
         {
             Debug.LogError("Boss projectile object not assigned to boss");
+        }
+        if(m_Lightning == null)
+        {
+            Debug.LogError("Lightning object not assigned to boss");
         }
         //Torches for the boss so he knows where to teleport
         if (torches[0] == null) Debug.LogError("First Torch not assigned to boss");
@@ -295,7 +306,7 @@ public class AdvancedBossAi : MonoBehaviour
         //Get Player to shoot at and target where the player is going 
         GameObject player = GetTargetPlayer();
         Vector3 pPosition = player.transform.position;
-        float shootSpeed = 25f;
+        float shootSpeed = 15;
         Vector3 bv = (pPosition - transform.position).normalized * shootSpeed;
         float distance = Vector3.Magnitude(pPosition - transform.position);
 
@@ -335,15 +346,15 @@ public class AdvancedBossAi : MonoBehaviour
         if (frame == 2)
         {
             m_BulletsToShoot -= 1; //Subtract number of bullets to shoot
-            for (int i = 0; i < ProjectilesArray.Length; i++)
+            for (int i = 0; i < LightningArray.Length; i++)
             {
-                if (ProjectilesArray[i].active == false)
+                if (LightningArray[i].active == false)
                 {
-                    ProjectilesArray[i].SetActive(true);
-                    ProjectilesArray[i].transform.position = transform.position + (targetPosition - transform.position).normalized * 3;
+                    LightningArray[i].SetActive(true);
+                    LightningArray[i].transform.position = transform.position + (targetPosition - transform.position).normalized * 3;
 
                     Vector3 projectileVelocity = (targetPosition - transform.position).normalized * shootSpeed;
-                    BossProjectileKamin script = ProjectilesArray[i].GetComponent<BossProjectileKamin>();
+                    BossLightningKamin script = LightningArray[i].GetComponent<BossLightningKamin>();
                     script.m_ProjectileVelocity = projectileVelocity;
                     break;
                 }
@@ -381,7 +392,7 @@ public class AdvancedBossAi : MonoBehaviour
             for (int i = 0; i < ProjectilesArray.Length; i++)
             {
                 //Get the angle to point at
-                pointVectorAngle = Quaternion.AngleAxis(-360/ProjectilesArray.Length, Vector3.up) * pointVectorAngle;
+                pointVectorAngle = Quaternion.AngleAxis(-360/40, Vector3.up) * pointVectorAngle;
 
                 //Set projectile active
                 ProjectilesArray[i].SetActive(true);
