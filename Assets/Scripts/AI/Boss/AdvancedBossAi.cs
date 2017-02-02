@@ -15,13 +15,9 @@ public class AdvancedBossAi : MonoBehaviour
 
     //Projectile
     public GameObject m_Projectile;
-<<<<<<< HEAD
     private GameObject[] ProjectilesArray = { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null };
     public int m_BulletsToShoot = 5;
-=======
-    private GameObject[] ProjectilesArray = { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null };
     private int m_NumberOfBullets;
->>>>>>> origin/master
 
     //Frame
     private int frame;
