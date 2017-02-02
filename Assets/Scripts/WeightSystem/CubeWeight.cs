@@ -14,6 +14,7 @@ public class CubeWeight : MonoBehaviour {
         m_player = GameManager.m_Instance.m_Players;
         rb = GetComponent<Rigidbody>();
         rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+        rb.isKinematic = true;
     }
 	
 	// Update is called once per frame
@@ -25,8 +26,17 @@ public class CubeWeight : MonoBehaviour {
             {
                 if(m_recentNum >= (m_maxNum * 2))
                 {
-                    rb.AddForce((transform.position - m_player[i].transform.position) * m_speed);
-                }              
+                    rb.isKinematic = false;
+                    if(!rb.isKinematic)
+                    {
+                        rb.AddForce((transform.position - m_player[i].transform.position) * m_speed);
+                    }
+                }            
+                
+                else
+                {
+                    rb.isKinematic = true;
+                }  
             }
         }
 	}
