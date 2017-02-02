@@ -3,43 +3,64 @@ using System.Collections;
 
 public class Lancher : MonoBehaviour
 {
-    public float m_FireIntervalMin = 5;
-    public float m_FireIntervalMax = 10;
+    public float m_Period1FireIntervalMin = 1;
+    public float m_Period1FireIntervalMax = 20;
+    public float m_Period1BlueSpeed = 1;
+    public float m_Period1GoldSpeed = 1;
+    public float m_Period1BlackSpeed = 1;
+    public float m_Period1EndTime = 15f;
+    public float m_Period2FireIntervalMin = 5;
+    public float m_Period2FireIntervalMax = 10;
+    public float m_Period2BlueSpeed = 5;
+    public float m_Period2GoldSpeed = 5;
+    public float m_Period2BlackSpeed = 5;
+    public float m_Period2EndTime = 30f;
+    public float m_Period3FireIntervalMin = 3;
+    public float m_Period3FireIntervalMax = 8;
+    public float m_Period3BlueSpeed = 10;
+    public float m_Period3GoldSpeed = 10;
+    public float m_Period3BlackSpeed = 10;
     public GameObject m_VasePrefeb;
     public GameObject m_VasePrefeb1;
     public GameObject m_VasePrefeb2;
     public Transform m_ShotPos;
     private float m_LastShotTime;
     private int m_ramdom;
-    //public int m_GoldPer = 20;
-    //public int m_BlackPer = 20;
+    private int m_BluePercentage;
+    public int m_GoldPercentage = 20;
+    public int m_BlackPercentage = 20;
     private float m_Timer;
 
+    private float m_FireIntervalMin;
+    private float m_FireIntervalMax;
     private bool m_Activated;
     private int m_LauncherRandom;
     private int m_LauncherPer;
-    public int LanuncherPercentage = 60;
+    //public int LauncherPercentage = 60;
     // Use this for initialization
     void Start()
     {
         m_LastShotTime = Time.time;
         m_Timer = 0f;
         m_Activated = false;
+        m_FireIntervalMin = m_Period1FireIntervalMin;
+        m_FireIntervalMax = m_Period1FireIntervalMax;
+        m_BluePercentage = 100 - m_GoldPercentage - m_BlackPercentage;
     }
 
     // Update is called once per frame
     void Update()
     {
         m_Timer += Time.deltaTime;
-        if (m_Timer >= 10 && m_Timer < 20)
+        if (m_Timer >= m_Period1EndTime && m_Timer < m_Period2EndTime)
         {
-            m_FireIntervalMin = 3;
-            m_FireIntervalMax = 8;
+            m_FireIntervalMin = m_Period2FireIntervalMin;
+            m_FireIntervalMax = m_Period2FireIntervalMax;
         }
-        if (m_Timer >= 20/* && m_Timer < 30*/)
+        if (m_Timer >= m_Period2EndTime/* && m_Timer < 30*/)
         {
-            m_FireIntervalMin = 1;
-            m_FireIntervalMax = 5;
+            m_FireIntervalMin = m_Period3FireIntervalMin;
+            m_FireIntervalMax = m_Period3FireIntervalMax;
         }
         //if (m_Timer >= 30)
         //{
@@ -51,7 +72,7 @@ public class Lancher : MonoBehaviour
         // Still need to test to get best values for m_FireIntervalMin and m_FireIntervalMax
         // method 1: Launcher or not
         m_LauncherRandom = Random.Range(0, 2);
-        if(m_LauncherRandom == 0)
+        if (m_LauncherRandom == 0)
         {
             m_Activated = true;
         }
@@ -71,60 +92,79 @@ public class Lancher : MonoBehaviour
         //}
 
         // Shoot!
-        if (canShoot && m_Activated)
+        if (canShoot /*&& m_Activated*/)
         {
-            if (m_VasePrefeb != null && m_VasePrefeb1 != null && m_VasePrefeb2 != null)
+            m_LastShotTime = Time.time;
+            if (m_Activated)
             {
-                if (m_ShotPos != null)
+                if (m_VasePrefeb != null && m_VasePrefeb1 != null && m_VasePrefeb2 != null)
                 {
-                    m_ramdom = Random.Range(0, 100);
-                    if (m_ramdom >= 0 && m_ramdom < 60)
+                    if (m_ShotPos != null)
                     {
-                        GameObject shot = Instantiate(m_VasePrefeb, m_ShotPos.position, m_ShotPos.rotation) as GameObject;
-                        if (m_Timer >= 10 && m_Timer < 20)
+                        m_ramdom = Random.Range(0, 100);
+                        if (m_ramdom >= 0 && m_ramdom < m_BluePercentage)
                         {
-                            shot.GetComponent<VaseSpeed>().velocity = 10;
+                            // Blue Vase
+                            GameObject shot = Instantiate(m_VasePrefeb, m_ShotPos.position, m_ShotPos.rotation) as GameObject;
+                            if (m_Timer < m_Period1EndTime)
+                            {
+                                shot.GetComponent<VaseSpeed>().velocity = m_Period1BlueSpeed;
+                            }
+                            if (m_Timer >= m_Period1EndTime && m_Timer < m_Period2EndTime)
+                            {
+                                shot.GetComponent<VaseSpeed>().velocity = m_Period2BlueSpeed;
+                            }
+                            if (m_Timer >= m_Period2EndTime /*&& m_Timer < 30*/)
+                            {
+                                shot.GetComponent<VaseSpeed>().velocity = m_Period3BlueSpeed;
+                            }
+                            //if (m_Timer >= 30)
+                            //{
+                            //    // game end
+                            //}
                         }
-                        if (m_Timer >= 20 /*&& m_Timer < 30*/)
+                        if (m_ramdom >= m_BluePercentage && m_ramdom < (m_BluePercentage + m_GoldPercentage))
                         {
-                            shot.GetComponent<VaseSpeed>().velocity = 15;
+                            // Gold Vase
+                            GameObject shot = Instantiate(m_VasePrefeb1, m_ShotPos.position, m_ShotPos.rotation) as GameObject;
+                            if (m_Timer < m_Period1EndTime)
+                            {
+                                shot.GetComponent<VaseSpeed>().velocity = m_Period1GoldSpeed;
+                            }
+                            if (m_Timer >= m_Period1EndTime && m_Timer < m_Period2EndTime)
+                            {
+                                shot.GetComponent<VaseSpeed>().velocity = m_Period2GoldSpeed;
+                            }
+                            if (m_Timer >= m_Period2EndTime /*&& m_Timer < 30*/)
+                            {
+                                shot.GetComponent<VaseSpeed>().velocity = m_Period3GoldSpeed;
+                            }
+                            //if (m_Timer >= 30)
+                            //{
+                            //    // game end
+                            //}
                         }
-                        //if (m_Timer >= 30)
-                        //{
-                        //    // game end
-                        //}
-                    }
-                    if (m_ramdom >= 60 && m_ramdom < 80)
-                    {
-                        GameObject shot = Instantiate(m_VasePrefeb1, m_ShotPos.position, m_ShotPos.rotation) as GameObject;
-                        if (m_Timer >= 10 && m_Timer < 20)
+                        if (m_ramdom >= (m_BluePercentage + m_GoldPercentage) && m_ramdom <= 100)
                         {
-                            shot.GetComponent<VaseSpeed>().velocity = 10;
+                            // Black Vase
+                            GameObject shot = Instantiate(m_VasePrefeb2, m_ShotPos.position, m_ShotPos.rotation) as GameObject;
+                            if (m_Timer < m_Period1EndTime)
+                            {
+                                shot.GetComponent<VaseSpeed>().velocity = m_Period1BlackSpeed;
+                            }
+                            if (m_Timer >= m_Period1EndTime && m_Timer < m_Period2EndTime)
+                            {
+                                shot.GetComponent<VaseSpeed>().velocity = m_Period2BlackSpeed;
+                            }
+                            if (m_Timer >= m_Period2EndTime /*&& m_Timer < 30*/)
+                            {
+                                shot.GetComponent<VaseSpeed>().velocity = m_Period3BlackSpeed;
+                            }
+                            //if (m_Timer >= 30)
+                            //{
+                            //    // game end
+                            //}
                         }
-                        if (m_Timer >= 20 /*&& m_Timer < 30*/)
-                        {
-                            shot.GetComponent<VaseSpeed>().velocity = 15;
-                        }
-                        //if (m_Timer >= 30)
-                        //{
-                        //    // game end
-                        //}
-                    }
-                    if (m_ramdom >= 80 && m_ramdom <= 100)
-                    {
-                        GameObject shot = Instantiate(m_VasePrefeb2, m_ShotPos.position, m_ShotPos.rotation) as GameObject;
-                        if (m_Timer >= 10 && m_Timer < 20)
-                        {
-                            shot.GetComponent<VaseSpeed>().velocity = 10;
-                        }
-                        if (m_Timer >= 20 /*&& m_Timer < 30*/)
-                        {
-                            shot.GetComponent<VaseSpeed>().velocity = 15;
-                        }
-                        //if (m_Timer >= 30)
-                        //{
-                        //    // game end
-                        //}
                     }
                 }
                 //else
@@ -134,8 +174,8 @@ public class Lancher : MonoBehaviour
                 //    shot.transform.forward = transform.forward;
                 //    shot.transform.up = transform.up;
                 //}
-                m_LastShotTime = Time.time;
             }
         }
     }
 }
+
