@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
 
     public float m_MaxMovementX = 14f;
     public float m_MaxMovementZ = 18f;
+    public float m_MaxY = 5f;
 
     public string m_JumpButton = "Jump_";
     public string m_HorizontalButton = "Horizontal_";
@@ -40,6 +41,7 @@ public class PlayerController : MonoBehaviour
 
     private bool m_StopMovementX = false;
     private bool m_StopMovementZ = false;
+    private bool m_ZoomY = false;
 
     private float m_RotateAngle;
 
@@ -262,6 +264,12 @@ public class PlayerController : MonoBehaviour
             //    m_Velocity = KnockBackDirection.normalized * KnockBackDis;
             //}
         }
+        if (other.gameObject.CompareTag("Projectile"))
+        {
+            KnockBackDirection = transform.position - other.transform.position;
+            KnockBack = transform.position + KnockBackDirection;
+            m_Velocity = KnockBackDirection.normalized * other.GetComponent<BaseLevelProjectile>().m_KnockBack;
+        }
     }
 
 
@@ -277,6 +285,7 @@ public class PlayerController : MonoBehaviour
     {
         float x = -1;
         float z = -1;
+        float y = -1;
 
         GameObject otherPlayerX = null;
         GameObject otherPlayerZ = null;
@@ -294,6 +303,11 @@ public class PlayerController : MonoBehaviour
             {
                 z = Mathf.Abs(transform.position.z - GameManager.m_Instance.m_Players[i].transform.position.z);
                 otherPlayerZ = GameManager.m_Instance.m_Players[i];
+            }
+
+            if (Mathf.Abs(transform.position.y - GameManager.m_Instance.m_Players[i].transform.position.y) > y)
+            {
+                y = Mathf.Abs(transform.position.y - GameManager.m_Instance.m_Players[i].transform.position.y);
             }
         }
 
@@ -314,6 +328,15 @@ public class PlayerController : MonoBehaviour
             m_StopMovementX = false;
         }
 
+        if(y >= m_MaxY)
+        {
+            m_ZoomY = true;
+        }
+        else
+        {
+            m_ZoomY = false;
+        }
+
         if (z >= m_MaxMovementZ)
         {
             m_StopMovementZ = true;
@@ -331,23 +354,31 @@ public class PlayerController : MonoBehaviour
             m_StopMovementZ = false;
         }
 
+        float tempZoom = 0.0f;
+
         if (m_StopMovementX == true && m_StopMovementZ == true)
         {
-            m_CameraController.m_Zoom = ((x + z) - (m_MaxMovementX + m_MaxMovementZ)) / m_CameraController.m_ZoomAmount;
+            tempZoom = ((x + z) - (m_MaxMovementX + m_MaxMovementZ)) / m_CameraController.m_ZoomAmount;
         }
         else if (m_StopMovementX == true && m_StopMovementZ == false)
         {
-            m_CameraController.m_Zoom = (x - m_MaxMovementX) / m_CameraController.m_ZoomAmount;
+            tempZoom = (x - m_MaxMovementX) / m_CameraController.m_ZoomAmount;
         }
         else if (m_StopMovementX == false && m_StopMovementZ == true)
         {
-            m_CameraController.m_Zoom = (z - m_MaxMovementZ) / m_CameraController.m_ZoomAmount;
+            tempZoom = (z - m_MaxMovementZ) / m_CameraController.m_ZoomAmount;
         }
         else
         {
             // Thiago - 12.04.2016 - commented the line down below since it was breaking the game. We have to fix it later. This is just a temporary solution
             //m_CameraController.m_Zoom = 0;
         }
+        if(m_ZoomY == true)
+        {
+            tempZoom = Mathf.Lerp(tempZoom, tempZoom +((y - m_MaxY) * 4f) / m_CameraController.m_ZoomAmount, 2f);
+        }
+
+        m_CameraController.m_Zoom = tempZoom;
         //Camera.main.gameObject.GetComponent<CameraController>().m_Zoom = Camera.main.gameObject.GetComponent<CameraController>().m_Zoom / Camera.main.gameObject.GetComponent<CameraController>().m_ZoomAmount;
     }
 

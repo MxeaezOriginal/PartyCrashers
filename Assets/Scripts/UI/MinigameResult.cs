@@ -58,11 +58,7 @@ public class MinigameResult : MonoBehaviour
     void Update()
     {
         if (minigameManager.showResultBar)
-        {
-            GameManager.m_Instance.m_GameState = GameManager.GameState.Dungeon;
-            SceneManager.LoadScene(GameManager.m_Instance.m_Tutorial.ToString());
-        }
-            //SortingScores();
+            SortingScores();
 
         SetPlayerPlace();
     }

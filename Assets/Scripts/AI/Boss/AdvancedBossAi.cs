@@ -27,11 +27,12 @@ public class AdvancedBossAi : MonoBehaviour
     //States
     enum states
     {
+        //Miscellaneous States
         idle,
         hurt,
         dead,
         teleport,
-        //Attacks
+        //Attack states
         dash,
         earthquake,
         shoot,
@@ -191,6 +192,7 @@ public class AdvancedBossAi : MonoBehaviour
         {
             state = states.idle;
         }
+        transform.Rotate(transform.rotation.x + Random.Range(0f, 120f), transform.rotation.y + Random.Range(0f, 120f), transform.rotation.z + Random.Range(0f, 120f));
 
     }
     void OnTriggerExit(Collider other)
@@ -202,7 +204,9 @@ public class AdvancedBossAi : MonoBehaviour
             attacked = false;
         }
     }
-    public void OnTriggerStay(Collider other) //Get CHANGE THIS ONCE ANIMATIONS ARE IN
+
+    //CHANGE THIS ONCE ANIMATIONS ARE IN    FUUUUUUCCKK
+    public void OnTriggerStay(Collider other) 
     {
         if (!m_Invincible)
         {
@@ -225,6 +229,11 @@ public class AdvancedBossAi : MonoBehaviour
                             dmg = attacker.m_Damage;
                             knockBack = 10f;
                             stun = 10f;
+
+                            m_Velocity = knockBack * Vector3.Normalize(transform.position - other.transform.position);
+                            m_Health -= dmg;
+                            m_StunTime = stun;
+                            state = states.hurt;
                         }
                         else
                         {
@@ -252,10 +261,6 @@ public class AdvancedBossAi : MonoBehaviour
                 //float knockBack = attackerEffect.m_KnockBack; //These two is how this code is supposed to work but for whatever reason it's not getting these or the values just don't exist
                 //float stun = attackerEffect.m_StunTime;
 
-                m_Velocity = knockBack * Vector3.Normalize(transform.position - other.transform.position);
-                m_Health -= dmg;
-                m_StunTime = stun;
-                state = states.hurt;
             }
         }
         #endregion//ALL THIS NEEDS TO CHANGE ONCE ANIMATIONS ARE IN
