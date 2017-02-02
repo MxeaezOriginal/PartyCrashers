@@ -3,6 +3,13 @@ using System.Collections;
 
 public class FizzPopPickup : MonoBehaviour {
 
+
+    //sound
+    public GameObject SFXPlayer;
+    public AudioClip[] SFX;
+    private AudioClip SFXtoPlay;
+
+
     public float speed;
     public Rigidbody rb;
     public int m_HealValue = 0;
@@ -34,6 +41,19 @@ public class FizzPopPickup : MonoBehaviour {
             m_HeartSystem = other.GetComponent<HeartSystem>();
             m_HeartSystem.Heal(m_HealValue);
             m_HeartSystem.UpdateHearts();
+
+            //sound
+            SFXtoPlay = SFX[Random.Range(0, SFX.Length)];
+
+            if (SFXPlayer != null)
+            {
+                AudioSource source = SFXPlayer.GetComponent<AudioSource>();
+                source.clip = SFXtoPlay;
+            }
+            GameObject SFXtest = Instantiate(SFXPlayer, transform.position, transform.rotation) as GameObject;
+            //sound end
+
+
             gameObject.SetActive(false);
         }
     }

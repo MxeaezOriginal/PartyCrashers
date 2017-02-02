@@ -1,7 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class FizzPopMaxPickup : MonoBehaviour {
+public class FizzPopMaxPickup : MonoBehaviour
+{
+
+
+    //sound
+    public GameObject SFXPlayer;
+    public AudioClip[] SFX;
+    private AudioClip SFXtoPlay; 
 
     public float speed;
     public Rigidbody rb;
@@ -34,6 +41,16 @@ public class FizzPopMaxPickup : MonoBehaviour {
             m_HeartSystem = other.GetComponent<HeartSystem>();
             m_HeartSystem.AddHeart();
             m_HeartSystem.UpdateHearts();
+            //sound
+            SFXtoPlay = SFX[Random.Range(0, SFX.Length)];
+
+            if (SFXPlayer != null)
+            {
+                AudioSource source = SFXPlayer.GetComponent<AudioSource>();
+                source.clip = SFXtoPlay;
+            }
+            GameObject SFXtest = Instantiate(SFXPlayer, transform.position, transform.rotation) as GameObject;
+            //sound end
             gameObject.SetActive(false);
         }
     }
