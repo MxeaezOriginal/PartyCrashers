@@ -14,12 +14,12 @@ public class MiniGameRewards : MonoBehaviour
     }
 
     MinigameManager minigameManger;
+    public GameObject rewardCanvas;
 
     EventSystem es;
     StandaloneInputModule sim;
     GameObject currentlySelectedButton;
 
-    public Canvas rewardCanvas;
     public Button[] rewardButtons;
     public Text rewardTitle;
 
@@ -30,10 +30,11 @@ public class MiniGameRewards : MonoBehaviour
 
     void Awake()
     {
+        rewardCanvas = GameObject.Find("Reward Canvas");
+
         es = GameObject.Find("EventSystem").GetComponent<EventSystem>();
         sim = GameObject.Find("EventSystem").GetComponent<StandaloneInputModule>();
         minigameManger = GetComponent<MinigameManager>();
-        rewardCanvas = GameObject.Find("Reward Canvas").GetComponent<Canvas>();
 
         rewardButtons[0] = GameObject.Find("First Reward Button").GetComponent<Button>();   //Damage
         rewardButtons[1] = GameObject.Find("Second Reward Button").GetComponent<Button>();  //Hearts
@@ -41,13 +42,23 @@ public class MiniGameRewards : MonoBehaviour
         rewardButtons[3] = GameObject.Find("Fourth Reward Button").GetComponent<Button>();  //Movement Speed
 
         rewardTitle = GameObject.Find("Pick Reward").GetComponent<Text>();
+
+        rewardCanvas.SetActive(false);
     }
 
     void Update()
     {
         //Enables Canvas component; NOT GAMEOBJECT!
-        //if (minigameManger.showRewardCanvas)
-        //    SetupInput();
+        if (minigameManger.showRewardCanvas)
+        {
+            rewardCanvas.SetActive(true);
+            SetupInput();
+        }
+
+        if(rewardCanvas.active == true)
+        {
+            print("SSSSSSSSSS");
+        }
         //UpdateCurrentPlayer();
     }
 
