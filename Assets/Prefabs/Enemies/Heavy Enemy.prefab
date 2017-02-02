@@ -45,6 +45,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 486448}
   - 33: {fileID: 3359822}
+  - 65: {fileID: 6572942}
   - 23: {fileID: 2381156}
   m_Layer: 0
   m_Name: Cube
@@ -83,9 +84,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 193810}
   m_LocalRotation: {x: 0, y: 0.7071077, z: 0, w: 0.7071059}
-  m_LocalPosition: {x: 45.440025, y: 1.04, z: 58.70583}
+  m_LocalPosition: {x: -70.57, y: 1.0144637, z: 48.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 90.0001, z: 0}
   m_Children:
   - {fileID: 486448}
   - {fileID: 22414270}
@@ -98,9 +98,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 169914}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: -0.611}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0.97}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 452322}
   m_RootOrder: 0
@@ -170,6 +169,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 193810}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &6572942
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 169914}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &11407834
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -244,7 +255,6 @@ MonoBehaviour:
   m_LastMoveTime: 0
   RotationSpeed: 1
   m_Damage: 1
-  takeHitEffect: {fileID: 0}
 --- !u!114 &11442814
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -381,7 +391,6 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0.0000018338349, z: 0, w: -1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.0088245, y: 0.06479796, z: 1.0088246}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 22465686}
   m_Father: {fileID: 452322}
@@ -400,7 +409,6 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.9469062, y: 1.6788018, z: 1.8478999}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 22414270}
   m_RootOrder: 0
