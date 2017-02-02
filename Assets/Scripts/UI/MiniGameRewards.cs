@@ -47,22 +47,17 @@ public class MiniGameRewards : MonoBehaviour
     {
         //Enables Canvas component; NOT GAMEOBJECT!
         if (minigameManger.showRewardCanvas)
-            rewardCanvas.enabled = true;
 
         SetupInput();
-        UpdateCurrentPlayer();
-
-        print(es.currentSelectedGameObject);
+        //UpdateCurrentPlayer();
     }
 
     void SetupInput()
-    {
-
+    { 
         switch (GameManager.m_Instance.m_NumOfPlayers)
         {
             //PLAYER 1
             case 1:
-                es.SetSelectedGameObject(rewardButtons[0].gameObject);
                 sim.horizontalAxis = ("Horizontal_P1");
                 sim.verticalAxis = ("Vertical_P1");
                 break;
@@ -71,7 +66,6 @@ public class MiniGameRewards : MonoBehaviour
             case 2:
                 if (i == 0)                                          //FIRST BUTTON PRESS
                 {
-                    es.SetSelectedGameObject(rewardButtons[0].gameObject);
                     if (minigameManger.P1_place == 1)
                     {
                         sim.horizontalAxis = ("Horizontal_P1");
@@ -85,7 +79,6 @@ public class MiniGameRewards : MonoBehaviour
                 }
                 else if (i == 1)                                    //SECOND BUTTON PRESS
                 {
-                    es.SetSelectedGameObject(rewardButtons[0].gameObject);
                     if (minigameManger.P1_place == 2)
                     {
                         sim.horizontalAxis = ("Horizontal_P1");
@@ -265,7 +258,7 @@ public class MiniGameRewards : MonoBehaviour
         firstButtonPressed = true;
         ++rewardsSelected;
 
-        addReward(Rewards.Damage);
+        //addReward(Rewards.Damage);
 
         if (!secondButtonPressed)
         {
@@ -293,7 +286,7 @@ public class MiniGameRewards : MonoBehaviour
         secondButtonPressed = true;
         ++rewardsSelected;
 
-        addReward(Rewards.Hearts);
+        //addReward(Rewards.Hearts);
 
         if (!firstButtonPressed)
         {
@@ -321,7 +314,7 @@ public class MiniGameRewards : MonoBehaviour
         thirdButtonPressed = true;
         ++rewardsSelected;
 
-        addReward(Rewards.AttackSpeed);
+        //addReward(Rewards.AttackSpeed);
 
         if (!firstButtonPressed)
         {
@@ -349,7 +342,7 @@ public class MiniGameRewards : MonoBehaviour
         fourthButtonPressed = true;
         ++rewardsSelected;
 
-        addReward(Rewards.MovementSpeed);
+        //addReward(Rewards.MovementSpeed);
 
         if (!firstButtonPressed)
         {
@@ -370,140 +363,140 @@ public class MiniGameRewards : MonoBehaviour
             print("FINISH");
     }
 
-    public bool checkWhenToEndReward()
-    {
-        if (rewardsSelected >= GameManager.m_Instance.m_NumOfPlayers)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
+    //public bool checkWhenToEndReward()
+    //{
+    //    if (rewardsSelected >= GameManager.m_Instance.m_NumOfPlayers)
+    //    {
+    //        return true;
+    //    }
+    //    else
+    //    {
+    //        return false;
+    //    }
+    //}
 
-    //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!       TEMP.!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    private void UpdateCurrentPlayer()
-    {
-        switch (rewardsSelected)
-        {
-            case 1:
-                rewardTitle.text = "Pick your reward: Player " + minigameManger.P1_place;
-                break;
-            case 2:
-                rewardTitle.text = "Pick your reward: Player " + minigameManger.P2_place;
-                break;
-            case 3:
-                rewardTitle.text = "Pick your reward: Player " + minigameManger.P3_place;
-                break;
-            case 4:
-                rewardTitle.text = "Pick your reward: Player " + minigameManger.P4_place;
-                break;
-            default:
-                rewardTitle.text = "Pick your reward: Player 1";
-                break;
-        }
-    }
-    ///!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    ////!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!       TEMP.!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    //private void UpdateCurrentPlayer()
+    //{
+    //    switch (rewardsSelected)
+    //    {
+    //        case 1:
+    //            rewardTitle.text = "Pick your reward: Player " + minigameManger.P1_place;
+    //            break;
+    //        case 2:
+    //            rewardTitle.text = "Pick your reward: Player " + minigameManger.P2_place;
+    //            break;
+    //        case 3:
+    //            rewardTitle.text = "Pick your reward: Player " + minigameManger.P3_place;
+    //            break;
+    //        case 4:
+    //            rewardTitle.text = "Pick your reward: Player " + minigameManger.P4_place;
+    //            break;
+    //        default:
+    //            rewardTitle.text = "Pick your reward: Player 1";
+    //            break;
+    //    }
+    //}
+    /////!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-    private Player.PLAYER getWhosPicking()
-    {
-        switch (rewardsSelected)
-        {
-            case 1:
-                return (Player.PLAYER)System.Enum.Parse(typeof(Player.PLAYER), "P" + minigameManger.P1_place);
-            case 2:
-                return (Player.PLAYER)System.Enum.Parse(typeof(Player.PLAYER), "P" + minigameManger.P2_place);
-            case 3:
-                return (Player.PLAYER)System.Enum.Parse(typeof(Player.PLAYER), "P" + minigameManger.P3_place);
-            case 4:
-                return (Player.PLAYER)System.Enum.Parse(typeof(Player.PLAYER), "P" + minigameManger.P4_place);
-            default:
-                return (Player.PLAYER)System.Enum.Parse(typeof(Player.PLAYER), "P" + minigameManger.P1_place);
-        }
-    }
+    //private Player.PLAYER getWhosPicking()
+    //{
+    //    switch (rewardsSelected)
+    //    {
+    //        case 1:
+    //            return (Player.PLAYER)System.Enum.Parse(typeof(Player.PLAYER), "P" + minigameManger.P1_place);
+    //        case 2:
+    //            return (Player.PLAYER)System.Enum.Parse(typeof(Player.PLAYER), "P" + minigameManger.P2_place);
+    //        case 3:
+    //            return (Player.PLAYER)System.Enum.Parse(typeof(Player.PLAYER), "P" + minigameManger.P3_place);
+    //        case 4:
+    //            return (Player.PLAYER)System.Enum.Parse(typeof(Player.PLAYER), "P" + minigameManger.P4_place);
+    //        default:
+    //            return (Player.PLAYER)System.Enum.Parse(typeof(Player.PLAYER), "P" + minigameManger.P1_place);
+    //    }
+    //}
 
-    private void addReward(Rewards reward)
-    {
-        if (reward == Rewards.Damage)
-        {
-            if (getWhosPicking() == Player.PLAYER.P1)
-            {
-                GameManager.m_Instance.m_Player1.damage++;
-                Debug.Log("P1 damage up");
-            }
-            else if (getWhosPicking() == Player.PLAYER.P2)
-            {
-                GameManager.m_Instance.m_Player2.damage++;
-                Debug.Log("P2 damage up");
-            }
-            else if (getWhosPicking() == Player.PLAYER.P3)
-            {
-                GameManager.m_Instance.m_Player3.damage++;
-                Debug.Log("P3 damage up");
-            }
-            else if (getWhosPicking() == Player.PLAYER.P4)
-            {
-                GameManager.m_Instance.m_Player4.damage++;
-                Debug.Log("P4 damage up");
-            }
-        }
-        if (reward == Rewards.Hearts)
-        {
-            if (getWhosPicking() == Player.PLAYER.P1)
-            {
-                GameManager.m_Instance.m_Player1.heartUpgrades++;
-            }
-            else if (getWhosPicking() == Player.PLAYER.P2)
-            {
-                GameManager.m_Instance.m_Player2.heartUpgrades++;
-            }
-            else if (getWhosPicking() == Player.PLAYER.P3)
-            {
-                GameManager.m_Instance.m_Player3.heartUpgrades++;
-            }
-            else if (getWhosPicking() == Player.PLAYER.P4)
-            {
-                GameManager.m_Instance.m_Player4.heartUpgrades++;
-            }
-        }
-        if (reward == Rewards.AttackSpeed)
-        {
-            if (getWhosPicking() == Player.PLAYER.P1)
-            {
-                GameManager.m_Instance.m_Player1.attackSpeed++;
-            }
-            else if (getWhosPicking() == Player.PLAYER.P2)
-            {
-                GameManager.m_Instance.m_Player2.attackSpeed++;
-            }
-            else if (getWhosPicking() == Player.PLAYER.P3)
-            {
-                GameManager.m_Instance.m_Player3.attackSpeed++;
-            }
-            else if (getWhosPicking() == Player.PLAYER.P4)
-            {
-                GameManager.m_Instance.m_Player4.attackSpeed++;
-            }
-        }
-        if (reward == Rewards.MovementSpeed)
-        {
-            if (getWhosPicking() == Player.PLAYER.P1)
-            {
-                GameManager.m_Instance.m_Player1.movementSpeed++;
-            }
-            else if (getWhosPicking() == Player.PLAYER.P2)
-            {
-                GameManager.m_Instance.m_Player2.movementSpeed++;
-            }
-            else if (getWhosPicking() == Player.PLAYER.P3)
-            {
-                GameManager.m_Instance.m_Player3.movementSpeed++;
-            }
-            else if (getWhosPicking() == Player.PLAYER.P4)
-            {
-                GameManager.m_Instance.m_Player4.movementSpeed++;
-            }
-        }
-    }
+    //private void addReward(Rewards reward)
+    //{
+    //    if (reward == Rewards.Damage)
+    //    {
+    //        if (getWhosPicking() == Player.PLAYER.P1)
+    //        {
+    //            GameManager.m_Instance.m_Player1.damage++;
+    //            Debug.Log("P1 damage up");
+    //        }
+    //        else if (getWhosPicking() == Player.PLAYER.P2)
+    //        {
+    //            GameManager.m_Instance.m_Player2.damage++;
+    //            Debug.Log("P2 damage up");
+    //        }
+    //        else if (getWhosPicking() == Player.PLAYER.P3)
+    //        {
+    //            GameManager.m_Instance.m_Player3.damage++;
+    //            Debug.Log("P3 damage up");
+    //        }
+    //        else if (getWhosPicking() == Player.PLAYER.P4)
+    //        {
+    //            GameManager.m_Instance.m_Player4.damage++;
+    //            Debug.Log("P4 damage up");
+    //        }
+    //    }
+    //    if (reward == Rewards.Hearts)
+    //    {
+    //        if (getWhosPicking() == Player.PLAYER.P1)
+    //        {
+    //            GameManager.m_Instance.m_Player1.heartUpgrades++;
+    //        }
+    //        else if (getWhosPicking() == Player.PLAYER.P2)
+    //        {
+    //            GameManager.m_Instance.m_Player2.heartUpgrades++;
+    //        }
+    //        else if (getWhosPicking() == Player.PLAYER.P3)
+    //        {
+    //            GameManager.m_Instance.m_Player3.heartUpgrades++;
+    //        }
+    //        else if (getWhosPicking() == Player.PLAYER.P4)
+    //        {
+    //            GameManager.m_Instance.m_Player4.heartUpgrades++;
+    //        }
+    //    }
+    //    if (reward == Rewards.AttackSpeed)
+    //    {
+    //        if (getWhosPicking() == Player.PLAYER.P1)
+    //        {
+    //            GameManager.m_Instance.m_Player1.attackSpeed++;
+    //        }
+    //        else if (getWhosPicking() == Player.PLAYER.P2)
+    //        {
+    //            GameManager.m_Instance.m_Player2.attackSpeed++;
+    //        }
+    //        else if (getWhosPicking() == Player.PLAYER.P3)
+    //        {
+    //            GameManager.m_Instance.m_Player3.attackSpeed++;
+    //        }
+    //        else if (getWhosPicking() == Player.PLAYER.P4)
+    //        {
+    //            GameManager.m_Instance.m_Player4.attackSpeed++;
+    //        }
+    //    }
+    //    if (reward == Rewards.MovementSpeed)
+    //    {
+    //        if (getWhosPicking() == Player.PLAYER.P1)
+    //        {
+    //            GameManager.m_Instance.m_Player1.movementSpeed++;
+    //        }
+    //        else if (getWhosPicking() == Player.PLAYER.P2)
+    //        {
+    //            GameManager.m_Instance.m_Player2.movementSpeed++;
+    //        }
+    //        else if (getWhosPicking() == Player.PLAYER.P3)
+    //        {
+    //            GameManager.m_Instance.m_Player3.movementSpeed++;
+    //        }
+    //        else if (getWhosPicking() == Player.PLAYER.P4)
+    //        {
+    //            GameManager.m_Instance.m_Player4.movementSpeed++;
+    //        }
+    //    }
+    //}
 }
