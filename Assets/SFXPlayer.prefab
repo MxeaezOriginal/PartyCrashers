@@ -9,6 +9,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 440266}
   - 82: {fileID: 8296036}
+  - 114: {fileID: 11472140}
   m_Layer: 0
   m_Name: SFXPlayer
   m_TagString: Untagged
@@ -38,6 +39,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 6c8d269acad818740a1260df836601a1, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -102,6 +104,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &11472140
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 141572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16db6e9353176d8429e1b91918cfbc8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  self: {fileID: 141572}
+  sfx: {fileID: 8296036}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
