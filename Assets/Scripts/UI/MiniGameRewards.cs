@@ -62,6 +62,7 @@ public class MiniGameRewards : MonoBehaviour
         {
             //PLAYER 1
             case 1:
+                es.SetSelectedGameObject(rewardButtons[0].gameObject);
                 sim.horizontalAxis = ("Horizontal_P1");
                 sim.verticalAxis = ("Vertical_P1");
                 break;
@@ -70,6 +71,7 @@ public class MiniGameRewards : MonoBehaviour
             case 2:
                 if (i == 0)                                          //FIRST BUTTON PRESS
                 {
+                    es.SetSelectedGameObject(rewardButtons[0].gameObject);
                     if (minigameManger.P1_place == 1)
                     {
                         sim.horizontalAxis = ("Horizontal_P1");
@@ -83,6 +85,7 @@ public class MiniGameRewards : MonoBehaviour
                 }
                 else if (i == 1)                                    //SECOND BUTTON PRESS
                 {
+                    es.SetSelectedGameObject(rewardButtons[0].gameObject);
                     if (minigameManger.P1_place == 2)
                     {
                         sim.horizontalAxis = ("Horizontal_P1");
