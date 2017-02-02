@@ -10,21 +10,29 @@ public class KickMeTrap : Trap {
     public float m_ChasingTime = 5.0f;
 	public bool m_used = false;
     public GameObject m_effect;
-
+    private GameObject m_Player;
+    private GameObject m_CurEffect;
     // Use this for initialization
-    void Start () {
-	}
+
+    void Update()
+    {
+        if(m_Player != null)
+        {
+            transform.position = m_Player.gameObject.transform.position;
+            if (m_effect != null)
+            {
+                m_CurEffect.transform.position = m_Player.gameObject.transform.position;
+            }
+        }
+    }
 
     public void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Player" && m_used == false)
         {
-            if (m_effect != null)
-            {
-                GameObject effect;
-                effect = (GameObject)Instantiate(m_effect, gameObject.transform.position, gameObject.transform.rotation);
-                Destroy(effect, 3f);
-            }
+            m_Player = other.gameObject;
+            m_CurEffect = (GameObject)Instantiate(m_effect, gameObject.transform.position, gameObject.transform.rotation);
+            Destroy(m_CurEffect, m_ChasingTime);
         }
       
     }
@@ -43,10 +51,12 @@ public class KickMeTrap : Trap {
 					{
 						if (hitColliders[i].GetComponent<ChaserEnemyAi>() != null)
 						{
-							//Transform enemy = hitColliders[i].transform;
-							ChaserEnemyAi ai = hitColliders[i].GetComponent<ChaserEnemyAi>();
+                            //Transform enemy = hitColliders[i].transform;
+                            ChaserEnemyAi ai = hitColliders[i].GetComponent<ChaserEnemyAi>();
 
-							ai.m_ChaseDist += chaseIncrease;
+                            ai.disableGetClosestPlayer = true;
+                            ai.m_ChaseDist += chaseIncrease;
+                            ai.target = other.GetComponent<Player>().gameObject;
 							StartCoroutine(setToDefault(ai));
 						}
 					}
@@ -60,15 +70,16 @@ public class KickMeTrap : Trap {
 	{
 		if (other.tag == "Player") 
 		{
-			m_used = true;
+            m_used = true;
 		}
 	}
 
     IEnumerator setToDefault(ChaserEnemyAi ai)
     {
         yield return new WaitForSeconds(m_ChasingTime);
+        ai.disableGetClosestPlayer = false;
         ai.m_ChaseDist -= chaseIncrease;
-
+        Destroy(gameObject);
     }
 
     void OnDrawGizmosSelected()

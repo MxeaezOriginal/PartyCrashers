@@ -6,9 +6,9 @@ public class ChaserEnemyAi : EnemyAI // Used to inherit from monobehaviour
     public float m_ChaseDist = 50;
     public float m_StopDistance = 5;
     public float KnockBackDis = 40f;
-
     public int m_Damage = 1;
 
+    public bool disableGetClosestPlayer;
     EnemyEffect enemyEffect;
     private HeartSystem m_HeartSystem;
     private bool m_CanDamage = true;
@@ -27,7 +27,10 @@ public class ChaserEnemyAi : EnemyAI // Used to inherit from monobehaviour
     // Update is called once per frame
     void Update()
     {
-        getClosestPlayer();
+        if(!disableGetClosestPlayer)
+        {
+            getClosestPlayer();
+        }
 
         if (!enemyEffect.isStun)
         {
