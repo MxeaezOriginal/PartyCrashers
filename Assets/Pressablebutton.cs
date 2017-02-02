@@ -16,6 +16,7 @@ public class Pressablebutton : MonoBehaviour {
     public Transform objectToMove;
     public Transform objectToMoveEndPosition;
     private Vector3 objectToMoveStartPosition;
+    private bool isDown = false;
 
     // Use this for initialization
     void Start ()
@@ -29,10 +30,19 @@ public class Pressablebutton : MonoBehaviour {
     {
         if (carryAmmount >= requiredCarryAmmount)
         {
+            isDown = true;
+        }
+        else if (buttonDownPermanent == false)
+        {
+            isDown = false;
+           
+        }
+        if(isDown == true)
+        {
             ButtonPosition.position = Vector3.Lerp(ButtonPosition.position, buttondownPosition.position, smooth * Time.deltaTime);
             objectToMove.position = Vector3.Lerp(objectToMove.position, objectToMoveEndPosition.position, smooth * Time.deltaTime);
         }
-        else if (buttonDownPermanent == false)
+        else
         {
             ButtonPosition.position = Vector3.Lerp(ButtonPosition.position, buttonstartPosition, smooth * Time.deltaTime);
             objectToMove.position = Vector3.Lerp(objectToMove.position, objectToMoveStartPosition, smooth * Time.deltaTime);
