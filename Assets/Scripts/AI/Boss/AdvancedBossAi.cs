@@ -15,7 +15,8 @@ public class AdvancedBossAi : MonoBehaviour
 
     //Projectile
     public GameObject m_Projectile;
-    private GameObject[] ProjectilesArray = { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null };
+    private GameObject[] ProjectilesArray = { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null };
+    public int m_BulletsToShoot = 5;
 
     //Frame
     private int frame;
@@ -63,7 +64,7 @@ public class AdvancedBossAi : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        state = states.dash;
+        state = states.earthquake;
         currentState = state;
         m_Invincible = false;
         frame = 0;
@@ -102,6 +103,7 @@ public class AdvancedBossAi : MonoBehaviour
             //Attacks
             case states.shoot: BasicShoot(); break;
             case states.dash: Dash(70, 10, 10); break;
+            case states.earthquake: Earthquake(60, 60);break;
         }
         //Manage frame
         frame++;
@@ -331,6 +333,7 @@ public class AdvancedBossAi : MonoBehaviour
 
         if (frame == 2)
         {
+            m_BulletsToShoot -= 1; //Subtract number of bullets to shoot
             for (int i = 0; i < ProjectilesArray.Length; i++)
             {
                 if (ProjectilesArray[i].active == false)
@@ -351,9 +354,18 @@ public class AdvancedBossAi : MonoBehaviour
             frame = 0;
         }
 
+        //Change state
+        if(m_BulletsToShoot <= 0)
+        {
+            m_BulletsToShoot = 5;
+            state = states.idle;
+        }
+
     }
-    void EarthQuake(int windup, int recover)
+    void Earthquake(int windup, int recover)
     {
+
+        float shootSpeed = 25f;
         //windup
         if(frame <= windup)
         {
@@ -363,16 +375,33 @@ public class AdvancedBossAi : MonoBehaviour
         if(frame == windup + 1)
         {
             Vector3 targetPosition = getClosestPlayer().transform.position;
+            Vector3 pointVectorAngle = new Vector3(targetPosition.x - transform.position.x, 0, targetPosition.x - transform.position.z).normalized;
             //shoot everywhere
             for (int i = 0; i < ProjectilesArray.Length; i++)
             {
+                //Get the angle to point at
+                pointVectorAngle = Quaternion.AngleAxis(-360/ProjectilesArray.Length, Vector3.up) * pointVectorAngle;
+
+                //Set projectile active
+                ProjectilesArray[i].SetActive(true);
+                //Position projectile
+                ProjectilesArray[i].transform.position = transform.position + pointVectorAngle * 3;
+
+                Vector3 projectileVelocity = pointVectorAngle * shootSpeed;
+                BossProjectileKamin script = ProjectilesArray[i].GetComponent<BossProjectileKamin>();
+                script.m_ProjectileVelocity = projectileVelocity;
             }
         }
 
-        //recover
+        //Recover
+        if(frame > windup)
+        {
+            transform.Rotate(new Vector3(transform.rotation.x, transform.rotation.y - 10, transform.rotation.z));
+        }
+        //Change state
         if(frame > windup + recover)
         {
-
+            state = states.idle;
         }
     }
 
@@ -422,6 +451,8 @@ public class AdvancedBossAi : MonoBehaviour
         }
 
     }
+
+    //This is where the decision making for the target player will happen
     GameObject GetTargetPlayer()
     {
         //Right now this whole function is really basic but I'll make it more complicated later
@@ -430,18 +461,21 @@ public class AdvancedBossAi : MonoBehaviour
         target = getClosestPlayer();
 
         return target;
-    } //This is where the decision making for the target player will happen
+    } 
+
+    //Decision making for which attack to perform
     states DecideAttack()
     {
-        int attackNumber = Random.Range(0, 3);
+        int attackNumber = Random.Range(0, 4);
         switch (attackNumber)
         {
             case 0: return states.dash;
             case 1: return states.teleport;
             case 2: return states.shoot;
+            case 3: return states.earthquake;
         }
         return states.shoot;
-    }//Decision making for which attack to perform
+    }
     GameObject getClosestPlayer()
     {
         float distance = 0f;
