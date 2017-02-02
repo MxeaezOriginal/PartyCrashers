@@ -46,14 +46,13 @@ public class MiniGameRewards : MonoBehaviour
     void Update()
     {
         //Enables Canvas component; NOT GAMEOBJECT!
-        if (minigameManger.showRewardCanvas)
-
-        SetupInput();
+        //if (minigameManger.showRewardCanvas)
+        //    SetupInput();
         //UpdateCurrentPlayer();
     }
 
     void SetupInput()
-    { 
+    {
         switch (GameManager.m_Instance.m_NumOfPlayers)
         {
             //PLAYER 1
