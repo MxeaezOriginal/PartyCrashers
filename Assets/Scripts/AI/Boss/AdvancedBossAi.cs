@@ -125,6 +125,12 @@ public class AdvancedBossAi : MonoBehaviour
         }
 
         Move(); //Call the move function so the guy actually moves based on it's velocity
+
+        //Dies
+        if(m_Health <= 0)
+        {
+            //Load main menu
+        }
     }
 
     void LateUpdate()
@@ -306,7 +312,7 @@ public class AdvancedBossAi : MonoBehaviour
         //Get Player to shoot at and target where the player is going 
         GameObject player = GetTargetPlayer();
         Vector3 pPosition = player.transform.position;
-        float shootSpeed = 15;
+        float shootSpeed = 20;
         Vector3 bv = (pPosition - transform.position).normalized * shootSpeed;
         float distance = Vector3.Magnitude(pPosition - transform.position);
 
@@ -352,8 +358,11 @@ public class AdvancedBossAi : MonoBehaviour
                 {
                     LightningArray[i].SetActive(true);
                     LightningArray[i].transform.position = transform.position + (targetPosition - transform.position).normalized * 3;
+                   
 
+                    Vector3 direction = (new Vector3(targetPosition.x,0, targetPosition.z) - new Vector3(transform.position.x,0, transform.position.z).normalized);
                     Vector3 projectileVelocity = (targetPosition - transform.position).normalized * shootSpeed;
+                    
                     BossLightningKamin script = LightningArray[i].GetComponent<BossLightningKamin>();
                     script.m_ProjectileVelocity = projectileVelocity;
                     break;
@@ -422,6 +431,11 @@ public class AdvancedBossAi : MonoBehaviour
     #endregion
     void Teleport(int framesBeforeTP, int recoverFrames)
     {
+        //Windup
+        if(frame < framesBeforeTP)
+        {
+            transform.Rotate(new Vector3(transform.rotation.x - 10, transform.rotation.y, transform.rotation.z));
+        }
         if (frame == framesBeforeTP)
         {
             Vector3 teleportTargetPosition = transform.position; //Set variable for target position
@@ -454,7 +468,7 @@ public class AdvancedBossAi : MonoBehaviour
         //Recover
         if (frame > framesBeforeTP && frame < recoverFrames + framesBeforeTP)
         {
-            //transform.localRotation += 3;
+            transform.Rotate(new Vector3(transform.rotation.x - 10, transform.rotation.y, transform.rotation.z));
         }
         //Change state
         if (frame > recoverFrames + framesBeforeTP)
