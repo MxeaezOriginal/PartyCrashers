@@ -25,6 +25,7 @@ public class Sword : Melee
         m_CharacterController = GetComponentInParent<CharacterController>();
         m_Player = GetComponentInParent<Player>();
 
+        sliceEffect.SetActive(false);
         swordTrigger.SetActive(false);
     }
 
@@ -34,6 +35,7 @@ public class Sword : Melee
         {
             triggerLife -= Time.deltaTime;
 
+            sliceEffect.SetActive(true);
             swordTrigger.SetActive(true);
 
             if (effect)
@@ -49,6 +51,7 @@ public class Sword : Melee
         {
             attack = false;
             swordTrigger.SetActive(false);
+            sliceEffect.SetActive(false);
             triggerLife = 0.5f;
         }
 
