@@ -113,7 +113,7 @@ public class AdvancedBossAi : MonoBehaviour
             case states.hurt: Hurt(m_DamageTaken, m_StunTime); break;
             case states.teleport: Teleport(60, 60); break;
             //Attacks
-            case states.shoot: BasicShoot(); break;
+            case states.shoot: BasicShoot(10, Mathf.RoundToInt(60 *m_Difficulty)); break;
             case states.dash: Dash(70, 10, 10); break;
             case states.earthquake: Earthquake(60, 60);break;
         }
@@ -306,7 +306,7 @@ public class AdvancedBossAi : MonoBehaviour
         }
 
     }
-    void BasicShoot()
+    void BasicShoot(int shootFrame, int recoverFrame)
     {
 
         //Get Player to shoot at and target where the player is going 
@@ -347,10 +347,17 @@ public class AdvancedBossAi : MonoBehaviour
             targetPosition = pPosition;
         }
 
+        //Windup
+        if(frame < shootFrame)
+        {
+            transform.Rotate(transform.rotation.x - (frame*50), transform.rotation.y,transform.rotation.z);
+        }
+
         //Actually shoot something
 
-        if (frame == 2)
+        if (frame == shootFrame)
         {
+            transform.LookAt(shootTarget);
             m_BulletsToShoot -= 1; //Subtract number of bullets to shoot
             for (int i = 0; i < LightningArray.Length; i++)
             {
@@ -358,6 +365,7 @@ public class AdvancedBossAi : MonoBehaviour
                 {
                     LightningArray[i].SetActive(true);
                     LightningArray[i].transform.position = transform.position + (targetPosition - transform.position).normalized * 3;
+                    LightningArray[i].transform.position = new Vector3(LightningArray[i].transform.position.x, LightningArray[i].transform.position.y + 5.3f, LightningArray[i].transform.position.z);
                    
 
                     Vector3 direction = (new Vector3(targetPosition.x,0, targetPosition.z) - new Vector3(transform.position.x,0, transform.position.z).normalized);
@@ -370,7 +378,7 @@ public class AdvancedBossAi : MonoBehaviour
 
             }
         }
-        if (frame > 60 * m_Difficulty)
+        if (frame > recoverFrame)
         {
             frame = 0;
         }

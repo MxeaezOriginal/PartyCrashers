@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using System.Linq;
 
 public class MinigameResult : MonoBehaviour
@@ -57,7 +58,11 @@ public class MinigameResult : MonoBehaviour
     void Update()
     {
         if (minigameManager.showResultBar)
-            SortingScores();
+        {
+            GameManager.m_Instance.m_GameState = GameManager.GameState.Dungeon;
+            SceneManager.LoadScene(GameManager.m_Instance.m_Tutorial.ToString());
+        }
+            //SortingScores();
 
         SetPlayerPlace();
     }
