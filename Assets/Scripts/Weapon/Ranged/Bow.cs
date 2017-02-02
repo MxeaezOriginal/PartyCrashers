@@ -24,12 +24,13 @@ public class Bow : Ranged
     [SerializeField]
     private float m_LaserTimer;
     public float m_LaserLenght;
-
-    //Test
     public float laserWidth = 1.0f;
 
-    Player player;
-    GameObject laser;
+    private Player player;
+    private GameObject laser;
+
+    [SerializeField]
+    private GameObject m_LaserChargedFX; //TODO: Instantiate this effect when max charge is true and fire button has not been released
 
     void Start()
     {
