@@ -27,11 +27,12 @@ public class AdvancedBossAi : MonoBehaviour
     //States
     enum states
     {
+        //Miscellaneous States
         idle,
         hurt,
         dead,
         teleport,
-        //Attacks
+        //Attack states
         dash,
         earthquake,
         shoot,
@@ -203,7 +204,9 @@ public class AdvancedBossAi : MonoBehaviour
             attacked = false;
         }
     }
-    public void OnTriggerStay(Collider other) //Get CHANGE THIS ONCE ANIMATIONS ARE IN
+
+    //CHANGE THIS ONCE ANIMATIONS ARE IN    FUUUUUUCCKK
+    public void OnTriggerStay(Collider other) 
     {
         if (!m_Invincible)
         {
