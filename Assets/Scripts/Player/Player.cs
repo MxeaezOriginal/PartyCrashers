@@ -449,16 +449,17 @@ public class Player : MonoBehaviour
 
     void OnCollisionEnter(Collision other)
     {
-        //if (other.gameObject.CompareTag("OneDamage"))
-        //{
-        //    m_Heart.TakeDamage(1);
-        //    m_Heart.UpdateHearts();
-        //}
-        //if (other.gameObject.CompareTag("TwoDamage"))
-        //{
-        //    m_Heart.TakeDamage(2);
-        //    m_Heart.UpdateHearts();
-        //}
+        // Bullet, Projectile using this way do deal damage
+        if (other.gameObject.CompareTag("OneDamage"))
+        {
+            m_Heart.TakeDamage(1);
+            m_Heart.UpdateHearts();
+        }
+        if (other.gameObject.CompareTag("TwoDamage"))
+        {
+            m_Heart.TakeDamage(2);
+            m_Heart.UpdateHearts();
+        }
         //if (other.gameObject.CompareTag("MeleeEnemy"))
         //{
         //    rb.AddForce(transform.forward * 500);

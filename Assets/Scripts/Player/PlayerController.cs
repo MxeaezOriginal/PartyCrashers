@@ -264,6 +264,12 @@ public class PlayerController : MonoBehaviour
             //    m_Velocity = KnockBackDirection.normalized * KnockBackDis;
             //}
         }
+        if (other.gameObject.CompareTag("Projectile"))
+        {
+            KnockBackDirection = transform.position - other.transform.position;
+            KnockBack = transform.position + KnockBackDirection;
+            m_Velocity = KnockBackDirection.normalized * other.GetComponent<BaseLevelProjectile>().m_KnockBack;
+        }
     }
 
 
