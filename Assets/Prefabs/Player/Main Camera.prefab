@@ -60,22 +60,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &183632
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 492378}
-  - 114: {fileID: 11477728}
-  m_Layer: 0
-  m_Name: GameManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!4 &414700
 Transform:
   m_ObjectHideFlags: 1
@@ -85,9 +69,10 @@ Transform:
   m_LocalRotation: {x: -0.3414562, y: 0, z: 0, w: 0.9398977}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 439830}
-  m_RootOrder: 2
+  m_RootOrder: 1
 --- !u!4 &439830
 Transform:
   m_ObjectHideFlags: 1
@@ -95,11 +80,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 173164}
   m_LocalRotation: {x: 0.3414562, y: 0, z: 0, w: 0.9398977}
-  m_LocalPosition: {x: 0.44, y: 14.72, z: 29.03}
+  m_LocalPosition: {x: -3.5136547, y: 41.657936, z: -83.83975}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 39.9312, y: 0, z: 0}
   m_Children:
   - {fileID: 465296}
-  - {fileID: 492378}
   - {fileID: 414700}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -112,21 +97,10 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 20}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 439830}
   m_RootOrder: 0
---- !u!4 &492378
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 183632}
-  m_LocalRotation: {x: -0.3414562, y: 0, z: 0, w: 0.9398977}
-  m_LocalPosition: {x: -0.44, y: -29.920944, z: -12.812354}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 439830}
-  m_RootOrder: 1
 --- !u!20 &2026128
 Camera:
   m_ObjectHideFlags: 1
@@ -414,75 +388,6 @@ MonoBehaviour:
   BlueSteepness: 1
   BlueGamma: 1
   e_ShowCurves: 1
---- !u!114 &11477728
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 183632}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d948f7bd93d45844bdb5a28424eebf9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_GameState: 1
-  m_Tutorial: 0
-  m_PlayerPrefab: {fileID: 179692, guid: c0d4599cda93dc54785f1e84c5383933, type: 2}
-  m_MascotPrefab: {fileID: 113286, guid: 7ce764fae4c3a0d48acebd2e06a955cf, type: 2}
-  m_PinataPrefab: {fileID: 136120, guid: fb88fcd3ea278524f992adc197cd44a6, type: 2}
-  m_Portraits:
-  - {fileID: 8400000, guid: 5acc0dd7f80d88248b6c8b0d19e77b89, type: 2}
-  - {fileID: 8400000, guid: 1500a03a085f2f044907fef6d3b1ae0a, type: 2}
-  - {fileID: 8400000, guid: 227f49247b9e1ef429f11ef1ea16104f, type: 2}
-  - {fileID: 8400000, guid: 14f79cfec67e62248ba95f224a0660c5, type: 2}
-  m_Player1:
-    name: 
-    player: 0
-    model: 0
-    attackSpeed: 0
-    movementSpeed: 0
-    damage: 0
-    heartUpgrades: 0
-    gold: 0
-    score: 0
-    m_Controller: 0
-  m_Player2:
-    name: 
-    player: 0
-    model: 0
-    attackSpeed: 0
-    movementSpeed: 0
-    damage: 0
-    heartUpgrades: 0
-    gold: 0
-    score: 0
-    m_Controller: 0
-  m_Player3:
-    name: 
-    player: 0
-    model: 0
-    attackSpeed: 0
-    movementSpeed: 0
-    damage: 0
-    heartUpgrades: 0
-    gold: 0
-    score: 0
-    m_Controller: 0
-  m_Player4:
-    name: 
-    player: 0
-    model: 0
-    attackSpeed: 0
-    movementSpeed: 0
-    damage: 0
-    heartUpgrades: 0
-    gold: 0
-    score: 0
-    m_Controller: 0
-  m_Players: []
-  m_NumOfPlayers: 0
-  m_PartyBar: {fileID: 0}
-  m_LevelToStart: Lobby_01
 --- !u!114 &11495654
 MonoBehaviour:
   m_ObjectHideFlags: 1
