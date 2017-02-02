@@ -179,7 +179,7 @@ public class MenuManager : MonoBehaviour
     IEnumerator SelectedAnimationWaitForEndOfFrame()
     {
         yield return new WaitForEndOfFrame();
-        SelectedAnimation();
+        //SelectedAnimation();
     }
 
     void SelectedAnimation()
