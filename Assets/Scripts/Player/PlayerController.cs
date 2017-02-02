@@ -369,7 +369,7 @@ public class PlayerController : MonoBehaviour
         }
         if(m_ZoomY == true)
         {
-            tempZoom = Mathf.Lerp(tempZoom, tempZoom +(y * 3.5f - m_MaxY) / m_CameraController.m_ZoomAmount, 2f);
+            tempZoom = Mathf.Lerp(tempZoom, tempZoom +((y - m_MaxY) * 4f) / m_CameraController.m_ZoomAmount, 2f);
         }
 
         m_CameraController.m_Zoom = tempZoom;
