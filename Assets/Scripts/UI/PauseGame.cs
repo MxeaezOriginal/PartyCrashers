@@ -22,6 +22,9 @@ public class PauseGame : MonoBehaviour
         {
             Pause();
         }
+        {
+            if (Time.timeScale == 0) return;
+        }
     }
     public void Pause()
     {
