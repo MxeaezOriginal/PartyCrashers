@@ -3,21 +3,31 @@ using System.Collections;
 
 public class DestroyOnCollision : MonoBehaviour
 {
+    [SerializeField]
+    private float LifeTimer;
     private Collider col;
 
     // Use this for initialization
     void Start()
     {
-        col = GetComponent<Collider>();
-        if (col == null)
-        {
-            Debug.LogError("DestroyOnCollision: NO COLLIDER!");
-            enabled = false;
-        }
+        StartCoroutine(DeactivateCallback());
+        
     }
 
-    public void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        Destroy(this.gameObject);
+        //if (other.tag != "Coins")
+            DestroyBullet();
+    }
+
+    private IEnumerator DeactivateCallback()
+    {
+        yield return new WaitForSeconds(LifeTimer);
+        DestroyBullet();
+    }
+
+    private void DestroyBullet()
+    {
+        Destroy(gameObject);
     }
 }
