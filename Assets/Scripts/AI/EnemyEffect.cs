@@ -13,8 +13,6 @@ public class EnemyEffect : MonoBehaviour
     public bool isStun = false;
     [HideInInspector]
     public bool isKB = false;
-    private float journeyLength;
-    float fracJourney;
     EnemyAI enemyAi;
 
     float m_MyHealth;

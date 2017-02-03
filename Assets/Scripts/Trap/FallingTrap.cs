@@ -5,10 +5,11 @@ public class FallingTrap : MonoBehaviour {
 
     public float FallingSpeed;
     public float DestructionDelay;
+    public int m_Damage;
 
     private float mMass;
     private bool mActivated;
-
+    private HeartSystem m_Heart;
     GameObject mTrap;
     
     void Start ()
@@ -25,7 +26,6 @@ public class FallingTrap : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-		Debug.Log ("HEEEEEY");
         if (other.tag == "Player")
         {
 
@@ -48,6 +48,16 @@ public class FallingTrap : MonoBehaviour {
         if(mActivated)
         {
             Destroy(mTrap, DestructionDelay);
+        }
+    }
+
+    void OnCollisionEnter(Collision other)
+    {
+        if(other.gameObject.GetComponent<Player>() != null)
+        {
+            m_Heart = other.gameObject.GetComponent<HeartSystem>();
+            m_Heart.TakeDamage(m_Damage);
+            m_Heart.UpdateHearts();
         }
     }
 }

@@ -151,7 +151,7 @@ public class Player : MonoBehaviour
         //Secondary Attack
         if (Input.GetAxisRaw(m_SecondaryAttack + m_Controller.ToString()) == 1)
         {
-            if (!m_CantAttack)
+            if (!m_CantAttack && GetComponent<PlayerController>().m_CantMove == false)
             {
                 attack(ATTACKTYPE.SECONDARY);
             }
@@ -449,16 +449,17 @@ public class Player : MonoBehaviour
 
     void OnCollisionEnter(Collision other)
     {
-        //if (other.gameObject.CompareTag("OneDamage"))
-        //{
-        //    m_Heart.TakeDamage(1);
-        //    m_Heart.UpdateHearts();
-        //}
-        //if (other.gameObject.CompareTag("TwoDamage"))
-        //{
-        //    m_Heart.TakeDamage(2);
-        //    m_Heart.UpdateHearts();
-        //}
+        // Bullet, Projectile using this way do deal damage
+        if (other.gameObject.CompareTag("OneDamage"))
+        {
+            m_Heart.TakeDamage(1);
+            m_Heart.UpdateHearts();
+        }
+        if (other.gameObject.CompareTag("TwoDamage"))
+        {
+            m_Heart.TakeDamage(2);
+            m_Heart.UpdateHearts();
+        }
         //if (other.gameObject.CompareTag("MeleeEnemy"))
         //{
         //    rb.AddForce(transform.forward * 500);

@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using System.Linq;
 
 public class MinigameResult : MonoBehaviour
@@ -266,6 +267,9 @@ public class MinigameResult : MonoBehaviour
                             P4_Bar.fillAmount = Mathf.Lerp(P4_Bar.fillAmount, resultBarAmount(scorePlace1, 0, maxScore, 0, 1), speed * Time.deltaTime);
                     }
                 }
+                delay4 -= Time.deltaTime;
+                if (delay4 < 0)
+                    minigameManager.barsRaised = true;
                 break;
         }
     }

@@ -16,7 +16,7 @@ public class RecycleBullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag != "Coins" && other.tag != "Player")
+        if (other.tag != "Coins" /*&& other.tag != "Player"*/)
             DestroyBullet();
     }
 

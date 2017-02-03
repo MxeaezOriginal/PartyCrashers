@@ -7,7 +7,7 @@ public class KickMeTrap : Trap {
 
     public float m_Radius;
     public float chaseIncrease;
-    public float m_ChasingTime = 5.0f;
+    public float m_ChasingTime;
 	public bool m_used = false;
     public GameObject m_effect;
     private GameObject m_Player;
@@ -33,38 +33,40 @@ public class KickMeTrap : Trap {
             m_Player = other.gameObject;
             m_CurEffect = (GameObject)Instantiate(m_effect, gameObject.transform.position, gameObject.transform.rotation);
             Destroy(m_CurEffect, m_ChasingTime);
+            Destroy(gameObject, m_ChasingTime);
         }
-      
-    }
-    public void OnTriggerStay(Collider other)
-    {
-		//Debug.Log("RUNING");
-		if (other.tag == "Player" && m_used == false)
-		{
+
+        if (other.tag == "Player" && m_used == false)
+        {
             //EnemyAI.Instance.getDistance(50);
             Collider[] hitColliders = Physics.OverlapSphere(transform.position, m_Radius);
-			for (int i = 0; i < hitColliders.Length; ++i)
-			{
-				for (int j = 0; j < m_EnemiesToAffect.Length; j++)
-				{
-					if (hitColliders[i].gameObject.CompareTag(m_EnemiesToAffect[j]))
-					{
-						if (hitColliders[i].GetComponent<ChaserEnemyAi>() != null)
-						{
+            for (int i = 0; i < hitColliders.Length; ++i)
+            {
+                for (int j = 0; j < m_EnemiesToAffect.Length; j++)
+                {
+                    if (hitColliders[i].gameObject.CompareTag(m_EnemiesToAffect[j]))
+                    {
+                        if (hitColliders[i].GetComponent<ChaserEnemyAi>() != null)
+                        {
                             //Transform enemy = hitColliders[i].transform;
                             ChaserEnemyAi ai = hitColliders[i].GetComponent<ChaserEnemyAi>();
 
                             ai.disableGetClosestPlayer = true;
                             ai.m_ChaseDist += chaseIncrease;
                             ai.target = other.GetComponent<Player>().gameObject;
-							StartCoroutine(setToDefault(ai));
-						}
-					}
-				}
-			}
-           
+                            StartCoroutine(setToDefault(ai));
+                        }
+                    }
+                }
+            }
+
         }
     }
+  //  public void OnTriggerStay(Collider other)
+  //  {
+		////Debug.Log("RUNING");
+		
+  //  }
 
 	public void OnTriggerExit(Collider other)
 	{
@@ -76,10 +78,9 @@ public class KickMeTrap : Trap {
 
     IEnumerator setToDefault(ChaserEnemyAi ai)
     {
-        yield return new WaitForSeconds(m_ChasingTime);
+        yield return new WaitForSeconds(3);
         ai.disableGetClosestPlayer = false;
         ai.m_ChaseDist -= chaseIncrease;
-        Destroy(gameObject);
     }
 
     void OnDrawGizmosSelected()
