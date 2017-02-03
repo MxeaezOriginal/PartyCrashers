@@ -94,7 +94,7 @@ public class AdvancedBossAi : MonoBehaviour
         {
             Debug.LogError("Boss projectile object not assigned to boss");
         }
-        if(m_Lightning == null)
+        if (m_Lightning == null)
         {
             Debug.LogError("Lightning object not assigned to boss");
         }
@@ -114,9 +114,9 @@ public class AdvancedBossAi : MonoBehaviour
             case states.hurt: Hurt(m_DamageTaken, m_StunTime); break;
             case states.teleport: Teleport(60, 60); break;
             //Attacks
-            case states.shoot: BasicShoot(10, Mathf.RoundToInt(60 *m_Difficulty)); break;
+            case states.shoot: BasicShoot(10, Mathf.RoundToInt(60 * m_Difficulty)); break;
             case states.dash: Dash(70, 10, 10); break;
-            case states.earthquake: Earthquake(60, 60);break;
+            case states.earthquake: Earthquake(60, 60); break;
         }
         //Manage frame
         frame++;
@@ -128,7 +128,7 @@ public class AdvancedBossAi : MonoBehaviour
         Move(); //Call the move function so the guy actually moves based on it's velocity
 
         //Dies
-        if(m_Health <= 0)
+        if (m_Health <= 0)
         {
             //Load main menu
         }
@@ -206,7 +206,7 @@ public class AdvancedBossAi : MonoBehaviour
     }
 
     //CHANGE THIS ONCE ANIMATIONS ARE IN    FUUUUUUCCKK
-    public void OnTriggerStay(Collider other) 
+    public void OnTriggerStay(Collider other)
     {
         if (!m_Invincible)
         {
@@ -353,9 +353,9 @@ public class AdvancedBossAi : MonoBehaviour
         }
 
         //Windup
-        if(frame < shootFrame)
+        if (frame < shootFrame)
         {
-            transform.Rotate(transform.rotation.x - (frame*50), transform.rotation.y,transform.rotation.z);
+            transform.Rotate(transform.rotation.x - (frame * 50), transform.rotation.y, transform.rotation.z);
         }
 
         //Actually shoot something
@@ -371,11 +371,11 @@ public class AdvancedBossAi : MonoBehaviour
                     LightningArray[i].SetActive(true);
                     LightningArray[i].transform.position = transform.position + (targetPosition - transform.position).normalized * 3;
                     LightningArray[i].transform.position = new Vector3(LightningArray[i].transform.position.x, LightningArray[i].transform.position.y + 5.3f, LightningArray[i].transform.position.z);
-                   
 
-                    Vector3 direction = (new Vector3(targetPosition.x,0, targetPosition.z) - new Vector3(transform.position.x,0, transform.position.z).normalized);
+
+                    Vector3 direction = (new Vector3(targetPosition.x, 0, targetPosition.z) - new Vector3(transform.position.x, 0, transform.position.z).normalized);
                     Vector3 projectileVelocity = (targetPosition - transform.position).normalized * shootSpeed;
-                    
+
                     BossLightningKamin script = LightningArray[i].GetComponent<BossLightningKamin>();
                     script.m_ProjectileVelocity = projectileVelocity;
                     break;
@@ -389,7 +389,7 @@ public class AdvancedBossAi : MonoBehaviour
         }
 
         //Change state
-        if(m_BulletsToShoot <= 0)
+        if (m_BulletsToShoot <= 0)
         {
             m_BulletsToShoot = 5;
             state = states.idle;
@@ -401,12 +401,12 @@ public class AdvancedBossAi : MonoBehaviour
 
         float shootSpeed = 25f;
         //windup
-        if(frame <= windup)
+        if (frame <= windup)
         {
             transform.Rotate(new Vector3(transform.rotation.x, transform.rotation.y - 10, transform.rotation.z));
         }
         //Shoot
-        if(frame == windup + 1)
+        if (frame == windup + 1)
         {
             Vector3 targetPosition = getClosestPlayer().transform.position;
             Vector3 pointVectorAngle = new Vector3(targetPosition.x - transform.position.x, 0, targetPosition.x - transform.position.z).normalized;
@@ -414,7 +414,7 @@ public class AdvancedBossAi : MonoBehaviour
             for (int i = 0; i < ProjectilesArray.Length; i++)
             {
                 //Get the angle to point at
-                pointVectorAngle = Quaternion.AngleAxis(-360/40, Vector3.up) * pointVectorAngle;
+                pointVectorAngle = Quaternion.AngleAxis(-360 / 40, Vector3.up) * pointVectorAngle;
 
                 //Set projectile active
                 ProjectilesArray[i].SetActive(true);
@@ -428,12 +428,12 @@ public class AdvancedBossAi : MonoBehaviour
         }
 
         //Recover
-        if(frame > windup)
+        if (frame > windup)
         {
             transform.Rotate(new Vector3(transform.rotation.x, transform.rotation.y - 10, transform.rotation.z));
         }
         //Change state
-        if(frame > windup + recover)
+        if (frame > windup + recover)
         {
             state = states.idle;
         }
@@ -445,7 +445,7 @@ public class AdvancedBossAi : MonoBehaviour
     void Teleport(int framesBeforeTP, int recoverFrames)
     {
         //Windup
-        if(frame < framesBeforeTP)
+        if (frame < framesBeforeTP)
         {
             transform.Rotate(new Vector3(transform.rotation.x - 10, transform.rotation.y, transform.rotation.z));
         }
@@ -500,18 +500,54 @@ public class AdvancedBossAi : MonoBehaviour
         target = getClosestPlayer();
 
         return target;
-    } 
+    }
 
     //Decision making for which attack to perform
+
+    private int m_DashPriority = 1;
+    private int m_TeleportPriority = 1;
+    private int m_EarthquakePriority = 1;
+    private int m_ShootPriority = 1;
     states DecideAttack()
     {
-        int attackNumber = Random.Range(0, 4);
+
+        int totalPriority = m_DashPriority + m_TeleportPriority + m_ShootPriority + m_EarthquakePriority;
+        int attackNumber = Random.Range(0, totalPriority);
+
+        while (true)
+        {
+            if (attackNumber <= m_DashPriority) { attackNumber = 0; break; }
+            if (attackNumber > m_DashPriority && attackNumber <= m_DashPriority + m_TeleportPriority) { attackNumber = 1; break; }
+            if (attackNumber > m_DashPriority + m_TeleportPriority && attackNumber <= m_DashPriority + m_TeleportPriority + m_ShootPriority) { attackNumber = 2; break; }
+            if (attackNumber > m_DashPriority + m_TeleportPriority + m_ShootPriority && attackNumber <= totalPriority) { attackNumber = 3; break; }
+        }
+
         switch (attackNumber)
         {
-            case 0: return states.dash;
-            case 1: return states.teleport;
-            case 2: return states.shoot;
-            case 3: return states.earthquake;
+            case 0:
+                m_DashPriority = 1;
+                m_TeleportPriority += 1;
+                m_EarthquakePriority++;
+                m_ShootPriority++;
+                return states.dash;
+            case 1:
+                m_DashPriority += 1;
+                m_TeleportPriority = 1;
+                m_EarthquakePriority++;
+                m_ShootPriority++;
+                return states.teleport;
+            case 2:
+                m_DashPriority = 1;
+                m_TeleportPriority += 1;
+                m_EarthquakePriority += 1;
+                m_ShootPriority = 1;
+                return states.shoot;
+            case 3:
+                m_DashPriority += 1;
+                m_TeleportPriority += 1;
+                m_EarthquakePriority = 1;
+                m_ShootPriority += 1;
+                return states.earthquake;
         }
         return states.shoot;
     }
