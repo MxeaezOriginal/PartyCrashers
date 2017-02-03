@@ -70,9 +70,18 @@ public class MiniGameRewards : MonoBehaviour
         {
             //PLAYER 1
             case 1:
-                sim.horizontalAxis = ("Horizontal_P1");
-                sim.verticalAxis = ("Vertical_P1");
-                sim.submitButton = ("Submit_P1");
+                if (GameManager.m_Instance.m_Player1.m_Controller == Player.Controller.Keyboard)
+                {
+                    sim.horizontalAxis = ("Horizontal_Keyboard");
+                    sim.verticalAxis = ("Vertical_Keyboard");
+                    sim.submitButton = ("Submit_Keyboard");
+                }
+                else
+                {
+                    sim.horizontalAxis = ("Horizontal_" + GameManager.m_Instance.m_Player1.m_Controller);
+                    sim.verticalAxis = ("Vertical_" + GameManager.m_Instance.m_Player1.m_Controller);
+                    sim.submitButton = ("Submit_" + GameManager.m_Instance.m_Player1.m_Controller);
+                }
                 break;
 
             //PLAYER 2
@@ -81,30 +90,48 @@ public class MiniGameRewards : MonoBehaviour
                 {
                     if (minigameManger.P1_place == 1)
                     {
-                        sim.horizontalAxis = ("Horizontal_P1");
-                        sim.verticalAxis = ("Vertical_P1");
-                        sim.submitButton = ("Submit_P1");
+                        if (GameManager.m_Instance.m_Player1.m_Controller == Player.Controller.Keyboard)
+                        {
+                            sim.horizontalAxis = ("Horizontal_Keyboard");
+                            sim.verticalAxis = ("Vertical_Keyboard");
+                            sim.submitButton = ("Submit_Keyboard");
+                        }
+                        else
+                        {
+                            sim.horizontalAxis = ("Horizontal_" + GameManager.m_Instance.m_Player1.m_Controller);
+                            sim.verticalAxis = ("Vertical_" + GameManager.m_Instance.m_Player1.m_Controller);
+                            sim.submitButton = ("Submit_" + GameManager.m_Instance.m_Player1.m_Controller);
+                        }
                     }
                     else if (minigameManger.P2_place == 1)
                     {
-                        sim.horizontalAxis = ("Horizontal_P2");
-                        sim.verticalAxis = ("Vertical_P2");
-                        sim.submitButton = ("Submit_P2");
+                        sim.horizontalAxis = ("Horizontal_" + GameManager.m_Instance.m_Player2.m_Controller);
+                        sim.verticalAxis = ("Vertical_" + GameManager.m_Instance.m_Player2.m_Controller);
+                        sim.submitButton = ("Submit_" + GameManager.m_Instance.m_Player2.m_Controller);
                     }
                 }
                 else if (rewardsSelected == 1)                                    //SECOND BUTTON PRESS
                 {
                     if (minigameManger.P1_place == 2)
                     {
-                        sim.horizontalAxis = ("Horizontal_P1");
-                        sim.verticalAxis = ("Vertical_P1");
-                        sim.submitButton = ("Submit_P1");
+                        if (GameManager.m_Instance.m_Player1.m_Controller == Player.Controller.Keyboard)
+                        {
+                            sim.horizontalAxis = ("Horizontal_Keyboard");
+                            sim.verticalAxis = ("Vertical_Keyboard");
+                            sim.submitButton = ("Submit_Keyboard");
+                        }
+                        else
+                        {
+                            sim.horizontalAxis = ("Horizontal_" + GameManager.m_Instance.m_Player1.m_Controller);
+                            sim.verticalAxis = ("Vertical_" + GameManager.m_Instance.m_Player1.m_Controller);
+                            sim.submitButton = ("Submit_" + GameManager.m_Instance.m_Player1.m_Controller);
+                        }
                     }
                     else if (minigameManger.P2_place == 2)
                     {
-                        sim.horizontalAxis = ("Horizontal_P2");
-                        sim.verticalAxis = ("Vertical_P2");
-                        sim.submitButton = ("Submit_P2");
+                        sim.horizontalAxis = ("Horizontal_" + GameManager.m_Instance.m_Player2.m_Controller);
+                        sim.verticalAxis = ("Vertical_" + GameManager.m_Instance.m_Player2.m_Controller);
+                        sim.submitButton = ("Submit_" + GameManager.m_Instance.m_Player2.m_Controller);
                     }
                 }
                 break;
@@ -115,63 +142,90 @@ public class MiniGameRewards : MonoBehaviour
                 {
                     if (minigameManger.P1_place == 1)
                     {
-                        sim.horizontalAxis = ("Horizontal_P1");
-                        sim.verticalAxis = ("Vertical_P1");
-                        sim.submitButton = ("Submit_P1");
+                        if (GameManager.m_Instance.m_Player1.m_Controller == Player.Controller.Keyboard)
+                        {
+                            sim.horizontalAxis = ("Horizontal_Keyboard");
+                            sim.verticalAxis = ("Vertical_Keyboard");
+                            sim.submitButton = ("Submit_Keyboard");
+                        }
+                        else
+                        {
+                            sim.horizontalAxis = ("Horizontal_" + GameManager.m_Instance.m_Player1.m_Controller);
+                            sim.verticalAxis = ("Vertical_" + GameManager.m_Instance.m_Player1.m_Controller);
+                            sim.submitButton = ("Submit_" + GameManager.m_Instance.m_Player1.m_Controller);
+                        }
                     }
                     else if (minigameManger.P2_place == 1)
                     {
-                        sim.horizontalAxis = ("Horizontal_P2");
-                        sim.verticalAxis = ("Vertical_P2");
-                        sim.submitButton = ("Submit_P2");
+                        sim.horizontalAxis = ("Horizontal_" + GameManager.m_Instance.m_Player2.m_Controller);
+                        sim.verticalAxis = ("Vertical_" + GameManager.m_Instance.m_Player2.m_Controller);
+                        sim.submitButton = ("Submit_" + GameManager.m_Instance.m_Player2.m_Controller);
                     }
                     else if (minigameManger.P3_place == 1)
                     {
-                        sim.horizontalAxis = ("Horizontal_P3");
-                        sim.verticalAxis = ("Vertical_P3");
-                        sim.submitButton = ("Submit_P3");
+                        sim.horizontalAxis = ("Horizontal_" + GameManager.m_Instance.m_Player3.m_Controller);
+                        sim.verticalAxis = ("Vertical_" + GameManager.m_Instance.m_Player3.m_Controller);
+                        sim.submitButton = ("Submit_" + GameManager.m_Instance.m_Player3.m_Controller);
                     }
                 }
                 else if (rewardsSelected == 1)                                    //SECOND BUTTON PRESS
                 {
                     if (minigameManger.P1_place == 2)
                     {
-                        sim.horizontalAxis = ("Horizontal_P1");
-                        sim.verticalAxis = ("Vertical_P1");
-                        sim.submitButton = ("Submit_P1");
+                        if (GameManager.m_Instance.m_Player1.m_Controller == Player.Controller.Keyboard)
+                        {
+                            sim.horizontalAxis = ("Horizontal_Keyboard");
+                            sim.verticalAxis = ("Vertical_Keyboard");
+                            sim.submitButton = ("Submit_Keyboard");
+                        }
+                        else
+                        {
+                            sim.horizontalAxis = ("Horizontal_" + GameManager.m_Instance.m_Player1.m_Controller);
+                            sim.verticalAxis = ("Vertical_" + GameManager.m_Instance.m_Player1.m_Controller);
+                            sim.submitButton = ("Submit_" + GameManager.m_Instance.m_Player1.m_Controller);
+                        }
                     }
                     else if (minigameManger.P2_place == 2)
                     {
-                        sim.horizontalAxis = ("Horizontal_P2");
-                        sim.verticalAxis = ("Vertical_P2");
-                        sim.submitButton = ("Submit_P2");
+                        sim.horizontalAxis = ("Horizontal_" + GameManager.m_Instance.m_Player2.m_Controller);
+                        sim.verticalAxis = ("Vertical_" + GameManager.m_Instance.m_Player2.m_Controller);
+                        sim.submitButton = ("Submit_" + GameManager.m_Instance.m_Player2.m_Controller);
                     }
                     else if (minigameManger.P3_place == 2)
                     {
-                        sim.horizontalAxis = ("Horizontal_P3");
-                        sim.verticalAxis = ("Vertical_P3");
-                        sim.submitButton = ("Submit_P3");
+                        sim.horizontalAxis = ("Horizontal_" + GameManager.m_Instance.m_Player3.m_Controller);
+                        sim.verticalAxis = ("Vertical_" + GameManager.m_Instance.m_Player3.m_Controller);
+                        sim.submitButton = ("Submit_" + GameManager.m_Instance.m_Player3.m_Controller);
                     }
                 }
                 else if (rewardsSelected == 2)                                    //THIRD BUTTON PRESS
                 {
                     if (minigameManger.P1_place == 3)
                     {
-                        sim.horizontalAxis = ("Horizontal_P1");
-                        sim.verticalAxis = ("Vertical_P1");
-                        sim.submitButton = ("Submit_P1");
+                        if (GameManager.m_Instance.m_Player1.m_Controller == Player.Controller.Keyboard)
+                        {
+                            sim.horizontalAxis = ("Horizontal_Keyboard");
+                            sim.verticalAxis = ("Vertical_Keyboard");
+                            sim.submitButton = ("Submit_Keyboard");
+                        }
+                        else
+                        {
+                            sim.horizontalAxis = ("Horizontal_" + GameManager.m_Instance.m_Player1.m_Controller);
+                            sim.verticalAxis = ("Vertical_" + GameManager.m_Instance.m_Player1.m_Controller);
+                            sim.submitButton = ("Submit_" + GameManager.m_Instance.m_Player1.m_Controller);
+                        }
                     }
                     else if (minigameManger.P2_place == 3)
                     {
-                        sim.horizontalAxis = ("Horizontal_P2");
-                        sim.verticalAxis = ("Vertical_P2");
-                        sim.submitButton = ("Submit_P2");
+                        sim.horizontalAxis = ("Horizontal_" + GameManager.m_Instance.m_Player2.m_Controller);
+                        sim.verticalAxis = ("Vertical_" + GameManager.m_Instance.m_Player2.m_Controller);
+                        sim.submitButton = ("Submit_" + GameManager.m_Instance.m_Player2.m_Controller);
                     }
                     else if (minigameManger.P3_place == 3)
                     {
-                        sim.horizontalAxis = ("Horizontal_P3");
-                        sim.verticalAxis = ("Vertical_P3");
-                        sim.submitButton = ("Submit_P3");
+                        sim.horizontalAxis = ("Horizontal_" + GameManager.m_Instance.m_Player3.m_Controller);
+                        sim.verticalAxis = ("Vertical_" + GameManager.m_Instance.m_Player3.m_Controller);
+                        sim.submitButton = ("Submit_" + GameManager.m_Instance.m_Player3.m_Controller);
                     }
                 }
                 break;
@@ -181,54 +235,72 @@ public class MiniGameRewards : MonoBehaviour
                 {
                     if (minigameManger.P1_place == 1)
                     {
-                        sim.horizontalAxis = ("Horizontal_P1");
-                        sim.verticalAxis = ("Vertical_P1");
-                        sim.submitButton = ("Submit_P1");
+                        if (GameManager.m_Instance.m_Player1.m_Controller == Player.Controller.Keyboard)
+                        {
+                            sim.horizontalAxis = ("Horizontal_Keyboard");
+                            sim.verticalAxis = ("Vertical_Keyboard");
+                            sim.submitButton = ("Submit_Keyboard");
+                        }
+                        else
+                        {
+                            sim.horizontalAxis = ("Horizontal_" + GameManager.m_Instance.m_Player1.m_Controller);
+                            sim.verticalAxis = ("Vertical_" + GameManager.m_Instance.m_Player1.m_Controller);
+                            sim.submitButton = ("Submit_" + GameManager.m_Instance.m_Player1.m_Controller);
+                        }
                     }
                     else if (minigameManger.P2_place == 1)
                     {
-                        sim.horizontalAxis = ("Horizontal_P2");
-                        sim.verticalAxis = ("Vertical_P2");
-                        sim.submitButton = ("Submit_P2");
+                        sim.horizontalAxis = ("Horizontal_" + GameManager.m_Instance.m_Player2.m_Controller);
+                        sim.verticalAxis = ("Vertical_" + GameManager.m_Instance.m_Player2.m_Controller);
+                        sim.submitButton = ("Submit_" + GameManager.m_Instance.m_Player2.m_Controller);
                     }
                     else if (minigameManger.P3_place == 1)
                     {
-                        sim.horizontalAxis = ("Horizontal_P3");
-                        sim.verticalAxis = ("Vertical_P3");
-                        sim.submitButton = ("Submit_P3");
+                        sim.horizontalAxis = ("Horizontal_" + GameManager.m_Instance.m_Player3.m_Controller);
+                        sim.verticalAxis = ("Vertical_" + GameManager.m_Instance.m_Player3.m_Controller);
+                        sim.submitButton = ("Submit_" + GameManager.m_Instance.m_Player3.m_Controller);
                     }
                     else if (minigameManger.P4_place == 1)
                     {
-                        sim.horizontalAxis = ("Horizontal_P4");
-                        sim.verticalAxis = ("Vertical_P4");
-                        sim.submitButton = ("Submit_P4");
+                        sim.horizontalAxis = ("Horizontal_" + GameManager.m_Instance.m_Player4.m_Controller);
+                        sim.verticalAxis = ("Vertical_" + GameManager.m_Instance.m_Player4.m_Controller);
+                        sim.submitButton = ("Submit_" + GameManager.m_Instance.m_Player4.m_Controller);
                     }
                 }
                 else if (rewardsSelected == 1)                                    //SECOND BUTTON PRESS
                 {
                     if (minigameManger.P1_place == 2)
                     {
-                        sim.horizontalAxis = ("Horizontal_P1");
-                        sim.verticalAxis = ("Vertical_P1");
-                        sim.submitButton = ("Submit_P1");
+                        if (GameManager.m_Instance.m_Player1.m_Controller == Player.Controller.Keyboard)
+                        {
+                            sim.horizontalAxis = ("Horizontal_Keyboard");
+                            sim.verticalAxis = ("Vertical_Keyboard");
+                            sim.submitButton = ("Submit_Keyboard");
+                        }
+                        else
+                        {
+                            sim.horizontalAxis = ("Horizontal_" + GameManager.m_Instance.m_Player1.m_Controller);
+                            sim.verticalAxis = ("Vertical_" + GameManager.m_Instance.m_Player1.m_Controller);
+                            sim.submitButton = ("Submit_" + GameManager.m_Instance.m_Player1.m_Controller);
+                        }
                     }
                     else if (minigameManger.P2_place == 2)
                     {
-                        sim.horizontalAxis = ("Horizontal_P2");
-                        sim.verticalAxis = ("Vertical_P2");
-                        sim.submitButton = ("Submit_P2");
+                        sim.horizontalAxis = ("Horizontal_" + GameManager.m_Instance.m_Player2.m_Controller);
+                        sim.verticalAxis = ("Vertical_" + GameManager.m_Instance.m_Player2.m_Controller);
+                        sim.submitButton = ("Submit_" + GameManager.m_Instance.m_Player2.m_Controller);
                     }
                     else if (minigameManger.P3_place == 2)
                     {
-                        sim.horizontalAxis = ("Horizontal_P3");
-                        sim.verticalAxis = ("Vertical_P3");
-                        sim.submitButton = ("Submit_P3");
+                        sim.horizontalAxis = ("Horizontal_" + GameManager.m_Instance.m_Player3.m_Controller);
+                        sim.verticalAxis = ("Vertical_" + GameManager.m_Instance.m_Player3.m_Controller);
+                        sim.submitButton = ("Submit_" + GameManager.m_Instance.m_Player3.m_Controller);
                     }
                     else if (minigameManger.P4_place == 2)
                     {
-                        sim.horizontalAxis = ("Horizontal_P4");
-                        sim.verticalAxis = ("Vertical_P4");
-                        sim.submitButton = ("Submit_P4");
+                        sim.horizontalAxis = ("Horizontal_" + GameManager.m_Instance.m_Player4.m_Controller);
+                        sim.verticalAxis = ("Vertical_" + GameManager.m_Instance.m_Player4.m_Controller);
+                        sim.submitButton = ("Submit_" + GameManager.m_Instance.m_Player4.m_Controller);
                     }
 
                 }
@@ -236,54 +308,72 @@ public class MiniGameRewards : MonoBehaviour
                 {
                     if (minigameManger.P1_place == 3)
                     {
-                        sim.horizontalAxis = ("Horizontal_P1");
-                        sim.verticalAxis = ("Vertical_P1");
-                        sim.submitButton = ("Submit_P1");
+                        if (GameManager.m_Instance.m_Player1.m_Controller == Player.Controller.Keyboard)
+                        {
+                            sim.horizontalAxis = ("Horizontal_Keyboard");
+                            sim.verticalAxis = ("Vertical_Keyboard");
+                            sim.submitButton = ("Submit_Keyboard");
+                        }
+                        else
+                        {
+                            sim.horizontalAxis = ("Horizontal_" + GameManager.m_Instance.m_Player1.m_Controller);
+                            sim.verticalAxis = ("Vertical_" + GameManager.m_Instance.m_Player1.m_Controller);
+                            sim.submitButton = ("Submit_" + GameManager.m_Instance.m_Player1.m_Controller);
+                        }
                     }
                     else if (minigameManger.P2_place == 3)
                     {
-                        sim.horizontalAxis = ("Horizontal_P2");
-                        sim.verticalAxis = ("Vertical_P2");
-                        sim.submitButton = ("Submit_P2");
+                        sim.horizontalAxis = ("Horizontal_" + GameManager.m_Instance.m_Player2.m_Controller);
+                        sim.verticalAxis = ("Vertical_" + GameManager.m_Instance.m_Player2.m_Controller);
+                        sim.submitButton = ("Submit_" + GameManager.m_Instance.m_Player2.m_Controller);
                     }
                     else if (minigameManger.P3_place == 3)
                     {
-                        sim.horizontalAxis = ("Horizontal_P3");
-                        sim.verticalAxis = ("Vertical_P3");
-                        sim.submitButton = ("Submit_P3");
+                        sim.horizontalAxis = ("Horizontal_" + GameManager.m_Instance.m_Player3.m_Controller);
+                        sim.verticalAxis = ("Vertical_" + GameManager.m_Instance.m_Player3.m_Controller);
+                        sim.submitButton = ("Submit_" + GameManager.m_Instance.m_Player3.m_Controller);
                     }
                     else if (minigameManger.P4_place == 3)
                     {
-                        sim.horizontalAxis = ("Horizontal_P4");
-                        sim.verticalAxis = ("Vertical_P4");
-                        sim.submitButton = ("Submit_P4");
+                        sim.horizontalAxis = ("Horizontal_" + GameManager.m_Instance.m_Player4.m_Controller);
+                        sim.verticalAxis = ("Vertical_" + GameManager.m_Instance.m_Player4.m_Controller);
+                        sim.submitButton = ("Submit_" + GameManager.m_Instance.m_Player4.m_Controller);
                     }
                 }
                 else if (rewardsSelected == 3)                                    //FOURTH BUTTON PRESS
                 {
                     if (minigameManger.P1_place == 4)
                     {
-                        sim.horizontalAxis = ("Horizontal_P1");
-                        sim.verticalAxis = ("Vertical_P1");
-                        sim.submitButton = ("Submit_P1");
+                        if (GameManager.m_Instance.m_Player1.m_Controller == Player.Controller.Keyboard)
+                        {
+                            sim.horizontalAxis = ("Horizontal_Keyboard");
+                            sim.verticalAxis = ("Vertical_Keyboard");
+                            sim.submitButton = ("Submit_Keyboard");
+                        }
+                        else
+                        {
+                            sim.horizontalAxis = ("Horizontal_" + GameManager.m_Instance.m_Player1.m_Controller);
+                            sim.verticalAxis = ("Vertical_" + GameManager.m_Instance.m_Player1.m_Controller);
+                            sim.submitButton = ("Submit_" + GameManager.m_Instance.m_Player1.m_Controller);
+                        }
                     }
                     else if (minigameManger.P2_place == 4)
                     {
-                        sim.horizontalAxis = ("Horizontal_P2");
-                        sim.verticalAxis = ("Vertical_P2");
-                        sim.submitButton = ("Submit_P2");
+                        sim.horizontalAxis = ("Horizontal_" + GameManager.m_Instance.m_Player2.m_Controller);
+                        sim.verticalAxis = ("Vertical_" + GameManager.m_Instance.m_Player2.m_Controller);
+                        sim.submitButton = ("Submit_" + GameManager.m_Instance.m_Player2.m_Controller);
                     }
                     else if (minigameManger.P3_place == 4)
                     {
-                        sim.horizontalAxis = ("Horizontal_P3");
-                        sim.verticalAxis = ("Vertical_P3");
-                        sim.submitButton = ("Submit_P3");
+                        sim.horizontalAxis = ("Horizontal_" + GameManager.m_Instance.m_Player3.m_Controller);
+                        sim.verticalAxis = ("Vertical_" + GameManager.m_Instance.m_Player3.m_Controller);
+                        sim.submitButton = ("Submit_" + GameManager.m_Instance.m_Player3.m_Controller);
                     }
                     else if (minigameManger.P4_place == 4)
                     {
-                        sim.horizontalAxis = ("Horizontal_P4");
-                        sim.verticalAxis = ("Vertical_P4");
-                        sim.submitButton = ("Submit_P4");
+                        sim.horizontalAxis = ("Horizontal_" + GameManager.m_Instance.m_Player4.m_Controller);
+                        sim.verticalAxis = ("Vertical_" + GameManager.m_Instance.m_Player4.m_Controller);
+                        sim.submitButton = ("Submit_" + GameManager.m_Instance.m_Player4.m_Controller);
                     }
                 }
                 break;
