@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 
@@ -93,8 +94,30 @@ public class PauseGame : MonoBehaviour
         }
     }
 
+    public void QuitBackButton(bool Open)
+    {
+        if (Open)
+        {
+            quitMenu.gameObject.SetActive(false);
+            pauseMenu.gameObject.SetActive(true);
+        }
+        if (!Open)
+        {
+            quitMenu.gameObject.SetActive(true);
+            pauseMenu.gameObject.SetActive(false);
+        }
+    }
 
+    public void QuitYesButton(bool Open)
+    {
+        if (Open)
+        {
+            SceneManager.LoadScene("MainMenu");
+        }
     
+    }
+
+
     public void Controls(bool Open)
     {
         if (Open)
@@ -109,19 +132,6 @@ public class PauseGame : MonoBehaviour
         }
     }
     
-    public void QuitBackButton(bool Open)
-    {
-        if (Open)
-        {
-            quitMenu.gameObject.SetActive(false);
-            pauseMenu.gameObject.SetActive(true);
-        }
-        if (!Open)
-        {
-            quitMenu.gameObject.SetActive(true);
-            pauseMenu.gameObject.SetActive(false);
-        }
-    }
 
            public void OptionsBackButton(bool Open)
     {
