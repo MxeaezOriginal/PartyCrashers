@@ -495,6 +495,14 @@ public class AdvancedBossAi : MonoBehaviour
     GameObject GetTargetPlayer()
     {
         //Right now this whole function is really basic but I'll make it more complicated later
+
+        //Get closest player
+        //Get player with the most health
+        //Get the player with the least amount of health
+        //Get the difference between the player with the largest amount of health and the least
+        //do math with this shit to figure out who to target
+        //SHOULD STILL BE KINDA RANDOM... We don't want people figuring out how the boss chooses it's targets
+
         GameObject target;
 
         target = getClosestPlayer();
@@ -502,7 +510,7 @@ public class AdvancedBossAi : MonoBehaviour
         return target;
     }
 
-    //Decision making for which attack to perform
+    #region Decision making for which attack to perform
 
     private int m_DashPriority = 1;
     private int m_TeleportPriority = 1;
@@ -551,6 +559,9 @@ public class AdvancedBossAi : MonoBehaviour
         }
         return states.shoot;
     }
+
+    #endregion
+    //Don't change this please it works pretty well
     GameObject getClosestPlayer()
     {
         float distance = 0f;
