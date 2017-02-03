@@ -151,7 +151,7 @@ public class Player : MonoBehaviour
         //Secondary Attack
         if (Input.GetAxisRaw(m_SecondaryAttack + m_Controller.ToString()) == 1)
         {
-            if (!m_CantAttack)
+            if (!m_CantAttack && GetComponent<PlayerController>().m_CantMove == false)
             {
                 attack(ATTACKTYPE.SECONDARY);
             }
