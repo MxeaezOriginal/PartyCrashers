@@ -16,6 +16,11 @@ public class HeartSystem : MonoBehaviour
     public Image[] heartImages = new Image[7];
     public Sprite[] heartSprites = new Sprite[3];
 
+	//kavells new code for feedback effects
+	public GameObject takeHitEffect;
+	public GameObject deathVFX;
+	//kavells new code for feedback effects
+
     //Player player;
 
     void Awake()
@@ -91,6 +96,14 @@ public class HeartSystem : MonoBehaviour
     {
         curHealth -= damage;
         curHealth = Mathf.Clamp(curHealth, 0, startHearts * healthPerHeart);
+		//kavells new code for feedback effects
+		if (takeHitEffect != null) 
+		{
+			GameObject takeDamage;
+			takeDamage = (GameObject)Instantiate (takeHitEffect, transform.position, Random.rotation);
+			Destroy (takeDamage, 0.5f);
+		}
+		//kavells new code for feedback effects
         UpdateHearts();
     }
 
@@ -118,6 +131,14 @@ public class HeartSystem : MonoBehaviour
         if (curHealth == 0)
         {
             print("Oh no cupcake, you died!");
+			//Kavells VFX code
+			if (deathVFX != null) 
+			{
+				GameObject takeDamage;
+				takeDamage = (GameObject)Instantiate (deathVFX, transform.position, transform.rotation);
+				Destroy (takeDamage, 1f);
+			}
+			//Kavells VFX code
             return true;
         }
         return false;

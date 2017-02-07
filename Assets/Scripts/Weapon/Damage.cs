@@ -37,9 +37,12 @@ public class Damage : MonoBehaviour
             EnemyHealth enemyHealth = other.gameObject.GetComponent<EnemyHealth>();
 			enemyHealth.Damage(m_Damage);
 			//kavells new code for feedback effects
-			GameObject takeDamage;
-			takeDamage = (GameObject)Instantiate(landHitEffect, other.transform.position, Random.rotation);
-			Destroy(takeDamage, 1f);
+			if (landHitEffect != null) 
+			{
+				GameObject takeDamage;
+				takeDamage = (GameObject)Instantiate (landHitEffect, other.transform.position, Random.rotation);
+				Destroy (takeDamage, 1f);
+			}
 			//kavells new code for feedback effects
 		}
 
