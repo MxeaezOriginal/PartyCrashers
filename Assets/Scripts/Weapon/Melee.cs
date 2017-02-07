@@ -8,4 +8,6 @@ public abstract class Melee : Weapon
     protected GameObject swordTrigger;
     [SerializeField]
     protected GameObject sliceEffect;
+  
 }
+

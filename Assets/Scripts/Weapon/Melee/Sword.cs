@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityStandardAssets.ImageEffects;
 
 public class Sword : Melee
 {
@@ -10,12 +11,14 @@ public class Sword : Melee
     [SerializeField]
     private float smooth = 20f;
     [SerializeField]
-    private float triggerLife = 0.5f;
+    private float triggerLife = 0.7f;
+    private float numOfParticles = 0;
 
     [SerializeField]
     public bool attack { get; private set; }
 
     public GameObject effect;
+    
     
     CharacterController m_CharacterController;
     Player m_Player;
@@ -24,7 +27,6 @@ public class Sword : Melee
     {
         m_CharacterController = GetComponentInParent<CharacterController>();
         m_Player = GetComponentInParent<Player>();
-
         sliceEffect.SetActive(false);
         swordTrigger.SetActive(false);
     }
@@ -34,24 +36,27 @@ public class Sword : Melee
         if (attack == true)
         {
             triggerLife -= Time.deltaTime;
-
             sliceEffect.SetActive(true);
             swordTrigger.SetActive(true);
 
-            if (effect)
+            if (effect && numOfParticles <= 0)
             {
+                numOfParticles = 1;
                 GameObject swordEffect;
                 swordEffect = (GameObject)Instantiate(effect, transform.position, transform.rotation);
 
-                Destroy(swordEffect, 5);
+                Destroy(swordEffect, 1);
+
             }
-        }
+          }  
+        
 
         if (triggerLife <= 0)
         {
             attack = false;
             swordTrigger.SetActive(false);
             sliceEffect.SetActive(false);
+            numOfParticles = 0;
             triggerLife = 0.5f;
         }
 
