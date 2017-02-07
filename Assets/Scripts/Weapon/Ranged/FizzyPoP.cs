@@ -51,6 +51,7 @@ public class FizzyPoP : Ranged
         if (Input.GetAxisRaw(Player.m_SecondaryAttack + Player.getControllerAsString()) == 0 && m_CanHeal)
         {
             ShootHeal();
+            Debug.Log("Is Shooting Spray");
         }
         #endregion
     }
@@ -93,7 +94,7 @@ public class FizzyPoP : Ranged
         GameObject healPrefab;
         healPrefab = (GameObject)Instantiate(m_LeftTriggerProjectile, m_FirePoint[0].gameObject.transform.position, m_FirePoint[0].gameObject.transform.rotation);
         healPrefab.GetComponent<Rigidbody>().AddForce(healPrefab.transform.up * m_HealShootSpeed);
-        healPrefab.GetComponent<FizzyGunSetTrap>().m_SetTrap = true;
+        healPrefab.GetComponent<FizzyGunSetTrap>().m_SetTrap = false;
         m_CanHeal = false;
     }
 
