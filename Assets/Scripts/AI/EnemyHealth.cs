@@ -55,9 +55,12 @@ public class EnemyHealth : MonoBehaviour
         if (m_EnemyHealth <= 0)
         {
 			//Kavells VFX code
-			GameObject takeDamage;
-			takeDamage = (GameObject)Instantiate(deathVFX, transform.position, transform.rotation);
-			Destroy(takeDamage, 1f);
+			if (deathVFX != null) 
+			{
+				GameObject takeDamage;
+				takeDamage = (GameObject)Instantiate (deathVFX, transform.position, transform.rotation);
+				Destroy (takeDamage, 1f);
+			}
 			//Kavells VFX code
             Kill();
         }

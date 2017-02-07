@@ -85,7 +85,6 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: -0.624}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 484034}
   m_RootOrder: 0
@@ -96,9 +95,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 193492}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: -0.00000016292068}
-  m_LocalPosition: {x: 13.043509, y: 1.101, z: 4.0858865}
+  m_LocalPosition: {x: -0.23, y: 1, z: 60.71}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
   m_Children:
   - {fileID: 402452}
   - {fileID: 22491084}
@@ -243,12 +241,12 @@ MonoBehaviour:
   infiniteSpawnCurrentNum: 0
   SpawnRange: 5
   GodRadius: 3
-  enemyPrefab: {fileID: 116792, guid: fd8eff308a4a0424798e4f65ac7fe3ab, type: 2}
+  enemyPrefab: {fileID: 128216, guid: ff6906de941c1804e9e04da544397b94, type: 2}
   timer: 5
   range: 15
-  spawnTime: 5
-  activedRange: 20
-  RunAwayRange: 5
+  spawnTime: 2
+  activedRange: 25
+  RunAwayRange: 4
   RunSpeed: 0.02
 --- !u!114 &11444220
 MonoBehaviour:
@@ -317,6 +315,7 @@ MonoBehaviour:
   SFX:
   - {fileID: 8300000, guid: 523aae0b772d1a744a038360810c68cb, type: 3}
   - {fileID: 8300000, guid: 6c8d269acad818740a1260df836601a1, type: 3}
+  deathVFX: {fileID: 176698, guid: a29a954b4afcf814f8f2ab513328e7c1, type: 2}
   m_EnemyHealth: 10
   m_Drop: {fileID: 0}
   isInvincible: 0
@@ -387,7 +386,6 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.9469062, y: 1.6788018, z: 1.8478999}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 22491084}
   m_RootOrder: 0
@@ -405,7 +403,6 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0.0000018338349, z: 0, w: -1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.0088245, y: 0.06479796, z: 1.0088246}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 22483972}
   m_Father: {fileID: 484034}
