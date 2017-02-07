@@ -8,6 +8,10 @@ public class EnemyHealth : MonoBehaviour
     public AudioClip[] SFX;
     private AudioClip SFXtoPlay;
 
+	//Kavells VFX code
+	public GameObject deathVFX;
+	//Kavells VFX code
+
     public float m_EnemyHealth = 100f;
     public GameObject m_Drop;
     [HideInInspector]
@@ -50,6 +54,11 @@ public class EnemyHealth : MonoBehaviour
         }
         if (m_EnemyHealth <= 0)
         {
+			//Kavells VFX code
+			GameObject takeDamage;
+			takeDamage = (GameObject)Instantiate(deathVFX, transform.position, transform.rotation);
+			Destroy(takeDamage, 1f);
+			//Kavells VFX code
             Kill();
         }
     }
