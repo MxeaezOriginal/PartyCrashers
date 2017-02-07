@@ -126,13 +126,13 @@ public class Sword : Melee
 
     private IEnumerator setPrimaryAttackFalse()
     {
-        yield return new WaitForSeconds(.1f);
+        yield return new WaitForSeconds(.5f);
         m_Player.m_Animator.SetBool("isSlashing", false);
     }
 
     private IEnumerator setSecondaryAttackFalse()
     {
-        yield return new WaitForSeconds(.1f);
+        yield return new WaitForSeconds(.5f);
         m_Player.m_Animator.SetBool("isDashing", false);
     }
 }
