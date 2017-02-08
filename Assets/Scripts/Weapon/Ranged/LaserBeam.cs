@@ -3,21 +3,19 @@ using System.Collections;
 
 [RequireComponent(typeof(LineRenderer))]
 public class LaserBeam : MonoBehaviour
-{
-    [SerializeField]
-    private float laserWidth = 0.2f;
-
+{ 
     Bow bow;
     LineRenderer m_LineRenderer;
+    SphereCollider col;
 
     [SerializeField]
     private GameObject m_LaserBeamFX;   //TODO: Instantiate this efect feom line renderer start to line renderer max lenght while line renderer is enabled
 
     void Start()
     {
-        bow = GetComponentInParent<Bow>();       
+        bow = GetComponentInParent<Bow>();
+        col = GetComponent<SphereCollider>();
         m_LineRenderer = GetComponent<LineRenderer>();
-        //m_LineRenderer.SetWidth(laserWidth, laserWidth);   
         m_LineRenderer.enabled = false;
     }
 
@@ -35,10 +33,9 @@ public class LaserBeam : MonoBehaviour
             if(m_LineRenderer.enabled == true)
             {
                 if (hit.transform.GetComponent<EnemyHealth>() != null)
-                {
-                    //Debug.Log(hit);
-                    //bow.assignDamage(this.gameObject, bow.m_LaserDmgMultiplier);    
-                    
+                {                    
+                    bow.assignDamage(this.gameObject, bow.m_LaserDmgMultiplier);
+                    col.transform.position = hit.transform.position;                     
                 }
             }
             
