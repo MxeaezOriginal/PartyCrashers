@@ -28,7 +28,7 @@ public class EnemyEffect : MonoBehaviour
     {
         if (isStun == true)
         {
-            gameObject.GetComponent<EnemyHealth>().isInvincible = true;
+            //gameObject.GetComponent<EnemyHealth>().isInvincible = true;
             enemyAi.agent.Stop();
             isStun = (m_LastStunTime + m_StunTime) > Time.time;
         }
@@ -54,4 +54,6 @@ public class EnemyEffect : MonoBehaviour
 
         enemyAi.Knockback(KnockBackDirection, KB);
     }
+
+
 }

@@ -8,14 +8,27 @@ public class EnemyHealth : MonoBehaviour
     public AudioClip[] SFX;
     private AudioClip SFXtoPlay;
 
-	//Kavells VFX code
-	public GameObject deathVFX;
-	//Kavells VFX code
-
     public float m_EnemyHealth = 100f;
+    public float m_EnemyInvincibleTime = 0.5f;
     public GameObject m_Drop;
     [HideInInspector]
+    private bool isDamage = false;
     public bool isInvincible = false;
+
+    void Update()
+    {
+        if (isDamage == true)
+        {
+            isInvincible = true;
+            StartCoroutine(StopDamagefor(m_EnemyInvincibleTime));
+            //isStun = (m_LastStunTime + m_StunTime) > Time.time;
+        }
+        if (isDamage == false)
+        {
+            isInvincible = false;
+        }
+    }
+
     public void Kill()
     {
         Destroy(gameObject);
@@ -36,8 +49,9 @@ public class EnemyHealth : MonoBehaviour
 
     public void Damage(float health)
     {
+        isDamage = true;
         //Debug.Log("Damaged");
-        if(isInvincible == true)
+        if (isInvincible == true)
         {
         }
         if (isInvincible == false)
@@ -54,16 +68,15 @@ public class EnemyHealth : MonoBehaviour
         }
         if (m_EnemyHealth <= 0)
         {
-			//Kavells VFX code
-			if (deathVFX != null) 
-			{
-				GameObject takeDamage;
-				takeDamage = (GameObject)Instantiate (deathVFX, transform.position, transform.rotation);
-				Destroy (takeDamage, 1f);
-			}
-			//Kavells VFX code
             Kill();
         }
     }
 
+    IEnumerator StopDamagefor(float wait)
+    {
+        //this is the amount of time i want it to wait
+        yield return new WaitForSeconds(wait);
+        //this is what it will do when the timehas passed
+        isDamage = false;
+    }
 }
