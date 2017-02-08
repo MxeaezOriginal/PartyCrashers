@@ -28,13 +28,13 @@ public class EnemyEffect : MonoBehaviour
     {
         if (isStun == true)
         {
-            gameObject.GetComponent<EnemyHealth>().isInvincible = true;
+            //gameObject.GetComponent<EnemyHealth>().isInvincible = true;
             enemyAi.agent.Stop();
             isStun = (m_LastStunTime + m_StunTime) > Time.time;
         }
         if (isStun == false)
         {
-            gameObject.GetComponent<EnemyHealth>().isInvincible = false;
+            //gameObject.GetComponent<EnemyHealth>().isInvincible = false;
         }
     }
 
