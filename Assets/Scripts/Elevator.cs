@@ -17,7 +17,12 @@ public class Elevator : MonoBehaviour {
     public bool resetToStart;
     public float resetTime;
     public float smooth;
-    
+
+
+    //sound
+    public AudioSource audioSource;
+    private bool soundMuted = false;
+    //sound end
 
     void Start()
     {
@@ -31,9 +36,22 @@ public class Elevator : MonoBehaviour {
     // Update is called once per frame
     void Update ()
     {
-	if (carryAmmount >= requiredCarryAmmount)
+        if (carryAmmount >= requiredCarryAmmount)
         {
+            if(resetToStart == false)
+            {
+                Invoke("muteSound", resetTime);
+            }
             ElevatorPosition.position = Vector3.Lerp(ElevatorPosition.position, newPosition, smooth * Time.deltaTime);
+            if(soundMuted == false)
+            {
+                audioSource.volume = 1;
+            }
+           
+        }
+         else
+        {
+            audioSource.volume = 0;
         }
 
 	}
@@ -57,6 +75,11 @@ public class Elevator : MonoBehaviour {
                 movingtoStart = false;
                 newPosition = endPosition.position;
             }
+        }
+        else
+        {
+
+            audioSource.volume = 0;
         }
 
 
@@ -86,4 +109,11 @@ public class Elevator : MonoBehaviour {
             carryAmmount--;
         }
     }
+
+    void muteSound()
+    {
+        soundMuted = true;
+        audioSource.volume = 0;
+    }
+
 }

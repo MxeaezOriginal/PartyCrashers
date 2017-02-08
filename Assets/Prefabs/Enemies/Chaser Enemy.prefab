@@ -86,7 +86,6 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: -0.582}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 492622}
   m_RootOrder: 0
@@ -96,10 +95,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 128216}
-  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071067}
-  m_LocalPosition: {x: 44.06, y: 1, z: 4.33}
+  m_LocalRotation: {x: 0, y: 0.7071051, z: 0, w: 0.7071085}
+  m_LocalPosition: {x: -99.45, y: 1.0083779, z: -78.323044}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
   m_Children:
   - {fileID: 431270}
   - {fileID: 22483400}
@@ -367,6 +365,7 @@ MonoBehaviour:
   m_StopDistance: 0
   KnockBackDis: 30
   m_Damage: 1
+  disableGetClosestPlayer: 0
   takeHitEffect: {fileID: 187060, guid: 8e6e97eaaf4c4c546801bea70858f782, type: 2}
 --- !u!114 &11491940
 MonoBehaviour:
@@ -383,6 +382,7 @@ MonoBehaviour:
   SFX:
   - {fileID: 8300000, guid: 523aae0b772d1a744a038360810c68cb, type: 3}
   - {fileID: 8300000, guid: 6c8d269acad818740a1260df836601a1, type: 3}
+  deathVFX: {fileID: 176698, guid: a29a954b4afcf814f8f2ab513328e7c1, type: 2}
   m_EnemyHealth: 4
   m_Drop: {fileID: 0}
   isInvincible: 0
@@ -453,7 +453,6 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0.0000018338349, z: 0, w: -1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.0088245, y: 0.06479796, z: 1.0088246}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 22487200}
   m_Father: {fileID: 492622}
@@ -472,7 +471,6 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.9469062, y: 1.6788018, z: 1.8478999}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 22483400}
   m_RootOrder: 0
