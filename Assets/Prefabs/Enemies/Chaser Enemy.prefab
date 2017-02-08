@@ -181,7 +181,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
-  m_Pitch: 1
+  m_Pitch: 1.1
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -366,7 +366,6 @@ MonoBehaviour:
   KnockBackDis: 30
   m_Damage: 1
   disableGetClosestPlayer: 0
-  takeHitEffect: {fileID: 187060, guid: 8e6e97eaaf4c4c546801bea70858f782, type: 2}
 --- !u!114 &11491940
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -379,11 +378,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SFXPlayer: {fileID: 141572, guid: 4b95968007ca77149a6192d5d186a91f, type: 2}
-  SFX:
-  - {fileID: 8300000, guid: 523aae0b772d1a744a038360810c68cb, type: 3}
-  - {fileID: 8300000, guid: 6c8d269acad818740a1260df836601a1, type: 3}
+  hurtSFX:
+  - {fileID: 8300000, guid: 55abaa4af74f6cc4187a7ec5c3229f68, type: 3}
+  - {fileID: 8300000, guid: c44f8ab61a2fe7b40879531e76006ca6, type: 3}
+  - {fileID: 8300000, guid: 8cfac5860639a744696ff63e13d00849, type: 3}
+  - {fileID: 8300000, guid: e18f57ae0e26dbe4389f1aacaf725631, type: 3}
+  - {fileID: 8300000, guid: 285f8a500f94f5f4b9c5b959542e349f, type: 3}
+  deathSFX:
+  - {fileID: 8300000, guid: b0513679066ad164f86002b920825e01, type: 3}
+  - {fileID: 8300000, guid: c78333a7acab3a542a6749b9bb552857, type: 3}
+  - {fileID: 8300000, guid: f5383e801ee9e194bb738636ccf9177c, type: 3}
+  - {fileID: 8300000, guid: 625dfa1c7f893d74c989941ee0fcc6f0, type: 3}
+  - {fileID: 8300000, guid: bc0048398dad08e4285ab3368bbef052, type: 3}
   deathVFX: {fileID: 176698, guid: a29a954b4afcf814f8f2ab513328e7c1, type: 2}
   m_EnemyHealth: 4
+  m_EnemyInvincibleTime: 0.5
   m_Drop: {fileID: 0}
   isInvincible: 0
 --- !u!136 &13673056
