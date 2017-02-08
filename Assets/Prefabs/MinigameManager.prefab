@@ -45,7 +45,6 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.9131181, y: 0.5210259, z: -3.5881052}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 444674}
   m_Father: {fileID: 0}
@@ -59,7 +58,6 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.9131181, y: -0.5210259, z: 3.5881052}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 422924}
   m_RootOrder: 0
@@ -123,6 +121,9 @@ MonoBehaviour:
   barsRaised: 0
   showRewardCanvas: 0
   rewardsSelected: 0
+  bossYes: 0
+  bossNo: 0
+  test: 0
   P1_place: 0
   P2_place: 0
   P3_place: 0
@@ -173,9 +174,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rewardCanvas: {fileID: 0}
+  bossPromptCanvas: {fileID: 0}
   rewardButtons:
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  bossPromptButtons:
   - {fileID: 0}
   - {fileID: 0}
   rewardTitle: {fileID: 0}

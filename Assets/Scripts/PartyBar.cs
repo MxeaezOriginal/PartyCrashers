@@ -132,18 +132,28 @@ public class PartyBar : MonoBehaviour {
             //SceneManager.LoadScene(GameManager.m_Instance.m_Tutorial.ToString()); //ballroom blitz
 
             //Reward time
-            if (miniGameManager.test)
+            if (miniGameManager.bossNo)
             {
                 GameManager.m_Instance.m_GameState = GameManager.GameState.Dungeon;
                 SceneManager.LoadScene(GameManager.m_Instance.m_Tutorial.ToString());
             }
+            else if (miniGameManager.bossYes)
+            {
+                GameManager.m_Instance.m_GameState = GameManager.GameState.Boss;
+                SceneManager.LoadScene("BossRoom");
+            }
         }
         else
         {
-            if (miniGameManager.test)
+            if (miniGameManager.bossNo)
             {
                 GameManager.m_Instance.m_GameState = GameManager.GameState.Dungeon;
                 SceneManager.LoadScene(Random.Range(8, 10));
+            }
+            else if (miniGameManager.bossYes)
+            {
+                GameManager.m_Instance.m_GameState = GameManager.GameState.Boss;
+                SceneManager.LoadScene("BossRoom");
             }
         }
     }

@@ -192,12 +192,13 @@ public class WeaponManager : MonoBehaviour
         {
             if(child.name.Equals("Weapon"))
             {
+                Debug.Log(child.name);
                 m_WeaponsTransform = child;
                 Debug.Log("Weapons Transform found under: " + child.name);
                 break;
             }
             findWeaponRecursive(child);
-            Debug.LogError("Weapons Transform not found under player model");
+            //Debug.LogError("Weapons Transform not found under player model");
         }
     }
 }
