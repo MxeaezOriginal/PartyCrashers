@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Pressablebutton : MonoBehaviour {
+public class Pressablebutton : MonoBehaviour
+{
 
     private Vector3 buttonstartPosition;
     public Transform buttondownPosition;
@@ -18,8 +19,15 @@ public class Pressablebutton : MonoBehaviour {
     private Vector3 objectToMoveStartPosition;
     private bool isDown = false;
 
+    //sounds
+    public AudioSource audioSource;
+    public AudioClip[] SFXDown;
+    public AudioClip[] SFXUp;
+    private AudioClip SFXtoPlay;
+    //sound end
+
     // Use this for initialization
-    void Start ()
+    void Start()
     {
         buttonstartPosition = ButtonPosition.position;
         objectToMoveStartPosition = objectToMove.position;
@@ -30,14 +38,30 @@ public class Pressablebutton : MonoBehaviour {
     {
         if (carryAmmount >= requiredCarryAmmount)
         {
+            //sound
+            if (!isDown)
+            {
+                SFXtoPlay = SFXDown[Random.Range(0, SFXDown.Length)];
+                audioSource.clip = SFXtoPlay;
+                audioSource.Play();
+            }
+            //sound end
             isDown = true;
         }
         else if (buttonDownPermanent == false)
         {
+            //sound
+            if (isDown)
+            {
+                SFXtoPlay = SFXUp[Random.Range(0, SFXUp.Length)];
+                audioSource.clip = SFXtoPlay;
+                audioSource.Play();
+            }
+            //sound end
             isDown = false;
-           
+
         }
-        if(isDown == true)
+        if (isDown == true)
         {
             ButtonPosition.position = Vector3.Lerp(ButtonPosition.position, buttondownPosition.position, smooth * Time.deltaTime);
             objectToMove.position = Vector3.Lerp(objectToMove.position, objectToMoveEndPosition.position, smooth * Time.deltaTime);

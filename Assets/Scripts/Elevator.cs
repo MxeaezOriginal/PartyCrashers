@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Elevator : MonoBehaviour {
+public class Elevator : MonoBehaviour
+{
 
     public Transform startPosition;
     public Transform endPosition;
@@ -12,12 +13,17 @@ public class Elevator : MonoBehaviour {
     public bool AllowEnemies;
     public bool AllowPlayers;
     private int carryAmmount = 0;
-    
+
     private bool movingtoStart;
     public bool resetToStart;
     public float resetTime;
     public float smooth;
-    
+
+
+    //sound
+    public AudioSource audioSource;
+    private bool soundMuted = false;
+    //sound end
 
     void Start()
     {
@@ -29,14 +35,27 @@ public class Elevator : MonoBehaviour {
 
 
     // Update is called once per frame
-    void Update ()
+    void Update()
     {
-	if (carryAmmount >= requiredCarryAmmount)
+        if (carryAmmount >= requiredCarryAmmount)
         {
+            if (resetToStart == false)
+            {
+                Invoke("muteSound", resetTime);
+            }
             ElevatorPosition.position = Vector3.Lerp(ElevatorPosition.position, newPosition, smooth * Time.deltaTime);
+            if (soundMuted == false)
+            {
+                audioSource.volume = 1;
+            }
+
+        }
+        else
+        {
+            audioSource.volume = 0;
         }
 
-	}
+    }
 
     void changeTarget()
     {
@@ -58,6 +77,11 @@ public class Elevator : MonoBehaviour {
                 newPosition = endPosition.position;
             }
         }
+        else
+        {
+
+            audioSource.volume = 0;
+        }
 
 
         Invoke("changeTarget", resetTime);
@@ -65,7 +89,7 @@ public class Elevator : MonoBehaviour {
     }
     void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Player" && AllowPlayers == true)
+        if (other.gameObject.tag == "Player" && AllowPlayers == true)
         {
             carryAmmount++;
         }
@@ -74,7 +98,7 @@ public class Elevator : MonoBehaviour {
             carryAmmount++;
         }
 
-        }
+    }
     void OnTriggerExit(Collider other)
     {
         if (other.gameObject.tag == "Player" && AllowPlayers == true)
@@ -86,4 +110,11 @@ public class Elevator : MonoBehaviour {
             carryAmmount--;
         }
     }
+
+    void muteSound()
+    {
+        soundMuted = true;
+        audioSource.volume = 0;
+    }
+
 }
