@@ -18,8 +18,9 @@ public class Bow : Ranged
 	public GameObject secondaryflashVFX;
 	public GameObject chargingVFX;
 	public GameObject chargedVFX;
-	//VFX end
+    //VFX end
 
+    [Header("WaterBalloon Bow")]
     [Tooltip("Maximum Charging Time.")]
     public float m_MaxCharge = 0f;
     [SerializeField][Tooltip("Medium Shooting Speed.")]
@@ -111,12 +112,12 @@ public class Bow : Ranged
     {
         GameObject balloon;
 		//kavells new code for feedback effects
-		if (primaryFlashVFX != null) 
-		{
-			GameObject shootMF;
-			shootMF = (GameObject)Instantiate (primaryFlashVFX, transform.position, transform.rotation);
-			Destroy (shootMF, 0.5f);
-		}
+		//if (primaryFlashVFX != null) 
+		//{
+		//	GameObject shootMF;
+		//	shootMF = (GameObject)Instantiate (primaryFlashVFX, transform.position, transform.rotation);
+		//	Destroy (shootMF, 0.5f);
+		//}
 		//kavells new code for feedback effects
 
         if (m_TimePressed < (m_MaxCharge / 2))
@@ -127,14 +128,14 @@ public class Bow : Ranged
             assignDamage(balloon, 1);
             balloon.GetComponent<Rigidbody>().AddForce(balloon.transform.forward * m_TimePressed);
             //sound
-            SFXtoPlay = SFXlowcharge[UnityEngine.Random.Range(0, SFXlowcharge.Length)];
+            //SFXtoPlay = SFXlowcharge[UnityEngine.Random.Range(0, SFXlowcharge.Length)];
 
-            if (SFXPlayer != null)
-            {
-                AudioSource source = SFXPlayer.GetComponent<AudioSource>();
-                source.clip = SFXtoPlay;
-            }
-            GameObject SFXtest = Instantiate(SFXPlayer, transform.position, transform.rotation) as GameObject;
+            //if (SFXPlayer != null)
+            //{
+            //    AudioSource source = SFXPlayer.GetComponent<AudioSource>();
+            //    source.clip = SFXtoPlay;
+            //}
+            //GameObject SFXtest = Instantiate(SFXPlayer, transform.position, transform.rotation) as GameObject;
             //sound end
 
         }
@@ -144,30 +145,30 @@ public class Bow : Ranged
             assignDamage(balloon, m_MidDmgMultiplier);
             balloon.GetComponent<Rigidbody>().AddForce(balloon.transform.forward * m_MedSpeed * m_TimePressed);
             //sound
-            SFXtoPlay = SFXmedcharge[UnityEngine.Random.Range(0, SFXmedcharge.Length)];
+            //SFXtoPlay = SFXmedcharge[UnityEngine.Random.Range(0, SFXmedcharge.Length)];
 
-            if (SFXPlayer != null)
-            {
-                AudioSource source = SFXPlayer.GetComponent<AudioSource>();
-                source.clip = SFXtoPlay;
-            }
-            GameObject SFXtest = Instantiate(SFXPlayer, transform.position, transform.rotation) as GameObject;
+            //if (SFXPlayer != null)
+            //{
+            //    AudioSource source = SFXPlayer.GetComponent<AudioSource>();
+            //    source.clip = SFXtoPlay;
+            //}
+            //GameObject SFXtest = Instantiate(SFXPlayer, transform.position, transform.rotation) as GameObject;
             //sound end
 
         }
         else
         {
             //sound
-            SFXtoPlay = SFXhighcharge[UnityEngine.Random.Range(0, SFXhighcharge.Length)];
+            //SFXtoPlay = SFXhighcharge[UnityEngine.Random.Range(0, SFXhighcharge.Length)];
 
-            if (SFXPlayer != null)
-            {
-                AudioSource source = SFXPlayer.GetComponent<AudioSource>();
-                source.clip = SFXtoPlay;
-            }
-            GameObject SFXtest = Instantiate(SFXPlayer, transform.position, transform.rotation) as GameObject;
+            //if (SFXPlayer != null)
+            //{
+            //    AudioSource source = SFXPlayer.GetComponent<AudioSource>();
+            //    source.clip = SFXtoPlay;
+            //}
+            //GameObject SFXtest = Instantiate(SFXPlayer, transform.position, transform.rotation) as GameObject;
             //sound end
-            laser.GetComponent<LineRenderer>().enabled = true;
+            
 
             StopCoroutine("LaserTimer");
             StartCoroutine("LaserTimer");                          
@@ -191,6 +192,7 @@ public class Bow : Ranged
 
     IEnumerator LaserTimer()
     {
+        laser.GetComponent<LineRenderer>().enabled = true;
         yield return new WaitForSeconds(m_LaserTimer);
         laser.GetComponent<LineRenderer>().enabled = false;
     }
