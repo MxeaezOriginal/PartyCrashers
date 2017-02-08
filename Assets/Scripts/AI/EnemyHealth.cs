@@ -5,7 +5,8 @@ public class EnemyHealth : MonoBehaviour
 {
     //sound
     public GameObject SFXPlayer;
-    public AudioClip[] SFX;
+    public AudioClip[] hurtSFX;
+    public AudioClip[] deathSFX;
     private AudioClip SFXtoPlay;
 
 	//Kavells VFX code
@@ -42,7 +43,19 @@ public class EnemyHealth : MonoBehaviour
         }
         if (isInvincible == false)
         {
-            SFXtoPlay = SFX[Random.Range(0, SFX.Length)];
+           
+            m_EnemyHealth -= health;
+
+            //James SFX Code
+            if (m_EnemyHealth > 0)
+            {
+                SFXtoPlay = hurtSFX[Random.Range(0, hurtSFX.Length)];
+            }
+            else
+            {
+                SFXtoPlay = deathSFX[Random.Range(0, deathSFX.Length)];
+            }
+
 
             if (SFXPlayer != null)
             {
@@ -50,7 +63,8 @@ public class EnemyHealth : MonoBehaviour
                 source.clip = SFXtoPlay;
             }
             GameObject SFXtest = Instantiate(SFXPlayer, transform.position, transform.rotation) as GameObject;
-            m_EnemyHealth -= health;
+
+            //James SFX Code End
         }
         if (m_EnemyHealth <= 0)
         {
