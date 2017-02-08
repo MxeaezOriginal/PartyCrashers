@@ -1,163 +1,174 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 
 public class PauseGame : MonoBehaviour
 {
-    public Transform canvas;
-    public Transform pauseMenu;
-    public Transform optionsMenu;
-    public Transform quitMenu;
-    public Transform controlsMenu;
-  
+
+    EventSystem es;
+
+    [Header("Different 'First Selected' Buttons")]
+    public GameObject[] firstSelectedButtons;
+
+    [Header("Different Canvases")]
+    public GameObject[] canvases;
+
+    [Header("Bools")]
+    public bool pauseActive, optionsActive, controlsActive, quitActive;
+
+    [Header("List of ALL Buttons")]
+    public GameObject[] allButtons;
 
 
 
+    void Awake()
+    {
 
+        es = GameObject.Find("Pause Menu/EventSystem").GetComponent<EventSystem>();
 
+    }
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (pauseActive)
+            StartCoroutine(Pause());
+        else if (optionsActive)
+            StartCoroutine(Options());
+        else if (controlsActive)
+            StartCoroutine(Controls());
+        else if (quitActive)
+            StartCoroutine(Quit());
+
+
+        if (Input.GetButtonDown("Pause_P1"))
         {
-            Pause();
+            PauseMenu();
         }
+
         {
             if (Time.timeScale == 0) return;
         }
     }
-    public void Pause()
-    {
-        if (canvas.gameObject.activeInHierarchy == true)
-        {
-            if (pauseMenu.gameObject.activeInHierarchy == false)
-            {
-                pauseMenu.gameObject.SetActive(true);
-                optionsMenu.gameObject.SetActive(false);
-                quitMenu.gameObject.SetActive(false);
-                controlsMenu.gameObject.SetActive(false);
-            }
-            canvas.gameObject.SetActive(true);
-            Time.timeScale = 0;
+    IEnumerator Pause()
 
+    {
+        pauseActive = false;
+        yield return null; es.SetSelectedGameObject(null); es.enabled = false; es.enabled = true; es.SetSelectedGameObject(firstSelectedButtons[0]); es.firstSelectedGameObject = firstSelectedButtons[0];
+
+        canvases[0].SetActive(true);
+        canvases[1].SetActive(false);
+        canvases[2].SetActive(false);
+        canvases[3].SetActive(false);
+
+    }
+
+
+
+    IEnumerator Options()
+
+    {
+        yield return null; es.SetSelectedGameObject(null); es.enabled = false; es.enabled = true; es.SetSelectedGameObject(firstSelectedButtons[1]); es.firstSelectedGameObject = firstSelectedButtons[1];
+        optionsActive = false;
+        canvases[0].SetActive(false);
+        canvases[1].SetActive(true);
+        canvases[2].SetActive(false);
+        canvases[3].SetActive(false);
+
+    }
+
+
+
+    IEnumerator Controls()
+
+    {
+        yield return null; es.SetSelectedGameObject(null); es.enabled = false; es.enabled = true; es.SetSelectedGameObject(firstSelectedButtons[2]); es.firstSelectedGameObject = firstSelectedButtons[2];
+        controlsActive = false;
+        canvases[0].SetActive(false);
+        canvases[1].SetActive(false);
+        canvases[2].SetActive(true);
+        canvases[3].SetActive(false);
+
+    }
+
+
+
+    IEnumerator Quit()
+
+    {
+        yield return null; es.SetSelectedGameObject(null); es.enabled = false; es.enabled = true; es.SetSelectedGameObject(firstSelectedButtons[3]); es.firstSelectedGameObject = firstSelectedButtons[3];
+        quitActive = false;
+        canvases[0].SetActive(false);
+        canvases[1].SetActive(false);
+        canvases[2].SetActive(false);
+        canvases[3].SetActive(true);
+
+    }
+
+    public void PauseMenu()
+    {
+        canvases[0].SetActive(true);
+        StandaloneInputModule inputModule = es.gameObject.GetComponent<StandaloneInputModule>();
+        if (canvases[0].activeSelf)
+        {
+            pauseActive = true;
+            inputModule.submitButton = "Jump_P1";
+            inputModule.horizontalAxis = "Horizontal_P1";
+            inputModule.verticalAxis = "Vertical_P1";
+            Time.timeScale = 0;
         }
+
         else
         {
-            canvas.gameObject.SetActive(false);
-            Time.timeScale = 1;
-           
-        }
-    }
-
-    public void Resume(bool Open)
-    {
-        if (Open)
-        {
-            //optionsMenu.gameObject.SetActive(true);
-            pauseMenu.gameObject.SetActive(false);
             Time.timeScale = 1;
         }
-        if (!Open)
-        {
-            //optionsMenu.gameObject.SetActive(false);
-            pauseMenu.gameObject.SetActive(true);
-        }
+
     }
 
-    public void Options(bool Open)
+    public void OptionsMenu()
     {
-        if (Open)
+        canvases[1].SetActive(true);
+        StandaloneInputModule inputModule = es.gameObject.GetComponent<StandaloneInputModule>();
+        if (canvases[1].activeSelf)
         {
-            optionsMenu.gameObject.SetActive(true);
-            pauseMenu.gameObject.SetActive(false);
-        }
-        if (!Open)
-        {
-            optionsMenu.gameObject.SetActive(false);
-            pauseMenu.gameObject.SetActive(true);
+            optionsActive = true;
+            inputModule.submitButton = "Jump_P1";
+            inputModule.horizontalAxis = "Horizontal_P1";
+            inputModule.verticalAxis = "Vertical_P1";
+            Time.timeScale = 0;
         }
     }
 
-
-    public void Quit(bool Open)
+    public void ResumeButton()
     {
-        if (Open)
-        {
-            quitMenu.gameObject.SetActive(true);
-            pauseMenu.gameObject.SetActive(false);
-        }
-        if (!Open)
-        {
-            quitMenu.gameObject.SetActive(false);
-            pauseMenu.gameObject.SetActive(true);
-        }
+        canvases[0].SetActive(false);
+        Time.timeScale = 1;
     }
-
-    public void QuitBackButton(bool Open)
+    public void OptionsButton()
     {
-        if (Open)
-        {
-            quitMenu.gameObject.SetActive(false);
-            pauseMenu.gameObject.SetActive(true);
-        }
-        if (!Open)
-        {
-            quitMenu.gameObject.SetActive(true);
-            pauseMenu.gameObject.SetActive(false);
-        }
+        optionsActive = true;
     }
-
-    public void QuitYesButton(bool Open)
+    public void ControlsButton()
     {
-        if (Open)
-        {
-            SceneManager.LoadScene("MainMenu");
-        }
-    
+        controlsActive = true;
     }
-
-
-    public void Controls(bool Open)
+    public void QuitButton()
     {
-        if (Open)
-        {
-            controlsMenu.gameObject.SetActive(true);
-            pauseMenu.gameObject.SetActive(false);
-        }
-        if (!Open)
-        {
-            controlsMenu.gameObject.SetActive(false);
-            pauseMenu.gameObject.SetActive(true);
-        }
+        quitActive = true;
     }
-    
-
-           public void OptionsBackButton(bool Open)
+    public void YesButton()
     {
-        if (Open)
-        {
-            optionsMenu.gameObject.SetActive(false);
-            pauseMenu.gameObject.SetActive(true);
-        }
-        if (!Open)
-        {
-            optionsMenu.gameObject.SetActive(true);
-            pauseMenu.gameObject.SetActive(false);
-        }
+        SceneManager.LoadScene("MainMenu");
+    }
+    public void NoButton()
+    {
+        PauseMenu();
     }
 
-    public void ControlsBackButton(bool Open)
-    {
-        if (Open)
-        {
-            controlsMenu.gameObject.SetActive(false);
-            pauseMenu.gameObject.SetActive(true);
-        }
-        if (!Open)
-        {
-            controlsMenu.gameObject.SetActive(true);
-            pauseMenu.gameObject.SetActive(false);
-        }
-    }
+
 }
+
+
+
