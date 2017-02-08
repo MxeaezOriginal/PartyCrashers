@@ -16,6 +16,7 @@ public class WeaponManager : MonoBehaviour
     private GameObject m_WeaponParent;
     private GameObject m_WeaponStandingOn;
     private GameObject m_WeaponStandingOnPickup;
+    private Transform m_WeaponsTransform;
 
     void Start()
     {
@@ -25,14 +26,17 @@ public class WeaponManager : MonoBehaviour
             m_Weapons.Add(weapon.gameObject.name, weapon);
         }
 
+        if (transform.FindChild("Model") != null) { findWeaponRecursive(transform.FindChild("Model")); }
+        else { Debug.LogError("Model not found under player"); }
+
         SetWeapon(m_WeaponOnGameStart);
     }
 
     public void SetWeapon(string weaponPrefabName)
     {
-        if (transform.FindChild("Model/Weapon/" + weaponPrefabName) != null)
+        if (m_WeaponsTransform.FindChild(weaponPrefabName) != null)
         {
-            GameObject child = transform.FindChild("Model/Weapon/" + weaponPrefabName).gameObject;
+            GameObject child = m_WeaponsTransform.FindChild(weaponPrefabName).gameObject;
             if (m_Weapons.ContainsKey(weaponPrefabName))
             {
                 if (m_CurrentWeapon != null)
@@ -125,8 +129,7 @@ public class WeaponManager : MonoBehaviour
             if (weapon.gameObject.name + m_PickupConcactinateString == other.gameObject.name)
             {
                 //Loop through all the child GameObjects under the Weapon gameobject in Player
-                Transform weapons = transform.FindChild("Model/Weapon");
-                foreach (Transform child in weapons)
+                foreach (Transform child in m_WeaponsTransform)
                 {
                     //If it finds a child under Weapon GameObject with the same name as the prefab, this is the Object to instantiate the Weapon Prefab under
                     if (child.gameObject.name == weapon.gameObject.name)
@@ -180,6 +183,21 @@ public class WeaponManager : MonoBehaviour
             m_WeaponParent = null;
             m_WeaponStandingOn = null;
             m_WeaponStandingOnPickup = null;
+        }
+    }
+
+    private void findWeaponRecursive(Transform root)
+    {
+        foreach(Transform child in root)
+        {
+            if(child.name.Equals("Weapon"))
+            {
+                m_WeaponsTransform = child;
+                Debug.Log("Weapons Transform found under: " + child.name);
+                break;
+            }
+            findWeaponRecursive(child);
+            Debug.LogError("Weapons Transform not found under player model");
         }
     }
 }
