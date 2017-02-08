@@ -10,6 +10,9 @@ public class MinigameManager : MonoBehaviour
     public bool barsRaised;
     public bool showRewardCanvas;
     public bool rewardsSelected;
+    public bool bossYes, bossNo;
+
+    public bool test;
 
     public int P1_place, P2_place, P3_place, P4_place;      //int from 1 - 4
 

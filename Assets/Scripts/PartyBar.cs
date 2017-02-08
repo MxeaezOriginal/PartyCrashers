@@ -132,7 +132,7 @@ public class PartyBar : MonoBehaviour {
             //SceneManager.LoadScene(GameManager.m_Instance.m_Tutorial.ToString()); //ballroom blitz
 
             //Reward time
-            if (miniGameManager.rewardsSelected)
+            if (miniGameManager.test)
             {
                 GameManager.m_Instance.m_GameState = GameManager.GameState.Dungeon;
                 SceneManager.LoadScene(GameManager.m_Instance.m_Tutorial.ToString());
@@ -140,7 +140,7 @@ public class PartyBar : MonoBehaviour {
         }
         else
         {
-            if (miniGameManager.rewardsSelected)
+            if (miniGameManager.test)
             {
                 GameManager.m_Instance.m_GameState = GameManager.GameState.Dungeon;
                 SceneManager.LoadScene(Random.Range(8, 10));

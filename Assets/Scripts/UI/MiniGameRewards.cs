@@ -15,12 +15,14 @@ public class MiniGameRewards : MonoBehaviour
 
     MinigameManager minigameManger;
     public GameObject rewardCanvas;
+    public GameObject bossPromptCanvas;
 
     EventSystem es;
     StandaloneInputModule sim;
     GameObject currentlySelectedButton;
 
     public Button[] rewardButtons;
+    public Button[] bossPromptButtons;
     public Text rewardTitle;
     public Text rewardTilePlayerNumber;
 
@@ -28,11 +30,13 @@ public class MiniGameRewards : MonoBehaviour
 
     public int rewardsSelected;
 
-    bool test;
+    bool rewardCanvasSetup;
+    bool bossPromptCanvasSetup;
 
     void Awake()
     {
         rewardCanvas = GameObject.Find("Reward Canvas");
+        bossPromptCanvas = GameObject.Find("BossPrompt Canvas");
 
         es = GameObject.Find("EventSystem").GetComponent<EventSystem>();
         sim = GameObject.Find("EventSystem").GetComponent<StandaloneInputModule>();
@@ -42,27 +46,42 @@ public class MiniGameRewards : MonoBehaviour
         rewardButtons[1] = GameObject.Find("Second Reward Button").GetComponent<Button>();  //Hearts
         rewardButtons[2] = GameObject.Find("Third Reward Button").GetComponent<Button>();   //Attack Speed
         rewardButtons[3] = GameObject.Find("Fourth Reward Button").GetComponent<Button>();  //Movement Speed
+        bossPromptButtons[0] = GameObject.Find("NO").GetComponent<Button>();
+        bossPromptButtons[1] = GameObject.Find("YES").GetComponent<Button>();
 
         rewardTitle = GameObject.Find("Pick Reward").GetComponent<Text>();
         rewardTilePlayerNumber = GameObject.Find("Player Number").GetComponent<Text>();
 
         rewardCanvas.SetActive(false);
+        bossPromptCanvas.SetActive(false);
     }
 
     void Update()
     {
-        //Enables Canvas component; NOT GAMEOBJECT!
+        //Enables Reward Canvas
         if (minigameManger.showRewardCanvas)
         {
             rewardCanvas.SetActive(true);
-            if (!test)
+            if (!rewardCanvasSetup)
             {
-                test = true;
+                rewardCanvasSetup = true;
                 es.SetSelectedGameObject(null); es.enabled = false; es.enabled = true; es.SetSelectedGameObject(rewardButtons[0].gameObject);
             }
             SetupInput();
             EndRewards();
             UpdateCurrentPlayer();
+        }
+        //Enables Boss Prompt Canvas
+        if (minigameManger.rewardsSelected)
+        {
+            rewardCanvas.SetActive(false);
+            bossPromptCanvas.SetActive(true);
+            if (!minigameManger.rewardsSelected)
+            {
+                minigameManger.rewardsSelected = true;
+                es.SetSelectedGameObject(null);
+                es.enabled = false; es.enabled = true; es.SetSelectedGameObject(bossPromptButtons[0].gameObject);
+            }
         }
     }
 
@@ -474,6 +493,14 @@ public class MiniGameRewards : MonoBehaviour
         }
     }
 
+    public void BossNo()
+    {
+        minigameManger.bossNo = true;
+    }
+    public void BossYes()
+    {
+        minigameManger.bossYes = true;
+    }
     private void UpdateCurrentPlayer()
     {
         switch (rewardsSelected)
