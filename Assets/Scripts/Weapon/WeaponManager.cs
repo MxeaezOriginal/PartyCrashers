@@ -116,8 +116,7 @@ public class WeaponManager : MonoBehaviour
         yield return new WaitForSeconds(m_DelayBetweenSwaps);
         droppedItem.name = correctName;
     }
-
-    void OnTriggerEnter(Collider other)
+    void OnTriggerStay(Collider other)
     {
         //Loop through all weapon prefabs
         foreach (GameObject weapon in m_WeaponPrefabs)
@@ -145,6 +144,34 @@ public class WeaponManager : MonoBehaviour
             }
         }
     }
+
+    /*void OnTriggerEnter(Collider other)
+    {
+        //Loop through all weapon prefabs
+        foreach (GameObject weapon in m_WeaponPrefabs)
+        {
+            //If the name of the prefab is equal to the name of the collided object with the pickup text added
+            if (weapon.gameObject.name + m_PickupConcactinateString == other.gameObject.name)
+            {
+                //Loop through all the child GameObjects under the Weapon gameobject in Player
+                foreach (Transform child in m_WeaponsObject)
+                {
+                    //If it finds a child under Weapon GameObject with the same name as the prefab, this is the Object to instantiate the Weapon Prefab under
+                    if (child.gameObject.name == weapon.gameObject.name)
+                    {
+                        //If the player already has a weapon equipped, destroy it before instatiating the new one
+                        //InstantiateWeapon(weapon, child.gameObject);
+                        m_WeaponParent = child.gameObject;
+                        m_WeaponStandingOn = weapon;
+                        m_WeaponStandingOnPickup = other.gameObject;
+                        Debug.Log("Standing on " + weapon.name);
+                        break;
+                    }
+                }
+                break;
+            }
+        }
+    }*/
     public void OnTriggerExit(Collider other)
     {
         if (m_WeaponStandingOn != null)

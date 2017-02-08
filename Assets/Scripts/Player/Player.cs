@@ -455,11 +455,11 @@ public class Player : MonoBehaviour
             m_Heart.TakeDamage(1);
             m_Heart.UpdateHearts();
         }
-        if (other.gameObject.CompareTag("TwoDamage"))
-        {
-            m_Heart.TakeDamage(2);
-            m_Heart.UpdateHearts();
-        }
+        //if (other.gameObject.CompareTag("TwoDamage"))
+        //{
+           // m_Heart.TakeDamage(2);
+            //m_Heart.UpdateHearts();
+        //}
         //if (other.gameObject.CompareTag("MeleeEnemy"))
         //{
         //    rb.AddForce(transform.forward * 500);
