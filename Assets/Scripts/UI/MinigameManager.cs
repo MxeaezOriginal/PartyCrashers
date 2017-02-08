@@ -20,13 +20,4 @@ public class MinigameManager : MonoBehaviour
             minigameEnded = true;
         }
     }
-
-    void Update()
-    {
-        if (rewardsSelected)
-        {
-            GameManager.m_Instance.m_GameState = GameManager.GameState.Dungeon;
-            SceneManager.LoadScene(GameManager.m_Instance.m_Tutorial.ToString());
-        }
-    }
 }
