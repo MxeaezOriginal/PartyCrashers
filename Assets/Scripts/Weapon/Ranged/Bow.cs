@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using UnityEngine.UI;
 
 public class Bow : Ranged
 {
@@ -11,6 +12,13 @@ public class Bow : Ranged
     public AudioClip[] SFXhighcharge;
     private AudioClip SFXtoPlay;
     //sound end 
+
+	//VfX
+	public GameObject primaryFlashVFX;
+	public GameObject secondaryflashVFX;
+	public GameObject chargingVFX;
+	public GameObject chargedVFX;
+	//VFX end
 
     [Tooltip("Maximum Charging Time.")]
     public float m_MaxCharge = 0f;
@@ -82,6 +90,14 @@ public class Bow : Ranged
 
         if (m_SecondaryCoolDown <= Time.time - m_Weapon2Cooldown || m_SecondaryCoolDown == 0)
         {
+			//kavells new code for feedback effects
+			if (secondaryflashVFX != null) 
+			{
+				GameObject bombMF;
+				bombMF = (GameObject)Instantiate (secondaryflashVFX, transform.position, transform.rotation);
+				Destroy (bombMF, 0.5f);
+			}
+			//kavells new code for feedback effects
             GameObject bigBalloon;
             bigBalloon = (GameObject)Instantiate(m_LeftTriggerProjectile, m_FirePoint[0].gameObject.transform.position, m_FirePoint[0].gameObject.transform.rotation);
 
@@ -94,7 +110,14 @@ public class Bow : Ranged
     private void shoot()
     {
         GameObject balloon;
-        
+		//kavells new code for feedback effects
+		if (primaryFlashVFX != null) 
+		{
+			GameObject shootMF;
+			shootMF = (GameObject)Instantiate (primaryFlashVFX, transform.position, transform.rotation);
+			Destroy (shootMF, 0.5f);
+		}
+		//kavells new code for feedback effects
 
         if (m_TimePressed < (m_MaxCharge / 2))
         {
@@ -130,6 +153,7 @@ public class Bow : Ranged
             }
             GameObject SFXtest = Instantiate(SFXPlayer, transform.position, transform.rotation) as GameObject;
             //sound end
+
         }
         else
         {

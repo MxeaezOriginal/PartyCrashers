@@ -19,8 +19,8 @@ public class StickyTrap : Trap {
                 if(m_effect != null)
                 {
                     GameObject effect;
-                    effect = (GameObject)Instantiate(m_effect, gameObject.transform.position, gameObject.transform.rotation);
-                    Destroy(effect, 3f);
+					effect = (GameObject)Instantiate(m_effect, other.transform.position, Random.rotation);  
+					Destroy(effect, m_StuckTime);
                 }
                 //Debug.Log("Stuck");
                 playerController.m_CantMove = true;
