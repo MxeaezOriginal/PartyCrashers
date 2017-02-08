@@ -13,9 +13,26 @@ public class EnemyHealth : MonoBehaviour
 	//Kavells VFX code
 
     public float m_EnemyHealth = 100f;
+    public float m_EnemyInvincibleTime = 0.5f;
     public GameObject m_Drop;
-    [HideInInspector]
+    //[HideInInspector]
     public bool isInvincible = false;
+    private bool isDamage = false;
+
+    void Update()
+    {
+        if (isDamage == true)
+        {
+            isInvincible = true;
+            StartCoroutine(StopDamagefor(m_EnemyInvincibleTime));
+        }
+        if (isDamage == false)
+        {
+            isInvincible = false;
+        }
+    }
+
+
     public void Kill()
     {
         Destroy(gameObject);
@@ -36,8 +53,9 @@ public class EnemyHealth : MonoBehaviour
 
     public void Damage(float health)
     {
+        isDamage = true;
         //Debug.Log("Damaged");
-        if(isInvincible == true)
+        if (isInvincible == true)
         {
         }
         if (isInvincible == false)
@@ -65,5 +83,11 @@ public class EnemyHealth : MonoBehaviour
             Kill();
         }
     }
-
+    IEnumerator StopDamagefor(float wait)
+    {
+        //this is the amount of time i want it to wait
+        yield return new WaitForSeconds(wait);
+        //this is what it will do when the timehas passed
+        isDamage = false;
+    }
 }
