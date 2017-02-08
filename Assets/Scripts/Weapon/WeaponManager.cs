@@ -16,7 +16,6 @@ public class WeaponManager : MonoBehaviour
     private GameObject m_WeaponParent;
     private GameObject m_WeaponStandingOn;
     private GameObject m_WeaponStandingOnPickup;
-    private Transform m_WeaponsObject;
 
     void Start()
     {
@@ -26,15 +25,14 @@ public class WeaponManager : MonoBehaviour
             m_Weapons.Add(weapon.gameObject.name, weapon);
         }
 
-        findChildRecursive(transform.FindChild("Model"));
         SetWeapon(m_WeaponOnGameStart);
     }
 
     public void SetWeapon(string weaponPrefabName)
     {
-        if (m_WeaponsObject.FindChild(weaponPrefabName) != null)
+        if (transform.FindChild("Model/Weapon/" + weaponPrefabName) != null)
         {
-            GameObject child = m_WeaponsObject.FindChild(weaponPrefabName).gameObject;
+            GameObject child = transform.FindChild("Model/Weapon/" + weaponPrefabName).gameObject;
             if (m_Weapons.ContainsKey(weaponPrefabName))
             {
                 if (m_CurrentWeapon != null)
@@ -118,8 +116,36 @@ public class WeaponManager : MonoBehaviour
         yield return new WaitForSeconds(m_DelayBetweenSwaps);
         droppedItem.name = correctName;
     }
+    void OnTriggerStay(Collider other)
+    {
+        //Loop through all weapon prefabs
+        foreach (GameObject weapon in m_WeaponPrefabs)
+        {
+            //If the name of the prefab is equal to the name of the collided object with the pickup text added
+            if (weapon.gameObject.name + m_PickupConcactinateString == other.gameObject.name)
+            {
+                //Loop through all the child GameObjects under the Weapon gameobject in Player
+                Transform weapons = transform.FindChild("Model/Weapon");
+                foreach (Transform child in weapons)
+                {
+                    //If it finds a child under Weapon GameObject with the same name as the prefab, this is the Object to instantiate the Weapon Prefab under
+                    if (child.gameObject.name == weapon.gameObject.name)
+                    {
+                        //If the player already has a weapon equipped, destroy it before instatiating the new one
+                        //InstantiateWeapon(weapon, child.gameObject);
+                        m_WeaponParent = child.gameObject;
+                        m_WeaponStandingOn = weapon;
+                        m_WeaponStandingOnPickup = other.gameObject;
+                        Debug.Log("Standing on " + weapon.name);
+                        break;
+                    }
+                }
+                break;
+            }
+        }
+    }
 
-    void OnTriggerEnter(Collider other)
+    /*void OnTriggerEnter(Collider other)
     {
         //Loop through all weapon prefabs
         foreach (GameObject weapon in m_WeaponPrefabs)
@@ -145,7 +171,7 @@ public class WeaponManager : MonoBehaviour
                 break;
             }
         }
-    }
+    }*/
     public void OnTriggerExit(Collider other)
     {
         if (m_WeaponStandingOn != null)
@@ -155,21 +181,5 @@ public class WeaponManager : MonoBehaviour
             m_WeaponStandingOn = null;
             m_WeaponStandingOnPickup = null;
         }
-    }
-
-    private void findChildRecursive(Transform root)
-    {
-        foreach(Transform child in root)
-        {
-            Debug.Log(child.name);
-            if(child.name.Equals("Weapon"))
-            {
-                m_WeaponsObject = child;
-                Debug.Log("Weapons object found under: " + root.name);
-                break;
-            }
-            findChildRecursive(child);
-        }
-        //Debug.LogError("Couldn't find weapons in player model");
     }
 }

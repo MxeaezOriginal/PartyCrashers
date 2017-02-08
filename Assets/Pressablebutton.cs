@@ -18,13 +18,6 @@ public class Pressablebutton : MonoBehaviour {
     private Vector3 objectToMoveStartPosition;
     private bool isDown = false;
 
-    //sounds
-    public AudioSource audioSource;
-    public AudioClip[] SFXDown;
-    public AudioClip[] SFXUp;
-    private AudioClip SFXtoPlay;
-    //sound end
-
     // Use this for initialization
     void Start ()
     {
@@ -37,26 +30,10 @@ public class Pressablebutton : MonoBehaviour {
     {
         if (carryAmmount >= requiredCarryAmmount)
         {
-            //sound
-            if(!isDown)
-            {
-                SFXtoPlay = SFXDown[Random.Range(0, SFXDown.Length)];
-                audioSource.clip = SFXtoPlay;
-                audioSource.Play();
-            }
-            //sound end
             isDown = true;
         }
         else if (buttonDownPermanent == false)
         {
-            //sound
-            if(isDown)
-            {
-                    SFXtoPlay = SFXUp[Random.Range(0, SFXUp.Length)];
-                    audioSource.clip = SFXtoPlay;
-                    audioSource.Play();
-            }
-            //sound end
             isDown = false;
            
         }

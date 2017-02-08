@@ -14,14 +14,6 @@ public class PressableButtonEnablever : MonoBehaviour
     private int carryAmmount = 0;
     public float smooth;
     public bool EnableObject;
-    private bool isDown = false;
-
-    //sounds
-    public AudioSource audioSource;
-    public AudioClip[] SFXDown;
-    public AudioClip[] SFXUp;
-    private AudioClip SFXtoPlay;
-    //sound end
 
     public GameObject objectToEnable;
 
@@ -40,30 +32,12 @@ public class PressableButtonEnablever : MonoBehaviour
         {
             ButtonPosition.position = Vector3.Lerp(ButtonPosition.position, buttondownPosition.position, smooth * Time.deltaTime);
             objectToEnable.SetActive(EnableObject);
-            //sound
-            if (!isDown)
-            {
-                SFXtoPlay = SFXDown[Random.Range(0, SFXDown.Length)];
-                audioSource.clip = SFXtoPlay;
-                audioSource.Play();
-            }
-            //sound end
-            isDown = true;
 
         }
         else if (buttonDownPermanent == false)
         {
             ButtonPosition.position = Vector3.Lerp(ButtonPosition.position, buttonstartPosition, smooth * Time.deltaTime);
             objectToEnable.SetActive(!EnableObject);
-            //sound
-            if (isDown)
-            {
-                SFXtoPlay = SFXUp[Random.Range(0, SFXUp.Length)];
-                audioSource.clip = SFXtoPlay;
-                audioSource.Play();
-            }
-            //sound end
-            isDown = false;
         }
 
     }
