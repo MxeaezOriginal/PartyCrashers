@@ -219,6 +219,13 @@ public class Player : MonoBehaviour
             transform.position = m_Location;
             m_RespawnHealth.initialize();
         }
+        if (m_State == State.Dead)
+        {
+            m_State = State.Dead;
+            updateModel();
+            transform.position = m_Location;
+            m_RespawnHealth.initialize();
+        }
     }
 
     public void updateModel()
