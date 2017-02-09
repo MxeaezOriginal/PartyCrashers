@@ -20,7 +20,7 @@ public class EnemyHealth : MonoBehaviour
     public float m_EnemyHealth = 100f;
     public float m_EnemyInvincibleTime = 0.5f;
     public GameObject m_Drop;
-    //[HideInInspector]
+    [HideInInspector]
     public bool isInvincible = false;
     private bool isDamage = false;
 
