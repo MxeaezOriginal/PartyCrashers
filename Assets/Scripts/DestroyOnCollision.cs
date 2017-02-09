@@ -16,8 +16,10 @@ public class DestroyOnCollision : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        //if (other.tag != "Coins")
+        if (other.gameObject.GetComponent<WeaponID>() == null) 
+        {
             DestroyBullet();
+        }
     }
 
     private IEnumerator DeactivateCallback()
