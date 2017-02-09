@@ -1,44 +1,44 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &141572
+--- !u!1 &195836
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 440266}
-  - 82: {fileID: 8296036}
-  - 114: {fileID: 11472140}
+  - 4: {fileID: 472148}
+  - 82: {fileID: 8248782}
+  - 114: {fileID: 11474448}
   m_Layer: 0
-  m_Name: SFXPlayer
+  m_Name: SFXHit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &440266
+--- !u!4 &472148
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 141572}
+  m_GameObject: {fileID: 195836}
   m_LocalRotation: {x: 0.40821794, y: -0.23456973, z: 0.109381676, w: 0.87542605}
-  m_LocalPosition: {x: -8.207, y: 16.774, z: 14.216}
+  m_LocalPosition: {x: 40.202538, y: 0.00000011920928, z: 8.259957}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!82 &8296036
+--- !u!82 &8248782
 AudioSource:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 141572}
+  m_GameObject: {fileID: 195836}
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: e393a4c5bb7b6bf47b0c21c190da51c2, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 8c707c003f1e81e48ad7bb833d8e4637, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -103,19 +103,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
---- !u!114 &11472140
+--- !u!114 &11474448
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 141572}
+  m_GameObject: {fileID: 195836}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 16db6e9353176d8429e1b91918cfbc8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  self: {fileID: 141572}
-  sfx: {fileID: 8296036}
+  self: {fileID: 195836}
+  sfx: {fileID: 8248782}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -125,5 +125,5 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 141572}
+  m_RootGameObject: {fileID: 195836}
   m_IsPrefabParent: 1
