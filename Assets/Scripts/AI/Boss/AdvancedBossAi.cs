@@ -68,6 +68,9 @@ public class AdvancedBossAi : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        //Set framerate
+        Application.targetFrameRate = 60;
+
         state = states.earthquake;
         currentState = state;
         m_Invincible = false;
@@ -120,7 +123,7 @@ public class AdvancedBossAi : MonoBehaviour
         }
         //Manage frame
         frame++;
-        if (frame > 1000000) //Just in case the frame gets too big which I doubt it ever will BUT WHATEVER poopy butts stuff
+        if (frame > 1000000) //Just in case the frame variable gets too big which I doubt it ever will BUT WHATEVER poopy butts stuff
         {
             frame = 0;
         }
@@ -183,6 +186,54 @@ public class AdvancedBossAi : MonoBehaviour
         }
 
     }
+    void Teleport(int framesBeforeTP, int recoverFrames)
+    {
+        //Windup
+        if (frame < framesBeforeTP)
+        {
+            transform.Rotate(new Vector3(transform.rotation.x - 10, transform.rotation.y, transform.rotation.z));
+        }
+        if (frame == framesBeforeTP)
+        {
+            Vector3 teleportTargetPosition = transform.position; //Set variable for target position
+            int xdir = Random.Range(-1, 1);
+            int zdir = Random.Range(-1, 1);
+            for (int i = 0; i < players.Length; i++) //Loop through the number of players 
+            {
+                playerPositionsArray[i] = players[i].transform; //Set the index's of the player positions array to the transforms of the respective player objects
+            }
+
+            teleportTargetPosition = new Vector3(Random.Range(torches[0].position.x, torches[1].position.x), transform.position.y, Random.Range(torches[0].position.z, torches[2].position.z));
+
+            for (int i = 0; i < playerPositionsArray.Length; i++)//Loop through the player positions and if the teleport position is close to a player, move the teleport position. Will keep looping until it's not close to a player
+            {
+                if (playerPositionsArray[i] != null)
+                {
+                    float xdif = teleportTargetPosition.x - playerPositionsArray[i].position.x;
+                    float zdif = teleportTargetPosition.z - playerPositionsArray[i].position.z;
+                    if (new Vector3(xdif, zdif).magnitude <= 5f)
+                    {
+                        teleportTargetPosition.x += Mathf.Abs(xdif) * xdir;
+                        teleportTargetPosition.z += Mathf.Abs(zdif) * zdir;
+                        i = 0;
+                    }
+                }
+            }
+
+            transform.position = teleportTargetPosition;
+        }
+        //Recover
+        if (frame > framesBeforeTP && frame < recoverFrames + framesBeforeTP)
+        {
+            transform.Rotate(new Vector3(transform.rotation.x - 10, transform.rotation.y, transform.rotation.z));
+        }
+        //Change state
+        if (frame > recoverFrames + framesBeforeTP)
+        {
+            state = states.idle;
+        }
+
+    }
     #region Getting hurt
     void Hurt(float damageTaken, float stunTime)
     {
@@ -203,6 +254,8 @@ public class AdvancedBossAi : MonoBehaviour
             bool attacking = sword.attack;
             attacked = false;
         }
+
+        
     }
 
     //CHANGE THIS ONCE ANIMATIONS ARE IN    FUUUUUUCCKK
@@ -260,7 +313,7 @@ public class AdvancedBossAi : MonoBehaviour
 
                 //float knockBack = attackerEffect.m_KnockBack; //These two is how this code is supposed to work but for whatever reason it's not getting these or the values just don't exist
                 //float stun = attackerEffect.m_StunTime;
-
+                
             }
         }
         #endregion//ALL THIS NEEDS TO CHANGE ONCE ANIMATIONS ARE IN
@@ -442,54 +495,7 @@ public class AdvancedBossAi : MonoBehaviour
     #endregion
 
     #endregion
-    void Teleport(int framesBeforeTP, int recoverFrames)
-    {
-        //Windup
-        if (frame < framesBeforeTP)
-        {
-            transform.Rotate(new Vector3(transform.rotation.x - 10, transform.rotation.y, transform.rotation.z));
-        }
-        if (frame == framesBeforeTP)
-        {
-            Vector3 teleportTargetPosition = transform.position; //Set variable for target position
-            int xdir = Random.Range(-1, 1);
-            int zdir = Random.Range(-1, 1);
-            for (int i = 0; i < players.Length; i++) //Loop through the number of players 
-            {
-                playerPositionsArray[i] = players[i].transform; //Set the index's of the player positions array to the transforms of the respective player objects
-            }
 
-            teleportTargetPosition = new Vector3(Random.Range(torches[0].position.x, torches[1].position.x), transform.position.y, Random.Range(torches[0].position.z, torches[2].position.z));
-
-            for (int i = 0; i < playerPositionsArray.Length; i++)//Loop through the player positions and if the teleport position is close to a player, move the teleport position. Will keep looping until it's not close to a player
-            {
-                if (playerPositionsArray[i] != null)
-                {
-                    float xdif = teleportTargetPosition.x - playerPositionsArray[i].position.x;
-                    float zdif = teleportTargetPosition.z - playerPositionsArray[i].position.z;
-                    if (new Vector3(xdif, zdif).magnitude <= 5f)
-                    {
-                        teleportTargetPosition.x += Mathf.Abs(xdif) * xdir;
-                        teleportTargetPosition.z += Mathf.Abs(zdif) * zdir;
-                        i = 0;
-                    }
-                }
-            }
-
-            transform.position = teleportTargetPosition;
-        }
-        //Recover
-        if (frame > framesBeforeTP && frame < recoverFrames + framesBeforeTP)
-        {
-            transform.Rotate(new Vector3(transform.rotation.x - 10, transform.rotation.y, transform.rotation.z));
-        }
-        //Change state
-        if (frame > recoverFrames + framesBeforeTP)
-        {
-            state = states.idle;
-        }
-
-    }
 
     //This is where the decision making for the target player will happen
     GameObject GetTargetPlayer()
@@ -497,11 +503,22 @@ public class AdvancedBossAi : MonoBehaviour
         //Right now this whole function is really basic but I'll make it more complicated later
 
         //Get closest player
+        GameObject closestPlayer = getClosestPlayer();
         //Get player with the most health
+        GameObject playerWithMostHealth = getPlayerWithMostHealth();
         //Get the player with the least amount of health
+        GameObject playerWithLeastHealth = getPlayerWithLeastHealth();
         //Get the difference between the player with the largest amount of health and the least
-        //do math with this shit to figure out who to target
-        //SHOULD STILL BE KINDA RANDOM... We don't want people figuring out how the boss chooses it's targets
+        HeartSystem mostHearts = playerWithMostHealth.GetComponent<HeartSystem>();
+        HeartSystem leastHearts = playerWithLeastHealth.GetComponent<HeartSystem>();
+
+        float mostHealth = mostHearts.curHealth;
+        float leastHealth = leastHearts.curHealth;
+
+
+        float healthDifference = mostHealth - leastHealth;
+        //Do math with this shit to figure out who to target ... SHOULD STILL BE KINDA RANDOM... We don't want people figuring out how the boss chooses it's targets
+         
 
         GameObject target;
 
@@ -585,4 +602,68 @@ public class AdvancedBossAi : MonoBehaviour
         return target;
     }
 
+    GameObject getPlayerWithMostHealth()
+    {
+        GameObject target = null;
+        GameObject finalTarget = players[0];
+        float health = 0f;
+
+        for(int i = 0; i < players.Length; i++)
+        {
+            target = players[i];
+            HeartSystem hearts = players[i].GetComponent<HeartSystem>();
+            health = hearts.curHealth;
+            if(i > 0)
+            {
+                HeartSystem lastHearts = players[i-1].GetComponent<HeartSystem>();
+                float lastHealth = lastHearts.curHealth;
+                if (health > lastHealth)
+                {
+                    finalTarget = target;
+                }
+            }
+
+        }
+
+        return finalTarget;
+    }
+    GameObject getPlayerWithLeastHealth()
+    {
+        GameObject target = null;
+        GameObject finalTarget = players[0];
+        float health = 0f;
+
+        for (int i = 0; i < players.Length; i++)
+        {
+            target = players[i];
+            HeartSystem hearts = players[i].GetComponent<HeartSystem>();
+            health = hearts.curHealth;
+            if (i > 0)
+            {
+                HeartSystem lastHearts = players[i - 1].GetComponent<HeartSystem>();
+                float lastHealth = lastHearts.curHealth;
+                if (health < lastHealth)
+                {
+                    finalTarget = target;
+                }
+            }
+
+        }
+
+        return finalTarget;
+    }
+    void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.GetComponent<Player>() != null)
+        {
+            //Hit player
+            PlayerController playerScript = other.gameObject.GetComponent<PlayerController>();
+            if(m_Velocity.magnitude > 10f)
+            {
+                playerScript.m_Velocity = new Vector3(0f,30f,0f);
+                HeartSystem health = other.gameObject.GetComponent<HeartSystem>();
+                health.TakeDamage(1);
+            }
+        }
+    }
 }
