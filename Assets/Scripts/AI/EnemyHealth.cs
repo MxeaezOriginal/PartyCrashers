@@ -5,9 +5,13 @@ public class EnemyHealth : MonoBehaviour
 {
     //sound
     public GameObject SFXPlayer;
+    public GameObject SFXHit;
     public AudioClip[] hurtSFX;
     public AudioClip[] deathSFX;
     private AudioClip SFXtoPlay;
+    public float maxRandomPitch;
+    public float minRandomPitch;
+    private float randomPitch;
 
     //Kavells VFX code
     public GameObject deathVFX;
@@ -62,24 +66,32 @@ public class EnemyHealth : MonoBehaviour
         if (isInvincible == false)
         {
             m_EnemyHealth -= health;
-            //James Shound Code
+            //James Sound Code
+           
+            randomPitch = Random.RandomRange(maxRandomPitch, minRandomPitch);
+            if (randomPitch > 3)
+            {
+                randomPitch = 3;
+            }
             if (m_EnemyHealth > 0)
             {
                 SFXtoPlay = hurtSFX[Random.Range(0, hurtSFX.Length)];
-
             }
             else
             {
                 SFXtoPlay = deathSFX[Random.Range(0, deathSFX.Length)];
-
             }
 
             if (SFXPlayer != null)
             {
                 AudioSource source = SFXPlayer.GetComponent<AudioSource>();
+                source.pitch = randomPitch;
                 source.clip = SFXtoPlay;
             }
+
             GameObject SFXtest = Instantiate(SFXPlayer, transform.position, transform.rotation) as GameObject;
+            GameObject SFXtest2 = Instantiate(SFXHit, transform.position, transform.rotation) as GameObject;
+
             //James Shound Code
         }
         if (m_EnemyHealth <= 0)
