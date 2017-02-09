@@ -68,6 +68,9 @@ public class AdvancedBossAi : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        //Set framerate
+        Application.targetFrameRate = 60;
+
         state = states.earthquake;
         currentState = state;
         m_Invincible = false;
@@ -310,9 +313,7 @@ public class AdvancedBossAi : MonoBehaviour
 
                 //float knockBack = attackerEffect.m_KnockBack; //These two is how this code is supposed to work but for whatever reason it's not getting these or the values just don't exist
                 //float stun = attackerEffect.m_StunTime;
-
-
-
+                
             }
         }
         #endregion//ALL THIS NEEDS TO CHANGE ONCE ANIMATIONS ARE IN
@@ -502,7 +503,9 @@ public class AdvancedBossAi : MonoBehaviour
         //Right now this whole function is really basic but I'll make it more complicated later
 
         //Get closest player
+        GameObject closestPlayer = getClosestPlayer();
         //Get player with the most health
+
         //Get the player with the least amount of health
         //Get the difference between the player with the largest amount of health and the least
         //do math with this shit to figure out who to target
@@ -600,7 +603,6 @@ public class AdvancedBossAi : MonoBehaviour
             {
                 playerScript.m_Velocity = new Vector3(0f,30f,0f);
             }
-            
         }
     }
 }
