@@ -7,6 +7,10 @@ public class LightTrigger : MonoBehaviour {
     private bool lightOn;
     private int I;
     public bool turnoffonleave;
+    public AudioClip LightonSFX;
+    public AudioClip LightoffSFX;
+    public AudioSource audioSource;
+
     // Use this for initialization
     void Start ()
     {
@@ -25,6 +29,8 @@ public class LightTrigger : MonoBehaviour {
         if(lightOn == false && other.gameObject.tag == "Player")
         {
             I = 0;
+            audioSource.clip = LightonSFX;
+            audioSource.Play();
             while (lt.Length >= (I + 1))
             {
                 lt[I].GetComponent<Light>().enabled = true;
@@ -43,7 +49,9 @@ public class LightTrigger : MonoBehaviour {
              if (lightOn == true && other.gameObject.tag == "Player")
              {
                  I = 0;
-                 while (lt.Length >= (I + 1))
+                audioSource.clip = LightoffSFX;
+                audioSource.Play();
+                while (lt.Length >= (I + 1))
                  {
                      lt[I].GetComponent<Light>().enabled = false;
                      I++;
