@@ -71,10 +71,10 @@ public class AdvancedBossAi : MonoBehaviour
         //Set framerate
         Application.targetFrameRate = 60;
 
-        state = states.earthquake;
+        state = states.idle;
         currentState = state;
         m_Invincible = false;
-        frame = 0;
+        frame = -100;
         players = GameManager.m_Instance.m_Players;
 
         m_Health = m_BaseMaxHealth * (players.Length * m_NumOfPlayersHealthMultiplier);
@@ -528,10 +528,10 @@ public class AdvancedBossAi : MonoBehaviour
 
     #region Decision making for which attack to perform
 
-    private int m_DashPriority = 1;
-    private int m_TeleportPriority = 1;
-    private int m_EarthquakePriority = 1;
-    private int m_ShootPriority = 1;
+    private int m_DashPriority = 0;
+    private int m_TeleportPriority = 100;
+    private int m_EarthquakePriority = 0;
+    private int m_ShootPriority = 0;
     states DecideAttack()
     {
 
