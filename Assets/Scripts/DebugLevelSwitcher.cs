@@ -33,7 +33,7 @@ public class DebugLevelSwitcher : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Alpha9))
         {
-            SceneManager.LoadScene("KaminsRoom");
+            SceneManager.LoadScene("KaminsBoss");
         }
     }
 
