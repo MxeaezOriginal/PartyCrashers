@@ -510,6 +510,12 @@ public class Player : MonoBehaviour
                 dotdelay = 2.0f;
             }
         }
+        if (other.gameObject.CompareTag("OneDamage"))
+        {
+            Destroy(other);
+            m_Heart.TakeDamage(1);
+            m_Heart.UpdateHearts();
+        }
         //if (other.gameObject.CompareTag("MeleeEnemy"))
         //{
         //    damageDelay -= Time.deltaTime;

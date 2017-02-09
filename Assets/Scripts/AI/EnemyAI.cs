@@ -16,6 +16,7 @@ public class EnemyAI : MonoBehaviour
     void Start()
     {
         m_Rtts = m_RotationSpeed;
+        m_Origin = transform.position;
     }
 
     public void chase()
