@@ -21,12 +21,13 @@ public class PauseGame : MonoBehaviour
 
     [Header("List of ALL Buttons")]
     public GameObject[] allButtons;
+    CharacterSelect characterSelect;
 
 
 
     void Awake()
     {
-
+        characterSelect = GetComponent<CharacterSelect>();
         es = GameObject.Find("Pause Menu/EventSystem").GetComponent<EventSystem>();
 
     }
@@ -44,6 +45,26 @@ public class PauseGame : MonoBehaviour
 
 
         if (Input.GetButtonDown("Pause_P1"))
+        {
+            PauseMenu();
+        }
+
+        if (Input.GetButtonDown("Pause_P2"))
+        {
+            PauseMenu();
+        }
+
+        if (Input.GetButtonDown("Pause_P3"))
+        {
+            PauseMenu();
+        }
+
+        if (Input.GetButtonDown("Pause_P4"))
+        {
+            PauseMenu();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             PauseMenu();
         }
@@ -109,23 +130,42 @@ public class PauseGame : MonoBehaviour
 
     public void PauseMenu()
     {
-        canvases[0].SetActive(true);
-        StandaloneInputModule inputModule = es.gameObject.GetComponent<StandaloneInputModule>();
+        
+            canvases[0].SetActive(true);
+            StandaloneInputModule inputModule = es.gameObject.GetComponent<StandaloneInputModule>();
+            if (canvases[0].activeSelf)
+            {
+                pauseActive = true;
+                inputModule.submitButton = "Jump_P1";
+                inputModule.horizontalAxis = "Horizontal_P1";
+                inputModule.verticalAxis = "Vertical_P1";
+                Time.timeScale = 0;
+            }
+
+            if (canvases[0].activeSelf)
+            {
+                pauseActive = true;
+                inputModule.submitButton = "Jump_P2";
+                inputModule.horizontalAxis = "Horizontal_P2";
+                inputModule.verticalAxis = "Vertical_P2";
+                Time.timeScale = 0;
+            }
+
         if (canvases[0].activeSelf)
         {
-            pauseActive = true;
-            inputModule.submitButton = "Jump_P1";
-            inputModule.horizontalAxis = "Horizontal_P1";
-            inputModule.verticalAxis = "Vertical_P1";
-            Time.timeScale = 0;
+            inputModule.submitButton = "Submit_Keyboard";
+            inputModule.horizontalAxis = "HorizontalRotation_Keyboard";
+            inputModule.verticalAxis = "VerticalRotation_Keyboard";
+
         }
 
         else
-        {
-            Time.timeScale = 1;
-        }
+            {
+                Time.timeScale = 1;
+            }
 
-    }
+        }
+    
 
     public void OptionsMenu()
     {
