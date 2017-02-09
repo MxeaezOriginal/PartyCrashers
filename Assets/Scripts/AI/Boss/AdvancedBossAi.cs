@@ -505,9 +505,17 @@ public class AdvancedBossAi : MonoBehaviour
         //Get closest player
         GameObject closestPlayer = getClosestPlayer();
         //Get player with the most health
-
+        GameObject playerWithMostHealth = getPlayerWithMostHealth();
         //Get the player with the least amount of health
+        GameObject playerWithLeastHealth = getPlayerWithLeastHealth();
         //Get the difference between the player with the largest amount of health and the least
+        HeartSystem mostHearts = playerWithMostHealth.GetComponent<HeartSystem>();
+        HeartSystem leastHearts = playerWithLeastHealth.GetComponent<HeartSystem>();
+
+        float mostHealth = mostHearts.curHealth;
+        float leastHealth = leastHearts.curHealth;
+
+        float healthDifference = mostHealth - leastHealth;
         //do math with this shit to figure out who to target
         //SHOULD STILL BE KINDA RANDOM... We don't want people figuring out how the boss chooses it's targets
 
@@ -592,7 +600,57 @@ public class AdvancedBossAi : MonoBehaviour
         }
         return target;
     }
-    
+
+    GameObject getPlayerWithMostHealth()
+    {
+        GameObject target = null;
+        GameObject finalTarget = players[0];
+        float health = 0f;
+
+        for(int i = 0; i < players.Length; i++)
+        {
+            target = players[i];
+            HeartSystem hearts = players[i].GetComponent<HeartSystem>();
+            health = hearts.curHealth;
+            if(i > 0)
+            {
+                HeartSystem lastHearts = players[i-1].GetComponent<HeartSystem>();
+                float lastHealth = lastHearts.curHealth;
+                if (health > lastHealth)
+                {
+                    finalTarget = target;
+                }
+            }
+
+        }
+
+        return finalTarget;
+    }
+    GameObject getPlayerWithLeastHealth()
+    {
+        GameObject target = null;
+        GameObject finalTarget = players[0];
+        float health = 0f;
+
+        for (int i = 0; i < players.Length; i++)
+        {
+            target = players[i];
+            HeartSystem hearts = players[i].GetComponent<HeartSystem>();
+            health = hearts.curHealth;
+            if (i > 0)
+            {
+                HeartSystem lastHearts = players[i - 1].GetComponent<HeartSystem>();
+                float lastHealth = lastHearts.curHealth;
+                if (health < lastHealth)
+                {
+                    finalTarget = target;
+                }
+            }
+
+        }
+
+        return finalTarget;
+    }
     void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.GetComponent<Player>() != null)
