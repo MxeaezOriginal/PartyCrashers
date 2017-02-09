@@ -110,14 +110,14 @@ public class Bow : Ranged
     private void shoot()
     {
         GameObject balloon;
-		//kavells new code for feedback effects
-		if (primaryFlashVFX != null) 
-		{
-			GameObject shootMF;
-			shootMF = (GameObject)Instantiate (primaryFlashVFX, transform.position, transform.rotation);
-			Destroy (shootMF, 0.5f);
-		}
-		//kavells new code for feedback effects
+	//kavells new code for feedback effects
+		//if (primaryFlashVFX != null) 
+		//{
+			//GameObject shootMF;
+			//shootMF = (GameObject)Instantiate (primaryFlashVFX, transform.position, transform.rotation);
+			//Destroy (shootMF, 0.5f);
+		//}
+	//kavells new code for feedback effects
 
         if (m_TimePressed < (m_MaxCharge / 2))
         {
@@ -126,16 +126,16 @@ public class Bow : Ranged
             balloon = (GameObject)Instantiate(m_RightTriggerProjectile, m_FirePoint[0].gameObject.transform.position, m_FirePoint[0].gameObject.transform.rotation);
             assignDamage(balloon, 1);
             balloon.GetComponent<Rigidbody>().AddForce(balloon.transform.forward * m_TimePressed);
-            //sound
-            SFXtoPlay = SFXlowcharge[UnityEngine.Random.Range(0, SFXlowcharge.Length)];
+        //sound
+            //SFXtoPlay = SFXlowcharge[UnityEngine.Random.Range(0, SFXlowcharge.Length)];
 
-            if (SFXPlayer != null)
-            {
-                AudioSource source = SFXPlayer.GetComponent<AudioSource>();
-                source.clip = SFXtoPlay;
-            }
-            GameObject SFXtest = Instantiate(SFXPlayer, transform.position, transform.rotation) as GameObject;
-            //sound end
+            //if (SFXPlayer != null)
+            //{
+                //AudioSource source = SFXPlayer.GetComponent<AudioSource>();
+                //source.clip = SFXtoPlay;
+            //}
+            //GameObject SFXtest = Instantiate(SFXPlayer, transform.position, transform.rotation) as GameObject;
+         //sound end
 
         }
         else if (m_TimePressed >= (m_MaxCharge / 2) && m_TimePressed < m_MaxCharge)
@@ -143,30 +143,30 @@ public class Bow : Ranged
             balloon = (GameObject)Instantiate(m_RightTriggerProjectile, m_FirePoint[0].gameObject.transform.position, m_FirePoint[0].gameObject.transform.rotation);
             assignDamage(balloon, m_MidDmgMultiplier);
             balloon.GetComponent<Rigidbody>().AddForce(balloon.transform.forward * m_MedSpeed * m_TimePressed);
-            //sound
-            SFXtoPlay = SFXmedcharge[UnityEngine.Random.Range(0, SFXmedcharge.Length)];
+        //sound
+            //SFXtoPlay = SFXmedcharge[UnityEngine.Random.Range(0, SFXmedcharge.Length)];
 
-            if (SFXPlayer != null)
-            {
-                AudioSource source = SFXPlayer.GetComponent<AudioSource>();
-                source.clip = SFXtoPlay;
-            }
-            GameObject SFXtest = Instantiate(SFXPlayer, transform.position, transform.rotation) as GameObject;
-            //sound end
+            //if (SFXPlayer != null)
+            //{
+                //AudioSource source = SFXPlayer.GetComponent<AudioSource>();
+                //source.clip = SFXtoPlay;
+            //}
+            //GameObject SFXtest = Instantiate(SFXPlayer, transform.position, transform.rotation) as GameObject;
+         //sound end
 
         }
         else
         {
-            //sound
-            SFXtoPlay = SFXhighcharge[UnityEngine.Random.Range(0, SFXhighcharge.Length)];
+        //sound
+            //SFXtoPlay = SFXhighcharge[UnityEngine.Random.Range(0, SFXhighcharge.Length)];
 
-            if (SFXPlayer != null)
-            {
-                AudioSource source = SFXPlayer.GetComponent<AudioSource>();
-                source.clip = SFXtoPlay;
-            }
-            GameObject SFXtest = Instantiate(SFXPlayer, transform.position, transform.rotation) as GameObject;
-            //sound end
+            //if (SFXPlayer != null)
+            //{
+                //AudioSource source = SFXPlayer.GetComponent<AudioSource>();
+                //source.clip = SFXtoPlay;
+            //}
+            //GameObject SFXtest = Instantiate(SFXPlayer, transform.position, transform.rotation) as GameObject;
+        //sound end
             laser.GetComponent<LineRenderer>().enabled = true;
 
             StopCoroutine("LaserTimer");
