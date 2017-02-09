@@ -21,11 +21,11 @@ public class HeartSystem : MonoBehaviour
 	public GameObject deathVFX;
 	//kavells new code for feedback effects
 
-    //Player player;
+    private Player m_Player;
 
     void Awake()
     {
-        //player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        m_Player = GetComponent<Player>();
     }
 
     void Start()
@@ -105,6 +105,10 @@ public class HeartSystem : MonoBehaviour
 		}
         if(curHealth == 0)
         {
+            if (m_Player.m_State == Player.State.Alive)
+            {
+                m_Player.respawn();
+            }
             //Kavells VFX code
             if (deathVFX != null)
             {

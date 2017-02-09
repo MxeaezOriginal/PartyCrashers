@@ -115,6 +115,7 @@ public class PlayerController : MonoBehaviour
             //Jump
             if (controller.isGrounded)
             {
+                //m_Velocity.y = 0.0f;
 
                 if (Input.GetButtonDown(m_JumpButton + GetComponent<Player>().getControllerAsString()))
                 {
@@ -234,7 +235,7 @@ public class PlayerController : MonoBehaviour
             }
 
             //Gravity
-            m_Velocity.y -= m_CurrentGravity * Time.deltaTime;
+                m_Velocity.y -= m_CurrentGravity * Time.deltaTime;
 
             //Move
             controller.Move(m_Velocity * Time.deltaTime);
