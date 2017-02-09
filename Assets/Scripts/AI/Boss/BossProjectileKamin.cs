@@ -37,10 +37,21 @@ public class BossProjectileKamin : MonoBehaviour {
 
     void OnCollisionEnter(Collision other)
     {
-        if(other.gameObject.GetComponent<BossProjectileKamin>() == null)
+        if(other.gameObject.GetComponent<Player>() != null)
+        {
+            PlayerController playerScript = other.gameObject.GetComponent<PlayerController>();
+            HeartSystem health = other.gameObject.GetComponent<HeartSystem>();
+
+            float knockback = 10f;
+            playerScript.m_Velocity = Vector3.Normalize(transform.position - other.gameObject.transform.position) * knockback;
+            //Deal damage
+            health.TakeDamage(1);
+
+        }
+        if (other.gameObject.GetComponent<BossProjectileKamin>() == null)
         {
             gameObject.SetActive(false);
         }
-        
+
     }
 }
