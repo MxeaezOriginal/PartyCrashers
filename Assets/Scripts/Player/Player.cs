@@ -128,7 +128,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         playerindacator();
-        if (m_Heart.IsDead() || Input.GetKeyDown(KeyCode.Y))
+        if (Input.GetKeyDown(KeyCode.Y))
         {
             respawn();
         }
@@ -137,6 +137,9 @@ public class Player : MonoBehaviour
             if (m_CurrentCooldown <= Time.time - m_CheckLocationCooldown || m_CurrentCooldown == 0)
             {
                 m_Location = transform.position;
+
+                //m_Location = m_Location  + (- vel * 5.0f);
+                //Debug.Log("Location after change: " + m_Location);
 
                 m_CurrentCooldown = Time.time;
             }
@@ -212,20 +215,19 @@ public class Player : MonoBehaviour
 
     public void respawn()
     {
-        if (m_State == State.Alive)
-        {
-            m_State = State.Dead;
-            updateModel();
-            transform.position = m_Location;
-            m_RespawnHealth.initialize();
-        }
-        if (m_State == State.Dead)
-        {
-            m_State = State.Dead;
-            updateModel();
-            transform.position = m_Location;
-            m_RespawnHealth.initialize();
-        }
+        var vel = gameObject.GetComponent<PlayerController>().m_Velocity.normalized;
+        Debug.Log("Velocity vector: " + vel.ToString());
+        //Debug.Log("Location before change: " + m_Location);
+        Vector3 tempLocation = m_Location;
+        tempLocation.x -= vel.x * 15.0f;
+        tempLocation.z -= vel.z * 15.0f;
+
+        m_State = State.Dead;
+        updateModel();
+        transform.position = tempLocation;
+        stun(0.1f);
+        m_RespawnHealth.initialize();
+
     }
 
     public void updateModel()
