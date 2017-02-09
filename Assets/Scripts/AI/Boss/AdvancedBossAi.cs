@@ -515,10 +515,9 @@ public class AdvancedBossAi : MonoBehaviour
         float mostHealth = mostHearts.curHealth;
         float leastHealth = leastHearts.curHealth;
 
-
         float healthDifference = mostHealth - leastHealth;
         //Do math with this shit to figure out who to target ... SHOULD STILL BE KINDA RANDOM... We don't want people figuring out how the boss chooses it's targets
-         
+      
 
         GameObject target;
 
