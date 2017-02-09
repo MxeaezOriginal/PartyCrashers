@@ -146,7 +146,7 @@ public class Player : MonoBehaviour
         }
 
         //Primary Attack
-        if (Input.GetAxisRaw(m_PrimaryAttack + m_Controller.ToString()) == 1)
+        if (Input.GetButtonDown(m_PrimaryAttack + m_Controller.ToString()))
         {
             if (!m_CantAttack)
             {
@@ -155,7 +155,7 @@ public class Player : MonoBehaviour
         }
 
         //Secondary Attack
-        if (Input.GetAxisRaw(m_SecondaryAttack + m_Controller.ToString()) == 1)
+        if (Input.GetButtonDown(m_SecondaryAttack + m_Controller.ToString()))
         {
             if (!m_CantAttack && GetComponent<PlayerController>().m_CantMove == false)
             {
