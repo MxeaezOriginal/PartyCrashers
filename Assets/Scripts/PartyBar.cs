@@ -10,7 +10,7 @@ public class PartyBar : MonoBehaviour {
     public float m_DecreaseRateDungeon = 5f;
     public int m_DecreaseAmountDungeon = 5;
     public float m_DecreaseRateMinigame = 1f;
-    public int m_DecreaseAmountMinigame = 20;
+    public int m_DecreaseAmountMinigame = 2;
     public float m_fillSpeed = 2f;
 
     public bool m_Active;
@@ -140,7 +140,7 @@ public class PartyBar : MonoBehaviour {
             else if (miniGameManager.bossYes)
             {
                 GameManager.m_Instance.m_GameState = GameManager.GameState.Boss;
-                SceneManager.LoadScene("BossRoom");
+                SceneManager.LoadScene("KaminsBoss");
             }
         }
         else
@@ -153,7 +153,7 @@ public class PartyBar : MonoBehaviour {
             else if (miniGameManager.bossYes)
             {
                 GameManager.m_Instance.m_GameState = GameManager.GameState.Boss;
-                SceneManager.LoadScene("BossRoom");
+                SceneManager.LoadScene("KaminsBoss");
             }
         }
     }

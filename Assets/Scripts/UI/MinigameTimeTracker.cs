@@ -43,16 +43,17 @@ public class MinigameTimeTracker : MonoBehaviour
         else
             MinigameEnd();
 
-        //Minigame ends in 30s from start (6s is from 3, 2, 1 Countdown in MinigameStart())
-        if (minigameTimerRaw >= 36f)
-            minigameManger.minigameEnded = true;
+        ////Minigame ends in 30s from start (6s is from 3, 2, 1 Countdown in MinigameStart())
+        //if (minigameTimerRaw >= 36f)
+        //    minigameManger.minigameEnded = true;
 
-        //TESTING
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            minigameManger.minigameEnded = true;
-        }
-        /////////
+        ////TESTING
+        //if (Input.GetKeyDown(KeyCode.T))
+        //{
+        //    minigameManger.minigameEnded = true;
+        //}
+        ///////////
+
         if (minigameManger.barsRaised)
             ScreenFading();
     }
@@ -143,8 +144,6 @@ public class MinigameTimeTracker : MonoBehaviour
                 secondFadingCanvas.gameObject.transform.SetParent(null);
             }
         }
-
-
     }
 
     void ScreenFading()

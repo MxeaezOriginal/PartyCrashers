@@ -24,7 +24,7 @@ public class MiniGameRewards : MonoBehaviour
     public Button[] rewardButtons;
     public Button[] bossPromptButtons;
     public Text rewardTitle;
-    public Text rewardTilePlayerNumber;
+    public Text rewardTilePlayerNumber, rewardTilePlayerNumberOutline;
 
     public bool firstButtonPressed, secondButtonPressed, thirdButtonPressed, fourthButtonPressed;
 
@@ -51,6 +51,7 @@ public class MiniGameRewards : MonoBehaviour
 
         rewardTitle = GameObject.Find("Pick Reward").GetComponent<Text>();
         rewardTilePlayerNumber = GameObject.Find("Player Number").GetComponent<Text>();
+        rewardTilePlayerNumberOutline = GameObject.Find("Player Number/Outline").GetComponent<Text>();
 
         rewardCanvas.SetActive(false);
         bossPromptCanvas.SetActive(false);
@@ -68,20 +69,22 @@ public class MiniGameRewards : MonoBehaviour
                 es.SetSelectedGameObject(null); es.enabled = false; es.enabled = true; es.SetSelectedGameObject(rewardButtons[0].gameObject);
             }
             SetupInput();
-            EndRewards();
             UpdateCurrentPlayer();
+            if (!minigameManger.rewardsSelected)
+                EndRewards();
         }
         //Enables Boss Prompt Canvas
         if (minigameManger.rewardsSelected)
         {
             rewardCanvas.SetActive(false);
             bossPromptCanvas.SetActive(true);
-            if (!minigameManger.rewardsSelected)
-            {
-                minigameManger.rewardsSelected = true;
-                es.SetSelectedGameObject(null);
-                es.enabled = false; es.enabled = true; es.SetSelectedGameObject(bossPromptButtons[0].gameObject);
-            }
+        }
+        if (minigameManger.showBossPrompt)
+        {
+            minigameManger.showBossPrompt = false;
+            minigameManger.rewardsSelected = true;
+            es.SetSelectedGameObject(null);
+            es.enabled = false; es.enabled = true; es.SetSelectedGameObject(bossPromptButtons[0].gameObject);
         }
     }
 
@@ -490,6 +493,7 @@ public class MiniGameRewards : MonoBehaviour
         if (rewardsSelected >= GameManager.m_Instance.m_NumOfPlayers)
         {
             minigameManger.rewardsSelected = true;
+            minigameManger.showBossPrompt = true;
         }
     }
 
@@ -509,21 +513,25 @@ public class MiniGameRewards : MonoBehaviour
                 if (minigameManger.P1_place == 1)
                 {
                     rewardTilePlayerNumber.text = "Player 1";
+                    rewardTilePlayerNumberOutline.text = "Player 1";
                     rewardTilePlayerNumber.color = new Color(240, 110, 110);
                 }
                 else if (minigameManger.P2_place == 1)
                 {
                     rewardTilePlayerNumber.text = "Player 2";
+                    rewardTilePlayerNumberOutline.text = "Player 2";
                     rewardTilePlayerNumber.color = new Color(110, 138, 240);
                 }
                 else if (minigameManger.P3_place == 1)
                 {
                     rewardTilePlayerNumber.text = "Player 3";
+                    rewardTilePlayerNumberOutline.text = "Player 3";
                     rewardTilePlayerNumber.color = new Color(125, 212, 136);
                 }
                 else if (minigameManger.P4_place == 1)
                 {
                     rewardTilePlayerNumber.text = "Player 4";
+                    rewardTilePlayerNumberOutline.text = "Player 4";
                     rewardTilePlayerNumber.color = new Color(227, 217, 90);
                 }
                 break;
@@ -531,21 +539,25 @@ public class MiniGameRewards : MonoBehaviour
                 if (minigameManger.P1_place == 2)
                 {
                     rewardTilePlayerNumber.text = "Player 1";
+                    rewardTilePlayerNumberOutline.text = "Player 1";
                     rewardTilePlayerNumber.color = new Color(240, 110, 110);
                 }
                 else if (minigameManger.P2_place == 2)
                 {
                     rewardTilePlayerNumber.text = "Player 2";
+                    rewardTilePlayerNumberOutline.text = "Player 2";
                     rewardTilePlayerNumber.color = new Color(110, 138, 240);
                 }
                 else if (minigameManger.P3_place == 2)
                 {
                     rewardTilePlayerNumber.text = "Player 3";
+                    rewardTilePlayerNumberOutline.text = "Player 3";
                     rewardTilePlayerNumber.color = new Color(125, 212, 136);
                 }
                 else if (minigameManger.P4_place == 2)
                 {
                     rewardTilePlayerNumber.text = "Player 4";
+                    rewardTilePlayerNumberOutline.text = "Player 4";
                     rewardTilePlayerNumber.color = new Color(227, 217, 90);
                 }
                 break;
@@ -553,21 +565,25 @@ public class MiniGameRewards : MonoBehaviour
                 if (minigameManger.P1_place == 3)
                 {
                     rewardTilePlayerNumber.text = "Player 1";
+                    rewardTilePlayerNumberOutline.text = "Player 1";
                     rewardTilePlayerNumber.color = new Color(240, 110, 110);
                 }
                 else if (minigameManger.P2_place == 3)
                 {
                     rewardTilePlayerNumber.text = "Player 2";
+                    rewardTilePlayerNumberOutline.text = "Player 2";
                     rewardTilePlayerNumber.color = new Color(110, 138, 240);
                 }
                 else if (minigameManger.P3_place == 3)
                 {
                     rewardTilePlayerNumber.text = "Player 3";
+                    rewardTilePlayerNumberOutline.text = "Player 3";
                     rewardTilePlayerNumber.color = new Color(125, 212, 136);
                 }
                 else if (minigameManger.P4_place == 3)
                 {
                     rewardTilePlayerNumber.text = "Player 4";
+                    rewardTilePlayerNumberOutline.text = "Player 4";
                     rewardTilePlayerNumber.color = new Color(227, 217, 90);
                 }
                 break;
@@ -575,26 +591,31 @@ public class MiniGameRewards : MonoBehaviour
                 if (minigameManger.P1_place == 4)
                 {
                     rewardTilePlayerNumber.text = "Player 1";
+                    rewardTilePlayerNumberOutline.text = "Player 1";
                     rewardTilePlayerNumber.color = new Color(240, 110, 110);
                 }
                 else if (minigameManger.P2_place == 4)
                 {
                     rewardTilePlayerNumber.text = "Player 2";
+                    rewardTilePlayerNumberOutline.text = "Player 2";
                     rewardTilePlayerNumber.color = new Color(110, 138, 240);
                 }
                 else if (minigameManger.P3_place == 4)
                 {
                     rewardTilePlayerNumber.text = "Player 3";
+                    rewardTilePlayerNumberOutline.text = "Player 3";
                     rewardTilePlayerNumber.color = new Color(125, 212, 136);
                 }
                 else if (minigameManger.P4_place == 4)
                 {
                     rewardTilePlayerNumber.text = "Player 4";
+                    rewardTilePlayerNumberOutline.text = "Player 4";
                     rewardTilePlayerNumber.color = new Color(227, 217, 90);
                 }
                 break;
             default:
                 rewardTilePlayerNumber.text = "Player 1";
+                rewardTilePlayerNumberOutline.text = "Player 1";
                 break;
         }
     }
