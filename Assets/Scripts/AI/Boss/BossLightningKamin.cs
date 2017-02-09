@@ -44,6 +44,11 @@ public class BossLightningKamin : MonoBehaviour
     {
         if(other.gameObject.GetComponent<Player>() != null)
         {
+            PlayerController playerScript = other.gameObject.GetComponent<PlayerController>();
+            float knockback = 10f;
+            playerScript.m_Velocity = Vector3.Normalize(transform.position - other.gameObject.transform.position) * knockback;
+            //Deal damage
+
             gameObject.SetActive(false);
         }
     }

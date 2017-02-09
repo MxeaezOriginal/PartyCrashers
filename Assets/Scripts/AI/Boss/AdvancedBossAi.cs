@@ -120,7 +120,7 @@ public class AdvancedBossAi : MonoBehaviour
         }
         //Manage frame
         frame++;
-        if (frame > 1000000) //Just in case the frame gets too big which I doubt it ever will BUT WHATEVER poopy butts stuff
+        if (frame > 1000000) //Just in case the frame variable gets too big which I doubt it ever will BUT WHATEVER poopy butts stuff
         {
             frame = 0;
         }
