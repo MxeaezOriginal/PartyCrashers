@@ -370,7 +370,7 @@ public class AdvancedBossAi : MonoBehaviour
         //Get Player to shoot at and target where the player is going 
         GameObject player = GetTargetPlayer();
         Vector3 pPosition = player.transform.position;
-        float shootSpeed = 20;
+        float shootSpeed = 22;
         Vector3 bv = (pPosition - transform.position).normalized * shootSpeed;
         float distance = Vector3.Magnitude(pPosition - transform.position);
 
