@@ -9,9 +9,7 @@ public class FizzyPoP : Ranged
 
     #region Floats
     [SerializeField]
-    private float m_MaxSprayCharge = 5f;
-    [SerializeField]
-    private float m_HealShootSpeed = 10f;
+    private float m_MaxSprayCharge = 5f;    
     [SerializeField]
     private float m_AngleModifier = .5f;
     #endregion
@@ -38,12 +36,10 @@ public class FizzyPoP : Ranged
     {
         #region Primary Attack
         // Shoot if Button Down
-        //if (Input.GetAxisRaw(Player.m_PrimaryAttack + Player.getControllerAsString()) == 1 && m_IsDown)
-        //    ShootSpray();    
-        //else
-        //    FizzyCone.SetActive(false);
-        //  1) Problem with line 33
-        //  2) FizzyGun Transform.position on load is wrong.
+        if (Input.GetAxisRaw(Player.m_PrimaryAttack + Player.getControllerAsString()) == 1 && m_IsDown)
+            ShootSpray();    
+        else
+            FizzyCone.SetActive(false);
         #endregion
 
         #region Secoindary Attack
@@ -58,20 +54,12 @@ public class FizzyPoP : Ranged
 
 
     public override void primaryAttack()
-    {
-        float timePressed = 0;
-
-        // Check for CD timers
+    {       
         if (m_CoolDown <= Time.time - m_Weapon1Cooldown || m_CoolDown == 0)
         {
-            while (timePressed < m_MaxSprayCharge)
-            {
-                m_IsDown = true;
-                timePressed += Input.GetAxisRaw(Player.m_PrimaryAttack + Player.getControllerAsString()) * Time.deltaTime;
-            }
-            m_IsDown = false;
+            m_IsDown = true;
+            m_CoolDown = Time.time;            
         }
-
     }
 
     public override void secondaryAttack()
@@ -86,15 +74,13 @@ public class FizzyPoP : Ranged
     private void ShootSpray()
     {
         FizzyCone.SetActive(true);
-        // Create Timer for cone scale reduction
     }
 
     private void ShootHeal()
     {
         GameObject healPrefab;
         healPrefab = (GameObject)Instantiate(m_LeftTriggerProjectile, m_FirePoint[0].gameObject.transform.position, m_FirePoint[0].gameObject.transform.rotation);
-        healPrefab.GetComponent<Rigidbody>().AddForce(healPrefab.transform.up * m_HealShootSpeed);
-        healPrefab.GetComponent<FizzyGunSetTrap>().m_SetTrap = false;
+        healPrefab.GetComponent<Rigidbody>().AddForce(healPrefab.transform.up * m_ProjectileSpeed02);        
         m_CanHeal = false;
     }
 
