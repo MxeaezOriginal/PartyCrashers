@@ -65,6 +65,7 @@ public class Player : MonoBehaviour
     //public int m_MaxHealth;
     public bool m_CantAttack;
     public State m_State;
+    public float m_RespawnTime;
     public float m_CheckLocationCooldown;
     //To hold location every x seconds to respawn to
     public Vector3 m_Location;
@@ -74,6 +75,7 @@ public class Player : MonoBehaviour
     private HeartSystem m_Heart;
     private CharacterController m_CharController;
     private WeaponManager m_WeaponManager;
+    private RespawnHealth m_RespawnHealth;
 
     //Input
     public string m_PrimaryAttack = "Primary_";
@@ -118,6 +120,7 @@ public class Player : MonoBehaviour
         m_Heart = GetComponent<HeartSystem>();
         m_CharController = GetComponent<CharacterController>();
         m_WeaponManager = GetComponent<WeaponManager>();
+        m_RespawnHealth = GetComponent<RespawnHealth>();
 
     }
 
@@ -209,10 +212,13 @@ public class Player : MonoBehaviour
 
     public void respawn()
     {
-        m_State = State.Dead;
-        updateModel();
-        transform.position = m_Location;
-        Debug.Log("Pinata time");
+        if (m_State == State.Alive)
+        {
+            m_State = State.Dead;
+            updateModel();
+            transform.position = m_Location;
+            m_RespawnHealth.initialize();
+        }
     }
 
     public void updateModel()
@@ -229,7 +235,7 @@ public class Player : MonoBehaviour
                 GameObject pinataClone = Instantiate(GameManager.m_Instance.m_PinataPrefab, transform.position, Quaternion.identity) as GameObject;
                 pinataClone.transform.parent = m_PlayerObject.gameObject.transform;
                 pinataClone.transform.localPosition = new Vector3(0, 0, 0);
-                pinataClone.transform.localRotation = Quaternion.identity;
+                pinataClone.transform.localRotation = GameManager.m_Instance.m_PinataPrefab.transform.rotation;
                 pinataClone.transform.localScale = new Vector3(1, 1, 1);
                 pinataClone.name = "Model";
                 return;

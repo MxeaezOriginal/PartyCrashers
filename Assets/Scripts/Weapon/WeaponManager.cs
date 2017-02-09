@@ -5,8 +5,16 @@ using System.Collections;
 public class WeaponManager : MonoBehaviour
 {
 
+    public enum Weapon
+    {
+        GlowSword,
+        WaterBalloonBow,
+        FizzyPopGun
+    }
+
     public GameObject m_CurrentWeapon;
-    public string m_WeaponOnGameStart = "GlowSword";
+    public string m_CurrentWeaponName;
+    public Weapon m_WeaponOnGameStart = Weapon.GlowSword;
     public string m_PickupConcactinateString = "_Pickup";
     public float m_DelayBetweenSwaps = 1f;
 
@@ -16,7 +24,7 @@ public class WeaponManager : MonoBehaviour
     private GameObject m_WeaponParent;
     private GameObject m_WeaponStandingOn;
     private GameObject m_WeaponStandingOnPickup;
-    private Transform m_WeaponsTransform;
+    public Transform m_WeaponsTransform;
 
     void Start()
     {
@@ -26,24 +34,31 @@ public class WeaponManager : MonoBehaviour
             m_Weapons.Add(weapon.gameObject.name, weapon);
         }
 
-        if (transform.FindChild("Model") != null) { findWeaponRecursive(transform.FindChild("Model")); }
-        else { Debug.LogError("Model not found under player"); }
+        m_CurrentWeaponName = m_WeaponOnGameStart.ToString();
 
-        SetWeapon(m_WeaponOnGameStart);
+        initialize();
     }
 
-    public void SetWeapon(string weaponPrefabName)
+    public void initialize()
     {
-        if (m_WeaponsTransform.FindChild(weaponPrefabName) != null)
+        if (transform.FindChild("Model") != null) { findWeaponRecursive(transform.FindChild("Model")); Debug.Log("hi"); }
+        else { Debug.LogError("Model not found under player"); }
+
+        SetWeapon((WeaponManager.Weapon)System.Enum.Parse(typeof(WeaponManager.Weapon), m_CurrentWeaponName));
+    }
+
+    public void SetWeapon(Weapon weaponPrefabName)
+    {
+        if (m_WeaponsTransform.FindChild(weaponPrefabName.ToString()) != null)
         {
-            GameObject child = m_WeaponsTransform.FindChild(weaponPrefabName).gameObject;
-            if (m_Weapons.ContainsKey(weaponPrefabName))
+            GameObject child = m_WeaponsTransform.FindChild(weaponPrefabName.ToString()).gameObject;
+            if (m_Weapons.ContainsKey(weaponPrefabName.ToString()))
             {
                 if (m_CurrentWeapon != null)
                 {
                     Destroy(m_CurrentWeapon);
                 }
-                InstantiateWeapon(m_Weapons[weaponPrefabName], child);
+                InstantiateWeapon(m_Weapons[weaponPrefabName.ToString()], child);
             }
             else
             {
@@ -68,6 +83,7 @@ public class WeaponManager : MonoBehaviour
 
         newWeapon.name = child.name;
         m_CurrentWeapon = newWeapon;
+        m_CurrentWeaponName = m_CurrentWeapon.name;
     }
 
     public void InstantiateWeapon()
@@ -82,6 +98,7 @@ public class WeaponManager : MonoBehaviour
 
         newWeapon.name = m_WeaponParent.name;
         m_CurrentWeapon = newWeapon;
+        m_CurrentWeaponName = m_CurrentWeapon.name;
 
         Destroy(m_WeaponStandingOnPickup);
     }
@@ -188,11 +205,10 @@ public class WeaponManager : MonoBehaviour
 
     private void findWeaponRecursive(Transform root)
     {
-        foreach(Transform child in root)
+        foreach (Transform child in root)
         {
             if(child.name.Equals("Weapon"))
             {
-                Debug.Log(child.name);
                 m_WeaponsTransform = child;
                 Debug.Log("Weapons Transform found under: " + child.name);
                 break;

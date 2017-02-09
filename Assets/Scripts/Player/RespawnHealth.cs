@@ -10,15 +10,28 @@ public class RespawnHealth : MonoBehaviour
 
     private Player m_Player;
     private HeartSystem m_PlayerHearts;
+    private WeaponManager m_WeaponManager;
+    private float m_Counter;
+    private float m_RespawnTime;
 
     void Start()
     {
         m_Player = GetComponent<Player>();
-        m_PlayerHearts = m_Player.GetComponent<HeartSystem>();
+        m_PlayerHearts = GetComponent<HeartSystem>();
+        m_WeaponManager = GetComponent<WeaponManager>();
 
         m_CurrentHealth = m_MaxHealth * m_RespawnCount;
+        m_Counter = -1;
     }
 
+    void Update()
+    {
+        if(m_Counter < Time.time - m_RespawnTime && m_Counter != -1)
+        {
+            revive();
+            m_Counter = -1;
+        }
+    }
 
     public void damage(int damage)
     {
@@ -27,12 +40,35 @@ public class RespawnHealth : MonoBehaviour
         Debug.Log("Current health for pinata: " + m_CurrentHealth + "/" + m_MaxHealth);
         if(m_CurrentHealth <= 0)
         {
+            revive();
+        }
+    }
+
+    public void initialize()
+    {
+        m_CurrentHealth = m_MaxHealth * m_RespawnCount;
+        m_RespawnTime = m_Player.m_RespawnTime;
+        m_Counter = Time.time;
+    }
+
+    void revive()
+    {
+        if (m_Player.m_State == Player.State.Dead)
+        {
             m_PlayerHearts.curHealth = m_PlayerHearts.maxHealth;
             m_PlayerHearts.UpdateHearts();
             m_Player.m_State = Player.State.Alive;
             m_Player.updateModel();
+            Debug.Log("Updated Model");
+            StartCoroutine(waitBeforeInitializeWeapon());
             m_RespawnCount++;
         }
     }
 
+    IEnumerator waitBeforeInitializeWeapon()
+    {
+        yield return new WaitForSeconds(.05f);
+        m_WeaponManager.initialize();
+        Debug.Log("Initialized Manager");
+    }
 }

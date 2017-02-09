@@ -103,7 +103,18 @@ public class HeartSystem : MonoBehaviour
 			takeDamage = (GameObject)Instantiate (takeHitEffect, transform.position, Random.rotation);
 			Destroy (takeDamage, 0.5f);
 		}
-		//kavells new code for feedback effects
+        if(curHealth == 0)
+        {
+            //Kavells VFX code
+            if (deathVFX != null)
+            {
+                GameObject takeDamage;
+                takeDamage = (GameObject)Instantiate(deathVFX, transform.position, transform.rotation);
+                Destroy(takeDamage, 1f);
+            }
+            //Kavells VFX code
+        }
+        //kavells new code for feedback effects
         UpdateHearts();
     }
 
@@ -131,14 +142,6 @@ public class HeartSystem : MonoBehaviour
         if (curHealth == 0)
         {
             print("Oh no cupcake, you died!");
-			//Kavells VFX code
-			if (deathVFX != null) 
-			{
-				GameObject takeDamage;
-				takeDamage = (GameObject)Instantiate (deathVFX, transform.position, transform.rotation);
-				Destroy (takeDamage, 1f);
-			}
-			//Kavells VFX code
             return true;
         }
         return false;
