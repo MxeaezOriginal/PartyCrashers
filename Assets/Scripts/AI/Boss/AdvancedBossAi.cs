@@ -183,6 +183,54 @@ public class AdvancedBossAi : MonoBehaviour
         }
 
     }
+    void Teleport(int framesBeforeTP, int recoverFrames)
+    {
+        //Windup
+        if (frame < framesBeforeTP)
+        {
+            transform.Rotate(new Vector3(transform.rotation.x - 10, transform.rotation.y, transform.rotation.z));
+        }
+        if (frame == framesBeforeTP)
+        {
+            Vector3 teleportTargetPosition = transform.position; //Set variable for target position
+            int xdir = Random.Range(-1, 1);
+            int zdir = Random.Range(-1, 1);
+            for (int i = 0; i < players.Length; i++) //Loop through the number of players 
+            {
+                playerPositionsArray[i] = players[i].transform; //Set the index's of the player positions array to the transforms of the respective player objects
+            }
+
+            teleportTargetPosition = new Vector3(Random.Range(torches[0].position.x, torches[1].position.x), transform.position.y, Random.Range(torches[0].position.z, torches[2].position.z));
+
+            for (int i = 0; i < playerPositionsArray.Length; i++)//Loop through the player positions and if the teleport position is close to a player, move the teleport position. Will keep looping until it's not close to a player
+            {
+                if (playerPositionsArray[i] != null)
+                {
+                    float xdif = teleportTargetPosition.x - playerPositionsArray[i].position.x;
+                    float zdif = teleportTargetPosition.z - playerPositionsArray[i].position.z;
+                    if (new Vector3(xdif, zdif).magnitude <= 5f)
+                    {
+                        teleportTargetPosition.x += Mathf.Abs(xdif) * xdir;
+                        teleportTargetPosition.z += Mathf.Abs(zdif) * zdir;
+                        i = 0;
+                    }
+                }
+            }
+
+            transform.position = teleportTargetPosition;
+        }
+        //Recover
+        if (frame > framesBeforeTP && frame < recoverFrames + framesBeforeTP)
+        {
+            transform.Rotate(new Vector3(transform.rotation.x - 10, transform.rotation.y, transform.rotation.z));
+        }
+        //Change state
+        if (frame > recoverFrames + framesBeforeTP)
+        {
+            state = states.idle;
+        }
+
+    }
     #region Getting hurt
     void Hurt(float damageTaken, float stunTime)
     {
@@ -203,6 +251,8 @@ public class AdvancedBossAi : MonoBehaviour
             bool attacking = sword.attack;
             attacked = false;
         }
+
+        
     }
 
     //CHANGE THIS ONCE ANIMATIONS ARE IN    FUUUUUUCCKK
@@ -260,6 +310,8 @@ public class AdvancedBossAi : MonoBehaviour
 
                 //float knockBack = attackerEffect.m_KnockBack; //These two is how this code is supposed to work but for whatever reason it's not getting these or the values just don't exist
                 //float stun = attackerEffect.m_StunTime;
+
+
 
             }
         }
@@ -442,54 +494,7 @@ public class AdvancedBossAi : MonoBehaviour
     #endregion
 
     #endregion
-    void Teleport(int framesBeforeTP, int recoverFrames)
-    {
-        //Windup
-        if (frame < framesBeforeTP)
-        {
-            transform.Rotate(new Vector3(transform.rotation.x - 10, transform.rotation.y, transform.rotation.z));
-        }
-        if (frame == framesBeforeTP)
-        {
-            Vector3 teleportTargetPosition = transform.position; //Set variable for target position
-            int xdir = Random.Range(-1, 1);
-            int zdir = Random.Range(-1, 1);
-            for (int i = 0; i < players.Length; i++) //Loop through the number of players 
-            {
-                playerPositionsArray[i] = players[i].transform; //Set the index's of the player positions array to the transforms of the respective player objects
-            }
 
-            teleportTargetPosition = new Vector3(Random.Range(torches[0].position.x, torches[1].position.x), transform.position.y, Random.Range(torches[0].position.z, torches[2].position.z));
-
-            for (int i = 0; i < playerPositionsArray.Length; i++)//Loop through the player positions and if the teleport position is close to a player, move the teleport position. Will keep looping until it's not close to a player
-            {
-                if (playerPositionsArray[i] != null)
-                {
-                    float xdif = teleportTargetPosition.x - playerPositionsArray[i].position.x;
-                    float zdif = teleportTargetPosition.z - playerPositionsArray[i].position.z;
-                    if (new Vector3(xdif, zdif).magnitude <= 5f)
-                    {
-                        teleportTargetPosition.x += Mathf.Abs(xdif) * xdir;
-                        teleportTargetPosition.z += Mathf.Abs(zdif) * zdir;
-                        i = 0;
-                    }
-                }
-            }
-
-            transform.position = teleportTargetPosition;
-        }
-        //Recover
-        if (frame > framesBeforeTP && frame < recoverFrames + framesBeforeTP)
-        {
-            transform.Rotate(new Vector3(transform.rotation.x - 10, transform.rotation.y, transform.rotation.z));
-        }
-        //Change state
-        if (frame > recoverFrames + framesBeforeTP)
-        {
-            state = states.idle;
-        }
-
-    }
 
     //This is where the decision making for the target player will happen
     GameObject GetTargetPlayer()
@@ -584,5 +589,18 @@ public class AdvancedBossAi : MonoBehaviour
         }
         return target;
     }
-
+    
+    void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.GetComponent<Player>() != null)
+        {
+            //Hit player
+            PlayerController playerScript = other.gameObject.GetComponent<PlayerController>();
+            if(m_Velocity.magnitude > 10f)
+            {
+                playerScript.m_Velocity = new Vector3(0f,30f,0f);
+            }
+            
+        }
+    }
 }
