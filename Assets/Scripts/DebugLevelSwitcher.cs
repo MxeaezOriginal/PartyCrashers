@@ -35,6 +35,18 @@ public class DebugLevelSwitcher : MonoBehaviour
         {
             SceneManager.LoadScene("KaminsBoss");
         }
+        else if (Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            SceneManager.LoadScene("BallroomBlitz");
+        }
+        else if (Input.GetKeyDown(KeyCode.Minus))
+        {
+            SceneManager.LoadScene("BreakToTheBeat");
+        }
+        else if (Input.GetKeyDown(KeyCode.Equals))
+        {
+            SceneManager.LoadScene("DanceFloorRumble");
+        }
     }
 
 }
