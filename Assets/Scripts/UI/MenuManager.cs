@@ -55,8 +55,8 @@ public class MenuManager : MonoBehaviour
         else if (exitPromptActive)
             StartCoroutine(ExitPrompt());
 
-        //if (canBack && Input.GetButtonDown("Back_" + GameManager.m_Instance.m_Player1.m_Controller)) //PRESS FOR BACK BUTTON
-        //    BackButton();
+        if (canBack && Input.GetButtonDown("Back_" + GameManager.m_Instance.m_Player1.m_Controller)) //PRESS FOR BACK BUTTON
+            BackButton();
 
         StartCoroutine(SelectedAnimationWaitForEndOfFrame());
     }
@@ -99,9 +99,6 @@ public class MenuManager : MonoBehaviour
         canvases[3].SetActive(false);
         canvases[4].SetActive(false);
         canvases[5].SetActive(false);
-
-
-        characterSelect.canBack = true;
     }
     IEnumerator Play()
     {
@@ -235,27 +232,12 @@ public class MenuManager : MonoBehaviour
             {
                 int players = ++GameManager.m_Instance.m_NumOfPlayers;
                 characterSelect.AssignController(Player.Controller.P1);
+                Debug.Log("Player " + players + " has Joined!");
                 inputModule.submitButton = "Jump_P1";
                 inputModule.horizontalAxis = "Horizontal_P1";
                 inputModule.verticalAxis = "Vertical_P1";
-                switch (GameManager.m_Instance.m_NumOfPlayers)
-                {
-                    case 1:
-                        characterSelect.P1Join = true;
-                        break;
-                    case 2:
-                        characterSelect.P2Join = true;
-                        break;
-                    case 3:
-                        characterSelect.P3Join = true;
-                        break;
-                    case 4:
-                        characterSelect.P4Join = true;
-                        break;
-                }
-
+                characterSelect.P1Join = true;
                 characterSelect.firstPlayer = CharacterSelect.PlayerOne.P1;
-                Debug.Log("Player " + players + " has Joined!");
             }
             if (canvases[0].activeSelf && Input.GetButtonDown("Jump_P2"))
             {
@@ -265,21 +247,7 @@ public class MenuManager : MonoBehaviour
                 inputModule.submitButton = "Jump_P2";
                 inputModule.horizontalAxis = "Horizontal_P2";
                 inputModule.verticalAxis = "Vertical_P2";
-                switch (GameManager.m_Instance.m_NumOfPlayers)
-                {
-                    case 1:
-                        characterSelect.P1Join = true;
-                        break;
-                    case 2:
-                        characterSelect.P2Join = true;
-                        break;
-                    case 3:
-                        characterSelect.P3Join = true;
-                        break;
-                    case 4:
-                        characterSelect.P4Join = true;
-                        break;
-                }
+                characterSelect.P2Join = true;
                 characterSelect.firstPlayer = CharacterSelect.PlayerOne.P2;
             }
             if (canvases[0].activeSelf && Input.GetButtonDown("Jump_P3"))
@@ -290,21 +258,7 @@ public class MenuManager : MonoBehaviour
                 inputModule.submitButton = "Jump_P3";
                 inputModule.horizontalAxis = "Horizontal_P3";
                 inputModule.verticalAxis = "Vertical_P3";
-                switch (GameManager.m_Instance.m_NumOfPlayers)
-                {
-                    case 1:
-                        characterSelect.P1Join = true;
-                        break;
-                    case 2:
-                        characterSelect.P2Join = true;
-                        break;
-                    case 3:
-                        characterSelect.P3Join = true;
-                        break;
-                    case 4:
-                        characterSelect.P4Join = true;
-                        break;
-                }
+                characterSelect.P3Join = true;
                 characterSelect.firstPlayer = CharacterSelect.PlayerOne.P3;
             }
             if (canvases[0].activeSelf && Input.GetButtonDown("Jump_P4"))
@@ -315,21 +269,7 @@ public class MenuManager : MonoBehaviour
                 inputModule.submitButton = "Jump_P4";
                 inputModule.horizontalAxis = "Horizontal_P4";
                 inputModule.verticalAxis = "Vertical_P4";
-                switch (GameManager.m_Instance.m_NumOfPlayers)
-                {
-                    case 1:
-                        characterSelect.P1Join = true;
-                        break;
-                    case 2:
-                        characterSelect.P2Join = true;
-                        break;
-                    case 3:
-                        characterSelect.P3Join = true;
-                        break;
-                    case 4:
-                        characterSelect.P4Join = true;
-                        break;
-                }
+                characterSelect.P4Join = true;
                 characterSelect.firstPlayer = CharacterSelect.PlayerOne.P4;
             }
             if (canvases[0].activeSelf && Input.GetButtonDown("Submit_Keyboard"))
