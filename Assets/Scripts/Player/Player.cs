@@ -215,31 +215,32 @@ public class Player : MonoBehaviour
 
     public void respawn()
     {
-        var vel = gameObject.GetComponent<PlayerController>().m_Velocity.normalized;
-        Vector3 tempLocation = m_Location;
-        tempLocation.x -= vel.x * 15.0f;
-        tempLocation.z -= vel.z * 15.0f;
+        if (GameManager.m_Instance.m_GameState == GameManager.GameState.Dungeon)
+        {
+            var vel = gameObject.GetComponent<PlayerController>().m_Velocity.normalized;
+            Vector3 tempLocation = m_Location;
+            tempLocation.x -= vel.x * 15.0f;
+            tempLocation.z -= vel.z * 15.0f;
 
-        m_State = State.Dead;
-        updateModel();
-        transform.position = tempLocation;
-        stun(0.1f);
-        m_RespawnHealth.initialize();
+            m_State = State.Dead;
+            updateModel();
+            transform.position = tempLocation;
+            stun(0.1f);
+            m_RespawnHealth.initialize();
+        }
+        else if(GameManager.m_Instance.m_GameState == GameManager.GameState.Minigame)
+        {
+            var vel = gameObject.GetComponent<PlayerController>().m_Velocity.normalized;
+            Vector3 tempLocation = m_Location;
+            tempLocation.x -= vel.x * 15.0f;
+            tempLocation.z -= vel.z * 15.0f;
 
-    }
-
-    public void respawnMinigame()
-    {
-        var vel = gameObject.GetComponent<PlayerController>().m_Velocity.normalized;
-        Vector3 tempLocation = m_Location;
-        tempLocation.x -= vel.x * 15.0f;
-        tempLocation.z -= vel.z * 15.0f;
-
-        m_State = State.Alive;
-        updateModel();
-        transform.position = tempLocation;
-        stun(0.1f);
-        m_RespawnHealth.initialize();
+            m_State = State.Alive;
+            updateModel();
+            transform.position = tempLocation;
+            stun(0.1f);
+            //m_RespawnHealth.initialize();
+        }
 
     }
 
