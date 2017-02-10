@@ -216,13 +216,26 @@ public class Player : MonoBehaviour
     public void respawn()
     {
         var vel = gameObject.GetComponent<PlayerController>().m_Velocity.normalized;
-        //Debug.Log("Velocity vector: " + vel.ToString());
-        //Debug.Log("Location before change: " + m_Location);
         Vector3 tempLocation = m_Location;
         tempLocation.x -= vel.x * 15.0f;
         tempLocation.z -= vel.z * 15.0f;
 
         m_State = State.Dead;
+        updateModel();
+        transform.position = tempLocation;
+        stun(0.1f);
+        m_RespawnHealth.initialize();
+
+    }
+
+    public void respawnMinigame()
+    {
+        var vel = gameObject.GetComponent<PlayerController>().m_Velocity.normalized;
+        Vector3 tempLocation = m_Location;
+        tempLocation.x -= vel.x * 15.0f;
+        tempLocation.z -= vel.z * 15.0f;
+
+        m_State = State.Alive;
         updateModel();
         transform.position = tempLocation;
         stun(0.1f);

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class KillVolumeStun : MonoBehaviour {
+public class KillVolumeMinigame : MonoBehaviour {
 
     public float m_StunTime;
 
@@ -10,8 +10,7 @@ public class KillVolumeStun : MonoBehaviour {
         if (other.gameObject.CompareTag("Player"))
         {
             Player p = other.gameObject.GetComponent<Player>();
-            p.respawn();
-            p.stun(m_StunTime);
+            p.respawnMinigame();
         }
     }
 }
