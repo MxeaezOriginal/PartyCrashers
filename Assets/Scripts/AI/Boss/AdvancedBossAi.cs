@@ -188,6 +188,8 @@ public class AdvancedBossAi : MonoBehaviour
     }
     void Teleport(int framesBeforeTP, int recoverFrames)
     {
+        //Friction
+        Friction(2f);
         //Windup
         if (frame < framesBeforeTP)
         {
