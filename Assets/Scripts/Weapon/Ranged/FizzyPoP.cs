@@ -22,8 +22,11 @@ public class FizzyPoP : Ranged
 
     #region Components
     private Player Player;
-    private GameObject FizzyCone;   
+    private GameObject FizzyCone;
     #endregion
+
+    //Test
+    bool m_IsFiring = false;
 
     void Start()
     {
@@ -37,7 +40,7 @@ public class FizzyPoP : Ranged
         #region Primary Attack
         // Shoot if Button Down
         if (Input.GetAxisRaw(Player.m_PrimaryAttack + Player.getControllerAsString()) == 1 && m_IsDown)
-            ShootSpray();    
+            ShootSpray();        
         else
             FizzyCone.SetActive(false);
         #endregion
@@ -54,12 +57,11 @@ public class FizzyPoP : Ranged
 
 
     public override void primaryAttack()
-    {       
+    {               
         if (m_CoolDown <= Time.time - m_Weapon1Cooldown || m_CoolDown == 0)
         {
             m_IsDown = true;
-            m_CoolDown = Time.time;            
-        }
+        }            
     }
 
     public override void secondaryAttack()
@@ -73,7 +75,23 @@ public class FizzyPoP : Ranged
 
     private void ShootSpray()
     {
+        float counter = 0.0f;
         FizzyCone.SetActive(true);
+        counter += Time.deltaTime;
+        //do
+        //{
+        //    counter += Time.deltaTime;
+        //    Debug.Log(counter);
+        //} while (counter < m_MaxSprayCharge);
+
+        if (counter >= m_MaxSprayCharge)
+        {
+            //FizzyCone.SetActive(false);
+            m_IsDown = false;    
+            m_CoolDown = Time.time;
+            counter = 0;
+        }
+
     }
 
     private void ShootHeal()

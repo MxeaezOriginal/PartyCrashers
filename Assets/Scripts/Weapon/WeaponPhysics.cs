@@ -6,7 +6,7 @@ public class WeaponPhysics : MonoBehaviour
 {
 
     public float speed;
-    public Rigidbody rb;
+    private Rigidbody rb;
     private bool[] is_touched = new bool[4] { false, false, false, false };
     protected GameObject[] m_player;
 
