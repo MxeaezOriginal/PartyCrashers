@@ -29,6 +29,7 @@ GameObject:
   - 114: {fileID: 11494592}
   - 114: {fileID: 11433430}
   - 114: {fileID: 11497706}
+  - 114: {fileID: 11448920}
   m_Layer: 0
   m_Name: MinigameManager
   m_TagString: Untagged
@@ -45,6 +46,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.9131181, y: 0.5210259, z: -3.5881052}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 444674}
   m_Father: {fileID: 0}
@@ -58,6 +60,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.9131181, y: -0.5210259, z: 3.5881052}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 422924}
   m_RootOrder: 0
@@ -100,10 +103,6 @@ MonoBehaviour:
   scorePlace4: 0
   allScoresList: 
   allScores: 00000000000000000000000000000000
-  P1_Score: 6000
-  P2_Score: 5000
-  P3_Score: 4000
-  P4_Score: 3000
 --- !u!114 &11441590
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -115,19 +114,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92045050adf6014478e770558320ecb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minigameEnded: 0
-  showResultBar: 0
-  scoreSorted: 0
-  barsRaised: 0
-  showRewardCanvas: 0
-  rewardsSelected: 0
-  bossYes: 0
-  bossNo: 0
-  test: 0
-  P1_place: 0
-  P2_place: 0
-  P3_place: 0
-  P4_place: 0
+  m_P1Place: 0
+  m_P2Place: 0
+  m_P3Place: 0
+  m_P4Place: 0
+  m_MinigameCanvas: {fileID: 0}
+  m_RewardSelectionCanvas: {fileID: 0}
+  m_BossPromptCanvas: {fileID: 0}
+  m_FirstFadingCanvas: {fileID: 0}
+  m_SecondFadingCanvas: {fileID: 0}
+  m_DelayToFadeIn: 1
+  m_DelayToShowResultBar: 2
+  m_FadeTime: 2
+--- !u!114 &11448920
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 162580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dabc7f0a5f01f041b40d3e85ffe0c91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_StartCounter:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  m_PartyBar: {fileID: 0}
 --- !u!114 &11449472
 MonoBehaviour:
   m_ObjectHideFlags: 1
