@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 public class MinigameResultSummary : MonoBehaviour
 {
@@ -67,15 +68,18 @@ public class MinigameResultSummary : MonoBehaviour
             {
                 player.GetComponent<PlayerController>().m_CantMove = true;
 
-                Animator[] anim = player.GetComponentsInChildren<Animator>();
+                // TEMPORARY!!!
 
-                foreach(Animator a in anim)
-                {
-                    if(a.name.Equals("Model"))
-                    {
-                        a.Play("idle");
-                    }
-                }
+                GoBacktoDungeon();
+                //Animator[] anim = player.GetComponentsInChildren<Animator>();
+
+                //foreach(Animator a in anim)
+                //{
+                //    if(a.name.Equals("Model"))
+                //    {
+                //        a.Play("idle");
+                //    }
+                //}
             }
 
             ShowResultCanvas();
@@ -83,6 +87,41 @@ public class MinigameResultSummary : MonoBehaviour
             SortingScores();
         }
         SetPlayerPlace();
+    }
+
+    void GoBacktoDungeon()
+    {
+        if (    GameManager.m_Instance.m_Tutorial == GameManager.Tutorial.Lobby_01 ||
+                GameManager.m_Instance.m_Tutorial == GameManager.Tutorial.Lobby_02 ||
+                GameManager.m_Instance.m_Tutorial == GameManager.Tutorial.Lobby_03)
+        {
+            //SceneManager.LoadScene(GameManager.m_Instance.m_Tutorial.ToString()); //ballroom blitz
+
+            //Reward time
+            //if (m_MinigameManager.bossNo)
+            //{
+                GameManager.m_Instance.m_GameState = GameManager.GameState.Dungeon;
+                SceneManager.LoadScene(GameManager.m_Instance.m_Tutorial.ToString());
+            //}
+            //else if (miniGameManager.bossYes)
+            //{
+            //    GameManager.m_Instance.m_GameState = GameManager.GameState.Boss;
+            //    SceneManager.LoadScene("BossRoom");
+            //}
+        }
+        else
+        {
+            //if (miniGameManager.bossNo)
+            //{
+                GameManager.m_Instance.m_GameState = GameManager.GameState.Dungeon;
+                SceneManager.LoadScene(Random.Range(8, 10));
+            //}
+            //else if (miniGameManager.bossYes)
+            //{
+            //    GameManager.m_Instance.m_GameState = GameManager.GameState.Boss;
+            //    SceneManager.LoadScene("BossRoom");
+            //}
+        }
     }
 
 
