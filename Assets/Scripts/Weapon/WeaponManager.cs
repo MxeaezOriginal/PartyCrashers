@@ -12,9 +12,8 @@ public class WeaponManager : MonoBehaviour
         FizzyPopGun
     }
 
-    public GameObject m_CurrentWeapon;
-    public string m_CurrentWeaponName;
-    public Weapon m_WeaponOnGameStart = Weapon.GlowSword;
+    public GameObject m_CurrentWeaponObject;
+    public Weapon m_CurrentWeapon = Weapon.GlowSword;
     public string m_PickupConcactinateString = "_Pickup";
     public float m_DelayBetweenSwaps = 1f;
 
@@ -34,8 +33,6 @@ public class WeaponManager : MonoBehaviour
             m_Weapons.Add(weapon.gameObject.name, weapon);
         }
 
-        m_CurrentWeaponName = m_WeaponOnGameStart.ToString();
-
         initialize();
     }
 
@@ -44,7 +41,7 @@ public class WeaponManager : MonoBehaviour
         if (transform.FindChild("Model") != null) { findWeaponRecursive(transform.FindChild("Model")); Debug.Log("hi"); }
         else { Debug.LogError("Model not found under player"); }
 
-        SetWeapon((WeaponManager.Weapon)System.Enum.Parse(typeof(WeaponManager.Weapon), m_CurrentWeaponName));
+        SetWeapon(m_CurrentWeapon);
     }
 
     public void SetWeapon(Weapon weaponPrefabName)
@@ -54,9 +51,9 @@ public class WeaponManager : MonoBehaviour
             GameObject child = m_WeaponsTransform.FindChild(weaponPrefabName.ToString()).gameObject;
             if (m_Weapons.ContainsKey(weaponPrefabName.ToString()))
             {
-                if (m_CurrentWeapon != null)
+                if (m_CurrentWeaponObject != null)
                 {
-                    Destroy(m_CurrentWeapon);
+                    Destroy(m_CurrentWeaponObject);
                 }
                 InstantiateWeapon(m_Weapons[weaponPrefabName.ToString()], child);
             }
@@ -82,8 +79,8 @@ public class WeaponManager : MonoBehaviour
         newWeapon.transform.localScale = new Vector3(1, 1, 1);
 
         newWeapon.name = child.name;
-        m_CurrentWeapon = newWeapon;
-        m_CurrentWeaponName = m_CurrentWeapon.name;
+        m_CurrentWeaponObject = newWeapon;
+        m_CurrentWeapon = (Weapon) System.Enum.Parse(typeof(Weapon), m_CurrentWeaponObject.name);
     }
 
     public void InstantiateWeapon()
@@ -97,23 +94,23 @@ public class WeaponManager : MonoBehaviour
         newWeapon.transform.localScale = new Vector3(1, 1, 1);
 
         newWeapon.name = m_WeaponParent.name;
-        m_CurrentWeapon = newWeapon;
-        m_CurrentWeaponName = m_CurrentWeapon.name;
+        m_CurrentWeaponObject = newWeapon;
+        m_CurrentWeapon = (Weapon)System.Enum.Parse(typeof(Weapon), m_CurrentWeaponObject.name);
 
         Destroy(m_WeaponStandingOnPickup);
     }
 
     private void DropCurrentWeapon()
     {
-        if (m_CurrentWeapon != null)
+        if (m_CurrentWeaponObject != null)
         {
             foreach (GameObject weaponPickup in m_WeaponPrefabPickups)
             {
-                if (m_CurrentWeapon.gameObject.name + m_PickupConcactinateString == weaponPickup.gameObject.name)
+                if (m_CurrentWeaponObject.gameObject.name + m_PickupConcactinateString == weaponPickup.gameObject.name)
                 {
-                    GameObject weaponToDrop = Instantiate(weaponPickup, m_CurrentWeapon.transform.position, Quaternion.identity) as GameObject;
+                    GameObject weaponToDrop = Instantiate(weaponPickup, m_CurrentWeaponObject.transform.position, Quaternion.identity) as GameObject;
                     StartCoroutine(SetWeaponPickupable(weaponToDrop, weaponPickup.name));
-                    Destroy(m_CurrentWeapon);
+                    Destroy(m_CurrentWeaponObject);
                     break;
                 }
             }

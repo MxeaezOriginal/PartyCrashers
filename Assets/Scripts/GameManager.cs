@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
         public string name;
         public Player.PLAYER player;
         public Player.Model model;
+        public WeaponManager.Weapon weapon;
         public float attackSpeed;
         public float movementSpeed;
         public int damage;

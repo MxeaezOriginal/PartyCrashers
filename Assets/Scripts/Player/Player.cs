@@ -96,6 +96,9 @@ public class Player : MonoBehaviour
     // Cooldown tracker for grabbing current location
     private float m_CurrentCooldown;
 
+    // Interact Cooldown
+    private float m_InteractWaitTime;
+
 
     //Set up color --------------------------------------------------------------------------------------------------------------------------------------------------
 	[SerializeField]
@@ -108,7 +111,14 @@ public class Player : MonoBehaviour
 	public Color playerDamageIndacator = Color.white;
 	public bool FlashCheck = true;
 
-
+    void Awake()
+    {
+        rb = GetComponent<Rigidbody>();
+        m_Heart = GetComponent<HeartSystem>();
+        m_CharController = GetComponent<CharacterController>();
+        m_WeaponManager = GetComponent<WeaponManager>();
+        m_RespawnHealth = GetComponent<RespawnHealth>();
+    }
 
     // Use this for initialization
     void Start()
@@ -116,11 +126,6 @@ public class Player : MonoBehaviour
         //COOPER TESTING
         //GetComponent<CharacterController>().attachedRigidbody.mass = 1000f;
         //
-        rb = GetComponent<Rigidbody>();
-        m_Heart = GetComponent<HeartSystem>();
-        m_CharController = GetComponent<CharacterController>();
-        m_WeaponManager = GetComponent<WeaponManager>();
-        m_RespawnHealth = GetComponent<RespawnHealth>();
 
     }
 
@@ -166,10 +171,19 @@ public class Player : MonoBehaviour
         //Interact
         if (Input.GetButtonDown(m_Interact + m_Controller.ToString()))
         {
-            if (m_WeaponManager.isStandingOnWeapon())
+            if (m_InteractWaitTime <= 0)
             {
-                m_WeaponManager.InstantiateWeapon();
+                if (m_WeaponManager.isStandingOnWeapon())
+                {
+                    m_WeaponManager.InstantiateWeapon();
+                }
+                m_InteractWaitTime = 1f;
             }
+        }
+
+        if(m_InteractWaitTime >= 0)
+        {
+            m_InteractWaitTime -= Time.deltaTime;
         }
 
         //Pause
@@ -186,20 +200,20 @@ public class Player : MonoBehaviour
     void attack(ATTACKTYPE a)
     {
         //If Current weapon is not assigned
-        if (m_WeaponManager.m_CurrentWeapon != null)
+        if (m_WeaponManager.m_CurrentWeaponObject != null)
         {
             //If current weapon has no component that inherits from Weapon
-            if (m_WeaponManager.m_CurrentWeapon.GetComponent<Weapon>() != null)
+            if (m_WeaponManager.m_CurrentWeaponObject.GetComponent<Weapon>() != null)
             {
                 //Use primary attack
                 if (a == ATTACKTYPE.PRIMARY)
                 {
-                    m_WeaponManager.m_CurrentWeapon.GetComponent<Weapon>().primaryAttack();
+                    m_WeaponManager.m_CurrentWeaponObject.GetComponent<Weapon>().primaryAttack();
                 }
                 //Use secondary attack
                 else if (a == ATTACKTYPE.SECONDARY)
                 {
-                    m_WeaponManager.m_CurrentWeapon.GetComponent<Weapon>().secondaryAttack();
+                    m_WeaponManager.m_CurrentWeaponObject.GetComponent<Weapon>().secondaryAttack();
                 }
             }
             else
@@ -330,6 +344,7 @@ public class Player : MonoBehaviour
                 GameManager.m_Instance.m_Player1.name = m_PlayerName;
                 GameManager.m_Instance.m_Player1.player = m_Player;
                 GameManager.m_Instance.m_Player1.model = m_Model;
+                GameManager.m_Instance.m_Player1.weapon = m_WeaponManager.m_CurrentWeapon;
                 GameManager.m_Instance.m_Player1.attackSpeed = m_AttackSpeed;
                 GameManager.m_Instance.m_Player1.movementSpeed = m_MovementSpeed;
                 GameManager.m_Instance.m_Player1.damage = m_Damage;
@@ -344,6 +359,7 @@ public class Player : MonoBehaviour
                 GameManager.m_Instance.m_Player2.name = m_PlayerName;
                 GameManager.m_Instance.m_Player2.player = m_Player;
                 GameManager.m_Instance.m_Player2.model = m_Model;
+                GameManager.m_Instance.m_Player2.weapon = m_WeaponManager.m_CurrentWeapon;
                 GameManager.m_Instance.m_Player2.attackSpeed = m_AttackSpeed;
                 GameManager.m_Instance.m_Player2.movementSpeed = m_MovementSpeed;
                 GameManager.m_Instance.m_Player2.damage = m_Damage;
@@ -358,6 +374,7 @@ public class Player : MonoBehaviour
                 GameManager.m_Instance.m_Player3.name = m_PlayerName;
                 GameManager.m_Instance.m_Player3.player = m_Player;
                 GameManager.m_Instance.m_Player3.model = m_Model;
+                GameManager.m_Instance.m_Player3.weapon = m_WeaponManager.m_CurrentWeapon;
                 GameManager.m_Instance.m_Player3.attackSpeed = m_AttackSpeed;
                 GameManager.m_Instance.m_Player3.movementSpeed = m_MovementSpeed;
                 GameManager.m_Instance.m_Player3.damage = m_Damage;
@@ -372,6 +389,7 @@ public class Player : MonoBehaviour
                 GameManager.m_Instance.m_Player4.name = m_PlayerName;
                 GameManager.m_Instance.m_Player4.player = m_Player;
                 GameManager.m_Instance.m_Player4.model = m_Model;
+                GameManager.m_Instance.m_Player4.weapon = m_WeaponManager.m_CurrentWeapon;
                 GameManager.m_Instance.m_Player4.attackSpeed = m_AttackSpeed;
                 GameManager.m_Instance.m_Player4.movementSpeed = m_MovementSpeed;
                 GameManager.m_Instance.m_Player4.damage = m_Damage;
@@ -416,6 +434,7 @@ public class Player : MonoBehaviour
                 m_PlayerName = GameManager.m_Instance.m_Player1.name;
                 m_Player = GameManager.m_Instance.m_Player1.player;
                 m_Model = GameManager.m_Instance.m_Player1.model;
+                m_WeaponManager.m_CurrentWeapon = GameManager.m_Instance.m_Player1.weapon;
                 m_AttackSpeed = GameManager.m_Instance.m_Player1.attackSpeed;
                 m_MovementSpeed = GameManager.m_Instance.m_Player1.movementSpeed;
                 m_Damage = GameManager.m_Instance.m_Player1.damage;
@@ -430,6 +449,7 @@ public class Player : MonoBehaviour
                 m_PlayerName = GameManager.m_Instance.m_Player2.name;
                 m_Player = GameManager.m_Instance.m_Player2.player;
                 m_Model = GameManager.m_Instance.m_Player2.model;
+                m_WeaponManager.m_CurrentWeapon = GameManager.m_Instance.m_Player2.weapon;
                 m_AttackSpeed = GameManager.m_Instance.m_Player2.attackSpeed;
                 m_MovementSpeed = GameManager.m_Instance.m_Player2.movementSpeed;
                 m_Damage = GameManager.m_Instance.m_Player2.damage;
@@ -444,6 +464,7 @@ public class Player : MonoBehaviour
                 m_PlayerName = GameManager.m_Instance.m_Player3.name;
                 m_Player = GameManager.m_Instance.m_Player3.player;
                 m_Model = GameManager.m_Instance.m_Player3.model;
+                m_WeaponManager.m_CurrentWeapon = GameManager.m_Instance.m_Player3.weapon;
                 m_AttackSpeed = GameManager.m_Instance.m_Player3.attackSpeed;
                 m_MovementSpeed = GameManager.m_Instance.m_Player3.movementSpeed;
                 m_Damage = GameManager.m_Instance.m_Player3.damage;
@@ -458,6 +479,7 @@ public class Player : MonoBehaviour
                 m_PlayerName = GameManager.m_Instance.m_Player4.name;
                 m_Player = GameManager.m_Instance.m_Player4.player;
                 m_Model = GameManager.m_Instance.m_Player4.model;
+                m_WeaponManager.m_CurrentWeapon = GameManager.m_Instance.m_Player4.weapon;
                 m_AttackSpeed = GameManager.m_Instance.m_Player4.attackSpeed;
                 m_MovementSpeed = GameManager.m_Instance.m_Player4.movementSpeed;
                 m_Damage = GameManager.m_Instance.m_Player4.damage;
