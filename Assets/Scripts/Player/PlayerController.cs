@@ -47,6 +47,11 @@ public class PlayerController : MonoBehaviour
 
     private Player m_Player;
 
+	//VFX
+	public GameObject jumpEffect;
+	//public GameObject landEffect;
+	//VFXend
+
     //bool canSee;
     //HeavyEnemy heavyenemy;
     //private Rigidbody rigidBody;
@@ -118,12 +123,21 @@ public class PlayerController : MonoBehaviour
 
                 if (Input.GetButtonDown(m_JumpButton + GetComponent<Player>().getControllerAsString()))
                 {
+					//VFX
+					if (jumpEffect != null) 
+					{
+						GameObject jumpvfx;
+						jumpvfx = (GameObject)Instantiate (jumpEffect, transform.position, transform.rotation);
+						Destroy (jumpvfx, 0.5f);
+					}
+					//VFXend
                     m_Velocity.y = m_Jump;
                 }
                 m_CurrentGravity = 0f;
                 if (m_Player.m_Animator != null)
                 {
                     m_Player.m_Animator.SetBool("isGrounded", true);
+
                 }
             }
             else
