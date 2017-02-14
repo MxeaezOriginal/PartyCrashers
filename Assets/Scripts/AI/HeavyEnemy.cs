@@ -24,10 +24,20 @@ public class HeavyEnemy : EnemyAI //Inherits from EnemyAI now instead of monobeh
     private HeartSystem m_HeartSystem;
     private bool m_CanDamage = true;
 
+	//VFX
+	//public GameObject trailEffect;
+	//VFX
+
     EnemyEffect enemyEffect;
 
     void Start()
     {
+		/*/VFX
+		if (trailEffect != null)
+		{
+			trailEffect.GetComponent<ParticleSystem> ().enableEmission = false;
+		}
+		//VFX*/
         KB = KnockBackDis;
         initializeVariables();
         enemyEffect = gameObject.GetComponent<EnemyEffect>();
@@ -45,10 +55,22 @@ public class HeavyEnemy : EnemyAI //Inherits from EnemyAI now instead of monobeh
         if (CanSeePlayer() && !enemyEffect.isStun)
         {
                 chase();
+			/*/VFX
+			if (trailEffect != null)
+			{
+				trailEffect.GetComponent<ParticleSystem> ().enableEmission = true;
+			}
+			//VFX*/
         }
         else
         {
                 agent.Stop();
+			/*/VFX
+			if (trailEffect != null)
+			{
+				trailEffect.GetComponent<ParticleSystem> ().enableEmission = false;
+			}
+			//VFX*/
         }
     }
 

@@ -17,6 +17,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &145964
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 429182}
+  - 96: {fileID: 9605176}
+  m_Layer: 0
+  m_Name: HeavyEnemyChargeVFX
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &160152
 GameObject:
   m_ObjectHideFlags: 0
@@ -76,6 +92,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!4 &429182
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 145964}
+  m_LocalRotation: {x: 0, y: -0.7071077, z: 0, w: 0.7071059}
+  m_LocalPosition: {x: 0.07600009, y: -0.064463675, z: 0.048996173}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 452322}
+  m_RootOrder: 2
 --- !u!4 &452322
 Transform:
   m_ObjectHideFlags: 1
@@ -83,11 +111,12 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 193810}
   m_LocalRotation: {x: 0, y: 0.7071077, z: 0, w: 0.7071059}
-  m_LocalPosition: {x: 13.900287, y: 1.29, z: 6.7844486}
+  m_LocalPosition: {x: -70.57, y: 1.0144637, z: 41.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 486448}
   - {fileID: 22414270}
+  - {fileID: 429182}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &486448
@@ -168,6 +197,53 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 193810}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!96 &9605176
+TrailRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 145964}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 1
+  m_Materials:
+  - {fileID: 2100000, guid: 9dc7bd1fb6cb1c148a7484fddcb72187, type: 2}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 1
+  m_ReflectionProbeUsage: 1
+  m_ProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_Time: 0.98
+  m_StartWidth: 1.74
+  m_EndWidth: -0.38
+  m_Colors:
+    m_Color[0]:
+      serializedVersion: 2
+      rgba: 4294967295
+    m_Color[1]:
+      serializedVersion: 2
+      rgba: 4294967295
+    m_Color[2]:
+      serializedVersion: 2
+      rgba: 4294967295
+    m_Color[3]:
+      serializedVersion: 2
+      rgba: 4294967295
+    m_Color[4]:
+      serializedVersion: 2
+      rgba: 16777215
+  m_MinVertexDistance: 0.1
+  m_Autodestruct: 0
 --- !u!114 &11407834
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -242,6 +318,7 @@ MonoBehaviour:
   m_LastMoveTime: 0
   RotationSpeed: 1
   m_Damage: 1
+  trailEffect: {fileID: 145964}
 --- !u!114 &11442814
 MonoBehaviour:
   m_ObjectHideFlags: 1
