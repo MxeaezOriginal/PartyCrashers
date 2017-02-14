@@ -97,7 +97,11 @@ public class Player : MonoBehaviour
     private float m_CurrentCooldown;
 
     // Interact Cooldown
-    private float m_InteractWaitTime;
+    private float m_InteractWaitTime; 
+
+	//VFX
+	public GameObject pickUpWeaponEffect;
+	//VFX
 
 
     //Set up color --------------------------------------------------------------------------------------------------------------------------------------------------
@@ -176,6 +180,14 @@ public class Player : MonoBehaviour
                 if (m_WeaponManager.isStandingOnWeapon())
                 {
                     m_WeaponManager.InstantiateWeapon();
+					//VfX
+					if (pickUpWeaponEffect != null) 
+					{
+						GameObject getWeapon;
+						getWeapon = (GameObject)Instantiate (pickUpWeaponEffect, transform.position, transform.rotation);
+						Destroy (getWeapon, 0.5f);
+					}
+					//VFX end
                 }
                 m_InteractWaitTime = 1f;
             }
