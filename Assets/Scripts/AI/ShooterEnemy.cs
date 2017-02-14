@@ -23,12 +23,22 @@ public class ShooterEnemy : EnemyAI //Inherits from EnemyAI instead of Monobehav
     public float bulletwaitingtime = 3.0f;
     public Rigidbody projectile;
 
-	//VFX
-	public GameObject shootEffect;
-	//VFXend
+    //VFX
+    public GameObject shootEffect;
+    //VFXend
 
     //EnemyAI enemyAi;
     EnemyEffect enemyEffect;
+
+    //SFX
+    public AudioSource audioSource;
+    public AudioClip[] SFX;
+    private AudioClip SFXtoPlay;
+
+    public float maxRandomPitch;
+    public float minRandomPitch;
+    private float randomPitch;
+    //SFX End
 
     void Start()
     {
@@ -38,7 +48,7 @@ public class ShooterEnemy : EnemyAI //Inherits from EnemyAI instead of Monobehav
     void Update()
     {
         getClosestPlayer();
-        
+
         aim(target.transform);
 
         MoveDir = transform.position - target.transform.position;
@@ -76,14 +86,29 @@ public class ShooterEnemy : EnemyAI //Inherits from EnemyAI instead of Monobehav
     {
         Rigidbody bullet = (Rigidbody)Instantiate(projectile, transform.position + transform.forward, transform.rotation);
         bullet.AddForce(transform.forward * bulletImpulse, ForceMode.Impulse);
-		//VFX
-		if (shootEffect != null) 
-		{
-			GameObject shootvfx;
-			shootvfx = (GameObject)Instantiate (shootEffect, transform.position, transform.rotation);
-			Destroy (shootvfx, 0.3f);
-		}
-		//VFXend
+        //VFX
+        if (shootEffect != null)
+        {
+            GameObject shootvfx;
+            shootvfx = (GameObject)Instantiate(shootEffect, transform.position, transform.rotation);
+            Destroy(shootvfx, 0.3f);
+        }
+        //VFXend
+
+
+        //SFX
+        if (audioSource != null)
+        {
+            randomPitch = Random.RandomRange(maxRandomPitch, minRandomPitch);
+            SFXtoPlay = SFX[Random.Range(0, SFX.Length)];
+            audioSource.clip = SFXtoPlay;
+            audioSource.pitch = randomPitch;
+            audioSource.Play();
+        }
+        //SFX END
+
+
+
         Destroy(bullet.gameObject, 1.0f);
     }
 }
