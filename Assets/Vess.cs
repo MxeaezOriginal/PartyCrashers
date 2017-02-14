@@ -8,10 +8,9 @@ public class Vess : MonoBehaviour
     public GameObject m_BoomEffect;
 
     //SFX
-    public AudioSource audioSource;
+    public GameObject SFXPlayer;
     public AudioClip[] SFX;
     private AudioClip SFXtoPlay;
-
     public float maxRandomPitch;
     public float minRandomPitch;
     private float randomPitch;
@@ -48,14 +47,25 @@ public class Vess : MonoBehaviour
             Destroy(explosion, 4f);
             //Debug.Log("Hit Weapon");
             //SFX
-            if (audioSource != null)
+            //James Sound Code
+
+            randomPitch = Random.RandomRange(maxRandomPitch, minRandomPitch);
+            if (randomPitch > 3)
             {
-                randomPitch = Random.RandomRange(maxRandomPitch, minRandomPitch);
-                SFXtoPlay = SFX[Random.Range(0, SFX.Length)];
-                audioSource.clip = SFXtoPlay;
-                audioSource.pitch = randomPitch;
-                audioSource.Play();
+                randomPitch = 3;
             }
+
+            if (SFXPlayer != null)
+            {
+                SFXtoPlay = SFX[Random.Range(0, SFX.Length)];
+                AudioSource source = SFXPlayer.GetComponent<AudioSource>();
+                source.pitch = randomPitch;
+                source.clip = SFXtoPlay;
+            }
+
+            GameObject SFXtest = Instantiate(SFXPlayer, transform.position, transform.rotation) as GameObject;
+
+            //James Shound Code
             //SFX END
         }
 
