@@ -4,7 +4,8 @@ using UnityStandardAssets.ImageEffects;
 
 public class Sword : Melee
 {
-    [Header("Sword Setting")][SerializeField]
+    [Header("Sword Setting")]
+    [SerializeField]
     private int dashDistance = 25;
     [SerializeField]
     private float dashDelay = 0.1f;
@@ -18,10 +19,20 @@ public class Sword : Melee
     public bool attack { get; private set; }
 
     public GameObject effect;
-    
-    
+
+
     CharacterController m_CharacterController;
     Player m_Player;
+
+    //SFX
+    public AudioSource audioSource;
+    public AudioClip[] dashSFX;
+    private AudioClip SFXtoPlay;
+
+    public float maxRandomPitch;
+    public float minRandomPitch;
+    private float randomPitch;
+    //SFX End
 
     void Start()
     {
@@ -48,8 +59,8 @@ public class Sword : Melee
                 Destroy(swordEffect, 1);
 
             }
-          }  
-        
+        }
+
 
         if (triggerLife <= 0)
         {
@@ -110,9 +121,19 @@ public class Sword : Melee
         StartCoroutine(setSecondaryAttackFalse());
         if (m_SecondaryCoolDown <= Time.time - m_Weapon1Cooldown || m_SecondaryCoolDown == 0)
         {
+            //SFX Start
+            if (audioSource != null)
+            {
+                randomPitch = Random.RandomRange(maxRandomPitch, minRandomPitch);
+                SFXtoPlay = dashSFX[Random.Range(0, dashSFX.Length)];
+                audioSource.clip = SFXtoPlay;
+                audioSource.pitch = randomPitch;
+                audioSource.Play();
+            }
+            //SFX END
             attack = true;
             m_CharacterController.Move(m_CharacterController.transform.forward * Time.deltaTime * 50f);
-
+           
             StartCoroutine(dash());
         }
     }
@@ -121,7 +142,7 @@ public class Sword : Melee
     {
         yield return new WaitForSeconds(dashDelay);
 
-        m_SecondaryCoolDown = Time.time;        
+        m_SecondaryCoolDown = Time.time;
     }
 
     private IEnumerator setPrimaryAttackFalse()
