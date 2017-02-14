@@ -27,7 +27,7 @@ public class RecycleBullet : MonoBehaviour
     }
 
     private void DestroyBullet()
-    {
+    {		
         Destroy(gameObject);
     }
 }
