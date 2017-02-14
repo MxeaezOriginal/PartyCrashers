@@ -9,6 +9,9 @@ public class FizzPopPickup : MonoBehaviour {
     public AudioClip[] SFX;
     private AudioClip SFXtoPlay;
 
+	//VfX
+	public GameObject usepickupVFX;
+	//VFX end
 
     public float speed;
     public Rigidbody rb;
@@ -44,6 +47,15 @@ public class FizzPopPickup : MonoBehaviour {
 
             //sound
             SFXtoPlay = SFX[Random.Range(0, SFX.Length)];
+
+			//VfX
+			if (usepickupVFX != null) 
+			{
+				GameObject getHeal;
+				getHeal = (GameObject)Instantiate (usepickupVFX, other.transform.position, transform.rotation);
+				Destroy (getHeal, 0.5f);
+			}
+			//VFX end
 
             if (SFXPlayer != null)
             {
