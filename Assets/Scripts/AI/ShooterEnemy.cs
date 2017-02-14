@@ -23,6 +23,10 @@ public class ShooterEnemy : EnemyAI //Inherits from EnemyAI instead of Monobehav
     public float bulletwaitingtime = 3.0f;
     public Rigidbody projectile;
 
+	//VFX
+	public GameObject shootEffect;
+	//VFXend
+
     //EnemyAI enemyAi;
     EnemyEffect enemyEffect;
 
@@ -72,7 +76,14 @@ public class ShooterEnemy : EnemyAI //Inherits from EnemyAI instead of Monobehav
     {
         Rigidbody bullet = (Rigidbody)Instantiate(projectile, transform.position + transform.forward, transform.rotation);
         bullet.AddForce(transform.forward * bulletImpulse, ForceMode.Impulse);
-
+		//VFX
+		if (shootEffect != null) 
+		{
+			GameObject shootvfx;
+			shootvfx = (GameObject)Instantiate (shootEffect, transform.position, transform.rotation);
+			Destroy (shootvfx, 0.3f);
+		}
+		//VFXend
         Destroy(bullet.gameObject, 1.0f);
     }
 }
