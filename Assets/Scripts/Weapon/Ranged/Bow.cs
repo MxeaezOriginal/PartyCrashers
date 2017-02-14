@@ -50,6 +50,16 @@ public class Bow : Ranged
 
     void Start()
     {
+		//kavells new code for feedback effects
+		if (chargingVFX != null)
+		{
+			chargingVFX.GetComponent<ParticleSystem> ().enableEmission = false;
+		}
+		if (chargedVFX != null) 
+		{
+			chargedVFX.GetComponent<ParticleSystem> ().enableEmission = false;
+		}
+		//kavells new code for feedback effects
         laser = transform.FindChild("laser").gameObject;     
         player = GetComponentInParent<Player>();
 
@@ -79,14 +89,35 @@ public class Bow : Ranged
             {                
                 m_TimePressed += Input.GetAxisRaw(player.m_PrimaryAttack + player.getControllerAsString()) * Time.deltaTime;
 				//kavells new code for feedback effects
-
+				if (chargingVFX != null)
+				{
+					chargingVFX.GetComponent<ParticleSystem> ().enableEmission = true;
+				}
 				//kavells new code for feedback effects
             }
 
             if (m_TimePressed >= m_MaxCharge)
             {
                 m_TimePressed = m_MaxCharge;
+				//kavells new code for feedback effects
+				if (chargingVFX != null && chargedVFX != null)
+				{
+					chargingVFX.GetComponent<ParticleSystem> ().enableEmission = false;
+					chargedVFX.GetComponent<ParticleSystem> ().enableEmission = true;
+
+				}
+				//kavells new code for feedback effects
             }
+			//kavells new code for feedback effects
+			if (chargingVFX != null)
+			{
+				chargingVFX.GetComponent<ParticleSystem> ().enableEmission = false;
+			}
+			if (chargedVFX != null) 
+			{
+				chargedVFX.GetComponent<ParticleSystem> ().enableEmission = false;
+			}
+			//kavells new code for feedback effects
             m_WasDown = true;
             //Debug.Log(m_TimePressed);
         }
