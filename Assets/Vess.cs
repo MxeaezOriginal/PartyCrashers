@@ -7,6 +7,16 @@ public class Vess : MonoBehaviour
     public GameObject m_explosion;
     public GameObject m_BoomEffect;
 
+    //SFX
+    public AudioSource audioSource;
+    public AudioClip[] SFX;
+    private AudioClip SFXtoPlay;
+
+    public float maxRandomPitch;
+    public float minRandomPitch;
+    private float randomPitch;
+    //SFX End
+
     void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Player")
@@ -37,7 +47,17 @@ public class Vess : MonoBehaviour
             Destroy(gameObject);
             Destroy(explosion, 4f);
             //Debug.Log("Hit Weapon");
+            //SFX
+            if (audioSource != null)
+            {
+                randomPitch = Random.RandomRange(maxRandomPitch, minRandomPitch);
+                SFXtoPlay = SFX[Random.Range(0, SFX.Length)];
+                audioSource.clip = SFXtoPlay;
+                audioSource.pitch = randomPitch;
+                audioSource.Play();
+            }
+            //SFX END
         }
-        
+
     }
 }
