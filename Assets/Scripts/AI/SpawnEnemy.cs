@@ -36,6 +36,16 @@ public class SpawnEnemy : EnemyAI // Inherits from EnemyAI now instead of Monobe
     //EnemyAI enemyAi;
     EnemyEffect enemyEffect;
 
+    //SFX
+    public AudioSource audioSource;
+    public AudioClip[] SFX;
+    private AudioClip SFXtoPlay;
+
+    public float maxRandomPitch;
+    public float minRandomPitch;
+    private float randomPitch;
+    //SFX End
+
     void Start()
     {
         initializeVariables();
@@ -136,7 +146,17 @@ public class SpawnEnemy : EnemyAI // Inherits from EnemyAI now instead of Monobe
 			Destroy (spawningvfx, 0.3f);
 			Destroy (spawnedvfx, 0.3f);
 		}
-		//VFXend
+        //VFXend
+        //SFX
+        if (audioSource != null)
+        {
+            randomPitch = Random.RandomRange(maxRandomPitch, minRandomPitch);
+            SFXtoPlay = SFX[Random.Range(0, SFX.Length)];
+            audioSource.clip = SFXtoPlay;
+            audioSource.pitch = randomPitch;
+            audioSource.Play();
+        }
+        //SFX END
         return enemy;
     }
 }
