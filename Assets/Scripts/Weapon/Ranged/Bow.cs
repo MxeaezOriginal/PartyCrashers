@@ -50,16 +50,16 @@ public class Bow : Ranged
 
     void Start()
     {
-		//kavells new code for feedback effects
+		//VfX
 		if (chargingVFX != null)
 		{
-			chargingVFX.GetComponent<ParticleSystem> ().enableEmission = false;
+			chargingVFX.gameObject.SetActive (false);
 		}
 		if (chargedVFX != null) 
 		{
-			chargedVFX.GetComponent<ParticleSystem> ().enableEmission = false;
+			chargedVFX.gameObject.SetActive (false);
 		}
-		//kavells new code for feedback effects
+		//VFX end
         laser = transform.FindChild("laser").gameObject;     
         player = GetComponentInParent<Player>();
 
@@ -68,7 +68,7 @@ public class Bow : Ranged
 
     void Update()
     {	
-			
+		chargeVFXs ();	
         if (m_CoolDown <= Time.time - m_Weapon1Cooldown || m_CoolDown == 0)
         {			
             //Shoot if Button Up
@@ -88,36 +88,12 @@ public class Bow : Ranged
             if (m_TimePressed < m_MaxCharge)
             {                
                 m_TimePressed += Input.GetAxisRaw(player.m_PrimaryAttack + player.getControllerAsString()) * Time.deltaTime;
-				//kavells new code for feedback effects
-				if (chargingVFX != null)
-				{
-					chargingVFX.GetComponent<ParticleSystem> ().enableEmission = true;
-				}
-				//kavells new code for feedback effects
             }
-
             if (m_TimePressed >= m_MaxCharge)
             {
                 m_TimePressed = m_MaxCharge;
-				//kavells new code for feedback effects
-				if (chargingVFX != null && chargedVFX != null)
-				{
-					chargingVFX.GetComponent<ParticleSystem> ().enableEmission = false;
-					chargedVFX.GetComponent<ParticleSystem> ().enableEmission = true;
-
-				}
-				//kavells new code for feedback effects
-            }
-			//kavells new code for feedback effects
-			if (chargingVFX != null)
-			{
-				chargingVFX.GetComponent<ParticleSystem> ().enableEmission = false;
+				            
 			}
-			if (chargedVFX != null) 
-			{
-				chargedVFX.GetComponent<ParticleSystem> ().enableEmission = false;
-			}
-			//kavells new code for feedback effects
             m_WasDown = true;
             //Debug.Log(m_TimePressed);
         }
@@ -128,20 +104,21 @@ public class Bow : Ranged
 
         if (m_SecondaryCoolDown <= Time.time - m_Weapon2Cooldown || m_SecondaryCoolDown == 0)
         {
-			//kavells new code for feedback effects
-			if (secondaryflashVFX != null) 
-			{
-				GameObject bombMF;
-				bombMF = (GameObject)Instantiate (secondaryflashVFX, transform.position, transform.rotation);
-				Destroy (bombMF, 0.1f);
-			}
-			//kavells new code for feedback effects
+			
             GameObject bigBalloon;
             bigBalloon = (GameObject)Instantiate(m_LeftTriggerProjectile, m_FirePoint[0].gameObject.transform.position, m_FirePoint[0].gameObject.transform.rotation);
 
             bigBalloon.GetComponent<Rigidbody>().AddForce(bigBalloon.transform.forward * m_ProjectileSpeed02);
 
             m_SecondaryCoolDown = Time.time;
+			//kavells new code for feedback effects
+			if (secondaryflashVFX != null) 
+			{
+				GameObject bombMF;
+				bombMF = (GameObject)Instantiate (secondaryflashVFX, transform.position, transform.rotation);
+				Destroy (bombMF, 0.5f);
+			}
+			//kavells new code for feedback effects
         }
     }
 
@@ -236,4 +213,35 @@ public class Bow : Ranged
         laser.GetComponent<LineRenderer>().enabled = false;
     }
     // https://unity3d.com/learn/tutorials/topics/graphics/fun-lasers
+
+
+	//VFX
+	public void chargeVFXs()
+	{
+		if (m_TimePressed > 0 && m_TimePressed < m_MaxCharge) 
+		{
+			if (chargingVFX != null) 
+			{
+				chargingVFX.gameObject.SetActive (true);
+			}
+		} 
+		else if (m_TimePressed >= m_MaxCharge) 
+		{
+			if (chargingVFX != null && chargedVFX != null) 
+			{
+				chargingVFX.gameObject.SetActive (false);
+				chargedVFX.gameObject.SetActive (true);
+
+			}
+		} 
+		else 
+		{
+			if (chargingVFX != null && chargedVFX != null)
+			{
+				chargingVFX.gameObject.SetActive (false);
+				chargedVFX.gameObject.SetActive (false);
+			}
+		}
+	}
+	//VFXend
 }
