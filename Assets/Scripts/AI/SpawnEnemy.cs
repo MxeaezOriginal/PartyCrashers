@@ -28,6 +28,11 @@ public class SpawnEnemy : EnemyAI // Inherits from EnemyAI now instead of Monobe
     public float RunAwayRange = 5f;
     public float RunSpeed = 0.01f;
 
+	//VFX
+	public GameObject spawningEffect;
+	public GameObject spawnedEffect;
+	//VFX
+
     //EnemyAI enemyAi;
     EnemyEffect enemyEffect;
 
@@ -121,7 +126,17 @@ public class SpawnEnemy : EnemyAI // Inherits from EnemyAI now instead of Monobe
     GameObject EnemySpawner()
     {
         GameObject enemy = (GameObject)Instantiate(enemyPrefab, GetRandomLocationForEnemy(), transform.rotation);
-
+		//VFX
+		if (spawningEffect != null && spawnedEffect != null) 
+		{
+			GameObject spawningvfx;
+			GameObject spawnedvfx;
+			spawningvfx = (GameObject)Instantiate (spawningEffect, transform.position, transform.rotation);
+			spawnedvfx = (GameObject)Instantiate (spawnedEffect, enemy.transform.position, transform.rotation);
+			Destroy (spawningvfx, 0.3f);
+			Destroy (spawnedvfx, 0.3f);
+		}
+		//VFXend
         return enemy;
     }
 }
