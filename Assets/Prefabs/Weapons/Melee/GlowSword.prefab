@@ -17,6 +17,7 @@ GameObject:
   - 26: {fileID: 2696170}
   - 12: {fileID: 1207946}
   - 87: {fileID: 8773106}
+  - 82: {fileID: 8246098}
   m_Layer: 0
   m_Name: GlowSword
   m_TagString: sword
@@ -68,6 +69,7 @@ Transform:
   m_LocalRotation: {x: 0.6427877, y: 0, z: 0, w: 0.7660444}
   m_LocalPosition: {x: -19.03, y: 0.014985103, z: 0.88880426}
   m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalEulerAnglesHint: {x: 80, y: 0, z: 0}
   m_Children:
   - {fileID: 456764}
   - {fileID: 489962}
@@ -82,6 +84,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.692, z: 0}
   m_LocalScale: {x: 0.1, y: 1, z: 0.1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 444646}
   m_RootOrder: 0
@@ -94,6 +97,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.769, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 444646}
   m_RootOrder: 1
@@ -235,6 +239,80 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!82 &8246098
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 124012}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!87 &8773106
 MeshParticleEmitter:
   m_ObjectHideFlags: 1
@@ -353,6 +431,11 @@ MonoBehaviour:
   smooth: 20
   triggerLife: 0.5
   effect: {fileID: 0}
+  audioSource: {fileID: 8246098}
+  dashSFX:
+  - {fileID: 8300000, guid: 646c89880fa7a404ca873148f407c3a2, type: 3}
+  maxRandomPitch: 1
+  minRandomPitch: 1
 --- !u!114 &11446614
 MonoBehaviour:
   m_ObjectHideFlags: 1
