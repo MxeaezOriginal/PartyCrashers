@@ -10,7 +10,7 @@ public class KillVolumeMinigame : MonoBehaviour {
         if (other.gameObject.CompareTag("Player"))
         {
             Player p = other.gameObject.GetComponent<Player>();
-            p.respawn();
+            p.respawnMinigame();
         }
     }
 }

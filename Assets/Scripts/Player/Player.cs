@@ -241,8 +241,8 @@ public class Player : MonoBehaviour
 
     public void respawn()
     {
-        if (GameManager.m_Instance.m_GameState == GameManager.GameState.Dungeon)
-        {
+        //if (GameManager.m_Instance.m_GameState == GameManager.GameState.Dungeon)
+        //{
             var vel = gameObject.GetComponent<PlayerController>().m_Velocity.normalized;
             Vector3 tempLocation = m_Location;
             tempLocation.x -= vel.x * 15.0f;
@@ -253,21 +253,34 @@ public class Player : MonoBehaviour
             transform.position = tempLocation;
             stun(0.1f);
             m_RespawnHealth.initialize();
-        }
-        else if(GameManager.m_Instance.m_GameState == GameManager.GameState.Minigame)
-        {
-            var vel = gameObject.GetComponent<PlayerController>().m_Velocity.normalized;
-            Vector3 tempLocation = m_Location;
-            tempLocation.x -= vel.x * 15.0f;
-            tempLocation.z -= vel.z * 15.0f;
+        //}
+        //else if(GameManager.m_Instance.m_GameState == GameManager.GameState.Minigame)
+        //{
+        //    var vel = gameObject.GetComponent<PlayerController>().m_Velocity.normalized;
+        //    Vector3 tempLocation = m_Location;
+        //    tempLocation.x -= vel.x * 15.0f;
+        //    tempLocation.z -= vel.z * 15.0f;
 
-            m_State = State.Alive;
-            updateModel();
-            transform.position = tempLocation;
-            stun(0.1f);
-            //m_RespawnHealth.initialize();
-        }
+        //    m_State = State.Alive;
+        //    updateModel();
+        //    transform.position = tempLocation;
+        //    stun(0.1f);
+        //    //m_RespawnHealth.initialize();
+        //}
 
+    }
+
+    public void respawnMinigame()
+    {
+        var vel = gameObject.GetComponent<PlayerController>().m_Velocity.normalized;
+        Vector3 tempLocation = m_Location;
+        tempLocation.x -= vel.x * 15.0f;
+        tempLocation.z -= vel.z * 15.0f;
+
+        m_State = State.Alive;
+        updateModel();
+        transform.position = tempLocation;
+        stun(0.1f);
     }
 
     public void updateModel()
