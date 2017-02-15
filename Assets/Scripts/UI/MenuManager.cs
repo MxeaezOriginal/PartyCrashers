@@ -55,8 +55,8 @@ public class MenuManager : MonoBehaviour
         else if (exitPromptActive)
             StartCoroutine(ExitPrompt());
 
-        if (canBack && Input.GetButtonDown("Back_" + GameManager.m_Instance.m_Player1.m_Controller)) //PRESS FOR BACK BUTTON
-            BackButton();
+        //if (canBack && Input.GetButtonDown("Back_" + GameManager.m_Instance.m_Player1.m_Controller)) //PRESS FOR BACK BUTTON
+        //    BackButton();
 
         StartCoroutine(SelectedAnimationWaitForEndOfFrame());
     }
@@ -272,6 +272,7 @@ public class MenuManager : MonoBehaviour
                 characterSelect.P4Join = true;
                 characterSelect.firstPlayer = CharacterSelect.PlayerOne.P4;
             }
+
             if (canvases[0].activeSelf && Input.GetButtonDown("Submit_Keyboard"))
             {
                 int players = ++GameManager.m_Instance.m_NumOfPlayers;
@@ -281,7 +282,7 @@ public class MenuManager : MonoBehaviour
                 inputModule.horizontalAxis = "HorizontalRotation_Keyboard";
                 inputModule.verticalAxis = "VerticalRotation_Keyboard";
                 characterSelect.KeyboardJoin = true;
-                characterSelect.firstPlayer = CharacterSelect.PlayerOne.P4;
+                characterSelect.firstPlayer = CharacterSelect.PlayerOne.Keyboard;
             }
         }
     }
