@@ -11,6 +11,7 @@ GameObject:
   - 33: {fileID: 3336480}
   - 23: {fileID: 2319564}
   - 65: {fileID: 6504788}
+  - 208: {fileID: 20820614}
   m_Layer: 0
   m_Name: Door
   m_TagString: Untagged
@@ -78,7 +79,6 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.06, y: -0, z: 0.61}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 429718}
   m_RootOrder: 0
@@ -91,7 +91,6 @@ Transform:
   m_LocalRotation: {x: -0.71785223, y: 0, z: 0, w: 0.69619554}
   m_LocalPosition: {x: 0.97999954, y: 0.06999997, z: -0.076439396}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: -88.2452, y: -1260, z: -1260}
   m_Children:
   - {fileID: 414678}
   m_Father: {fileID: 440542}
@@ -105,7 +104,6 @@ Transform:
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071067}
   m_LocalPosition: {x: -2.5, y: 0, z: -0.027716637}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
   m_Children:
   - {fileID: 429718}
   m_Father: {fileID: 445086}
@@ -116,10 +114,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 140252}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.305363, y: 0, z: -0.31584835}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071067}
+  m_LocalPosition: {x: 5.07, y: 0, z: 7.67}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 440542}
   m_Father: {fileID: 0}
@@ -256,6 +253,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ani: {fileID: 9517314}
   m_effect: {fileID: 0}
+--- !u!208 &20820614
+NavMeshObstacle:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 120312}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.998, y: 1.876, z: 0.07700001}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -0.998, y: 1.876, z: 0.07700001}
+  m_TimeToStationary: 0.5
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

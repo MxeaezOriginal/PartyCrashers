@@ -27,6 +27,7 @@ GameObject:
   - 23: {fileID: 2373624}
   - 65: {fileID: 6567896}
   - 114: {fileID: 11493020}
+  - 208: {fileID: 20877972}
   m_Layer: 0
   m_Name: Two_Way_Door
   m_TagString: Untagged
@@ -43,7 +44,6 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0, y: 1.804, z: -0.955}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 464536}
   m_RootOrder: 0
@@ -54,9 +54,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 194708}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071067}
-  m_LocalPosition: {x: 3.8386688, y: 0, z: 0.47726142}
+  m_LocalPosition: {x: -0.5254589, y: 1.1667529e-17, z: 4.97933}
   m_LocalScale: {x: 1, y: 1.3773773, z: 1.5582936}
-  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
   m_Children:
   - {fileID: 432670}
   m_Father: {fileID: 0}
@@ -120,6 +119,21 @@ MonoBehaviour:
   explosionRadius: 1
   explosionObject: {fileID: 189566, guid: 079954accd64b32419ec069129c81273, type: 2}
   particleLocation: {fileID: 108580}
+--- !u!208 &20877972
+NavMeshObstacle:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 194708}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.15400001, y: 1.876, z: 0.998}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -0.07700001, y: 1.876, z: -0.998}
+  m_TimeToStationary: 0.5
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
