@@ -43,7 +43,7 @@ public class PressableButtonEnablever : MonoBehaviour
             
             ButtonPosition.position = Vector3.Lerp(ButtonPosition.position, buttondownPosition.position, smooth * Time.deltaTime);
             
-            while (objectToEnable.Length >= (I))
+            while (objectToEnable.Length > (I))
             {
                 objectToEnable[I].SetActive(EnableObject);
                 I++;
@@ -62,7 +62,7 @@ public class PressableButtonEnablever : MonoBehaviour
         else if (buttonDownPermanent == false)
         {
             ButtonPosition.position = Vector3.Lerp(ButtonPosition.position, buttonstartPosition, smooth * Time.deltaTime);
-            while (objectToEnable.Length >= (I))
+            while (objectToEnable.Length > (I))
             {
                 objectToEnable[I].SetActive(!EnableObject);
                 I++;
