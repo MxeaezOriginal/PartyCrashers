@@ -59,6 +59,17 @@ public class PlayerController : MonoBehaviour
     CameraController m_CameraController;
 
     // Use this for initialization
+
+    //SFX
+    public AudioSource audioSource;
+    public AudioClip[] jumpSFX;
+    private AudioClip SFXtoPlay;
+
+    public float maxRandomPitch;
+    public float minRandomPitch;
+    private float randomPitch;
+    //SFX End
+
     void Start()
     {
         //rigidBody = gameObject.GetComponent<Rigidbody>();
@@ -130,7 +141,17 @@ public class PlayerController : MonoBehaviour
 						jumpvfx = (GameObject)Instantiate (jumpEffect, transform.position, transform.rotation);
 						Destroy (jumpvfx, 0.5f);
 					}
-					//VFXend
+                    //SFX Start
+                    if (audioSource != null)
+                    {
+                        randomPitch = Random.RandomRange(maxRandomPitch, minRandomPitch);
+                        SFXtoPlay = jumpSFX[Random.Range(0, jumpSFX.Length)];
+                        audioSource.clip = SFXtoPlay;
+                        audioSource.pitch = randomPitch;
+                        audioSource.Play();
+                    }
+                    //SFX END
+                    //VFXend
                     m_Velocity.y = m_Jump;
                 }
                 m_CurrentGravity = 0f;
