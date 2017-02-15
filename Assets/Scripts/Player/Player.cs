@@ -280,7 +280,7 @@ public class Player : MonoBehaviour
         m_State = State.Alive;
         updateModel();
         transform.position = tempLocation;
-        stun(0.1f);
+        stun(0.2f);
     }
 
     public void updateModel()

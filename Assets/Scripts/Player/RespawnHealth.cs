@@ -65,6 +65,11 @@ public class RespawnHealth : MonoBehaviour
         }
     }
 
+    public void reviveWeapon()
+    {
+        StartCoroutine(waitBeforeInitializeWeapon());
+    }
+
     IEnumerator waitBeforeInitializeWeapon()
     {
         yield return new WaitForSeconds(.05f);
