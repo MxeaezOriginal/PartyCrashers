@@ -23,7 +23,8 @@ public class PressableButtonEnablever : MonoBehaviour
      private AudioClip SFXtoPlay;
      //sound end
 
-    public GameObject objectToEnable;
+    public GameObject[] objectToEnable;
+    private int I;
 
 
     // Use this for initialization
@@ -36,10 +37,17 @@ public class PressableButtonEnablever : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        I = 0;
         if (carryAmmount >= requiredCarryAmmount)
         {
+            
             ButtonPosition.position = Vector3.Lerp(ButtonPosition.position, buttondownPosition.position, smooth * Time.deltaTime);
-            objectToEnable.SetActive(EnableObject);
+            
+            while (objectToEnable.Length >= (I))
+            {
+                objectToEnable[I].SetActive(EnableObject);
+                I++;
+            }
             //sound
             if (!isDown)
             {
@@ -54,7 +62,12 @@ public class PressableButtonEnablever : MonoBehaviour
         else if (buttonDownPermanent == false)
         {
             ButtonPosition.position = Vector3.Lerp(ButtonPosition.position, buttonstartPosition, smooth * Time.deltaTime);
-            objectToEnable.SetActive(!EnableObject);
+            while (objectToEnable.Length >= (I))
+            {
+                objectToEnable[I].SetActive(!EnableObject);
+                I++;
+            }
+            
             //sound
             if (isDown)
             {
