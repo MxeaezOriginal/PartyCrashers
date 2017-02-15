@@ -31,6 +31,14 @@ public class BaseLevelLauncher : MonoBehaviour
                     shot.GetComponent<VaseSpeed>().velocity = m_ProjectileSpeed;
                     m_LastShotTime = Time.time;
                 }
+                else
+                {
+                    Debug.Log("Shot Position is null");
+                }
+            }
+            else
+            {
+                Debug.Log("Projectile is null");
             }
         }
     }

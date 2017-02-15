@@ -22,6 +22,8 @@ public class ShooterEnemy : EnemyAI //Inherits from EnemyAI instead of Monobehav
     float timer;
     public float bulletwaitingtime = 3.0f;
     public Rigidbody projectile;
+    //public Transform m_ShotPos;
+    //public GameObject m_Projectile;
 
     //VFX
     public GameObject shootEffect;
@@ -84,31 +86,38 @@ public class ShooterEnemy : EnemyAI //Inherits from EnemyAI instead of Monobehav
     }
     void Shoot()
     {
-        Rigidbody bullet = (Rigidbody)Instantiate(projectile, transform.position + transform.forward, transform.rotation);
-        bullet.AddForce(transform.forward * bulletImpulse, ForceMode.Impulse);
-        //VFX
-        if (shootEffect != null)
+        if(projectile != null)
         {
-            GameObject shootvfx;
-            shootvfx = (GameObject)Instantiate(shootEffect, transform.position, transform.rotation);
-            Destroy(shootvfx, 0.3f);
+            Rigidbody bullet = (Rigidbody)Instantiate(projectile, transform.position + transform.forward, transform.rotation);
+            bullet.AddForce(transform.forward * bulletImpulse, ForceMode.Impulse);
+            //VFX
+            if (shootEffect != null)
+            {
+                GameObject shootvfx;
+                shootvfx = (GameObject)Instantiate(shootEffect, transform.position, transform.rotation);
+                Destroy(shootvfx, 0.3f);
+            }
+            //VFXend
+
+
+            //SFX
+            if (audioSource != null)
+            {
+                randomPitch = Random.RandomRange(maxRandomPitch, minRandomPitch);
+                SFXtoPlay = SFX[Random.Range(0, SFX.Length)];
+                audioSource.clip = SFXtoPlay;
+                audioSource.pitch = randomPitch;
+                audioSource.Play();
+            }
+            //SFX END
+            Destroy(bullet.gameObject, 1.0f);
         }
-        //VFXend
-
-
-        //SFX
-        if (audioSource != null)
+        else
         {
-            randomPitch = Random.RandomRange(maxRandomPitch, minRandomPitch);
-            SFXtoPlay = SFX[Random.Range(0, SFX.Length)];
-            audioSource.clip = SFXtoPlay;
-            audioSource.pitch = randomPitch;
-            audioSource.Play();
+            Debug.Log("Projectile is null");
         }
-        //SFX END
 
 
 
-        Destroy(bullet.gameObject, 1.0f);
     }
 }
