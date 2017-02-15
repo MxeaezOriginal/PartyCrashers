@@ -74,6 +74,7 @@ public class CharacterSelect : MonoBehaviour
     public bool canStartGame;
 
     public GameObject[] readyText;
+    public GameObject lockInText, lockInTextOutline;
 
     //Bools for preventing adding playersLockedIn with each "A" button
     public bool playerOneJoined, playerTwoJoined, playerThreeJoined, playerFourJoined;
@@ -107,8 +108,18 @@ public class CharacterSelect : MonoBehaviour
         else
             canBack = true;
 
-        if (canStartGame && Input.GetButtonDown("Jump_" + GameManager.m_Instance.m_Player1.m_Controller))
-            SceneManager.LoadScene(GameManager.m_Instance.m_LevelToStart);
+        if (canStartGame)
+        {
+            lockInText.GetComponent<Text>().text = "'A'/ENTER START";
+            lockInTextOutline.GetComponent<Text>().text = "'A'/ENTER START";
+            if (Input.GetButtonDown("Jump_" + GameManager.m_Instance.m_Player1.m_Controller))
+                SceneManager.LoadScene(GameManager.m_Instance.m_LevelToStart);
+        }
+        else
+        {
+            lockInText.GetComponent<Text>().text = "'A'/ENTER LOCKIN";
+            lockInTextOutline.GetComponent<Text>().text = "'A'/ENTER LOCKIN";
+        }
     }
     void PlayerIndexSorting()
     {
@@ -164,9 +175,6 @@ public class CharacterSelect : MonoBehaviour
                     AssignController(Player.Controller.P1);
                     Debug.Log("Player " + players + " has Joined!");
                     P1Join = true;
-                    //Reset();
-                    //allowToLock = true;
-
 
                     if (firstPlayer != PlayerOne.P1)
                     {
@@ -195,8 +203,6 @@ public class CharacterSelect : MonoBehaviour
                 AssignController(Player.Controller.P2);
                 Debug.Log("Player " + players + " has Joined!");
                 P2Join = true;
-                //Reset();
-                //allowToLock = true;
 
                 if (firstPlayer != PlayerOne.P2)
                 {
@@ -224,8 +230,6 @@ public class CharacterSelect : MonoBehaviour
                 AssignController(Player.Controller.P3);
                 Debug.Log("Player " + players + " has Joined!");
                 P3Join = true;
-                //Reset();
-                //allowToLock = true;
 
                 if (firstPlayer != PlayerOne.P3)
                 {
@@ -252,8 +256,6 @@ public class CharacterSelect : MonoBehaviour
                 AssignController(Player.Controller.P4);
                 Debug.Log("Player " + players + " has Joined!");
                 P4Join = true;
-                //Reset();
-                //allowToLock = true;
 
                 if (firstPlayer != PlayerOne.P4)
                 {
