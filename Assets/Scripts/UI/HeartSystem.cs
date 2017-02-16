@@ -105,7 +105,6 @@ public class HeartSystem : MonoBehaviour
 		}
         if(curHealth == 0)
         {
-            GetComponent<Player>().respawn();
             //Kavells VFX code
             if (deathVFX != null)
             {
