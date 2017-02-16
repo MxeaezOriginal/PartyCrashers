@@ -258,13 +258,11 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                RaycastHit hit;
+                float camDifference = Camera.main.transform.position.y - transform.position.y;
 
-                if (Physics.Raycast(ray, out hit, 100))
-                {
-                    transform.LookAt(new Vector3(hit.point.x, transform.position.y, hit.point.z));
-                }
+                Vector3 direction = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, camDifference));
+
+                transform.LookAt(new Vector3(direction.x, transform.position.y, direction.z));
 
             }
 
