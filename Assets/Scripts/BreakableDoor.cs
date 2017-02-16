@@ -7,27 +7,7 @@ public class BreakableDoor : MonoBehaviour {
     public GameObject explosionObject;
     public GameObject particleLocation;
 
-    public void OnCollisionEnter(Collision coll)
-    {
-
-        if (coll.gameObject.tag == "Projectile")
-        {
-            GameObject explosion;
-            explosion = (GameObject)Instantiate(explosionObject, particleLocation.gameObject.transform.position, particleLocation.gameObject.transform.rotation);
-            explosion.transform.localScale = new Vector3(explosionRadius,explosionRadius,explosionRadius);
-            Destroy(gameObject);
-        }
-        else if (coll.gameObject.tag == "Melee")
-        {
-            GameObject explosion;
-            explosion = (GameObject)Instantiate(explosionObject, particleLocation.gameObject.transform.position, particleLocation.gameObject.transform.rotation);
-            explosion.transform.localScale = new Vector3(explosionRadius, explosionRadius, explosionRadius);
-            Destroy(gameObject);
-        }
-
-    }
-
-    public void OnTriggerEnter(Collider other)
+    public void OnTriggerStay(Collider other)
     {
         if (other.tag == "Projectile")
         {
@@ -36,7 +16,8 @@ public class BreakableDoor : MonoBehaviour {
             explosion.transform.localScale = new Vector3(explosionRadius, explosionRadius, explosionRadius);
             Destroy(gameObject);
         }
-        else if (other.tag == "Melee")
+
+        if (other.tag == "Physical")
         {
             GameObject explosion;
             explosion = (GameObject)Instantiate(explosionObject, particleLocation.gameObject.transform.position, particleLocation.gameObject.transform.rotation);
@@ -44,4 +25,5 @@ public class BreakableDoor : MonoBehaviour {
             Destroy(gameObject);
         }
     }
+
 }
