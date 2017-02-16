@@ -153,7 +153,6 @@ public class WeaponManager : MonoBehaviour
                         m_WeaponParent = child.gameObject;
                         m_WeaponStandingOn = weapon;
                         m_WeaponStandingOnPickup = other.gameObject;
-                        GetComponent<Player>().canPickUp = true;
                         Debug.Log("Standing on " + weapon.name);
                         break;
                     }
@@ -198,7 +197,6 @@ public class WeaponManager : MonoBehaviour
             m_WeaponParent = null;
             m_WeaponStandingOn = null;
             m_WeaponStandingOnPickup = null;
-            GetComponent<Player>().canPickUp = false;
         }
     }
 

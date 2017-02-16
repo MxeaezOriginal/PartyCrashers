@@ -64,7 +64,6 @@ public class Player : MonoBehaviour
     //public int m_Health;
     //public int m_MaxHealth;
     public bool m_CantAttack;
-    public bool canPickUp;
     public State m_State;
     public float m_RespawnTime;
     public float m_CheckLocationCooldown;
@@ -98,7 +97,7 @@ public class Player : MonoBehaviour
     private float m_CurrentCooldown;
 
     // Interact Cooldown
-    private float m_InteractWaitTime;
+    private float m_InteractWaitTime; 
 
 	//VFX
 	public GameObject pickUpWeaponEffect;
@@ -208,13 +207,6 @@ public class Player : MonoBehaviour
         {
             //GetComponent<Stats>().ToggleWindow();
         }
-
-
-        //PickUp Pop-Up Image
-        if (canPickUp)
-            transform.GetChild(3).GetComponent<Canvas>().enabled = true;
-        else
-            transform.GetChild(3).GetComponent<Canvas>().enabled = false;
     }
 
     void attack(ATTACKTYPE a)
@@ -579,12 +571,12 @@ public class Player : MonoBehaviour
                 dotdelay = 2.0f;
             }
         }
-        //if (other.gameObject.CompareTag("OneDamage"))
-        //{
-        //    Destroy(other);
-        //    m_Heart.TakeDamage(1);
-        //    m_Heart.UpdateHearts();
-        //}
+        if (other.gameObject.CompareTag("OneDamage"))
+        {
+            Destroy(other);
+            m_Heart.TakeDamage(1);
+            m_Heart.UpdateHearts();
+        }
         //if (other.gameObject.CompareTag("MeleeEnemy"))
         //{
         //    damageDelay -= Time.deltaTime;
