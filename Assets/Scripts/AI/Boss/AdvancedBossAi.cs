@@ -23,6 +23,8 @@ public class AdvancedBossAi : MonoBehaviour
     public int m_BulletsToShoot = 5;
     private int m_NumberOfBullets;
 
+    
+
     //Frame
     private int frame;
 
@@ -50,6 +52,8 @@ public class AdvancedBossAi : MonoBehaviour
     private float m_StunTime;
     private bool attacked = false;
     private bool attackerLeft = true;
+    //Effects
+    public GameObject m_HurtEffect;
 
     //Movement
     private Rigidbody m_Body;
@@ -73,15 +77,26 @@ public class AdvancedBossAi : MonoBehaviour
         //Set framerate
         Application.targetFrameRate = 60;
 
+        //Set the state
         state = states.idle;
         currentState = state;
+
+        //Make surre boss isn't invincible 
         m_Invincible = false;
+        //Set frame to some large negative number so the boss stays in his idle state a bit longer
         frame = -100;
+        //Get the number of players
         players = GameManager.m_Instance.m_Players;
 
+        //Set the health appropriately to match the number of players
         m_Health = m_BaseMaxHealth * (players.Length * m_NumOfPlayersHealthMultiplier);
-
+        
+        //Get the rigidbody
         m_Body = GetComponent<Rigidbody>();
+
+        //Effect
+        Instantiate(m_HurtEffect, transform.position, transform.rotation);
+        m_HurtEffect.SetActive(false);
 
         //Projectiles
         for (int i = 0; i < ProjectilesArray.Length; i++)
@@ -102,6 +117,10 @@ public class AdvancedBossAi : MonoBehaviour
         if (m_Lightning == null)
         {
             Debug.LogError("Lightning object not assigned to boss");
+        }
+        if(m_HurtEffect == null)
+        {
+            Debug.LogError("Hurt effect object not assigned to boss");
         }
         //Torches for the boss so he knows where to teleport
         if (torches[0] == null) Debug.LogError("First Torch not assigned to boss");
@@ -249,6 +268,10 @@ public class AdvancedBossAi : MonoBehaviour
             state = states.idle;
         }
         transform.Rotate(transform.rotation.x + Random.Range(0f, 120f), transform.rotation.y + Random.Range(0f, 120f), transform.rotation.z + Random.Range(0f, 120f));
+        if (m_HurtEffect.active == false)
+        {
+            m_HurtEffect.SetActive(true);
+        }
 
     }
     void OnTriggerExit(Collider other)
