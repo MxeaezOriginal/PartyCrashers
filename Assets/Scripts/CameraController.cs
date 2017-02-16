@@ -13,6 +13,8 @@ public class CameraController : MonoBehaviour
     [Range(1, 5)]
     public int m_ZoomAmount = 3;
 
+    public int m_MaxZoom = 25;
+
     public GameObject[] players;
     // Use this for initialization
     void Start()
@@ -128,8 +130,18 @@ public class CameraController : MonoBehaviour
         //float Y = y;
 
 
-        gameObject.transform.position = new Vector3(averageX, Mathf.Lerp(transform.position.y, y + height + m_Zoom, .1f), averageZ - distanceOffset - m_Zoom);
+        //gameObject.transform.position = new Vector3(averageX, Mathf.Lerp(transform.position.y, y + height + m_Zoom, .1f), averageZ - distanceOffset - m_Zoom);
         //Y + height
+
+        if(m_Zoom > m_MaxZoom)
+        {
+            gameObject.transform.position = new Vector3(averageX, Mathf.Lerp(transform.position.y, y + height + m_MaxZoom, .1f), averageZ - distanceOffset - m_MaxZoom);
+        }
+        else
+        {
+            gameObject.transform.position = new Vector3(averageX, Mathf.Lerp(transform.position.y, y + height + m_Zoom, .1f), averageZ - distanceOffset - m_Zoom);
+        }
+        Debug.Log(m_Zoom);
 
         mPosition = new Vector3(averageX, y, averageZ);
     }
