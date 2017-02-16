@@ -154,6 +154,7 @@ public class WeaponManager : MonoBehaviour
                         m_WeaponStandingOn = weapon;
                         m_WeaponStandingOnPickup = other.gameObject;
                         Debug.Log("Standing on " + weapon.name);
+                        GetComponent<Player>().m_CanPickUp = true;
                         break;
                     }
                 }
@@ -194,6 +195,7 @@ public class WeaponManager : MonoBehaviour
         if (m_WeaponStandingOn != null)
         {
             Debug.Log("Now leaving " + m_WeaponStandingOn.name + " behind.. :'(");
+            GetComponent<Player>().m_CanPickUp = false;
             m_WeaponParent = null;
             m_WeaponStandingOn = null;
             m_WeaponStandingOnPickup = null;

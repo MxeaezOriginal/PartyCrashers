@@ -64,6 +64,7 @@ public class Player : MonoBehaviour
     //public int m_Health;
     //public int m_MaxHealth;
     public bool m_CantAttack;
+    public bool m_CanPickUp;
     public State m_State;
     public float m_RespawnTime;
     public float m_CheckLocationCooldown;
@@ -97,23 +98,26 @@ public class Player : MonoBehaviour
     private float m_CurrentCooldown;
 
     // Interact Cooldown
-    private float m_InteractWaitTime; 
+    private float m_InteractWaitTime;
 
-	//VFX
-	public GameObject pickUpWeaponEffect;
-	//VFX
+    //Intercat UI Image
+    public Canvas interactImage;
+
+    //VFX
+    public GameObject pickUpWeaponEffect;
+    //VFX
 
 
     //Set up color --------------------------------------------------------------------------------------------------------------------------------------------------
-	[SerializeField]
-	Image PlayerMarker;
-	public Color playerOneColor = Color.red;
-	public Color playerTwoColor = Color.blue;
-	public Color playerThreeColor = Color.green;
-	public Color playerFourColor = Color.yellow;
-	public Color playerCurrentColor;
-	public Color playerDamageIndacator = Color.white;
-	public bool FlashCheck = true;
+    [SerializeField]
+    Image PlayerMarker;
+    public Color playerOneColor = Color.red;
+    public Color playerTwoColor = Color.blue;
+    public Color playerThreeColor = Color.green;
+    public Color playerFourColor = Color.yellow;
+    public Color playerCurrentColor;
+    public Color playerDamageIndacator = Color.white;
+    public bool FlashCheck = true;
 
     void Awake()
     {
@@ -122,6 +126,8 @@ public class Player : MonoBehaviour
         m_CharController = GetComponent<CharacterController>();
         m_WeaponManager = GetComponent<WeaponManager>();
         m_RespawnHealth = GetComponent<RespawnHealth>();
+
+        interactImage = transform.GetChild(3).GetComponent<Canvas>();
     }
 
     // Use this for initialization
@@ -180,23 +186,29 @@ public class Player : MonoBehaviour
                 if (m_WeaponManager.isStandingOnWeapon())
                 {
                     m_WeaponManager.InstantiateWeapon();
-					//VfX
-					if (pickUpWeaponEffect != null) 
-					{
-						GameObject getWeapon;
-						getWeapon = (GameObject)Instantiate (pickUpWeaponEffect, transform.position, transform.rotation);
-						Destroy (getWeapon, 0.5f);
-					}
-					//VFX end
+                    //VfX
+                    if (pickUpWeaponEffect != null)
+                    {
+                        GameObject getWeapon;
+                        getWeapon = (GameObject)Instantiate(pickUpWeaponEffect, transform.position, transform.rotation);
+                        Destroy(getWeapon, 0.5f);
+                    }
+                    //VFX end
                 }
                 m_InteractWaitTime = 1f;
             }
         }
 
-        if(m_InteractWaitTime >= 0)
+        if (m_InteractWaitTime >= 0)
         {
             m_InteractWaitTime -= Time.deltaTime;
         }
+
+        //Interact UI Pop-up
+        if (m_CanPickUp)
+            interactImage.GetComponent<Canvas>().enabled = true;
+        else
+            interactImage.GetComponent<Canvas>().enabled = false;
 
         //Pause
         if (Input.GetButtonDown(m_Pause + m_Controller.ToString()))
@@ -243,16 +255,16 @@ public class Player : MonoBehaviour
     {
         //if (GameManager.m_Instance.m_GameState == GameManager.GameState.Dungeon)
         //{
-            var vel = gameObject.GetComponent<PlayerController>().m_Velocity.normalized;
-            Vector3 tempLocation = m_Location;
-            tempLocation.x -= vel.x * 15.0f;
-            tempLocation.z -= vel.z * 15.0f;
+        var vel = gameObject.GetComponent<PlayerController>().m_Velocity.normalized;
+        Vector3 tempLocation = m_Location;
+        tempLocation.x -= vel.x * 15.0f;
+        tempLocation.z -= vel.z * 15.0f;
 
-            m_State = State.Dead;
-            updateModel();
-            transform.position = tempLocation;
-            stun(0.1f);
-            m_RespawnHealth.initialize();
+        m_State = State.Dead;
+        updateModel();
+        transform.position = tempLocation;
+        stun(0.1f);
+        m_RespawnHealth.initialize();
         //}
         //else if(GameManager.m_Instance.m_GameState == GameManager.GameState.Minigame)
         //{
@@ -533,8 +545,8 @@ public class Player : MonoBehaviour
         }*/
         //if (other.gameObject.CompareTag("TwoDamage"))
         //{
-           // m_Heart.TakeDamage(2);
-            //m_Heart.UpdateHearts();
+        // m_Heart.TakeDamage(2);
+        //m_Heart.UpdateHearts();
         //}
         //if (other.gameObject.CompareTag("MeleeEnemy"))
         //{
@@ -627,96 +639,96 @@ public class Player : MonoBehaviour
     }
 
 
-	//Health Indicator Code --------------------------------------------------------------------------------
-	void playerindacator()
-	{
-		if (m_Player == PLAYER.P1)
-		{
-			playerCurrentColor = playerOneColor;
-			if (m_Heart.curHealth <= m_Heart.maxHealth / 2 && m_Heart.curHealth > m_Heart.maxHealth / 4)
-			{
-				PlayerMarker.color = Color.Lerp(playerOneColor, playerDamageIndacator, Mathf.PingPong(Time.time, 0.9f));
-			}
-			else if (m_Heart.curHealth <= m_Heart.maxHealth / 4) 
-			{
-				if (FlashCheck == true) 
-				{
-					FlashCheck = false;
-					StartCoroutine (Flash ());
-				}
-			} 
-			else 
-			{				
-				PlayerMarker.color = playerCurrentColor;
-			}
-		}
-		if (m_Player == PLAYER.P2)
-		{
-			playerCurrentColor = playerTwoColor;
-			if (m_Heart.curHealth <= m_Heart.maxHealth / 2 && m_Heart.curHealth > m_Heart.maxHealth / 4)
-			{
-				PlayerMarker.color = Color.Lerp(playerTwoColor, playerDamageIndacator, Mathf.PingPong(Time.time, 0.9f));
-			}
-			else if (m_Heart.curHealth <= m_Heart.maxHealth / 4)
-			{
-				if (FlashCheck == true) 
-				{
-					FlashCheck = false;
-					StartCoroutine (Flash ());
-				}
-			}
-			else 
-			{				
-				PlayerMarker.color = playerCurrentColor;
-			}
-		}
-		if (m_Player == PLAYER.P3)
-		{
-			playerCurrentColor = playerThreeColor;
-			if (m_Heart.curHealth <= m_Heart.maxHealth / 2 && m_Heart.curHealth > m_Heart.maxHealth / 4)
-			{
-				PlayerMarker.color = Color.Lerp(playerThreeColor, playerDamageIndacator, Mathf.PingPong(Time.time, 0.9f));
-			}
-			else if (m_Heart.curHealth <= m_Heart.maxHealth / 4)
-			{
-				if (FlashCheck == true) 
-				{
-					FlashCheck = false;
-					StartCoroutine (Flash ());
-				}
-			}
-			else 
-			{				
-				PlayerMarker.color = playerCurrentColor;
-			}
-		}
-		if (m_Player == PLAYER.P4)
-		{
-			playerCurrentColor = playerFourColor;
-			if (m_Heart.curHealth <= m_Heart.maxHealth / 2 && m_Heart.curHealth > m_Heart.maxHealth / 4)
-			{
-				PlayerMarker.color = Color.Lerp(playerFourColor, playerDamageIndacator, Mathf.PingPong(Time.time, 0.9f));
-			}
-			else if (m_Heart.curHealth <= m_Heart.maxHealth / 4)
-			{
-				if (FlashCheck == true) 
-				{
-					FlashCheck = false;
-					StartCoroutine (Flash ());
-				}
-			}
-			else 
-			{				
-				PlayerMarker.color = playerCurrentColor;
-			}
-		}
-	}
-	IEnumerator Flash()
-	{		
-		PlayerMarker.color = playerDamageIndacator;
-		yield return new WaitForSeconds(.1f);
-		PlayerMarker.color = playerCurrentColor;
-		yield return new WaitForSeconds(.1f);
-		FlashCheck = true;
-	}
+    //Health Indicator Code --------------------------------------------------------------------------------
+    void playerindacator()
+    {
+        if (m_Player == PLAYER.P1)
+        {
+            playerCurrentColor = playerOneColor;
+            if (m_Heart.curHealth <= m_Heart.maxHealth / 2 && m_Heart.curHealth > m_Heart.maxHealth / 4)
+            {
+                PlayerMarker.color = Color.Lerp(playerOneColor, playerDamageIndacator, Mathf.PingPong(Time.time, 0.9f));
+            }
+            else if (m_Heart.curHealth <= m_Heart.maxHealth / 4)
+            {
+                if (FlashCheck == true)
+                {
+                    FlashCheck = false;
+                    StartCoroutine(Flash());
+                }
+            }
+            else
+            {
+                PlayerMarker.color = playerCurrentColor;
+            }
+        }
+        if (m_Player == PLAYER.P2)
+        {
+            playerCurrentColor = playerTwoColor;
+            if (m_Heart.curHealth <= m_Heart.maxHealth / 2 && m_Heart.curHealth > m_Heart.maxHealth / 4)
+            {
+                PlayerMarker.color = Color.Lerp(playerTwoColor, playerDamageIndacator, Mathf.PingPong(Time.time, 0.9f));
+            }
+            else if (m_Heart.curHealth <= m_Heart.maxHealth / 4)
+            {
+                if (FlashCheck == true)
+                {
+                    FlashCheck = false;
+                    StartCoroutine(Flash());
+                }
+            }
+            else
+            {
+                PlayerMarker.color = playerCurrentColor;
+            }
+        }
+        if (m_Player == PLAYER.P3)
+        {
+            playerCurrentColor = playerThreeColor;
+            if (m_Heart.curHealth <= m_Heart.maxHealth / 2 && m_Heart.curHealth > m_Heart.maxHealth / 4)
+            {
+                PlayerMarker.color = Color.Lerp(playerThreeColor, playerDamageIndacator, Mathf.PingPong(Time.time, 0.9f));
+            }
+            else if (m_Heart.curHealth <= m_Heart.maxHealth / 4)
+            {
+                if (FlashCheck == true)
+                {
+                    FlashCheck = false;
+                    StartCoroutine(Flash());
+                }
+            }
+            else
+            {
+                PlayerMarker.color = playerCurrentColor;
+            }
+        }
+        if (m_Player == PLAYER.P4)
+        {
+            playerCurrentColor = playerFourColor;
+            if (m_Heart.curHealth <= m_Heart.maxHealth / 2 && m_Heart.curHealth > m_Heart.maxHealth / 4)
+            {
+                PlayerMarker.color = Color.Lerp(playerFourColor, playerDamageIndacator, Mathf.PingPong(Time.time, 0.9f));
+            }
+            else if (m_Heart.curHealth <= m_Heart.maxHealth / 4)
+            {
+                if (FlashCheck == true)
+                {
+                    FlashCheck = false;
+                    StartCoroutine(Flash());
+                }
+            }
+            else
+            {
+                PlayerMarker.color = playerCurrentColor;
+            }
+        }
+    }
+    IEnumerator Flash()
+    {
+        PlayerMarker.color = playerDamageIndacator;
+        yield return new WaitForSeconds(.1f);
+        PlayerMarker.color = playerCurrentColor;
+        yield return new WaitForSeconds(.1f);
+        FlashCheck = true;
+    }
 }
