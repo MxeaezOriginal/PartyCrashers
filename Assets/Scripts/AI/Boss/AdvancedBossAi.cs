@@ -261,11 +261,15 @@ public class AdvancedBossAi : MonoBehaviour
     #region Getting hurt
     void Hurt(float damageTaken, float stunTime)
     {
-        // m_Health -= damageTaken;
-
+        //Leave state
         if (frame > stunTime)
         {
             state = states.idle;
+
+            if (m_HurtEffect.active)
+            {
+                m_HurtEffect.SetActive(false);
+            }
         }
         transform.Rotate(transform.rotation.x + Random.Range(0f, 120f), transform.rotation.y + Random.Range(0f, 120f), transform.rotation.z + Random.Range(0f, 120f));
         if (m_HurtEffect.active == false)
