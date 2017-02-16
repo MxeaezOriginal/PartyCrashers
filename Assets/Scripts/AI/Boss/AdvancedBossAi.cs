@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 //using UnityEditor;
 using System.Collections;
+
 
 public class AdvancedBossAi : MonoBehaviour
 {
@@ -134,6 +136,7 @@ public class AdvancedBossAi : MonoBehaviour
         if (m_Health <= 0)
         {
             //Load main menu
+            SceneManager.LoadScene(0);
         }
     }
 
