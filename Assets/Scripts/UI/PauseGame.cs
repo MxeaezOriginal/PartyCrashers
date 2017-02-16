@@ -22,7 +22,7 @@ public class PauseGame : MonoBehaviour
     [Header("List of ALL Buttons")]
     public GameObject[] allButtons;
 
-
+    public bool openedP1, openedP2, openedP3, openedP4, openedKeyboard;
 
     void Awake()
     {
@@ -43,8 +43,32 @@ public class PauseGame : MonoBehaviour
             StartCoroutine(Quit());
 
 
-        if (Input.GetButtonDown("Pause_P1"))
+        if (Input.GetButtonDown("Pause_" + GameManager.m_Instance.m_Player1.m_Controller))
         {
+            openedP1 = true;
+            PauseMenu();
+        }
+        else if(Input.GetButtonDown("Pause_" + GameManager.m_Instance.m_Player2.m_Controller))
+        {
+            openedP2 = true;
+            PauseMenu();
+        }
+
+        else if (Input.GetButtonDown("Pause_" + GameManager.m_Instance.m_Player3.m_Controller))
+        {
+            openedP3 = true;
+            PauseMenu();
+        }
+
+        else if (Input.GetButtonDown("Pause_" + GameManager.m_Instance.m_Player4.m_Controller))
+        {
+            openedP4 = true;
+            PauseMenu();
+        }
+
+        else if (Input.GetKeyDown(KeyCode.Escape))
+            {
+            openedKeyboard = true;
             PauseMenu();
         }
 
@@ -111,15 +135,55 @@ public class PauseGame : MonoBehaviour
     {
         canvases[0].SetActive(true);
         StandaloneInputModule inputModule = es.gameObject.GetComponent<StandaloneInputModule>();
-        if (canvases[0].activeSelf)
+
+        if (openedP1)
         {
             pauseActive = true;
-            inputModule.submitButton = "Jump_P1";
-            inputModule.horizontalAxis = "Horizontal_P1";
-            inputModule.verticalAxis = "Vertical_P1";
+            inputModule.submitButton = "Jump_" + GameManager.m_Instance.m_Player1.m_Controller;
+            inputModule.horizontalAxis = "Horizontal_" + GameManager.m_Instance.m_Player1.m_Controller;
+            inputModule.verticalAxis = "Vertical_" + GameManager.m_Instance.m_Player1.m_Controller;
+            //ADD CANCEL BUTTOn
+            Time.timeScale = 0;
+        }
+        if (openedP2)
+        {
+            pauseActive = true;
+            inputModule.submitButton = "Jump_" + GameManager.m_Instance.m_Player2.m_Controller;
+            inputModule.horizontalAxis = "Horizontal_" + GameManager.m_Instance.m_Player2.m_Controller;
+            inputModule.verticalAxis = "Vertical_" + GameManager.m_Instance.m_Player2.m_Controller;
+            //ADD CANCEL BUTTOn
             Time.timeScale = 0;
         }
 
+        if (openedP3)
+        {
+            pauseActive = true;
+            inputModule.submitButton = "Jump_" + GameManager.m_Instance.m_Player3.m_Controller;
+            inputModule.horizontalAxis = "Horizontal_" + GameManager.m_Instance.m_Player3.m_Controller;
+            inputModule.verticalAxis = "Vertical_" + GameManager.m_Instance.m_Player3.m_Controller;
+            //ADD CANCEL BUTTOn
+            Time.timeScale = 0;
+        }
+
+        if (openedP4)
+        {
+            pauseActive = true;
+            inputModule.submitButton = "Jump_" + GameManager.m_Instance.m_Player4.m_Controller;
+            inputModule.horizontalAxis = "Horizontal_" + GameManager.m_Instance.m_Player4.m_Controller;
+            inputModule.verticalAxis = "Vertical_" + GameManager.m_Instance.m_Player4.m_Controller;
+            //ADD CANCEL BUTTOn
+            Time.timeScale = 0;
+        }
+
+        if (openedKeyboard)
+        {
+            pauseActive = true;
+            //Input.GetButtonDown("Back_Keyboard") _ INPUT
+            inputModule.submitButton = "Submit_Keyboard";
+            inputModule.horizontalAxis = "HorizontalRotation_Keyboard";
+            inputModule.verticalAxis = "VerticalRotation_Keyboard";
+            Time.timeScale = 0;
+        }
         else
         {
             Time.timeScale = 1;
@@ -130,14 +194,58 @@ public class PauseGame : MonoBehaviour
     public void OptionsMenu()
     {
         canvases[1].SetActive(true);
+
         StandaloneInputModule inputModule = es.gameObject.GetComponent<StandaloneInputModule>();
         if (canvases[1].activeSelf)
         {
-            optionsActive = true;
-            inputModule.submitButton = "Jump_P1";
-            inputModule.horizontalAxis = "Horizontal_P1";
-            inputModule.verticalAxis = "Vertical_P1";
-            Time.timeScale = 0;
+            if (openedP1)
+            {
+                optionsActive = true;
+                inputModule.submitButton = "Jump_" + GameManager.m_Instance.m_Player1.m_Controller;
+                inputModule.horizontalAxis = "Horizontal_" + GameManager.m_Instance.m_Player1.m_Controller;
+                inputModule.verticalAxis = "Vertical_" + GameManager.m_Instance.m_Player1.m_Controller;
+                //ADD CANCEL BUTTOn
+                Time.timeScale = 0;
+            }
+            if (openedP2)
+            {
+                optionsActive = true;
+                inputModule.submitButton = "Jump_" + GameManager.m_Instance.m_Player2.m_Controller;
+                inputModule.horizontalAxis = "Horizontal_" + GameManager.m_Instance.m_Player2.m_Controller;
+                inputModule.verticalAxis = "Vertical_" + GameManager.m_Instance.m_Player2.m_Controller;
+                //ADD CANCEL BUTTOn
+                Time.timeScale = 0;
+            }
+
+            if (openedP3)
+            {
+                optionsActive = true;
+                inputModule.submitButton = "Jump_" + GameManager.m_Instance.m_Player3.m_Controller;
+                inputModule.horizontalAxis = "Horizontal_" + GameManager.m_Instance.m_Player3.m_Controller;
+                inputModule.verticalAxis = "Vertical_" + GameManager.m_Instance.m_Player3.m_Controller;
+                //ADD CANCEL BUTTOn
+                Time.timeScale = 0;
+            }
+
+            if (openedP4)
+            {
+                optionsActive = true;
+                inputModule.submitButton = "Jump_" + GameManager.m_Instance.m_Player4.m_Controller;
+                inputModule.horizontalAxis = "Horizontal_" + GameManager.m_Instance.m_Player4.m_Controller;
+                inputModule.verticalAxis = "Vertical_" + GameManager.m_Instance.m_Player4.m_Controller;
+                //ADD CANCEL BUTTOn
+                Time.timeScale = 0;
+            }
+
+            if (openedKeyboard)
+            {
+                optionsActive = true;
+                //Input.GetButtonDown("Back_Keyboard") _ INPUT
+                inputModule.submitButton = "Submit_Keyboard";
+                inputModule.horizontalAxis = "HorizontalRotation_Keyboard";
+                inputModule.verticalAxis = "VerticalRotation_Keyboard";
+                Time.timeScale = 0;
+            }
         }
     }
 
@@ -157,6 +265,7 @@ public class PauseGame : MonoBehaviour
     public void QuitButton()
     {
         quitActive = true;
+
     }
     public void YesButton()
     {
