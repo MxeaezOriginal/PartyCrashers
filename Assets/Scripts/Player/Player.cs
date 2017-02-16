@@ -65,6 +65,7 @@ public class Player : MonoBehaviour
     //public int m_MaxHealth;
     public bool m_CantAttack;
     public bool m_CanPickUp;
+    public bool m_IsDead;
     public State m_State;
     public float m_RespawnTime;
     public float m_CheckLocationCooldown;
@@ -147,6 +148,12 @@ public class Player : MonoBehaviour
         {
             respawn();
         }
+
+        if (m_Heart.IsDead() && m_IsDead == false)
+        {
+            respawn();
+        }
+
         if (m_CharController.isGrounded)
         {
             if (m_CurrentCooldown <= Time.time - m_CheckLocationCooldown || m_CurrentCooldown == 0)
@@ -253,7 +260,7 @@ public class Player : MonoBehaviour
 
     public void respawn()
     {
-        //if (GameManager.m_Instance.m_GameState == GameManager.GameState.Dungeon)
+        // if (GameManager.m_Instance.m_GameState == GameManager.GameState.Dungeon)
         //{
         var vel = gameObject.GetComponent<PlayerController>().m_Velocity.normalized;
         Vector3 tempLocation = m_Location;
@@ -261,6 +268,7 @@ public class Player : MonoBehaviour
         tempLocation.z -= vel.z * 15.0f;
 
         m_State = State.Dead;
+        m_IsDead = true;
         updateModel();
         transform.position = tempLocation;
         stun(0.1f);

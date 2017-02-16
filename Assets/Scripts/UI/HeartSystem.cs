@@ -139,7 +139,7 @@ public class HeartSystem : MonoBehaviour
 
     public bool IsDead()
     {
-        if (curHealth == 0)
+        if (curHealth <= 0)
         {
             print("Oh no cupcake, you died!");
             return true;

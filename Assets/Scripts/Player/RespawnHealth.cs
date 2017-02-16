@@ -58,6 +58,7 @@ public class RespawnHealth : MonoBehaviour
             m_PlayerHearts.curHealth = m_PlayerHearts.maxHealth;
             m_PlayerHearts.UpdateHearts();
             m_Player.m_State = Player.State.Alive;
+            m_Player.m_IsDead = false;
             m_Player.updateModel();
             Debug.Log("Updated Model");
             StartCoroutine(waitBeforeInitializeWeapon());
