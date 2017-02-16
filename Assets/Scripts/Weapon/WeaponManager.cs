@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 using System.Collections;
 
@@ -9,7 +10,8 @@ public class WeaponManager : MonoBehaviour
     {
         GlowSword,
         WaterBalloonBow,
-        FizzyPopGun
+        FizzyPopGun,
+        Length
     }
 
     public GameObject m_CurrentWeaponObject;
@@ -31,6 +33,11 @@ public class WeaponManager : MonoBehaviour
         foreach (GameObject weapon in m_WeaponPrefabs)
         {
             m_Weapons.Add(weapon.gameObject.name, weapon);
+        }
+
+        if (SceneManager.GetActiveScene().name == GameManager.m_Instance.m_LevelToStart)
+        {
+            m_CurrentWeapon = (Weapon)Random.Range(0, (int)Weapon.Length - 1);
         }
 
         initialize();
