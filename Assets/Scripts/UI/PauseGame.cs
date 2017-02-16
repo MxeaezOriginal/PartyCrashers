@@ -22,6 +22,9 @@ public class PauseGame : MonoBehaviour
     [Header("List of ALL Buttons")]
     public GameObject[] allButtons;
 
+    [Header("'Back' Button Available")]
+    public bool canBack;
+
     public bool openedP1, openedP2, openedP3, openedP4, openedKeyboard;
 
     void Awake()
@@ -42,6 +45,20 @@ public class PauseGame : MonoBehaviour
         else if (quitActive)
             StartCoroutine(Quit());
 
+        if (canBack && Input.GetButtonDown("Back_" + GameManager.m_Instance.m_Player1.m_Controller)) //PRESS FOR BACK BUTTON
+            BackButton();
+
+        if (canBack && Input.GetButtonDown("Back_" + GameManager.m_Instance.m_Player2.m_Controller)) //PRESS FOR BACK BUTTON
+            BackButton();
+
+        if (canBack && Input.GetButtonDown("Back_" + GameManager.m_Instance.m_Player3.m_Controller)) //PRESS FOR BACK BUTTON
+            BackButton();
+
+        if (canBack && Input.GetButtonDown("Back_" + GameManager.m_Instance.m_Player4.m_Controller)) //PRESS FOR BACK BUTTON
+            BackButton();
+
+        if (canBack && (Input.GetKeyDown(KeyCode.Escape))) //PRESS FOR BACK BUTTON
+            BackButton();
 
         if (Input.GetButtonDown("Pause_" + GameManager.m_Instance.m_Player1.m_Controller))
         {
@@ -101,6 +118,8 @@ public class PauseGame : MonoBehaviour
         canvases[2].SetActive(false);
         canvases[3].SetActive(false);
 
+        canBack = true;
+
     }
 
 
@@ -115,6 +134,8 @@ public class PauseGame : MonoBehaviour
         canvases[2].SetActive(true);
         canvases[3].SetActive(false);
 
+        canBack = true;
+
     }
 
 
@@ -128,6 +149,8 @@ public class PauseGame : MonoBehaviour
         canvases[1].SetActive(false);
         canvases[2].SetActive(false);
         canvases[3].SetActive(true);
+
+        canBack = true;
 
     }
 
@@ -271,7 +294,7 @@ public class PauseGame : MonoBehaviour
     {
         SceneManager.LoadScene("MainMenu");
     }
-    public void NoButton()
+    public void BackButton()
     {
         PauseMenu();
     }
