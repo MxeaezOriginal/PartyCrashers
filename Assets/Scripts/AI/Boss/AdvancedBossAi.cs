@@ -75,7 +75,7 @@ public class AdvancedBossAi : MonoBehaviour
     void Start()
     {
         //Set framerate
-        //Application.targetFrameRate = 60;
+        Application.targetFrameRate = 60;
 
         //Set the state
         state = states.idle;
