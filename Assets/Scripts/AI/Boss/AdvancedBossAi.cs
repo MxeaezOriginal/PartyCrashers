@@ -23,8 +23,6 @@ public class AdvancedBossAi : MonoBehaviour
     public int m_BulletsToShoot = 5;
     private int m_NumberOfBullets;
 
-    
-
     //Frame
     private int frame;
 
