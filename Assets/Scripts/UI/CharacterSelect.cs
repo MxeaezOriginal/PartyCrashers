@@ -81,6 +81,12 @@ public class CharacterSelect : MonoBehaviour
     public bool playerOneJoined, playerTwoJoined, playerThreeJoined, playerFourJoined;
 
     MenuManager menuManager;
+
+
+
+    //TEMP.!
+    public Text[] tempPlayerNumbersText;
+    public Text[] tempPlayerNumbersTextOutline;
     void Awake()
     {
         menuManager = GetComponent<MenuManager>();
@@ -121,7 +127,54 @@ public class CharacterSelect : MonoBehaviour
             lockInText.GetComponent<Text>().text = "'A'/ENTER LOCKIN";
             lockInTextOutline.GetComponent<Text>().text = "'A'/ENTER LOCKIN";
         }
+
+        if (GameManager.m_Instance.m_NumOfPlayers == 1)
+        {
+            tempPlayerNumbersText[0].enabled = true;
+            tempPlayerNumbersTextOutline[0].enabled = true;
+            tempPlayerNumbersText[1].enabled = false;
+            tempPlayerNumbersText[2].enabled = false;
+            tempPlayerNumbersText[3].enabled = false;
+            tempPlayerNumbersTextOutline[1].enabled = false;
+            tempPlayerNumbersTextOutline[2].enabled = false;
+            tempPlayerNumbersTextOutline[3].enabled = false;
+        }
+        else if (GameManager.m_Instance.m_NumOfPlayers == 2)
+        {
+            tempPlayerNumbersText[0].enabled = true;
+            tempPlayerNumbersText[1].enabled = true;
+            tempPlayerNumbersTextOutline[0].enabled = true;
+            tempPlayerNumbersTextOutline[1].enabled = true;
+            tempPlayerNumbersText[2].enabled = false;
+            tempPlayerNumbersText[3].enabled = false;
+            tempPlayerNumbersTextOutline[2].enabled = false;
+            tempPlayerNumbersTextOutline[3].enabled = false;
+        }
+        else if (GameManager.m_Instance.m_NumOfPlayers == 3)
+        {
+            tempPlayerNumbersText[0].enabled = true;
+            tempPlayerNumbersText[1].enabled = true;
+            tempPlayerNumbersText[2].enabled = true;
+            tempPlayerNumbersTextOutline[0].enabled = true;
+            tempPlayerNumbersTextOutline[1].enabled = true;
+            tempPlayerNumbersTextOutline[2].enabled = true;
+            tempPlayerNumbersText[3].enabled = false;
+            tempPlayerNumbersTextOutline[3].enabled = false;
+        }
+
+        else if (GameManager.m_Instance.m_NumOfPlayers == 4)
+        {
+            tempPlayerNumbersText[0].enabled = true;
+            tempPlayerNumbersText[1].enabled = true;
+            tempPlayerNumbersText[2].enabled = true;
+            tempPlayerNumbersText[3].enabled = true;
+            tempPlayerNumbersTextOutline[0].enabled = true;
+            tempPlayerNumbersTextOutline[1].enabled = true;
+            tempPlayerNumbersTextOutline[2].enabled = true;
+            tempPlayerNumbersTextOutline[3].enabled = true;
+        }
     }
+
     void PlayerIndexSorting()
     {
         if (P1.index > 3)
