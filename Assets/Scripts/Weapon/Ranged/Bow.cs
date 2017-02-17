@@ -18,7 +18,9 @@ public class Bow : Ranged
 	public GameObject secondaryflashVFX;
 	public GameObject chargingVFX;
 	public GameObject chargedVFX;
-	//VFX end
+    [SerializeField]
+    private GameObject m_LaserBeamFX;
+    //VFX end
 
     [Tooltip("Maximum Charging Time.")]
     public float m_MaxCharge = 0f;
@@ -185,7 +187,7 @@ public class Bow : Ranged
             GameObject SFXtest = Instantiate(SFXPlayer, transform.position, transform.rotation) as GameObject;
         //sound end
 			*/
-            laser.GetComponent<LineRenderer>().enabled = true;
+            
 
             StopCoroutine("LaserTimer");
             StartCoroutine("LaserTimer");                          
@@ -209,14 +211,26 @@ public class Bow : Ranged
 
     IEnumerator LaserTimer()
     {
+        laser.transform.position = transform.position;
+        laser.transform.rotation = transform.rotation;
+        laser.GetComponent<LineRenderer>().enabled = true;
+        laser.transform.parent = null;
+
+        if (m_LaserBeamFX != null)
+        {           
+            GameObject laserMF;
+            laserMF = (GameObject)Instantiate(m_LaserBeamFX, transform.position, transform.rotation);
+            Destroy(laserMF, m_LaserTimer);
+        }
+
         yield return new WaitForSeconds(m_LaserTimer);
         laser.GetComponent<LineRenderer>().enabled = false;
     }
     // https://unity3d.com/learn/tutorials/topics/graphics/fun-lasers
 
 
-	//VFX
-	public void chargeVFXs()
+    //VFX
+    public void chargeVFXs()
 	{
 		if (m_TimePressed > 0 && m_TimePressed < m_MaxCharge) 
 		{
@@ -231,7 +245,6 @@ public class Bow : Ranged
 			{
 				chargingVFX.gameObject.SetActive (false);
 				chargedVFX.gameObject.SetActive (true);
-
 			}
 		} 
 		else 

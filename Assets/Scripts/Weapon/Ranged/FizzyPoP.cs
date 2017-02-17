@@ -12,6 +12,8 @@ public class FizzyPoP : Ranged
     private float m_MaxSprayCharge = 5f;    
     [SerializeField]
     private float m_AngleModifier = .5f;
+    [SerializeField]
+    private float m_FireHealthVFXTimer;
     #endregion
 
     #region Bools
@@ -23,10 +25,11 @@ public class FizzyPoP : Ranged
     #region Components
     private Player Player;
     private GameObject FizzyCone;
+    [SerializeField]
+    private GameObject FireHealthVFX;
     #endregion
 
     //Test
-    bool m_IsFiring = false;
 
     void Start()
     {
@@ -100,6 +103,13 @@ public class FizzyPoP : Ranged
         healPrefab = (GameObject)Instantiate(m_LeftTriggerProjectile, m_FirePoint[0].gameObject.transform.position, m_FirePoint[0].gameObject.transform.rotation);
         healPrefab.GetComponent<Rigidbody>().AddForce(healPrefab.transform.up * m_ProjectileSpeed02);        
         m_CanHeal = false;
+
+        if (FireHealthVFX != null)
+        {
+            GameObject HealthMF;
+            HealthMF = (GameObject)Instantiate(FireHealthVFX, transform.position, transform.rotation);
+            Destroy(HealthMF, m_FireHealthVFXTimer);
+        }
     }
 
     private void assignDamage(GameObject bullet)
