@@ -237,6 +237,7 @@ public class MenuManager : MonoBehaviour
                 inputModule.horizontalAxis = "Horizontal_P1";
                 inputModule.verticalAxis = "Vertical_P1";
                 characterSelect.P1Join = true;
+                characterSelect.canLockIn_P1 = true;
                 characterSelect.firstPlayer = CharacterSelect.PlayerOne.P1;
             }
             if (canvases[0].activeSelf && Input.GetButtonDown("Jump_P2"))
@@ -248,6 +249,7 @@ public class MenuManager : MonoBehaviour
                 inputModule.horizontalAxis = "Horizontal_P2";
                 inputModule.verticalAxis = "Vertical_P2";
                 characterSelect.P2Join = true;
+                characterSelect.canLockIn_P2 = true;
                 characterSelect.firstPlayer = CharacterSelect.PlayerOne.P2;
             }
             if (canvases[0].activeSelf && Input.GetButtonDown("Jump_P3"))
@@ -259,6 +261,7 @@ public class MenuManager : MonoBehaviour
                 inputModule.horizontalAxis = "Horizontal_P3";
                 inputModule.verticalAxis = "Vertical_P3";
                 characterSelect.P3Join = true;
+                characterSelect.canLockIn_P3 = true;
                 characterSelect.firstPlayer = CharacterSelect.PlayerOne.P3;
             }
             if (canvases[0].activeSelf && Input.GetButtonDown("Jump_P4"))
@@ -270,6 +273,7 @@ public class MenuManager : MonoBehaviour
                 inputModule.horizontalAxis = "Horizontal_P4";
                 inputModule.verticalAxis = "Vertical_P4";
                 characterSelect.P4Join = true;
+                characterSelect.canLockIn_P4 = true;
                 characterSelect.firstPlayer = CharacterSelect.PlayerOne.P4;
             }
 
@@ -282,6 +286,7 @@ public class MenuManager : MonoBehaviour
                 inputModule.horizontalAxis = "HorizontalRotation_Keyboard";
                 inputModule.verticalAxis = "VerticalRotation_Keyboard";
                 characterSelect.KeyboardJoin = true;
+                characterSelect.canLockIn_Keyboard = true;
                 characterSelect.firstPlayer = CharacterSelect.PlayerOne.Keyboard;
             }
         }

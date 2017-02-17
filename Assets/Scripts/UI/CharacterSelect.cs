@@ -65,6 +65,7 @@ public class CharacterSelect : MonoBehaviour
     //[HideInInspector]
     public bool P1Join, P2Join, P3Join, P4Join, KeyboardJoin;
     //[HideInInspector]
+    public bool canLockIn_P1, canLockIn_P2, canLockIn_P3, canLockIn_P4, canLockIn_Keyboard;
     public bool P1Locked, P2Locked, P3Locked, P4Locked;
     //[HideInInspector]
     //public bool canBack, canLockIn, allowToLock;
@@ -166,7 +167,6 @@ public class CharacterSelect : MonoBehaviour
     {
         if (GameManager.m_Instance.m_NumOfPlayers <= 4)
         {
-            //P2-4 Join
             if (menuManager.canvases[2].activeSelf && Input.GetButtonDown("Jump_P1"))
             {
                 if (!P1Join)
@@ -191,8 +191,8 @@ public class CharacterSelect : MonoBehaviour
                             fourthPlayer = PlayerFour.P1;
                         }
                     }
-
                 }
+                StartCoroutine(DelayBeforeAllowingToJoin(1));
             }
         }
         if (menuManager.canvases[2].activeSelf && Input.GetButtonDown("Jump_P2"))
@@ -219,7 +219,7 @@ public class CharacterSelect : MonoBehaviour
                         fourthPlayer = PlayerFour.P2;
                     }
                 }
-
+                StartCoroutine(DelayBeforeAllowingToJoin(2));
             }
         }
         if (menuManager.canvases[2].activeSelf && Input.GetButtonDown("Jump_P3"))
@@ -246,6 +246,7 @@ public class CharacterSelect : MonoBehaviour
                         fourthPlayer = PlayerFour.P3;
                     }
                 }
+                StartCoroutine(DelayBeforeAllowingToJoin(3));
             }
         }
         if (menuManager.canvases[2].activeSelf && Input.GetButtonDown("Jump_P4"))
@@ -272,6 +273,7 @@ public class CharacterSelect : MonoBehaviour
                         fourthPlayer = PlayerFour.P4;
                     }
                 }
+                StartCoroutine(DelayBeforeAllowingToJoin(4));
             }
         }
         if (menuManager.canvases[2].activeSelf && Input.GetButtonDown("Submit_Keyboard"))
@@ -298,12 +300,42 @@ public class CharacterSelect : MonoBehaviour
                         fourthPlayer = PlayerFour.Keyboard;
                     }
                 }
+                StartCoroutine(DelayBeforeAllowingToJoin(5));
             }
+        }
+    }
+
+    //HERE
+    IEnumerator DelayBeforeAllowingToJoin(int playerNumber)
+    {
+        yield return new WaitForSeconds(0.1f);
+        switch (playerNumber)
+        {
+            case 1:
+                canLockIn_P1 = true;
+                print("??1");
+                break;
+            case 2:
+                canLockIn_P2 = true;
+                print("??2");
+                break;
+            case 3:
+                canLockIn_P3 = true;
+                print("??3");
+                break;
+            case 4:
+                canLockIn_P4 = true;
+                print("??4");
+                break;
+            case 5:
+                canLockIn_Keyboard = true;
+                print("??5");
+                break;
         }
     }
     void LockInPlayer()
     {
-        if (menuManager.canvases[2].activeSelf && Input.GetButtonDown("Jump_P1"))/* && canLockIn)*/
+        if (menuManager.canvases[2].activeSelf && canLockIn_P1 && Input.GetButtonDown("Jump_P1"))/* && canLockIn)*/
         {
             if (firstPlayer == PlayerOne.P1 && !playerOneJoined)
             {
@@ -331,7 +363,7 @@ public class CharacterSelect : MonoBehaviour
             }
             //allowToLock = true;
         }
-        if (menuManager.canvases[2].activeSelf && Input.GetButtonDown("Jump_P2"))/* && canLockIn && !playerTwoJoined)*/
+        if (menuManager.canvases[2].activeSelf && canLockIn_P2 && Input.GetButtonDown("Jump_P2"))/* && canLockIn && !playerTwoJoined)*/
         {
             if (firstPlayer == PlayerOne.P2 && !playerOneJoined)
             {
@@ -360,7 +392,7 @@ public class CharacterSelect : MonoBehaviour
 
             //allowToLock = true;
         }
-        if (menuManager.canvases[2].activeSelf && Input.GetButtonDown("Jump_P3"))/* && canLockIn && !playerThreeJoined)*/
+        if (menuManager.canvases[2].activeSelf && canLockIn_P3 && Input.GetButtonDown("Jump_P3"))/* && canLockIn && !playerThreeJoined)*/
         {
             if (firstPlayer == PlayerOne.P3 && !playerOneJoined)
             {
@@ -388,7 +420,7 @@ public class CharacterSelect : MonoBehaviour
             }
             //allowToLock = true;
         }
-        if (menuManager.canvases[2].activeSelf && Input.GetButtonDown("Jump_P4"))/* && canLockIn && !playerFourJoined)*/
+        if (menuManager.canvases[2].activeSelf && canLockIn_P4 && Input.GetButtonDown("Jump_P4"))/* && canLockIn && !playerFourJoined)*/
         {
             if (firstPlayer == PlayerOne.P4 && !playerOneJoined)
             {
@@ -416,7 +448,7 @@ public class CharacterSelect : MonoBehaviour
             }
             //allowToLock = true;
         }
-        if (menuManager.canvases[2].activeSelf && Input.GetButtonDown("Jump_Keyboard"))
+        if (menuManager.canvases[2].activeSelf && canLockIn_Keyboard && Input.GetButtonDown("Jump_Keyboard"))
         {
             if (firstPlayer == PlayerOne.Keyboard && !playerOneJoined)
             {
@@ -488,24 +520,44 @@ public class CharacterSelect : MonoBehaviour
                             P3Join = false;
                             P4Join = false;
                             KeyboardJoin = false;
+                            canLockIn_P1 = true;
+                            canLockIn_P2 = false;
+                            canLockIn_P3 = false;
+                            canLockIn_P4 = false;
+                            canLockIn_Keyboard = false;
                             break;
                         case PlayerOne.P2:
                             P1Join = false;
                             P3Join = false;
                             P4Join = false;
                             KeyboardJoin = false;
+                            canLockIn_P1 = false;
+                            canLockIn_P2 = true;
+                            canLockIn_P3 = false;
+                            canLockIn_P4 = false;
+                            canLockIn_Keyboard = false;
                             break;
                         case PlayerOne.P3:
                             P1Join = false;
                             P2Join = false;
                             P4Join = false;
                             KeyboardJoin = false;
+                            canLockIn_P1 = false;
+                            canLockIn_P2 = false;
+                            canLockIn_P3 = true;
+                            canLockIn_P4 = false;
+                            canLockIn_Keyboard = false;
                             break;
                         case PlayerOne.P4:
                             P1Join = false;
                             P2Join = false;
                             P3Join = false;
                             KeyboardJoin = false;
+                            canLockIn_P1 = false;
+                            canLockIn_P2 = false;
+                            canLockIn_P3 = false;
+                            canLockIn_P4 = true;
+                            canLockIn_Keyboard = false;
                             break;
                         case PlayerOne.Keyboard:
                             P1Join = false;
@@ -542,30 +594,55 @@ public class CharacterSelect : MonoBehaviour
                             P3Join = false;
                             P4Join = false;
                             KeyboardJoin = false;
+                            canLockIn_P1 = false;
+                            canLockIn_P2 = false;
+                            canLockIn_P3 = false;
+                            canLockIn_P4 = false;
+                            canLockIn_Keyboard = true;
                             break;
                         case PlayerOne.P2:
                             P1Join = false;
                             P3Join = false;
                             P4Join = false;
                             KeyboardJoin = false;
+                            canLockIn_P1 = false;
+                            canLockIn_P2 = false;
+                            canLockIn_P3 = false;
+                            canLockIn_P4 = false;
+                            canLockIn_Keyboard = true;
                             break;
                         case PlayerOne.P3:
                             P1Join = false;
                             P2Join = false;
                             P4Join = false;
                             KeyboardJoin = false;
+                            canLockIn_P1 = false;
+                            canLockIn_P2 = false;
+                            canLockIn_P3 = false;
+                            canLockIn_P4 = false;
+                            canLockIn_Keyboard = true;
                             break;
                         case PlayerOne.P4:
                             P1Join = false;
                             P2Join = false;
                             P3Join = false;
                             KeyboardJoin = false;
+                            canLockIn_P1 = false;
+                            canLockIn_P2 = false;
+                            canLockIn_P3 = false;
+                            canLockIn_P4 = false;
+                            canLockIn_Keyboard = true;
                             break;
                         case PlayerOne.Keyboard:
                             P1Join = false;
                             P2Join = false;
                             P3Join = false;
                             P4Join = false;
+                            canLockIn_P1 = false;
+                            canLockIn_P2 = false;
+                            canLockIn_P3 = false;
+                            canLockIn_P4 = false;
+                            canLockIn_Keyboard = true;
                             break;
                     }
 
@@ -591,100 +668,123 @@ public class CharacterSelect : MonoBehaviour
             if (firstPlayer == PlayerOne.P1 && P1Locked)
             {
                 P1Locked = false;
+                canLockIn_P1 = true;
                 playerOneJoined = false;
+                playersLockedIn--;
             }
             if (secondPlayer == PlayerTwo.P1 && P2Locked)
             {
                 P2Locked = false;
+                canLockIn_P2 = true;
                 playerTwoJoined = false;
+                playersLockedIn--;
             }
             if (thirdPlayer == PlayerThree.P1 && P3Locked)
             {
                 P3Locked = false;
+                canLockIn_P3 = true;
                 playerThreeJoined = false;
+                playersLockedIn--;
             }
             if (fourthPlayer == PlayerFour.P1 && P4Locked)
             {
                 P4Locked = false;
+                canLockIn_P4 = true;
                 playerFourJoined = false;
+                playersLockedIn--;
             }
-
-            playersLockedIn--;
         }
         if (menuManager.canvases[2].activeSelf && Input.GetButtonDown("Back_P2"))
         {
             if (firstPlayer == PlayerOne.P2 && P1Locked)
             {
                 P1Locked = false;
+                canLockIn_P1 = true;
                 playerOneJoined = false;
+                playersLockedIn--;
             }
             if (secondPlayer == PlayerTwo.P2 && P2Locked)
             {
                 P2Locked = false;
+                canLockIn_P2 = true;
                 playerTwoJoined = false;
+                playersLockedIn--;
             }
             if (thirdPlayer == PlayerThree.P2 && P3Locked)
             {
                 P3Locked = false;
+                canLockIn_P3 = true;
                 playerThreeJoined = false;
+                playersLockedIn--;
             }
             if (fourthPlayer == PlayerFour.P2 && P4Locked)
             {
                 P4Locked = false;
+                canLockIn_P4 = true;
                 playerFourJoined = false;
+                playersLockedIn--;
             }
-
-            playersLockedIn--;
         }
         if (menuManager.canvases[2].activeSelf && Input.GetButtonDown("Back_P3"))
         {
             if (firstPlayer == PlayerOne.P1 && P1Locked)
             {
                 P1Locked = false;
+                canLockIn_P1 = true;
                 playerOneJoined = false;
             }
             if (secondPlayer == PlayerTwo.P3 && P2Locked)
             {
                 P2Locked = false;
+                canLockIn_P2 = true;
                 playerTwoJoined = false;
+                playersLockedIn--;
             }
             if (thirdPlayer == PlayerThree.P3 && P3Locked)
             {
                 P3Locked = false;
+                canLockIn_P3 = true;
                 playerThreeJoined = false;
+                playersLockedIn--;
             }
             if (fourthPlayer == PlayerFour.P3 && P4Locked)
             {
                 P4Locked = false;
+                canLockIn_P4 = true;
                 playerFourJoined = false;
+                playersLockedIn--;
             }
-
-            playersLockedIn--;
         }
         if (menuManager.canvases[2].activeSelf && Input.GetButtonDown("Back_P4"))
         {
             if (firstPlayer == PlayerOne.P4 && P1Locked)
             {
                 P1Locked = false;
+                canLockIn_P1 = true;
                 playerOneJoined = false;
+                playersLockedIn--;
             }
             if (secondPlayer == PlayerTwo.P4 && P2Locked)
             {
                 P2Locked = false;
+                canLockIn_P2 = true;
                 playerTwoJoined = false;
+                playersLockedIn--;
             }
             if (thirdPlayer == PlayerThree.P4 && P3Locked)
             {
                 P3Locked = false;
+                canLockIn_P3 = true;
                 playerThreeJoined = false;
+                playersLockedIn--;
             }
             if (fourthPlayer == PlayerFour.P4 && P4Locked)
             {
                 P4Locked = false;
+                canLockIn_P4 = true;
                 playerFourJoined = false;
+                playersLockedIn--;
             }
-
-            playersLockedIn--;
         }
         if (menuManager.canvases[2].activeSelf && Input.GetButtonDown("Back_Keyboard"))
         {
