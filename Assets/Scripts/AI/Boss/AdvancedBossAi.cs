@@ -523,9 +523,7 @@ public class AdvancedBossAi : MonoBehaviour
     }
 
     #endregion
-
     #endregion
-
 
     //This is where the decision making for the target player will happen
     GameObject GetTargetPlayer()
