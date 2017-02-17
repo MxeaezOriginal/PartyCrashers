@@ -20,6 +20,7 @@ public class Sword : Melee
 
     public GameObject effect;
 
+    public GameObject DashVFX;
 
     CharacterController m_CharacterController;
     Player m_Player;
@@ -134,6 +135,13 @@ public class Sword : Melee
             attack = true;
             m_CharacterController.Move(m_CharacterController.transform.forward * Time.deltaTime * 50f);
            
+            if(DashVFX != null)
+            {
+                GameObject DashMF;
+                DashMF = (GameObject)Instantiate(DashVFX, transform.position, transform.rotation);
+                Destroy(DashMF, 0.2f);
+            }
+
             StartCoroutine(dash());
         }
     }
