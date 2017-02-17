@@ -243,7 +243,6 @@ public class AdvancedBossAi : MonoBehaviour
                     }
                 }
             }
-
             transform.position = teleportTargetPosition;
         }
         //Recover
@@ -276,7 +275,6 @@ public class AdvancedBossAi : MonoBehaviour
         {
             m_HurtEffect.SetActive(true);
         }
-
     }
     void OnTriggerExit(Collider other)
     {
@@ -290,7 +288,7 @@ public class AdvancedBossAi : MonoBehaviour
         
     }
 
-    //CHANGE THIS ONCE ANIMATIONS ARE IN    FUUUUUUCCKK
+    //CHANGE THIS ONCE ANIMATIONS ARE IN
     public void OnTriggerStay(Collider other)
     {
         if (!m_Invincible)
