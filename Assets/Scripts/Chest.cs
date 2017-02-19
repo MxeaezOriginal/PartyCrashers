@@ -21,13 +21,15 @@ public class Chest : MonoBehaviour {
             if (m_effect != null)
             {
                 GameObject effect;
-                effect = (GameObject)Instantiate(m_effect, gameObject.transform.position, gameObject.transform.rotation);
+                effect = (GameObject)Instantiate(m_effect, gameObject.transform.position, gameObject.transform.rotation);                
                 Destroy(effect, 3f);
             }
             for (int i = 0; i < prefab.Length; i++)
             {
                 //GetComponent<Animation>().Play();               //After get animation for chest, uncomment it
-                Instantiate(prefab[i], gameObject.transform.position, gameObject.transform.rotation);
+                GameObject weapon;
+                weapon = (GameObject)Instantiate(prefab[i], gameObject.transform.position, gameObject.transform.rotation);
+                weapon.name = prefab[i].name;
                 alreadyOpen = true;
             }
             
