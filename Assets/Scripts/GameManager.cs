@@ -108,8 +108,6 @@ public class GameManager : MonoBehaviour
             }
             FindHearts();
 
-            foreach (GameObject p in m_Instance.m_Players) { p.GetComponent<Player>().updateModel(); }
-
             Destroy(gameObject);
         }
     }
@@ -266,6 +264,22 @@ public class GameManager : MonoBehaviour
             playerComponent.m_PlayerObject = playerClone;
 
             playerComponent.m_Player = (Player.PLAYER)System.Enum.Parse(typeof(Player.PLAYER), player);
+            switch (playerComponent.m_Player)
+            {
+                case Player.PLAYER.P1:
+                    playerComponent.m_Model = m_Instance.m_Player1.model;
+                    break;
+                case Player.PLAYER.P2:
+                    playerComponent.m_Model = m_Instance.m_Player2.model;
+                    break;
+                case Player.PLAYER.P3:
+                    playerComponent.m_Model = m_Instance.m_Player3.model;
+                    break;
+                case Player.PLAYER.P4:
+                    playerComponent.m_Model = m_Instance.m_Player4.model;
+                    break;
+            }
+
             playerComponent.updateModel();
             playerComponent.saveMain();
 
