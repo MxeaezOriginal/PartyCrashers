@@ -7,7 +7,10 @@ public class LightFlash : MonoBehaviour
     public float colorSwapTime;
     public Color[] arrayOfColors;
     private int I;
-     
+    public AudioSource audioSource;
+    public AudioClip[] SFX;
+    private AudioClip SFXtoPlay;
+
 
 
     // Use this for initialization
@@ -36,7 +39,11 @@ public class LightFlash : MonoBehaviour
         {
             I = 0;
         }
-
+        //sound code
+        SFXtoPlay = SFX[Random.Range(0, SFX.Length)];
+        audioSource.clip = SFXtoPlay;
+        audioSource.Play();
+        //sound code
         Invoke("changeColor", colorSwapTime);
 
     }
