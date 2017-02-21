@@ -29,8 +29,8 @@ public class PauseGame : MonoBehaviour
 
     void Awake()
     {
-
-        es = GameObject.Find("Pause Menu/EventSystem").GetComponent<EventSystem>();
+        //Was causing error - Brody
+        //es = GameObject.Find("Pause Menu/EventSystem").GetComponent<EventSystem>();
 
     }
     // Update is called once per frame

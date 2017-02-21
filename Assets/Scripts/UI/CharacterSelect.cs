@@ -119,8 +119,11 @@ public class CharacterSelect : MonoBehaviour
         {
             lockInText.GetComponent<Text>().text = "'A'/ENTER START";
             lockInTextOutline.GetComponent<Text>().text = "'A'/ENTER START";
-            if (Input.GetButtonDown("Jump_" + GameManager.m_Instance.m_Player1.m_Controller))
-                SceneManager.LoadScene(GameManager.m_Instance.m_LevelToStart);
+			if (Input.GetButtonDown ("Jump_" + GameManager.m_Instance.m_Player1.m_Controller))
+			{
+                AssignCharacteModels();
+                SceneManager.LoadScene (GameManager.m_Instance.m_LevelToStart);
+			}
         }
         else
         {
@@ -973,6 +976,70 @@ public class CharacterSelect : MonoBehaviour
         P2Selection();
         P3Selection();
         P4Selection();
+    }
+
+    void AssignCharacteModels()
+    {
+        switch (P1.index)
+        {
+            case 0:
+                GameManager.m_Instance.m_Player1.model = Player.Model.Mascot;
+                break;
+            case 1:
+                GameManager.m_Instance.m_Player1.model = Player.Model.Nerd;
+                break;
+            case 2:
+                GameManager.m_Instance.m_Player1.model = Player.Model.Badboy;
+                break;
+            case 3:
+                GameManager.m_Instance.m_Player1.model = Player.Model.Goth;
+                break;
+        }
+        switch (P2.index)
+        {
+            case 0:
+                GameManager.m_Instance.m_Player2.model = Player.Model.Mascot;
+                break;
+            case 1:
+                GameManager.m_Instance.m_Player2.model = Player.Model.Nerd;
+                break;
+            case 2:
+                GameManager.m_Instance.m_Player2.model = Player.Model.Badboy;
+                break;
+            case 3:
+                GameManager.m_Instance.m_Player2.model = Player.Model.Goth;
+                break;
+        }
+        switch (P3.index)
+        {
+            case 0:
+                GameManager.m_Instance.m_Player3.model = Player.Model.Mascot;
+                break;
+            case 1:
+                GameManager.m_Instance.m_Player3.model = Player.Model.Nerd;
+                break;
+            case 2:
+                GameManager.m_Instance.m_Player3.model = Player.Model.Badboy;
+                break;
+            case 3:
+                GameManager.m_Instance.m_Player3.model = Player.Model.Goth;
+                break;
+        }
+        switch (P4.index)
+        {
+            case 0:
+                GameManager.m_Instance.m_Player4.model = Player.Model.Mascot;
+                break;
+            case 1:
+                GameManager.m_Instance.m_Player4.model = Player.Model.Nerd;
+                break;
+            case 2:
+                GameManager.m_Instance.m_Player4.model = Player.Model.Badboy;
+                break;
+            case 3:
+                GameManager.m_Instance.m_Player4.model = Player.Model.Goth;
+                break;
+        }
     }
 
     void StartGame()

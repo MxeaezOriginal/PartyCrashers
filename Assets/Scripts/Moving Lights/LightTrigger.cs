@@ -17,7 +17,8 @@ public class LightTrigger : MonoBehaviour {
         lightOn = false;
         while (lt.Length >= (I + 1) )
         {
-            lt[I].GetComponent<Light>().enabled = false;
+            //Was causing error - Brody
+            //lt[I].GetComponent<Light>().enabled = false; 
             I++;
         }
 
@@ -33,7 +34,8 @@ public class LightTrigger : MonoBehaviour {
             audioSource.Play();
             while (lt.Length >= (I + 1))
             {
-                lt[I].GetComponent<Light>().enabled = true;
+                //Was causing error - Brody
+                //lt[I].GetComponent<Light>().enabled = true;
                 I++;
             }
             lightOn = true;

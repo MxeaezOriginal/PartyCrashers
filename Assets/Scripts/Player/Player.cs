@@ -41,6 +41,8 @@ public class Player : MonoBehaviour
     {
         Mascot,
         Nerd,
+        Badboy,
+        Goth,
         Pinata
     }
 
@@ -333,6 +335,34 @@ public class Player : MonoBehaviour
                     mascotClone.name = "Model";
                     m_Animator = mascotClone.GetComponent<Animator>();
                     break;
+                case Player.Model.Nerd:
+                    GameObject nerdClone = Instantiate(GameManager.m_Instance.m_NerdPrefab, transform.position, Quaternion.identity) as GameObject;
+                    nerdClone.transform.parent = m_PlayerObject.gameObject.transform;
+                    nerdClone.transform.localPosition = new Vector3(0, 0, 0);
+                    nerdClone.transform.localRotation = Quaternion.identity;
+                    nerdClone.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+                    nerdClone.name = "Model";
+                    Debug.Log("CheekO");
+                    m_Animator = nerdClone.GetComponent<Animator>();
+                    break;
+                case Player.Model.Badboy:
+                    GameObject badBoyClone = Instantiate(GameManager.m_Instance.m_BadboyPrefab, transform.position, Quaternion.identity) as GameObject;
+                    badBoyClone.transform.parent = m_PlayerObject.gameObject.transform;
+                    badBoyClone.transform.localPosition = new Vector3(0, 0, 0);
+                    badBoyClone.transform.localRotation = Quaternion.identity;
+                    badBoyClone.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+                    badBoyClone.name = "Model";
+                    m_Animator = badBoyClone.GetComponent<Animator>();
+                    break;
+                case Player.Model.Goth:
+                    GameObject gothClone = Instantiate(GameManager.m_Instance.m_GothPrefab, transform.position, Quaternion.identity) as GameObject;
+                    gothClone.transform.parent = m_PlayerObject.gameObject.transform;
+                    gothClone.transform.localPosition = new Vector3(0, 0, 0);
+                    gothClone.transform.localRotation = Quaternion.identity;
+                    gothClone.transform.localScale = new Vector3(1, 1, 1);
+                    gothClone.name = "Model";
+                    m_Animator = gothClone.GetComponent<Animator>();
+                    break;
                 case Player.Model.Pinata:
                     GameObject pinataClone = Instantiate(GameManager.m_Instance.m_PinataPrefab, transform.position, Quaternion.identity) as GameObject;
                     pinataClone.transform.parent = m_PlayerObject.gameObject.transform;
@@ -454,19 +484,19 @@ public class Player : MonoBehaviour
         {
             case PLAYER.P1:
                 GameManager.m_Instance.m_Player1.player = m_Player;
-                GameManager.m_Instance.m_Player1.model = m_Model;
+                //GameManager.m_Instance.m_Player1.model = m_Model;
                 break;
             case PLAYER.P2:
                 GameManager.m_Instance.m_Player2.player = m_Player;
-                GameManager.m_Instance.m_Player2.model = m_Model;
+                //GameManager.m_Instance.m_Player2.model = m_Model;
                 break;
             case PLAYER.P3:
                 GameManager.m_Instance.m_Player3.player = m_Player;
-                GameManager.m_Instance.m_Player3.model = m_Model;
+                //GameManager.m_Instance.m_Player3.model = m_Model;
                 break;
             case PLAYER.P4:
                 GameManager.m_Instance.m_Player4.player = m_Player;
-                GameManager.m_Instance.m_Player4.model = m_Model;
+                //GameManager.m_Instance.m_Player4.model = m_Model;
                 break;
         }
     }
@@ -581,7 +611,7 @@ public class Player : MonoBehaviour
 
     void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.CompareTag("DotTrap"))
+       /* if (other.gameObject.CompareTag("DotTrap"))
         {
             dotdelay -= Time.deltaTime;
             if (dotdelay <= 0)
@@ -596,7 +626,7 @@ public class Player : MonoBehaviour
             Destroy(other);
             m_Heart.TakeDamage(1);
             m_Heart.UpdateHearts();
-        }
+        }*/
         //if (other.gameObject.CompareTag("MeleeEnemy"))
         //{
         //    damageDelay -= Time.deltaTime;

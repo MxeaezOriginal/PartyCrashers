@@ -45,7 +45,7 @@ public class WeaponManager : MonoBehaviour
 
     public void initialize()
     {
-        if (transform.FindChild("Model") != null) { findWeaponRecursive(transform.FindChild("Model")); Debug.Log("hi"); }
+        if (transform.FindChild("Model") != null) { findWeaponRecursive(transform.FindChild("Model")); }
         else { Debug.LogError("Model not found under player"); }
 
         SetWeapon(m_CurrentWeapon);

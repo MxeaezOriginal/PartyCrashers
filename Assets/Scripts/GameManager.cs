@@ -47,6 +47,9 @@ public class GameManager : MonoBehaviour
 
     public GameObject m_PlayerPrefab;
     public GameObject m_MascotPrefab;
+    public GameObject m_NerdPrefab;
+    public GameObject m_BadboyPrefab;
+    public GameObject m_GothPrefab;
     public GameObject m_PinataPrefab;
 
     public RenderTexture[] m_Portraits;
@@ -104,6 +107,8 @@ public class GameManager : MonoBehaviour
                 GameManager.m_Instance.loadPlayers();
             }
             FindHearts();
+
+            foreach (GameObject p in m_Instance.m_Players) { p.GetComponent<Player>().updateModel(); }
 
             Destroy(gameObject);
         }
