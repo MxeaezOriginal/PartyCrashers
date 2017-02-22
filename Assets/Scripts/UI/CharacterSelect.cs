@@ -45,11 +45,15 @@ public class CharacterSelect : MonoBehaviour
     [System.Serializable]
     public struct Character
     {
-        public Sprite[] characters;
-        public Image characterSelectIcon;
+        public Texture[] characterTexture;
+        public RawImage characterSelectIcon;
+        public Text characterName;
+        public Text characterNameOutline;
         public int index;
         public float cooldownCounter;
     }
+    public Texture emptyTexture;
+
     //[HideInInspector]
     public PlayerOne firstPlayer;
     //[HideInInspector]
@@ -90,10 +94,20 @@ public class CharacterSelect : MonoBehaviour
     void Awake()
     {
         menuManager = GetComponent<MenuManager>();
-        P1.characterSelectIcon = GameObject.Find("P1_CharacterSelectIcon/Image").GetComponent<Image>();
-        P2.characterSelectIcon = GameObject.Find("P2_CharacterSelectIcon/Image").GetComponent<Image>();
-        P3.characterSelectIcon = GameObject.Find("P3_CharacterSelectIcon/Image").GetComponent<Image>();
-        P4.characterSelectIcon = GameObject.Find("P4_CharacterSelectIcon/Image").GetComponent<Image>();
+        P1.characterSelectIcon = GameObject.Find("P1_CharacterSelectIcon/Image").GetComponent<RawImage>();
+        P2.characterSelectIcon = GameObject.Find("P2_CharacterSelectIcon/Image").GetComponent<RawImage>();
+        P3.characterSelectIcon = GameObject.Find("P3_CharacterSelectIcon/Image").GetComponent<RawImage>();
+        P4.characterSelectIcon = GameObject.Find("P4_CharacterSelectIcon/Image").GetComponent<RawImage>();
+
+        P1.characterName = GameObject.Find("P1/Character Name").GetComponent<Text>();
+        P2.characterName = GameObject.Find("P2/Character Name").GetComponent<Text>();
+        P3.characterName = GameObject.Find("P3/Character Name").GetComponent<Text>();
+        P4.characterName = GameObject.Find("P4/Character Name").GetComponent<Text>();
+
+        P1.characterNameOutline = GameObject.Find("P1/Character Name/Text Outline").GetComponent<Text>();
+        P2.characterNameOutline = GameObject.Find("P2/Character Name/Text Outline").GetComponent<Text>();
+        P3.characterNameOutline = GameObject.Find("P3/Character Name/Text Outline").GetComponent<Text>();
+        P4.characterNameOutline = GameObject.Find("P4/Character Name/Text Outline").GetComponent<Text>();
 
         P1.cooldownCounter = -1; P2.cooldownCounter = -1; P3.cooldownCounter = -1; P4.cooldownCounter = -1;
         //canLockIn = true;
@@ -119,11 +133,11 @@ public class CharacterSelect : MonoBehaviour
         {
             lockInText.GetComponent<Text>().text = "'A'/ENTER START";
             lockInTextOutline.GetComponent<Text>().text = "'A'/ENTER START";
-			if (Input.GetButtonDown ("Jump_" + GameManager.m_Instance.m_Player1.m_Controller))
-			{
+            if (Input.GetButtonDown("Jump_" + GameManager.m_Instance.m_Player1.m_Controller))
+            {
                 AssignCharacteModels();
-                SceneManager.LoadScene (GameManager.m_Instance.m_LevelToStart);
-			}
+                SceneManager.LoadScene(GameManager.m_Instance.m_LevelToStart);
+            }
         }
         else
         {
@@ -624,10 +638,10 @@ public class CharacterSelect : MonoBehaviour
                     }
 
                     //Set characterSelectIcon to default\
-                    P1.characterSelectIcon.sprite = null;
-                    P2.characterSelectIcon.sprite = null;
-                    P3.characterSelectIcon.sprite = null;
-                    P4.characterSelectIcon.sprite = null;
+                    P1.characterSelectIcon.texture = null;
+                    P2.characterSelectIcon.texture = null;
+                    P3.characterSelectIcon.texture = null;
+                    P4.characterSelectIcon.texture = null;
 
 
                     secondPlayer = PlayerTwo.nullType;
@@ -703,10 +717,10 @@ public class CharacterSelect : MonoBehaviour
                     }
 
                     //Set characterSelectIcon to default\
-                    P1.characterSelectIcon.sprite = null;
-                    P2.characterSelectIcon.sprite = null;
-                    P3.characterSelectIcon.sprite = null;
-                    P4.characterSelectIcon.sprite = null;
+                    P1.characterSelectIcon.texture = null;
+                    P2.characterSelectIcon.texture = null;
+                    P3.characterSelectIcon.texture = null;
+                    P4.characterSelectIcon.texture = null;
 
 
                     secondPlayer = PlayerTwo.nullType;
@@ -872,102 +886,214 @@ public class CharacterSelect : MonoBehaviour
 
     void P1Selection()
     {
-        if (menuManager.canvases[2].activeSelf && !P1Locked && firstPlayer != PlayerOne.nullType)
+        if (firstPlayer != PlayerOne.nullType)
         {
-            P1.characterSelectIcon.sprite = P1.characters[P1.index];
-            if (Input.GetAxisRaw("Horizontal_" + GameManager.m_Instance.m_Player1.m_Controller) < 0)    //Scroll Left
+            if (menuManager.canvases[2].activeSelf && !P1Locked)
             {
-                if (P1.cooldownCounter < Time.time - cooldown || P1.cooldownCounter == -1)
+                P1.characterSelectIcon.texture = P1.characterTexture[P1.index];
+                if (Input.GetAxisRaw("Horizontal_" + GameManager.m_Instance.m_Player1.m_Controller) < 0)    //Scroll Left
                 {
-                    P1.index--;
+                    if (P1.cooldownCounter < Time.time - cooldown || P1.cooldownCounter == -1)
+                    {
+                        P1.index--;
 
-                    P1.cooldownCounter = Time.time;
+                        P1.cooldownCounter = Time.time;
+                    }
+                }
+                if (Input.GetAxisRaw("Horizontal_" + GameManager.m_Instance.m_Player1.m_Controller) > 0)     //Scroll Right
+                {
+                    if (P1.cooldownCounter < Time.time - cooldown || P1.cooldownCounter == -1)
+                    {
+                        P1.index++;
+
+                        P1.cooldownCounter = Time.time;
+                    }
                 }
             }
-            if (Input.GetAxisRaw("Horizontal_" + GameManager.m_Instance.m_Player1.m_Controller) > 0)     //Scroll Right
+            switch (P1.index)
             {
-                if (P1.cooldownCounter < Time.time - cooldown || P1.cooldownCounter == -1)
-                {
-                    P1.index++;
-
-                    P1.cooldownCounter = Time.time;
-                }
+                case 0:
+                    P1.characterName.text = "Mascot";
+                    P1.characterNameOutline.text = "Mascot";
+                    break;
+                case 1:
+                    P1.characterName.text = "Nerd";
+                    P1.characterNameOutline.text = "Nerd";
+                    break;
+                case 2:
+                    P1.characterName.text = "Bad Boy";
+                    P1.characterNameOutline.text = "Bad Boy";
+                    break;
+                case 3:
+                    P1.characterName.text = "Goth";
+                    P1.characterNameOutline.text = "Goth";
+                    break;
             }
+        }
+        else
+        {
+            P1.characterSelectIcon.texture = emptyTexture;
+            P1.characterName.text = "";
+            P1.characterNameOutline.text = "";
         }
     }
     void P2Selection()
     {
-        P2.characterSelectIcon.sprite = P2.characters[P2.index];
-        if (menuManager.canvases[2].activeSelf && !P2Locked && secondPlayer != PlayerTwo.nullType)
+        if (secondPlayer != PlayerTwo.nullType)
         {
-            if (Input.GetAxisRaw("Horizontal_" + GameManager.m_Instance.m_Player2.m_Controller) < 0)
+            P2.characterSelectIcon.texture = P2.characterTexture[P2.index];
+            if (menuManager.canvases[2].activeSelf && !P2Locked)
             {
-                if (P2.cooldownCounter < Time.time - cooldown || P2.cooldownCounter == -1)
+                if (Input.GetAxisRaw("Horizontal_" + GameManager.m_Instance.m_Player2.m_Controller) < 0)
                 {
-                    P2.index--;
+                    if (P2.cooldownCounter < Time.time - cooldown || P2.cooldownCounter == -1)
+                    {
+                        P2.index--;
 
-                    P2.cooldownCounter = Time.time;
+                        P2.cooldownCounter = Time.time;
+                    }
+                }
+                if (Input.GetAxisRaw("Horizontal_" + GameManager.m_Instance.m_Player2.m_Controller) > 0)
+                {
+                    if (P2.cooldownCounter < Time.time - cooldown || P2.cooldownCounter == -1)
+                    {
+                        P2.index++;
+
+                        P2.cooldownCounter = Time.time;
+                    }
                 }
             }
-            if (Input.GetAxisRaw("Horizontal_" + GameManager.m_Instance.m_Player2.m_Controller) > 0)
+            switch (P2.index)
             {
-                if (P2.cooldownCounter < Time.time - cooldown || P2.cooldownCounter == -1)
-                {
-                    P2.index++;
-
-                    P2.cooldownCounter = Time.time;
-                }
+                case 0:
+                    P2.characterName.text = "Mascot";
+                    P2.characterNameOutline.text = "Mascot";
+                    break;
+                case 1:
+                    P2.characterName.text = "Nerd";
+                    P2.characterNameOutline.text = "Nerd";
+                    break;
+                case 2:
+                    P2.characterName.text = "Bad Boy";
+                    P2.characterNameOutline.text = "Bad Boy";
+                    break;
+                case 3:
+                    P2.characterName.text = "Goth";
+                    P2.characterNameOutline.text = "Goth";
+                    break;
             }
+        }
+        else
+        { 
+            P2.characterSelectIcon.texture = emptyTexture;
+            P2.characterName.text = "";
+            P2.characterNameOutline.text = "";
         }
     }
     void P3Selection()
     {
-        P3.characterSelectIcon.sprite = P3.characters[P3.index];
-        if (menuManager.canvases[2].activeSelf && !P3Locked && thirdPlayer != PlayerThree.nullType)
+        if (thirdPlayer != PlayerThree.nullType)
         {
-            if (Input.GetAxisRaw("Horizontal_" + GameManager.m_Instance.m_Player3.m_Controller) < 0)
+            P3.characterSelectIcon.texture = P3.characterTexture[P3.index];
+            if (menuManager.canvases[2].activeSelf && !P3Locked)
             {
-                if (P3.cooldownCounter < Time.time - cooldown || P3.cooldownCounter == -1)
+                if (Input.GetAxisRaw("Horizontal_" + GameManager.m_Instance.m_Player3.m_Controller) < 0)
                 {
-                    P3.index--;
+                    if (P3.cooldownCounter < Time.time - cooldown || P3.cooldownCounter == -1)
+                    {
+                        P3.index--;
 
-                    P3.cooldownCounter = Time.time;
+                        P3.cooldownCounter = Time.time;
+                    }
+                }
+                if (Input.GetAxisRaw("Horizontal_" + GameManager.m_Instance.m_Player3.m_Controller) > 0)
+                {
+                    if (P3.cooldownCounter < Time.time - cooldown || P3.cooldownCounter == -1)
+                    {
+                        P3.index++;
+
+                        P3.cooldownCounter = Time.time;
+                    }
                 }
             }
-            if (Input.GetAxisRaw("Horizontal_" + GameManager.m_Instance.m_Player3.m_Controller) > 0)
+            switch (P3.index)
             {
-                if (P3.cooldownCounter < Time.time - cooldown || P3.cooldownCounter == -1)
-                {
-                    P3.index++;
-
-                    P3.cooldownCounter = Time.time;
-                }
+                case 0:
+                    P3.characterName.text = "Mascot";
+                    P3.characterNameOutline.text = "Mascot";
+                    break;
+                case 1:
+                    P3.characterName.text = "Nerd";
+                    P3.characterNameOutline.text = "Nerd";
+                    break;
+                case 2:
+                    P3.characterName.text = "Bad Boy";
+                    P3.characterNameOutline.text = "Bad Boy";
+                    break;
+                case 3:
+                    P3.characterName.text = "Goth";
+                    P3.characterNameOutline.text = "Goth";
+                    break;
             }
+        }
+        else
+        { 
+            P3.characterSelectIcon.texture = emptyTexture;
+            P3.characterName.text = "";
+            P3.characterNameOutline.text = "";
         }
     }
     void P4Selection()
     {
-        P4.characterSelectIcon.sprite = P4.characters[P4.index];
-        if (menuManager.canvases[2].activeSelf && !P4Locked && fourthPlayer != PlayerFour.nullType)
+        if (fourthPlayer != PlayerFour.nullType)
         {
-            if (Input.GetAxisRaw("Horizontal_" + GameManager.m_Instance.m_Player4.m_Controller) < 0)
+            P4.characterSelectIcon.texture = P4.characterTexture[P4.index];
+            if (menuManager.canvases[2].activeSelf && !P4Locked)
             {
-                if (P4.cooldownCounter < Time.time - cooldown || P4.cooldownCounter == -1)
+                if (Input.GetAxisRaw("Horizontal_" + GameManager.m_Instance.m_Player4.m_Controller) < 0)
                 {
-                    P4.index--;
+                    if (P4.cooldownCounter < Time.time - cooldown || P4.cooldownCounter == -1)
+                    {
+                        P4.index--;
 
-                    P4.cooldownCounter = Time.time;
+                        P4.cooldownCounter = Time.time;
+                    }
+                }
+                if (Input.GetAxisRaw("Horizontal_" + GameManager.m_Instance.m_Player4.m_Controller) > 0)
+                {
+                    if (P4.cooldownCounter < Time.time - cooldown || P4.cooldownCounter == -1)
+                    {
+                        P4.index++;
+
+                        P4.cooldownCounter = Time.time;
+                    }
                 }
             }
-            if (Input.GetAxisRaw("Horizontal_" + GameManager.m_Instance.m_Player4.m_Controller) > 0)
+            switch (P4.index)
             {
-                if (P4.cooldownCounter < Time.time - cooldown || P4.cooldownCounter == -1)
-                {
-                    P4.index++;
-
-                    P4.cooldownCounter = Time.time;
-                }
+                case 0:
+                    P4.characterName.text = "Mascot";
+                    P4.characterNameOutline.text = "Mascot";
+                    break;
+                case 1:
+                    P4.characterName.text = "Nerd";
+                    P4.characterNameOutline.text = "Nerd";
+                    break;
+                case 2:
+                    P4.characterName.text = "Bad Boy";
+                    P4.characterNameOutline.text = "Bad Boy";
+                    break;
+                case 3:
+                    P4.characterName.text = "Goth";
+                    P4.characterNameOutline.text = "Goth";
+                    break;
             }
+        }
+        else
+        { 
+            P4.characterSelectIcon.texture = emptyTexture;
+            P4.characterName.text = "";
+            P4.characterNameOutline.text = "";
         }
     }
     void SelectCharacter()

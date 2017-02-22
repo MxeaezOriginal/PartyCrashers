@@ -369,9 +369,9 @@ public class MenuManager : MonoBehaviour
         }
 
         //Set characterSelectIcon to default\
-        characterSelect.P1.characterSelectIcon.sprite = null;
-        characterSelect.P2.characterSelectIcon.sprite = null;
-        characterSelect.P3.characterSelectIcon.sprite = null;
-        characterSelect.P4.characterSelectIcon.sprite = null;
+        characterSelect.P1.characterSelectIcon.texture = null;
+        characterSelect.P2.characterSelectIcon.texture = null;
+        characterSelect.P3.characterSelectIcon.texture = null;
+        characterSelect.P4.characterSelectIcon.texture = null;
     }
 }
