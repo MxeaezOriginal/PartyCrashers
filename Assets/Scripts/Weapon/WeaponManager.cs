@@ -14,9 +14,10 @@ public class WeaponManager : MonoBehaviour
         Length
     }
 
+    [HideInInspector]
     public GameObject m_CurrentWeaponObject;
     public Weapon m_CurrentWeapon = Weapon.GlowSword;
-    public string m_PickupConcactinateString = "_Pickup";
+    private string m_PickupConcactinateString = "_PickUp";
     public float m_DelayBetweenSwaps = 1f;
 
     public GameObject[] m_WeaponPrefabs;
@@ -25,7 +26,7 @@ public class WeaponManager : MonoBehaviour
     private GameObject m_WeaponParent;
     private GameObject m_WeaponStandingOn;
     private GameObject m_WeaponStandingOnPickup;
-    public Transform m_WeaponsTransform;
+    private Transform m_WeaponsTransform;
 
     void Start()
     {

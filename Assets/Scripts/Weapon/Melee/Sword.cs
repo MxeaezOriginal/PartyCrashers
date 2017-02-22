@@ -138,15 +138,15 @@ public class Sword : Melee
         if (m_SecondaryCoolDown <= Time.time - m_Weapon1Cooldown || m_SecondaryCoolDown == 0)
         {
             //SFX Start
-            if (audioSource != null)
-            {
-                randomPitch = Random.RandomRange(maxRandomPitch, minRandomPitch);
-                SFXtoPlay = dashSFX[Random.Range(0, dashSFX.Length)];
-                audioSource.clip = SFXtoPlay;
-                audioSource.pitch = randomPitch;
-                SFXManager.PushMusic(SFXtoPlay);
-                audioSource.Play();
-            }
+            //if (audioSource != null)
+            //{
+            //    randomPitch = Random.RandomRange(maxRandomPitch, minRandomPitch);
+            //    SFXtoPlay = dashSFX[Random.Range(0, dashSFX.Length)];
+            //    audioSource.clip = SFXtoPlay;
+            //    audioSource.pitch = randomPitch;
+            //    SFXManager.PushMusic(SFXtoPlay);
+            //    audioSource.Play();
+            //}
             //SFX END
             attack = true;
             m_CharacterController.Move(m_CharacterController.transform.forward * Time.deltaTime * 50f);
