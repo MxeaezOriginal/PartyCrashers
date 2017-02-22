@@ -63,11 +63,15 @@ public class PlayerController : MonoBehaviour
     //SFX
     public AudioSource audioSource;
     public AudioClip[] jumpSFX;
+    public AudioClip[] landSFX;
     private AudioClip SFXtoPlay;
+    
+
 
     public float maxRandomPitch;
     public float minRandomPitch;
     private float randomPitch;
+    private bool isJumping;
     //SFX End
 
     void Start()
@@ -131,7 +135,17 @@ public class PlayerController : MonoBehaviour
             //Jump
             if (controller.isGrounded)
             {
-
+                //SFX Land
+                if(isJumping)
+                {
+                    randomPitch = Random.RandomRange(maxRandomPitch, minRandomPitch);
+                    SFXtoPlay = landSFX[Random.Range(0, jumpSFX.Length)];
+                    audioSource.clip = SFXtoPlay;
+                    audioSource.pitch = randomPitch;
+                    audioSource.Play();
+                    isJumping = false;
+                }
+                //SFX Land end
                 if (Input.GetButtonDown(m_JumpButton + GetComponent<Player>().getControllerAsString()))
                 {
 					//VFX
@@ -142,6 +156,7 @@ public class PlayerController : MonoBehaviour
 						Destroy (jumpvfx, 0.5f);
 					}
                     //SFX Start
+                    isJumping = true;
                     if (audioSource != null)
                     {
                         randomPitch = Random.RandomRange(maxRandomPitch, minRandomPitch);
