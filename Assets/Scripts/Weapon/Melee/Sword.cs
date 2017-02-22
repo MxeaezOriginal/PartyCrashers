@@ -30,6 +30,9 @@ public class Sword : Melee
     public AudioClip[] dashSFX;
     private AudioClip SFXtoPlay;
 
+    public AudioClip[] slashSFX;
+    private AudioClip slashSFXtoPlay;
+
     public float maxRandomPitch;
     public float minRandomPitch;
     private float randomPitch;
@@ -50,6 +53,16 @@ public class Sword : Melee
             triggerLife -= Time.deltaTime;
             sliceEffect.SetActive(true);
             swordTrigger.SetActive(true);
+            //SFX Start
+            if (audioSource != null && !audioSource.isPlaying)
+            {
+                randomPitch = Random.RandomRange(maxRandomPitch, minRandomPitch);
+                slashSFXtoPlay = slashSFX[Random.Range(0, dashSFX.Length)];
+                audioSource.clip = slashSFXtoPlay;
+                audioSource.pitch = randomPitch;
+                audioSource.Play();
+            }
+            //SFX END
 
             if (effect && numOfParticles <= 0)
             {
