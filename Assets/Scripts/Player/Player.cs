@@ -266,8 +266,8 @@ public class Player : MonoBehaviour
         //{
         var vel = gameObject.GetComponent<PlayerController>().m_Velocity.normalized;
         Vector3 tempLocation = m_Location;
-        tempLocation.x -= vel.x * 15.0f;
-        tempLocation.z -= vel.z * 15.0f;
+        tempLocation.x -= vel.x * 20.0f;
+        tempLocation.z -= vel.z * 20.0f;
 
         m_State = State.Dead;
         m_IsDead = true;
