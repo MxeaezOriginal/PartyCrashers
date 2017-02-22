@@ -57,7 +57,7 @@ public class Sword : Melee
             if (audioSource != null && !audioSource.isPlaying)
             {
                 randomPitch = Random.RandomRange(maxRandomPitch, minRandomPitch);
-                slashSFXtoPlay = slashSFX[Random.Range(0, dashSFX.Length)];
+                slashSFXtoPlay = slashSFX[Random.Range(0, slashSFX.Length)];
                 audioSource.clip = slashSFXtoPlay;
                 audioSource.pitch = randomPitch;
                 audioSource.Play();

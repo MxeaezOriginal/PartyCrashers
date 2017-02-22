@@ -11,7 +11,14 @@ public class FallingTrap : MonoBehaviour {
     private bool mActivated;
     private HeartSystem m_Heart;
     GameObject mTrap;
-    
+    //SFX
+    public AudioSource audioSource;
+    public AudioClip[] FallSFX;
+    public AudioClip[] hitPlayerSFX;
+    private AudioClip SFXtoPlay;
+    //SFX
+    // 
+
     void Start ()
     {
         mTrap = this.gameObject;
@@ -30,8 +37,16 @@ public class FallingTrap : MonoBehaviour {
         {
 
             //Debug.Log("Falling trap Activated.");
+            //SFX
+            if (audioSource != null)
+            {
+                SFXtoPlay = FallSFX[Random.Range(0, FallSFX.Length)];
+                audioSource.clip = SFXtoPlay;
+                audioSource.Play();
+            }
+            //SFX End
 
-            Rigidbody rb = mTrap.GetComponent<Rigidbody>();
+                Rigidbody rb = mTrap.GetComponent<Rigidbody>();
             rb.mass = mMass;
             if(FallingSpeed >= 1000)
             {
@@ -55,6 +70,14 @@ public class FallingTrap : MonoBehaviour {
     {
         if(other.gameObject.GetComponent<Player>() != null)
         {
+            //SFX
+            if (audioSource != null)
+            {
+                SFXtoPlay = hitPlayerSFX[Random.Range(0, hitPlayerSFX.Length)];
+                audioSource.clip = SFXtoPlay;
+                audioSource.Play();
+            }
+            //SFX End
             m_Heart = other.gameObject.GetComponent<HeartSystem>();
             m_Heart.TakeDamage(m_Damage);
             m_Heart.UpdateHearts();
