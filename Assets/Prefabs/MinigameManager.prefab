@@ -26,10 +26,10 @@ GameObject:
   m_Component:
   - 4: {fileID: 422924}
   - 114: {fileID: 11441590}
-  - 114: {fileID: 11494592}
+  - 114: {fileID: 11448920}
+  - 114: {fileID: 11492334}
   - 114: {fileID: 11433430}
   - 114: {fileID: 11497706}
-  - 114: {fileID: 11448920}
   m_Layer: 0
   m_Name: MinigameManager
   m_TagString: Untagged
@@ -93,16 +93,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 030d682d80fdcfe4bbefb076df36c572, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  P1_Bar: {fileID: 0}
-  P2_Bar: {fileID: 0}
-  P3_Bar: {fileID: 0}
-  P4_Bar: {fileID: 0}
-  scorePlace1: 0
-  scorePlace2: 0
-  scorePlace3: 0
-  scorePlace4: 0
-  allScoresList: 
-  allScores: 00000000000000000000000000000000
 --- !u!114 &11441590
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -118,6 +108,10 @@ MonoBehaviour:
   m_P2Place: 0
   m_P3Place: 0
   m_P4Place: 0
+  m_ScorePlace1: 0
+  m_ScorePlace2: 0
+  m_ScorePlace3: 0
+  m_ScorePlace4: 0
   m_MinigameCanvas: {fileID: 0}
   m_RewardSelectionCanvas: {fileID: 0}
   m_BossPromptCanvas: {fileID: 0}
@@ -125,6 +119,7 @@ MonoBehaviour:
   m_SecondFadingCanvas: {fileID: 0}
   m_DelayToFadeIn: 1
   m_DelayToShowResultBar: 2
+  m_DelayToShowRewards: 5
   m_FadeTime: 2
 --- !u!114 &11448920
 MonoBehaviour:
@@ -157,7 +152,7 @@ MonoBehaviour:
   m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
   m_DragThreshold: 5
---- !u!114 &11494592
+--- !u!114 &11492334
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -165,18 +160,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 162580}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 386e7144fd0b1a847a1cdb7238fbfafa, type: 3}
+  m_Script: {fileID: 11500000, guid: c915a589b1e615b428d498f05cfd8e65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  miniGameCanvas: {fileID: 0}
-  firstFadingCanvas: {fileID: 0}
-  secondFadingCanvas: {fileID: 0}
-  startCounter:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  minigameTimer: 0
 --- !u!114 &11497706
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -188,23 +174,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9d4366df4f17b0448329141e463d786, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rewardCanvas: {fileID: 0}
-  bossPromptCanvas: {fileID: 0}
-  rewardButtons:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  bossPromptButtons:
-  - {fileID: 0}
-  - {fileID: 0}
-  rewardTitle: {fileID: 0}
-  rewardTilePlayerNumber: {fileID: 0}
+  m_RewardTitle: {fileID: 0}
+  m_RewardTilePlayerNumber: {fileID: 0}
   firstButtonPressed: 0
   secondButtonPressed: 0
   thirdButtonPressed: 0
   fourthButtonPressed: 0
-  rewardsSelected: 0
+  m_RewardsSelected: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

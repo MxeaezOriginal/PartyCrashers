@@ -14,6 +14,8 @@ public class MinigameManager : MonoBehaviour
     public enum EMinigameState { PreGameCountdown, ScoreAndTimeTrack, ResultSummary, RewardSelection };
     [HideInInspector]
     public int m_P1Place, m_P2Place, m_P3Place, m_P4Place;
+    [HideInInspector]
+    public int m_ScorePlace1, m_ScorePlace2, m_ScorePlace3, m_ScorePlace4;
 
     // Member variables
     private EMinigameState m_CurrentState;
@@ -27,6 +29,7 @@ public class MinigameManager : MonoBehaviour
 
     public float        m_DelayToFadeIn;
     public float        m_DelayToShowResultBar;
+    public float        m_DelayToShowRewards;
     public float        m_FadeTime;
 
     private void Start()
@@ -37,6 +40,10 @@ public class MinigameManager : MonoBehaviour
         m_P2Place = 0;
         m_P3Place = 0;
         m_P4Place = 0;
+        m_ScorePlace1 = 0;
+        m_ScorePlace2 = 0;
+        m_ScorePlace3 = 0;
+        m_ScorePlace4 = 0;
         m_RewardSelectionCanvas.gameObject.SetActive(false);
         m_BossPromptCanvas.gameObject.SetActive(false);
     }
