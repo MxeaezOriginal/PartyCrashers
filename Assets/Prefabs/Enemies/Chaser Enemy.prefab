@@ -34,6 +34,7 @@ GameObject:
   - 114: {fileID: 11406454}
   - 114: {fileID: 11450094}
   - 82: {fileID: 8275512}
+  - 114: {fileID: 11428096}
   m_Layer: 0
   m_Name: Chaser Enemy
   m_TagString: MeleeEnemy
@@ -86,6 +87,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: -0.582}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 492622}
   m_RootOrder: 0
@@ -98,6 +100,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0.7071051, z: 0, w: 0.7071085}
   m_LocalPosition: {x: -99.45, y: 1.0083779, z: -78.323044}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 89.999695, z: 0}
   m_Children:
   - {fileID: 431270}
   - {fileID: 22483400}
@@ -268,6 +271,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isStun: 0
   isKB: 0
+--- !u!114 &11428096
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 128216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d818104cc8a433142ba55ecd61ade953, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AudioManager: {fileID: 0}
+  m_DelayTime: 0.5
 --- !u!114 &11450094
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -591,6 +607,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0.0000018338349, z: 0, w: -1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.0088245, y: 0.06479796, z: 1.0088246}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 22487200}
   m_Father: {fileID: 492622}
@@ -609,6 +626,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.9469062, y: 1.6788018, z: 1.8478999}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 22483400}
   m_RootOrder: 0

@@ -421,12 +421,18 @@ MonoBehaviour:
   m_SecondarySounds: []
   m_SoundsOnHit: []
   swordTrigger: {fileID: 0}
+  sliceEffect: {fileID: 0}
   dashDistance: 25
   dashDelay: 0.1
   smooth: 20
   triggerLife: 0.5
-  attack: 0
   effect: {fileID: 0}
+  DashVFX: {fileID: 0}
+  audioSource: {fileID: 0}
+  dashSFX: []
+  slashSFX: []
+  maxRandomPitch: 0
+  minRandomPitch: 0
 --- !u!114 &11442208
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -447,12 +453,23 @@ MonoBehaviour:
   m_SoundsOnHit: []
   m_RightTriggerProjectile: {fileID: 0}
   m_LeftTriggerProjectile: {fileID: 0}
+  m_ProjectileSpeed02: 0
   m_FirePoint:
   - {fileID: 139498}
   - {fileID: 133624}
   - {fileID: 172210}
   - {fileID: 107784}
   - {fileID: 149362}
+  SFXManager: {fileID: 0}
+  SFXPlayer: {fileID: 0}
+  SFXlowcharge: []
+  SFXmedcharge: []
+  SFXhighcharge: []
+  primaryFlashVFX: {fileID: 0}
+  secondaryflashVFX: {fileID: 0}
+  chargingVFX: {fileID: 0}
+  chargedVFX: {fileID: 0}
+  m_LaserBeamFX: {fileID: 0}
   m_MaxCharge: 0
   m_MedSpeed: 0
   m_MinSpeed: 0
@@ -462,6 +479,8 @@ MonoBehaviour:
   m_LaserDmgMultiplier: 0
   m_LaserTimer: 0
   m_LaserLenght: 0
+  laserWidth: 1
+  m_LaserChargedFX: {fileID: 0}
 --- !u!114 &11458736
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -497,12 +516,20 @@ MonoBehaviour:
   m_Jump: 30
   m_MaxMovementX: 14
   m_MaxMovementZ: 18
+  m_MaxY: 5
   m_JumpButton: Jump_
   m_HorizontalButton: JoystickLeftX_
   m_VerticalButton: JoystickLeftY_
   m_HorizontalRotationButton: JoystickRightY_
   m_VerticalRotationButton: JoystickRightX_
   m_Velocity: {x: 0, y: 0, z: 0}
+  jumpEffect: {fileID: 0}
+  SFXManager: {fileID: 0}
+  audioSource: {fileID: 0}
+  jumpSFX: []
+  landSFX: []
+  maxRandomPitch: 0
+  minRandomPitch: 0
 --- !u!114 &11477312
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -526,7 +553,10 @@ MonoBehaviour:
   m_Gold: 0
   m_Score: 0
   m_CantAttack: 0
+  m_CanPickUp: 0
+  m_IsDead: 0
   m_State: 0
+  m_RespawnTime: 0
   m_CheckLocationCooldown: 0
   m_Location: {x: 0, y: 0, z: 0}
   m_Animator: {fileID: 0}
@@ -539,14 +569,19 @@ MonoBehaviour:
   m_Pause: Pause_
   delay: 2
   dotdelay: 2
+  damageDelay: 2
   m_Controller: 4
+  interactImage: {fileID: 0}
+  pickUpWeaponEffect: {fileID: 0}
+  SFXPlayer: {fileID: 0}
+  pickupSFX: []
   PlayerMarker: {fileID: 0}
-  Player1Color: {r: 1, g: 0, b: 0, a: 1}
-  Player2Color: {r: 0, g: 0, b: 1, a: 1}
-  Player3Color: {r: 0, g: 1, b: 0, a: 1}
-  Player4Color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  PlayerCurrentColor: {r: 0, g: 0, b: 0, a: 0}
-  PlayerDamageIndacator: {r: 1, g: 1, b: 1, a: 1}
+  playerOneColor: {r: 1, g: 0, b: 0, a: 1}
+  playerTwoColor: {r: 0, g: 0, b: 1, a: 1}
+  playerThreeColor: {r: 0, g: 1, b: 0, a: 1}
+  playerFourColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  playerCurrentColor: {r: 0, g: 0, b: 0, a: 0}
+  playerDamageIndacator: {r: 1, g: 1, b: 1, a: 1}
   FlashCheck: 1
 --- !u!114 &11478534
 MonoBehaviour:

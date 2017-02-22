@@ -26,16 +26,17 @@ public class AudioManager : MonoBehaviour {
             {
                 if (m_RandomMusicList.Count <= 1 && m_RandomMusicList.Count > 0)
                 {
-                    Debug.Log("fIRST");
+                    Debug.Log("FIRST");
                     m_CurMusic = m_RandomMusicList[0];
                     m_AudioManager.clip = m_CurMusic;
                     m_AudioManager.pitch = m_pitch;
                     m_AudioManager.Play();
-                    ResetMusicList();
+                    //ResetMusicList();
                 }
 
                 if (m_RandomMusicList.Count > 1)
                 {
+                    Debug.Log("Second");
                     playRandomMusic();
                 }
             }

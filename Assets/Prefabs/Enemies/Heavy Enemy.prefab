@@ -85,6 +85,7 @@ GameObject:
   - 114: {fileID: 11496950}
   - 114: {fileID: 11422394}
   - 114: {fileID: 11408922}
+  - 114: {fileID: 11487718}
   m_Layer: 0
   m_Name: Heavy Enemy
   m_TagString: HeavyEnemy
@@ -101,6 +102,7 @@ Transform:
   m_LocalRotation: {x: 0, y: -0.7071077, z: 0, w: 0.7071059}
   m_LocalPosition: {x: 0.07600009, y: -0.064463675, z: 0.048996173}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 452322}
   m_RootOrder: 2
@@ -113,6 +115,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0.7071077, z: 0, w: 0.7071059}
   m_LocalPosition: {x: -70.57, y: 1.0144637, z: 41.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 90.0001, z: 0}
   m_Children:
   - {fileID: 486448}
   - {fileID: 22414270}
@@ -128,6 +131,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: -0.553}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 452322}
   m_RootOrder: 0
@@ -357,6 +361,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 0}
+--- !u!114 &11487718
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 193810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d818104cc8a433142ba55ecd61ade953, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AudioManager: {fileID: 0}
+  m_DelayTime: 0.5
 --- !u!114 &11488942
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -509,6 +526,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0.0000018338349, z: 0, w: -1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.0088245, y: 0.06479796, z: 1.0088246}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 22465686}
   m_Father: {fileID: 452322}
@@ -527,6 +545,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.9469062, y: 1.6788018, z: 1.8478999}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 22414270}
   m_RootOrder: 0
