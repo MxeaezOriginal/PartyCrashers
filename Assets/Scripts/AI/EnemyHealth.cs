@@ -4,6 +4,7 @@ using System.Collections;
 public class EnemyHealth : MonoBehaviour
 {
     //sound
+    private AudioManager SFXManager;
     public GameObject SFXPlayer;
     public GameObject SFXHit;
     public AudioClip[] hurtSFX;
@@ -23,6 +24,11 @@ public class EnemyHealth : MonoBehaviour
     //[HideInInspector]
     public bool isInvincible = false;
     private bool isDamage = false;
+
+    void Start()
+    {
+        SFXManager = GetComponent<AudioManager>();
+    }
 
     void Update()
     {
@@ -76,10 +82,12 @@ public class EnemyHealth : MonoBehaviour
             if (m_EnemyHealth > 0)
             {
                 SFXtoPlay = hurtSFX[Random.Range(0, hurtSFX.Length)];
+                SFXManager.PushMusic(SFXtoPlay);
             }
             else
             {
                 SFXtoPlay = deathSFX[Random.Range(0, deathSFX.Length)];
+                SFXManager.PushMusic(SFXtoPlay);
             }
 
             if (SFXPlayer != null)
@@ -87,6 +95,7 @@ public class EnemyHealth : MonoBehaviour
                 AudioSource source = SFXPlayer.GetComponent<AudioSource>();
                 source.pitch = randomPitch;
                 source.clip = SFXtoPlay;
+                SFXManager.PushMusic(SFXtoPlay);
             }
 
             GameObject SFXtest = Instantiate(SFXPlayer, transform.position, transform.rotation) as GameObject;

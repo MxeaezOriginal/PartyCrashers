@@ -33,6 +33,7 @@ public class ShooterEnemy : EnemyAI //Inherits from EnemyAI instead of Monobehav
     EnemyEffect enemyEffect;
 
     //SFX
+    AudioManager SFXManager;
     public AudioSource audioSource;
     public AudioClip[] SFX;
     private AudioClip SFXtoPlay;
@@ -44,6 +45,7 @@ public class ShooterEnemy : EnemyAI //Inherits from EnemyAI instead of Monobehav
 
     void Start()
     {
+        SFXManager = GetComponent<AudioManager>();
         initializeVariables();
         enemyEffect = gameObject.GetComponent<EnemyEffect>();
     }
@@ -107,7 +109,10 @@ public class ShooterEnemy : EnemyAI //Inherits from EnemyAI instead of Monobehav
                 SFXtoPlay = SFX[Random.Range(0, SFX.Length)];
                 audioSource.clip = SFXtoPlay;
                 audioSource.pitch = randomPitch;
-                audioSource.Play();
+                SFXManager.PushMusic(SFXtoPlay);
+                //audioSource.Play();
+
+                
             }
             //SFX END
             Destroy(bullet.gameObject, 1.0f);

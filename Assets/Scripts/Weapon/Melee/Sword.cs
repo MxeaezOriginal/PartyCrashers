@@ -26,6 +26,7 @@ public class Sword : Melee
     Player m_Player;
 
     //SFX
+    private AudioManager SFXManager;
     public AudioSource audioSource;
     public AudioClip[] dashSFX;
     private AudioClip SFXtoPlay;
@@ -40,6 +41,7 @@ public class Sword : Melee
 
     void Start()
     {
+        SFXManager = GetComponent<AudioManager>();
         m_CharacterController = GetComponentInParent<CharacterController>();
         m_Player = GetComponentInParent<Player>();
         sliceEffect.SetActive(false);
@@ -142,6 +144,7 @@ public class Sword : Melee
                 SFXtoPlay = dashSFX[Random.Range(0, dashSFX.Length)];
                 audioSource.clip = SFXtoPlay;
                 audioSource.pitch = randomPitch;
+                SFXManager.PushMusic(SFXtoPlay);
                 audioSource.Play();
             }
             //SFX END

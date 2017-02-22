@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Bow : Ranged
 {
     //sound
+    public AudioManager SFXManager;
     public GameObject SFXPlayer;
     public AudioClip[] SFXlowcharge;
     public AudioClip[] SFXmedcharge;
@@ -64,7 +65,7 @@ public class Bow : Ranged
 		//VFX end
         laser = transform.FindChild("laser").gameObject;     
         player = GetComponentInParent<Player>();
-
+        SFXManager = GetComponent<AudioManager>();
 
     }
 
