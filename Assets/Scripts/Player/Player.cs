@@ -109,6 +109,11 @@ public class Player : MonoBehaviour
     //VFX
     public GameObject pickUpWeaponEffect;
     //VFX
+    //SFX
+    public GameObject SFXPlayer;
+    public AudioClip[] pickupSFX;
+    private AudioClip SFXtoPlay;
+    //SFX END
 
 
     //Set up color --------------------------------------------------------------------------------------------------------------------------------------------------
@@ -203,6 +208,16 @@ public class Player : MonoBehaviour
                         Destroy(getWeapon, 0.5f);
                     }
                     //VFX end
+                    //SFX
+                    if (SFXPlayer != null)
+                    {
+                        AudioSource source = SFXPlayer.GetComponent<AudioSource>();
+                        SFXtoPlay = pickupSFX[Random.Range(0, pickupSFX.Length)];
+                        source.clip = SFXtoPlay;
+                    }
+
+                    GameObject SFXtest = Instantiate(SFXPlayer, transform.position, transform.rotation) as GameObject;
+                    //SFX End
                 }
                 m_InteractWaitTime = 1f;
             }
