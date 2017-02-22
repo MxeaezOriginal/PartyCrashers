@@ -8,56 +8,41 @@ public class MinigameResultSummary : MonoBehaviour
 {
     private MinigameManager m_MinigameManager;
 
+    private Image m_P1Bar, m_P2Bar, m_P3Bar, m_P4Bar;
+    private float m_Speed = 2.0f;
+    private int m_MaxScore = 7000;
 
-    public Image P1_Bar, P2_Bar, P3_Bar, P4_Bar;
-    float speed = 2f;
-    int maxScore = 7000;
-
-    private bool m_isScoreSorted;
-    private bool m_isBarRaised;
-
-    //Tracks and playersScores P1-4 scores in order (playersScore1 - highest)
-    public int scorePlace1, scorePlace2, scorePlace3, scorePlace4;
-
-    //List & Array for sorting players'score
-    public List<int> allScoresList = new List<int>();
-    public int[] allScores = new int[4];
+    private bool m_IsScoreSorted;
 
     //Delays between Raising Result Bars
-    float delay = 3.5f;
-    float firstDelay;
-    float secondDelay;
-    float ThirdDelay;
+    private float m_FirstDelay;
+    private float m_SecondDelay;
+    private float m_ThirdDelay;
 
-    //TEMP.!!! WILL BE RENAMED/REMOVED//
-    bool test = true;
-    bool test2 = true;
-    bool test3 = true;
-    bool test4 = true;
-    float delay4 = 5f;
-    //    public int P1_Score, P2_Score, P3_Score, P4_Score;      //TEMP.! REPLACE WITH PLAYERS' ACTUAL SCORE//
-    //
+    //List & Array for sorting players'score
+    private List<int>    m_AllScoresList = new List<int>();
+    private int[]        m_AllScores     = new int[4];
+
+    // Methods
 
     private float ResultBarAmount(float score, float scoreMin, float scoreMax, float scoreMinFillAmount, float scoreMaxFillAmount)
     {
         return (score - scoreMin) * (scoreMaxFillAmount - scoreMinFillAmount) / (scoreMax - scoreMin) + scoreMinFillAmount;
-
     }
 
     void Awake()
     {
-        m_MinigameManager = GetComponent<MinigameManager>();
-        m_isScoreSorted = false;
-        m_isBarRaised = false;
+        m_MinigameManager   = GetComponent<MinigameManager>();
+        m_IsScoreSorted     = false;
 
-        P1_Bar = GameObject.Find("P1_Panel/Result Bar/Content").GetComponent<Image>();
-        P2_Bar = GameObject.Find("P2_Panel/Result Bar/Content").GetComponent<Image>();
-        P3_Bar = GameObject.Find("P3_Panel/Result Bar/Content").GetComponent<Image>();
-        P4_Bar = GameObject.Find("P4_Panel/Result Bar/Content").GetComponent<Image>();
+        m_P1Bar = GameObject.Find("P1_Panel/Result Bar/Content").GetComponent<Image>();
+        m_P2Bar = GameObject.Find("P2_Panel/Result Bar/Content").GetComponent<Image>();
+        m_P3Bar = GameObject.Find("P3_Panel/Result Bar/Content").GetComponent<Image>();
+        m_P4Bar = GameObject.Find("P4_Panel/Result Bar/Content").GetComponent<Image>();
 
-        firstDelay = delay;
-        secondDelay = firstDelay + delay;
-        ThirdDelay = secondDelay + delay;
+        m_FirstDelay  = 3.5f;
+        m_SecondDelay = 2.0f * m_FirstDelay;
+        m_ThirdDelay  = 3.0f * m_FirstDelay;
     }
 
     void Update()
@@ -67,68 +52,55 @@ public class MinigameResultSummary : MonoBehaviour
             foreach (GameObject player in GameManager.m_Instance.m_Players)
             {
                 player.GetComponent<PlayerController>().m_CantMove = true;
-
-                // TEMPORARY!!!
-
-                GoBacktoDungeon();
-                //Animator[] anim = player.GetComponentsInChildren<Animator>();
-
-                //foreach(Animator a in anim)
-                //{
-                //    if(a.name.Equals("Model"))
-                //    {
-                //        a.Play("idle");
-                //    }
-                //}
             }
 
             ShowResultCanvas();
-
             SortingScores();
-        }
-        SetPlayerPlace();
-    }
-
-    void GoBacktoDungeon()
-    {
-        if (    GameManager.m_Instance.m_Tutorial == GameManager.Tutorial.Lobby_01 ||
-                GameManager.m_Instance.m_Tutorial == GameManager.Tutorial.Lobby_02 ||
-                GameManager.m_Instance.m_Tutorial == GameManager.Tutorial.Lobby_03)
-        {
-            //SceneManager.LoadScene(GameManager.m_Instance.m_Tutorial.ToString()); //ballroom blitz
-
-            //Reward time
-            //if (m_MinigameManager.bossNo)
-            //{
-                GameManager.m_Instance.m_GameState = GameManager.GameState.Dungeon;
-                SceneManager.LoadScene(GameManager.m_Instance.m_Tutorial.ToString());
-            //}
-            //else if (miniGameManager.bossYes)
-            //{
-            //    GameManager.m_Instance.m_GameState = GameManager.GameState.Boss;
-            //    SceneManager.LoadScene("BossRoom");
-            //}
-        }
-        else
-        {
-            //if (miniGameManager.bossNo)
-            //{
-                GameManager.m_Instance.m_GameState = GameManager.GameState.Dungeon;
-                SceneManager.LoadScene(Random.Range(8, 10));
-            //}
-            //else if (miniGameManager.bossYes)
-            //{
-            //    GameManager.m_Instance.m_GameState = GameManager.GameState.Boss;
-            //    SceneManager.LoadScene("BossRoom");
-            //}
+            SetPlayerPlace();
         }
     }
+
+    //void GoBacktoDungeon()
+    //{
+    //    if (    GameManager.m_Instance.m_Tutorial == GameManager.Tutorial.Lobby_01 ||
+    //            GameManager.m_Instance.m_Tutorial == GameManager.Tutorial.Lobby_02 ||
+    //            GameManager.m_Instance.m_Tutorial == GameManager.Tutorial.Lobby_03)
+    //    {
+    //        //SceneManager.LoadScene(GameManager.m_Instance.m_Tutorial.ToString()); //ballroom blitz
+
+    //        //Reward time
+    //        //if (m_MinigameManager.bossNo)
+    //        //{
+    //            GameManager.m_Instance.m_GameState = GameManager.GameState.Dungeon;
+    //            SceneManager.LoadScene(GameManager.m_Instance.m_Tutorial.ToString());
+    //        //}
+    //        //else if (miniGameManager.bossYes)
+    //        //{
+    //        //    GameManager.m_Instance.m_GameState = GameManager.GameState.Boss;
+    //        //    SceneManager.LoadScene("BossRoom");
+    //        //}
+    //    }
+    //    else
+    //    {
+    //        //if (miniGameManager.bossNo)
+    //        //{
+    //            GameManager.m_Instance.m_GameState = GameManager.GameState.Dungeon;
+    //            SceneManager.LoadScene(Random.Range(8, 10));
+    //        //}
+    //        //else if (miniGameManager.bossYes)
+    //        //{
+    //        //    GameManager.m_Instance.m_GameState = GameManager.GameState.Boss;
+    //        //    SceneManager.LoadScene("BossRoom");
+    //        //}
+    //    }
+    //}
 
 
     void ShowResultCanvas()
     {
         //Black Background Fading Canvas
         m_MinigameManager.m_DelayToFadeIn -= Time.deltaTime;
+
         if (m_MinigameManager.m_DelayToFadeIn < 0)
         {
             if (m_MinigameManager.m_FirstFadingCanvas.alpha < 0.6)
@@ -137,6 +109,7 @@ public class MinigameResultSummary : MonoBehaviour
             }
 
             m_MinigameManager.m_DelayToShowResultBar -= Time.deltaTime;
+
             if (m_MinigameManager.m_DelayToShowResultBar < 0)
             {
                 //Work-around of canvases hirarchy order
@@ -148,80 +121,75 @@ public class MinigameResultSummary : MonoBehaviour
 
     void SortingScores()
     {
-        if (!m_isScoreSorted)
+        if (!m_IsScoreSorted)
         {
             //Adds all players' scores to an array
             switch (GameManager.m_Instance.m_NumOfPlayers)
             {
-                case 1:
-                    allScores[0] = GameManager.m_Instance.m_Player1.score;
-                    break;
-                case 2:
-                    allScores[0] = GameManager.m_Instance.m_Player1.score;
-                    allScores[1] = GameManager.m_Instance.m_Player2.score;
-                    break;
-                case 3:
-                    allScores[0] = GameManager.m_Instance.m_Player1.score;
-                    allScores[1] = GameManager.m_Instance.m_Player2.score;
-                    allScores[2] = GameManager.m_Instance.m_Player3.score;
-                    break;
                 case 4:
-                    allScores[0] = GameManager.m_Instance.m_Player1.score;
-                    allScores[1] = GameManager.m_Instance.m_Player2.score;
-                    allScores[2] = GameManager.m_Instance.m_Player3.score;
-                    allScores[3] = GameManager.m_Instance.m_Player4.score;
+                    m_AllScores[3] = GameManager.m_Instance.m_Players[3].GetComponent<Player>().m_Score;
+                    goto case 3;
+                case 3:
+                    m_AllScores[2] = GameManager.m_Instance.m_Players[2].GetComponent<Player>().m_Score;
+                    goto case 2;
+                case 2:
+                    m_AllScores[1] = GameManager.m_Instance.m_Players[1].GetComponent<Player>().m_Score;
+                    goto case 1;
+                case 1:
+                    m_AllScores[0] = GameManager.m_Instance.m_Players[0].GetComponent<Player>().m_Score;
                     break;
             }
             //If statements instead of switch [needs to be a step-by-step removal from the list]
             if (GameManager.m_Instance.m_NumOfPlayers >= 1) //Place 1
             {
-                scorePlace1 = allScores.Max();               //Gives Place 1 the highest score from all players
-                allScoresList = allScores.ToList();     //Converts Array to List
-                allScoresList.Remove(allScores.Max());  //Deletes the highest score that was given to Place 1
-                allScores = allScoresList.ToArray();    //Converts List back to Array
+                m_MinigameManager.m_ScorePlace1 = m_AllScores.Max();               //Gives Place 1 the highest score from all players
+                m_AllScoresList = m_AllScores.ToList();     //Converts Array to List
+                m_AllScoresList.Remove(m_AllScores.Max());  //Deletes the highest score that was given to Place 1
+                m_AllScores = m_AllScoresList.ToArray();    //Converts List back to Array
             }
             if (GameManager.m_Instance.m_NumOfPlayers >= 2) //Place 2
             {
-                scorePlace2 = allScores.Max(); allScoresList = allScores.ToList();
-                allScoresList.Remove(allScores.Max()); allScores = allScoresList.ToArray();
+                m_MinigameManager.m_ScorePlace2 = m_AllScores.Max(); m_AllScoresList = m_AllScores.ToList();
+                m_AllScoresList.Remove(m_AllScores.Max()); m_AllScores = m_AllScoresList.ToArray();
             }
             if (GameManager.m_Instance.m_NumOfPlayers >= 3) //Place 3
             {
-                scorePlace3 = allScores.Max(); allScoresList = allScores.ToList();
-                allScoresList.Remove(allScores.Max()); allScores = allScoresList.ToArray();
+                m_MinigameManager.m_ScorePlace3 = m_AllScores.Max(); m_AllScoresList = m_AllScores.ToList();
+                m_AllScoresList.Remove(m_AllScores.Max()); m_AllScores = m_AllScoresList.ToArray();
             }
             if (GameManager.m_Instance.m_NumOfPlayers >= 4) //Place 4
             {
-                scorePlace4 = allScores.Max();
-                allScoresList = allScores.ToList(); allScoresList.Remove(allScores.Max()); allScores = allScoresList.ToArray();
-                //Now both Array and List are empty but scorePlace1, scorePlace2, scorePlace3, scorePlace4 have sorted scores
+                m_MinigameManager.m_ScorePlace4 = m_AllScores.Max();
+                m_AllScoresList = m_AllScores.ToList(); m_AllScoresList.Remove(m_AllScores.Max()); m_AllScores = m_AllScoresList.ToArray();
+                //Now both Array and List are empty but m_ScorePlace1, m_ScorePlace2, m_ScorePlace3, m_ScorePlace4 have sorted scores
             }
-            m_isScoreSorted = true;
+            m_IsScoreSorted = true;
         }
         RaisingResultBar();
+        ScreenFading();
     }
 
     void SetPlayerPlace()
     {
-        if (GameManager.m_Instance.m_Player1.score == scorePlace1) m_MinigameManager.m_P1Place = 1;
-        if (GameManager.m_Instance.m_Player1.score == scorePlace2) m_MinigameManager.m_P1Place = 2;
-        if (GameManager.m_Instance.m_Player1.score == scorePlace3) m_MinigameManager.m_P1Place = 3;
-        if (GameManager.m_Instance.m_Player1.score == scorePlace4) m_MinigameManager.m_P1Place = 4;
+        if (GameManager.m_Instance.m_Player1.score == m_MinigameManager.m_ScorePlace1) m_MinigameManager.m_P1Place = 1;
+        if (GameManager.m_Instance.m_Player1.score == m_MinigameManager.m_ScorePlace2) m_MinigameManager.m_P1Place = 2;
+        if (GameManager.m_Instance.m_Player1.score == m_MinigameManager.m_ScorePlace3) m_MinigameManager.m_P1Place = 3;
+        if (GameManager.m_Instance.m_Player1.score == m_MinigameManager.m_ScorePlace4) m_MinigameManager.m_P1Place = 4;
 
-        if (GameManager.m_Instance.m_Player2.score == scorePlace1) m_MinigameManager.m_P2Place = 1;
-        if (GameManager.m_Instance.m_Player2.score == scorePlace2) m_MinigameManager.m_P2Place = 2;
-        if (GameManager.m_Instance.m_Player2.score == scorePlace3) m_MinigameManager.m_P2Place = 3;
-        if (GameManager.m_Instance.m_Player2.score == scorePlace4) m_MinigameManager.m_P2Place = 4;
+        if (GameManager.m_Instance.m_Player2.score == m_MinigameManager.m_ScorePlace1) m_MinigameManager.m_P2Place = 1;
+        if (GameManager.m_Instance.m_Player2.score == m_MinigameManager.m_ScorePlace2) m_MinigameManager.m_P2Place = 2;
+        if (GameManager.m_Instance.m_Player2.score == m_MinigameManager.m_ScorePlace3) m_MinigameManager.m_P2Place = 3;
+        if (GameManager.m_Instance.m_Player2.score == m_MinigameManager.m_ScorePlace4) m_MinigameManager.m_P2Place = 4;
 
-        if (GameManager.m_Instance.m_Player3.score == scorePlace1) m_MinigameManager.m_P3Place = 1;
-        if (GameManager.m_Instance.m_Player3.score == scorePlace2) m_MinigameManager.m_P3Place = 2;
-        if (GameManager.m_Instance.m_Player3.score == scorePlace3) m_MinigameManager.m_P3Place = 3;
-        if (GameManager.m_Instance.m_Player3.score == scorePlace4) m_MinigameManager.m_P3Place = 4;
+        if (GameManager.m_Instance.m_Player3.score == m_MinigameManager.m_ScorePlace1) m_MinigameManager.m_P3Place = 1;
+        if (GameManager.m_Instance.m_Player3.score == m_MinigameManager.m_ScorePlace2) m_MinigameManager.m_P3Place = 2;
+        if (GameManager.m_Instance.m_Player3.score == m_MinigameManager.m_ScorePlace3) m_MinigameManager.m_P3Place = 3;
+        if (GameManager.m_Instance.m_Player3.score == m_MinigameManager.m_ScorePlace4) m_MinigameManager.m_P3Place = 4;
 
-        if (GameManager.m_Instance.m_Player4.score == scorePlace1) m_MinigameManager.m_P4Place = 1;
-        if (GameManager.m_Instance.m_Player4.score == scorePlace2) m_MinigameManager.m_P4Place = 2;
-        if (GameManager.m_Instance.m_Player4.score == scorePlace3) m_MinigameManager.m_P4Place = 3;
-        if (GameManager.m_Instance.m_Player4.score == scorePlace4) m_MinigameManager.m_P4Place = 4;
+        if (GameManager.m_Instance.m_Player4.score == m_MinigameManager.m_ScorePlace1) m_MinigameManager.m_P4Place = 1;
+        if (GameManager.m_Instance.m_Player4.score == m_MinigameManager.m_ScorePlace2) m_MinigameManager.m_P4Place = 2;
+        if (GameManager.m_Instance.m_Player4.score == m_MinigameManager.m_ScorePlace3) m_MinigameManager.m_P4Place = 3;
+        if (GameManager.m_Instance.m_Player4.score == m_MinigameManager.m_ScorePlace4) m_MinigameManager.m_P4Place = 4;
     }
 
     void RaisingResultBar()
@@ -229,139 +197,102 @@ public class MinigameResultSummary : MonoBehaviour
         switch (GameManager.m_Instance.m_NumOfPlayers)
         {
             case 1:
-                P1_Bar.fillAmount = Mathf.Lerp(P1_Bar.fillAmount, ResultBarAmount(scorePlace1, 0, maxScore, 0, 1), speed * Time.deltaTime);
-                delay4 -= Time.deltaTime;
+                m_P1Bar.fillAmount = Mathf.Lerp(m_P1Bar.fillAmount, ResultBarAmount(m_MinigameManager.m_ScorePlace1, 0, m_MaxScore, 0, 1), m_Speed * Time.deltaTime);
 
-                if (delay4 < 0)
-                    m_isBarRaised = true;
                 break;
-
             case 2:
-                if (test)
-                {
-                    P1_Bar.fillAmount = Mathf.Lerp(P1_Bar.fillAmount, ResultBarAmount(scorePlace2, 0, maxScore, 0, 1), speed * Time.deltaTime);
-                    P2_Bar.fillAmount = Mathf.Lerp(P2_Bar.fillAmount, ResultBarAmount(scorePlace2, 0, maxScore, 0, 1), speed * Time.deltaTime);
-                }
+                m_P1Bar.fillAmount = Mathf.Lerp(m_P1Bar.fillAmount, ResultBarAmount(m_MinigameManager.m_ScorePlace2, 0, m_MaxScore, 0, 1), m_Speed * Time.deltaTime);
+                m_P2Bar.fillAmount = Mathf.Lerp(m_P2Bar.fillAmount, ResultBarAmount(m_MinigameManager.m_ScorePlace2, 0, m_MaxScore, 0, 1), m_Speed * Time.deltaTime);
 
-                firstDelay -= Time.deltaTime;
+                m_FirstDelay -= Time.deltaTime;
 
-                if (firstDelay < 0)
-                {
-                    if (m_MinigameManager.m_P1Place == 1)
-                        P1_Bar.fillAmount = Mathf.Lerp(P1_Bar.fillAmount, ResultBarAmount(scorePlace1, 0, maxScore, 0, 1), speed * Time.deltaTime);
-                    if (m_MinigameManager.m_P2Place == 1)
-                        P2_Bar.fillAmount = Mathf.Lerp(P2_Bar.fillAmount, ResultBarAmount(scorePlace1, 0, maxScore, 0, 1), speed * Time.deltaTime);
-                }
-                delay4 -= Time.deltaTime;
+                if (m_MinigameManager.m_P1Place == 1)
+                    m_P1Bar.fillAmount = Mathf.Lerp(m_P1Bar.fillAmount, ResultBarAmount(m_MinigameManager.m_ScorePlace1, 0, m_MaxScore, 0, 1), m_Speed * Time.deltaTime);
+                else
+                    m_P2Bar.fillAmount = Mathf.Lerp(m_P2Bar.fillAmount, ResultBarAmount(m_MinigameManager.m_ScorePlace1, 0, m_MaxScore, 0, 1), m_Speed * Time.deltaTime);
 
-                if (delay4 < 0)
-                    m_isBarRaised = true;
                 break;
-
             case 3:
-                if (test)
-                {
-                    P1_Bar.fillAmount = Mathf.Lerp(P1_Bar.fillAmount, ResultBarAmount(scorePlace3, 0, maxScore, 0, 1), speed * Time.deltaTime);
-                    P2_Bar.fillAmount = Mathf.Lerp(P2_Bar.fillAmount, ResultBarAmount(scorePlace3, 0, maxScore, 0, 1), speed * Time.deltaTime);
-                    P3_Bar.fillAmount = Mathf.Lerp(P3_Bar.fillAmount, ResultBarAmount(scorePlace3, 0, maxScore, 0, 1), speed * Time.deltaTime);
-                }
+                m_P1Bar.fillAmount = Mathf.Lerp(m_P1Bar.fillAmount, ResultBarAmount(m_MinigameManager.m_ScorePlace3, 0, m_MaxScore, 0, 1), m_Speed * Time.deltaTime);
+                m_P2Bar.fillAmount = Mathf.Lerp(m_P2Bar.fillAmount, ResultBarAmount(m_MinigameManager.m_ScorePlace3, 0, m_MaxScore, 0, 1), m_Speed * Time.deltaTime);
+                m_P3Bar.fillAmount = Mathf.Lerp(m_P3Bar.fillAmount, ResultBarAmount(m_MinigameManager.m_ScorePlace3, 0, m_MaxScore, 0, 1), m_Speed * Time.deltaTime);
 
-                firstDelay -= Time.deltaTime;
-                if (firstDelay < 0)
-                {
-                    test = false;
-                    if (test2)
-                    {
-                        if (m_MinigameManager.m_P1Place == 1 || m_MinigameManager.m_P1Place == 2)
-                            P1_Bar.fillAmount = Mathf.Lerp(P1_Bar.fillAmount, ResultBarAmount(scorePlace2, 0, maxScore, 0, 1), speed * Time.deltaTime);
-                        if (m_MinigameManager.m_P2Place == 1 || m_MinigameManager.m_P2Place == 2)
-                            P2_Bar.fillAmount = Mathf.Lerp(P2_Bar.fillAmount, ResultBarAmount(scorePlace2, 0, maxScore, 0, 1), speed * Time.deltaTime);
-                        if (m_MinigameManager.m_P3Place == 1 || m_MinigameManager.m_P3Place == 2)
-                            P3_Bar.fillAmount = Mathf.Lerp(P3_Bar.fillAmount, ResultBarAmount(scorePlace2, 0, maxScore, 0, 1), speed * Time.deltaTime);
-                    }
-                }
+                m_FirstDelay -= Time.deltaTime;
 
-                secondDelay -= Time.deltaTime;
-                if (secondDelay < 0)
-                {
-                    test2 = false;
-                    if (test3)
-                    {
-                        if (m_MinigameManager.m_P1Place == 1)
-                            P1_Bar.fillAmount = Mathf.Lerp(P1_Bar.fillAmount, ResultBarAmount(scorePlace1, 0, maxScore, 0, 1), speed * Time.deltaTime);
-                        if (m_MinigameManager.m_P2Place == 1)
-                            P2_Bar.fillAmount = Mathf.Lerp(P2_Bar.fillAmount, ResultBarAmount(scorePlace1, 0, maxScore, 0, 1), speed * Time.deltaTime);
-                        if (m_MinigameManager.m_P3Place == 1)
-                            P3_Bar.fillAmount = Mathf.Lerp(P3_Bar.fillAmount, ResultBarAmount(scorePlace1, 0, maxScore, 0, 1), speed * Time.deltaTime);
-                    }
-                }
-                delay4 -= Time.deltaTime;
-                if (delay4 < 0)
-                    m_isBarRaised = true;
+                if (m_MinigameManager.m_P1Place == 1 || m_MinigameManager.m_P1Place == 2)
+                    m_P1Bar.fillAmount = Mathf.Lerp(m_P1Bar.fillAmount, ResultBarAmount(m_MinigameManager.m_ScorePlace2, 0, m_MaxScore, 0, 1), m_Speed * Time.deltaTime);
+                if (m_MinigameManager.m_P2Place == 1 || m_MinigameManager.m_P2Place == 2)
+                    m_P2Bar.fillAmount = Mathf.Lerp(m_P2Bar.fillAmount, ResultBarAmount(m_MinigameManager.m_ScorePlace2, 0, m_MaxScore, 0, 1), m_Speed * Time.deltaTime);
+                if (m_MinigameManager.m_P3Place == 1 || m_MinigameManager.m_P3Place == 2)
+                    m_P3Bar.fillAmount = Mathf.Lerp(m_P3Bar.fillAmount, ResultBarAmount(m_MinigameManager.m_ScorePlace2, 0, m_MaxScore, 0, 1), m_Speed * Time.deltaTime);
+
+                m_SecondDelay -= Time.deltaTime;
+
+                if (m_MinigameManager.m_P1Place == 1)
+                    m_P1Bar.fillAmount = Mathf.Lerp(m_P1Bar.fillAmount, ResultBarAmount(m_MinigameManager.m_ScorePlace1, 0, m_MaxScore, 0, 1), m_Speed * Time.deltaTime);
+                else if (m_MinigameManager.m_P2Place == 1)
+                    m_P2Bar.fillAmount = Mathf.Lerp(m_P2Bar.fillAmount, ResultBarAmount(m_MinigameManager.m_ScorePlace1, 0, m_MaxScore, 0, 1), m_Speed * Time.deltaTime);
+                else
+                    m_P3Bar.fillAmount = Mathf.Lerp(m_P3Bar.fillAmount, ResultBarAmount(m_MinigameManager.m_ScorePlace1, 0, m_MaxScore, 0, 1), m_Speed * Time.deltaTime);
+
                 break;
             case 4:
-                if (test)
-                {
-                    P1_Bar.fillAmount = Mathf.Lerp(P1_Bar.fillAmount, ResultBarAmount(scorePlace4, 0, maxScore, 0, 1), speed * Time.deltaTime);
-                    P2_Bar.fillAmount = Mathf.Lerp(P2_Bar.fillAmount, ResultBarAmount(scorePlace4, 0, maxScore, 0, 1), speed * Time.deltaTime);
-                    P3_Bar.fillAmount = Mathf.Lerp(P3_Bar.fillAmount, ResultBarAmount(scorePlace4, 0, maxScore, 0, 1), speed * Time.deltaTime);
-                    P4_Bar.fillAmount = Mathf.Lerp(P4_Bar.fillAmount, ResultBarAmount(scorePlace4, 0, maxScore, 0, 1), speed * Time.deltaTime);
-                }
+                m_P1Bar.fillAmount = Mathf.Lerp(m_P1Bar.fillAmount, ResultBarAmount(m_MinigameManager.m_ScorePlace4, 0, m_MaxScore, 0, 1), m_Speed * Time.deltaTime);
+                m_P2Bar.fillAmount = Mathf.Lerp(m_P2Bar.fillAmount, ResultBarAmount(m_MinigameManager.m_ScorePlace4, 0, m_MaxScore, 0, 1), m_Speed * Time.deltaTime);
+                m_P3Bar.fillAmount = Mathf.Lerp(m_P3Bar.fillAmount, ResultBarAmount(m_MinigameManager.m_ScorePlace4, 0, m_MaxScore, 0, 1), m_Speed * Time.deltaTime);
+                m_P4Bar.fillAmount = Mathf.Lerp(m_P4Bar.fillAmount, ResultBarAmount(m_MinigameManager.m_ScorePlace4, 0, m_MaxScore, 0, 1), m_Speed * Time.deltaTime);
 
-                firstDelay -= Time.deltaTime;
-                if (firstDelay < 0)
-                {
-                    test = false;
-                    if (test2)
-                    {
-                        if (m_MinigameManager.m_P1Place == 1 || m_MinigameManager.m_P1Place == 2 || m_MinigameManager.m_P1Place == 3)
-                            P1_Bar.fillAmount = Mathf.Lerp(P1_Bar.fillAmount, ResultBarAmount(scorePlace3, 0, maxScore, 0, 1), speed * Time.deltaTime);
-                        if (m_MinigameManager.m_P2Place == 1 || m_MinigameManager.m_P2Place == 2 || m_MinigameManager.m_P2Place == 3)
-                            P2_Bar.fillAmount = Mathf.Lerp(P2_Bar.fillAmount, ResultBarAmount(scorePlace3, 0, maxScore, 0, 1), speed * Time.deltaTime);
-                        if (m_MinigameManager.m_P3Place == 1 || m_MinigameManager.m_P3Place == 2 || m_MinigameManager.m_P3Place == 3)
-                            P3_Bar.fillAmount = Mathf.Lerp(P3_Bar.fillAmount, ResultBarAmount(scorePlace3, 0, maxScore, 0, 1), speed * Time.deltaTime);
-                        if (m_MinigameManager.m_P4Place == 1 || m_MinigameManager.m_P4Place == 2 || m_MinigameManager.m_P4Place == 3)
-                            P4_Bar.fillAmount = Mathf.Lerp(P4_Bar.fillAmount, ResultBarAmount(scorePlace3, 0, maxScore, 0, 1), speed * Time.deltaTime);
-                    }
-                }
+                m_FirstDelay -= Time.deltaTime;
 
-                secondDelay -= Time.deltaTime;
-                if (secondDelay < 0)
-                {
-                    test2 = false;
-                    if (test3)
-                    {
-                        if (m_MinigameManager.m_P1Place == 1 || m_MinigameManager.m_P1Place == 2)
-                            P1_Bar.fillAmount = Mathf.Lerp(P1_Bar.fillAmount, ResultBarAmount(scorePlace2, 0, maxScore, 0, 1), speed * Time.deltaTime);
-                        if (m_MinigameManager.m_P2Place == 1 || m_MinigameManager.m_P2Place == 2)
-                            P2_Bar.fillAmount = Mathf.Lerp(P2_Bar.fillAmount, ResultBarAmount(scorePlace2, 0, maxScore, 0, 1), speed * Time.deltaTime);
-                        if (m_MinigameManager.m_P3Place == 1 || m_MinigameManager.m_P3Place == 2)
-                            P3_Bar.fillAmount = Mathf.Lerp(P3_Bar.fillAmount, ResultBarAmount(scorePlace2, 0, maxScore, 0, 1), speed * Time.deltaTime);
-                        if (m_MinigameManager.m_P4Place == 1 || m_MinigameManager.m_P4Place == 2)
-                            P4_Bar.fillAmount = Mathf.Lerp(P4_Bar.fillAmount, ResultBarAmount(scorePlace2, 0, maxScore, 0, 1), speed * Time.deltaTime);
-                    }
-                }
+                if (m_MinigameManager.m_P1Place == 1 || m_MinigameManager.m_P1Place == 2 || m_MinigameManager.m_P1Place == 3)
+                    m_P1Bar.fillAmount = Mathf.Lerp(m_P1Bar.fillAmount, ResultBarAmount(m_MinigameManager.m_ScorePlace3, 0, m_MaxScore, 0, 1), m_Speed * Time.deltaTime);
+                if (m_MinigameManager.m_P2Place == 1 || m_MinigameManager.m_P2Place == 2 || m_MinigameManager.m_P2Place == 3)
+                    m_P2Bar.fillAmount = Mathf.Lerp(m_P2Bar.fillAmount, ResultBarAmount(m_MinigameManager.m_ScorePlace3, 0, m_MaxScore, 0, 1), m_Speed * Time.deltaTime);
+                if (m_MinigameManager.m_P3Place == 1 || m_MinigameManager.m_P3Place == 2 || m_MinigameManager.m_P3Place == 3)
+                    m_P3Bar.fillAmount = Mathf.Lerp(m_P3Bar.fillAmount, ResultBarAmount(m_MinigameManager.m_ScorePlace3, 0, m_MaxScore, 0, 1), m_Speed * Time.deltaTime);
+                if (m_MinigameManager.m_P4Place == 1 || m_MinigameManager.m_P4Place == 2 || m_MinigameManager.m_P4Place == 3)
+                    m_P4Bar.fillAmount = Mathf.Lerp(m_P4Bar.fillAmount, ResultBarAmount(m_MinigameManager.m_ScorePlace3, 0, m_MaxScore, 0, 1), m_Speed * Time.deltaTime);
 
-                ThirdDelay -= Time.deltaTime;
-                if (ThirdDelay < 0)
-                {
-                    test3 = false;
-                    if (test4)
-                    {
-                        if (m_MinigameManager.m_P1Place == 1)
-                            P1_Bar.fillAmount = Mathf.Lerp(P1_Bar.fillAmount, ResultBarAmount(scorePlace1, 0, maxScore, 0, 1), speed * Time.deltaTime);
-                        if (m_MinigameManager.m_P2Place == 1)
-                            P2_Bar.fillAmount = Mathf.Lerp(P2_Bar.fillAmount, ResultBarAmount(scorePlace1, 0, maxScore, 0, 1), speed * Time.deltaTime);
-                        if (m_MinigameManager.m_P3Place == 1)
-                            P3_Bar.fillAmount = Mathf.Lerp(P3_Bar.fillAmount, ResultBarAmount(scorePlace1, 0, maxScore, 0, 1), speed * Time.deltaTime);
-                        if (m_MinigameManager.m_P4Place == 1)
-                            P4_Bar.fillAmount = Mathf.Lerp(P4_Bar.fillAmount, ResultBarAmount(scorePlace1, 0, maxScore, 0, 1), speed * Time.deltaTime);
-                    }
-                }
-                delay4 -= Time.deltaTime;
-                if (delay4 < 0)
-                    m_isBarRaised = true;
+                m_SecondDelay -= Time.deltaTime;
+
+                if (m_MinigameManager.m_P1Place == 1 || m_MinigameManager.m_P1Place == 2)
+                    m_P1Bar.fillAmount = Mathf.Lerp(m_P1Bar.fillAmount, ResultBarAmount(m_MinigameManager.m_ScorePlace2, 0, m_MaxScore, 0, 1), m_Speed * Time.deltaTime);
+                if (m_MinigameManager.m_P2Place == 1 || m_MinigameManager.m_P2Place == 2)
+                    m_P2Bar.fillAmount = Mathf.Lerp(m_P2Bar.fillAmount, ResultBarAmount(m_MinigameManager.m_ScorePlace2, 0, m_MaxScore, 0, 1), m_Speed * Time.deltaTime);
+                if (m_MinigameManager.m_P3Place == 1 || m_MinigameManager.m_P3Place == 2)
+                    m_P3Bar.fillAmount = Mathf.Lerp(m_P3Bar.fillAmount, ResultBarAmount(m_MinigameManager.m_ScorePlace2, 0, m_MaxScore, 0, 1), m_Speed * Time.deltaTime);
+                if (m_MinigameManager.m_P4Place == 1 || m_MinigameManager.m_P4Place == 2)
+                    m_P4Bar.fillAmount = Mathf.Lerp(m_P4Bar.fillAmount, ResultBarAmount(m_MinigameManager.m_ScorePlace2, 0, m_MaxScore, 0, 1), m_Speed * Time.deltaTime);
+
+                m_ThirdDelay -= Time.deltaTime;
+
+                if (m_MinigameManager.m_P1Place == 1)
+                    m_P1Bar.fillAmount = Mathf.Lerp(m_P1Bar.fillAmount, ResultBarAmount(m_MinigameManager.m_ScorePlace1, 0, m_MaxScore, 0, 1), m_Speed * Time.deltaTime);
+                else if (m_MinigameManager.m_P2Place == 1)
+                    m_P2Bar.fillAmount = Mathf.Lerp(m_P2Bar.fillAmount, ResultBarAmount(m_MinigameManager.m_ScorePlace1, 0, m_MaxScore, 0, 1), m_Speed * Time.deltaTime);
+                else if (m_MinigameManager.m_P3Place == 1)
+                    m_P3Bar.fillAmount = Mathf.Lerp(m_P3Bar.fillAmount, ResultBarAmount(m_MinigameManager.m_ScorePlace1, 0, m_MaxScore, 0, 1), m_Speed * Time.deltaTime);
+                else
+                    m_P4Bar.fillAmount = Mathf.Lerp(m_P4Bar.fillAmount, ResultBarAmount(m_MinigameManager.m_ScorePlace1, 0, m_MaxScore, 0, 1), m_Speed * Time.deltaTime);
+
                 break;
+        }
+    }
+
+    void ScreenFading()
+    {
+        if (m_MinigameManager.m_SecondFadingCanvas.alpha < 0.6f)
+        {
+            m_MinigameManager.m_SecondFadingCanvas.alpha += Time.deltaTime / m_MinigameManager.m_FadeTime;
+        }
+        else
+        {
+            m_MinigameManager.m_DelayToShowRewards -= Time.deltaTime;
+            if (m_MinigameManager.m_DelayToShowRewards < 0.0f)
+            {
+                // Going to the Reward Selection Minigame state;
+                m_MinigameManager.UpdateMinigameState();
+            }
         }
     }
 }

@@ -15,8 +15,6 @@ public class PartyBar : MonoBehaviour {
 
     public bool m_Active;
 
-    private bool m_MiniGameStatusChanged;
-
     private Image m_Bar;
 
     float m_TempTimer;
@@ -32,7 +30,6 @@ public class PartyBar : MonoBehaviour {
         else if (GameManager.m_Instance.m_GameState == GameManager.GameState.Minigame)
         {
             m_Current = 100.0f;
-            m_MiniGameStatusChanged = false;
         }
     }
 	
@@ -94,16 +91,16 @@ public class PartyBar : MonoBehaviour {
                     m_TempTimer = Time.time;
                 }
             }
-            //if bar hits 0 load minigame
-            else if(!m_MiniGameStatusChanged)
-            {
-                MinigameManager minigameManager = GameObject.Find("MinigameManager").GetComponent<MinigameManager>();
-                minigameManager.UpdateMinigameState();
-                m_MiniGameStatusChanged = true;
-//          Edit ==> Minigame is being managed by the MinigameManager
+//            //if bar hits 0 load minigame
+//            else if(!m_MiniGameStatusChanged)
+//            {
+//                MinigameManager minigameManager = GameObject.Find("MinigameManager").GetComponent<MinigameManager>();
+//                minigameManager.UpdateMinigameState();
+//                m_MiniGameStatusChanged = true;
+////          Edit ==> Minigame is being managed by the MinigameManager
 
-                //                RewardsAndLoadBackToGame();
-            }
+//                //                RewardsAndLoadBackToGame();
+//            }
         }
     }
 

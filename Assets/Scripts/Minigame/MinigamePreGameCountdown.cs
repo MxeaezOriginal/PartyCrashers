@@ -31,20 +31,13 @@ public class MinigamePreGameCountdown : MonoBehaviour
         if (m_MinigameManager.GetMinigameState() == MinigameManager.EMinigameState.PreGameCountdown
             && !m_IsCoroutineExecuting)
         {
-            m_IsCoroutineExecuting = true;
-
             StartCoroutine(RunCountdown());
-
-            m_IsCoroutineExecuting = false;
-
-            // After the countdown, change the minigame state (PreGameCountdown ==> ScoreAndTimeTrack)
-            m_MinigameManager.UpdateMinigameState();
-
         }
     }
 
     IEnumerator RunCountdown()
     {
+        m_IsCoroutineExecuting = true;
         DisableFeatures();
 
         //3, 2, 1, GO Countdown
@@ -88,6 +81,11 @@ public class MinigamePreGameCountdown : MonoBehaviour
         m_StartCounter[3].transform.GetChild(0).GetComponent<Text>().enabled = false;
 
         EnableFeatures();
+
+        // After the countdown, change the minigame state (PreGameCountdown ==> ScoreAndTimeTrack)
+        m_MinigameManager.UpdateMinigameState();
+
+        m_IsCoroutineExecuting = false;
     }
 
     private void DisableFeatures()
