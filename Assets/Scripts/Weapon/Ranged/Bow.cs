@@ -75,7 +75,7 @@ public class Bow : Ranged
         if (m_CoolDown <= Time.time - m_Weapon1Cooldown || m_CoolDown == 0)
         {			
             //Shoot if Button Up
-            if (Input.GetAxisRaw(player.m_PrimaryAttack + player.getControllerAsString()) == 0 && m_WasDown)
+            if (Input.GetButtonDown(player.m_PrimaryAttack + player.getControllerAsString()) && m_WasDown)
             {	
                 shoot();
                 m_WasDown = false;
@@ -89,8 +89,10 @@ public class Bow : Ranged
         {
 			
             if (m_TimePressed < m_MaxCharge)
-            {                
-                m_TimePressed += Input.GetAxisRaw(player.m_PrimaryAttack + player.getControllerAsString()) * Time.deltaTime;
+            {     
+                //Wont work with bumper as the new button           
+                //m_TimePressed += Input.GetAxisRaw(player.m_PrimaryAttack + player.getControllerAsString()) * Time.deltaTime;
+                m_TimePressed += Time.deltaTime;
             }
             if (m_TimePressed >= m_MaxCharge)
             {

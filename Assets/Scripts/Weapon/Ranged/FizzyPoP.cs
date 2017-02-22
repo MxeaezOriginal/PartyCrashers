@@ -42,7 +42,7 @@ public class FizzyPoP : Ranged
     {
         #region Primary Attack
         // Shoot if Button Down
-        if (Input.GetAxisRaw(Player.m_PrimaryAttack + Player.getControllerAsString()) == 1 && m_IsDown)
+        if (Input.GetButtonDown(Player.m_PrimaryAttack + Player.getControllerAsString()) && m_IsDown)
             ShootSpray();        
         else
             FizzyCone.SetActive(false);
@@ -50,7 +50,7 @@ public class FizzyPoP : Ranged
 
         #region Secoindary Attack
         // Shoot if Button Down
-        if (Input.GetAxisRaw(Player.m_SecondaryAttack + Player.getControllerAsString()) == 0 && m_CanHeal)
+        if (Input.GetButtonDown(Player.m_SecondaryAttack + Player.getControllerAsString()) && m_CanHeal)
         {
             ShootHeal();
             Debug.Log("Is Shooting Spray");
