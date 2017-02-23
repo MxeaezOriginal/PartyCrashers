@@ -14,6 +14,7 @@ public class Sword : Melee
     [SerializeField]
     private float triggerLife = 0.7f;
     private float numOfParticles = 0;
+    public float m_SecondSlashTime = 0.75f;
 
     [SerializeField]
     public bool attack { get; private set; }
@@ -21,6 +22,9 @@ public class Sword : Melee
     public GameObject effect;
 
     public GameObject DashVFX;
+
+    private bool m_FirstAnimation;
+    private float m_FirstAnimCooldown;
 
     CharacterController m_CharacterController;
     Player m_Player;
@@ -50,6 +54,8 @@ public class Sword : Melee
 
     void Update()
     {
+        m_FirstAnimCooldown += Time.deltaTime;
+
         if (attack == true)
         {
             triggerLife -= Time.deltaTime;
@@ -122,10 +128,20 @@ public class Sword : Melee
 
     override public void primaryAttack()
     {
-        m_Player.m_Animator.SetBool("isSlashing", true);
-        StartCoroutine(setPrimaryAttackFalse());
         if (m_CoolDown <= Time.time - m_Weapon1Cooldown || m_CoolDown == 0)
         {
+            if (m_FirstAnimCooldown >= m_SecondSlashTime)
+            {
+                m_Player.m_Animator.SetBool("isSlashing", true);
+                StartCoroutine(setPrimaryAttackFalse(1));
+                m_FirstAnimCooldown = 0;
+            }
+            else
+            {
+                m_Player.m_Animator.SetBool("isSlashing2", true);
+                StartCoroutine(setPrimaryAttackFalse(2));
+                m_FirstAnimCooldown = m_SecondSlashTime;
+            }
             attack = true;
             m_CoolDown = Time.time;
         }
@@ -169,10 +185,13 @@ public class Sword : Melee
         m_SecondaryCoolDown = Time.time;
     }
 
-    private IEnumerator setPrimaryAttackFalse()
+    private IEnumerator setPrimaryAttackFalse(int i)
     {
         yield return new WaitForSeconds(.1f);
-        m_Player.m_Animator.SetBool("isSlashing", false);
+        if(i == 1)
+            m_Player.m_Animator.SetBool("isSlashing", false);
+        else if(i == 2)
+            m_Player.m_Animator.SetBool("isSlashing2", false);
     }
 
     private IEnumerator setSecondaryAttackFalse()
