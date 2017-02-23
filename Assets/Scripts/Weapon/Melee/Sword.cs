@@ -6,7 +6,8 @@ public class Sword : Melee
 {
     [Header("Sword Setting")]
     [SerializeField]
-    private int dashDistance = 25;
+    private float m_DashTime = 1.0f;
+    public float m_DashDistance = 50f;
     [SerializeField]
     private float dashDelay = 0.1f;
     [SerializeField]
@@ -25,6 +26,8 @@ public class Sword : Melee
 
     private bool m_FirstAnimation;
     private float m_FirstAnimCooldown;
+
+    private float m_DashCooldown;
 
     CharacterController m_CharacterController;
     Player m_Player;
@@ -55,6 +58,12 @@ public class Sword : Melee
     void Update()
     {
         m_FirstAnimCooldown += Time.deltaTime;
+        m_DashCooldown -= Time.deltaTime;
+
+        if(m_DashCooldown > 0)
+        {
+            m_CharacterController.Move(m_CharacterController.transform.forward * Time.deltaTime * m_DashDistance);
+        }
 
         if (attack == true)
         {
@@ -82,7 +91,6 @@ public class Sword : Melee
 
             }
         }
-
 
         if (triggerLife <= 0)
         {
@@ -165,7 +173,7 @@ public class Sword : Melee
             //}
             //SFX END
             attack = true;
-            m_CharacterController.Move(m_CharacterController.transform.forward * Time.deltaTime * 50f);
+            m_DashCooldown = m_DashTime;
            
             if(DashVFX != null)
             {
@@ -174,16 +182,16 @@ public class Sword : Melee
                 Destroy(DashMF, 0.2f);
             }
 
-            StartCoroutine(dash());
+            m_SecondaryCoolDown = Time.time;
         }
     }
 
-    IEnumerator dash()
+    /*IEnumerator dash()
     {
         yield return new WaitForSeconds(dashDelay);
 
         m_SecondaryCoolDown = Time.time;
-    }
+    }*/
 
     private IEnumerator setPrimaryAttackFalse(int i)
     {
