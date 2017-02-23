@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Chest : MonoBehaviour {
+public class Chest : MonoBehaviour
+{
 
     public Animator animator;
     public GameObject[] prefab;
@@ -12,26 +13,41 @@ public class Chest : MonoBehaviour {
     public GameObject m_Endeffect;
     GameObject endeffect;
     bool firstEffectFinish;
+
+    //SFX Start
+    public AudioSource audioSource;
+    public AudioClip[] SFX;
+    private AudioClip SFXtoPlay;
+    //SFX END
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         animator.enabled = false;
     }
-	
-	// Update is called once per frame
-	void Update () 
+
+    // Update is called once per frame
+    void Update()
     {
-        if (isOpen == true && alreadyOpen == false && (Input.GetButtonDown("Interact_P1")||Input.GetButtonDown("Interact_Keyboard")) )
+        if (isOpen == true && alreadyOpen == false && (Input.GetButtonDown("Interact_P1") || Input.GetButtonDown("Interact_Keyboard")))
         {
             if (m_effect != null)
             {
                 animator.enabled = true;
                 GameObject effect;
-                effect = (GameObject)Instantiate(m_effect, gameObject.transform.position, gameObject.transform.rotation);                
+                effect = (GameObject)Instantiate(m_effect, gameObject.transform.position, gameObject.transform.rotation);
                 Destroy(effect, 3f);
                 StartCoroutine(WaitChestExplosion(2f));
                 Destroy(transform.parent.gameObject, 2f);
                 Destroy(gameObject, 2f);
             }
+            //sfx begin
+            if (audioSource != null)
+            {
+                SFXtoPlay = SFX[Random.Range(0, SFX.Length)];
+                audioSource.clip = SFXtoPlay;
+                audioSource.Play();
+            }
+            //sfx end
 
             for (int i = 0; i < prefab.Length; i++)
             {
@@ -41,11 +57,11 @@ public class Chest : MonoBehaviour {
                 alreadyOpen = true;
             }
         }
-	}
+    }
 
     public void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Player")
+        if (other.tag == "Player")
         {
             isOpen = true;
         }
