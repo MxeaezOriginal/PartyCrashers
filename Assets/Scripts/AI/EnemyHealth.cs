@@ -96,8 +96,9 @@ public class EnemyHealth : MonoBehaviour
                 AudioSource source = SFXPlayer.GetComponent<AudioSource>();
                 source.pitch = randomPitch;
                 source.clip = SFXtoPlay;
-                SFXManager.GetPitch(randomPitch);
-                SFXManager.PushMusic(SFXtoPlay);
+                source.Play();
+                //SFXManager.GetPitch(randomPitch);
+                //SFXManager.PushMusic(SFXtoPlay);
                 //SFXManager.PushMusic(SFXtoPlay);
             }
 

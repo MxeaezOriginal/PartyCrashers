@@ -4,7 +4,7 @@ using System.Collections;
 public class FallingTrap : MonoBehaviour {
 
     public float FallingSpeed;
-    public float DestructionDelay;
+    //public float DestructionDelay;
     public int m_Damage;
 
     private float mMass;
@@ -33,7 +33,7 @@ public class FallingTrap : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.GetComponent<HeartSystem>() != null || other.GetComponent<EnemyHealth>() != null)
         {
 
             //Debug.Log("Falling trap Activated.");
@@ -46,7 +46,7 @@ public class FallingTrap : MonoBehaviour {
             }
             //SFX End
 
-                Rigidbody rb = mTrap.GetComponent<Rigidbody>();
+            Rigidbody rb = mTrap.GetComponent<Rigidbody>();
             rb.mass = mMass;
             if(FallingSpeed >= 1000)
             {
@@ -60,9 +60,9 @@ public class FallingTrap : MonoBehaviour {
 
     void DestroyAfterActivation()
     {
-        if(mActivated)
+        if (mTrap.transform.position.y <= 0.5)
         {
-            Destroy(mTrap, DestructionDelay);
+            Destroy(mTrap);
         }
     }
 
@@ -77,6 +77,7 @@ public class FallingTrap : MonoBehaviour {
                 audioSource.clip = SFXtoPlay;
                 audioSource.Play();
             }
+
             //SFX End
             m_Heart = other.gameObject.GetComponent<HeartSystem>();
             m_Heart.TakeDamage(m_Damage);
