@@ -287,17 +287,21 @@ public class Player : MonoBehaviour
         tempLocation.z -= vel.z * 20.0f;
 
         m_State = State.Dead;
+        gameObject.layer = 11;
         m_IsDead = true;
         updateModel();
         transform.position = tempLocation;
         stun(0.1f);
         m_RespawnHealth.initialize();
         //SFX Start
-        if (SFXPlayer != null)
+        if (m_State == State.Alive)
         {
-            AudioSource source = SFXPlayer.GetComponent<AudioSource>();
-            SFXtoPlay = pinataSpawn;
-            source.clip = SFXtoPlay;
+            if (SFXPlayer != null)
+            {
+                AudioSource source = SFXPlayer.GetComponent<AudioSource>();
+                SFXtoPlay = pinataSpawn;
+                source.clip = SFXtoPlay;
+            }
         }
 
         GameObject SFXtest = Instantiate(SFXPlayer, transform.position, transform.rotation) as GameObject;
