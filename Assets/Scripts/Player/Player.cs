@@ -112,6 +112,8 @@ public class Player : MonoBehaviour
     //SFX
     public GameObject SFXPlayer;
     public AudioClip[] pickupSFX;
+    public AudioClip pinataSpawn;
+
     private AudioClip SFXtoPlay;
     //SFX END
 
@@ -290,6 +292,16 @@ public class Player : MonoBehaviour
         transform.position = tempLocation;
         stun(0.1f);
         m_RespawnHealth.initialize();
+        //SFX Start
+        if (SFXPlayer != null)
+        {
+            AudioSource source = SFXPlayer.GetComponent<AudioSource>();
+            SFXtoPlay = pinataSpawn;
+            source.clip = SFXtoPlay;
+        }
+
+        GameObject SFXtest = Instantiate(SFXPlayer, transform.position, transform.rotation) as GameObject;
+        //SFX End
         //}
         //else if(GameManager.m_Instance.m_GameState == GameManager.GameState.Minigame)
         //{
@@ -315,6 +327,7 @@ public class Player : MonoBehaviour
         tempLocation.z -= vel.z * 20.0f;
 
         m_State = State.Alive;
+
         updateModel();
         transform.position = tempLocation;
         stun(0.2f);

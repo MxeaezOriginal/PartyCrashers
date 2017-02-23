@@ -14,6 +14,12 @@ public class RespawnHealth : MonoBehaviour
     private float m_Counter;
     private float m_RespawnTime;
 
+    //SFX
+    public GameObject SFXPlayer;
+    public AudioClip pinataTear;
+    private AudioClip SFXtoPlay;
+    //SFX END
+
     void Start()
     {
         m_Player = GetComponent<Player>();
@@ -61,6 +67,16 @@ public class RespawnHealth : MonoBehaviour
             m_Player.m_IsDead = false;
             m_Player.updateModel();
             Debug.Log("Updated Model");
+            //SFX Start
+            if (SFXPlayer != null)
+            {
+                AudioSource source = SFXPlayer.GetComponent<AudioSource>();
+                SFXtoPlay = pinataTear;
+                source.clip = SFXtoPlay;
+            }
+
+            GameObject SFXtest = Instantiate(SFXPlayer, transform.position, transform.rotation) as GameObject;
+            //SFX End
             StartCoroutine(waitBeforeInitializeWeapon());
             m_RespawnCount++;
         }
