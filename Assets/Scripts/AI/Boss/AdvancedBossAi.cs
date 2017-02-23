@@ -136,7 +136,7 @@ public class AdvancedBossAi : MonoBehaviour
             case states.hurt: Hurt(m_DamageTaken, m_StunTime); break;
             case states.teleport: Teleport(60, 60); break;
             //Attacks
-            case states.shoot: BasicShoot(10,60); break;
+            case states.shoot: BasicShoot(Mathf.RoundToInt( 10/m_Difficulty), Mathf.RoundToInt(60 / m_Difficulty)); break;
             case states.dash: Dash(70, 10, 10); break;
             case states.earthquake: Earthquake(60, 60); break;
         }
