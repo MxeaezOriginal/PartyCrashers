@@ -616,6 +616,10 @@ public class AdvancedBossAi : MonoBehaviour
         {
             m_Difficulty = 0.1f;
         }
+        if (m_Difficulty > 0.9)
+        {
+            m_Difficulty = 0.9f;
+        }
     }
     GameObject getClosestPlayer()
     {
