@@ -7,7 +7,6 @@ using UnityEngine.UI;
 
 public class PauseGame : MonoBehaviour
 {
-
     EventSystem es;
 
     [Header("Different 'First Selected' Buttons")]
@@ -30,74 +29,91 @@ public class PauseGame : MonoBehaviour
     void Awake()
     {
         //Was causing error - Brody
-        //es = GameObject.Find("Pause Menu/EventSystem").GetComponent<EventSystem>();
+        es = GameObject.Find("Pause Menu/EventSystem").GetComponent<EventSystem>();
 
     }
     // Update is called once per frame
     void Update()
     {
         if (pauseActive)
-            StartCoroutine(Pause());
+            Pause();
         else if (optionsActive)
-            StartCoroutine(Options());
+            Options();
         else if (controlsActive)
-            StartCoroutine(Controls());
+            Controls();
         else if (quitActive)
-            StartCoroutine(Quit());
+            Quit();
 
-        if (canBack && Input.GetButtonDown("Back_" + GameManager.m_Instance.m_Player1.m_Controller)) //PRESS FOR BACK BUTTON
+        if (canBack && openedP1 && !openedP2 && !openedP3 && !openedP4 && !openedKeyboard && Input.GetButtonDown("Back_" + GameManager.m_Instance.m_Player1.m_Controller)) //PRESS FOR BACK BUTTON
             BackButton();
 
-        if (canBack && Input.GetButtonDown("Back_" + GameManager.m_Instance.m_Player2.m_Controller)) //PRESS FOR BACK BUTTON
+        if (canBack && !openedP1 && openedP2 && !openedP3 && !openedP4 && !openedKeyboard && Input.GetButtonDown("Back_" + GameManager.m_Instance.m_Player2.m_Controller)) //PRESS FOR BACK BUTTON
             BackButton();
 
-        if (canBack && Input.GetButtonDown("Back_" + GameManager.m_Instance.m_Player3.m_Controller)) //PRESS FOR BACK BUTTON
+        if (canBack && !openedP1 && !openedP2 && openedP3 && !openedP4 && !openedKeyboard && Input.GetButtonDown("Back_" + GameManager.m_Instance.m_Player3.m_Controller)) //PRESS FOR BACK BUTTON
             BackButton();
 
-        if (canBack && Input.GetButtonDown("Back_" + GameManager.m_Instance.m_Player4.m_Controller)) //PRESS FOR BACK BUTTON
+        if (canBack && !openedP1 && !openedP2 && !openedP3 && openedP4 && !openedKeyboard && Input.GetButtonDown("Back_" + GameManager.m_Instance.m_Player4.m_Controller)) //PRESS FOR BACK BUTTON
             BackButton();
 
-        if (canBack && (Input.GetKeyDown(KeyCode.Escape))) //PRESS FOR BACK BUTTON
+        if (canBack && !openedP1 && !openedP2 && !openedP3 && !openedP4 && openedKeyboard && (Input.GetKeyDown(KeyCode.Escape))) //PRESS FOR BACK BUTTON
             BackButton();
 
-        if (Input.GetButtonDown("Pause_" + GameManager.m_Instance.m_Player1.m_Controller))
+        //PRESS START P1-4 + KEYBOARD
+        if (GameManager.m_Instance.m_Player1.m_Controller == Player.Controller.P1 || GameManager.m_Instance.m_Player2.m_Controller == Player.Controller.P1 ||
+            GameManager.m_Instance.m_Player3.m_Controller == Player.Controller.P1 || GameManager.m_Instance.m_Player4.m_Controller == Player.Controller.P1)
         {
-            openedP1 = true;
-            PauseMenu();
-        }
-        else if(Input.GetButtonDown("Pause_" + GameManager.m_Instance.m_Player2.m_Controller))
-        {
-            openedP2 = true;
-            PauseMenu();
-        }
-
-        else if (Input.GetButtonDown("Pause_" + GameManager.m_Instance.m_Player3.m_Controller))
-        {
-            openedP3 = true;
-            PauseMenu();
-        }
-
-        else if (Input.GetButtonDown("Pause_" + GameManager.m_Instance.m_Player4.m_Controller))
-        {
-            openedP4 = true;
-            PauseMenu();
-        }
-
-        else if (Input.GetKeyDown(KeyCode.Escape))
+            if (Input.GetButtonDown("Pause_" + GameManager.m_Instance.m_Player1.m_Controller) && !pauseActive && !openedP2 && !openedP3 && !openedP4 && !openedKeyboard)
             {
-            openedKeyboard = true;
-            PauseMenu();
+                openedP1 = true;
+                PauseMenu();
+            }
         }
-
+        if (GameManager.m_Instance.m_Player1.m_Controller == Player.Controller.P2 || GameManager.m_Instance.m_Player2.m_Controller == Player.Controller.P2 ||
+    GameManager.m_Instance.m_Player3.m_Controller == Player.Controller.P2 || GameManager.m_Instance.m_Player4.m_Controller == Player.Controller.P2)
         {
-            if (Time.timeScale == 0) return;
+            if (Input.GetButtonDown("Pause_" + GameManager.m_Instance.m_Player2.m_Controller) && !pauseActive && !openedP1 && !openedP3 && !openedP4 && !openedKeyboard)
+            {
+                openedP2 = true;
+                PauseMenu();
+            }
         }
-    }
-    IEnumerator Pause()
+        if (GameManager.m_Instance.m_Player1.m_Controller == Player.Controller.P3 || GameManager.m_Instance.m_Player2.m_Controller == Player.Controller.P3 ||
+    GameManager.m_Instance.m_Player3.m_Controller == Player.Controller.P3 || GameManager.m_Instance.m_Player4.m_Controller == Player.Controller.P3)
+        {
+            if (Input.GetButtonDown("Pause_" + GameManager.m_Instance.m_Player3.m_Controller) && !pauseActive && !openedP2 && !openedP1 && !openedP4 && !openedKeyboard)
+            {
+                openedP3 = true;
+                PauseMenu();
+            }
+        }
+        if (GameManager.m_Instance.m_Player1.m_Controller == Player.Controller.P4 || GameManager.m_Instance.m_Player2.m_Controller == Player.Controller.P4 ||
+GameManager.m_Instance.m_Player3.m_Controller == Player.Controller.P4 || GameManager.m_Instance.m_Player4.m_Controller == Player.Controller.P4)
+        {
+            if (Input.GetButtonDown("Pause_" + GameManager.m_Instance.m_Player4.m_Controller) && !pauseActive && !openedP2 && !openedP3 && !openedP1 && !openedKeyboard)
+            {
+                openedP4 = true;
+                PauseMenu();
+            }
+        }
+        if (GameManager.m_Instance.m_Player1.m_Controller == Player.Controller.Keyboard || GameManager.m_Instance.m_Player2.m_Controller == Player.Controller.Keyboard ||
+GameManager.m_Instance.m_Player3.m_Controller == Player.Controller.Keyboard || GameManager.m_Instance.m_Player4.m_Controller == Player.Controller.Keyboard)
+        {
+            if (Input.GetKeyDown(KeyCode.Escape) && !pauseActive && !openedP2 && !openedP3 && !openedP4 && !openedP1)//Change to asdasdas
+            {
+                openedKeyboard = true;
+                PauseMenu();
+            }
+        }
 
+        if (pauseActive)
+            canBack = false;
+
+    }
+    void Pause()
     {
         pauseActive = false;
-        yield return null; es.SetSelectedGameObject(null); es.enabled = false; es.enabled = true; es.SetSelectedGameObject(firstSelectedButtons[0]); es.firstSelectedGameObject = firstSelectedButtons[0];
+        es.SetSelectedGameObject(null); es.enabled = false; es.enabled = true; es.SetSelectedGameObject(firstSelectedButtons[0]); es.firstSelectedGameObject = firstSelectedButtons[0];
 
         canvases[0].SetActive(true);
         canvases[1].SetActive(false);
@@ -105,13 +121,9 @@ public class PauseGame : MonoBehaviour
         canvases[3].SetActive(false);
 
     }
-
-
-
-    IEnumerator Options()
-
+    void Options()
     {
-        yield return null; es.SetSelectedGameObject(null); es.enabled = false; es.enabled = true; es.SetSelectedGameObject(firstSelectedButtons[1]); es.firstSelectedGameObject = firstSelectedButtons[1];
+        es.SetSelectedGameObject(null); es.enabled = false; es.enabled = true; es.SetSelectedGameObject(firstSelectedButtons[1]); es.firstSelectedGameObject = firstSelectedButtons[1];
         optionsActive = false;
         canvases[0].SetActive(false);
         canvases[1].SetActive(true);
@@ -121,13 +133,9 @@ public class PauseGame : MonoBehaviour
         canBack = true;
 
     }
-
-
-
-    IEnumerator Controls()
-
+    void Controls()
     {
-        yield return null; es.SetSelectedGameObject(null); es.enabled = false; es.enabled = true; es.SetSelectedGameObject(firstSelectedButtons[2]); es.firstSelectedGameObject = firstSelectedButtons[2];
+        es.SetSelectedGameObject(null); es.enabled = false; es.enabled = true; es.SetSelectedGameObject(firstSelectedButtons[2]); es.firstSelectedGameObject = firstSelectedButtons[2];
         controlsActive = false;
         canvases[0].SetActive(false);
         canvases[1].SetActive(false);
@@ -137,13 +145,10 @@ public class PauseGame : MonoBehaviour
         canBack = true;
 
     }
-
-
-
-    IEnumerator Quit()
-
+    void Quit()
     {
-        yield return null; es.SetSelectedGameObject(null); es.enabled = false; es.enabled = true; es.SetSelectedGameObject(firstSelectedButtons[3]); es.firstSelectedGameObject = firstSelectedButtons[3];
+        Time.timeScale = 0;
+        es.SetSelectedGameObject(null); es.enabled = false; es.enabled = true; es.SetSelectedGameObject(firstSelectedButtons[3]); es.firstSelectedGameObject = firstSelectedButtons[3];
         quitActive = false;
         canvases[0].SetActive(false);
         canvases[1].SetActive(false);
@@ -156,6 +161,12 @@ public class PauseGame : MonoBehaviour
 
     public void PauseMenu()
     {
+
+        for (int i = 0; i < GameManager.m_Instance.m_NumOfPlayers; i++)//MIGHT REDO AS ARRAY SIZE IF CAUSES ERRORS
+        {
+            GameManager.m_Instance.m_Players[i].GetComponent<PlayerController>().m_CantMove = true;
+        }
+        Time.timeScale = 0;
         canvases[0].SetActive(true);
         StandaloneInputModule inputModule = es.gameObject.GetComponent<StandaloneInputModule>();
 
@@ -165,8 +176,6 @@ public class PauseGame : MonoBehaviour
             inputModule.submitButton = "Jump_" + GameManager.m_Instance.m_Player1.m_Controller;
             inputModule.horizontalAxis = "Horizontal_" + GameManager.m_Instance.m_Player1.m_Controller;
             inputModule.verticalAxis = "Vertical_" + GameManager.m_Instance.m_Player1.m_Controller;
-            //ADD CANCEL BUTTOn
-            Time.timeScale = 0;
         }
         if (openedP2)
         {
@@ -174,8 +183,6 @@ public class PauseGame : MonoBehaviour
             inputModule.submitButton = "Jump_" + GameManager.m_Instance.m_Player2.m_Controller;
             inputModule.horizontalAxis = "Horizontal_" + GameManager.m_Instance.m_Player2.m_Controller;
             inputModule.verticalAxis = "Vertical_" + GameManager.m_Instance.m_Player2.m_Controller;
-            //ADD CANCEL BUTTOn
-            Time.timeScale = 0;
         }
 
         if (openedP3)
@@ -184,8 +191,6 @@ public class PauseGame : MonoBehaviour
             inputModule.submitButton = "Jump_" + GameManager.m_Instance.m_Player3.m_Controller;
             inputModule.horizontalAxis = "Horizontal_" + GameManager.m_Instance.m_Player3.m_Controller;
             inputModule.verticalAxis = "Vertical_" + GameManager.m_Instance.m_Player3.m_Controller;
-            //ADD CANCEL BUTTOn
-            Time.timeScale = 0;
         }
 
         if (openedP4)
@@ -194,8 +199,6 @@ public class PauseGame : MonoBehaviour
             inputModule.submitButton = "Jump_" + GameManager.m_Instance.m_Player4.m_Controller;
             inputModule.horizontalAxis = "Horizontal_" + GameManager.m_Instance.m_Player4.m_Controller;
             inputModule.verticalAxis = "Vertical_" + GameManager.m_Instance.m_Player4.m_Controller;
-            //ADD CANCEL BUTTOn
-            Time.timeScale = 0;
         }
 
         if (openedKeyboard)
@@ -203,19 +206,15 @@ public class PauseGame : MonoBehaviour
             pauseActive = true;
             //Input.GetButtonDown("Back_Keyboard") _ INPUT
             inputModule.submitButton = "Submit_Keyboard";
-            inputModule.horizontalAxis = "HorizontalRotation_Keyboard";
-            inputModule.verticalAxis = "VerticalRotation_Keyboard";
-            Time.timeScale = 0;
-        }
-        else
-        {
-            Time.timeScale = 1;
+            inputModule.horizontalAxis = "Horizontal_Keyboard";
+            inputModule.verticalAxis = "Vertical_Keyboard";
         }
 
     }
 
     public void OptionsMenu()
     {
+        Time.timeScale = 0;
         canvases[1].SetActive(true);
 
         StandaloneInputModule inputModule = es.gameObject.GetComponent<StandaloneInputModule>();
@@ -227,8 +226,6 @@ public class PauseGame : MonoBehaviour
                 inputModule.submitButton = "Jump_" + GameManager.m_Instance.m_Player1.m_Controller;
                 inputModule.horizontalAxis = "Horizontal_" + GameManager.m_Instance.m_Player1.m_Controller;
                 inputModule.verticalAxis = "Vertical_" + GameManager.m_Instance.m_Player1.m_Controller;
-                //ADD CANCEL BUTTOn
-                Time.timeScale = 0;
             }
             if (openedP2)
             {
@@ -236,8 +233,6 @@ public class PauseGame : MonoBehaviour
                 inputModule.submitButton = "Jump_" + GameManager.m_Instance.m_Player2.m_Controller;
                 inputModule.horizontalAxis = "Horizontal_" + GameManager.m_Instance.m_Player2.m_Controller;
                 inputModule.verticalAxis = "Vertical_" + GameManager.m_Instance.m_Player2.m_Controller;
-                //ADD CANCEL BUTTOn
-                Time.timeScale = 0;
             }
 
             if (openedP3)
@@ -246,8 +241,6 @@ public class PauseGame : MonoBehaviour
                 inputModule.submitButton = "Jump_" + GameManager.m_Instance.m_Player3.m_Controller;
                 inputModule.horizontalAxis = "Horizontal_" + GameManager.m_Instance.m_Player3.m_Controller;
                 inputModule.verticalAxis = "Vertical_" + GameManager.m_Instance.m_Player3.m_Controller;
-                //ADD CANCEL BUTTOn
-                Time.timeScale = 0;
             }
 
             if (openedP4)
@@ -256,8 +249,6 @@ public class PauseGame : MonoBehaviour
                 inputModule.submitButton = "Jump_" + GameManager.m_Instance.m_Player4.m_Controller;
                 inputModule.horizontalAxis = "Horizontal_" + GameManager.m_Instance.m_Player4.m_Controller;
                 inputModule.verticalAxis = "Vertical_" + GameManager.m_Instance.m_Player4.m_Controller;
-                //ADD CANCEL BUTTOn
-                Time.timeScale = 0;
             }
 
             if (openedKeyboard)
@@ -265,17 +256,26 @@ public class PauseGame : MonoBehaviour
                 optionsActive = true;
                 //Input.GetButtonDown("Back_Keyboard") _ INPUT
                 inputModule.submitButton = "Submit_Keyboard";
-                inputModule.horizontalAxis = "HorizontalRotation_Keyboard";
-                inputModule.verticalAxis = "VerticalRotation_Keyboard";
-                Time.timeScale = 0;
+                inputModule.horizontalAxis = "Horizontal_Keyboard";
+                inputModule.verticalAxis = "Vertical_Keyboard";
             }
         }
     }
 
     public void ResumeButton()
     {
-        canvases[0].SetActive(false);
+        for (int i = 0; i < GameManager.m_Instance.m_NumOfPlayers; i++)//MIGHT REDO AS ARRAY SIZE IF CAUSES ERRORS
+        {
+            GameManager.m_Instance.m_Players[i].GetComponent<PlayerController>().m_CantMove = false;
+        }
+
         Time.timeScale = 1;
+        canvases[0].SetActive(false);
+        openedP1 = false;
+        openedP2 = false;
+        openedP3 = false;
+        openedP4 = false;
+        openedKeyboard = false;
     }
     public void OptionsButton()
     {
