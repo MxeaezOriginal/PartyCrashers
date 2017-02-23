@@ -61,7 +61,6 @@ public class PlayerController : MonoBehaviour
     // Use this for initialization
 
     //SFX
-    public AudioManager SFXManager;
     public AudioSource audioSource;
     public AudioClip[] jumpSFX;
     public AudioClip[] landSFX;
@@ -143,7 +142,6 @@ public class PlayerController : MonoBehaviour
                     SFXtoPlay = landSFX[Random.Range(0, jumpSFX.Length)];
                     audioSource.clip = SFXtoPlay;
                     audioSource.pitch = randomPitch;
-                    //SFXManager.PushMusic(SFXtoPlay);
                     audioSource.Play();
                     isJumping = false;
 
@@ -159,6 +157,7 @@ public class PlayerController : MonoBehaviour
 						Destroy (jumpvfx, 0.5f);
 					}
                     //SFX Start
+                    //VFXend
                     isJumping = true;
                     if (audioSource != null)
                     {
@@ -166,11 +165,10 @@ public class PlayerController : MonoBehaviour
                         SFXtoPlay = jumpSFX[Random.Range(0, jumpSFX.Length)];
                         audioSource.clip = SFXtoPlay;
                         audioSource.pitch = randomPitch;
-                        //SFXManager.PushMusic(SFXtoPlay);
                         audioSource.Play();
                     }
                     //SFX END
-                    //VFXend
+                    
                     m_Velocity.y = m_Jump;
                 }
                 m_CurrentGravity = 0f;
