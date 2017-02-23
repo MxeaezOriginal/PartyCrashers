@@ -283,8 +283,8 @@ public class MenuManager : MonoBehaviour
                 characterSelect.AssignController(Player.Controller.Keyboard);
                 Debug.Log("Player " + players + " has Joined!");
                 inputModule.submitButton = "Submit_Keyboard";
-                inputModule.horizontalAxis = "HorizontalRotation_Keyboard";
-                inputModule.verticalAxis = "VerticalRotation_Keyboard";
+                inputModule.horizontalAxis = "Horizontal_Keyboard";
+                inputModule.verticalAxis = "Vertical_Keyboard";
                 characterSelect.KeyboardJoin = true;
                 characterSelect.canLockIn_Keyboard = true;
                 characterSelect.firstPlayer = CharacterSelect.PlayerOne.Keyboard;
