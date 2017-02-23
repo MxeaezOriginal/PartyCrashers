@@ -13,12 +13,15 @@ public class ChaserEnemyAi : EnemyAI // Used to inherit from monobehaviour
     private HeartSystem m_HeartSystem;
     private bool m_CanDamage = true;
 
+    Animator m_Animator;
+
 
     // Use this for initialization
     void Start()
     {
         initializeVariables();
         enemyEffect = gameObject.GetComponent<EnemyEffect>();
+        m_Animator = gameObject.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -35,6 +38,7 @@ public class ChaserEnemyAi : EnemyAI // Used to inherit from monobehaviour
             if (m_Distance < m_ChaseDist)
             {
                 chase();
+                m_Animator.SetBool("isChasing", true);
             }
             if (m_Distance < m_StopDistance)
             {
@@ -43,6 +47,7 @@ public class ChaserEnemyAi : EnemyAI // Used to inherit from monobehaviour
             if (m_Distance > m_ChaseDist)
             {
                 returnToOrigin();
+                m_Animator.SetBool("isChasing", false);
             }
         }
         else
