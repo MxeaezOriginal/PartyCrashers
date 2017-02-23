@@ -18,18 +18,26 @@ public class MinigameRewardSelection : MonoBehaviour
     private GameObject m_BossPromptCanvas;
 
     private Button[] m_RewardButtons = new Button[4];
-    private Button[] m_BossPromptButtons = new Button[2];
+    public Button[] m_BossPromptButtons = new Button[2];
 
-    private EventSystem m_ES;
-    private StandaloneInputModule m_SIM;
+    [HideInInspector]
+    public EventSystem m_ES;
+    [HideInInspector]
+    public StandaloneInputModule m_SIM;
 
     private bool m_IsInputSet;
 
     public Text m_RewardTitle;
     public Text m_RewardTilePlayerNumber;
 
+    [HideInInspector]
     public bool rewardsShown;
+    [HideInInspector]
     public bool firstButtonPressed, secondButtonPressed, thirdButtonPressed, fourthButtonPressed;
+    [HideInInspector]
+    public bool m_IsFightingBoss;
+    public bool m_IsBossFightAnswered;
+
 
     public int m_RewardsSelected;
 
@@ -56,6 +64,8 @@ public class MinigameRewardSelection : MonoBehaviour
         m_RewardsSelected = 0;
 
         m_IsInputSet = false;
+        m_IsBossFightAnswered = false;
+        m_IsFightingBoss = false;
     }
 
     void Update()
@@ -537,11 +547,13 @@ public class MinigameRewardSelection : MonoBehaviour
 
     public void BossNo()
     {
-        //        m_MinigameManager.bossNo = true;
+        m_IsBossFightAnswered = true;
+        m_IsFightingBoss = false;
     }
     public void BossYes()
     {
-        //        m_MinigameManager.bossYes = true;
+        m_IsBossFightAnswered = true;
+        m_IsFightingBoss = true;
     }
     private void UpdateCurrentPlayer()
     {

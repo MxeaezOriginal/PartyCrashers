@@ -11,7 +11,7 @@ using UnityEngine;
 public class MinigameManager : MonoBehaviour
 {
     [HideInInspector]
-    public enum EMinigameState { PreGameCountdown, ScoreAndTimeTrack, ResultSummary, RewardSelection };
+    public enum EMinigameState { PreGameCountdown, ScoreAndTimeTrack, ResultSummary, RewardSelection, BossPrompt };
     [HideInInspector]
     public int m_P1Place, m_P2Place, m_P3Place, m_P4Place;
     [HideInInspector]
@@ -65,6 +65,9 @@ public class MinigameManager : MonoBehaviour
                 break;
             case EMinigameState.ResultSummary:
                 m_CurrentState = EMinigameState.RewardSelection;
+                break;
+            case EMinigameState.RewardSelection:
+                m_CurrentState = EMinigameState.BossPrompt;
                 break;
             default:
                 Debug.LogAssertion("[Minigame Manager] Invalid state update");
