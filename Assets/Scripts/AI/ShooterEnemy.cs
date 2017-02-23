@@ -42,12 +42,14 @@ public class ShooterEnemy : EnemyAI //Inherits from EnemyAI instead of Monobehav
     public float minRandomPitch;
     private float randomPitch;
     //SFX End
+    Animator m_Animator;
 
     void Start()
     {
         SFXManager = GetComponent<AudioManager>();
         initializeVariables();
         enemyEffect = gameObject.GetComponent<EnemyEffect>();
+        m_Animator = gameObject.GetComponent<Animator>();
     }
     void Update()
     {
@@ -80,10 +82,19 @@ public class ShooterEnemy : EnemyAI //Inherits from EnemyAI instead of Monobehav
             {
                 returnToOrigin();
             }
+            if (isArrived == true)
+            {
+                m_Animator.SetBool("isChasing", false);
+            }
+            if (isArrived == false)
+            {
+                m_Animator.SetBool("isChasing", true);
+            }
         }
         else
         {
             agent.Stop();
+            m_Animator.SetBool("isChasing", false);
         }
     }
     void Shoot()
