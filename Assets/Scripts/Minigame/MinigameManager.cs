@@ -19,18 +19,18 @@ public class MinigameManager : MonoBehaviour
 
     // Member variables
     private EMinigameState m_CurrentState;
-    private PartyBar       m_PartyBar;
+    private PartyBar m_PartyBar;
 
-    public Canvas      m_MinigameCanvas;
-    public Canvas      m_RewardSelectionCanvas;
-    public Canvas      m_BossPromptCanvas;
+    public Canvas m_MinigameCanvas;
+    public Canvas m_RewardSelectionCanvas;
+    public Canvas m_BossPromptCanvas;
     public CanvasGroup m_FirstFadingCanvas;
     public CanvasGroup m_SecondFadingCanvas;
 
-    public float        m_DelayToFadeIn;
-    public float        m_DelayToShowResultBar;
-    public float        m_DelayToShowRewards;
-    public float        m_FadeTime;
+    public float m_DelayToFadeIn;
+    public float m_DelayToShowResultBar;
+    public float m_DelayToShowRewards;
+    public float m_FadeTime;
 
     private void Start()
     {

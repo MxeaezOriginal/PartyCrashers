@@ -17,8 +17,8 @@ public class MinigameRewardSelection : MonoBehaviour
     private GameObject m_RewardCanvas;
     private GameObject m_BossPromptCanvas;
 
-    private Button[] m_RewardButtons        = new Button[4];
-    private Button[] m_BossPromptButtons    = new Button[2];
+    private Button[] m_RewardButtons = new Button[4];
+    private Button[] m_BossPromptButtons = new Button[2];
 
     private EventSystem m_ES;
     private StandaloneInputModule m_SIM;
@@ -28,17 +28,18 @@ public class MinigameRewardSelection : MonoBehaviour
     public Text m_RewardTitle;
     public Text m_RewardTilePlayerNumber;
 
+    public bool rewardsShown;
     public bool firstButtonPressed, secondButtonPressed, thirdButtonPressed, fourthButtonPressed;
 
     public int m_RewardsSelected;
 
     void Awake()
     {
-        m_MinigameManager   = GetComponent<MinigameManager>();
-        m_RewardCanvas      = m_MinigameManager.m_RewardSelectionCanvas.gameObject;// GameObject.Find("Reward Canvas");
-        m_BossPromptCanvas  = m_MinigameManager.m_BossPromptCanvas.gameObject; // GameObject.Find("BossPrompt Canvas");
+        m_MinigameManager = GetComponent<MinigameManager>();
+        m_RewardCanvas = m_MinigameManager.m_RewardSelectionCanvas.gameObject;// GameObject.Find("Reward Canvas");
+        m_BossPromptCanvas = m_MinigameManager.m_BossPromptCanvas.gameObject; // GameObject.Find("BossPrompt Canvas");
 
-        m_ES  = GameObject.Find("EventSystem").GetComponent<EventSystem>();
+        m_ES = GameObject.Find("EventSystem").GetComponent<EventSystem>();
         m_SIM = GameObject.Find("EventSystem").GetComponent<StandaloneInputModule>();
 
         m_RewardButtons[0] = GameObject.Find("First Reward Button").GetComponent<Button>();   //Damage
@@ -61,17 +62,21 @@ public class MinigameRewardSelection : MonoBehaviour
     {
         if (m_MinigameManager.GetMinigameState().Equals(MinigameManager.EMinigameState.RewardSelection))
         {
-            m_RewardCanvas.SetActive(true);
-            m_ES.SetSelectedGameObject(null);
-            m_ES.enabled = false;
-            m_ES.enabled = true;
-            m_ES.SetSelectedGameObject(m_RewardButtons[0].gameObject);
-
-            if(!m_IsInputSet)
+            if (!rewardsShown)
             {
-                SetupInput();
-                m_IsInputSet = true;
+                m_RewardCanvas.SetActive(true);
+                m_ES.SetSelectedGameObject(null);
+                m_ES.enabled = false;
+                m_ES.enabled = true;
+                m_ES.SetSelectedGameObject(m_RewardButtons[0].gameObject);
+                rewardsShown = true;
             }
+
+            //if(!m_IsInputSet)
+            //{
+            SetupInput();
+            //    m_IsInputSet = true;
+            //}
 
             EndRewards();
             UpdateCurrentPlayer();
@@ -111,15 +116,15 @@ public class MinigameRewardSelection : MonoBehaviour
             case 1:
                 if (GameManager.m_Instance.m_Player1.m_Controller == Player.Controller.Keyboard)
                 {
-                    m_SIM.horizontalAxis  = ("Horizontal_Keyboard");
-                    m_SIM.verticalAxis    = ("Vertical_Keyboard");
-                    m_SIM.submitButton    = ("Submit_Keyboard");
+                    m_SIM.horizontalAxis = ("Horizontal_Keyboard");
+                    m_SIM.verticalAxis = ("Vertical_Keyboard");
+                    m_SIM.submitButton = ("Submit_Keyboard");
                 }
                 else
                 {
-                    m_SIM.horizontalAxis  = ("Horizontal_" + GameManager.m_Instance.m_Player1.m_Controller);
-                    m_SIM.verticalAxis    = ("Vertical_" + GameManager.m_Instance.m_Player1.m_Controller);
-                    m_SIM.submitButton    = ("Submit_" + GameManager.m_Instance.m_Player1.m_Controller);
+                    m_SIM.horizontalAxis = ("Horizontal_" + GameManager.m_Instance.m_Player1.m_Controller);
+                    m_SIM.verticalAxis = ("Vertical_" + GameManager.m_Instance.m_Player1.m_Controller);
+                    m_SIM.submitButton = ("Submit_" + GameManager.m_Instance.m_Player1.m_Controller);
                 }
                 break;
 
@@ -131,22 +136,31 @@ public class MinigameRewardSelection : MonoBehaviour
                     {
                         if (GameManager.m_Instance.m_Player1.m_Controller == Player.Controller.Keyboard)
                         {
-                            m_SIM.horizontalAxis  = ("Horizontal_Keyboard");
-                            m_SIM.verticalAxis    = ("Vertical_Keyboard");
-                            m_SIM.submitButton    = ("Submit_Keyboard");
+                            m_SIM.horizontalAxis = ("Horizontal_Keyboard");
+                            m_SIM.verticalAxis = ("Vertical_Keyboard");
+                            m_SIM.submitButton = ("Submit_Keyboard");
                         }
                         else
                         {
-                            m_SIM.horizontalAxis  = ("Horizontal_" + GameManager.m_Instance.m_Player1.m_Controller);
-                            m_SIM.verticalAxis    = ("Vertical_" + GameManager.m_Instance.m_Player1.m_Controller);
-                            m_SIM.submitButton    = ("Submit_" + GameManager.m_Instance.m_Player1.m_Controller);
+                            m_SIM.horizontalAxis = ("Horizontal_" + GameManager.m_Instance.m_Player1.m_Controller);
+                            m_SIM.verticalAxis = ("Vertical_" + GameManager.m_Instance.m_Player1.m_Controller);
+                            m_SIM.submitButton = ("Submit_" + GameManager.m_Instance.m_Player1.m_Controller);
                         }
                     }
                     else if (m_MinigameManager.m_P2Place == 1)
                     {
-                        m_SIM.horizontalAxis  = ("Horizontal_" + GameManager.m_Instance.m_Player2.m_Controller);
-                        m_SIM.verticalAxis    = ("Vertical_" + GameManager.m_Instance.m_Player2.m_Controller);
-                        m_SIM.submitButton    = ("Submit_" + GameManager.m_Instance.m_Player2.m_Controller);
+                        if (GameManager.m_Instance.m_Player1.m_Controller == Player.Controller.Keyboard)
+                        {
+                            m_SIM.horizontalAxis = ("Horizontal_Keyboard");
+                            m_SIM.verticalAxis = ("Vertical_Keyboard");
+                            m_SIM.submitButton = ("Submit_Keyboard");
+                        }
+                        else
+                        {
+                            m_SIM.horizontalAxis = ("Horizontal_" + GameManager.m_Instance.m_Player2.m_Controller);
+                            m_SIM.verticalAxis = ("Vertical_" + GameManager.m_Instance.m_Player2.m_Controller);
+                            m_SIM.submitButton = ("Submit_" + GameManager.m_Instance.m_Player2.m_Controller);
+                        }
                     }
                 }
                 else if (m_RewardsSelected == 1)                                    //SECOND BUTTON PRESS
@@ -155,22 +169,32 @@ public class MinigameRewardSelection : MonoBehaviour
                     {
                         if (GameManager.m_Instance.m_Player1.m_Controller == Player.Controller.Keyboard)
                         {
-                            m_SIM.horizontalAxis  = ("Horizontal_Keyboard");
-                            m_SIM.verticalAxis    = ("Vertical_Keyboard");
-                            m_SIM.submitButton    = ("Submit_Keyboard");
+                            m_SIM.horizontalAxis = ("Horizontal_Keyboard");
+                            m_SIM.verticalAxis = ("Vertical_Keyboard");
+                            m_SIM.submitButton = ("Submit_Keyboard");
                         }
                         else
                         {
-                            m_SIM.horizontalAxis  = ("Horizontal_" + GameManager.m_Instance.m_Player1.m_Controller);
-                            m_SIM.verticalAxis    = ("Vertical_" + GameManager.m_Instance.m_Player1.m_Controller);
-                            m_SIM.submitButton    = ("Submit_" + GameManager.m_Instance.m_Player1.m_Controller);
+                            m_SIM.horizontalAxis = ("Horizontal_" + GameManager.m_Instance.m_Player1.m_Controller);
+                            m_SIM.verticalAxis = ("Vertical_" + GameManager.m_Instance.m_Player1.m_Controller);
+                            m_SIM.submitButton = ("Submit_" + GameManager.m_Instance.m_Player1.m_Controller);
                         }
                     }
                     else if (m_MinigameManager.m_P2Place == 2)
                     {
-                        m_SIM.horizontalAxis  = ("Horizontal_" + GameManager.m_Instance.m_Player2.m_Controller);
-                        m_SIM.verticalAxis    = ("Vertical_" + GameManager.m_Instance.m_Player2.m_Controller);
-                        m_SIM.submitButton    = ("Submit_" + GameManager.m_Instance.m_Player2.m_Controller);
+                        if (GameManager.m_Instance.m_Player1.m_Controller == Player.Controller.Keyboard)
+                        {
+                            m_SIM.horizontalAxis = ("Horizontal_Keyboard");
+                            m_SIM.verticalAxis = ("Vertical_Keyboard");
+                            m_SIM.submitButton = ("Submit_Keyboard");
+                        }
+                        else
+                        {
+
+                            m_SIM.horizontalAxis = ("Horizontal_" + GameManager.m_Instance.m_Player2.m_Controller);
+                            m_SIM.verticalAxis = ("Vertical_" + GameManager.m_Instance.m_Player2.m_Controller);
+                            m_SIM.submitButton = ("Submit_" + GameManager.m_Instance.m_Player2.m_Controller);
+                        }
                     }
                 }
                 break;
@@ -183,28 +207,28 @@ public class MinigameRewardSelection : MonoBehaviour
                     {
                         if (GameManager.m_Instance.m_Player1.m_Controller == Player.Controller.Keyboard)
                         {
-                            m_SIM.horizontalAxis  = ("Horizontal_Keyboard");
-                            m_SIM.verticalAxis    = ("Vertical_Keyboard");
-                            m_SIM.submitButton    = ("Submit_Keyboard");
+                            m_SIM.horizontalAxis = ("Horizontal_Keyboard");
+                            m_SIM.verticalAxis = ("Vertical_Keyboard");
+                            m_SIM.submitButton = ("Submit_Keyboard");
                         }
                         else
                         {
-                            m_SIM.horizontalAxis  = ("Horizontal_" + GameManager.m_Instance.m_Player1.m_Controller);
-                            m_SIM.verticalAxis    = ("Vertical_" + GameManager.m_Instance.m_Player1.m_Controller);
-                            m_SIM.submitButton    = ("Submit_" + GameManager.m_Instance.m_Player1.m_Controller);
+                            m_SIM.horizontalAxis = ("Horizontal_" + GameManager.m_Instance.m_Player1.m_Controller);
+                            m_SIM.verticalAxis = ("Vertical_" + GameManager.m_Instance.m_Player1.m_Controller);
+                            m_SIM.submitButton = ("Submit_" + GameManager.m_Instance.m_Player1.m_Controller);
                         }
                     }
                     else if (m_MinigameManager.m_P2Place == 1)
                     {
-                        m_SIM.horizontalAxis  = ("Horizontal_" + GameManager.m_Instance.m_Player2.m_Controller);
-                        m_SIM.verticalAxis    = ("Vertical_" + GameManager.m_Instance.m_Player2.m_Controller);
-                        m_SIM.submitButton    = ("Submit_" + GameManager.m_Instance.m_Player2.m_Controller);
+                        m_SIM.horizontalAxis = ("Horizontal_" + GameManager.m_Instance.m_Player2.m_Controller);
+                        m_SIM.verticalAxis = ("Vertical_" + GameManager.m_Instance.m_Player2.m_Controller);
+                        m_SIM.submitButton = ("Submit_" + GameManager.m_Instance.m_Player2.m_Controller);
                     }
                     else if (m_MinigameManager.m_P3Place == 1)
                     {
-                        m_SIM.horizontalAxis  = ("Horizontal_" + GameManager.m_Instance.m_Player3.m_Controller);
-                        m_SIM.verticalAxis    = ("Vertical_" + GameManager.m_Instance.m_Player3.m_Controller);
-                        m_SIM.submitButton    = ("Submit_" + GameManager.m_Instance.m_Player3.m_Controller);
+                        m_SIM.horizontalAxis = ("Horizontal_" + GameManager.m_Instance.m_Player3.m_Controller);
+                        m_SIM.verticalAxis = ("Vertical_" + GameManager.m_Instance.m_Player3.m_Controller);
+                        m_SIM.submitButton = ("Submit_" + GameManager.m_Instance.m_Player3.m_Controller);
                     }
                 }
                 else if (m_RewardsSelected == 1)                                    //SECOND BUTTON PRESS
@@ -213,9 +237,9 @@ public class MinigameRewardSelection : MonoBehaviour
                     {
                         if (GameManager.m_Instance.m_Player1.m_Controller == Player.Controller.Keyboard)
                         {
-                            m_SIM.horizontalAxis  = ("Horizontal_Keyboard");
-                            m_SIM.verticalAxis    = ("Vertical_Keyboard");
-                            m_SIM.submitButton    = ("Submit_Keyboard");
+                            m_SIM.horizontalAxis = ("Horizontal_Keyboard");
+                            m_SIM.verticalAxis = ("Vertical_Keyboard");
+                            m_SIM.submitButton = ("Submit_Keyboard");
                         }
                         else
                         {
@@ -513,11 +537,11 @@ public class MinigameRewardSelection : MonoBehaviour
 
     public void BossNo()
     {
-//        m_MinigameManager.bossNo = true;
+        //        m_MinigameManager.bossNo = true;
     }
     public void BossYes()
     {
-//        m_MinigameManager.bossYes = true;
+        //        m_MinigameManager.bossYes = true;
     }
     private void UpdateCurrentPlayer()
     {
@@ -630,7 +654,7 @@ public class MinigameRewardSelection : MonoBehaviour
             case 4:
                 return (Player.PLAYER)System.Enum.Parse(typeof(Player.PLAYER), "P" + m_MinigameManager.m_P4Place);
             default:
-                return (Player.PLAYER)System.Enum.Parse(typeof(Player.PLAYER), "P" + m_MinigameManager.m_P1Place);
+                return (Player.PLAYER)System.Enum.Parse(typeof(Player.PLAYER), "P" + m_MinigameManager.m_P2Place);
         }
     }
 
