@@ -49,18 +49,27 @@ public class ChaserEnemyAi : EnemyAI // Used to inherit from monobehaviour
             }
             if (isArrived == true)
             {
-                m_Animator.SetBool("isChasing", false);
+                if(m_Animator != null)
+                {
+                    m_Animator.SetBool("isChasing", false);
+                }
             }
             if (isArrived == false)
             {
-                m_Animator.SetBool("isChasing", true);
+                if (m_Animator != null)
+                {
+                    m_Animator.SetBool("isChasing", true);
+                }
             }
             
         }
         else
         {
             agent.Stop();
-            m_Animator.SetBool("isChasing", false);
+            if (m_Animator != null)
+            {
+                m_Animator.SetBool("isChasing", false);
+            }
         }
     }
 
