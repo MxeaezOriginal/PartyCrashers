@@ -88,8 +88,10 @@ public class AdvancedBossAi : MonoBehaviour
         players = GameManager.m_Instance.m_Players;
 
         //Set the health appropriately to match the number of players
+        EnemyHealth enemyHealth = GetComponent<EnemyHealth>();
         m_Health = m_BaseMaxHealth * (players.Length * m_NumOfPlayersHealthMultiplier);
-        
+        enemyHealth.m_EnemyHealth = m_Health;
+
         //Get the rigidbody
         m_Body = GetComponent<Rigidbody>();
 
@@ -117,7 +119,7 @@ public class AdvancedBossAi : MonoBehaviour
         {
             Debug.LogError("Lightning object not assigned to boss");
         }
-        if(m_HurtEffect == null)
+        if (m_HurtEffect == null)
         {
             Debug.LogError("Hurt effect object not assigned to boss");
         }
@@ -137,7 +139,7 @@ public class AdvancedBossAi : MonoBehaviour
             case states.hurt: Hurt(m_DamageTaken, m_StunTime); break;
             case states.teleport: Teleport(Mathf.RoundToInt(20 / m_Difficulty), Mathf.RoundToInt(20 / m_Difficulty)); break;
             //Attacks
-            case states.shoot: m_BulletsToShoot = Mathf.RoundToInt(10 * m_Difficulty); BasicShoot(Mathf.RoundToInt( 20/m_Difficulty), Mathf.RoundToInt(20 / m_Difficulty));  break;
+            case states.shoot: m_BulletsToShoot = Mathf.RoundToInt(10 * m_Difficulty); BasicShoot(Mathf.RoundToInt(20 / m_Difficulty), Mathf.RoundToInt(20 / m_Difficulty)); break;
             case states.dash: Dash(Mathf.RoundToInt(30 / m_Difficulty), 10, Mathf.RoundToInt(10 / m_Difficulty)); break;
             case states.earthquake: Earthquake(Mathf.RoundToInt(20 / m_Difficulty), Mathf.RoundToInt(20 / m_Difficulty)); break;
         }
@@ -279,91 +281,90 @@ public class AdvancedBossAi : MonoBehaviour
     }
     void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.GetComponent<Sword>() != null)
-        {
-            Sword sword = other.gameObject.GetComponent<Sword>();
-            bool attacking = sword.attack;
-            attacked = false;
-        }
+        //if (other.gameObject.GetComponent<Sword>() != null)
+        //{
+        //    Sword sword = other.gameObject.GetComponent<Sword>();
+        //    bool attacking = sword.attack;
+        //    attacked = false;
+        //}
 
-        
+
     }
 
     //CHANGE THIS ONCE ANIMATIONS ARE IN
-    public void OnTriggerStay(Collider other)
+    public void OnTriggerEnter(Collider other)
     {
-        if (!m_Invincible)
-        {
-            if (other.gameObject.GetComponent<Damage>() != null)
-            {
-                Damage attacker = other.gameObject.GetComponent<Damage>();
-                StateEffect attackerEffect = other.gameObject.GetComponent<StateEffect>();
-                float dmg = 0;
-                float knockBack = 0f;
-                float stun = 0f;
-                if (other.gameObject.GetComponent<Sword>() != null)
-                {
-                    Sword sword = other.gameObject.GetComponent<Sword>();
-                    bool attacking = sword.attack;
-                    if (attacking)
-                    {
-                        if (!attacked)
-                        {
-                            attacked = true;
-                            dmg = attacker.m_Damage;
-                            knockBack = 10f;
-                            stun = 10f;
+        //if (!m_Invincible)
+        //{
+        //    if (other.gameObject.GetComponent<Damage>() != null)
+        //    {
+        //        Damage attacker = other.gameObject.GetComponent<Damage>();
+        //        StateEffect attackerEffect = other.gameObject.GetComponent<StateEffect>();
+        //        float dmg = 0;
+        //        float knockBack = 0f;
+        //        float stun = 0f;
+        //        if (other.gameObject.GetComponent<Sword>() != null)
+        //        {
+        //            Sword sword = other.gameObject.GetComponent<Sword>();
+        //            bool attacking = sword.attack;
+        //            if (attacking)
+        //            {
+        //                if (!attacked)
+        //                {
+        //                    attacked = true;
+        //                    dmg = attacker.m_Damage;
+        //                    knockBack = 10f;
+        //                    stun = 10f;
 
-                            m_Velocity = knockBack * Vector3.Normalize(transform.position - other.transform.position);
-                            m_Health -= dmg;
-                            m_StunTime = stun;
-                            state = states.hurt;
-                        }
-                        else
-                        {
-                            dmg = 0;
-                            knockBack = 0f;
-                            stun = 0f;
-                        }
-                    }
-                    else
-                    {
+        //                    m_Velocity = knockBack * Vector3.Normalize(transform.position - other.transform.position);
+        //                    m_Health -= dmg;
+        //                    m_StunTime = stun;
+        //                    state = states.hurt;
+        //                }
+        //                else
+        //                {
+        //                    dmg = 0;
+        //                    knockBack = 0f;
+        //                    stun = 0f;
+        //                }
+        //            }
+        //            else
+        //            {
 
-                        dmg = 0;
-                        knockBack = 0f;
-                        stun = 0f;
-                    }
-                }
-                else
-                {
-                    //dmg = attacker.m_Damage;
-                    knockBack = 10f;
-                    stun = 10f;
-                }
+        //                dmg = 0;
+        //                knockBack = 0f;
+        //                stun = 0f;
+        //            }
+        //        }
+        //        else
+        //        {
+        //            //dmg = attacker.m_Damage;
+        //            knockBack = 10f;
+        //            stun = 10f;
+        //        }
 
 
-                //float knockBack = attackerEffect.m_KnockBack; //These two is how this code is supposed to work but for whatever reason it's not getting these or the values just don't exist
-                //float stun = attackerEffect.m_StunTime;
-                
-            }
-        }
-        #endregion//ALL THIS NEEDS TO CHANGE ONCE ANIMATIONS ARE IN
+        //        //float knockBack = attackerEffect.m_KnockBack; //These two is how this code is supposed to work but for whatever reason it's not getting these or the values just don't exist
+        //        //float stun = attackerEffect.m_StunTime;
+
+        //    }
+        //}
     }
+    #endregion//ALL THIS NEEDS TO CHANGE ONCE ANIMATIONS ARE IN
+
     #region Attack states
 
     void Dash(int windup, int active, int recover)
     {
         frame++;
-        
 
-        if (frame == 2)
-        {
-            GameObject playerToTarget = GetTargetPlayer();
-            m_DashTarget = playerToTarget.transform;
-        }
+
+        GameObject playerToTarget = GetTargetPlayer();
+        m_DashTarget = playerToTarget.transform;
+
 
         //Windup
-        if (frame <= windup)
+        if (frame <= windup && frame >= 2)
         {
             //Apply friction
             Friction(2f);
@@ -475,7 +476,7 @@ public class AdvancedBossAi : MonoBehaviour
         }
 
         //Change state
-        if (m_BulletsShot >= 10*m_Difficulty)
+        if (m_BulletsShot >= 10 * m_Difficulty)
         {
             m_BulletsShot = 0;
             state = states.idle;
@@ -548,7 +549,7 @@ public class AdvancedBossAi : MonoBehaviour
 
         float healthDifference = mostHealth - leastHealth;
         //Do math with this shit to figure out who to target ... SHOULD STILL BE KINDA RANDOM... We don't want people figuring out how the boss chooses it's targets
-      
+
 
         GameObject target;
 
@@ -611,8 +612,9 @@ public class AdvancedBossAi : MonoBehaviour
     //Don't change this please it works pretty well
     void ManageDifficulty()
     {
-        m_Difficulty = GetPlayersTotalHealthRatio() / (m_Health/(m_BaseMaxHealth*m_NumOfPlayersHealthMultiplier));
-        if(m_Difficulty < 0.1)
+        EnemyHealth enemyHealthScript = GetComponent<EnemyHealth>();
+        m_Difficulty = GetPlayersTotalHealthRatio() / (enemyHealthScript.m_EnemyHealth / (m_BaseMaxHealth * m_NumOfPlayersHealthMultiplier));
+        if (m_Difficulty < 0.1)
         {
             m_Difficulty = 0.1f;
         }
@@ -650,15 +652,15 @@ public class AdvancedBossAi : MonoBehaviour
         GameObject finalTarget = players[0];
         float health = 0f;
 
-        for(int i = 0; i < players.Length; i++)
+        for (int i = 0; i < players.Length; i++)
         {
             target = players[i];
             HeartSystem hearts = players[i].GetComponent<HeartSystem>();
             health = hearts.curHealth;
 
-            if(i > 0)
+            if (i > 0)
             {
-                HeartSystem lastHearts = players[i-1].GetComponent<HeartSystem>();
+                HeartSystem lastHearts = players[i - 1].GetComponent<HeartSystem>();
                 float lastHealth = lastHearts.curHealth;
                 if (health > lastHealth)
                 {
@@ -699,7 +701,7 @@ public class AdvancedBossAi : MonoBehaviour
     {
         float health = 0;
         float maxHealth = 0;
-        for(int i = 0; i < players.Length; i++)
+        for (int i = 0; i < players.Length; i++)
         {
             HeartSystem hearts = players[i].GetComponent<HeartSystem>();
             health += hearts.curHealth;
@@ -718,9 +720,9 @@ public class AdvancedBossAi : MonoBehaviour
         {
             //Hit player
             PlayerController playerScript = other.gameObject.GetComponent<PlayerController>();
-            if(m_Velocity.magnitude > 10f)
+            if (m_Velocity.magnitude > 10f)
             {
-                playerScript.m_Velocity = new Vector3(0f,30f,0f);
+                playerScript.m_Velocity = new Vector3(0f, 30f, 0f);
                 HeartSystem health = other.gameObject.GetComponent<HeartSystem>();
                 health.TakeDamage(1);
             }
