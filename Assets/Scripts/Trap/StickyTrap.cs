@@ -7,6 +7,12 @@ public class StickyTrap : Trap {
     public GameObject m_effect;
     private PlayerController playerController;
 
+    //SFX Start
+    public AudioSource audioSource;
+    public AudioClip[] StuckSFX;
+    private AudioClip SFXtoPlay;
+    //SFX END
+
     public void OnTriggerEnter(Collider other)
     {
         if (other.GetComponent<HeartSystem>() != null)
@@ -20,6 +26,14 @@ public class StickyTrap : Trap {
 					effect = (GameObject)Instantiate(m_effect, other.transform.position, Random.rotation);  
 					Destroy(effect, m_StuckTime);
                 }
+                //SFX
+                if (audioSource != null)
+                {
+                    SFXtoPlay = StuckSFX[Random.Range(0, StuckSFX.Length)];
+                    audioSource.clip = SFXtoPlay;
+                    audioSource.Play();
+                }
+                //SFX End
                 playerController.m_CantMove = true;
                 m_CurrentCooldown = Time.time;
                 StartCoroutine("getUnstuck");
