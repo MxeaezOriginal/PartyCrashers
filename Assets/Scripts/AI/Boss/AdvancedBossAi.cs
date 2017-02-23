@@ -135,11 +135,11 @@ public class AdvancedBossAi : MonoBehaviour
         {
             case states.idle: Idle(); break;
             case states.hurt: Hurt(m_DamageTaken, m_StunTime); break;
-            case states.teleport: Teleport(60, 60); break;
+            case states.teleport: Teleport(Mathf.RoundToInt(20 / m_Difficulty), Mathf.RoundToInt(20 / m_Difficulty)); break;
             //Attacks
-            case states.shoot: m_BulletsToShoot = Mathf.RoundToInt(10 * m_Difficulty); BasicShoot(Mathf.RoundToInt( 10/m_Difficulty), Mathf.RoundToInt(10 / m_Difficulty));  break;
-            case states.dash: Dash(70, 10, Mathf.RoundToInt(10 / m_Difficulty)); break;
-            case states.earthquake: Earthquake(Mathf.RoundToInt(60 / m_Difficulty), 60); break;
+            case states.shoot: m_BulletsToShoot = Mathf.RoundToInt(10 * m_Difficulty); BasicShoot(Mathf.RoundToInt( 20/m_Difficulty), Mathf.RoundToInt(20 / m_Difficulty));  break;
+            case states.dash: Dash(Mathf.RoundToInt(30 / m_Difficulty), 10, Mathf.RoundToInt(10 / m_Difficulty)); break;
+            case states.earthquake: Earthquake(Mathf.RoundToInt(20 / m_Difficulty), Mathf.RoundToInt(20 / m_Difficulty)); break;
         }
         //Manage frame
         frame++;
@@ -148,8 +148,11 @@ public class AdvancedBossAi : MonoBehaviour
             frame = 0;
         }
 
-        Move(); //Call the move function so the guy actually moves based on it's velocity
+        //Call the move function so the guy actually moves based on it's velocity
+        Move();
 
+        //Manage difficulty
+        ManageDifficulty();
         //Dies
         if (m_Health <= 0)
         {
@@ -446,7 +449,7 @@ public class AdvancedBossAi : MonoBehaviour
         if (frame == shootFrame)
         {
             transform.LookAt(shootTarget);
-            m_BulletsToShoot -= 1; //Subtract number of bullets to shoot
+            m_BulletsShot += 1; //Increase number of bullets shot
             for (int i = 0; i < LightningArray.Length; i++)
             {
                 if (LightningArray[i].active == false)
@@ -472,9 +475,9 @@ public class AdvancedBossAi : MonoBehaviour
         }
 
         //Change state
-        if (m_BulletsToShoot <= 0)
+        if (m_BulletsShot >= 10*m_Difficulty)
         {
-            m_BulletsToShoot = 5;
+            m_BulletsShot = 0;
             state = states.idle;
         }
 
@@ -606,6 +609,14 @@ public class AdvancedBossAi : MonoBehaviour
 
     #endregion
     //Don't change this please it works pretty well
+    void ManageDifficulty()
+    {
+        m_Difficulty = GetPlayersTotalHealthRatio() / (m_Health/(m_BaseMaxHealth*m_NumOfPlayersHealthMultiplier));
+        if(m_Difficulty < 0.1)
+        {
+            m_Difficulty = 0.1f;
+        }
+    }
     GameObject getClosestPlayer()
     {
         float distance = 0f;
@@ -640,6 +651,7 @@ public class AdvancedBossAi : MonoBehaviour
             target = players[i];
             HeartSystem hearts = players[i].GetComponent<HeartSystem>();
             health = hearts.curHealth;
+
             if(i > 0)
             {
                 HeartSystem lastHearts = players[i-1].GetComponent<HeartSystem>();
@@ -678,6 +690,23 @@ public class AdvancedBossAi : MonoBehaviour
         }
 
         return finalTarget;
+    }
+    float GetPlayersTotalHealthRatio()
+    {
+        float health = 0;
+        float maxHealth = 0;
+        for(int i = 0; i < players.Length; i++)
+        {
+            HeartSystem hearts = players[i].GetComponent<HeartSystem>();
+            health += hearts.curHealth;
+        }
+        for (int i = 0; i < players.Length; i++)
+        {
+            HeartSystem hearts = players[i].GetComponent<HeartSystem>();
+            maxHealth += hearts.maxHealth;
+        }
+
+        return health / maxHealth;
     }
     void OnCollisionEnter(Collision other)
     {
