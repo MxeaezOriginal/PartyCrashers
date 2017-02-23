@@ -16,9 +16,9 @@ public class WeaponManager : MonoBehaviour
 
     [HideInInspector]
     public GameObject m_CurrentWeaponObject;
-    [HideInInspector]
     public Weapon m_CurrentWeapon = Weapon.GlowSword;
-    public Weapon m_ChangeWeapon = Weapon.GlowSword;
+    [HideInInspector]
+    private Weapon m_ChangeWeapon = Weapon.GlowSword;
     private string m_PickupConcactinateString = "_PickUp";
     public float m_DelayBetweenSwaps = 1f;
 
