@@ -59,6 +59,11 @@ public class MenuManager : MonoBehaviour
         //    BackButton();
 
         StartCoroutine(SelectedAnimationWaitForEndOfFrame());
+
+        if (Input.GetButtonDown("Back_" + GameManager.m_Instance.m_Player1.m_Controller) && canBack)
+        {
+            Back();
+        }
     }
 
     //Main Functions for setting all the bools
@@ -312,9 +317,10 @@ public class MenuManager : MonoBehaviour
     {
         exitActive = true;
 
-        exitPromptActive = false;
-        canvases[5].SetActive(false);
-        canvases[1].SetActive(false);
+        Application.Quit();
+        //exitPromptActive = false;
+        //canvases[5].SetActive(false);
+        //canvases[1].SetActive(false);
     }
     public void ExitPromptNo()
     {
@@ -329,7 +335,7 @@ public class MenuManager : MonoBehaviour
         firstSelectedButtons[1].GetComponent<Button>().Select();
 
     }
-    public void BackButton()
+    public void Back()
     {
         mainMenuActive = true;
         GameManager.m_Instance.m_NumOfPlayers = 1;
@@ -369,9 +375,9 @@ public class MenuManager : MonoBehaviour
         }
 
         //Set characterSelectIcon to default\
-        characterSelect.P1.characterSelectIcon.texture = null;
-        characterSelect.P2.characterSelectIcon.texture = null;
-        characterSelect.P3.characterSelectIcon.texture = null;
-        characterSelect.P4.characterSelectIcon.texture = null;
+        characterSelect.P1.characterSelectIcon.texture = characterSelect.emptyTexture;
+        characterSelect.P2.characterSelectIcon.texture = characterSelect.emptyTexture;
+        characterSelect.P3.characterSelectIcon.texture = characterSelect.emptyTexture;
+        characterSelect.P4.characterSelectIcon.texture = characterSelect.emptyTexture;
     }
 }
