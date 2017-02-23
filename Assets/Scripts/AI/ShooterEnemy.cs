@@ -109,6 +109,7 @@ public class ShooterEnemy : EnemyAI //Inherits from EnemyAI instead of Monobehav
                 SFXtoPlay = SFX[Random.Range(0, SFX.Length)];
                 audioSource.clip = SFXtoPlay;
                 audioSource.pitch = randomPitch;
+                SFXManager.GetPitch(randomPitch);
                 SFXManager.PushMusic(SFXtoPlay);
                 //audioSource.Play();
 

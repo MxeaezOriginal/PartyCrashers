@@ -46,11 +46,11 @@ public class AudioManager : MonoBehaviour {
                 WaitAudioClip();
             }
         }    
-	}
+	} 
 
     void playRandomMusic()
     {
-        m_CurMusic = m_RandomMusicList[Random.Range(0, m_RandomMusicList.Count)];
+        m_CurMusic = m_RandomMusicList[Random.Range(0, (m_RandomMusicList.Count)-1)];
         m_AudioManager.clip = m_CurMusic;
         m_AudioManager.pitch = m_pitch;
         m_AudioManager.Play();
@@ -78,9 +78,10 @@ public class AudioManager : MonoBehaviour {
     {
         m_RandomMusicList.Clear();
     }
-    //public void GetPitch(float p)
-    //{
-    //    Debug.Log("get pitch");
-    //    m_pitch = p;
-    //}
+
+    public void GetPitch(float p)
+    {
+        Debug.Log("get pitch");
+        m_pitch = p;
+    }
 }

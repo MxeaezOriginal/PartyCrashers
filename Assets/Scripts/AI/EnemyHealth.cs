@@ -4,7 +4,7 @@ using System.Collections;
 public class EnemyHealth : MonoBehaviour
 {
     //sound
-    //private AudioManager SFXManager;
+    private AudioManager SFXManager;
     public GameObject SFXPlayer;
     public GameObject SFXHit;
     public AudioClip[] hurtSFX;
@@ -96,6 +96,8 @@ public class EnemyHealth : MonoBehaviour
                 AudioSource source = SFXPlayer.GetComponent<AudioSource>();
                 source.pitch = randomPitch;
                 source.clip = SFXtoPlay;
+                SFXManager.GetPitch(randomPitch);
+                SFXManager.PushMusic(SFXtoPlay);
                 //SFXManager.PushMusic(SFXtoPlay);
             }
 
