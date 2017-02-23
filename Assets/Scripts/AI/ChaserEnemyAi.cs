@@ -38,7 +38,7 @@ public class ChaserEnemyAi : EnemyAI // Used to inherit from monobehaviour
             if (m_Distance < m_ChaseDist)
             {
                 chase();
-                m_Animator.SetBool("isChasing", true);
+                //m_Animator.SetBool("isChasing", true);
             }
             if (m_Distance < m_StopDistance)
             {
@@ -47,8 +47,16 @@ public class ChaserEnemyAi : EnemyAI // Used to inherit from monobehaviour
             if (m_Distance > m_ChaseDist)
             {
                 returnToOrigin();
+            }
+            if (isArrived == true)
+            {
                 m_Animator.SetBool("isChasing", false);
             }
+            if (isArrived == false)
+            {
+                m_Animator.SetBool("isChasing", true);
+            }
+            
         }
         else
         {

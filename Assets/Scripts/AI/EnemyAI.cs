@@ -12,6 +12,7 @@ public class EnemyAI : MonoBehaviour
     [HideInInspector]
     public float m_Rtts;
     public Rigidbody m_RigidBody;
+    public bool isArrived = false;
 
     void Start()
     {
@@ -22,6 +23,7 @@ public class EnemyAI : MonoBehaviour
     {
         if (target != null)
         {
+            isArrived = false;
             look(target.transform);
             agent.SetDestination(target.transform.position);
             agent.Resume();
@@ -32,6 +34,14 @@ public class EnemyAI : MonoBehaviour
     {
         agent.SetDestination(m_Origin);
         agent.Resume();
+        if(transform.position.x == m_Origin.x && transform.position.z == m_Origin.z)
+        {
+            isArrived = true;
+        }
+        else
+        {
+            isArrived = false;
+        }
     }
 
     public void aim(Transform other)
