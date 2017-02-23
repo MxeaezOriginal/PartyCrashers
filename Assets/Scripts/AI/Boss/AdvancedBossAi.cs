@@ -51,6 +51,7 @@ public class AdvancedBossAi : MonoBehaviour
     private float m_StunTime;
     private bool attacked = false;
     private bool attackerLeft = true;
+    private float currentHealth;
     //Effects
     public GameObject m_HurtEffect;
 
@@ -91,6 +92,7 @@ public class AdvancedBossAi : MonoBehaviour
         EnemyHealth enemyHealth = GetComponent<EnemyHealth>();
         m_Health = m_BaseMaxHealth * (players.Length * m_NumOfPlayersHealthMultiplier);
         enemyHealth.m_EnemyHealth = m_Health;
+        currentHealth = m_Health;
 
         //Get the rigidbody
         m_Body = GetComponent<Rigidbody>();
@@ -156,7 +158,8 @@ public class AdvancedBossAi : MonoBehaviour
         //Manage difficulty
         ManageDifficulty();
         //Dies
-        if (m_Health <= 0)
+        EnemyHealth enemyHealth = GetComponent<EnemyHealth>();
+        if (enemyHealth.m_EnemyHealth <= 0)
         {
             //Load main menu
             SceneManager.LoadScene(0);
@@ -168,6 +171,12 @@ public class AdvancedBossAi : MonoBehaviour
         {
             frame = 0;
             currentState = state;
+        }
+        EnemyHealth enemyHealth = GetComponent<EnemyHealth>();
+        if(enemyHealth.m_EnemyHealth != currentHealth)
+        {
+            currentHealth = enemyHealth.m_EnemyHealth;
+            state = states.hurt;
         }
     }
     void Move()
