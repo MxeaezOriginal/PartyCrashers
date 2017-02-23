@@ -47,7 +47,7 @@ public class DebugLevelSwitcher : MonoBehaviour
         {
             SceneManager.LoadScene("DanceFloorRumble");
         }
-		else if (Input.GetKeyDown(KeyCode.F1))
+		else if (Input.GetKeyDown(KeyCode.Keypad1))
 		{
 			SceneManager.LoadScene("DiningRoom02");
 		}
