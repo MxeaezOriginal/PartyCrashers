@@ -4,22 +4,27 @@ using System.Collections;
 public class DanceFloor : MonoBehaviour {
 
     public GameObject m_Light;
-    public GameObject m_DiscoBall;
+    //public GameObject m_DiscoBall;
     public int m_CurrentFloorColor;
-    public int m_CurrentBallColor;
+    //public int m_CurrentBallColor;
     public int m_PreviousFloorColor;
-    public int m_PreviousBallColor;
+    //public int m_PreviousBallColor;
+    private int m_GreenColorPercentage;
+
+    //public GameObject m_GetPointEffect;
+    //public GameObject m_LosepointEffect;
+
     private bool m_GetPoint = true;
     private bool m_LosePoint = true;
 
     private bool m_GetPointFX = false;
     private bool m_LosePointFX = false;
 
-    private GameObject m_GetPointEffect;
-    private GameObject m_LosepointEffect;
+    public GameObject m_GetPointEffect;
+    public GameObject m_LosepointEffect;
 
     private LightChangeDancefloor m_LightChangeDancefloor;
-    private LightChangeDiscoball m_LightChangeDiscoball;
+    //private LightChangeDiscoball m_LightChangeDiscoball;
 
     private GameObject GettingPoint = null;
     private GameObject LosingPoint = null;
@@ -28,18 +33,19 @@ public class DanceFloor : MonoBehaviour {
     // Use this for initialization
     void Start () {
         m_LightChangeDancefloor = m_Light.GetComponent<LightChangeDancefloor>();
-        m_LightChangeDiscoball = m_DiscoBall.GetComponent<LightChangeDiscoball>();
+        //m_LightChangeDiscoball = m_DiscoBall.GetComponent<LightChangeDiscoball>();
 
-        m_GetPointEffect = m_LightChangeDiscoball.m_GetPointEffect;
-        m_LosepointEffect = m_LightChangeDiscoball.m_LosepointEffect;
+        //m_GetPointEffect = m_LightChangeDiscoball.m_GetPointEffect;
+        //m_LosepointEffect = m_LightChangeDiscoball.m_LosepointEffect;
     }
 	
 	// Update is called once per frame
 	void Update () {
         m_CurrentFloorColor = m_LightChangeDancefloor.CurrentColorInt;
-        m_CurrentBallColor = m_LightChangeDiscoball.CurrentColorInt;
+        //m_CurrentBallColor = m_LightChangeDiscoball.CurrentColorInt;
         m_PreviousFloorColor = m_LightChangeDancefloor.PreviousColorInt;
-        m_PreviousBallColor = m_LightChangeDiscoball.PreviousColorInt;
+        //m_PreviousBallColor = m_LightChangeDiscoball.PreviousColorInt;
+        m_GreenColorPercentage = m_LightChangeDancefloor.GreenColorPercentage;
     }
 
     public void OnTriggerStay(Collider other)
@@ -61,7 +67,8 @@ public class DanceFloor : MonoBehaviour {
             if (m_Light.GetComponent<LightChangeDancefloor>().stop == true)
             {
 
-                if (m_PreviousFloorColor == m_PreviousBallColor)
+                //if (m_PreviousFloorColor == 0)
+                if(m_PreviousFloorColor >= 0 && m_PreviousFloorColor < m_GreenColorPercentage)
                 {
                     // Getting Score.
                     Debug.Log("Getting Score!");
@@ -81,7 +88,8 @@ public class DanceFloor : MonoBehaviour {
                     //Destroy(GettingPoint, 5f);
                     StartCoroutine(WaitForSec(1f));
                 }
-                else if(m_PreviousFloorColor == 7)
+                //else if(m_PreviousFloorColor == 1)
+                else if (m_PreviousFloorColor >= m_GreenColorPercentage && m_PreviousFloorColor < 100)
                 {
                     // Lose Score.
                     Debug.Log("LOSE point!");

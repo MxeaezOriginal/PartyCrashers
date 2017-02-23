@@ -1,15 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class LightChangeDancefloor : MonoBehaviour {
+public class NEWLightChangeDancefloor : MonoBehaviour {
 
-	[SerializeField]
-	private Light lt;
-	
-	[SerializeField]
-	private Color ColorRight;
-	[SerializeField]
-	private Color ColorWrong;
+    // Green
+	public Color ColorGreen;
+    // Red
+	public Color ColorRed;
 
 	[SerializeField]
 	private float scoretime = 4;
@@ -25,14 +22,11 @@ public class LightChangeDancefloor : MonoBehaviour {
 
 	public bool stop = false;
 
-    public int GreenColorPercentage = 20;
-
 
 	// Use this for initialization
 	void Start()
 	{		
 		//CurrentColorNumber = 1;
-		lt = GetComponent<Light>();
         CurrentColorInt = -1;
 	}
 
@@ -44,14 +38,14 @@ public class LightChangeDancefloor : MonoBehaviour {
 			StartCoroutine (Stopedfor (scoretime));
             if (PreviousColorInt != -1)
             {
-                lt.color = TempColor;
+                //lt.color = TempColor;
             }
         }
 		if (stop == false) 
 		{
 			StartCoroutine(Stopfor(scoretime));
 			StartCoroutine(ColorRandomiser(stoptime));
-            lt.color = Color.Lerp (CurrentColor, PreviousColor, Mathf.PingPong (Time.time*1.5f, 1));
+            //lt.color = Color.Lerp (CurrentColor, PreviousColor, Mathf.PingPong (Time.time*1.5f, 1));
             PreviousColorInt = CurrentColorInt;
             TempColor = CurrentColor;
             //lt.color = Color.Lerp(CurrentColor, PreviousColor, 1);
@@ -82,16 +76,16 @@ public class LightChangeDancefloor : MonoBehaviour {
 	IEnumerator ColorRandomiser(float wait)
 	{
 		yield return new WaitForSeconds(wait);
-		CurrentColorInt = Random.Range (0,100);
-		
-			if (CurrentColorInt >= 0 && CurrentColorInt < GreenColorPercentage) 
-			{
-				CurrentColor = ColorRight;
-			}
-			if (CurrentColorInt >= GreenColorPercentage && CurrentColorInt < 100) 
-			{
-				CurrentColor = ColorWrong;
-			}
+		CurrentColorInt = Random.Range (0,8);
 
+			if (CurrentColorInt == 0)
+			{
+				CurrentColor = ColorGreen;
+			}		
+			
+			if (CurrentColorInt == 1) 
+			{
+				CurrentColor = ColorRed;
+			}
 	}
 }

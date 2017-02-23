@@ -4,14 +4,18 @@ using System.Collections;
 public class MaterialChangeDanceFloor : MonoBehaviour {
 
     public Renderer m_DiscoBallLight;
-    public Material m_ColorZero;
-    public Material m_ColorOne;
-    public Material m_ColorTwo;
-    public Material m_ColorThree;
-    public Material m_ColorFour;
-    public Material m_ColorFive;
-    public Material m_ColorSix;
-    public Material m_ColorSeven;
+    //public Material m_ColorZero;
+    //public Material m_ColorOne;
+    //public Material m_ColorTwo;
+    //public Material m_ColorThree;
+    //public Material m_ColorFour;
+    //public Material m_ColorFive;
+    //public Material m_ColorSix;
+    //public Material m_ColorSeven;
+
+    public Material m_ColorRight;
+    public Material m_ColorWrong;
+
 
     private float scoretime = 4;
     private float stoptime = 4;
@@ -23,7 +27,9 @@ public class MaterialChangeDanceFloor : MonoBehaviour {
     public GameObject m_Light;
     public int m_CurrentFloorColorInt;
     public int m_PreviousColorInt = -1;
-    
+    private int m_GreedColorPercentage;
+
+
     void Start()
     {
         m_CurrentFloorColorInt = -2;
@@ -32,6 +38,7 @@ public class MaterialChangeDanceFloor : MonoBehaviour {
     void Update()
     {
         m_CurrentFloorColorInt = m_Light.GetComponent<LightChangeDancefloor>().CurrentColorInt;
+        m_GreedColorPercentage = m_Light.GetComponent<LightChangeDancefloor>().GreenColorPercentage;
         if (stop == true)
         {
             StartCoroutine(Stopedfor(scoretime));
@@ -62,38 +69,15 @@ public class MaterialChangeDanceFloor : MonoBehaviour {
     IEnumerator ColorRandomiser(float wait)
     {
 
-        if (m_CurrentFloorColorInt == 0)
+        if (m_CurrentFloorColorInt >= 0 && m_CurrentFloorColorInt < m_GreedColorPercentage)
         {
-            m_DiscoBallON = m_ColorZero;
+            m_DiscoBallON = m_ColorRight;
         }
-        if (m_CurrentFloorColorInt == 1)
+        if (m_CurrentFloorColorInt >= m_GreedColorPercentage && m_CurrentFloorColorInt < 100)
         {
-            m_DiscoBallON = m_ColorOne;
+            m_DiscoBallON = m_ColorWrong;
         }
-        if (m_CurrentFloorColorInt == 2)
-        {
-            m_DiscoBallON = m_ColorTwo;
-        }
-        if (m_CurrentFloorColorInt == 3)
-        {
-            m_DiscoBallON = m_ColorThree;
-        }
-        if (m_CurrentFloorColorInt == 4)
-        {
-            m_DiscoBallON = m_ColorFour;
-        }
-        if (m_CurrentFloorColorInt == 5)
-        {
-            m_DiscoBallON = m_ColorFive;
-        }
-        if (m_CurrentFloorColorInt == 6)
-        {
-            m_DiscoBallON = m_ColorSix;
-        }
-        if (m_CurrentFloorColorInt == 7)
-        {
-            m_DiscoBallON = m_ColorSeven;
-        }
+        
         yield return new WaitForSeconds(wait);
     }
     IEnumerator Stopfor(float wait)

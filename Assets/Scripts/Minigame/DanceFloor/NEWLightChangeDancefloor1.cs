@@ -1,15 +1,26 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class LightChangeDancefloor : MonoBehaviour {
+public class LightChangeDancefloorNew : MonoBehaviour {
 
 	[SerializeField]
 	private Light lt;
-	
 	[SerializeField]
-	private Color ColorRight;
+	private Color ColorZero;
 	[SerializeField]
-	private Color ColorWrong;
+	private Color ColorOne;
+	[SerializeField]
+	private Color ColorTwo;
+	[SerializeField]
+	private Color ColorThree;
+	[SerializeField]
+	private Color ColorFour;
+	[SerializeField]
+	private Color ColorFive;
+	[SerializeField]
+	private Color ColorSix;
+	[SerializeField]
+	private Color ColorSeven;
 
 	[SerializeField]
 	private float scoretime = 4;
@@ -24,8 +35,6 @@ public class LightChangeDancefloor : MonoBehaviour {
 	//public int CurrentColorNumber;
 
 	public bool stop = false;
-
-    public int GreenColorPercentage = 20;
 
 
 	// Use this for initialization
@@ -82,16 +91,80 @@ public class LightChangeDancefloor : MonoBehaviour {
 	IEnumerator ColorRandomiser(float wait)
 	{
 		yield return new WaitForSeconds(wait);
-		CurrentColorInt = Random.Range (0,100);
-		
-			if (CurrentColorInt >= 0 && CurrentColorInt < GreenColorPercentage) 
+		CurrentColorInt = Random.Range (0,8);
+		//PreviousColorInt = Random.Range (0,8);
+		//if (CurrentColorInt == PreviousColorInt) {
+		//	CurrentColorInt = Random.Range (0,8);
+		//	PreviousColorInt = Random.Range (0,8);
+		//} 
+		//else//im so sorry
+		//{
+			if (CurrentColorInt == 0)
 			{
-				CurrentColor = ColorRight;
+				CurrentColor = ColorZero;
+			}		
+			if (CurrentColorInt == 1) 
+			{
+				CurrentColor = ColorOne;
 			}
-			if (CurrentColorInt >= GreenColorPercentage && CurrentColorInt < 100) 
+			if (CurrentColorInt == 2) 
 			{
-				CurrentColor = ColorWrong;
+				CurrentColor = ColorTwo;
+			}
+			if (CurrentColorInt == 3)
+			{
+				CurrentColor = ColorThree;
+			}
+			if (CurrentColorInt == 4) 
+			{
+				CurrentColor = ColorFour;
+			}
+			if (CurrentColorInt == 5) 
+			{
+				CurrentColor = ColorFive;
+			}
+			if (CurrentColorInt == 6) 
+			{
+				CurrentColor = ColorSix;
+			}
+			if (CurrentColorInt == 7) 
+			{
+				CurrentColor = ColorSeven;
 			}
 
+			//if (PreviousColorInt == 0)
+			//{
+			//	CurrentColor = ColorZero;
+			//}		
+			//if (PreviousColorInt == 1) 
+			//{
+			//	CurrentColor = ColorOne;
+			//}
+			//if (PreviousColorInt == 2) 
+			//{
+			//	CurrentColor = ColorTwo;
+			//}
+			//if (PreviousColorInt == 3)
+			//{
+			//	CurrentColor = ColorThree;
+			//}
+			//if (PreviousColorInt == 4) 
+			//{
+			//	CurrentColor = ColorFour;
+			//}
+			//if (PreviousColorInt == 5) 
+			//{
+			//	CurrentColor = ColorFive;
+			//}
+			//if (PreviousColorInt == 6) 
+			//{
+			//	CurrentColor = ColorSix;
+			//}
+			//if (PreviousColorInt == 7) 
+			//{
+			//	CurrentColor = ColorSeven;
+			//}
+		//}
+			
 	}
 }
