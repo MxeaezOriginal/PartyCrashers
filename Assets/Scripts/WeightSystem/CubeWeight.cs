@@ -9,12 +9,20 @@ public class CubeWeight : MonoBehaviour {
     private Rigidbody rb;
     private bool[] is_touched = new bool[4] { false, false, false, false };
     protected GameObject[] m_player;
+
+    //SFX
+    public AudioSource audioSource;
+    public AudioClip MoveSFX;
+    //SFX
     // Use this for initialization
     void Start () {
         m_player = GameManager.m_Instance.m_Players;
         rb = GetComponent<Rigidbody>();
         rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
         rb.isKinematic = true;
+        //sfx start
+        audioSource.clip = MoveSFX;
+        //sfx end
     }
 	
 	// Update is called once per frame
@@ -30,16 +38,25 @@ public class CubeWeight : MonoBehaviour {
                     if(!rb.isKinematic)
                     {
                         rb.AddForce((transform.position - m_player[i].transform.position) * m_speed);
+                        //SFX Start
+                        if(!audioSource.isPlaying)
+                        {
+                            audioSource.Play();
+                        }
+                        //SFX END
+                            
+
                     }
                 }            
                 
                 else
                 {
                     rb.isKinematic = true;
+                  
                 }  
             }
         }
-	}
+    }
 
     void OnTriggerEnter(Collider other)
     {
