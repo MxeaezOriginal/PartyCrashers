@@ -50,9 +50,9 @@ public class WeaponManager : MonoBehaviour
     {
         if(m_ChangeWeapon != m_CurrentWeapon)
         {
-            SetWeapon(m_ChangeWeapon);
+            SetWeapon(m_CurrentWeapon);
+            m_ChangeWeapon = m_CurrentWeapon;
         }
-        m_CurrentWeapon = m_ChangeWeapon;
     }
 
     public void initialize()
