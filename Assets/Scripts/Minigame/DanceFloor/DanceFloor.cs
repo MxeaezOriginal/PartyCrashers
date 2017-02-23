@@ -54,7 +54,7 @@ public class DanceFloor : MonoBehaviour {
         {
             if (m_Light.GetComponent<LightChangeDancefloor>().stop == false)
             {
-                    Debug.Log("No point.");
+                    //Debug.Log("No point.");
                 if (GettingPoint != null)
                 {
                     Destroy(GettingPoint);
@@ -71,7 +71,7 @@ public class DanceFloor : MonoBehaviour {
                 if(m_PreviousFloorColor >= 0 && m_PreviousFloorColor < m_GreenColorPercentage)
                 {
                     // Getting Score.
-                    Debug.Log("Getting Score!");
+                    //Debug.Log("Getting Score!");
 
                     m_GetPoint = false;
 
@@ -92,7 +92,7 @@ public class DanceFloor : MonoBehaviour {
                 else if (m_PreviousFloorColor >= m_GreenColorPercentage && m_PreviousFloorColor < 100)
                 {
                     // Lose Score.
-                    Debug.Log("LOSE point!");
+                    //Debug.Log("LOSE point!");
                     m_LosePoint = false;
                     m_GetPointFX = false;
                     if (m_LosePointFX == false)
@@ -119,7 +119,7 @@ public class DanceFloor : MonoBehaviour {
                     {
                         Destroy(LosingPoint);
                     }
-                    Debug.Log("No point.");
+                    //Debug.Log("No point.");
                 }
             }
         }
