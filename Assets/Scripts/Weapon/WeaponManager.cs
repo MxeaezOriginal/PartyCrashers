@@ -40,7 +40,7 @@ public class WeaponManager : MonoBehaviour
 
         if (SceneManager.GetActiveScene().name == GameManager.m_Instance.m_LevelToStart)
         {
-            m_CurrentWeapon = (Weapon)Random.Range(0, (int)Weapon.Length - 1);
+            m_CurrentWeapon = (Weapon)Random.Range(0, (int) Weapon.Length);
         }
 
         initialize();
