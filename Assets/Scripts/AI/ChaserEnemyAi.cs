@@ -38,6 +38,7 @@ public class ChaserEnemyAi : EnemyAI // Used to inherit from monobehaviour
             if (m_Distance < m_ChaseDist)
             {
                 chase();
+                isArrived = false;
             }
             if (m_Distance < m_StopDistance)
             {

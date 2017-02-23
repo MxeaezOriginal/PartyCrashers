@@ -23,7 +23,7 @@ public class EnemyAI : MonoBehaviour
     {
         if (target != null)
         {
-            isArrived = false;
+            //isArrived = false;
             look(target.transform);
             agent.SetDestination(target.transform.position);
             agent.Resume();

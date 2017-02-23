@@ -10,6 +10,7 @@ public class ShooterEnemy : EnemyAI //Inherits from EnemyAI instead of Monobehav
     //public float m_distance;
     public float ActivedDis = 20f;
     public float ChaseDis = 15f;
+    public float AimDis = 6f;
     public float ShootDis = 10f;
     public float RunAwayDis = 5f;
     public float ChaseSpeed = 0.005f;
@@ -44,6 +45,10 @@ public class ShooterEnemy : EnemyAI //Inherits from EnemyAI instead of Monobehav
     //SFX End
     Animator m_Animator;
 
+    // Check if it is moving
+    //private Vector3 CurPos;
+    //private Vector3 LastPos;
+
     void Start()
     {
         SFXManager = GetComponent<AudioManager>();
@@ -53,6 +58,18 @@ public class ShooterEnemy : EnemyAI //Inherits from EnemyAI instead of Monobehav
     }
     void Update()
     {
+        //// Check if it is moving
+        //CurPos = transform.position;
+        //if (CurPos == LastPos)
+        //{
+        //    if (m_Animator != null)
+        //    {
+        //        m_Animator.SetBool("isChasing", false);
+        //    }
+        //}
+        //LastPos = CurPos;
+        //// Check finished
+
         getClosestPlayer();
 
         aim(target.transform);
@@ -64,6 +81,7 @@ public class ShooterEnemy : EnemyAI //Inherits from EnemyAI instead of Monobehav
             if (m_Distance <= RunAwayDis)
             {
                 transform.position = Vector3.Lerp(transform.position, Flee, RunAwaySpeed);
+                isArrived = false;
             }
             if (m_Distance > RunAwayDis && m_Distance < ChaseDis)
             {
@@ -74,9 +92,15 @@ public class ShooterEnemy : EnemyAI //Inherits from EnemyAI instead of Monobehav
                     timer = 0;
                 }
             }
-            if (m_Distance >= ChaseDis && m_Distance <= ActivedDis)
+            if (m_Distance > ChaseDis && m_Distance <= ActivedDis)
             {
                 chase();
+                isArrived = false;
+            }
+            if (m_Distance <= AimDis && m_Distance > RunAwayDis)
+            {
+                agent.Stop();
+                isArrived = true;
             }
             if (m_Distance > ActivedDis)
             {
