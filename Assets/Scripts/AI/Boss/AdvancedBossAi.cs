@@ -21,6 +21,7 @@ public class AdvancedBossAi : MonoBehaviour
     private GameObject[] ProjectilesArray = { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null };
     private GameObject[] LightningArray = { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null };
     public int m_BulletsToShoot = 5;
+    private int m_BulletsShot = 0;
     private int m_NumberOfBullets;
 
     //Frame
@@ -136,9 +137,9 @@ public class AdvancedBossAi : MonoBehaviour
             case states.hurt: Hurt(m_DamageTaken, m_StunTime); break;
             case states.teleport: Teleport(60, 60); break;
             //Attacks
-            case states.shoot: BasicShoot(Mathf.RoundToInt( 10/m_Difficulty), Mathf.RoundToInt(60 / m_Difficulty)); break;
-            case states.dash: Dash(70, 10, 10); break;
-            case states.earthquake: Earthquake(60, 60); break;
+            case states.shoot: m_BulletsToShoot = Mathf.RoundToInt(10 * m_Difficulty); BasicShoot(Mathf.RoundToInt( 10/m_Difficulty), Mathf.RoundToInt(10 / m_Difficulty));  break;
+            case states.dash: Dash(70, 10, Mathf.RoundToInt(10 / m_Difficulty)); break;
+            case states.earthquake: Earthquake(Mathf.RoundToInt(60 / m_Difficulty), 60); break;
         }
         //Manage frame
         frame++;
@@ -156,7 +157,6 @@ public class AdvancedBossAi : MonoBehaviour
             SceneManager.LoadScene(0);
         }
     }
-
     void LateUpdate()
     {
         if (state != currentState) //Reset the frame variable back to zero every time the boss changes it's state
@@ -351,7 +351,7 @@ public class AdvancedBossAi : MonoBehaviour
     void Dash(int windup, int active, int recover)
     {
         frame++;
-        m_Invincible = true;
+        
 
         if (frame == 2)
         {
@@ -377,12 +377,14 @@ public class AdvancedBossAi : MonoBehaviour
         {
             float chargeSpeed = 50;
             m_Velocity = chargeSpeed * lookingDirection;
+            m_Invincible = true;
 
         }
         //Recover
         if (frame > windup + active && frame <= windup + active + recover)
         {
             Friction(1f);
+            m_Invincible = false;
         }
         //Exit dash
         if (frame > windup + active + recover)
@@ -394,7 +396,7 @@ public class AdvancedBossAi : MonoBehaviour
     }
     void BasicShoot(int shootFrame, int recoverFrame)
     {
-
+        #region Target the player
         //Get Player to shoot at and target where the player is going 
         GameObject player = GetTargetPlayer();
         Vector3 pPosition = player.transform.position;
@@ -432,7 +434,7 @@ public class AdvancedBossAi : MonoBehaviour
             transform.LookAt(pPosition);
             targetPosition = pPosition;
         }
-
+        #endregion
         //Windup
         if (frame < shootFrame)
         {
