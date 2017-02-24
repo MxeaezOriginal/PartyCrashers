@@ -39,37 +39,37 @@ public class MinigameBossPrompt : MonoBehaviour {
 
             if(m_MinigameRewardSelection.m_IsBossFightAnswered)
             {
-                if (GameManager.m_Instance.m_Tutorial == GameManager.Tutorial.Lobby_01 ||
-                    GameManager.m_Instance.m_Tutorial == GameManager.Tutorial.Lobby_02 ||
-                    GameManager.m_Instance.m_Tutorial == GameManager.Tutorial.Lobby_03)
-                {
-                    //SceneManager.LoadScene(GameManager.m_Instance.m_Tutorial.ToString()); //ballroom blitz
+                //if (GameManager.m_Instance.m_Tutorial == GameManager.Tutorial.Lobby_01 ||
+                //    GameManager.m_Instance.m_Tutorial == GameManager.Tutorial.Lobby_02 ||
+                //    GameManager.m_Instance.m_Tutorial == GameManager.Tutorial.Lobby_03)
+                //{
+                //    //SceneManager.LoadScene(GameManager.m_Instance.m_Tutorial.ToString()); //ballroom blitz
 
-                    //Reward time
+                //    //Reward time
+                //    if (!m_MinigameRewardSelection.m_IsFightingBoss)
+                //    {
+                //        GameManager.m_Instance.m_GameState = GameManager.GameState.Dungeon;
+                //        SceneManager.LoadScene(GameManager.m_Instance.m_Tutorial.ToString());
+                //    }
+                //    else
+                //    {
+                //        GameManager.m_Instance.m_GameState = GameManager.GameState.Boss;
+                //        SceneManager.LoadScene("KaminsBoss");
+                //    }
+                //}
+                //else
+                //{
                     if (!m_MinigameRewardSelection.m_IsFightingBoss)
                     {
                         GameManager.m_Instance.m_GameState = GameManager.GameState.Dungeon;
-                        SceneManager.LoadScene(GameManager.m_Instance.m_Tutorial.ToString());
+                        SceneManager.LoadScene(Random.Range(1, 4 + 1));
                     }
                     else
                     {
                         GameManager.m_Instance.m_GameState = GameManager.GameState.Boss;
                         SceneManager.LoadScene("KaminsBoss");
                     }
-                }
-                else
-                {
-                    if (!m_MinigameRewardSelection.m_IsFightingBoss)
-                    {
-                        GameManager.m_Instance.m_GameState = GameManager.GameState.Dungeon;
-                        SceneManager.LoadScene(Random.Range(8, 10));
-                    }
-                    else
-                    {
-                        GameManager.m_Instance.m_GameState = GameManager.GameState.Boss;
-                        SceneManager.LoadScene("KaminsBoss");
-                    }
-                }
+                //}
             }
         }
     }
