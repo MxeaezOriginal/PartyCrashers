@@ -228,12 +228,15 @@ public class AdvancedBossAi : MonoBehaviour
     }
     void Teleport(int framesBeforeTP, int recoverFrames)
     {
+        //Look at player
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(getClosestPlayer().transform.position - transform.position), 0.1f);
         //Friction
         Friction(2f);
         //Windup
         if (frame < framesBeforeTP)
         {
-            transform.Rotate(new Vector3(transform.rotation.x - 10, transform.rotation.y, transform.rotation.z));
+            m_Ball.transform.Rotate(new Vector3(transform.rotation.x - 10, transform.rotation.y, transform.rotation.z));
+            
         }
         if (frame == framesBeforeTP)
         {
@@ -278,9 +281,12 @@ public class AdvancedBossAi : MonoBehaviour
     #region Getting hurt
     void Hurt(float damageTaken, float stunTime)
     {
+        //Freak the fuck out
+        transform.Rotate(new Vector3(Random.Range( transform.rotation.x - 10, transform.rotation.x + 10f), Random.Range(transform.rotation.y - 10, transform.rotation.y + 10f), Random.Range(transform.rotation.z - 10, transform.rotation.z + 10f)));
         //Leave state
         if (frame > stunTime)
         {
+            transform.Rotate(0, 0, transform.rotation.z - transform.rotation.z);
             state = states.idle;
 
             if (m_HurtEffect.active)
