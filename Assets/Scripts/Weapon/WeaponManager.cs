@@ -19,15 +19,12 @@ public class WeaponManager : MonoBehaviour
     public Weapon m_CurrentWeapon = Weapon.GlowSword;
     [HideInInspector]
     private Weapon m_ChangeWeapon = Weapon.GlowSword;
-    private string m_PickupConcactinateString = "_PickUp";
+    public string m_PickupConcactinateString = "_Pickup";
     public float m_DelayBetweenSwaps = 1f;
 
     public GameObject[] m_WeaponPrefabs;
     public GameObject[] m_WeaponPrefabPickups;
     private Dictionary<string, GameObject> m_Weapons = new Dictionary<string, GameObject>();
-    private GameObject m_WeaponParent;
-    private GameObject m_WeaponStandingOn;
-    private GameObject m_WeaponStandingOnPickup;
     private Transform m_WeaponsTransform;
 
     void Start()
@@ -70,11 +67,7 @@ public class WeaponManager : MonoBehaviour
             GameObject child = m_WeaponsTransform.FindChild(weaponPrefabName.ToString()).gameObject;
             if (m_Weapons.ContainsKey(weaponPrefabName.ToString()))
             {
-                if (m_CurrentWeaponObject != null)
-                {
-                    Destroy(m_CurrentWeaponObject);
-                }
-                InstantiateWeapon(m_Weapons[weaponPrefabName.ToString()], child);
+                InstantiateWeapon(m_Weapons[weaponPrefabName.ToString()], child, false);
             }
             else
             {
@@ -87,9 +80,15 @@ public class WeaponManager : MonoBehaviour
         }
     }
 
-    public void InstantiateWeapon(GameObject weapon, GameObject child)
+    public void InstantiateWeapon(GameObject weapon, GameObject child, bool dropWeapon)
     {
-        DropCurrentWeapon();
+        if(dropWeapon)
+            DropCurrentWeapon();
+
+        if (m_CurrentWeaponObject != null)
+        {
+            Destroy(m_CurrentWeaponObject);
+        }
 
         GameObject newWeapon = Instantiate(weapon, weapon.transform.position, weapon.transform.rotation) as GameObject;
         newWeapon.transform.parent = child.gameObject.transform;
@@ -102,7 +101,7 @@ public class WeaponManager : MonoBehaviour
         m_CurrentWeapon = (Weapon) System.Enum.Parse(typeof(Weapon), m_CurrentWeaponObject.name);
     }
 
-    public void InstantiateWeapon()
+    /*public void InstantiateWeapon()
     {
         DropCurrentWeapon();
 
@@ -117,7 +116,7 @@ public class WeaponManager : MonoBehaviour
         m_CurrentWeapon = (Weapon)System.Enum.Parse(typeof(Weapon), m_CurrentWeaponObject.name);
 
         Destroy(m_WeaponStandingOnPickup);
-    }
+    }*/
 
     private void DropCurrentWeapon()
     {
@@ -130,21 +129,12 @@ public class WeaponManager : MonoBehaviour
                     GameObject weaponToDrop = Instantiate(weaponPickup, m_CurrentWeaponObject.transform.position, Quaternion.identity) as GameObject;
                     StartCoroutine(SetWeaponPickupable(weaponToDrop, weaponPickup.name));
                     Destroy(m_CurrentWeaponObject);
+
+                    weaponToDrop.transform.position = transform.position;
+
                     break;
                 }
             }
-        }
-    }
-
-    public bool isStandingOnWeapon()
-    {
-        if (m_WeaponStandingOn != null)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
         }
     }
 
@@ -153,7 +143,8 @@ public class WeaponManager : MonoBehaviour
         yield return new WaitForSeconds(m_DelayBetweenSwaps);
         droppedItem.name = correctName;
     }
-    void OnTriggerStay(Collider other)
+
+    /*void OnTriggerStay(Collider other)
     {
         //Loop through all weapon prefabs
         foreach (GameObject weapon in m_WeaponPrefabs)
@@ -180,9 +171,9 @@ public class WeaponManager : MonoBehaviour
                 break;
             }
         }
-    }
+    }*/
 
-    /*void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other)
     {
         //Loop through all weapon prefabs
         foreach (GameObject weapon in m_WeaponPrefabs)
@@ -191,25 +182,23 @@ public class WeaponManager : MonoBehaviour
             if (weapon.gameObject.name + m_PickupConcactinateString == other.gameObject.name)
             {
                 //Loop through all the child GameObjects under the Weapon gameobject in Player
-                foreach (Transform child in m_WeaponsObject)
+                foreach (Transform child in m_WeaponsTransform)
                 {
                     //If it finds a child under Weapon GameObject with the same name as the prefab, this is the Object to instantiate the Weapon Prefab under
                     if (child.gameObject.name == weapon.gameObject.name)
                     {
                         //If the player already has a weapon equipped, destroy it before instatiating the new one
-                        //InstantiateWeapon(weapon, child.gameObject);
-                        m_WeaponParent = child.gameObject;
-                        m_WeaponStandingOn = weapon;
-                        m_WeaponStandingOnPickup = other.gameObject;
-                        Debug.Log("Standing on " + weapon.name);
+                        InstantiateWeapon(weapon, child.gameObject, true);
+                        Destroy(other.gameObject);
                         break;
                     }
                 }
                 break;
             }
         }
-    }*/
-    public void OnTriggerExit(Collider other)
+    }
+
+    /*public void OnTriggerExit(Collider other)
     {
         if (m_WeaponStandingOn != null)
         {
@@ -219,7 +208,7 @@ public class WeaponManager : MonoBehaviour
             m_WeaponStandingOn = null;
             m_WeaponStandingOnPickup = null;
         }
-    }
+    }*/
 
     private void findWeaponRecursive(Transform root)
     {

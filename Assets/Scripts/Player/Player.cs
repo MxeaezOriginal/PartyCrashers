@@ -197,7 +197,7 @@ public class Player : MonoBehaviour
         //Interact
         if (Input.GetButtonDown(m_Interact + m_Controller.ToString()))
         {
-            if (m_InteractWaitTime <= 0)
+            /*if (m_InteractWaitTime <= 0)
             {
                 if (m_WeaponManager.isStandingOnWeapon())
                 {
@@ -222,7 +222,7 @@ public class Player : MonoBehaviour
                     //SFX End
                 }
                 m_InteractWaitTime = 1f;
-            }
+            }*/
         }
 
         if (m_InteractWaitTime >= 0)
