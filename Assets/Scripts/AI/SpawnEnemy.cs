@@ -47,12 +47,15 @@ public class SpawnEnemy : EnemyAI // Inherits from EnemyAI now instead of Monobe
     private float randomPitch;
     //SFX End
 
+    Animator m_Animator;
+
     void Start()
     {
         initializeVariables();
         timer = spawnTime;
         enemyEffect = gameObject.GetComponent<EnemyEffect>();
         SFXManager = GetComponent<AudioManager>();
+        m_Animator = gameObject.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -79,11 +82,31 @@ public class SpawnEnemy : EnemyAI // Inherits from EnemyAI now instead of Monobe
                 if (m_Distance <= RunAwayRange)
                 {
                     transform.position = Vector3.Lerp(transform.position, RunAwayDirection, RunSpeed);
+                    isArrived = false;
+                }
+                if(m_Distance > RunAwayRange)
+                {
+                    isArrived = true;
+                }
+                if (isArrived == true)
+                {
+                    if (m_Animator != null)
+                    {
+                        m_Animator.SetBool("isChasing", false);
+                    }
+                }
+                if (isArrived == false)
+                {
+                    if (m_Animator != null)
+                    {
+                        m_Animator.SetBool("isChasing", true);
+                    }
                 }
             }
             else
             {
                 agent.Stop();
+                isArrived = true;
             }
         }
         // run away finish ---------------------------------------------------

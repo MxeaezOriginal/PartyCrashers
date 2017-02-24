@@ -30,8 +30,6 @@ public class HeavyEnemy : EnemyAI //Inherits from EnemyAI now instead of monobeh
 
     EnemyEffect enemyEffect;
 
-    Animator m_Animator;
-
     void Start()
     {
 		/*/VFX
@@ -43,55 +41,32 @@ public class HeavyEnemy : EnemyAI //Inherits from EnemyAI now instead of monobeh
         KB = KnockBackDis;
         initializeVariables();
         enemyEffect = gameObject.GetComponent<EnemyEffect>();
-        m_Animator = gameObject.GetComponent<Animator>();
     }
 
     void Update()
     {
         getClosestPlayer();
-        if(!enemyEffect.isStun)
+        if (DetectPlayer() && !enemyEffect.isStun)
         {
-            if (DetectPlayer())
-            {
-                m_Rtts = RotationSpeed;
-                look(target.transform);
-                m_Rtts = m_RotationSpeed;
-            }
-            if (CanSeePlayer())
-            {
+            m_Rtts = RotationSpeed;
+            look(target.transform);
+            m_Rtts = m_RotationSpeed;
+        }
+        if (CanSeePlayer() && !enemyEffect.isStun)
+        {
                 chase();
-                //isArrived = false;
-                /*/VFX
-			    if (trailEffect != null)
-			    {
-				    trailEffect.GetComponent<ParticleSystem> ().enableEmission = true;
-			    }
-			    //VFX*/
-            }
-            //if (isArrived == true)
-            //{
-            //    if (m_Animator != null)
-            //    {
-            //        m_Animator.SetBool("isChasing", false);
-            //    }
-            //}
-            //if (isArrived == false)
-            //{
-            //    if (m_Animator != null)
-            //    {
-            //        m_Animator.SetBool("isChasing", true);
-            //    }
-            //}
-
+            Debug.Log("chasing");
+			/*/VFX
+			if (trailEffect != null)
+			{
+				trailEffect.GetComponent<ParticleSystem> ().enableEmission = true;
+			}
+			//VFX*/
         }
         else
         {
-            agent.Stop();
-            //if (m_Animator != null)
-            //{
-            //    m_Animator.SetBool("isChasing", false);
-            //}
-            /*/VFX
+                agent.Stop();
+			/*/VFX
 			if (trailEffect != null)
 			{
 				trailEffect.GetComponent<ParticleSystem> ().enableEmission = false;
