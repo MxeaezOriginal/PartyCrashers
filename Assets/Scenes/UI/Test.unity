@@ -12673,13 +12673,17 @@ MonoBehaviour:
   m_SoundsOnHit: []
   swordTrigger: {fileID: 22739827}
   sliceEffect: {fileID: 0}
-  dashDistance: 25
+  m_DashTime: 1
+  m_DashDistance: 50
   dashDelay: 0.1
   smooth: 20
   triggerLife: 0.5
+  m_SecondSlashTime: 0.75
   effect: {fileID: 0}
+  DashVFX: {fileID: 0}
   audioSource: {fileID: 0}
   dashSFX: []
+  slashSFX: []
   maxRandomPitch: 0
   minRandomPitch: 0
 --- !u!23 &930725658
@@ -25688,6 +25692,22 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9dc46d5b0401df14196f2a1db4cada21, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1827360775 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 172684, guid: 1512c6e2d8c3fea4b8c47cd60c796b72, type: 2}
+  m_PrefabInternal: {fileID: 2105089570}
+--- !u!114 &1827360780
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1827360775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b95dac76ec1d2b8489d556e30402ff3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 0.5
 --- !u!1001 &1829116159
 Prefab:
   m_ObjectHideFlags: 0
@@ -29762,6 +29782,10 @@ Prefab:
     - target: {fileID: 489840, guid: 1512c6e2d8c3fea4b8c47cd60c796b72, type: 2}
       propertyPath: m_RootOrder
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 11404630, guid: 1512c6e2d8c3fea4b8c47cd60c796b72, type: 2}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1512c6e2d8c3fea4b8c47cd60c796b72, type: 2}
