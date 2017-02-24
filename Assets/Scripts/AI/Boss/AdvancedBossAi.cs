@@ -61,6 +61,7 @@ public class AdvancedBossAi : MonoBehaviour
     public float m_Friction;
 
     //Face and ball thingie
+    public GameObject m_WholeBody;
     public GameObject m_Ball;
     public GameObject m_Face;
 
@@ -74,10 +75,14 @@ public class AdvancedBossAi : MonoBehaviour
     //Dashing bullshit
     Transform m_DashTarget;
     private Vector3 lookingDirection;
+    //y position variable so boss doesn't fly away
+    float ypos; 
 
     // Use this for initialization
     void Start()
     {
+        //Set the y position
+        ypos = transform.position.y;
         //Set framerate
         Application.targetFrameRate = 60;
 
@@ -138,7 +143,7 @@ public class AdvancedBossAi : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Colors(Color.red,Color.green,0.1f);
+        
         //Switch states
         switch (state)
         {
@@ -170,6 +175,10 @@ public class AdvancedBossAi : MonoBehaviour
             SceneManager.LoadScene(0);
         }
     }
+    void FixedUpdate()
+    {
+        transform.position = new Vector3(transform.position.x, ypos,transform.position.z);
+    }
     void LateUpdate()
     {
         if (state != currentState) //Reset the frame variable back to zero every time the boss changes it's state
@@ -188,7 +197,6 @@ public class AdvancedBossAi : MonoBehaviour
     {
         m_Body.velocity = m_Velocity; //The rigidBody's velocity will always be set to the local Velocity
     }
-
     void Friction(float friction)
     {
         //Friction
@@ -206,21 +214,20 @@ public class AdvancedBossAi : MonoBehaviour
             }
         }
     }
-
     #region states
     void Idle()
     {
+        //Colors
+        Colors(Color.green, Color.green, 1f);
         //Look at next player
-
         GameObject closestPlayer = getClosestPlayer();
-
         transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(closestPlayer.transform.position - transform.position),0.1f);
         
         //Friction
         Friction(1f);
 
         //Choose attack
-        if (frame > 60 * m_Difficulty)
+        if (frame > 60 / m_Difficulty)
         {
             state = DecideAttack();
         }
@@ -228,6 +235,8 @@ public class AdvancedBossAi : MonoBehaviour
     }
     void Teleport(int framesBeforeTP, int recoverFrames)
     {
+
+        Colors(Color.blue, Color.white, 0.3f);
         //Look at player
         transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(getClosestPlayer().transform.position - transform.position), 0.1f);
         //Friction
@@ -281,6 +290,7 @@ public class AdvancedBossAi : MonoBehaviour
     #region Getting hurt
     void Hurt(float damageTaken, float stunTime)
     {
+        Colors(Color.red, Color.white, 0.07f);
         //Freak the fuck out
         transform.Rotate(new Vector3(Random.Range( transform.rotation.x - 10, transform.rotation.x + 10f), Random.Range(transform.rotation.y - 10, transform.rotation.y + 10f), Random.Range(transform.rotation.z - 10, transform.rotation.z + 10f)));
         //Leave state
@@ -377,8 +387,8 @@ public class AdvancedBossAi : MonoBehaviour
 
     void Dash(int windup, int active, int recover)
     {
+        Colors(Color.yellow, Color.red, 0.3f);
         frame++;
-
 
         GameObject playerToTarget = GetTargetPlayer();
         m_DashTarget = playerToTarget.transform;
@@ -421,6 +431,7 @@ public class AdvancedBossAi : MonoBehaviour
     }
     void BasicShoot(int shootFrame, int recoverFrame)
     {
+        Colors(Color.magenta, Color.blue, 0.3f);
         #region Target the player
         //Get Player to shoot at and target where the player is going 
         GameObject player = GetTargetPlayer();
@@ -463,7 +474,8 @@ public class AdvancedBossAi : MonoBehaviour
         //Windup
         if (frame < shootFrame)
         {
-            transform.Rotate(transform.rotation.x - (frame * 50), transform.rotation.y, transform.rotation.z);
+            m_Ball.transform.Rotate(transform.rotation.x - (frame * 50), transform.rotation.y, transform.rotation.z);
+            
         }
 
         //Actually shoot something
@@ -506,7 +518,7 @@ public class AdvancedBossAi : MonoBehaviour
     }
     void Earthquake(int windup, int recover)
     {
-
+        Colors(Color.gray, Color.green, 1f);
         float shootSpeed = 25f;
         //windup
         if (frame <= windup)
