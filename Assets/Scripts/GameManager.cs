@@ -95,12 +95,11 @@ public class GameManager : MonoBehaviour
             //Set State at level start
             if (GameObject.Find("DungeonCanvas") != null)
             {
-                Debug.Log("heheh");
-                m_GameState = GameState.Dungeon;
+                m_Instance.m_GameState = GameState.Dungeon;
             }
             else if (GameObject.Find("MinigameCanvas") != null)
             {
-                m_GameState = GameState.Minigame;
+                m_Instance.m_GameState = GameState.Minigame;
             }
             if (GameManager.m_Instance.m_Player1.name != null)
             {
@@ -287,11 +286,11 @@ public class GameManager : MonoBehaviour
             {
                 Transform portraitTransform = playerClone.transform.FindChild("Portrait");
 
-                if(portraitTransform.GetComponent<Camera>() != null)
+                if (portraitTransform.GetComponent<Camera>() != null)
                 {
                     Camera portraitCamera = portraitTransform.GetComponent<Camera>();
 
-                    switch(playerComponent.m_Player)
+                    switch (playerComponent.m_Player)
                     {
                         case Player.PLAYER.P1:
                             portraitCamera.targetTexture = m_Portraits[0];

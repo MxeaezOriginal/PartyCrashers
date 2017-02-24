@@ -17,7 +17,7 @@ public class MinigameRewardSelection : MonoBehaviour
     private GameObject m_RewardCanvas;
     private GameObject m_BossPromptCanvas;
 
-    private Button[] m_RewardButtons = new Button[4];
+    public Button[] m_RewardButtons = new Button[4];
     public Button[] m_BossPromptButtons = new Button[2];
 
     [HideInInspector]

@@ -18,7 +18,7 @@ public class MinigameManager : MonoBehaviour
     public int m_ScorePlace1, m_ScorePlace2, m_ScorePlace3, m_ScorePlace4;
 
     // Member variables
-    private EMinigameState m_CurrentState;
+    public EMinigameState m_CurrentState;
     private PartyBar m_PartyBar;
 
     public Canvas m_MinigameCanvas;
