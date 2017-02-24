@@ -125,10 +125,21 @@ public class CameraController : MonoBehaviour
 
         float averageX = (x1 + x2) / 2;
         float averageZ = (z1 + z2) / 2;
-        //float Y = y;
+
+        if (GameObject.Find("Boss") != null)
+        {
+            GameObject boss = GameObject.Find("Boss");
+            Transform bossTransform = boss.GetComponent<Transform>();
+            float bossx = bossTransform.position.x;
+            float bossz = bossTransform.position.z;
+
+            averageX = (x1 + x2 + bossx) / 3;
+            averageZ = (z1 + z2 + bossz) / 3;
+        }
+            //float Y = y;
 
 
-        gameObject.transform.position = new Vector3(averageX, Mathf.Lerp(transform.position.y, y + height + m_Zoom, .1f), averageZ - distanceOffset - m_Zoom);
+            gameObject.transform.position = new Vector3(Mathf.Lerp(transform.position.x,averageX,0.2f), Mathf.Lerp(transform.position.y, y + height + m_Zoom, .1f), Mathf.Lerp(transform.position.z, averageZ - distanceOffset - m_Zoom,0.2f));
         //Y + height
 
         mPosition = new Vector3(averageX, y, averageZ);

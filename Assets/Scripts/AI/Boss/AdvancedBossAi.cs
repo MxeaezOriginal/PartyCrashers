@@ -61,7 +61,6 @@ public class AdvancedBossAi : MonoBehaviour
     public float m_Friction;
 
     //Face and ball thingie
-    public GameObject m_WholeBody;
     public GameObject m_Ball;
     public GameObject m_Face;
 
@@ -294,7 +293,7 @@ public class AdvancedBossAi : MonoBehaviour
         //Freak the fuck out
         transform.Rotate(new Vector3(Random.Range( transform.rotation.x - 10, transform.rotation.x + 10f), Random.Range(transform.rotation.y - 10, transform.rotation.y + 10f), Random.Range(transform.rotation.z - 10, transform.rotation.z + 10f)));
         //Leave state
-        if (frame > stunTime)
+        if (frame > 20)
         {
             transform.Rotate(0, 0, transform.rotation.z - transform.rotation.z);
             state = states.idle;
