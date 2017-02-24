@@ -31,19 +31,19 @@ public class GameManager : MonoBehaviour
         Boss
     }
 
-    public enum Tutorial
+    /*public enum Tutorial
     {
         Lobby_01,
         Lobby_02,
         Lobby_03,
         Ovah
-    }
+    }*/
 
     public static GameManager m_Instance;
 
     //public int amountOfPlayers;
     public GameState m_GameState;
-    public Tutorial m_Tutorial;
+    //public Tutorial m_Tutorial;
 
     public GameObject m_PlayerPrefab;
     public GameObject m_MascotPrefab;
@@ -80,7 +80,7 @@ public class GameManager : MonoBehaviour
                 SceneManager.LoadScene(0);
             }
 
-            m_Tutorial = Tutorial.Lobby_01;
+            //m_Tutorial = Tutorial.Lobby_01;
             InstantiatePlayers();
             GameManager.m_Instance.m_Players = GameObject.FindGameObjectsWithTag("Player");
             findPartyBar();

@@ -111,14 +111,14 @@ public class PartyBar : MonoBehaviour {
 
         GameManager.m_Instance.savePlayers();
 
-        if( GameManager.m_Instance.m_Tutorial == GameManager.Tutorial.Lobby_01 ||
+        /*if( GameManager.m_Instance.m_Tutorial == GameManager.Tutorial.Lobby_01 ||
             GameManager.m_Instance.m_Tutorial == GameManager.Tutorial.Lobby_02 ||
             GameManager.m_Instance.m_Tutorial == GameManager.Tutorial.Lobby_03)
         {
             ++GameManager.m_Instance.m_Tutorial;
-        }
+        }*/
 
-        SceneManager.LoadScene(Random.Range(5,7));
+        SceneManager.LoadScene(Random.Range(5,7 + 1));
     }
 
     //void RewardsAndLoadBackToGame()
