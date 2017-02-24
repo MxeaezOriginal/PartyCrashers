@@ -9,7 +9,9 @@ public class FizzyPoP : Ranged
 
     #region Floats
     [SerializeField]
-    private float m_MaxSprayCharge = 5f;    
+    private float m_SprayTimer = 5f;
+    [SerializeField]
+    private float m_FallOffTimer = 2f;
     [SerializeField]
     private float m_AngleModifier = .5f;
     [SerializeField]
@@ -26,7 +28,11 @@ public class FizzyPoP : Ranged
     private Player Player;
     private GameObject FizzyCone;
     [SerializeField]
-    private GameObject FireHealthVFX;
+    private GameObject ShootSprayVFX;
+    [SerializeField]
+    private GameObject FallOffSprayVFX;
+    [SerializeField]
+    private GameObject VFXFirePoint;
     #endregion
 
     //Test
@@ -42,15 +48,13 @@ public class FizzyPoP : Ranged
     {
         #region Primary Attack
         // Shoot if Button Down
-        if (Input.GetButtonDown(Player.m_PrimaryAttack + Player.getControllerAsString()) && m_IsDown)
-            ShootSpray();        
-        else
-            FizzyCone.SetActive(false);
+        if (m_IsDown)
+            ShootSpray(); 
         #endregion
 
         #region Secoindary Attack
         // Shoot if Button Down
-        if (Input.GetButtonDown(Player.m_SecondaryAttack + Player.getControllerAsString()) && m_CanHeal)
+        if (m_CanHeal)
         {
             ShootHeal();
             Debug.Log("Is Shooting Spray");
@@ -64,6 +68,7 @@ public class FizzyPoP : Ranged
         if (m_CoolDown <= Time.time - m_Weapon1Cooldown || m_CoolDown == 0)
         {
             m_IsDown = true;
+            m_CoolDown = Time.time;
         }            
     }
 
@@ -77,25 +82,70 @@ public class FizzyPoP : Ranged
     }
 
     private void ShootSpray()
-    {
-        float counter = 0.0f;
+    {        
         FizzyCone.SetActive(true);
-        counter += Time.deltaTime;
-        //do
-        //{
-        //    counter += Time.deltaTime;
-        //    Debug.Log(counter);
-        //} while (counter < m_MaxSprayCharge);
+        StopCoroutine(ShootSprayTimer());
+        StartCoroutine(ShootSprayTimer());
+        m_IsDown = false;
 
-        if (counter >= m_MaxSprayCharge)
+        
+
+        #region Fizzy Shoot Effect
+        bool ShootSprayVFXBool = false;
+        //bool FallOff = false;
+        if (ShootSprayVFX != null)
         {
-            //FizzyCone.SetActive(false);
-            m_IsDown = false;    
-            m_CoolDown = Time.time;
-            counter = 0;
-        }
+            if(!ShootSprayVFXBool)
+            {
+                GameObject ShootSprayGO;
+                ShootSprayGO = (GameObject)Instantiate(ShootSprayVFX, VFXFirePoint.transform.position, transform.rotation);
+                ShootSprayGO.transform.parent = gameObject.transform;                
+                ShootSprayGO.transform.Rotate(new Vector3(-90, 0, 0));
+                ShootSprayGO.transform.localScale = new Vector3(1, 1, 1);
+                ShootSprayVFXBool = true;                  
+                Destroy(ShootSprayGO, (m_SprayTimer - 1f));
 
-    }
+                //if(!ShootSprayGO)
+                //{
+                //    //FallOff = true;
+                //    bool ShootSprayFallOffVFXBool = false;
+                //    if (FallOffSprayVFX != null)
+                //    {
+                //        //if (FallOff)
+                //        //{
+                //            if(!ShootSprayFallOffVFXBool)
+                //            {
+                //                GameObject FallOffSpray;
+                //                FallOffSpray = (GameObject)Instantiate(FallOffSprayVFX, transform.position, transform.rotation);    
+                //                FallOffSpray.transform.Rotate(new Vector3(-90, 0, 0));
+                //                ShootSprayFallOffVFXBool = true;
+                //                Destroy(FallOffSpray, m_FallOffTimer);
+                //            }
+                //        //}
+                //    }
+                //}
+            }
+        }
+        #endregion
+        
+        //#region Fizzy Shoot FallOff Effect
+        //bool ShootSprayFallOffVFXBool = false;
+        //if (FallOffSprayVFX != null)
+        //{
+        //    if (FallOff)
+        //    {
+        //        if(!ShootSprayFallOffVFXBool)
+        //        {
+        //            GameObject FallOffSpray;
+        //            FallOffSpray = (GameObject)Instantiate(FallOffSprayVFX, transform.position, transform.rotation);    // Rotation is wrong
+        //            ShootSprayFallOffVFXBool = true;
+        //            Destroy(FallOffSpray, m_FallOffTimer);
+        //        }
+        //    }
+        //}
+
+        //#endregion
+    }   
 
     private void ShootHeal()
     {
@@ -103,13 +153,13 @@ public class FizzyPoP : Ranged
         healPrefab = (GameObject)Instantiate(m_LeftTriggerProjectile, m_FirePoint[0].gameObject.transform.position, m_FirePoint[0].gameObject.transform.rotation);
         healPrefab.GetComponent<Rigidbody>().AddForce(healPrefab.transform.up * m_ProjectileSpeed02);        
         m_CanHeal = false;
+    }
 
-        if (FireHealthVFX != null)
-        {
-            GameObject HealthMF;
-            HealthMF = (GameObject)Instantiate(FireHealthVFX, transform.position, transform.rotation);
-            Destroy(HealthMF, m_FireHealthVFXTimer);
-        }
+
+    private IEnumerator ShootSprayTimer()
+    {
+        yield return new WaitForSeconds(m_SprayTimer);
+        FizzyCone.SetActive(false);
     }
 
     private void assignDamage(GameObject bullet)

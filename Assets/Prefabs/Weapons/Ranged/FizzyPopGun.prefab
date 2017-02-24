@@ -272,17 +272,19 @@ MonoBehaviour:
   m_PrimarySounds: []
   m_SecondarySounds: []
   m_SoundsOnHit: []
-  m_RightTriggerProjectile: {fileID: 179520, guid: 39d7099d07a63a04a8c23aaf514b7a0e,
-    type: 2}
+  m_RightTriggerProjectile: {fileID: 0}
   m_LeftTriggerProjectile: {fileID: 199266, guid: 4a4f4968e409ebf48b4413abc44cbfd1,
     type: 2}
   m_ProjectileSpeed02: 50
   m_FirePoint:
   - {fileID: 185152}
-  m_MaxSprayCharge: 50
+  m_SprayTimer: 2
+  m_FallOffTimer: 2
   m_AngleModifier: 0.5
   m_FireHealthVFXTimer: 0
-  FireHealthVFX: {fileID: 0}
+  ShootSprayVFX: {fileID: 179520, guid: 39d7099d07a63a04a8c23aaf514b7a0e, type: 2}
+  FallOffSprayVFX: {fileID: 147976, guid: 628b51554bec1f0449abc21365700561, type: 2}
+  VFXFirePoint: {fileID: 185152}
 --- !u!114 &11446070
 MonoBehaviour:
   m_ObjectHideFlags: 1
