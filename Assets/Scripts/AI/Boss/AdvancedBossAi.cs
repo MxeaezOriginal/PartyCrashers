@@ -60,6 +60,10 @@ public class AdvancedBossAi : MonoBehaviour
     private Vector3 m_Velocity;
     public float m_Friction;
 
+    //Face and ball thingie
+    public GameObject m_Ball;
+    public GameObject m_Face;
+
     //Get the players
     protected GameObject[] players;
     private Transform[] playerPositionsArray = { null, null, null, null };
@@ -134,6 +138,7 @@ public class AdvancedBossAi : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Colors(Color.red,Color.green,0.1f);
         //Switch states
         switch (state)
         {
@@ -209,7 +214,8 @@ public class AdvancedBossAi : MonoBehaviour
 
         GameObject closestPlayer = getClosestPlayer();
 
-        transform.LookAt(closestPlayer.transform.position);
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(closestPlayer.transform.position - transform.position),0.1f);
+        
         //Friction
         Friction(1f);
 
@@ -737,4 +743,23 @@ public class AdvancedBossAi : MonoBehaviour
             }
         }
     }
+    void Colors(Color colorStart, Color colorEnd, float duration)
+    {
+        Renderer renderer = m_Face.GetComponent<Renderer>();
+        Renderer ballRenderer = m_Ball.GetComponentInChildren<Renderer>();
+        Material mat = renderer.material;
+        Material ballMat = ballRenderer.material;
+
+        float emission = Mathf.PingPong(Time.time, 1.0f);
+        Color baseColor = Color.yellow; //Replace this with whatever you want for your base color at emission level '1'
+
+        //Color finalColor = baseColor * Mathf.LinearToGammaSpace(emission);
+
+        float lerp = Mathf.PingPong(Time.time, duration) / duration;
+        Color finalColor = Color.Lerp(colorStart, colorEnd, lerp);
+
+        mat.SetColor("_EmissionColor", finalColor);
+        ballMat.SetColor("_EmissionColor", finalColor);
+    }
+
 }
