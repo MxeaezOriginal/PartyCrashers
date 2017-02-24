@@ -6,11 +6,11 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Black
-  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+  m_Name: Monitor
+  m_Shader: {fileID: 4800000, guid: 01a668cc78047034a8a0c5ca2d24c6f7, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 3000
   stringTagMap: {}
   m_SavedProperties:
     serializedVersion: 2
@@ -20,7 +20,7 @@ Material:
           name: _MainTex
         second:
           m_Texture: {fileID: 0}
-          m_Scale: {x: 3.29, y: 1}
+          m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
         first:
@@ -80,10 +80,17 @@ Material:
           m_Offset: {x: 0, y: 0}
       data:
         first:
-          name: _Cube
+          name: _ShadowTex
         second:
-          m_Texture: {fileID: 8900000, guid: 4fe7a472107e30b488049d810517d559, type: 3}
-          m_Scale: {x: 1, y: 1}
+          m_Texture: {fileID: 2800000, guid: 71bb60f95cb866c458d7bc194a88d79a, type: 3}
+          m_Scale: {x: 0.44, y: 10.54}
+          m_Offset: {x: 0, y: 1.45}
+      data:
+        first:
+          name: _FalloffTex
+        second:
+          m_Texture: {fileID: 2800000, guid: 8d477e8a90eb6384882420ca937e62b2, type: 3}
+          m_Scale: {x: 1, y: 0.39}
           m_Offset: {x: 0, y: 0}
     m_Floats:
       data:
@@ -109,7 +116,7 @@ Material:
       data:
         first:
           name: _Glossiness
-        second: 0
+        second: 0.5
       data:
         first:
           name: _BumpScale
@@ -142,8 +149,4 @@ Material:
       data:
         first:
           name: _Color
-        second: {r: 0, g: 0, b: 0, a: 1}
-      data:
-        first:
-          name: _ReflectColor
-        second: {r: 0.1544118, g: 0.09903653, b: 0, a: 0.5}
+        second: {r: 1, g: 0.97794116, b: 0.97794116, a: 1}
