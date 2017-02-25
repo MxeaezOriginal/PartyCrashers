@@ -49,7 +49,7 @@ public class FizzyPoP : Ranged
         #region Primary Attack
         // Shoot if Button Down
         if (m_IsDown)
-            ShootSpray(); 
+            ShootSpray();
         #endregion
 
         #region Secoindary Attack
@@ -64,12 +64,12 @@ public class FizzyPoP : Ranged
 
 
     public override void primaryAttack()
-    {               
+    {
         if (m_CoolDown <= Time.time - m_Weapon1Cooldown || m_CoolDown == 0)
         {
             m_IsDown = true;
             m_CoolDown = Time.time;
-        }            
+        }
     }
 
     public override void secondaryAttack()
@@ -82,84 +82,65 @@ public class FizzyPoP : Ranged
     }
 
     private void ShootSpray()
-    {        
+    {
         FizzyCone.SetActive(true);
         StopCoroutine(ShootSprayTimer());
         StartCoroutine(ShootSprayTimer());
         m_IsDown = false;
 
-        
-
-        #region Fizzy Shoot Effect
+        #region Fizzy Shoot VFX
         bool ShootSprayVFXBool = false;
-        //bool FallOff = false;
+             
         if (ShootSprayVFX != null)
         {
-            if(!ShootSprayVFXBool)
+            if (!ShootSprayVFXBool)
             {
                 GameObject ShootSprayGO;
                 ShootSprayGO = (GameObject)Instantiate(ShootSprayVFX, VFXFirePoint.transform.position, transform.rotation);
-                ShootSprayGO.transform.parent = gameObject.transform;                
+                ShootSprayGO.transform.parent = gameObject.transform;
                 ShootSprayGO.transform.Rotate(new Vector3(-90, 0, 0));
                 ShootSprayGO.transform.localScale = new Vector3(1, 1, 1);
-                ShootSprayVFXBool = true;                  
+                ShootSprayVFXBool = true;
                 Destroy(ShootSprayGO, (m_SprayTimer - 1f));
 
-                //if(!ShootSprayGO)
-                //{
-                //    //FallOff = true;
-                //    bool ShootSprayFallOffVFXBool = false;
-                //    if (FallOffSprayVFX != null)
-                //    {
-                //        //if (FallOff)
-                //        //{
-                //            if(!ShootSprayFallOffVFXBool)
-                //            {
-                //                GameObject FallOffSpray;
-                //                FallOffSpray = (GameObject)Instantiate(FallOffSprayVFX, transform.position, transform.rotation);    
-                //                FallOffSpray.transform.Rotate(new Vector3(-90, 0, 0));
-                //                ShootSprayFallOffVFXBool = true;
-                //                Destroy(FallOffSpray, m_FallOffTimer);
-                //            }
-                //        //}
-                //    }
-                //}
+                StopCoroutine(FallOffTimer());
+                StartCoroutine(FallOffTimer());                
             }
         }
         #endregion
-        
-        //#region Fizzy Shoot FallOff Effect
-        //bool ShootSprayFallOffVFXBool = false;
-        //if (FallOffSprayVFX != null)
-        //{
-        //    if (FallOff)
-        //    {
-        //        if(!ShootSprayFallOffVFXBool)
-        //        {
-        //            GameObject FallOffSpray;
-        //            FallOffSpray = (GameObject)Instantiate(FallOffSprayVFX, transform.position, transform.rotation);    // Rotation is wrong
-        //            ShootSprayFallOffVFXBool = true;
-        //            Destroy(FallOffSpray, m_FallOffTimer);
-        //        }
-        //    }
-        //}
-
-        //#endregion
-    }   
+    }
 
     private void ShootHeal()
     {
         GameObject healPrefab;
         healPrefab = (GameObject)Instantiate(m_LeftTriggerProjectile, m_FirePoint[0].gameObject.transform.position, m_FirePoint[0].gameObject.transform.rotation);
-        healPrefab.GetComponent<Rigidbody>().AddForce(healPrefab.transform.up * m_ProjectileSpeed02);        
+        healPrefab.GetComponent<Rigidbody>().AddForce(healPrefab.transform.up * m_ProjectileSpeed02);
         m_CanHeal = false;
     }
-
 
     private IEnumerator ShootSprayTimer()
     {
         yield return new WaitForSeconds(m_SprayTimer);
         FizzyCone.SetActive(false);
+    }
+
+    private IEnumerator FallOffTimer()
+    {
+        bool ShootSprayFallOffVFXBool = false;
+        yield return new WaitForSeconds(m_SprayTimer - 1.5f);
+        if (FallOffSprayVFX != null)
+        {
+            if (!ShootSprayFallOffVFXBool)
+            {
+                GameObject FallOffSpray;
+                FallOffSpray = (GameObject)Instantiate(FallOffSprayVFX, VFXFirePoint.transform.position, transform.rotation);
+                FallOffSpray.transform.parent = gameObject.transform;
+                FallOffSpray.transform.Rotate(new Vector3(-90, 0, 0));
+                FallOffSpray.transform.localScale = new Vector3(1, 1, 1);
+                ShootSprayFallOffVFXBool = true;
+                Destroy(FallOffSpray, (m_FallOffTimer + 2));
+            }
+        }
     }
 
     private void assignDamage(GameObject bullet)

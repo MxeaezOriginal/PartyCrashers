@@ -54,8 +54,7 @@ public class HealDestroyTimer : MonoBehaviour {
             if(!isShootVFX)
             {
                 GameObject ShootVFX;
-                ShootVFX = (GameObject)Instantiate(m_ShootVFX, transform.position, transform.localRotation);
-                ShootVFX.transform.parent = VFXFirePoint.transform;
+                ShootVFX = (GameObject)Instantiate(m_ShootVFX, transform.position, transform.localRotation);                
                 ShootVFX.transform.Rotate(new Vector3(-90, 0, 0));
                 isShootVFX = true;
                 if (initspeed < 0.1f)
