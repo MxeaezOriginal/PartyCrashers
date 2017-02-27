@@ -8,7 +8,7 @@ public class Bow : Ranged
     [Header("WaterBalloon Bow")]
     #region Floats
     [SerializeField]
-    private float m_BulletSpeed;
+    private float m_InitBulletSpeed;
     [SerializeField]
     private float m_BombSpeed;
     [SerializeField]
@@ -53,7 +53,9 @@ public class Bow : Ranged
 
     [Header("Test Components")]
     #region Test
-    public float m_MaxChargeTimer;       
+    public float m_MaxChargeTimer;
+    private float m_BulletSpeed;
+    private float m_ChargeTimer = 0f;
     #endregion
 
     void start()
@@ -82,34 +84,32 @@ public class Bow : Ranged
 
     public override void primaryAttack()
     {
-        if(m_CoolDown <= Time.time - m_Weapon1Cooldown || m_CoolDown == 0)
+        if (m_CoolDown <= Time.time - m_Weapon1Cooldown || m_CoolDown == 0)
         {
-            float chargeTimer = 0f;
-            chargeTimer += Time.deltaTime;
-            
- // This needs work  
+            //do
+            //    m_ChargeTimer += Time.deltaTime;                
+            //while { Player.m_PrimaryAttack == true }
+            Debug.Log(m_ChargeTimer);
 
-
-            if (chargeTimer < (m_MaxChargeTimer * .5))
+            if (m_ChargeTimer < (m_MaxChargeTimer * .5))
             {
+                m_BulletSpeed = m_InitBulletSpeed;
                 m_CanFirePrimary = true;
-                m_CoolDown = Time.time;
             }
-            else if (chargeTimer >= (m_MaxChargeTimer * .5) && chargeTimer < m_MaxChargeTimer)
+            else if (m_ChargeTimer >= (m_MaxChargeTimer * .5) && m_ChargeTimer < m_MaxChargeTimer)
             {
-                m_BulletSpeed *= m_BulletSpeedMultiplier;
-                m_CanFirePrimary = true;
-                m_CoolDown = Time.time;
+                m_BulletSpeed = m_InitBulletSpeed * m_BulletSpeedMultiplier;
+                //m_BulletSpeed *= m_BulletSpeedMultiplier;
+                m_CanFirePrimary = true;                
             }
             else
             {
-                chargeTimer = m_MaxChargeTimer;
+                m_ChargeTimer = m_MaxChargeTimer;
                 Debug.Log("BOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOM");
                 //StopCoroutine(ShootLaser());
-                //StartCoroutine(ShootLaser());
-                m_CoolDown = Time.time;
-            }       
-            chargeTimer = 0f;
+                //StartCoroutine(ShootLaser());          
+            }
+            m_CoolDown = Time.time;            
         }
     }
 
@@ -169,29 +169,21 @@ public class Bow : Ranged
 
     private void ChargeVFX()
     {
-        //if (m_TimePressed > 0 && m_TimePressed < m_MaxCharge)
-        //{
-        //    if (chargingVFX != null)
-        //    {
-        //        chargingVFX.gameObject.SetActive(true);
-        //    }
-        //}
-        //else if (m_TimePressed >= m_MaxCharge)
-        //{
-        //    if (chargingVFX != null && chargedVFX != null)
-        //    {
-        //        chargingVFX.gameObject.SetActive(false);
-        //        chargedVFX.gameObject.SetActive(true);
-        //    }
-        //}
-        //else
-        //{
-        //    if (chargingVFX != null && chargedVFX != null)
-        //    {
-        //        chargingVFX.gameObject.SetActive(false);
-        //        chargedVFX.gameObject.SetActive(false);
-        //    }
-        //}
+        if (m_ChargingVFX != null && m_ChargedVFX != null)
+        {
+            if (m_ChargeTimer > 0 && m_ChargeTimer < m_MaxChargeTimer)
+                m_ChargingVFX.gameObject.SetActive(true);
+            else if (m_ChargeTimer >= m_MaxChargeTimer)
+            {
+                m_ChargingVFX.gameObject.SetActive(false);
+                m_ChargedVFX.gameObject.SetActive(true);
+            }
+            else
+            {
+                m_ChargingVFX.gameObject.SetActive(false);
+                m_ChargedVFX.gameObject.SetActive(false);
+            }
+        }
     }
 
-}
+}    // End
