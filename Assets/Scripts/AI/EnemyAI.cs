@@ -98,7 +98,7 @@ public class EnemyAI : MonoBehaviour
         {
             if (i == 0)
             {
-                if(players[i].GetComponent<Player>().m_State == Player.State.Alive || players[i].GetComponent<Player>().m_State == Player.State.Dead)
+                if(players[i].GetComponent<Player>().m_State == Player.State.Alive)
                 {
                     m_Distance = Vector3.Distance(players[i].transform.position, transform.position);
                     target = players[i];
@@ -113,7 +113,7 @@ public class EnemyAI : MonoBehaviour
                 if (Vector3.Distance(players[i].transform.position, transform.position) < m_Distance)
                 {
                     //m_Distance = Vector3.Distance(players[i].transform.position, transform.position);
-                    if (players[i].GetComponent<Player>().m_State == Player.State.Alive || players[i].GetComponent<Player>().m_State == Player.State.Dead)
+                    if (players[i].GetComponent<Player>().m_State == Player.State.Alive)
                     {
                         m_Distance = Vector3.Distance(players[i].transform.position, transform.position);
                         target = players[i];
