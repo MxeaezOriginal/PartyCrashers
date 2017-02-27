@@ -177,7 +177,7 @@ public class Player : MonoBehaviour
         }
 
         //Primary Attack
-        if (Input.GetButtonDown(m_PrimaryAttack + m_Controller.ToString()))
+        if (Input.GetButton(m_PrimaryAttack + m_Controller.ToString()))
         {
             if (!m_CantAttack)
             {

@@ -26,7 +26,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 478290}
   - 120: {fileID: 12047440}
-  - 114: {fileID: 11413568}
   - 114: {fileID: 11409042}
   m_Layer: 0
   m_Name: laser
@@ -368,17 +367,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Damage: 0
   landHitEffect: {fileID: 0}
---- !u!114 &11413568
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 126640}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a42e8ac97390024497ad75914346221, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &11460504
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -405,37 +393,29 @@ MonoBehaviour:
   m_Anim: {fileID: 0}
   m_Damage: 3
   m_Weapon1Cooldown: 0.35
-  m_Weapon2Cooldown: 3
+  m_Weapon2Cooldown: 0.5
   m_PrimarySounds: []
   m_SecondarySounds: []
   m_SoundsOnHit: []
   m_RightTriggerProjectile: {fileID: 150382, guid: af711eaa29756584fa36f3fccfaec720,
     type: 2}
-  m_LeftTriggerProjectile: {fileID: 174722, guid: b59f42cd686fa0041b1e775273f66bb2,
+  m_LeftTriggerProjectile: {fileID: 130804, guid: ac9d184c848c6364bad2a0f5bf937784,
     type: 2}
-  m_ProjectileSpeed02: 50
   m_FirePoint:
   - {fileID: 159222}
-  SFXPlayer: {fileID: 0}
-  SFXlowcharge: []
-  SFXmedcharge: []
-  SFXhighcharge: []
-  primaryFlashVFX: {fileID: 120410, guid: 6636b3078b0905e489f698a11b7a6b6b, type: 2}
-  secondaryflashVFX: {fileID: 120410, guid: 6636b3078b0905e489f698a11b7a6b6b, type: 2}
-  chargingVFX: {fileID: 138150}
-  chargedVFX: {fileID: 188794}
-  m_LaserBeamFX: {fileID: 124376, guid: 516d9df5957c0ef4ea4cfd69f7bba95a, type: 2}
-  m_MaxCharge: 2
-  m_MedSpeed: 1500
-  m_MinSpeed: 900
-  m_TimePressed: 0
-  m_BulletDamage: 0
-  m_MidDmgMultiplier: 2
-  m_LaserDmgMultiplier: 1
+  m_BulletSpeed: 1000
+  m_BombSpeed: 100
+  m_BulletSpeedMultiplier: 5
+  m_LaserDmgMultiplier: 3
   m_LaserTimer: 2
+  m_LaserWidth: 0.1
   m_LaserLenght: 20
-  laserWidth: 0.1
-  m_LaserChargedFX: {fileID: 124376, guid: 516d9df5957c0ef4ea4cfd69f7bba95a, type: 2}
+  m_PrimaryFlashVFX: {fileID: 0}
+  m_SecondaryFlashVFX: {fileID: 0}
+  m_ChargingVFX: {fileID: 0}
+  m_ChargedVFX: {fileID: 0}
+  m_LaserBeamVFX: {fileID: 0}
+  m_MaxChargeTimer: 5
 --- !u!120 &12047440
 LineRenderer:
   m_ObjectHideFlags: 1

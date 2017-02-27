@@ -74,7 +74,7 @@ public class RaveGun : Ranged {
             GameObject bigBalloon;
             bigBalloon = (GameObject)Instantiate(m_LeftTriggerProjectile, m_FirePoint[0].gameObject.transform.position, m_FirePoint[0].gameObject.transform.rotation);
 
-            bigBalloon.GetComponent<Rigidbody>().AddForce(bigBalloon.transform.forward * m_ProjectileSpeed02);
+            bigBalloon.GetComponent<Rigidbody>().AddForce(bigBalloon.transform.forward * 1/*m_ProjectileSpeed02*/);
 
             m_SecondaryCoolDown = Time.time;
 

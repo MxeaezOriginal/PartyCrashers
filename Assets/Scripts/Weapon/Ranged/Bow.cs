@@ -5,259 +5,193 @@ using UnityEngine.UI;
 
 public class Bow : Ranged
 {
-    //sound
-    public AudioManager SFXManager;
-    public GameObject SFXPlayer;
-    public AudioClip[] SFXlowcharge;
-    public AudioClip[] SFXmedcharge;
-    public AudioClip[] SFXhighcharge;
-    private AudioClip SFXtoPlay;
-    //sound end 
-
-	//VfX
-	public GameObject primaryFlashVFX;
-	public GameObject secondaryflashVFX;
-	public GameObject chargingVFX;
-	public GameObject chargedVFX;
+    [Header("WaterBalloon Bow")]
+    #region Floats
     [SerializeField]
-    private GameObject m_LaserBeamFX;
-    //VFX end
-
-    [Tooltip("Maximum Charging Time.")]
-    public float m_MaxCharge = 0f;
-    [SerializeField][Tooltip("Medium Shooting Speed.")]
-    private float m_MedSpeed = 0f;
-    [SerializeField][Tooltip("Minimum Shooting Speed.")]
-    private float m_MinSpeed = 0f;
-    [HideInInspector]
-    public float m_TimePressed = 0f;    
-    [HideInInspector]
-    private bool m_WasDown = false;
-    [HideInInspector]
-    public int m_BulletDamage = 0;
+    private float m_BulletSpeed;
     [SerializeField]
-    [Tooltip("Multiplies the initial Damage the bullet does at Half charge.")]
-    private int m_MidDmgMultiplier;
-    [Tooltip("Multiplies the initial Damage the bullet does at Full charge.")]
-    public int m_LaserDmgMultiplier;
+    private float m_BombSpeed;
+    [SerializeField]
+    private float m_BulletSpeedMultiplier;
+
+    [Header("Laser")]
+    public float m_LaserDmgMultiplier;
     [SerializeField]
     private float m_LaserTimer;
+    public float m_LaserWidth;
     public float m_LaserLenght;
-    public float laserWidth = 1.0f;
-
-    private Player player;
-    private GameObject laser;
-
+    #endregion
+    #region Bools
+    private bool m_CanFirePrimary = false;
+    private bool m_CanFireSecondary = false;
+    #endregion
+    #region Components
+    private Player Player;
+    private GameObject Laser;
+    #endregion
+    [Header("FX")]
+    #region VFX
     [SerializeField]
-    private GameObject m_LaserChargedFX; //TODO: Instantiate this effect when max charge is true and fire button has not been released
+    private GameObject m_PrimaryFlashVFX;
+    [SerializeField]
+    private GameObject m_SecondaryFlashVFX;
+    [SerializeField]
+    private GameObject m_ChargingVFX;
+    [SerializeField]
+    private GameObject m_ChargedVFX;
+    [SerializeField]
+    private GameObject m_LaserBeamVFX;
+    #endregion
+    #region SFX
+    private AudioManager SFXManager;
+    private GameObject SFXPlayer;
+    private AudioClip[] SFXlowcharge;
+    private AudioClip[] SFXmedcharge;
+    private AudioClip[] SFXhighcharge;
+    private AudioClip SFXtoPlay;
+    #endregion
 
-    void Start()
+    [Header("Test Components")]
+    #region Test
+    public float m_MaxChargeTimer;       
+    #endregion
+
+    void start()
     {
-		//VfX
-		if (chargingVFX != null)
-		{
-			chargingVFX.gameObject.SetActive (false);
-		}
-		if (chargedVFX != null) 
-		{
-			chargedVFX.gameObject.SetActive (false);
-		}
-		//VFX end
-        laser = transform.FindChild("laser").gameObject;     
-        player = GetComponentInParent<Player>();
-        SFXManager = GetComponent<AudioManager>();
+        Player = GetComponent<Player>();
+        Laser = transform.FindChild("laser").gameObject;
 
+        m_ChargingVFX.gameObject.SetActive(false);
+        m_ChargedVFX.gameObject.SetActive(false);
     }
 
-    void Update()
-    {	
-		chargeVFXs ();	
-        if (m_CoolDown <= Time.time - m_Weapon1Cooldown || m_CoolDown == 0)
-        {			
-            //Shoot if Button Up
-            if (Input.GetButtonDown(player.m_PrimaryAttack + player.getControllerAsString()) && m_WasDown)
-            {	
-                shoot();
-                m_WasDown = false;
-            }
-        }
+    private void Update()
+    {
+        //ChargeVFX();
+
+        #region Primary Attack
+        if (m_CanFirePrimary)
+            ShootPrimary();
+        #endregion
+
+        #region Secondary Attack
+        if (m_CanFireSecondary)
+            ShootSecondary();
+        #endregion
     }
 
     public override void primaryAttack()
     {
-        if (m_CoolDown <= Time.time - m_Weapon1Cooldown || m_CoolDown == 0)
+        if(m_CoolDown <= Time.time - m_Weapon1Cooldown || m_CoolDown == 0)
         {
-			
-            if (m_TimePressed < m_MaxCharge)
-            {     
-                //Wont work with bumper as the new button           
-                //m_TimePressed += Input.GetAxisRaw(player.m_PrimaryAttack + player.getControllerAsString()) * Time.deltaTime;
-                m_TimePressed += Time.deltaTime;
-            }
-            if (m_TimePressed >= m_MaxCharge)
+            float chargeTimer = 0f;
+            chargeTimer += Time.deltaTime;
+            
+ // This needs work  
+
+
+            if (chargeTimer < (m_MaxChargeTimer * .5))
             {
-                m_TimePressed = m_MaxCharge;
-				            
-			}
-            m_WasDown = true;
-            //Debug.Log(m_TimePressed);
+                m_CanFirePrimary = true;
+                m_CoolDown = Time.time;
+            }
+            else if (chargeTimer >= (m_MaxChargeTimer * .5) && chargeTimer < m_MaxChargeTimer)
+            {
+                m_BulletSpeed *= m_BulletSpeedMultiplier;
+                m_CanFirePrimary = true;
+                m_CoolDown = Time.time;
+            }
+            else
+            {
+                chargeTimer = m_MaxChargeTimer;
+                Debug.Log("BOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOM");
+                //StopCoroutine(ShootLaser());
+                //StartCoroutine(ShootLaser());
+                m_CoolDown = Time.time;
+            }       
+            chargeTimer = 0f;
         }
     }
 
     public override void secondaryAttack()
     {
-
-        if (m_SecondaryCoolDown <= Time.time - m_Weapon2Cooldown || m_SecondaryCoolDown == 0)
+        if(m_SecondaryCoolDown <= Time.time - m_Weapon2Cooldown || m_SecondaryCoolDown == 0)
         {
-			
-            GameObject bigBalloon;
-            bigBalloon = (GameObject)Instantiate(m_LeftTriggerProjectile, m_FirePoint[0].gameObject.transform.position, m_FirePoint[0].gameObject.transform.rotation);
-
-            bigBalloon.GetComponent<Rigidbody>().AddForce(bigBalloon.transform.forward * m_ProjectileSpeed02);
-
+            m_CanFireSecondary = true;
             m_SecondaryCoolDown = Time.time;
-			//kavells new code for feedback effects
-			if (secondaryflashVFX != null) 
-			{
-				GameObject bombMF;
-				bombMF = (GameObject)Instantiate (secondaryflashVFX, transform.position, transform.rotation);
-				Destroy (bombMF, 0.5f);
-			}
-			//kavells new code for feedback effects
         }
     }
 
-    private void shoot()
+    private void ShootPrimary()
     {
-        GameObject balloon;
-	//kavells new code for feedback effects
-		if (primaryFlashVFX != null) 
-		{
-			GameObject shootMF;
-			shootMF = (GameObject)Instantiate (primaryFlashVFX, transform.position, transform.rotation);
-			Destroy (shootMF, 0.5f);
-		}
-	//kavells new code for feedback effects
-
-        if (m_TimePressed < (m_MaxCharge / 2))
-        {
-            m_TimePressed = m_MinSpeed;
-            //Debug.Log(m_TimePressed);
-            balloon = (GameObject)Instantiate(m_RightTriggerProjectile, m_FirePoint[0].gameObject.transform.position, m_FirePoint[0].gameObject.transform.rotation);
-            assignDamage(balloon, 1);
-            balloon.GetComponent<Rigidbody>().AddForce(balloon.transform.forward * m_TimePressed);
-        //sound
-            /* the sound code breaks the bow
-             SFXtoPlay = SFXlowcharge[UnityEngine.Random.Range(0, SFXlowcharge.Length)];
-            if (SFXPlayer != null)
-            {
-                AudioSource source = SFXPlayer.GetComponent<AudioSource>();
-                source.clip = SFXtoPlay;
-            }
-            GameObject SFXtest = Instantiate(SFXPlayer, transform.position, transform.rotation) as GameObject;
-            */
-         //sound end
-
-        }
-        else if (m_TimePressed >= (m_MaxCharge / 2) && m_TimePressed < m_MaxCharge)
-        {
-            balloon = (GameObject)Instantiate(m_RightTriggerProjectile, m_FirePoint[0].gameObject.transform.position, m_FirePoint[0].gameObject.transform.rotation);
-            assignDamage(balloon, m_MidDmgMultiplier);
-            balloon.GetComponent<Rigidbody>().AddForce(balloon.transform.forward * m_MedSpeed * m_TimePressed);
-        //sound
-			/*
-            SFXtoPlay = SFXmedcharge[UnityEngine.Random.Range(0, SFXmedcharge.Length)];
-            if (SFXPlayer != null)
-            {
-                AudioSource source = SFXPlayer.GetComponent<AudioSource>();
-                source.clip = SFXtoPlay;
-            }
-           GameObject SFXtest = Instantiate(SFXPlayer, transform.position, transform.rotation) as GameObject;
-			*/
-         //sound end
-
-        }
-        else
-        {
-			/*
-        //sound
-            SFXtoPlay = SFXhighcharge[UnityEngine.Random.Range(0, SFXhighcharge.Length)];
-            if (SFXPlayer != null)
-            {
-                AudioSource source = SFXPlayer.GetComponent<AudioSource>();
-                source.clip = SFXtoPlay;
-						}
-            GameObject SFXtest = Instantiate(SFXPlayer, transform.position, transform.rotation) as GameObject;
-        //sound end
-			*/
-            
-
-            StopCoroutine("LaserTimer");
-            StartCoroutine("LaserTimer");                          
-        }
-
-        m_TimePressed = 0;
-        m_CoolDown = Time.time;
+        GameObject bullet;
+        bullet = (GameObject)Instantiate(m_RightTriggerProjectile, m_FirePoint[0].gameObject.transform.position, m_FirePoint[0].gameObject.transform.rotation);        
+        bullet.GetComponent<Rigidbody>().AddForce(bullet.transform.forward * m_BulletSpeed);
+        AssignDamage(bullet, 1);
+        m_CanFirePrimary = false;
     }
 
-    public void assignDamage(GameObject bullet, int multiplier)
+    private void ShootSecondary()
     {
-        if(bullet.GetComponent<Damage>() != null)
-        {
-            bullet.GetComponent<Damage>().m_Damage =  m_Damage * multiplier;
-        }
-        else
-        {
-            Debug.Log("Bullet doesn't have a Damage Component");
-        }
+        GameObject bomb;
+        bomb = (GameObject)Instantiate(m_LeftTriggerProjectile, m_FirePoint[0].gameObject.transform.position, m_FirePoint[0].gameObject.transform.rotation);                
+        bomb.GetComponent<Rigidbody>().AddForce(bomb.transform.forward * m_BombSpeed);                
+        m_CanFireSecondary = false;        
     }
 
-    IEnumerator LaserTimer()
+    private IEnumerator ShootLaser()
     {
-        laser.transform.position = transform.position;
-        laser.transform.rotation = transform.rotation;
-        laser.GetComponent<LineRenderer>().enabled = true;
-        laser.transform.parent = null;
-
-        if (m_LaserBeamFX != null)
-        {           
+        Laser.transform.position = transform.position;
+        Laser.transform.rotation = transform.rotation;
+        Laser.GetComponent<LineRenderer>().enabled = true;
+        Laser.transform.parent = null;
+       
+        #region LaserVFX
+        if (m_LaserBeamVFX != null)
+        {
             GameObject laserMF;
-            laserMF = (GameObject)Instantiate(m_LaserBeamFX, transform.position, transform.rotation);
+            laserMF = (GameObject)Instantiate(m_LaserBeamVFX, transform.position, transform.rotation);
             Destroy(laserMF, m_LaserTimer);
         }
+        #endregion
 
         yield return new WaitForSeconds(m_LaserTimer);
-        laser.GetComponent<LineRenderer>().enabled = false;
+        Laser.GetComponent<LineRenderer>().enabled = false;
     }
-    // https://unity3d.com/learn/tutorials/topics/graphics/fun-lasers
 
+    private void AssignDamage(GameObject bullet, int multiplier)
+    {
+        if (bullet.GetComponent<Damage>() != null)
+            bullet.GetComponent<Damage>().m_Damage = m_Damage * multiplier;
+        else
+            Debug.Log("Bullet doesn't have a Damage Component.");
+    }
 
-    //VFX
-    public void chargeVFXs()
-	{
-		if (m_TimePressed > 0 && m_TimePressed < m_MaxCharge) 
-		{
-			if (chargingVFX != null) 
-			{
-				chargingVFX.gameObject.SetActive (true);
-			}
-		} 
-		else if (m_TimePressed >= m_MaxCharge) 
-		{
-			if (chargingVFX != null && chargedVFX != null) 
-			{
-				chargingVFX.gameObject.SetActive (false);
-				chargedVFX.gameObject.SetActive (true);
-			}
-		} 
-		else 
-		{
-			if (chargingVFX != null && chargedVFX != null)
-			{
-				chargingVFX.gameObject.SetActive (false);
-				chargedVFX.gameObject.SetActive (false);
-			}
-		}
-	}
-	//VFXend
+    private void ChargeVFX()
+    {
+        //if (m_TimePressed > 0 && m_TimePressed < m_MaxCharge)
+        //{
+        //    if (chargingVFX != null)
+        //    {
+        //        chargingVFX.gameObject.SetActive(true);
+        //    }
+        //}
+        //else if (m_TimePressed >= m_MaxCharge)
+        //{
+        //    if (chargingVFX != null && chargedVFX != null)
+        //    {
+        //        chargingVFX.gameObject.SetActive(false);
+        //        chargedVFX.gameObject.SetActive(true);
+        //    }
+        //}
+        //else
+        //{
+        //    if (chargingVFX != null && chargedVFX != null)
+        //    {
+        //        chargingVFX.gameObject.SetActive(false);
+        //        chargedVFX.gameObject.SetActive(false);
+        //    }
+        //}
+    }
+
 }

@@ -1,76 +1,46 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &141012
+--- !u!1 &130804
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 401434}
+  - 4: {fileID: 418690}
+  - 33: {fileID: 3316020}
+  - 23: {fileID: 2322266}
+  - 54: {fileID: 5422176}
+  - 65: {fileID: 6513214}
+  - 114: {fileID: 11413096}
+  - 114: {fileID: 11491722}
+  - 82: {fileID: 8222256}
   m_Layer: 0
-  m_Name: Spawnpoint
+  m_Name: WBBomb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &174722
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 455352}
-  - 33: {fileID: 3364702}
-  - 23: {fileID: 2379770}
-  - 54: {fileID: 5410242}
-  - 65: {fileID: 6549450}
-  - 135: {fileID: 13569980}
-  - 114: {fileID: 11486842}
-  - 114: {fileID: 11498244}
-  - 82: {fileID: 8268414}
-  m_Layer: 0
-  m_Name: WaterBalloonBomb
-  m_TagString: Projectile
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &401434
+--- !u!4 &418690
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 141012}
+  m_GameObject: {fileID: 130804}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.6666667, z: 0.5}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_Children: []
-  m_Father: {fileID: 455352}
-  m_RootOrder: 0
---- !u!4 &455352
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 174722}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -101.26043, y: 0.007331673, z: -82.66083}
+  m_LocalPosition: {x: 20.25, y: 1.8, z: 0.66}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_Children:
-  - {fileID: 401434}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!23 &2379770
+--- !u!23 &2322266
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 174722}
+  m_GameObject: {fileID: 130804}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -91,19 +61,19 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
---- !u!33 &3364702
+--- !u!33 &3316020
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 174722}
+  m_GameObject: {fileID: 130804}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!54 &5410242
+--- !u!54 &5422176
 Rigidbody:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 174722}
+  m_GameObject: {fileID: 130804}
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
@@ -111,32 +81,32 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 2
+  m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &6549450
+--- !u!65 &6513214
 BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 174722}
+  m_GameObject: {fileID: 130804}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.7, y: 0.7, z: 0.7}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!82 &8268414
+--- !u!82 &8222256
 AudioSource:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 174722}
+  m_GameObject: {fileID: 130804}
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: c9728c91da2ea4a478c06f0cfaa29699, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.792
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -176,7 +146,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 0
+    m_RotationOrder: 4
   spreadCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -198,47 +168,35 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 0
---- !u!114 &11486842
+    m_RotationOrder: 4
+--- !u!114 &11413096
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 174722}
+  m_GameObject: {fileID: 130804}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7284d7928b7926343a93fa59281537c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_ExplosionRadius: 10
-  SFXPlayer: {fileID: 141572, guid: 4b95968007ca77149a6192d5d186a91f, type: 2}
+  SFXPlayer: {fileID: 0}
   SFX:
   - {fileID: 8300000, guid: a16b50185d672e844be14bede63161b8, type: 3}
   m_ExplosionEffect: {fileID: 171954, guid: f0b99aae309429d4c8c6e78b3be9687c, type: 2}
---- !u!114 &11498244
+--- !u!114 &11491722
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 174722}
+  m_GameObject: {fileID: 130804}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e8c496d70273f064eaebc42e725021d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   delay: 5
---- !u!135 &13569980
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 174722}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Radius: 3
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -248,5 +206,5 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 174722}
+  m_RootGameObject: {fileID: 130804}
   m_IsPrefabParent: 1

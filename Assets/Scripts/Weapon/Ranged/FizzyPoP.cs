@@ -16,6 +16,8 @@ public class FizzyPoP : Ranged
     private float m_AngleModifier = .5f;
     [SerializeField]
     private float m_FireHealthVFXTimer;
+    [SerializeField]
+    private float m_ProjectileSpeed02;
     #endregion
 
     #region Bools
@@ -35,8 +37,6 @@ public class FizzyPoP : Ranged
     private GameObject VFXFirePoint;
     #endregion
 
-    //Test
-
     void Start()
     {
         FizzyCone = transform.FindChild("FizzyGunCone").gameObject;
@@ -52,7 +52,7 @@ public class FizzyPoP : Ranged
             ShootSpray();
         #endregion
 
-        #region Secoindary Attack
+        #region Secondary Attack
         // Shoot if Button Down
         if (m_CanHeal)
         {

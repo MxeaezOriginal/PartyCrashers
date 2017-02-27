@@ -9,9 +9,8 @@ public abstract class Ranged : Weapon
     [SerializeField]
     protected GameObject m_LeftTriggerProjectile;
     [SerializeField]
-    protected float m_ProjectileSpeed02;
-    [SerializeField]
     protected GameObject[] m_FirePoint;
+
 
 
 }

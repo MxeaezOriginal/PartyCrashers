@@ -18,9 +18,7 @@ public class LaserBeam : MonoBehaviour
 
     void Update()
     {
-        m_LineRenderer.SetWidth(bow.laserWidth, bow.laserWidth);
-
-        
+        m_LineRenderer.SetWidth(bow.m_LaserWidth, bow.m_LaserWidth);
 
         Ray ray = new Ray(transform.position, transform.forward);
         m_LineRenderer.SetPosition(0, ray.origin);  
@@ -44,17 +42,11 @@ public class LaserBeam : MonoBehaviour
                     }
                     enemyHealth.Damage(dmg.m_Damage);                   
                 }
-            }
-            
-        }
-                   
+            }            
+        }                   
         m_LineRenderer.SetPosition(1, ray.GetPoint(bow.m_LaserLenght));
-
     }
 }
-
-
-
 
 
 

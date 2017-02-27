@@ -29,22 +29,10 @@ public class WaterBombCombo : MonoBehaviour
             Destroy(gameObject);
             Destroy(explosion, 5f);
         }
-
     }
 
     void explode()
     {
-        //sound
-            //SFXtoPlay = SFX[Random.Range(0, SFX.Length)];
-            //
-            //if (SFXPlayer != null)
-            //{
-            //    AudioSource source = SFXPlayer.GetComponent<AudioSource>();
-            //    source.clip = SFXtoPlay;
-            //}
-            //GameObject SFXtest = Instantiate(SFXPlayer, transform.position, transform.rotation) as GameObject;
-        //sound end
-
         Collider[] colliders = Physics.OverlapSphere(transform.position, m_ExplosionRadius);
 
         foreach (Collider hit in colliders)
