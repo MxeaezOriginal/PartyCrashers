@@ -288,7 +288,7 @@ public class Player : MonoBehaviour
 
         m_State = State.Dead;
         m_Score /= 2;
-        gameObject.layer = 11;
+        //gameObject.layer = 11;
         m_IsDead = true;
         updateModel();
         transform.position = tempLocation;
