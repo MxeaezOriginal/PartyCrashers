@@ -30,6 +30,8 @@ public class HeavyEnemy : EnemyAI //Inherits from EnemyAI now instead of monobeh
 
     EnemyEffect enemyEffect;
 
+    Animator m_Animator;
+
     void Start()
     {
 		/*/VFX
@@ -41,6 +43,7 @@ public class HeavyEnemy : EnemyAI //Inherits from EnemyAI now instead of monobeh
         KB = KnockBackDis;
         initializeVariables();
         enemyEffect = gameObject.GetComponent<EnemyEffect>();
+        m_Animator = gameObject.GetComponent<Animator>();
     }
 
     void Update()
@@ -56,22 +59,40 @@ public class HeavyEnemy : EnemyAI //Inherits from EnemyAI now instead of monobeh
         {
                 chase();
             Debug.Log("chasing");
-			/*/VFX
+            /*/VFX
 			if (trailEffect != null)
 			{
 				trailEffect.GetComponent<ParticleSystem> ().enableEmission = true;
 			}
 			//VFX*/
+            if (isArrived == true)
+            {
+                if (m_Animator != null)
+                {
+                    m_Animator.SetBool("isChasing", false);
+                }
+            }
+            if (isArrived == false)
+            {
+                if (m_Animator != null)
+                {
+                    m_Animator.SetBool("isChasing", true);
+                }
+            }
         }
         else
         {
                 agent.Stop();
-			/*/VFX
+            /*/VFX
 			if (trailEffect != null)
 			{
 				trailEffect.GetComponent<ParticleSystem> ().enableEmission = false;
 			}
 			//VFX*/
+            if (m_Animator != null)
+            {
+                m_Animator.SetBool("isChasing", false);
+            }
         }
     }
 
@@ -121,12 +142,17 @@ public class HeavyEnemy : EnemyAI //Inherits from EnemyAI now instead of monobeh
                 //        return true;
                 //    }
                 //}
-                if (Physics.Raycast(transform.position, transform.forward, out hit, ViewDis))
+                for (int j = 0; j < 5; ++j)
                 {
-                    if (hit.transform.GetComponent<Weapon>() != null || hit.transform.GetComponent<Player>() != null)
+                    Vector3 rayStartPosition = new Vector3(transform.position.x, transform.position.y + j, transform.position.z);
+                    if (Physics.Raycast(rayStartPosition, transform.forward, out hit, ViewDis))
                     {
-                        KB = KnockBackDis;
-                        return true;
+                        Debug.DrawRay(rayStartPosition, transform.forward, Color.red);
+                        if (hit.transform.GetComponent<Weapon>() != null || hit.transform.GetComponent<Player>() != null)
+                        {
+                            KB = KnockBackDis;
+                            return true;
+                        }
                     }
                 }
             }
