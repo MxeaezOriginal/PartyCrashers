@@ -7,47 +7,47 @@ public class DebugLevelSwitcher : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha3))
+        if (Input.GetKeyDown(KeyCode.F1))
         {
             SceneManager.LoadScene("MainMenu");
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha4))
+        else if (Input.GetKeyDown(KeyCode.F2))
         {
             SceneManager.LoadScene("Lobby_01");
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha5))
+        else if (Input.GetKeyDown(KeyCode.F3))
         {
             SceneManager.LoadScene("Lobby_02");
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha6))
+        else if (Input.GetKeyDown(KeyCode.F4))
         {
             SceneManager.LoadScene("Lobby_03");
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha7))
+        else if (Input.GetKeyDown(KeyCode.F5))
         {
             SceneManager.LoadScene("DiningRoom");
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha8))
+        else if (Input.GetKeyDown(KeyCode.F6))
         {
             SceneManager.LoadScene("BowlingRoom");
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha9))
+        else if (Input.GetKeyDown(KeyCode.F8))
         {
             SceneManager.LoadScene("KaminsBoss");
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha0))
+        else if (Input.GetKeyDown(KeyCode.F9))
         {
             SceneManager.LoadScene("BallroomBlitz");
         }
-        else if (Input.GetKeyDown(KeyCode.Minus))
+        else if (Input.GetKeyDown(KeyCode.F10))
         {
             SceneManager.LoadScene("BreakToTheBeat");
         }
-        else if (Input.GetKeyDown(KeyCode.Equals))
+        else if (Input.GetKeyDown(KeyCode.F11))
         {
             SceneManager.LoadScene("DanceFloorRumble");
         }
-		else if (Input.GetKeyDown(KeyCode.Keypad1))
+		else if (Input.GetKeyDown(KeyCode.F8))
 		{
 			SceneManager.LoadScene("DiningRoom02");
 		}
