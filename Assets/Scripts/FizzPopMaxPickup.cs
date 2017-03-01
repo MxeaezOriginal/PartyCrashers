@@ -8,7 +8,11 @@ public class FizzPopMaxPickup : MonoBehaviour
     //sound
     public GameObject SFXPlayer;
     public AudioClip[] SFX;
-    private AudioClip SFXtoPlay; 
+    private AudioClip SFXtoPlay;
+    //sound end
+    //VfX
+    public GameObject usepickupVFX;
+    //VFX end
 
     public float speed;
     public Rigidbody rb;
@@ -41,6 +45,14 @@ public class FizzPopMaxPickup : MonoBehaviour
             m_HeartSystem = other.GetComponent<HeartSystem>();
             m_HeartSystem.AddHeart();
             m_HeartSystem.UpdateHearts();
+            //VfX
+            if (usepickupVFX != null)
+            {
+                GameObject getHeal;
+                getHeal = (GameObject)Instantiate(usepickupVFX, other.transform.position, transform.rotation);
+                Destroy(getHeal, 0.5f);
+            }
+            //VFX end
             //sound
             SFXtoPlay = SFX[Random.Range(0, SFX.Length)];
 
