@@ -4,7 +4,6 @@ using System.Collections;
 public class EnemyHealth : MonoBehaviour
 {
     //sound
-    private AudioManager SFXManager;
     public GameObject SFXPlayer;
     public GameObject SFXHit;
     public AudioClip[] hurtSFX;
