@@ -15,7 +15,8 @@ public class EnemyHealth : MonoBehaviour
 
     //Kavells VFX code
     public GameObject deathVFX;
-	//Kavells VFX code
+    public GameObject hurtVFX;
+    //Kavells VFX code
 
     public float m_EnemyHealth = 100f;
     public float m_EnemyInvincibleTime = 0.5f;
@@ -117,6 +118,17 @@ public class EnemyHealth : MonoBehaviour
 			}
 			//Kavells VFX code
             Kill();
+        }
+        else
+        {
+            //Kavells VFX code
+            if (hurtVFX != null)
+            {
+                GameObject takeDamage;
+                takeDamage = (GameObject)Instantiate(hurtVFX, transform.position, transform.rotation);
+                Destroy(takeDamage, 1f);
+            }
+            //Kavells VFX code
         }
     }
     IEnumerator StopDamagefor(float wait)
