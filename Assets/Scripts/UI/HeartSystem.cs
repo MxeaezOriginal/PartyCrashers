@@ -19,9 +19,16 @@ public class HeartSystem : MonoBehaviour
 	//kavells new code for feedback effects
 	public GameObject takeHitEffect;
 	public GameObject deathVFX;
-	//kavells new code for feedback effects
+    //kavells new code for feedback effects
 
     //Player player;
+
+    //sound
+    public AudioClip[] AttentionSFX;
+    public AudioClip SFXtoPlay;
+    static private int Chance = 1;
+    public int maxChance;
+    public int ChanceNumber;
 
     void Awake()
     {
@@ -96,8 +103,16 @@ public class HeartSystem : MonoBehaviour
     {
         curHealth -= damage;
         curHealth = Mathf.Clamp(curHealth, 0, startHearts * healthPerHeart);
-		//kavells new code for feedback effects
-		if (takeHitEffect != null) 
+
+        ChanceNumber = Random.Range(0, maxChance);
+        if (ChanceNumber == Chance)
+        {
+            SFXtoPlay = AttentionSFX[Random.Range(0, AttentionSFX.Length)];
+            AudioManager.m_Instance.PushMusic(SFXtoPlay);
+        }
+
+        //kavells new code for feedback effects
+        if (takeHitEffect != null) 
 		{
 			GameObject takeDamage;
 			takeDamage = (GameObject)Instantiate (takeHitEffect, transform.position, Random.rotation);
