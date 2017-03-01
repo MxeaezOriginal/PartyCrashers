@@ -153,7 +153,7 @@ public class AdvancedBossAi : MonoBehaviour
         {
             case states.idle: Idle(); break;
             case states.hurt: Hurt(m_DamageTaken, m_StunTime); break;
-            case states.teleport: GenerateTeleportFX();  Teleport(Mathf.RoundToInt(20 / m_Difficulty), Mathf.RoundToInt(20 / m_Difficulty)); break;
+            case states.teleport:  Teleport(Mathf.RoundToInt(20 / m_Difficulty), Mathf.RoundToInt(20 / m_Difficulty)); break;
             //Attacks
             case states.shoot: m_BulletsToShoot = Mathf.RoundToInt(10 * m_Difficulty); BasicShoot(Mathf.RoundToInt(20 / m_Difficulty), Mathf.RoundToInt(20 / m_Difficulty)); break;
             case states.dash: Dash(Mathf.RoundToInt(30 / m_Difficulty), 10, Mathf.RoundToInt(10 / m_Difficulty)); break;
@@ -271,6 +271,7 @@ public class AdvancedBossAi : MonoBehaviour
         }
         if (frame == framesBeforeTP)
         {
+            GenerateTeleportFX();
             Vector3 teleportTargetPosition = transform.position; //Set variable for target position
             int xdir = Random.Range(-1, 1);
             int zdir = Random.Range(-1, 1);
