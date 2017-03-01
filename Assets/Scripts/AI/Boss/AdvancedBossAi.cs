@@ -54,6 +54,7 @@ public class AdvancedBossAi : MonoBehaviour
     private float currentHealth;
     //Effects
     public GameObject m_HurtEffect;
+    public GameObject m_TeleportEffect;
 
     //Movement
     private Rigidbody m_Body;
@@ -133,6 +134,10 @@ public class AdvancedBossAi : MonoBehaviour
         {
             Debug.LogError("Hurt effect object not assigned to boss");
         }
+        if (m_TeleportEffect == null)//teleport
+        {
+            Debug.LogError("Teleport effect object not assigned to boss");
+        }
         //Torches for the boss so he knows where to teleport
         if (torches[0] == null) Debug.LogError("First Torch not assigned to boss");
         if (torches[1] == null) Debug.LogError("Second Torch not assigned to boss");
@@ -148,7 +153,7 @@ public class AdvancedBossAi : MonoBehaviour
         {
             case states.idle: Idle(); break;
             case states.hurt: Hurt(m_DamageTaken, m_StunTime); break;
-            case states.teleport: Teleport(Mathf.RoundToInt(20 / m_Difficulty), Mathf.RoundToInt(20 / m_Difficulty)); break;
+            case states.teleport: GenerateTeleportFX();  Teleport(Mathf.RoundToInt(20 / m_Difficulty), Mathf.RoundToInt(20 / m_Difficulty)); break;
             //Attacks
             case states.shoot: m_BulletsToShoot = Mathf.RoundToInt(10 * m_Difficulty); BasicShoot(Mathf.RoundToInt(20 / m_Difficulty), Mathf.RoundToInt(20 / m_Difficulty)); break;
             case states.dash: Dash(Mathf.RoundToInt(30 / m_Difficulty), 10, Mathf.RoundToInt(10 / m_Difficulty)); break;
@@ -232,15 +237,33 @@ public class AdvancedBossAi : MonoBehaviour
         }
 
     }
+
+    void GenerateTeleportFX() //James Code Attempt *kinda works------------------------------------------
+    {
+        if (frame > 20)
+        {
+
+            if (m_TeleportEffect.active)
+            {
+                m_TeleportEffect.SetActive(false);
+            }
+        }
+        if (m_TeleportEffect.active == false)//teleport
+        {
+            m_TeleportEffect.SetActive(true);
+            m_TeleportEffect.transform.position = transform.position;
+        }
+    }
     void Teleport(int framesBeforeTP, int recoverFrames)
     {
-
+        
         Colors(Color.blue, Color.white, 0.3f);
         //Look at player
         transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(getClosestPlayer().transform.position - transform.position), 0.1f);
         //Friction
         Friction(2f);
         //Windup
+        
         if (frame < framesBeforeTP)
         {
             m_Ball.transform.Rotate(new Vector3(transform.rotation.x - 10, transform.rotation.y, transform.rotation.z));
