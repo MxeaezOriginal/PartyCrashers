@@ -15,7 +15,13 @@ public class ChaserEnemyAi : EnemyAI // Used to inherit from monobehaviour
 
     Animator m_Animator;
 
-
+    //sound
+    public AudioClip[] AttentionSFX;
+    public AudioClip SFXtoPlay;
+    static private int Chance = 1;
+    public int maxChance;
+    public int ChanceNumber;
+    public bool m_IsPlayed;
     // Use this for initialization
     void Start()
     {
@@ -35,10 +41,23 @@ public class ChaserEnemyAi : EnemyAI // Used to inherit from monobehaviour
         if (!enemyEffect.isStun)
         {
             chase();
+
             if (m_Distance < m_ChaseDist)
             {
                 chase();
                 isArrived = false;
+
+                if(!m_IsPlayed)
+                {
+                    ChanceNumber = Random.Range(0, maxChance);
+                    if (ChanceNumber == Chance)
+                    {
+                        SFXtoPlay = AttentionSFX[Random.Range(0, AttentionSFX.Length)];
+                        AudioManager.m_Instance.PushMusic(SFXtoPlay);
+                    }
+                    m_IsPlayed = true;
+                }
+                
             }
             if (m_Distance < m_StopDistance)
             {

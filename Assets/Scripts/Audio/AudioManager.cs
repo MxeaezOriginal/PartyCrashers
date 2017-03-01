@@ -50,7 +50,6 @@ public class AudioManager : MonoBehaviour {
 
     public void PushMusic(AudioClip ac)
     {
-        Debug.Log(ac.ToString());
         if (m_IsPlaying == false)
         {
             //m_RandomMusicList.Add(ac);
