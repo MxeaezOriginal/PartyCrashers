@@ -141,39 +141,13 @@ public class MouseInputFix : MonoBehaviour
         //Menu
         if (es != null)
         {
-            if (es.currentSelectedGameObject == menuManager.allButtons[0].gameObject)
-                previouslySelectedGameObject = menuManager.allButtons[0];
-
-            else if (es.currentSelectedGameObject == menuManager.allButtons[1].gameObject)
-                previouslySelectedGameObject = menuManager.allButtons[1];
-
-            else if (es.currentSelectedGameObject == menuManager.allButtons[2].gameObject)
-                previouslySelectedGameObject = menuManager.allButtons[2];
-
-            else if (es.currentSelectedGameObject == menuManager.allButtons[3].gameObject)
-                previouslySelectedGameObject = menuManager.allButtons[3];
-
-            else if (es.currentSelectedGameObject == menuManager.allButtons[4].gameObject)
-                previouslySelectedGameObject = menuManager.allButtons[4];
-
-            else if (es.currentSelectedGameObject == menuManager.allButtons[5].gameObject)
-                previouslySelectedGameObject = menuManager.allButtons[5];
-
-            else if (es.currentSelectedGameObject == menuManager.allButtons[6].gameObject)
-                previouslySelectedGameObject = menuManager.allButtons[6];
-
-            else if (es.currentSelectedGameObject == menuManager.allButtons[7].gameObject)
-                previouslySelectedGameObject = menuManager.allButtons[7];
-
-            else if (es.currentSelectedGameObject == menuManager.allButtons[8].gameObject)
-                previouslySelectedGameObject = menuManager.allButtons[8];
-
-            else if (es.currentSelectedGameObject == menuManager.allButtons[9].gameObject)
-                previouslySelectedGameObject = menuManager.allButtons[9];
-
-            else if (es.currentSelectedGameObject == menuManager.allButtons[10].gameObject)
-                previouslySelectedGameObject = menuManager.allButtons[10];
-
+            for (int i = 0; i < menuManager.allButtons.Length; i++)
+            {
+                if (es.currentSelectedGameObject == menuManager.allButtons[i])
+                {
+                    previouslySelectedGameObject = menuManager.allButtons[i];
+                }
+            }
             es.SetSelectedGameObject(previouslySelectedGameObject);
         }
     }

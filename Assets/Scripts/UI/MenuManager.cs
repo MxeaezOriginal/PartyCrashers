@@ -53,16 +53,37 @@ public class MenuManager : MonoBehaviour
         else if (creditsActive)
             StartCoroutine(Credits());
         else if (exitPromptActive)
-            StartCoroutine(ExitPrompt());
+            Application.Quit();
 
         //if (canBack && Input.GetButtonDown("Back_" + GameManager.m_Instance.m_Player1.m_Controller)) //PRESS FOR BACK BUTTON
         //    BackButton();
 
-        StartCoroutine(SelectedAnimationWaitForEndOfFrame());
+        //StartCoroutine(SelectedAnimationWaitForEndOfFrame());
+        SelectedButtonOutline();
 
         if (Input.GetButtonDown("Back_" + GameManager.m_Instance.m_Player1.m_Controller) && canBack)
         {
             Back();
+        }
+    }
+
+    void SelectedButtonOutline()
+    {
+        for (int i = 0; i < allButtons.Length; i++)
+        {
+            if (allButtons[i].activeInHierarchy)
+            {
+                if (es.currentSelectedGameObject == allButtons[i])
+                {
+                    allButtons[i].GetComponent<Outline>().enabled = true;
+                    allButtons[i].GetComponent<Animator>().SetBool("Selected", true);
+                }
+                else
+                {
+                    allButtons[i].GetComponent<Outline>().enabled = false;
+                    allButtons[i].GetComponent<Animator>().SetBool("Selected", false);
+                }
+            }
         }
     }
 
@@ -86,7 +107,6 @@ public class MenuManager : MonoBehaviour
         canvases[2].SetActive(false);
         canvases[3].SetActive(false);
         canvases[4].SetActive(false);
-        canvases[5].SetActive(false);
     }
     IEnumerator MainMenu()
     {
@@ -103,7 +123,6 @@ public class MenuManager : MonoBehaviour
         canvases[2].SetActive(false);
         canvases[3].SetActive(false);
         canvases[4].SetActive(false);
-        canvases[5].SetActive(false);
     }
     IEnumerator Play()
     {
@@ -118,7 +137,6 @@ public class MenuManager : MonoBehaviour
         canvases[1].SetActive(false);
         canvases[3].SetActive(false);
         canvases[4].SetActive(false);
-        canvases[5].SetActive(false);
 
         yield return new WaitForSeconds(1.5f);
         canvases[2].SetActive(true);
@@ -136,7 +154,6 @@ public class MenuManager : MonoBehaviour
         canvases[1].SetActive(false);
         canvases[2].SetActive(false);
         canvases[4].SetActive(false);
-        canvases[5].SetActive(false);
 
         yield return new WaitForSeconds(1.5f);
         canvases[3].SetActive(true);
@@ -156,73 +173,9 @@ public class MenuManager : MonoBehaviour
         canvases[1].SetActive(false);
         canvases[2].SetActive(false);
         canvases[3].SetActive(false);
-        canvases[5].SetActive(false);
 
         yield return new WaitForSeconds(1.5f);
         canvases[4].SetActive(true);
-    }
-    IEnumerator ExitPrompt()
-    {
-        canvases[0].SetActive(false);
-        canvases[1].SetActive(true);
-        canvases[2].SetActive(false);
-        canvases[3].SetActive(false);
-        canvases[4].SetActive(false);
-        canvases[5].SetActive(true);
-
-        exitPromptActive = false;
-
-        yield return null; es.SetSelectedGameObject(null); es.enabled = false; es.enabled = true; es.SetSelectedGameObject(firstSelectedButtons[3]); es.firstSelectedGameObject = firstSelectedButtons[3];
-
-        //Disabling buttons of MainMenu but don't hide
-        foreach (Transform child in canvases[1].transform)
-        {
-            child.GetComponentInChildren<Button>().interactable = false;
-        }
-    }
-
-    IEnumerator SelectedAnimationWaitForEndOfFrame()
-    {
-        yield return new WaitForEndOfFrame();
-        //SelectedAnimation();
-    }
-
-    void SelectedAnimation()
-    {
-        if (es.currentSelectedGameObject == allButtons[0])
-            allButtons[0].GetComponent<Animator>().SetBool("Selected", true);
-        else
-            allButtons[0].GetComponent<Animator>().SetBool("Selected", false);
-
-        if (es.currentSelectedGameObject == allButtons[1])
-            allButtons[1].GetComponent<Animator>().SetBool("Selected", true);
-        else
-            allButtons[1].GetComponent<Animator>().SetBool("Selected", false);
-
-        if (es.currentSelectedGameObject == allButtons[2])
-            allButtons[2].GetComponent<Animator>().SetBool("Selected", true);
-        else
-            allButtons[2].GetComponent<Animator>().SetBool("Selected", false);
-
-        if (es.currentSelectedGameObject == allButtons[3])
-            allButtons[3].GetComponent<Animator>().SetBool("Selected", true);
-        else
-            allButtons[3].GetComponent<Animator>().SetBool("Selected", false);
-
-        if (es.currentSelectedGameObject == allButtons[4])
-            allButtons[4].GetComponent<Animator>().SetBool("Selected", true);
-        else
-            allButtons[4].GetComponent<Animator>().SetBool("Selected", false);
-
-        if (es.currentSelectedGameObject == allButtons[5])
-            allButtons[5].GetComponent<Animator>().SetBool("Selected", true);
-        else
-            allButtons[5].GetComponent<Animator>().SetBool("Selected", false);
-
-        if (es.currentSelectedGameObject == allButtons[6])
-            allButtons[6].GetComponent<Animator>().SetBool("Selected", true);
-        else
-            allButtons[6].GetComponent<Animator>().SetBool("Selected", false);
     }
 
     //Functions assigned to buttons in main menu - SETTING ****Active bool to true;
@@ -308,32 +261,6 @@ public class MenuManager : MonoBehaviour
     public void CreditsButton()
     {
         creditsActive = true;
-    }
-    public void ExitPromptButton()
-    {
-        exitPromptActive = true;
-    }
-    public void ExitPromptYes()
-    {
-        exitActive = true;
-
-        Application.Quit();
-        //exitPromptActive = false;
-        //canvases[5].SetActive(false);
-        //canvases[1].SetActive(false);
-    }
-    public void ExitPromptNo()
-    {
-        exitPromptActive = false;
-        canvases[5].SetActive(false);
-
-        //Enabling buttons of MainMenu but don't hide
-        foreach (Transform child in canvases[1].transform)
-        {
-            child.GetComponentInChildren<Button>().interactable = true;
-        }
-        firstSelectedButtons[1].GetComponent<Button>().Select();
-
     }
     public void Back()
     {

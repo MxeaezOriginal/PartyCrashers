@@ -48,7 +48,6 @@ public class CharacterSelect : MonoBehaviour
         public Texture[] characterTexture;
         public RawImage characterSelectIcon;
         public Text characterName;
-        public Text characterNameOutline;
         public int index;
         public float cooldownCounter;
     }
@@ -79,7 +78,7 @@ public class CharacterSelect : MonoBehaviour
     public bool canStartGame;
 
     public GameObject[] readyText;
-    public GameObject lockInText, lockInTextOutline;
+    public GameObject lockInText;
 
     //Bools for preventing adding playersLockedIn with each "A" button
     public bool playerOneJoined, playerTwoJoined, playerThreeJoined, playerFourJoined;
@@ -90,24 +89,28 @@ public class CharacterSelect : MonoBehaviour
 
     //TEMP.!
     public Text[] tempPlayerNumbersText;
-    public Text[] tempPlayerNumbersTextOutline;
     void Awake()
     {
         menuManager = GetComponent<MenuManager>();
-        P1.characterSelectIcon = GameObject.Find("P1_CharacterSelectIcon/Image").GetComponent<RawImage>();
-        P2.characterSelectIcon = GameObject.Find("P2_CharacterSelectIcon/Image").GetComponent<RawImage>();
-        P3.characterSelectIcon = GameObject.Find("P3_CharacterSelectIcon/Image").GetComponent<RawImage>();
-        P4.characterSelectIcon = GameObject.Find("P4_CharacterSelectIcon/Image").GetComponent<RawImage>();
+        P1.characterSelectIcon = GameObject.Find("Character Select Plate P1/Portrait Image").GetComponent<RawImage>();
+        P2.characterSelectIcon = GameObject.Find("Character Select Plate P2/Portrait Image").GetComponent<RawImage>();
+        P3.characterSelectIcon = GameObject.Find("Character Select Plate P3/Portrait Image").GetComponent<RawImage>();
+        P4.characterSelectIcon = GameObject.Find("Character Select Plate P4/Portrait Image").GetComponent<RawImage>();
 
-        P1.characterName = GameObject.Find("P1/Character Name").GetComponent<Text>();
-        P2.characterName = GameObject.Find("P2/Character Name").GetComponent<Text>();
-        P3.characterName = GameObject.Find("P3/Character Name").GetComponent<Text>();
-        P4.characterName = GameObject.Find("P4/Character Name").GetComponent<Text>();
+        P1.characterName = GameObject.Find("Character Select Plate P1/Character Name").GetComponent<Text>();
+        P2.characterName = GameObject.Find("Character Select Plate P2/Character Name").GetComponent<Text>();
+        P3.characterName = GameObject.Find("Character Select Plate P3/Character Name").GetComponent<Text>();
+        P4.characterName = GameObject.Find("Character Select Plate P4/Character Name").GetComponent<Text>();
 
-        P1.characterNameOutline = GameObject.Find("P1/Character Name/Text Outline").GetComponent<Text>();
-        P2.characterNameOutline = GameObject.Find("P2/Character Name/Text Outline").GetComponent<Text>();
-        P3.characterNameOutline = GameObject.Find("P3/Character Name/Text Outline").GetComponent<Text>();
-        P4.characterNameOutline = GameObject.Find("P4/Character Name/Text Outline").GetComponent<Text>();
+        readyText[0] = GameObject.Find("Character Select Plate P1/READY");
+        readyText[1] = GameObject.Find("Character Select Plate P2/READY");
+        readyText[2] = GameObject.Find("Character Select Plate P3/READY");
+        readyText[3] = GameObject.Find("Character Select Plate P4/READY");
+
+        tempPlayerNumbersText[0] = GameObject.Find("Character Select Plate P1/Character Name").GetComponent<Text>();
+        tempPlayerNumbersText[1] = GameObject.Find("Character Select Plate P2/Character Name").GetComponent<Text>();
+        tempPlayerNumbersText[2] = GameObject.Find("Character Select Plate P3/Character Name").GetComponent<Text>();
+        tempPlayerNumbersText[3] = GameObject.Find("Character Select Plate P4/Character Name").GetComponent<Text>();
 
         P1.cooldownCounter = -1; P2.cooldownCounter = -1; P3.cooldownCounter = -1; P4.cooldownCounter = -1;
         //canLockIn = true;
@@ -132,7 +135,6 @@ public class CharacterSelect : MonoBehaviour
         if (canStartGame)
         {
             lockInText.GetComponent<Text>().text = "'A'/ENTER START";
-            lockInTextOutline.GetComponent<Text>().text = "'A'/ENTER START";
             if (Input.GetButtonDown("Jump_" + GameManager.m_Instance.m_Player1.m_Controller))
             {
                 AssignCharacteModels();
@@ -142,41 +144,28 @@ public class CharacterSelect : MonoBehaviour
         else
         {
             lockInText.GetComponent<Text>().text = "'A'/ENTER LOCKIN";
-            lockInTextOutline.GetComponent<Text>().text = "'A'/ENTER LOCKIN";
         }
 
         if (GameManager.m_Instance.m_NumOfPlayers == 1)
         {
             tempPlayerNumbersText[0].enabled = true;
-            tempPlayerNumbersTextOutline[0].enabled = true;
             tempPlayerNumbersText[1].enabled = false;
             tempPlayerNumbersText[2].enabled = false;
             tempPlayerNumbersText[3].enabled = false;
-            tempPlayerNumbersTextOutline[1].enabled = false;
-            tempPlayerNumbersTextOutline[2].enabled = false;
-            tempPlayerNumbersTextOutline[3].enabled = false;
         }
         else if (GameManager.m_Instance.m_NumOfPlayers == 2)
         {
             tempPlayerNumbersText[0].enabled = true;
             tempPlayerNumbersText[1].enabled = true;
-            tempPlayerNumbersTextOutline[0].enabled = true;
-            tempPlayerNumbersTextOutline[1].enabled = true;
             tempPlayerNumbersText[2].enabled = false;
             tempPlayerNumbersText[3].enabled = false;
-            tempPlayerNumbersTextOutline[2].enabled = false;
-            tempPlayerNumbersTextOutline[3].enabled = false;
         }
         else if (GameManager.m_Instance.m_NumOfPlayers == 3)
         {
             tempPlayerNumbersText[0].enabled = true;
             tempPlayerNumbersText[1].enabled = true;
             tempPlayerNumbersText[2].enabled = true;
-            tempPlayerNumbersTextOutline[0].enabled = true;
-            tempPlayerNumbersTextOutline[1].enabled = true;
-            tempPlayerNumbersTextOutline[2].enabled = true;
             tempPlayerNumbersText[3].enabled = false;
-            tempPlayerNumbersTextOutline[3].enabled = false;
         }
 
         else if (GameManager.m_Instance.m_NumOfPlayers == 4)
@@ -185,10 +174,6 @@ public class CharacterSelect : MonoBehaviour
             tempPlayerNumbersText[1].enabled = true;
             tempPlayerNumbersText[2].enabled = true;
             tempPlayerNumbersText[3].enabled = true;
-            tempPlayerNumbersTextOutline[0].enabled = true;
-            tempPlayerNumbersTextOutline[1].enabled = true;
-            tempPlayerNumbersTextOutline[2].enabled = true;
-            tempPlayerNumbersTextOutline[3].enabled = true;
         }
     }
 
@@ -914,19 +899,15 @@ public class CharacterSelect : MonoBehaviour
             {
                 case 0:
                     P1.characterName.text = "Mascot";
-                    P1.characterNameOutline.text = "Mascot";
                     break;
                 case 1:
                     P1.characterName.text = "Nerd";
-                    P1.characterNameOutline.text = "Nerd";
                     break;
                 case 2:
                     P1.characterName.text = "Bad Boy";
-                    P1.characterNameOutline.text = "Bad Boy";
                     break;
                 case 3:
                     P1.characterName.text = "Goth";
-                    P1.characterNameOutline.text = "Goth";
                     break;
             }
         }
@@ -934,7 +915,6 @@ public class CharacterSelect : MonoBehaviour
         {
             P1.characterSelectIcon.texture = emptyTexture;
             P1.characterName.text = "";
-            P1.characterNameOutline.text = "";
         }
     }
     void P2Selection()
@@ -967,19 +947,15 @@ public class CharacterSelect : MonoBehaviour
             {
                 case 0:
                     P2.characterName.text = "Mascot";
-                    P2.characterNameOutline.text = "Mascot";
                     break;
                 case 1:
                     P2.characterName.text = "Nerd";
-                    P2.characterNameOutline.text = "Nerd";
                     break;
                 case 2:
                     P2.characterName.text = "Bad Boy";
-                    P2.characterNameOutline.text = "Bad Boy";
                     break;
                 case 3:
                     P2.characterName.text = "Goth";
-                    P2.characterNameOutline.text = "Goth";
                     break;
             }
         }
@@ -987,7 +963,6 @@ public class CharacterSelect : MonoBehaviour
         { 
             P2.characterSelectIcon.texture = emptyTexture;
             P2.characterName.text = "";
-            P2.characterNameOutline.text = "";
         }
     }
     void P3Selection()
@@ -1020,19 +995,15 @@ public class CharacterSelect : MonoBehaviour
             {
                 case 0:
                     P3.characterName.text = "Mascot";
-                    P3.characterNameOutline.text = "Mascot";
                     break;
                 case 1:
-                    P3.characterName.text = "Nerd";
-                    P3.characterNameOutline.text = "Nerd";
+                    P3.characterName.text = "Nerd";;
                     break;
                 case 2:
                     P3.characterName.text = "Bad Boy";
-                    P3.characterNameOutline.text = "Bad Boy";
                     break;
                 case 3:
                     P3.characterName.text = "Goth";
-                    P3.characterNameOutline.text = "Goth";
                     break;
             }
         }
@@ -1040,7 +1011,6 @@ public class CharacterSelect : MonoBehaviour
         { 
             P3.characterSelectIcon.texture = emptyTexture;
             P3.characterName.text = "";
-            P3.characterNameOutline.text = "";
         }
     }
     void P4Selection()
@@ -1073,19 +1043,15 @@ public class CharacterSelect : MonoBehaviour
             {
                 case 0:
                     P4.characterName.text = "Mascot";
-                    P4.characterNameOutline.text = "Mascot";
                     break;
                 case 1:
                     P4.characterName.text = "Nerd";
-                    P4.characterNameOutline.text = "Nerd";
                     break;
                 case 2:
                     P4.characterName.text = "Bad Boy";
-                    P4.characterNameOutline.text = "Bad Boy";
                     break;
                 case 3:
                     P4.characterName.text = "Goth";
-                    P4.characterNameOutline.text = "Goth";
                     break;
             }
         }
@@ -1093,7 +1059,6 @@ public class CharacterSelect : MonoBehaviour
         { 
             P4.characterSelectIcon.texture = emptyTexture;
             P4.characterName.text = "";
-            P4.characterNameOutline.text = "";
         }
     }
     void SelectCharacter()
