@@ -37,7 +37,6 @@ public class SpawnEnemy : EnemyAI // Inherits from EnemyAI now instead of Monobe
     EnemyEffect enemyEffect;
 
     //SFX
-    public AudioManager SFXManager;
     public AudioSource audioSource;
     public AudioClip[] SFX;
     private AudioClip SFXtoPlay;
@@ -54,7 +53,6 @@ public class SpawnEnemy : EnemyAI // Inherits from EnemyAI now instead of Monobe
         initializeVariables();
         timer = spawnTime;
         enemyEffect = gameObject.GetComponent<EnemyEffect>();
-        SFXManager = GetComponent<AudioManager>();
         m_Animator = gameObject.GetComponent<Animator>();
     }
 
@@ -179,9 +177,7 @@ public class SpawnEnemy : EnemyAI // Inherits from EnemyAI now instead of Monobe
             SFXtoPlay = SFX[Random.Range(0, SFX.Length)];
             audioSource.clip = SFXtoPlay;
             audioSource.pitch = randomPitch;
-            SFXManager.GetPitch(randomPitch);
-            SFXManager.PushMusic(SFXtoPlay);
-            //audioSource.Play();
+            audioSource.Play();
         }
         //SFX END
         return enemy;

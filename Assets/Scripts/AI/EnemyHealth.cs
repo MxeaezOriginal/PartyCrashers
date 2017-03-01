@@ -83,12 +83,12 @@ public class EnemyHealth : MonoBehaviour
             if (m_EnemyHealth > 0)
             {
                 SFXtoPlay = hurtSFX[Random.Range(0, hurtSFX.Length)];
-                //SFXManager.PushMusic(SFXtoPlay);
+                AudioManager.m_Instance.PushMusic(SFXtoPlay);
             }
             else
             {
                 SFXtoPlay = deathSFX[Random.Range(0, deathSFX.Length)];
-                //SFXManager.PushMusic(SFXtoPlay);
+                AudioManager.m_Instance.PushMusic(SFXtoPlay);
             }
 
             if (SFXPlayer != null)
@@ -96,13 +96,13 @@ public class EnemyHealth : MonoBehaviour
                 AudioSource source = SFXPlayer.GetComponent<AudioSource>();
                 source.pitch = randomPitch;
                 source.clip = SFXtoPlay;
-                source.Play();
+                //source.Play();
                 //SFXManager.GetPitch(randomPitch);
                 //SFXManager.PushMusic(SFXtoPlay);
                 //SFXManager.PushMusic(SFXtoPlay);
             }
 
-            GameObject SFXtest = Instantiate(SFXPlayer, transform.position, transform.rotation) as GameObject;
+            //GameObject SFXtest = Instantiate(SFXPlayer, transform.position, transform.rotation) as GameObject;
             GameObject SFXtest2 = Instantiate(SFXHit, transform.position, transform.rotation) as GameObject;
 
             //James Shound Code

@@ -5,73 +5,61 @@ using System.Collections.Generic;
 public class AudioManager : MonoBehaviour {
 
     public static AudioManager m_Instance;
-    public AudioSource m_AudioManager;
+    private AudioSource m_AudioSource;
     private AudioClip m_CurMusic;
     private float m_pitch;
     private List<AudioClip> m_RandomMusicList;
     public float m_DelayTime;
-	// Use this for initialization
-	void Start () {
-        m_AudioManager = GetComponent<AudioSource>();
-        m_RandomMusicList = new List<AudioClip>();
-        ResetMusicList();
-	}
+
+    private bool m_IsPlaying;
+    private float m_DelayCounter;
+    // Use this for initialization
+    void Start () {
+        if (m_Instance == null)
+        {
+            DontDestroyOnLoad(gameObject);
+            m_Instance = this;
+            m_RandomMusicList = new List<AudioClip>();
+            m_AudioSource = GetComponent<AudioSource>();
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 	
 	// Update is called once per frame
 	void Update ()
     {
-        if(m_RandomMusicList != null)
+        m_DelayCounter -= Time.deltaTime;
+        if (m_DelayCounter <= 0)
         {
-            if (!m_AudioManager.isPlaying)
-            {
-                if (m_RandomMusicList.Count <= 1 && m_RandomMusicList.Count > 0)
-                {
-                    Debug.Log("FIRST");
-                    m_CurMusic = m_RandomMusicList[0];
-                    m_AudioManager.clip = m_CurMusic;
-                    m_AudioManager.pitch = m_pitch;
-                    m_AudioManager.Play();
-                    //ResetMusicList();
-                }
-
-                if (m_RandomMusicList.Count > 1)
-                {
-                    Debug.Log("Second");
-                    playRandomMusic();
-                }
-            }
-
-            if (m_AudioManager.isPlaying)
-            {
-                WaitAudioClip();
-            }
-        }    
-	} 
-
-    void playRandomMusic()
-    {
-        m_CurMusic = m_RandomMusicList[Random.Range(0, (m_RandomMusicList.Count)-1)];
-        m_AudioManager.clip = m_CurMusic;
-        m_AudioManager.pitch = m_pitch;
-        m_AudioManager.Play();
-        ResetMusicList();
+            m_IsPlaying = false;
+        }
+        else
+        {
+            m_IsPlaying = true;
+        }
     }
 
-    IEnumerator WaitAudioClip()
+    IEnumerator WaitListReset()
     {
-        while(m_AudioManager.isPlaying)
-        {
-            yield return null;
-        }
-
         yield return new WaitForSeconds(m_DelayTime);
-        playRandomMusic();
+        ResetMusicList();
     }
 
     public void PushMusic(AudioClip ac)
     {
         Debug.Log(ac.ToString());
-        m_RandomMusicList.Add(ac);
+        if (m_IsPlaying == false)
+        {
+            //m_RandomMusicList.Add(ac);
+            //m_AudioSource.clip = ac;
+            //m_AudioSource.pitch = m_pitch;
+            AudioSource.PlayClipAtPoint(ac, Camera.main.transform.position);
+            m_IsPlaying = true;
+            m_DelayCounter = m_DelayTime;
+        }
     }
 
     void ResetMusicList()
@@ -79,9 +67,5 @@ public class AudioManager : MonoBehaviour {
         m_RandomMusicList.Clear();
     }
 
-    public void GetPitch(float p)
-    {
-        Debug.Log("get pitch");
-        m_pitch = p;
-    }
+
 }
