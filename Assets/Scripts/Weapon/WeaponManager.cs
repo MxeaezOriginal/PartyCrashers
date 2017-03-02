@@ -127,7 +127,7 @@ public class WeaponManager : MonoBehaviour
         {
             foreach (GameObject weaponPickup in m_WeaponPrefabPickups)
             {
-                if (m_CurrentWeaponObject.gameObject.name + m_PickupConcactinateString == weaponPickup.gameObject.name)
+                if ((m_CurrentWeaponObject.gameObject.name + m_PickupConcactinateString).ToLower() == weaponPickup.gameObject.name.ToLower())
                 {
                     GameObject weaponToDrop = Instantiate(weaponPickup, m_CurrentWeaponObject.transform.position, Quaternion.identity) as GameObject;
                     StartCoroutine(SetWeaponPickupable(weaponToDrop, weaponPickup.name));
@@ -182,7 +182,7 @@ public class WeaponManager : MonoBehaviour
         foreach (GameObject weapon in m_WeaponPrefabs)
         {
             //If the name of the prefab is equal to the name of the collided object with the pickup text added
-            if (weapon.gameObject.name + m_PickupConcactinateString == other.gameObject.name)
+            if ((weapon.gameObject.name + m_PickupConcactinateString).ToLower() == other.gameObject.name.ToLower())
             {
                 //Loop through all the child GameObjects under the Weapon gameobject in Player
                 foreach (Transform child in m_WeaponsTransform)
