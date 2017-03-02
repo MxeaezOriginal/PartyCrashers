@@ -85,55 +85,65 @@ public class MenuNeonFlicker : MonoBehaviour
     void SetStateForNeonFrame()
     {
         //CONTROLLER CHECK & ASSIGN (IF - ON / ELSE - OFF)
-        if (CS.P1Join)
+
+        if(CS.firstPlayer != CharacterSelect.PlayerOne.nullType)
+        {
             m_NeonFrames[0] = NeonFrame.Turning;
+        }
         else
             m_NeonFrames[0] = NeonFrame.OFF;
 
-        if (CS.P2Join)
+        if (CS.secondPlayer != CharacterSelect.PlayerTwo.nullType)
+        {
             m_NeonFrames[1] = NeonFrame.Turning;
+        }
         else
             m_NeonFrames[1] = NeonFrame.OFF;
 
-        if (CS.P3Join)
+        if (CS.thirdPlayer != CharacterSelect.PlayerThree.nullType)
+        {
             m_NeonFrames[2] = NeonFrame.Turning;
+        }
         else
             m_NeonFrames[2] = NeonFrame.OFF;
 
-        if (CS.P4Join)
+        if (CS.fourthPlayer != CharacterSelect.PlayerFour.nullType)
+        {
             m_NeonFrames[3] = NeonFrame.Turning;
+        }
         else
             m_NeonFrames[3] = NeonFrame.OFF;
 
+
         //KEYBOARD CHECK & ASSIGN (IF - ON / ELSE - OFF)
-        if (CS.KeyboardJoin)
-        {
-            if (GameManager.m_Instance.m_Player1.m_Controller == Player.Controller.Keyboard)
-                m_NeonFrames[0] = NeonFrame.Turning;
+        //if (CS.KeyboardJoin)
+        //{
+        //    if (GameManager.m_Instance.m_Player1.m_Controller == Player.Controller.Keyboard)
+        //        m_NeonFrames[0] = NeonFrame.Turning;
 
-            if (GameManager.m_Instance.m_Player2.m_Controller == Player.Controller.Keyboard)
-                m_NeonFrames[1] = NeonFrame.Turning;
+        //    if (GameManager.m_Instance.m_Player2.m_Controller == Player.Controller.Keyboard)
+        //        m_NeonFrames[1] = NeonFrame.Turning;
 
-            if (GameManager.m_Instance.m_Player3.m_Controller == Player.Controller.Keyboard)
-                m_NeonFrames[2] = NeonFrame.Turning;
+        //    if (GameManager.m_Instance.m_Player3.m_Controller == Player.Controller.Keyboard)
+        //        m_NeonFrames[2] = NeonFrame.Turning;
 
-            if (GameManager.m_Instance.m_Player4.m_Controller == Player.Controller.Keyboard)
-                m_NeonFrames[3] = NeonFrame.Turning;
-        }
-        else
-        {
-            if (GameManager.m_Instance.m_Player1.m_Controller == Player.Controller.Keyboard)
-                m_NeonFrames[0] = NeonFrame.OFF;
+        //    if (GameManager.m_Instance.m_Player4.m_Controller == Player.Controller.Keyboard)
+        //        m_NeonFrames[3] = NeonFrame.Turning;
+        //}
+        //else
+        //{
+        //    if (GameManager.m_Instance.m_Player1.m_Controller == Player.Controller.Keyboard)
+        //        m_NeonFrames[0] = NeonFrame.OFF;
 
-            if (GameManager.m_Instance.m_Player2.m_Controller == Player.Controller.Keyboard)
-                m_NeonFrames[1] = NeonFrame.OFF;
+        //    if (GameManager.m_Instance.m_Player2.m_Controller == Player.Controller.Keyboard)
+        //        m_NeonFrames[1] = NeonFrame.OFF;
 
-            if (GameManager.m_Instance.m_Player3.m_Controller == Player.Controller.Keyboard)
-                m_NeonFrames[2] = NeonFrame.OFF;
+        //    if (GameManager.m_Instance.m_Player3.m_Controller == Player.Controller.Keyboard)
+        //        m_NeonFrames[2] = NeonFrame.OFF;
 
-            if (GameManager.m_Instance.m_Player4.m_Controller == Player.Controller.Keyboard)
-                m_NeonFrames[3] = NeonFrame.OFF;
-        }
+        //    if (GameManager.m_Instance.m_Player4.m_Controller == Player.Controller.Keyboard)
+        //        m_NeonFrames[3] = NeonFrame.OFF;
+        //}
     }
 
     void Update()

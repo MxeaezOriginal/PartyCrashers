@@ -368,23 +368,18 @@ public class CharacterSelect : MonoBehaviour
         {
             case 1:
                 canLockIn_P1 = true;
-                print("??1");
                 break;
             case 2:
                 canLockIn_P2 = true;
-                print("??2");
                 break;
             case 3:
                 canLockIn_P3 = true;
-                print("??3");
                 break;
             case 4:
                 canLockIn_P4 = true;
-                print("??4");
                 break;
             case 5:
                 canLockIn_Keyboard = true;
-                print("??5");
                 break;
         }
     }
