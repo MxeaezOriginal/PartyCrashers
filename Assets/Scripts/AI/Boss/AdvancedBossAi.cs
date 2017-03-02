@@ -186,6 +186,16 @@ public class AdvancedBossAi : MonoBehaviour
         transform.position = new Vector3(transform.position.x, ypos,transform.position.z);
         //Make sure scale is fine
         if(state != states.teleport)transform.localScale = new Vector3(2f, 2f, 2f);
+        //Manage invinvibility
+        if (m_Invincible)
+        {
+            bool healthshit = GetComponent<EnemyHealth>().isInvincible;
+            healthshit = true;
+        }else
+        {
+            bool healthshit = GetComponent<EnemyHealth>().isInvincible;
+            healthshit = true;
+        }
     }
     void LateUpdate()
     {
@@ -268,7 +278,8 @@ public class AdvancedBossAi : MonoBehaviour
     }
     void Teleport(int framesBeforeTP, int recoverFrames)
     {
-        
+
+        m_Invincible = true;
         Colors(Color.blue, Color.white, 0.3f);
         //Look at teh sky
         transform.Rotate(new Vector3(transform.position.x, transform.position.y, transform.position.z + 5));
@@ -329,6 +340,7 @@ public class AdvancedBossAi : MonoBehaviour
         if (frame > recoverFrames + framesBeforeTP)
         {
             transform.localScale = new Vector3(2f,2f,2f);
+            m_Invincible = false;
             state = states.idle;
         }
         
@@ -357,78 +369,7 @@ public class AdvancedBossAi : MonoBehaviour
             m_HurtEffect.SetActive(true);
         }
     }
-    void OnTriggerExit(Collider other)
-    {
-        //if (other.gameObject.GetComponent<Sword>() != null)
-        //{
-        //    Sword sword = other.gameObject.GetComponent<Sword>();
-        //    bool attacking = sword.attack;
-        //    attacked = false;
-        //}
-
-
-    }
-
-    //CHANGE THIS ONCE ANIMATIONS ARE IN
-    public void OnTriggerEnter(Collider other)
-    {
-        //if (!m_Invincible)
-        //{
-        //    if (other.gameObject.GetComponent<Damage>() != null)
-        //    {
-        //        Damage attacker = other.gameObject.GetComponent<Damage>();
-        //        StateEffect attackerEffect = other.gameObject.GetComponent<StateEffect>();
-        //        float dmg = 0;
-        //        float knockBack = 0f;
-        //        float stun = 0f;
-        //        if (other.gameObject.GetComponent<Sword>() != null)
-        //        {
-        //            Sword sword = other.gameObject.GetComponent<Sword>();
-        //            bool attacking = sword.attack;
-        //            if (attacking)
-        //            {
-        //                if (!attacked)
-        //                {
-        //                    attacked = true;
-        //                    dmg = attacker.m_Damage;
-        //                    knockBack = 10f;
-        //                    stun = 10f;
-
-        //                    m_Velocity = knockBack * Vector3.Normalize(transform.position - other.transform.position);
-        //                    m_Health -= dmg;
-        //                    m_StunTime = stun;
-        //                    state = states.hurt;
-        //                }
-        //                else
-        //                {
-        //                    dmg = 0;
-        //                    knockBack = 0f;
-        //                    stun = 0f;
-        //                }
-        //            }
-        //            else
-        //            {
-
-        //                dmg = 0;
-        //                knockBack = 0f;
-        //                stun = 0f;
-        //            }
-        //        }
-        //        else
-        //        {
-        //            //dmg = attacker.m_Damage;
-        //            knockBack = 10f;
-        //            stun = 10f;
-        //        }
-
-
-        //        //float knockBack = attackerEffect.m_KnockBack; //These two is how this code is supposed to work but for whatever reason it's not getting these or the values just don't exist
-        //        //float stun = attackerEffect.m_StunTime;
-
-        //    }
-        //}
-    }
-    #endregion//ALL THIS NEEDS TO CHANGE ONCE ANIMATIONS ARE IN
+    #endregion
 
     #region Attack states
 
