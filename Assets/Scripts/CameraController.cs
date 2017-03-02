@@ -5,8 +5,8 @@ public class CameraController : MonoBehaviour
 {
 
     public Vector3 rotation = new Vector3(60, 0, 0);
-    public int height = 10;
-    public int distanceOffset = 10;
+    private int height = 20;
+    private int distanceOffset = 15;
     public float y = 0;
     public Vector3 mPosition;
     public float m_Zoom = 0;
