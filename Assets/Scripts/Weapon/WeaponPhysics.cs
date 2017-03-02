@@ -25,7 +25,7 @@ public class WeaponPhysics : MonoBehaviour
     {
         m_player = GameManager.m_Instance.m_Players;
         rb = GetComponent<Rigidbody>();
-        rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+        //rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
         //foreach (Transform player in players)
         //{
         //    switch (player.GetComponent<Player>().m_Player)

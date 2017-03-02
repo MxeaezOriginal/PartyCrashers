@@ -182,7 +182,10 @@ public class AdvancedBossAi : MonoBehaviour
     }
     void FixedUpdate()
     {
+        //Manage position
         transform.position = new Vector3(transform.position.x, ypos,transform.position.z);
+        //Make sure scale is fine
+        if(state != states.teleport)transform.localScale = new Vector3(2f, 2f, 2f);
     }
     void LateUpdate()
     {
@@ -226,7 +229,7 @@ public class AdvancedBossAi : MonoBehaviour
         Colors(Color.green, Color.green, 1f);
         //Look at next player
         GameObject closestPlayer = getClosestPlayer();
-        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(closestPlayer.transform.position - transform.position),0.1f);
+        transform.LookAt(closestPlayer.transform.position);
         
         //Friction
         Friction(1f);
@@ -267,20 +270,25 @@ public class AdvancedBossAi : MonoBehaviour
     {
         
         Colors(Color.blue, Color.white, 0.3f);
-        //Look at player
-        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(getClosestPlayer().transform.position - transform.position), 0.1f);
+        //Look at teh sky
+        transform.Rotate(new Vector3(transform.position.x, transform.position.y, transform.position.z + 5));
+        if (frame == 1) transform.LookAt(new Vector3(transform.position.x, transform.position.y + 10, transform.position.z)); 
         //Friction
         Friction(2f);
         //Windup
-        
+        GenerateTeleportFX();
         if (frame < framesBeforeTP)
         {
+            //Rotate Ball
             m_Ball.transform.Rotate(new Vector3(transform.rotation.x - 10, transform.rotation.y, transform.rotation.z));
+            //Shrink
+            transform.localScale = new Vector3(Mathf.Lerp(transform.localScale.x, 0.1f,0.1f), Mathf.Lerp(transform.localScale.y, 0.1f, 0.1f), transform.localScale.z);
             
         }
         if (frame == framesBeforeTP)
         {
-            GenerateTeleportFX();
+            
+
             Vector3 teleportTargetPosition = transform.position; //Set variable for target position
             int xdir = Random.Range(-1, 1);
             int zdir = Random.Range(-1, 1);
@@ -315,10 +323,12 @@ public class AdvancedBossAi : MonoBehaviour
         if (frame > framesBeforeTP && frame < recoverFrames + framesBeforeTP)
         {
             transform.Rotate(new Vector3(transform.rotation.x - 10, transform.rotation.y, transform.rotation.z));
+            transform.localScale = new Vector3(Mathf.Lerp(transform.localScale.x, 2f, 0.5f), Mathf.Lerp(transform.localScale.y, 2f, 0.5f), transform.localScale.z);
         }
         //Change state
         if (frame > recoverFrames + framesBeforeTP)
         {
+            transform.localScale = new Vector3(2f,2f,2f);
             state = states.idle;
         }
         
