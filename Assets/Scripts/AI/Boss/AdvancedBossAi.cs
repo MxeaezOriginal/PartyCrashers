@@ -226,7 +226,7 @@ public class AdvancedBossAi : MonoBehaviour
         Colors(Color.green, Color.green, 1f);
         //Look at next player
         GameObject closestPlayer = getClosestPlayer();
-        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(closestPlayer.transform.position - transform.position),0.1f);
+        transform.LookAt(closestPlayer.transform.position);
         
         //Friction
         Friction(1f);
@@ -268,11 +268,11 @@ public class AdvancedBossAi : MonoBehaviour
         
         Colors(Color.blue, Color.white, 0.3f);
         //Look at player
-        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(getClosestPlayer().transform.position - transform.position), 0.1f);
+        transform.rotation = new Quaternion(0f, 0f, 1f,0f);
         //Friction
         Friction(2f);
         //Windup
-        
+        GenerateTeleportFX();
         if (frame < framesBeforeTP)
         {
             m_Ball.transform.Rotate(new Vector3(transform.rotation.x - 10, transform.rotation.y, transform.rotation.z));
@@ -280,7 +280,7 @@ public class AdvancedBossAi : MonoBehaviour
         }
         if (frame == framesBeforeTP)
         {
-            GenerateTeleportFX();
+            
             Vector3 teleportTargetPosition = transform.position; //Set variable for target position
             int xdir = Random.Range(-1, 1);
             int zdir = Random.Range(-1, 1);
