@@ -125,7 +125,7 @@ public class Bow : Ranged
     private void ShootPrimary()
     {
         GameObject bullet;
-        bullet = (GameObject)Instantiate(m_RightTriggerProjectile, m_FirePoint[0].gameObject.transform.position, m_FirePoint[0].gameObject.transform.rotation);        
+        bullet = (GameObject)Instantiate(m_RightTriggerProjectile, m_FirePoint[0].gameObject.transform.position, m_FirePoint[0].gameObject.transform.rotation);
         bullet.GetComponent<Rigidbody>().AddForce(bullet.transform.forward * m_BulletSpeed);
         AssignDamage(bullet, 1);
         m_CanFirePrimary = false;

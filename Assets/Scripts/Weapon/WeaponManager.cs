@@ -99,6 +99,20 @@ public class WeaponManager : MonoBehaviour
         newWeapon.transform.localRotation = Quaternion.identity;
         newWeapon.transform.localScale = new Vector3(1, 1, 1);
 
+        if(newWeapon.GetComponent<Ranged>() != null)
+        {
+            if(transform.FindChild("Firepoints").FindChild("Firepoint1") != null)
+            {
+                GameObject firePoint = transform.FindChild("Firepoints").FindChild("Firepoint1").gameObject;
+
+                newWeapon.GetComponent<Ranged>().setFirePoint(firePoint);
+            }
+            else
+            {
+                Debug.LogError("[WeaponManager] Firepoints/Firepoint1 not found under player");
+            }
+        }
+
         newWeapon.name = child.name;
         m_CurrentWeaponObject = newWeapon;
         m_CurrentWeapon = (Weapon) System.Enum.Parse(typeof(Weapon), m_CurrentWeaponObject.name);
