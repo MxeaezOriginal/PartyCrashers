@@ -147,7 +147,7 @@ GameManager.m_Instance.m_Player3.m_Controller == Player.Controller.Keyboard || G
     }
     void Quit()
     {
-        Time.timeScale = 0;
+        //Time.timeScale = 0;
         es.SetSelectedGameObject(null); es.enabled = false; es.enabled = true; es.SetSelectedGameObject(firstSelectedButtons[3]); es.firstSelectedGameObject = firstSelectedButtons[3];
         quitActive = false;
         canvases[0].SetActive(false);
