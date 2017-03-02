@@ -60,7 +60,7 @@ public class FallingTrap : MonoBehaviour {
 
     void DestroyAfterActivation()
     {
-        if (mTrap.transform.position.y <= 0.5)
+        if (mTrap.transform.position.y <= 0.7)
         {
             Destroy(mTrap);
         }
