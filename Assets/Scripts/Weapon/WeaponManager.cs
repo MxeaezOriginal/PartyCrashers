@@ -21,6 +21,7 @@ public class WeaponManager : MonoBehaviour
     private Weapon m_ChangeWeapon = Weapon.GlowSword;
     public string m_PickupConcactinateString = "_Pickup";
     public float m_DelayBetweenSwaps = 1f;
+    public bool m_RandomWeaponOnStart;
 
     public GameObject[] m_WeaponPrefabs;
     public GameObject[] m_WeaponPrefabPickups;
@@ -37,7 +38,10 @@ public class WeaponManager : MonoBehaviour
 
         if (SceneManager.GetActiveScene().name == GameManager.m_Instance.m_LevelToStart)
         {
-            m_CurrentWeapon = (Weapon)Random.Range(0, (int) Weapon.Length);
+            if (m_RandomWeaponOnStart)
+            {
+                m_CurrentWeapon = (Weapon)Random.Range(0, (int)Weapon.Length);
+            }
         }
 
         initialize();

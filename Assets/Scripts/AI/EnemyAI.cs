@@ -14,10 +14,25 @@ public class EnemyAI : MonoBehaviour
     public Rigidbody m_RigidBody;
     public bool isArrived = false;
 
+    private float m_KnockBackCounter;
+ private Vector3 m_KnockBackPosition;
+ private float m_KnockBackTime;
+ private float m_KnockBackSpeed;
+
     void Start()
     {
         m_Rtts = m_RotationSpeed;
     }
+
+    void FixedUpdate()
+    {
+        m_KnockBackCounter -= Time.deltaTime;
+        if (m_KnockBackCounter > 0)
+        {
+            Vector3 newPosition = Vector3.Slerp(m_KnockBackPosition.normalized * m_KnockBackSpeed, new Vector3(0, 0, 0), 1f - m_KnockBackCounter / m_KnockBackTime);
+            agent.Move(newPosition * Time.deltaTime);
+        }
+      }
 
     public void chase()
     {
@@ -61,11 +76,9 @@ public class EnemyAI : MonoBehaviour
 
     public void Knockback(Vector3 position, float KB)
     {
-        disableAgent();
-
-        m_RigidBody.velocity = position * KB;
-
-        reActivateAgent(1 / KB);
+        m_KnockBackPosition = position;
+        m_KnockBackCounter = m_KnockBackTime;
+        m_KnockBackSpeed = KB;
     }
 
     public void disableAgent()
@@ -136,6 +149,8 @@ public class EnemyAI : MonoBehaviour
         players = GameManager.m_Instance.m_Players;
         agent = gameObject.GetComponent<NavMeshAgent>();
         m_Origin = gameObject.transform.position;
+        m_KnockBackTime = 0.5f;
+        m_KnockBackSpeed = 30f;
     }
 
 }
