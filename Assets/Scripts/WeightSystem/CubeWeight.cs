@@ -18,7 +18,7 @@ public class CubeWeight : MonoBehaviour {
     void Start () {
         m_player = GameManager.m_Instance.m_Players;
         rb = GetComponent<Rigidbody>();
-        rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+        //rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
         rb.isKinematic = true;
         //sfx start
         audioSource.clip = MoveSFX;
