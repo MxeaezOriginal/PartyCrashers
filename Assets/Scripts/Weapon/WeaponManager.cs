@@ -44,7 +44,10 @@ public class WeaponManager : MonoBehaviour
             }
         }
 
-        initialize();
+        if (GameManager.m_Instance.m_GameState != GameManager.GameState.Minigame)
+        {
+            initialize();
+        }
     }
 
     private void Update()
