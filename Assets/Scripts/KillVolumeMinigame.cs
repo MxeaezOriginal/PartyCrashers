@@ -12,7 +12,7 @@ public class KillVolumeMinigame : MonoBehaviour {
             Player p = other.gameObject.GetComponent<Player>();
             RespawnHealth w = other.gameObject.GetComponent<RespawnHealth>();
             p.respawnMinigame();
-            w.reviveWeapon();
+            //w.reviveWeapon();
         }
     }
 }

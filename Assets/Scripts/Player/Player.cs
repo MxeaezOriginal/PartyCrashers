@@ -327,15 +327,15 @@ public class Player : MonoBehaviour
     public void respawnMinigame()
     {
         var vel = gameObject.GetComponent<PlayerController>().m_Velocity.normalized;
-        Vector3 tempLocation = m_Location;
-        tempLocation.x -= vel.x * 20.0f;
-        tempLocation.z -= vel.z * 20.0f;
-
-        m_State = State.Alive;
-
+        //Vector3 tempLocation = m_Location;
+        //tempLocation.x -= vel.x * 20.0f;
+        //tempLocation.z -= vel.z * 20.0f;
+        m_State = State.Dead;
+        m_IsDead = true;
         updateModel();
-        transform.position = tempLocation;
+        transform.position = new Vector3(0.0f, 0.0f);
         stun(0.2f);
+        m_RespawnHealth.initialize();
     }
 
     public void updateModel()

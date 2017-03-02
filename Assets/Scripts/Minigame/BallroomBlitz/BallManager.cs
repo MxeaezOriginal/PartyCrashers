@@ -34,14 +34,17 @@ public class BallManager : MonoBehaviour
             switch (m_BallType)
             {
                 case EBallType.Basic:
-                    var playerController = other.GetComponent<PlayerController>();
-                    m_KnockBackDirection = (other.transform.position - transform.position).normalized;
+                    if(!other.GetComponent<Player>().m_IsDead)
+                    {
+                        var playerController = other.GetComponent<PlayerController>();
+                        m_KnockBackDirection = (other.transform.position - transform.position).normalized;
 
-                    // Check if player is stunned
-                    if (playerController.m_CantMove)
-                        playerController.m_CantMove = false;
+                        // Check if player is stunned
+                        if (playerController.m_CantMove)
+                            playerController.m_CantMove = false;
 
-                    playerController.m_Velocity = m_KnockBackDirection * m_KnockBackIntensity;
+                        playerController.m_Velocity = m_KnockBackDirection * m_KnockBackIntensity;
+                    }
                     break;
                 case EBallType.Stun:
                     other.GetComponent<Player>().stun(m_StunTime);

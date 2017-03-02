@@ -8,12 +8,17 @@
 
 using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class MinigameScoreAndTimeTrack : MonoBehaviour
 {
     private MinigameManager m_MinigameManager;
     private bool            m_IsCoroutineRunning;
     private PartyBar        m_PartyBar;
+    private string          m_MinigameSceneName;
+    private float[]         m_RawTime;
+
+    public int              m_PointsToAward;
 
     // Use this for initialization
     void Start()
@@ -21,6 +26,13 @@ public class MinigameScoreAndTimeTrack : MonoBehaviour
         m_PartyBar              = GameManager.m_Instance.m_PartyBar.GetComponent<PartyBar>();
         m_MinigameManager       = GetComponent<MinigameManager>();
         m_IsCoroutineRunning    = false;
+        m_MinigameSceneName     = SceneManager.GetActiveScene().name;
+        m_RawTime               = new float[GameManager.m_Instance.m_NumOfPlayers];
+
+        for(int i = 0; i < GameManager.m_Instance.m_NumOfPlayers; ++i)
+        {
+            m_RawTime[i] = 0.0f;
+        }
     }
 
     // Update is called once per frame
@@ -32,17 +44,51 @@ public class MinigameScoreAndTimeTrack : MonoBehaviour
             if (m_PartyBar.m_Current < 0.0f)
             {
                 m_MinigameManager.UpdateMinigameState();
+                return;
             }
 
-            StartCoroutine(UpdateScore());
+            if(m_MinigameSceneName.Equals("BallroomBlitz"))
+            {
+                // each player gets points (variable) for each second they are "active" (if stunned, do not receive any points).
+                // if player "dies", 5 seconds to respawn without getting any points
+
+                //
+                for (int i = 0; i < GameManager.m_Instance.m_NumOfPlayers; ++i)
+                {
+                    if (!GameManager.m_Instance.m_Players[i].GetComponent<PlayerController>().m_CantMove 
+                        && !GameManager.m_Instance.m_Players[i].GetComponent<Player>().m_IsDead)
+                    {
+                        m_RawTime[i] += Time.deltaTime;
+                    }
+                }
+
+                StartCoroutine(UpdateScore());
+            }
+            else if(m_MinigameSceneName.Equals("BreakToTheBeat"))
+            {
+                // each player gets points (variable) as he/she gets food.
+                // if players get food, party bar should not be refilled
+            }
+            else if(m_MinigameSceneName.Equals("DanceFloorRumble"))
+            {
+                // players get points (variable) per second by standing on the green squares
+
+            }
         }
     }
 
     IEnumerator UpdateScore()
     {
         m_IsCoroutineRunning = true;
-        GameManager.m_Instance.m_Players[0].GetComponent<Player>().m_Score+= 10;
+
         yield return new WaitForSeconds(1.0f);
+
+        for (int i = 0; i < GameManager.m_Instance.m_NumOfPlayers; ++i)
+        {
+            GameManager.m_Instance.m_Players[i].GetComponent<Player>().m_Score += Mathf.CeilToInt(m_RawTime[i]) * m_PointsToAward;
+            m_RawTime[i] = 0.0f;
+        }
+
         m_IsCoroutineRunning = false;
     }
 }
