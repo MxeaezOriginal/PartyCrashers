@@ -14,32 +14,65 @@ public class EnemyAI : MonoBehaviour
     public Rigidbody m_RigidBody;
     public bool isArrived = false;
 
+    private float m_KnockBackCounter;
+    private Vector3 m_KnockBackPosition;
+    private float m_KnockBackTime;
+    private float m_KnockBackSpeed;
+
+    //private bool m_IsGettingKB;
+
     void Start()
     {
         m_Rtts = m_RotationSpeed;
     }
 
+    void FixedUpdate()
+    {
+        //Debug.Log(m_KnockBackCounter);
+        m_KnockBackCounter -= Time.deltaTime;
+        if (m_KnockBackCounter > 0)
+        {
+            //m_IsGettingKB = true;
+            Vector3 newPosition = Vector3.Slerp(m_KnockBackPosition.normalized * m_KnockBackSpeed, new Vector3(0, 0, 0), 1f - m_KnockBackCounter / m_KnockBackTime);
+            agent.Move(newPosition * Time.deltaTime);
+        }
+        //else
+        //{
+        //    m_IsGettingKB = false;
+        //    //if(!agent.enabled)
+        //    //{
+        //    //    agent.enabled = true;
+        //    //}
+        //}
+    }
+
     public void chase()
     {
-        if (target != null)
+        if (agent.enabled)
         {
-            look(target.transform);
-            agent.SetDestination(target.transform.position);
-            agent.Resume();
+            if (target != null)
+            {
+                look(target.transform);
+                agent.SetDestination(target.transform.position);
+                agent.Resume();
+            }
         }
     }
 
     public void returnToOrigin()
     {
-        agent.SetDestination(m_Origin);
-        agent.Resume();
-        if(transform.position.x == m_Origin.x && transform.position.z == m_Origin.z)
+        if (agent.enabled)
         {
-            isArrived = true;
-        }
-        else
-        {
-            isArrived = false;
+            agent.SetDestination(m_Origin);
+            agent.Resume();
+            if (transform.position.x == m_Origin.x && transform.position.z == m_Origin.z)
+            {
+                isArrived = true;
+            }
+            else
+            {
+                isArrived = false;
+            }
         }
     }
 
@@ -61,22 +94,21 @@ public class EnemyAI : MonoBehaviour
 
     public void Knockback(Vector3 position, float KB)
     {
-        disableAgent();
+        //agent.enabled = false;
 
-        m_RigidBody.velocity = position * KB;
+        m_KnockBackPosition = position;
+        m_KnockBackCounter = m_KnockBackTime;
+        m_KnockBackSpeed = KB;
+        // m_RigidBody.AddForce(new Vector3(position.x, 0, position.z) * KB * 50f);
 
-        reActivateAgent(1 / KB);
+        //reActivateAgent(1 / KB);
     }
 
     public void disableAgent()
     {
         agent.enabled = false;
-        if (gameObject.GetComponent<Rigidbody>() == null)
-        {
-            gameObject.AddComponent<Rigidbody>();
-        }
-        m_RigidBody = gameObject.GetComponent<Rigidbody>();
-        m_RigidBody.freezeRotation = true;
+        //m_RigidBody.isKinematic = false;
+        //m_RigidBody.freezeRotation = true;
     }
 
     public void reActivateAgent(float time)
@@ -98,7 +130,7 @@ public class EnemyAI : MonoBehaviour
         {
             if (i == 0)
             {
-                if(players[i].GetComponent<Player>().m_State == Player.State.Alive)
+                if (players[i].GetComponent<Player>().m_State == Player.State.Alive)
                 {
                     m_Distance = Vector3.Distance(players[i].transform.position, transform.position);
                     target = players[i];
@@ -125,7 +157,7 @@ public class EnemyAI : MonoBehaviour
                 }
             }
         }
-        if(m_Distance == 10000)
+        if (m_Distance == 10000)
         {
             target = null;
         }
@@ -135,7 +167,10 @@ public class EnemyAI : MonoBehaviour
     {
         players = GameManager.m_Instance.m_Players;
         agent = gameObject.GetComponent<NavMeshAgent>();
+        m_RigidBody = GetComponent<Rigidbody>();
         m_Origin = gameObject.transform.position;
+        m_KnockBackTime = 0.5f;
+        m_KnockBackSpeed = 30f;
     }
 
 }
