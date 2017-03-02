@@ -11,11 +11,14 @@ public class FallingTrap : MonoBehaviour {
     private bool mActivated;
     private HeartSystem m_Heart;
     GameObject mTrap;
+    private float m_DeleteCounter = 1.5f;
+    private bool m_IsUsed;
     //SFX
     public AudioSource audioSource;
     public AudioClip[] FallSFX;
     public AudioClip[] hitPlayerSFX;
     private AudioClip SFXtoPlay;
+    
     //SFX
     // 
 
@@ -45,7 +48,7 @@ public class FallingTrap : MonoBehaviour {
                 audioSource.Play();
             }
             //SFX End
-
+            m_IsUsed = true;
             Rigidbody rb = mTrap.GetComponent<Rigidbody>();
             rb.mass = mMass;
             if(FallingSpeed >= 1000)
@@ -60,9 +63,14 @@ public class FallingTrap : MonoBehaviour {
 
     void DestroyAfterActivation()
     {
-        if (mTrap.transform.position.y <= 0.7)
+        if(m_IsUsed == true)
         {
-            Destroy(mTrap);
+            m_DeleteCounter -= Time.deltaTime;
+
+            if (m_DeleteCounter <= 0)
+            {
+                Destroy(mTrap);
+            }
         }
     }
 
