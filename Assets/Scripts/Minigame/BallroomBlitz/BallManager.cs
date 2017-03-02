@@ -8,6 +8,8 @@ public class BallManager : MonoBehaviour
     [HideInInspector]
     public float m_StunTime;
 
+    public float m_KnockBackIntensity;
+
     private Vector3 m_KnockBackDirection;
     private EBallType m_BallType;
     private BallPoolManager m_BallPoolManager;
@@ -39,7 +41,7 @@ public class BallManager : MonoBehaviour
                     if (playerController.m_CantMove)
                         playerController.m_CantMove = false;
 
-                    playerController.m_Velocity = m_KnockBackDirection * 30.0f;
+                    playerController.m_Velocity = m_KnockBackDirection * m_KnockBackIntensity;
                     break;
                 case EBallType.Stun:
                     other.GetComponent<Player>().stun(m_StunTime);
@@ -90,7 +92,7 @@ public class BallManager : MonoBehaviour
             if (playerController.m_CantMove)
                 playerController.m_CantMove = false;
 
-            playerController.m_Velocity = m_KnockBackDirection * 30.0f;
+            playerController.m_Velocity = m_KnockBackDirection * m_KnockBackIntensity;
         }
 
         if (gameObject.activeInHierarchy)
