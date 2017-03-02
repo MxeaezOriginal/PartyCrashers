@@ -17,6 +17,8 @@ public class MinigameRewardSelection : MonoBehaviour
     private GameObject m_RewardCanvas;
     private GameObject m_BossPromptCanvas;
 
+    //private bool m_IsRewardEnded;
+
     public Button[] m_RewardButtons = new Button[4];
     public Button[] m_BossPromptButtons = new Button[2];
 
@@ -25,7 +27,7 @@ public class MinigameRewardSelection : MonoBehaviour
     [HideInInspector]
     public StandaloneInputModule m_SIM;
 
-    private bool m_IsInputSet;
+    //private bool m_IsInputSet;
 
     public Text m_RewardTitle;
     public Text m_RewardTilePlayerNumber;
@@ -58,23 +60,22 @@ public class MinigameRewardSelection : MonoBehaviour
         m_BossPromptButtons[0] = GameObject.Find("NO").GetComponent<Button>();
         m_BossPromptButtons[1] = GameObject.Find("YES").GetComponent<Button>();
 
-        //m_RewardTitle               = GameObject.Find("Pick Reward").GetComponent<Text>();
-        //m_RewardTilePlayerNumber    = GameObject.Find("Player Number").GetComponent<Text>();
-
         m_RewardsSelected = 0;
 
-        m_IsInputSet = false;
+        //m_IsInputSet = false;
         m_IsBossFightAnswered = false;
         m_IsFightingBoss = false;
+        //m_IsRewardEnded = false;
     }
 
     void Update()
     {
-        if (m_MinigameManager.GetMinigameState().Equals(MinigameManager.EMinigameState.RewardSelection))
+        //if (m_MinigameManager.GetMinigameState().Equals(MinigameManager.EMinigameState.RewardSelection))
+        if (m_MinigameManager.GetMinigameState().Equals(MinigameManager.EMinigameState.BossPrompt))
         {
             if (!rewardsShown)
             {
-                m_RewardCanvas.SetActive(true);
+//                m_RewardCanvas.SetActive(true);
                 m_ES.SetSelectedGameObject(null);
                 m_ES.enabled = false;
                 m_ES.enabled = true;
@@ -82,39 +83,14 @@ public class MinigameRewardSelection : MonoBehaviour
                 rewardsShown = true;
             }
 
-            //if(!m_IsInputSet)
-            //{
             SetupInput();
-            //    m_IsInputSet = true;
-            //}
 
-            EndRewards();
-            UpdateCurrentPlayer();
-
-            ////Enables Reward Canvas
-            //if (m_MinigameManager.showRewardCanvas)
+            //if(!m_IsRewardEnded)
             //{
-            //    rewardCanvas.SetActive(true);
-            //    if (!rewardCanvasSetup)
-            //    {
-            //        rewardCanvasSetup = true;
-            //        m_ES.SetSelectedGameObject(null); m_ES.enabled = false; m_ES.enabled = true; m_ES.SetSelectedGameObject(m_RewardButtons[0].gameObject);
-            //    }
-            //    SetupInput();
+            //    m_IsRewardEnded = true;
             //    EndRewards();
-            //    UpdateCurrentPlayer();
             //}
-            ////Enables Boss Prompt Canvas
-            //if (m_MinigameManager.m_RewardsSelected)
-            //{
-            //    rewardCanvas.SetActive(false);
-            //    bossPromptCanvas.SetActive(true);
-            //    if (!m_MinigameManager.m_RewardsSelected)
-            //    {
-            //        m_MinigameManager.m_RewardsSelected = true;
-            //        m_ES.SetSelectedGameObject(null);
-            //        m_ES.enabled = false; m_ES.enabled = true; m_ES.SetSelectedGameObject(bossPromptButtons[0].gameObject);
-            //    }
+//            UpdateCurrentPlayer();
         }
     }
 
@@ -539,10 +515,10 @@ public class MinigameRewardSelection : MonoBehaviour
 
     public void EndRewards()
     {
-        if (m_RewardsSelected >= GameManager.m_Instance.m_NumOfPlayers)
-        {
+        //if (m_RewardsSelected >= GameManager.m_Instance.m_NumOfPlayers)
+        //{
             m_MinigameManager.UpdateMinigameState();
-        }
+        //}
     }
 
     public void BossNo()

@@ -90,9 +90,9 @@ public class MouseInputFix : MonoBehaviour
                         case MinigameManager.EMinigameState.ResultSummary:
                             DisableMouse();
                             break;
-                        case MinigameManager.EMinigameState.RewardSelection:
-                            MiniGameRewardButtonManualSetting();
-                            break;
+                        //case MinigameManager.EMinigameState.RewardSelection:
+                        //    MiniGameRewardButtonManualSetting();
+                        //    break;
                         case MinigameManager.EMinigameState.BossPrompt:
                             BossPromptButtonManualSetting();
                             break;

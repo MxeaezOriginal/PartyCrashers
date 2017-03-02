@@ -11,7 +11,14 @@ using UnityEngine;
 public class MinigameManager : MonoBehaviour
 {
     [HideInInspector]
-    public enum EMinigameState { PreGameCountdown, ScoreAndTimeTrack, ResultSummary, RewardSelection, BossPrompt };
+    public enum EMinigameState
+        {
+            PreGameCountdown
+          , ScoreAndTimeTrack
+          , ResultSummary
+//          , RewardSelection
+          , BossPrompt
+        };
     [HideInInspector]
     public int m_P1Place, m_P2Place, m_P3Place, m_P4Place;
     [HideInInspector]
@@ -64,9 +71,9 @@ public class MinigameManager : MonoBehaviour
                 m_CurrentState = EMinigameState.ResultSummary;
                 break;
             case EMinigameState.ResultSummary:
-                m_CurrentState = EMinigameState.RewardSelection;
-                break;
-            case EMinigameState.RewardSelection:
+            //    m_CurrentState = EMinigameState.RewardSelection;
+            //    break;
+            //case EMinigameState.RewardSelection:
                 m_CurrentState = EMinigameState.BossPrompt;
                 break;
             default:
@@ -74,30 +81,4 @@ public class MinigameManager : MonoBehaviour
                 break;
         }
     }
-
-    //public bool minigameEnded;
-    //public bool showResultBar;
-    //public bool scoreSorted;
-    //public bool barsRaised;
-    //public bool showRewardCanvas;
-    //public bool rewardsSelected;
-
-    //public int P1_place, P2_place, P3_place, P4_place;      //int from 1 - 4
-
-    //public void endMinigame()
-    //{
-    //    if (minigameEnded == false)
-    //    {
-    //        minigameEnded = true;
-    //    }
-    //}
-
-    //void Update()
-    //{
-    //    if (rewardsSelected)
-    //    {
-    //        GameManager.m_Instance.m_GameState = GameManager.GameState.Dungeon;
-    //        SceneManager.LoadScene(GameManager.m_Instance.m_Tutorial.ToString());
-    //    }
-    //}
 }
