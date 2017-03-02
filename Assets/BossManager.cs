@@ -8,7 +8,7 @@ public class BossManager : MonoBehaviour {
     private Transform[] playerPositionsArray = { null, null, null, null };
     public GameObject m_backWall;
 
-    private GameObject boss;
+    public GameObject boss;
 
     // Use this for initialization
     void Start () {
@@ -17,7 +17,6 @@ public class BossManager : MonoBehaviour {
 
 
         //Boss
-        boss = GameObject.Find("Boss");
         if (boss.active == true)
         {
             boss.SetActive(false);
