@@ -78,7 +78,10 @@ public class RespawnHealth : MonoBehaviour
 
             GameObject SFXtest = Instantiate(SFXPlayer, transform.position, transform.rotation) as GameObject;
             //SFX End
-            StartCoroutine(waitBeforeInitializeWeapon());
+            if (GameManager.m_Instance.m_GameState != GameManager.GameState.Minigame)
+            {
+                StartCoroutine(waitBeforeInitializeWeapon());
+            }
             m_RespawnCount++;
         }
     }

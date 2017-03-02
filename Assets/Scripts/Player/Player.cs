@@ -287,6 +287,7 @@ public class Player : MonoBehaviour
         tempLocation.z -= vel.z * 20.0f;
 
         m_State = State.Dead;
+        if(m_Score != 0)
         m_Score /= 2;
         gameObject.layer = 11;
         m_IsDead = true;
