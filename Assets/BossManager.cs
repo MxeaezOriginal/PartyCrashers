@@ -8,10 +8,20 @@ public class BossManager : MonoBehaviour {
     private Transform[] playerPositionsArray = { null, null, null, null };
     public GameObject m_backWall;
 
+    private GameObject boss;
+
     // Use this for initialization
     void Start () {
         //Get the number of players
         players = GameManager.m_Instance.m_Players;
+
+
+        //Boss
+        boss = GameObject.Find("Boss");
+        if (boss.active == true)
+        {
+            boss.SetActive(false);
+        }
     }
 	
 	// Update is called once per frame
@@ -21,6 +31,13 @@ public class BossManager : MonoBehaviour {
         if(m_backWall.transform.position.z < GetLowestPlayerZ() - 5f && m_backWall.transform.position.z < -7f)
         {
             m_backWall.transform.position = new Vector3(m_backWall.transform.position.x, m_backWall.transform.position.y, Mathf.Lerp(m_backWall.transform.position.z,m_backWall.transform.position.z + 1f,0.1f));
+        }
+        //Activate Boss
+        if(m_backWall.transform.position.z >= -7f)
+        {
+            //boss = GameObject.Find("Boss");
+            boss.SetActive(true);
+            
         }
 	}
     GameObject getClosestPlayer()
