@@ -28,11 +28,18 @@ public class MaterialChangeDanceFloor : MonoBehaviour {
     public int m_CurrentFloorColorInt;
     public int m_PreviousColorInt = -1;
     private int m_GreedColorPercentage;
-
+    //james FX
+    public GameObject m_colourchange;
+    //James FX
+    
 
     void Start()
     {
         m_CurrentFloorColorInt = -2;
+        if (m_colourchange != null)
+        {
+            m_colourchange.SetActive(false);
+        }
     }
 
     void Update()
@@ -46,6 +53,13 @@ public class MaterialChangeDanceFloor : MonoBehaviour {
             {
                 m_DiscoBallLight.material = m_Temp;
             }
+            //james VFX
+            if (m_colourchange != null)
+            {
+                m_colourchange.SetActive(false);
+            }
+            //james VFX end
+
         }
         if (stop == false)
         {
@@ -63,6 +77,13 @@ public class MaterialChangeDanceFloor : MonoBehaviour {
             m_DiscoBallLight.material.SetColor("_EmissionColor", new Color(1f, 1f, 1f) * emission);
             m_PreviousColorInt = m_CurrentFloorColorInt;
             m_Temp = m_DiscoBallON;
+            
+            //james VFX
+            if (m_colourchange != null)
+            {
+                m_colourchange.SetActive(true);
+            }
+            //james VFX end
         }
     }
 

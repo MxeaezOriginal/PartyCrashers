@@ -22,12 +22,16 @@ public class DanceFloor : MonoBehaviour {
 
     public GameObject m_GetPointEffect;
     public GameObject m_LosepointEffect;
+    public AudioClip m_PositiveSound;
+    public AudioClip m_NegativeSound;
+    public AudioSource m_audiosource;
 
     private LightChangeDancefloor m_LightChangeDancefloor;
     //private LightChangeDiscoball m_LightChangeDiscoball;
 
     private GameObject GettingPoint = null;
     private GameObject LosingPoint = null;
+
     //GameObject m_Discoball2;
 
     // Use this for initialization
@@ -79,6 +83,11 @@ public class DanceFloor : MonoBehaviour {
                     {
                         m_GetPointFX = true;
                         GettingPoint = (GameObject)Instantiate(m_GetPointEffect, gameObject.transform.position, gameObject.transform.rotation);
+                        if(m_PositiveSound != null && m_audiosource !=null)
+                        {
+                            m_audiosource.clip = m_PositiveSound;
+                            m_audiosource.Play();
+                        }
                     }
                         m_LosePointFX = false;
                     if (LosingPoint != null)
@@ -99,6 +108,12 @@ public class DanceFloor : MonoBehaviour {
                     {
                         m_LosePointFX = true;
                         LosingPoint = (GameObject)Instantiate(m_LosepointEffect, gameObject.transform.position, gameObject.transform.rotation);
+                        m_audiosource.clip = m_NegativeSound;
+                        m_audiosource.Play();
+                        if (m_NegativeSound != null && m_audiosource != null)
+                        {
+                           
+                        }
 
                     }
                     if (GettingPoint != null)
