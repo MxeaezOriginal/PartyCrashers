@@ -55,6 +55,7 @@ public class AdvancedBossAi : MonoBehaviour
     //Effects
     public GameObject m_HurtEffect;
     public GameObject m_TeleportEffect;
+    public GameObject m_DashEffect;
 
     //Movement
     private Rigidbody m_Body;
@@ -240,18 +241,26 @@ public class AdvancedBossAi : MonoBehaviour
 
     void GenerateTeleportFX() //James Code Attempt *kinda works------------------------------------------
     {
-        if (frame > 20)
+        if (m_TeleportEffect != null)
         {
-
-            if (m_TeleportEffect.active)
+            if (frame > 20)
             {
-                m_TeleportEffect.SetActive(false);
+
+                if (m_TeleportEffect.active)
+                {
+                    m_TeleportEffect.SetActive(false);
+                }
             }
-        }
-        if (m_TeleportEffect.active == false)//teleport
-        {
-            m_TeleportEffect.SetActive(true);
-            m_TeleportEffect.transform.position = transform.position;
+            if (m_TeleportEffect.active == false)//teleport
+            {
+                if(m_DashEffect != null)
+                {
+                    m_DashEffect.SetActive(false);
+                }
+                
+                m_TeleportEffect.SetActive(true);
+                m_TeleportEffect.transform.position = transform.position;
+            }
         }
     }
     void Teleport(int framesBeforeTP, int recoverFrames)
@@ -297,6 +306,10 @@ public class AdvancedBossAi : MonoBehaviour
                 }
             }
             transform.position = teleportTargetPosition;
+            if(m_DashEffect != null)
+            {
+                m_DashEffect.SetActive(true);
+            }
         }
         //Recover
         if (frame > framesBeforeTP && frame < recoverFrames + framesBeforeTP)
@@ -308,6 +321,7 @@ public class AdvancedBossAi : MonoBehaviour
         {
             state = states.idle;
         }
+        
 
     }
     #region Getting hurt
