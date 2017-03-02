@@ -18,15 +18,9 @@ public class PlayerController : MonoBehaviour
     public float m_JumpGravity = 30f;
     public float m_Jump = 15.0f;
 
-    //Max movement before zoom starts to happen
     public float m_MaxMovementX = 14f;
     public float m_MaxMovementZ = 18f;
     public float m_MaxY = 5f;
-
-    //Max zoom
-    public float m_MaxMovementZoomX = 35f;
-    public float m_MaxMovementZoomZ = 35f;
-    public float m_MaxMovementZoomY = 30f;
 
     public string m_JumpButton = "Jump_";
     public string m_HorizontalButton = "Horizontal_";
@@ -429,33 +423,12 @@ public class PlayerController : MonoBehaviour
             // Thiago - 12.04.2016 - commented the line down below since it was breaking the game. We have to fix it later. This is just a temporary solution
             //m_CameraController.m_Zoom = 0;
         }
-
-        if (x >= m_MaxMovementZoomX && z >= m_MaxMovementZoomZ)
+        if(m_ZoomY == true)
         {
-            tempZoom = ((m_MaxMovementZoomX + m_MaxMovementZoomZ) - (m_MaxMovementX + m_MaxMovementZ)) / m_CameraController.m_ZoomAmount;
-        }
-        else if (x >= m_MaxMovementZoomX && z < m_MaxMovementZoomZ)
-        {
-            tempZoom = (m_MaxMovementZoomX - m_MaxMovementX) / m_CameraController.m_ZoomAmount;
-        }
-        else if (x < m_MaxMovementZoomX && z >= m_MaxMovementZoomZ)
-        {
-            tempZoom = (m_MaxMovementZoomZ - m_MaxMovementZ) / m_CameraController.m_ZoomAmount;
+            tempZoom = Mathf.Lerp(tempZoom, tempZoom +((y - m_MaxY) * 4f) / m_CameraController.m_ZoomAmount, 2f);
         }
 
-        if (m_ZoomY == true)
-        {
-            if (y <= m_MaxMovementZoomY)
-            {
-                tempZoom = Mathf.Lerp(tempZoom, tempZoom + ((y - m_MaxY) * 4f) / m_CameraController.m_ZoomAmount, Time.deltaTime);
-            }
-            else
-            {
-                tempZoom = Mathf.Lerp(tempZoom, tempZoom + ((m_MaxMovementZoomY - m_MaxY) * 4f) / m_CameraController.m_ZoomAmount, Time.deltaTime);
-            }
-        }
-
-        m_CameraController.m_Zoom = Mathf.Lerp(m_CameraController.m_Zoom, tempZoom, Time.deltaTime);
+        m_CameraController.m_Zoom = tempZoom;
         //Camera.main.gameObject.GetComponent<CameraController>().m_Zoom = Camera.main.gameObject.GetComponent<CameraController>().m_Zoom / Camera.main.gameObject.GetComponent<CameraController>().m_ZoomAmount;
     }
 

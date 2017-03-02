@@ -139,7 +139,7 @@ public class CameraController : MonoBehaviour
             //float Y = y;
 
 
-        gameObject.transform.position = new Vector3(Mathf.Lerp(transform.position.x,averageX,0.2f), Mathf.Lerp(transform.position.y, y + height + m_Zoom, .1f), Mathf.Lerp(transform.position.z, averageZ - distanceOffset - m_Zoom, Time.deltaTime));
+            gameObject.transform.position = new Vector3(Mathf.Lerp(transform.position.x,averageX,0.2f), Mathf.Lerp(transform.position.y, y + height + m_Zoom, .1f), Mathf.Lerp(transform.position.z, averageZ - distanceOffset - m_Zoom,0.2f));
         //Y + height
 
         mPosition = new Vector3(averageX, y, averageZ);
