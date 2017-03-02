@@ -13,14 +13,14 @@ GameObject:
   - 65: {fileID: 6517292}
   - 65: {fileID: 6569682}
   - 54: {fileID: 5402754}
-  - 114: {fileID: 11440348}
   - 208: {fileID: 20899018}
+  - 114: {fileID: 11459258}
   m_Layer: 0
   m_Name: Shelf_Phys
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &462866
 Transform:
@@ -107,7 +107,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.75, y: 3.75, z: 1}
   m_Center: {x: 0, y: 1.68, z: 0}
---- !u!114 &11440348
+--- !u!114 &11459258
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -115,10 +115,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 190970}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9cb8a13ee5bfe24ba18981c6eb23b84, type: 3}
+  m_Script: {fileID: 11500000, guid: b423d4adaaee1cb4786017677ca27f5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
+  m_speed: 0
+  m_maxNum: 1
+  m_recentNum: 0
+  audioSource: {fileID: 0}
+  MoveSFX: {fileID: 0}
 --- !u!208 &20899018
 NavMeshObstacle:
   m_ObjectHideFlags: 1

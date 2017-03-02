@@ -208,7 +208,8 @@ public class AdvancedBossAi : MonoBehaviour
         if(enemyHealth.m_EnemyHealth != currentHealth)
         {
             currentHealth = enemyHealth.m_EnemyHealth;
-            //state = states.hurt;
+            state = states.hurt;
+            frame = 0;
         }
     }
     void Move()
@@ -282,8 +283,8 @@ public class AdvancedBossAi : MonoBehaviour
         m_Invincible = true;
         Colors(Color.blue, Color.white, 0.3f);
         //Look at teh sky
-        transform.Rotate(new Vector3(transform.position.x, transform.position.y, transform.position.z + 5));
-        if (frame == 1) transform.LookAt(new Vector3(transform.position.x, transform.position.y + 10, transform.position.z)); 
+        transform.Rotate(new Vector3(0f, 0f, transform.position.z + 5));
+        if (frame == 3) transform.LookAt(new Vector3(transform.position.x, transform.position.y + 10, transform.position.z)); 
         //Friction
         Friction(2f);
         //Windup
@@ -333,8 +334,7 @@ public class AdvancedBossAi : MonoBehaviour
         //Recover
         if (frame > framesBeforeTP && frame < recoverFrames + framesBeforeTP)
         {
-            transform.Rotate(new Vector3(transform.rotation.x - 10, transform.rotation.y, transform.rotation.z));
-            transform.localScale = new Vector3(Mathf.Lerp(transform.localScale.x, 2f, 0.5f), Mathf.Lerp(transform.localScale.y, 2f, 0.5f), transform.localScale.z);
+            transform.localScale = new Vector3(Mathf.Lerp(transform.localScale.x, 2f, 0.1f), Mathf.Lerp(transform.localScale.y, 2f, 0.1f), transform.localScale.z);
         }
         //Change state
         if (frame > recoverFrames + framesBeforeTP)
@@ -368,6 +368,7 @@ public class AdvancedBossAi : MonoBehaviour
         {
             m_HurtEffect.SetActive(true);
         }
+        m_Velocity = Vector3.Normalize(transform.position - getClosestPlayer().transform.position) * 50f;
     }
     #endregion
 

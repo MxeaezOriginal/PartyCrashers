@@ -5,8 +5,8 @@ public class CameraController : MonoBehaviour
 {
 
     public Vector3 rotation = new Vector3(60, 0, 0);
-    public int height = 10;
-    public int distanceOffset = 10;
+    private int height = 20;
+    private int distanceOffset = 15;
     public float y = 0;
     public Vector3 mPosition;
     public float m_Zoom = 0;
@@ -128,13 +128,16 @@ public class CameraController : MonoBehaviour
 
         if (GameObject.Find("Boss") != null)
         {
-            GameObject boss = GameObject.Find("Boss");
-            Transform bossTransform = boss.GetComponent<Transform>();
-            float bossx = bossTransform.position.x;
-            float bossz = bossTransform.position.z;
+            if (GameObject.Find("Boss").active)
+            {
+                GameObject boss = GameObject.Find("Boss");
+                Transform bossTransform = boss.GetComponent<Transform>();
+                float bossx = bossTransform.position.x;
+                float bossz = bossTransform.position.z;
 
-            averageX = (x1 + x2 + bossx) / 3;
-            averageZ = (z1 + z2 + bossz) / 3;
+                averageX = (x1 + x2 + bossx) / 3;
+                averageZ = (z1 + z2 + bossz) / 3;
+            }
         }
             //float Y = y;
 

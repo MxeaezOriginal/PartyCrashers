@@ -21,7 +21,6 @@ public class WeaponManager : MonoBehaviour
     private Weapon m_ChangeWeapon = Weapon.GlowSword;
     public string m_PickupConcactinateString = "_Pickup";
     public float m_DelayBetweenSwaps = 1f;
-    public bool m_RandomWeaponOnStart;
 
     public GameObject[] m_WeaponPrefabs;
     public GameObject[] m_WeaponPrefabPickups;
@@ -38,10 +37,7 @@ public class WeaponManager : MonoBehaviour
 
         if (SceneManager.GetActiveScene().name == GameManager.m_Instance.m_LevelToStart)
         {
-            if (m_RandomWeaponOnStart)
-            {
-                m_CurrentWeapon = (Weapon)Random.Range(0, (int)Weapon.Length);
-            }
+             m_CurrentWeapon = (Weapon)Random.Range(0, (int)Weapon.Length);
         }
 
         if (GameManager.m_Instance.m_GameState != GameManager.GameState.Minigame)
@@ -103,6 +99,20 @@ public class WeaponManager : MonoBehaviour
         newWeapon.transform.localRotation = Quaternion.identity;
         newWeapon.transform.localScale = new Vector3(1, 1, 1);
 
+        if(newWeapon.GetComponent<Ranged>() != null)
+        {
+            if(transform.FindChild("Firepoints").FindChild("Firepoint1") != null)
+            {
+                GameObject firePoint = transform.FindChild("Firepoints").FindChild("Firepoint1").gameObject;
+
+                newWeapon.GetComponent<Ranged>().setFirePoint(firePoint);
+            }
+            else
+            {
+                Debug.LogError("[WeaponManager] Firepoints/Firepoint1 not found under player");
+            }
+        }
+
         newWeapon.name = child.name;
         m_CurrentWeaponObject = newWeapon;
         m_CurrentWeapon = (Weapon) System.Enum.Parse(typeof(Weapon), m_CurrentWeaponObject.name);
@@ -131,7 +141,7 @@ public class WeaponManager : MonoBehaviour
         {
             foreach (GameObject weaponPickup in m_WeaponPrefabPickups)
             {
-                if (m_CurrentWeaponObject.gameObject.name + m_PickupConcactinateString == weaponPickup.gameObject.name)
+                if ((m_CurrentWeaponObject.gameObject.name + m_PickupConcactinateString).ToLower() == weaponPickup.gameObject.name.ToLower())
                 {
                     GameObject weaponToDrop = Instantiate(weaponPickup, m_CurrentWeaponObject.transform.position, Quaternion.identity) as GameObject;
                     StartCoroutine(SetWeaponPickupable(weaponToDrop, weaponPickup.name));
@@ -186,7 +196,7 @@ public class WeaponManager : MonoBehaviour
         foreach (GameObject weapon in m_WeaponPrefabs)
         {
             //If the name of the prefab is equal to the name of the collided object with the pickup text added
-            if (weapon.gameObject.name + m_PickupConcactinateString == other.gameObject.name)
+            if ((weapon.gameObject.name + m_PickupConcactinateString).ToLower() == other.gameObject.name.ToLower())
             {
                 //Loop through all the child GameObjects under the Weapon gameobject in Player
                 foreach (Transform child in m_WeaponsTransform)

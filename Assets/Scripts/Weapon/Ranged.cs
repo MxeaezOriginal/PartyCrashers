@@ -11,6 +11,9 @@ public abstract class Ranged : Weapon
     [SerializeField]
     protected GameObject[] m_FirePoint;
 
-
+    public void setFirePoint(GameObject firePoint)
+    {
+        m_FirePoint[0] = firePoint;
+    }
 
 }
