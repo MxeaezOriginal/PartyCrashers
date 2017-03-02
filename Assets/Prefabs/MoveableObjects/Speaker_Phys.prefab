@@ -13,8 +13,8 @@ GameObject:
   - 65: {fileID: 6581736}
   - 65: {fileID: 6544162}
   - 54: {fileID: 5443716}
-  - 114: {fileID: 11430078}
   - 208: {fileID: 20852112}
+  - 114: {fileID: 11403496}
   m_Layer: 0
   m_Name: Speaker_Phys
   m_TagString: Untagged
@@ -107,7 +107,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.2658253, y: 0.44964004, z: 0.4687538}
   m_Center: {x: -0.0000009536743, y: 0.22482002, z: 0.0000019073486}
---- !u!114 &11430078
+--- !u!114 &11403496
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -115,10 +115,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 135752}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9cb8a13ee5bfe24ba18981c6eb23b84, type: 3}
+  m_Script: {fileID: 11500000, guid: b423d4adaaee1cb4786017677ca27f5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
+  m_speed: 0
+  m_maxNum: 1
+  m_recentNum: 0
+  audioSource: {fileID: 0}
+  MoveSFX: {fileID: 0}
 --- !u!208 &20852112
 NavMeshObstacle:
   m_ObjectHideFlags: 1
