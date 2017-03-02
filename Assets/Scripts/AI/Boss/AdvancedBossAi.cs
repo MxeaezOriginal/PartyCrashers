@@ -208,7 +208,8 @@ public class AdvancedBossAi : MonoBehaviour
         if(enemyHealth.m_EnemyHealth != currentHealth)
         {
             currentHealth = enemyHealth.m_EnemyHealth;
-            //state = states.hurt;
+            state = states.hurt;
+            frame = 0;
         }
     }
     void Move()
