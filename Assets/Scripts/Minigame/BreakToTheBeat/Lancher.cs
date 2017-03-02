@@ -38,6 +38,11 @@ public class Lancher : MonoBehaviour
     private int m_LauncherPer;
     //public int LauncherPercentage = 60;
     // Use this for initialization
+    //SFX AND VFX
+    public GameObject cannonfireFX;
+    public AudioSource audiosource;
+    public AudioClip CannonSFX;
+    //SFX AND VFX
     void Start()
     {
         m_LastShotTime = Time.time;
@@ -174,6 +179,21 @@ public class Lancher : MonoBehaviour
                 //    shot.transform.forward = transform.forward;
                 //    shot.transform.up = transform.up;
                 //}
+
+                //SFX AND VFX
+                if (audiosource != null &&  CannonSFX != null)
+                {                
+                    audiosource.clip = CannonSFX;
+                    audiosource.Play();
+                }
+                if(cannonfireFX != null)
+                {
+                    GameObject firevfx;
+                    firevfx = (GameObject)Instantiate(cannonfireFX, m_ShotPos.position, m_ShotPos.rotation);
+                    Destroy(firevfx, 0.5f);
+                }
+                
+                //SFX AND VFX
             }
         }
     }
