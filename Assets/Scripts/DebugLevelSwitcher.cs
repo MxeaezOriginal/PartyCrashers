@@ -29,7 +29,7 @@ public class DebugLevelSwitcher : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.F6))
         {
-            SceneManager.LoadScene("BowlingRoom");
+            SceneManager.LoadScene("BowlingRoomRedesign");
         }
         else if (Input.GetKeyDown(KeyCode.F8))
         {
@@ -47,7 +47,7 @@ public class DebugLevelSwitcher : MonoBehaviour
         {
             SceneManager.LoadScene("DanceFloorRumble");
         }
-		else if (Input.GetKeyDown(KeyCode.F8))
+		else if (Input.GetKeyDown(KeyCode.F7))
 		{
 			SceneManager.LoadScene("DiningRoom02");
 		}
