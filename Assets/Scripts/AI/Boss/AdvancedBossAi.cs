@@ -268,7 +268,7 @@ public class AdvancedBossAi : MonoBehaviour
         
         Colors(Color.blue, Color.white, 0.3f);
         //Look at player
-        transform.rotation = new Quaternion(0f, 0f, 1f,0f);
+        transform.LookAt(new Vector3(transform.position.x, transform.position.y + 10, transform.position.z));
         //Friction
         Friction(2f);
         //Windup
