@@ -118,7 +118,7 @@ public class PartyBar : MonoBehaviour {
             ++GameManager.m_Instance.m_Tutorial;
         }*/
 
-        SceneManager.LoadScene(Random.Range(5,7 + 1));
+        SceneManager.LoadScene(Random.Range(7, 9 + 1));
     }
 
     //void RewardsAndLoadBackToGame()
