@@ -51,12 +51,17 @@ public class Damage : MonoBehaviour
             if (other.gameObject.GetComponent<RespawnHealth>() != null)
             {
                 RespawnHealth playerRespawnHealth = other.gameObject.GetComponent<RespawnHealth>();
+                HeartSystem playerHeartSystem = other.gameObject.GetComponent<HeartSystem>();
                 Player player = playerRespawnHealth.GetComponent<Player>();
 
                 if (player.m_State == Player.State.Dead)
                 {
                     playerRespawnHealth.damage(1);
                     Debug.Log("Pinata hit");
+                }
+                else
+                {
+                    playerHeartSystem.TakeDamage((int) m_Damage);
                 }
             }
         }
