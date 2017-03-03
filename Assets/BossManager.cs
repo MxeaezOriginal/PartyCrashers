@@ -27,18 +27,18 @@ public class BossManager : MonoBehaviour {
 	void Update () {
 	    //Move wall
 
-        if(m_backWall.transform.position.z < GetLowestPlayerZ() - 5f && m_backWall.transform.position.z < -7f)
+        if(m_backWall.transform.position.z < GetLowestPlayerZ() - 5f && m_backWall.transform.position.z < 33f)
         {
             m_backWall.transform.position = new Vector3(m_backWall.transform.position.x, m_backWall.transform.position.y, Mathf.Lerp(m_backWall.transform.position.z,m_backWall.transform.position.z + 1f,0.1f));
         }
         //Activate Boss
-        if(m_backWall.transform.position.z >= -7f)
+        if (m_backWall.transform.position.z >= 33f)
         {
             //boss = GameObject.Find("Boss");
             boss.SetActive(true);
-            
+
         }
-	}
+    }
     GameObject getClosestPlayer()
     {
         float distance = 0f;

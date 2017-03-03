@@ -309,7 +309,7 @@ public class AdvancedBossAi : MonoBehaviour
                 playerPositionsArray[i] = players[i].transform; //Set the index's of the player positions array to the transforms of the respective player objects
             }
 
-            teleportTargetPosition = new Vector3(Random.Range(torches[0].position.x, torches[1].position.x), transform.position.y, Random.Range(torches[0].position.z, torches[2].position.z));
+            teleportTargetPosition = new Vector3(Random.Range(torches[0].localPosition.x, torches[1].localPosition.x), transform.localPosition.y, Random.Range(torches[0].localPosition.z, torches[2].localPosition.z));
 
             for (int i = 0; i < playerPositionsArray.Length; i++)//Loop through the player positions and if the teleport position is close to a player, move the teleport position. Will keep looping until it's not close to a player
             {
