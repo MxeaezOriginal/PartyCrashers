@@ -9,8 +9,8 @@ public class WeaponManager : MonoBehaviour
     public enum Weapon
     {
         GlowSword,
-        WaterBalloonBow,
-        FizzyPopGun,
+        WaterBalloonBow,        
+        FizzyGun,
         Length
     }
 
