@@ -6,6 +6,7 @@ public class WaterBombCombo : MonoBehaviour
 
     public float m_ExplosionRadius;
     private float m_Damage;
+    private float m_Knockback = 30f;
 
     //sound
     public GameObject SFXPlayer;
@@ -40,6 +41,11 @@ public class WaterBombCombo : MonoBehaviour
             if (hit.GetComponent<EnemyHealth>() != null)
             {
                 hit.GetComponent<EnemyHealth>().Damage(m_Damage);
+                if(hit.GetComponent<EnemyEffect>() != null)
+                {
+                    EnemyEffect enemyEffect = hit.GetComponent<EnemyEffect>();
+                    enemyEffect.KnockBack(m_Knockback, gameObject);
+                }
             }
         }
     }
