@@ -59,7 +59,7 @@ public class Damage : MonoBehaviour
                     playerRespawnHealth.damage(1);
                     Debug.Log("Pinata hit");
                 }
-                else
+                else if(gameObject.CompareTag("Dodgeball"))
                 {
                     playerHeartSystem.TakeDamage((int) m_Damage);
                 }

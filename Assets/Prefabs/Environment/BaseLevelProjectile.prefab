@@ -18,7 +18,7 @@ GameObject:
   - 114: {fileID: 11440134}
   m_Layer: 0
   m_Name: BaseLevelProjectile
-  m_TagString: Projectile
+  m_TagString: Dodgeball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -96,6 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LifeTimer: 50
+  hitVFX: {fileID: 0}
 --- !u!114 &11449540
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -110,6 +111,10 @@ MonoBehaviour:
   m_StunTime: 0
   m_explosion: {fileID: 171954, guid: f0b99aae309429d4c8c6e78b3be9687c, type: 2}
   m_BoomEffect: {fileID: 100000, guid: 769fbd11a7ef2445682e024c98c276b5, type: 2}
+  SFXPlayer: {fileID: 0}
+  SFX: []
+  maxRandomPitch: 0
+  minRandomPitch: 0
 --- !u!114 &11477452
 MonoBehaviour:
   m_ObjectHideFlags: 1
