@@ -33,7 +33,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &128806
 GameObject:
   m_ObjectHideFlags: 0
@@ -70,7 +70,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &154254
 GameObject:
   m_ObjectHideFlags: 1
@@ -135,7 +135,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &405024
 Transform:
   m_ObjectHideFlags: 1
@@ -392,7 +392,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Anim: {fileID: 0}
   m_Damage: 3
-  m_Weapon1Cooldown: 0.35
+  m_Weapon1Cooldown: 0.1
   m_Weapon2Cooldown: 0.5
   m_PrimarySounds: []
   m_SecondarySounds: []
@@ -403,19 +403,15 @@ MonoBehaviour:
     type: 2}
   m_FirePoint:
   - {fileID: 159222}
-  m_InitBulletSpeed: 1000
+  m_MaxBullets: 5
+  m_BulletSpeed: 1000
+  BulletRegenTimer: 1
   m_BombSpeed: 1000
-  m_BulletSpeedMultiplier: 5
-  m_LaserDmgMultiplier: 3
-  m_LaserTimer: 2
-  m_LaserWidth: 0.1
-  m_LaserLenght: 20
   m_PrimaryFlashVFX: {fileID: 0}
   m_SecondaryFlashVFX: {fileID: 0}
   m_ChargingVFX: {fileID: 138150}
   m_ChargedVFX: {fileID: 188794}
   m_LaserBeamVFX: {fileID: 0}
-  m_MaxChargeTimer: 5
 --- !u!120 &12047440
 LineRenderer:
   m_ObjectHideFlags: 1
