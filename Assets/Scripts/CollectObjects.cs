@@ -26,7 +26,7 @@ public class CollectObjects : MonoBehaviour
     {
         Collectible collectible = other.GetComponent<Collectible>();
 
-        if(collectible != null)
+        if(collectible != null && GameManager.m_Instance.m_GameState == GameManager.GameState.Dungeon)
         {
             //player.m_Gold += collectible.gold;
             //player.m_Score += 100;
@@ -42,6 +42,10 @@ public class CollectObjects : MonoBehaviour
             }
 
             other.gameObject.SetActive(false);
+        }
+        else if(GameManager.m_Instance.m_GameState == GameManager.GameState.Minigame)
+        {
+            player.m_Score += 10;
         }
     }
     IEnumerator CountTo(int target)
