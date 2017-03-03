@@ -13,10 +13,12 @@ using UnityEngine.SceneManagement;
 public class MinigameScoreAndTimeTrack : MonoBehaviour
 {
     private MinigameManager m_MinigameManager;
-    private bool            m_IsCoroutineRunning;
+    [HideInInspector]
+    public bool             m_IsCoroutineRunning;
     private PartyBar        m_PartyBar;
     private string          m_MinigameSceneName;
-    private float[]         m_RawTime;
+    [HideInInspector]
+    public float[]          m_RawTime;
 
     public int              m_PointsToAward;
 
@@ -62,7 +64,10 @@ public class MinigameScoreAndTimeTrack : MonoBehaviour
                     }
                 }
 
-                StartCoroutine(UpdateScore());
+                if(!m_IsCoroutineRunning)
+                {
+                    StartCoroutine(UpdateScore());
+                }
             }
             else if(m_MinigameSceneName.Equals("BreakToTheBeat"))
             {
@@ -77,7 +82,7 @@ public class MinigameScoreAndTimeTrack : MonoBehaviour
         }
     }
 
-    IEnumerator UpdateScore()
+    public IEnumerator UpdateScore()
     {
         m_IsCoroutineRunning = true;
 

@@ -20,6 +20,9 @@ public class DanceFloor : MonoBehaviour {
     private bool m_GetPointFX = false;
     private bool m_LosePointFX = false;
 
+    private MinigameScoreAndTimeTrack   m_MinigameScoreAndTimeTrack;
+    private MinigameManager             m_MinigameManager;
+
     public GameObject m_GetPointEffect;
     public GameObject m_LosepointEffect;
     public AudioClip m_PositiveSound;
@@ -41,6 +44,13 @@ public class DanceFloor : MonoBehaviour {
 
         //m_GetPointEffect = m_LightChangeDiscoball.m_GetPointEffect;
         //m_LosepointEffect = m_LightChangeDiscoball.m_LosepointEffect;
+        m_MinigameManager = GameObject.Find("MinigameManager").GetComponent<MinigameManager>();
+        m_MinigameScoreAndTimeTrack = m_MinigameManager.GetComponent<MinigameScoreAndTimeTrack>();
+
+        for (int i = 0; i < GameManager.m_Instance.m_NumOfPlayers; ++i)
+        {
+            m_MinigameScoreAndTimeTrack.m_RawTime[i] = 0.0f;
+        }
     }
 	
 	// Update is called once per frame
@@ -76,6 +86,14 @@ public class DanceFloor : MonoBehaviour {
                 {
                     // Getting Score.
                     //Debug.Log("Getting Score!");
+
+                    //Get points!!
+                    m_MinigameScoreAndTimeTrack.m_RawTime[(int)other.GetComponent<Player>().m_Player - 1] += Time.deltaTime;
+
+                    if (!m_MinigameScoreAndTimeTrack.m_IsCoroutineRunning)
+                    {
+                        StartCoroutine(m_MinigameScoreAndTimeTrack.UpdateScore());
+                    }
 
                     m_GetPoint = false;
 
