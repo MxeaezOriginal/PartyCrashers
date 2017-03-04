@@ -14,7 +14,7 @@ GameObject:
   - 65: {fileID: 6526124}
   - 54: {fileID: 5469510}
   - 208: {fileID: 20830702}
-  - 114: {fileID: 11490250}
+  - 114: {fileID: 11458140}
   m_Layer: 0
   m_Name: OnePersonCouch_Phys
   m_TagString: Untagged
@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 178360}
   m_LocalRotation: {x: 0, y: 0.8660253, z: 0, w: -0.5000002}
   m_LocalPosition: {x: 27, y: -0, z: 145.06}
-  m_LocalScale: {x: 1.0044644, y: 1, z: 1.004464}
+  m_LocalScale: {x: 1.0044644, y: 1.5, z: 1.004464}
   m_LocalEulerAnglesHint: {x: 0, y: -480, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
@@ -105,9 +105,9 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.936991, y: 1.5757504, z: 3.3913426}
+  m_Size: {x: 2.936991, y: 2, z: 3.3913426}
   m_Center: {x: 0, y: 0.7878752, z: -0.0000076293945}
---- !u!114 &11490250
+--- !u!114 &11458140
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -115,14 +115,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 178360}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b423d4adaaee1cb4786017677ca27f5d, type: 3}
+  m_Script: {fileID: 11500000, guid: c9cb8a13ee5bfe24ba18981c6eb23b84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_speed: 0
-  m_maxNum: 1
-  m_recentNum: 0
-  audioSource: {fileID: 0}
-  MoveSFX: {fileID: 0}
+  speed: 1
 --- !u!208 &20830702
 NavMeshObstacle:
   m_ObjectHideFlags: 1
