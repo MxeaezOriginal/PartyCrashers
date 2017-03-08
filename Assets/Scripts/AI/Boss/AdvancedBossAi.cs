@@ -77,13 +77,23 @@ public class AdvancedBossAi : MonoBehaviour
     Transform m_DashTarget;
     private Vector3 lookingDirection;
     //y position variable so boss doesn't fly away
-    float ypos; 
+    float ypos;
 
     //Sound fx
+    public AudioClip m_TeleportWindupSound;
+    public AudioClip m_TeleportSound;
+
+    public AudioClip[] m_ShootSounds;
+    public AudioClip m_DashWindupSound;
+    public AudioClip m_DashSound;
+
+    private AudioSource source;
 
     // Use this for initialization
     void Start()
     {
+        //Set audio source
+        source = GetComponent<AudioSource>();
         //Set the y position
         ypos = transform.position.y;
         //Set framerate
@@ -295,12 +305,16 @@ public class AdvancedBossAi : MonoBehaviour
             m_Ball.transform.Rotate(new Vector3(transform.rotation.x - 10, transform.rotation.y, transform.rotation.z));
             //Shrink
             transform.localScale = new Vector3(Mathf.Lerp(transform.localScale.x, 0.1f,0.1f), Mathf.Lerp(transform.localScale.y, 0.1f, 0.1f), transform.localScale.z);
-            
+
+            //SFX
+            source.PlayOneShot(m_TeleportWindupSound, 1);
+
         }
         if (frame == framesBeforeTP)
         {
-            
-
+            //SFX
+            source.PlayOneShot(m_TeleportSound, 1);
+            //Move
             Vector3 teleportTargetPosition = transform.position; //Set variable for target position
             int xdir = Random.Range(-1, 1);
             int zdir = Random.Range(-1, 1);
@@ -386,6 +400,8 @@ public class AdvancedBossAi : MonoBehaviour
         //Windup
         if (frame <= windup && frame >= 2)
         {
+            //SFX
+            source.PlayOneShot(m_DashWindupSound, 1);
             //Apply friction
             Friction(2f);
             //Look at target player
@@ -399,6 +415,8 @@ public class AdvancedBossAi : MonoBehaviour
         //Active
         if (frame > windup && frame <= active + windup)
         {
+            //SFX
+            source.PlayOneShot(m_DashSound, 1);
             float chargeSpeed = 50;
             m_Velocity = chargeSpeed * lookingDirection;
             m_Invincible = true;
@@ -471,6 +489,10 @@ public class AdvancedBossAi : MonoBehaviour
 
         if (frame == shootFrame)
         {
+
+            //SFX
+            source.PlayOneShot(m_ShootSounds[0], 1);
+
             transform.LookAt(shootTarget);
             m_BulletsShot += 1; //Increase number of bullets shot
             for (int i = 0; i < LightningArray.Length; i++)
@@ -517,6 +539,9 @@ public class AdvancedBossAi : MonoBehaviour
         //Shoot
         if (frame == windup + 1)
         {
+            //SFX
+            source.PlayOneShot(m_ShootSounds[1], 1);
+
             Vector3 targetPosition = getClosestPlayer().transform.position;
             Vector3 pointVectorAngle = new Vector3(targetPosition.x - transform.position.x, 0, targetPosition.x - transform.position.z).normalized;
             //shoot everywhere
