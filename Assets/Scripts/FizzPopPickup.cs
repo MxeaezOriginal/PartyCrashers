@@ -9,8 +9,14 @@ public class FizzPopPickup : MonoBehaviour {
     public AudioClip[] SFX;
     private AudioClip SFXtoPlay;
 
-	//VfX
-	public GameObject usepickupVFX;
+    public AudioClip[] BadBoyHealthSFX;
+    public AudioClip[] GothHealthSFX;
+    public AudioClip[] NerdHealthSFX;
+    public AudioClip[] MascotHealthSFX;
+    public AudioClip SFXtoPlay2;
+
+    //VfX
+    public GameObject usepickupVFX;
 	//VFX end
 
     public int m_HealValue = 0;
@@ -24,7 +30,32 @@ public class FizzPopPickup : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-        if(other.GetComponent<HeartSystem>() != null)
+        if (other.GetComponent<Player>().m_Model == Player.Model.Badboy)
+        {
+            SFXtoPlay = BadBoyHealthSFX[Random.Range(0, BadBoyHealthSFX.Length)];
+            AudioManager.m_Instance.PushMusic(SFXtoPlay2);           
+        }
+
+        if (other.GetComponent<Player>().m_Model == Player.Model.Goth)
+        {
+            SFXtoPlay = GothHealthSFX[Random.Range(0, GothHealthSFX.Length)];
+            AudioManager.m_Instance.PushMusic(SFXtoPlay2);    
+        }
+
+        if (other.GetComponent<Player>().m_Model == Player.Model.Mascot)
+        {
+            Debug.Log("Get");
+            SFXtoPlay = MascotHealthSFX[Random.Range(0, MascotHealthSFX.Length)];
+            AudioManager.m_Instance.PushMusic(SFXtoPlay2);   
+        }
+
+        if (other.GetComponent<Player>().m_Model == Player.Model.Nerd)
+        {
+            SFXtoPlay = NerdHealthSFX[Random.Range(0, NerdHealthSFX.Length)];
+            AudioManager.m_Instance.PushMusic(SFXtoPlay2);       
+        }
+
+        if (other.GetComponent<HeartSystem>() != null)
         {
             m_HeartSystem = other.GetComponent<HeartSystem>();
             m_HeartSystem.Heal(m_HealValue);
@@ -53,6 +84,8 @@ public class FizzPopPickup : MonoBehaviour {
 
             gameObject.SetActive(false);
         }
+
+
     }
 
     //void OnTriggerExit(Collider other)
