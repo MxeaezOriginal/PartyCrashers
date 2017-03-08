@@ -39,6 +39,10 @@ public class HeavyEnemy : EnemyAI //Inherits from EnemyAI now instead of monobeh
 
     Animator m_Animator;
 
+    public int hitmaxChance;
+    public int hitChanceNumber;
+    public AudioClip[] DamageSFX;
+    public AudioClip SFXtoPlay2;
     void Start()
     {
 		/*/VFX
@@ -188,6 +192,13 @@ public class HeavyEnemy : EnemyAI //Inherits from EnemyAI now instead of monobeh
             {
                 if (m_CanDamage)
                 {
+                    hitChanceNumber = Random.Range(0, hitmaxChance);
+                    if (hitChanceNumber == Chance)
+                    {
+                        SFXtoPlay2 = DamageSFX[Random.Range(0, DamageSFX.Length)];
+                        AudioManager.m_Instance.PushMusic(SFXtoPlay2);
+                    }
+
                     m_HeartSystem.TakeDamage(m_Damage);
                     m_CanDamage = false;
                     StartCoroutine(WaitForSec(2));
