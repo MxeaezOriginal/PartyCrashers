@@ -79,6 +79,8 @@ public class AdvancedBossAi : MonoBehaviour
     //y position variable so boss doesn't fly away
     float ypos; 
 
+    //Sound fx
+
     // Use this for initialization
     void Start()
     {
@@ -189,12 +191,10 @@ public class AdvancedBossAi : MonoBehaviour
         //Manage invinvibility
         if (m_Invincible)
         {
-            bool healthshit = GetComponent<EnemyHealth>().isInvincible;
-            healthshit = false;
+            GetComponent<EnemyHealth>().isInvincible = true;
         }else
         {
-            bool healthshit = GetComponent<EnemyHealth>().isInvincible;
-            healthshit = false;
+            GetComponent<EnemyHealth>().isInvincible = false;
         }
     }
     void LateUpdate()

@@ -33,7 +33,7 @@ public class EnemyHealth : MonoBehaviour
     */
     void Update()
     {
-        if (gameObject.name != "Boss")
+        if (this.gameObject.name != "Boss")
         {
             if (isDamage == true)
             {
@@ -78,7 +78,7 @@ public class EnemyHealth : MonoBehaviour
             m_EnemyHealth -= health;
             //James Sound Code
            
-            randomPitch = Random.RandomRange(maxRandomPitch, minRandomPitch);
+            randomPitch = Random.Range(minRandomPitch, maxRandomPitch);
             if (randomPitch > 3)
             {
                 randomPitch = 3;
@@ -108,7 +108,7 @@ public class EnemyHealth : MonoBehaviour
             //GameObject SFXtest = Instantiate(SFXPlayer, transform.position, transform.rotation) as GameObject;
             GameObject SFXtest2 = Instantiate(SFXHit, transform.position, transform.rotation) as GameObject;
 
-            //James Shound Code
+            //James Sound Code
         }
         if (m_EnemyHealth <= 0)
         {
