@@ -60,6 +60,7 @@ public class FizzyPoP : Ranged
             Debug.Log("Is Shooting Spray");
         }
         #endregion
+
     }
 
 
@@ -114,7 +115,7 @@ public class FizzyPoP : Ranged
     {
         GameObject healPrefab;
         healPrefab = (GameObject)Instantiate(m_LeftTriggerProjectile, m_FirePoint[0].gameObject.transform.position, m_FirePoint[0].gameObject.transform.rotation);
-        healPrefab.GetComponent<Rigidbody>().AddForce(healPrefab.transform.up * m_ProjectileSpeed02);
+        healPrefab.GetComponent<Rigidbody>().AddForce(healPrefab.transform.forward * m_ProjectileSpeed02);
         m_CanHeal = false;
     }
 
