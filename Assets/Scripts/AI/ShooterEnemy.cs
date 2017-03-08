@@ -44,6 +44,13 @@ public class ShooterEnemy : EnemyAI //Inherits from EnemyAI instead of Monobehav
     //SFX End
     Animator m_Animator;
 
+    //sound
+    public AudioClip[] AttentionSFX;
+    public AudioClip SFXtoPlay2;
+    static private int Chance = 1;
+    public int maxChance;
+    public int ChanceNumber;
+    public bool m_IsPlayed;
     // Check if it is moving
     //private Vector3 CurPos;
     //private Vector3 LastPos;
@@ -94,6 +101,17 @@ public class ShooterEnemy : EnemyAI //Inherits from EnemyAI instead of Monobehav
             {
                 chase();
                 isArrived = false;
+
+                if (!m_IsPlayed)
+                {
+                    ChanceNumber = Random.Range(0, maxChance);
+                    if (ChanceNumber == Chance)
+                    {
+                        SFXtoPlay2 = AttentionSFX[Random.Range(0, AttentionSFX.Length)];
+                        AudioManager.m_Instance.PushMusic(SFXtoPlay2);
+                    }
+                    m_IsPlayed = true;
+                }
             }
             if (m_Distance <= AimDis && m_Distance > RunAwayDis)
             {

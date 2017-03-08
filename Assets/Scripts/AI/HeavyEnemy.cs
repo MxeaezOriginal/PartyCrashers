@@ -24,10 +24,17 @@ public class HeavyEnemy : EnemyAI //Inherits from EnemyAI now instead of monobeh
     private HeartSystem m_HeartSystem;
     private bool m_CanDamage = true;
 
-	//VFX
-	//public GameObject trailEffect;
-	//VFX
+    //VFX
+    //public GameObject trailEffect;
+    //VFX
 
+    //sound
+    public AudioClip[] AttentionSFX;
+    public AudioClip SFXtoPlay;
+    static private int Chance = 1;
+    public int maxChance;
+    public int ChanceNumber;
+    public bool m_IsPlayed;
     EnemyEffect enemyEffect;
 
     Animator m_Animator;
@@ -57,14 +64,25 @@ public class HeavyEnemy : EnemyAI //Inherits from EnemyAI now instead of monobeh
         }
         if (CanSeePlayer() && !enemyEffect.isStun)
         {
-                chase();
-            Debug.Log("chasing");
+            chase();
             /*/VFX
 			if (trailEffect != null)
 			{
 				trailEffect.GetComponent<ParticleSystem> ().enableEmission = true;
 			}
 			//VFX*/
+
+            if (!m_IsPlayed)
+            {
+                ChanceNumber = Random.Range(0, maxChance);
+                if (ChanceNumber == Chance)
+                {
+                    SFXtoPlay = AttentionSFX[Random.Range(0, AttentionSFX.Length)];
+                    AudioManager.m_Instance.PushMusic(SFXtoPlay);
+                }
+                m_IsPlayed = true;
+            }
+
             if (isArrived == true)
             {
                 if (m_Animator != null)
