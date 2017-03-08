@@ -190,11 +190,11 @@ public class AdvancedBossAi : MonoBehaviour
         if (m_Invincible)
         {
             bool healthshit = GetComponent<EnemyHealth>().isInvincible;
-            healthshit = true;
+            healthshit = false;
         }else
         {
             bool healthshit = GetComponent<EnemyHealth>().isInvincible;
-            healthshit = true;
+            healthshit = false;
         }
     }
     void LateUpdate()
