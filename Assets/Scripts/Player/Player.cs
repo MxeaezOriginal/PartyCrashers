@@ -115,6 +115,8 @@ public class Player : MonoBehaviour
     public AudioClip pinataSpawn;
 
     private AudioClip SFXtoPlay;
+
+
     //SFX END
 
 

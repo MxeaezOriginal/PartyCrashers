@@ -10,6 +10,7 @@ public class EnemyDamage : MonoBehaviour
     public AudioClip[] DamageSFX;
     public AudioClip SFXtoPlay;
     static private int Chance = 1;
+
     public void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.GetComponent<HeartSystem>() != null)

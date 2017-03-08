@@ -74,6 +74,7 @@ public class PlayerController : MonoBehaviour
     private bool isJumping;
     //SFX End
 
+
     void Start()
     {
         //rigidBody = gameObject.GetComponent<Rigidbody>();
@@ -130,7 +131,7 @@ public class PlayerController : MonoBehaviour
             //moveDir = transform.TransformDirection(moveDir);
 
 
-            //Move
+            //Idle
 
             //Jump
             if (controller.isGrounded)

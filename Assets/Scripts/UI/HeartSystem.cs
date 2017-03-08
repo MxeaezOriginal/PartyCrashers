@@ -16,6 +16,7 @@ public class HeartSystem : MonoBehaviour
     public Image[] heartImages = new Image[7];
     public Sprite[] heartSprites = new Sprite[3];
 
+    private Player player;
 	//kavells new code for feedback effects
 	public GameObject takeHitEffect;
 	public GameObject deathVFX;
@@ -23,16 +24,29 @@ public class HeartSystem : MonoBehaviour
 
     //Player player;
 
-    //sound
-    public AudioClip[] AttentionSFX;
+    //hurtsound
+    public int hitmaxChance;
+    public int hitChanceNumber;
+    public AudioClip[] BadBoyDamageSFX;
+    public AudioClip[] GothDamageSFX;
+    public AudioClip[] NerdDamageSFX;
+    public AudioClip[] MascotDamageSFX;
     public AudioClip SFXtoPlay;
     static private int Chance = 1;
-    public int maxChance;
-    public int ChanceNumber;
+
+
+    //lowhealthsound
+    public int lowHealthmaxChance;
+    public int lowHealthChanceNumber;
+    public AudioClip[] BadBoylowHealthSFX;
+    public AudioClip[] GothlowHealthSFX;
+    public AudioClip[] NerdlowHealthSFX;
+    public AudioClip[] MascotlowHealthSFX;
+    public AudioClip SFXtoPlay2;
 
     void Awake()
     {
-        //player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
 
     void Start()
@@ -104,13 +118,6 @@ public class HeartSystem : MonoBehaviour
         curHealth -= damage;
         curHealth = Mathf.Clamp(curHealth, 0, startHearts * healthPerHeart);
 
-        ChanceNumber = Random.Range(0, maxChance);
-        if (ChanceNumber == Chance)
-        {
-            SFXtoPlay = AttentionSFX[Random.Range(0, AttentionSFX.Length)];
-            AudioManager.m_Instance.PushMusic(SFXtoPlay);
-        }
-
         //kavells new code for feedback effects
         if (takeHitEffect != null) 
 		{
@@ -118,7 +125,70 @@ public class HeartSystem : MonoBehaviour
 			takeDamage = (GameObject)Instantiate (takeHitEffect, transform.position, Random.rotation);
 			Destroy (takeDamage, 0.5f);
 		}
-        if(curHealth == 0)
+            
+        if(curHealth > 2)
+        {
+            hitChanceNumber = Random.Range(0, hitmaxChance);
+            if (hitChanceNumber == Chance)
+            {
+                if (player.m_Model == Player.Model.Badboy)
+                {
+                    SFXtoPlay = BadBoyDamageSFX[Random.Range(0, BadBoyDamageSFX.Length)];
+                    AudioManager.m_Instance.PushMusic(SFXtoPlay);
+                }
+
+                if (player.m_Model == Player.Model.Goth)
+                {
+                    SFXtoPlay = GothDamageSFX[Random.Range(0, GothDamageSFX.Length)];
+                    AudioManager.m_Instance.PushMusic(SFXtoPlay);
+                }
+
+                if (player.m_Model == Player.Model.Nerd)
+                {
+                    SFXtoPlay = NerdDamageSFX[Random.Range(0, NerdDamageSFX.Length)];
+                    AudioManager.m_Instance.PushMusic(SFXtoPlay);
+                }
+
+                if (player.m_Model == Player.Model.Mascot)
+                {
+                    SFXtoPlay = MascotDamageSFX[Random.Range(0, MascotDamageSFX.Length)];
+                    AudioManager.m_Instance.PushMusic(SFXtoPlay);
+                }
+            }
+        }
+
+        if(curHealth <= 2 && curHealth > 0)
+        {
+            lowHealthChanceNumber = Random.Range(0, lowHealthmaxChance);
+            if (lowHealthChanceNumber == Chance)
+            {
+                if (player.m_Model == Player.Model.Badboy)
+                {
+                    SFXtoPlay2 = BadBoylowHealthSFX[Random.Range(0, BadBoylowHealthSFX.Length)];
+                    AudioManager.m_Instance.PushMusic(SFXtoPlay2);
+                }
+
+                if (player.m_Model == Player.Model.Goth)
+                {
+                    SFXtoPlay2 = GothlowHealthSFX[Random.Range(0, GothlowHealthSFX.Length)];
+                    AudioManager.m_Instance.PushMusic(SFXtoPlay2);
+                }
+
+                if (player.m_Model == Player.Model.Nerd)
+                {
+                    SFXtoPlay2 = NerdlowHealthSFX[Random.Range(0, NerdlowHealthSFX.Length)];
+                    AudioManager.m_Instance.PushMusic(SFXtoPlay2);
+                }
+
+                if (player.m_Model == Player.Model.Mascot)
+                {
+                    SFXtoPlay2 = MascotlowHealthSFX[Random.Range(0, MascotlowHealthSFX.Length)];
+                    AudioManager.m_Instance.PushMusic(SFXtoPlay2);
+                }
+            }
+        }
+
+        if (curHealth == 0)
         {
             GetComponent<Player>().respawn();
             //Kavells VFX code
