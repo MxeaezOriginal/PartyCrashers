@@ -33,8 +33,9 @@ GameObject:
   - 54: {fileID: 5497006}
   - 114: {fileID: 11456602}
   - 114: {fileID: 11484624}
+  - 114: {fileID: 11476154}
   m_Layer: 14
-  m_Name: Bullet_Test
+  m_Name: PrepGirl_Projectile
   m_TagString: OneDamage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -49,7 +50,6 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -12.754997, y: 2.5, z: 7.2118955}
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 479206}
   m_Father: {fileID: 0}
@@ -63,7 +63,6 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 4, y: 4, z: 4}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 467914}
   m_RootOrder: 0
@@ -271,6 +270,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LifeTimer: 10
   hitVFX: {fileID: 100558, guid: b7e08dbe3e5783544b0cb0b945afc7d0, type: 2}
+--- !u!114 &11476154
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 184478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01e3821d7f3e8ec41a467033ef4553b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_StunTime: 0.1
+  m_KnockBack: 10
 --- !u!114 &11484624
 MonoBehaviour:
   m_ObjectHideFlags: 1
