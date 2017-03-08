@@ -26,6 +26,22 @@ public class WeaponManager : MonoBehaviour
     public GameObject[] m_WeaponPrefabPickups;
     private Dictionary<string, GameObject> m_Weapons = new Dictionary<string, GameObject>();
     private Transform m_WeaponsTransform;
+    private Player player;
+
+    //PickupSound
+    public int maxChance;
+    public int ChanceNumber;
+    public AudioClip[] BadBoySFX;
+    public AudioClip[] GothSFX;
+    public AudioClip[] NerdSFX;
+    public AudioClip[] MascotSFX;
+    public AudioClip SFXtoPlay;
+    static private int Chance = 1;
+
+    void Awake()
+    {
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+    }
 
     void Start()
     {
@@ -199,6 +215,35 @@ public class WeaponManager : MonoBehaviour
             if ((weapon.gameObject.name + m_PickupConcactinateString).ToLower() == other.gameObject.name.ToLower())
             {
                 //Loop through all the child GameObjects under the Weapon gameobject in Player
+
+                ChanceNumber = Random.Range(0, maxChance);
+                if (ChanceNumber == Chance)
+                {
+                    if (player.m_Model == Player.Model.Badboy)
+                    {
+                        SFXtoPlay = BadBoySFX[Random.Range(0, BadBoySFX.Length)];
+                        AudioManager.m_Instance.PushMusic(SFXtoPlay);
+                    }
+
+                    if (player.m_Model == Player.Model.Goth)
+                    {
+                        SFXtoPlay = GothSFX[Random.Range(0, GothSFX.Length)];
+                        AudioManager.m_Instance.PushMusic(SFXtoPlay);
+                    }
+
+                    if (player.m_Model == Player.Model.Nerd)
+                    {
+                        SFXtoPlay = NerdSFX[Random.Range(0, NerdSFX.Length)];
+                        AudioManager.m_Instance.PushMusic(SFXtoPlay);
+                    }
+
+                    if (player.m_Model == Player.Model.Mascot)
+                    {
+                        SFXtoPlay = MascotSFX[Random.Range(0, MascotSFX.Length)];
+                        AudioManager.m_Instance.PushMusic(SFXtoPlay);
+                    }
+                }
+
                 foreach (Transform child in m_WeaponsTransform)
                 {
                     //If it finds a child under Weapon GameObject with the same name as the prefab, this is the Object to instantiate the Weapon Prefab under
