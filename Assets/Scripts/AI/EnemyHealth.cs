@@ -33,14 +33,17 @@ public class EnemyHealth : MonoBehaviour
     */
     void Update()
     {
-        if (isDamage == true)
+        if (gameObject.name != "Boss")
         {
-            isInvincible = true;
-            StartCoroutine(StopDamagefor(m_EnemyInvincibleTime));
-        }
-        if (isDamage == false)
-        {
-            isInvincible = false;
+            if (isDamage == true)
+            {
+                isInvincible = true;
+                StartCoroutine(StopDamagefor(m_EnemyInvincibleTime));
+            }
+            if (isDamage == false)
+            {
+                isInvincible = false;
+            }
         }
     }
 
