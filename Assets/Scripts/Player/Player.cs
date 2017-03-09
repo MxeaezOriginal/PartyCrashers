@@ -360,59 +360,83 @@ public class Player : MonoBehaviour
                 pinataClone.name = "Model";
                 return;
             }
-            switch (m_Model)
+            else
             {
-                case Player.Model.Mascot:
-                    GameObject mascotClone = Instantiate(GameManager.m_Instance.m_MascotPrefab, transform.position, Quaternion.identity) as GameObject;
-                    mascotClone.transform.parent = m_PlayerObject.gameObject.transform;
-                    mascotClone.transform.localPosition = new Vector3(0, 0, 0);
-                    mascotClone.transform.localRotation = Quaternion.identity;
-                    mascotClone.transform.localScale = new Vector3(1, 1, 1);
-                    mascotClone.name = "Model";
-                    m_Animator = mascotClone.GetComponent<Animator>();
-                    break;
-                case Player.Model.Nerd:
-                    GameObject nerdClone = Instantiate(GameManager.m_Instance.m_NerdPrefab, transform.position, Quaternion.identity) as GameObject;
-                    nerdClone.transform.parent = m_PlayerObject.gameObject.transform;
-                    nerdClone.transform.localPosition = new Vector3(0, 0, 0);
-                    nerdClone.transform.localRotation = Quaternion.identity;
-                    nerdClone.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
-                    nerdClone.name = "Model";
-                    Debug.Log("CheekO");
-                    m_Animator = nerdClone.GetComponent<Animator>();
-                    break;
-                case Player.Model.Badboy:
-                    GameObject badBoyClone = Instantiate(GameManager.m_Instance.m_BadboyPrefab, transform.position, Quaternion.identity) as GameObject;
-                    badBoyClone.transform.parent = m_PlayerObject.gameObject.transform;
-                    badBoyClone.transform.localPosition = new Vector3(0, 0, 0);
-                    badBoyClone.transform.localRotation = Quaternion.identity;
-                    badBoyClone.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
-                    badBoyClone.name = "Model";
-                    m_Animator = badBoyClone.GetComponent<Animator>();
-                    break;
-                case Player.Model.Goth:
-                    GameObject gothClone = Instantiate(GameManager.m_Instance.m_GothPrefab, transform.position, Quaternion.identity) as GameObject;
-                    gothClone.transform.parent = m_PlayerObject.gameObject.transform;
-                    gothClone.transform.localPosition = new Vector3(0, 0, 0);
-                    gothClone.transform.localRotation = Quaternion.identity;
-                    gothClone.transform.localScale = new Vector3(1, 1, 1);
-                    gothClone.name = "Model";
-                    m_Animator = gothClone.GetComponent<Animator>();
-                    break;
-                case Player.Model.Pinata:
-                    GameObject pinataClone = Instantiate(GameManager.m_Instance.m_PinataPrefab, transform.position, Quaternion.identity) as GameObject;
-                    pinataClone.transform.parent = m_PlayerObject.gameObject.transform;
-                    pinataClone.transform.localPosition = new Vector3(0, 0, 0);
-                    pinataClone.transform.localRotation = Quaternion.identity;
-                    pinataClone.transform.localScale = new Vector3(1, 1, 1);
-                    pinataClone.name = "Model";
-                    break;
+                switch (m_Model)
+                {
+                    case Player.Model.Mascot:
+                        GameObject mascotClone = Instantiate(GameManager.m_Instance.m_MascotPrefab, transform.position, Quaternion.identity) as GameObject;
+                        mascotClone.transform.parent = m_PlayerObject.gameObject.transform;
+                        mascotClone.transform.localPosition = new Vector3(0, 0, 0);
+                        mascotClone.transform.localRotation = Quaternion.identity;
+                        mascotClone.transform.localScale = new Vector3(1, 1, 1);
+                        //mascotClone.transform.FindChild("lionGeo").GetComponent<Renderer>().material.SetColor("_OutlineColor", playerOneColor);
+                        StartCoroutine(waitThenSetPlayerOutline(mascotClone, m_Model));
+                        mascotClone.name = "Model";
+                        m_Animator = mascotClone.GetComponent<Animator>();
+                        break;
+                    case Player.Model.Nerd:
+                        GameObject nerdClone = Instantiate(GameManager.m_Instance.m_NerdPrefab, transform.position, Quaternion.identity) as GameObject;
+                        nerdClone.transform.parent = m_PlayerObject.gameObject.transform;
+                        nerdClone.transform.localPosition = new Vector3(0, 0, 0);
+                        nerdClone.transform.localRotation = Quaternion.identity;
+                        nerdClone.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+                        StartCoroutine(waitThenSetPlayerOutline(nerdClone, m_Model));
+                        nerdClone.name = "Model";
+                        Debug.Log("CheekO");
+                        m_Animator = nerdClone.GetComponent<Animator>();
+                        break;
+                    case Player.Model.Badboy:
+                        GameObject badBoyClone = Instantiate(GameManager.m_Instance.m_BadboyPrefab, transform.position, Quaternion.identity) as GameObject;
+                        badBoyClone.transform.parent = m_PlayerObject.gameObject.transform;
+                        badBoyClone.transform.localPosition = new Vector3(0, 0, 0);
+                        badBoyClone.transform.localRotation = Quaternion.identity;
+                        badBoyClone.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+                        StartCoroutine(waitThenSetPlayerOutline(badBoyClone, m_Model));
+                        badBoyClone.name = "Model";
+                        m_Animator = badBoyClone.GetComponent<Animator>();
+                        break;
+                    case Player.Model.Goth:
+                        GameObject gothClone = Instantiate(GameManager.m_Instance.m_GothPrefab, transform.position, Quaternion.identity) as GameObject;
+                        gothClone.transform.parent = m_PlayerObject.gameObject.transform;
+                        gothClone.transform.localPosition = new Vector3(0, 0, 0);
+                        gothClone.transform.localRotation = Quaternion.identity;
+                        gothClone.transform.localScale = new Vector3(1, 1, 1);
+                        StartCoroutine(waitThenSetPlayerOutline(gothClone, m_Model));
+                        gothClone.name = "Model";
+                        m_Animator = gothClone.GetComponent<Animator>();
+                        break;
+                        //case Player.Model.Pinata:
+                        //    GameObject pinataClone = Instantiate(GameManager.m_Instance.m_PinataPrefab, transform.position, Quaternion.identity) as GameObject;
+                        //    pinataClone.transform.parent = m_PlayerObject.gameObject.transform;
+                        //    pinataClone.transform.localPosition = new Vector3(0, 0, 0);
+                        //    pinataClone.transform.localRotation = Quaternion.identity;
+                        //    pinataClone.transform.localScale = new Vector3(1, 1, 1);
+                        //    StartCoroutine(waitThenSetPlayerOutline(nerdClone, m_Model));
+                        //    pinataClone.name = "Model";
+                        //    break;
 
+                }
             }
         }
         else
         {
             Debug.Log("Error: Player's 'm_PlayerObject' is not assigned!");
+        }
+    }
+
+    IEnumerator waitThenSetPlayerOutline(GameObject modelObject, Model model)
+    {
+        yield return new WaitForSeconds(1f);
+
+        if(model == Model.Mascot)
+        {
+            modelObject.transform.FindChild("lionGeo").GetComponent<Renderer>().material.SetColor("_OutlineColor", playerCurrentColor);
+        }
+        else if(model != Model.Pinata)
+        {
+            modelObject.transform.FindChild("Human_Head").GetComponent<Renderer>().material.SetColor("_OutlineColor", playerCurrentColor);
+            modelObject.transform.FindChild("Human_Body").GetComponent<Renderer>().material.SetColor("_OutlineColor", playerCurrentColor);
         }
     }
 
