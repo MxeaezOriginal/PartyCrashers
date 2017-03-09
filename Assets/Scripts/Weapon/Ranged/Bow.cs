@@ -69,7 +69,6 @@ public class Bow : Ranged
     private void Update()
     {
         //ChargeVFX();
-        Debug.Log(m_bulletsLeft);
        
         #region Primary Attack
         Bullets();

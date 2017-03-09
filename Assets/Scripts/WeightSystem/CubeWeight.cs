@@ -66,7 +66,6 @@ public class CubeWeight : MonoBehaviour {
             {
                 if (other.GetComponent<Player>().m_Player == m_player[i].GetComponent<Player>().m_Player)
                 {
-                    Debug.Log("Enter");
                     is_touched[i] = true;
                     m_recentNum++;
                 }
@@ -82,7 +81,6 @@ public class CubeWeight : MonoBehaviour {
             {
                 if (other.GetComponent<Player>().m_Player == m_player[i].GetComponent<Player>().m_Player)
                 {
-                    Debug.Log("Leaved");
                     is_touched[i] = false;
                     m_recentNum--;
                 }
