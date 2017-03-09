@@ -578,13 +578,12 @@ public class CharacterSelect : MonoBehaviour
     void BackToMainMenu()
     {
         //ONLY P1
-        if (menuManager.canvases[2].activeSelf)
+        if (menuManager.canvases[2].activeSelf && canBack)
         {
             if (GameManager.m_Instance.m_Player1.m_Controller != Player.Controller.Keyboard)
             {
-                if (Input.GetButtonDown("Back_" + GameManager.m_Instance.m_Player1.m_Controller) && canBack)
+                if (Input.GetButtonDown("Back_" + GameManager.m_Instance.m_Player1.m_Controller))
                 {
-                    menuManager.mainMenuActive = true;
                     GameManager.m_Instance.m_NumOfPlayers = 1;
                     playersLockedIn = 0;
 
@@ -642,21 +641,22 @@ public class CharacterSelect : MonoBehaviour
                             break;
                     }
 
-                    //Set characterSelectIcon to default\
-                    P1.characterSelectIcon.texture = null;
-                    P2.characterSelectIcon.texture = null;
-                    P3.characterSelectIcon.texture = null;
-                    P4.characterSelectIcon.texture = null;
-
-
                     secondPlayer = PlayerTwo.nullType;
                     thirdPlayer = PlayerThree.nullType;
                     fourthPlayer = PlayerFour.nullType;
+
+                    //Set characterSelectIcon to default\
+                    //P1.characterSelectIcon.texture = emptyTexture;
+                    P2.characterSelectIcon.texture = emptyTexture;
+                    P3.characterSelectIcon.texture = emptyTexture;
+                    P4.characterSelectIcon.texture = emptyTexture;
+
+                    menuManager.mainMenuActive = true;
                 }
             }
             else
             {
-                if (Input.GetButtonDown("Back_Keyboard") && canBack)
+                if (Input.GetButtonDown("Back_Keyboard"))
                 {
                     menuManager.mainMenuActive = true;
                     GameManager.m_Instance.m_NumOfPlayers = 1;
@@ -721,16 +721,15 @@ public class CharacterSelect : MonoBehaviour
                             break;
                     }
 
-                    //Set characterSelectIcon to default\
-                    P1.characterSelectIcon.texture = null;
-                    P2.characterSelectIcon.texture = null;
-                    P3.characterSelectIcon.texture = null;
-                    P4.characterSelectIcon.texture = null;
-
-
                     secondPlayer = PlayerTwo.nullType;
                     thirdPlayer = PlayerThree.nullType;
                     fourthPlayer = PlayerFour.nullType;
+
+                    //Set characterSelectIcon to default\
+                    //P1.characterSelectIcon.texture = emptyTexture;
+                    P2.characterSelectIcon.texture = emptyTexture;
+                    P3.characterSelectIcon.texture = emptyTexture;
+                    P4.characterSelectIcon.texture = emptyTexture;
                 }
             }
         }
@@ -984,7 +983,7 @@ public class CharacterSelect : MonoBehaviour
             }
         }
         else
-        { 
+        {
             P2.characterSelectIcon.texture = emptyTexture;
             P2.characterName.text = "";
         }
@@ -1023,7 +1022,7 @@ public class CharacterSelect : MonoBehaviour
                     P3.characterName.text = "Mascot";
                     break;
                 case 1:
-                    P3.characterName.text = "Nerd";;
+                    P3.characterName.text = "Nerd"; ;
                     break;
                 case 2:
                     P3.characterName.text = "Bad Boy";
@@ -1034,7 +1033,7 @@ public class CharacterSelect : MonoBehaviour
             }
         }
         else
-        { 
+        {
             P3.characterSelectIcon.texture = emptyTexture;
             P3.characterName.text = "";
         }
@@ -1084,7 +1083,7 @@ public class CharacterSelect : MonoBehaviour
             }
         }
         else
-        { 
+        {
             P4.characterSelectIcon.texture = emptyTexture;
             P4.characterName.text = "";
         }

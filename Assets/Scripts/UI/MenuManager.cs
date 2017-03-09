@@ -61,7 +61,7 @@ public class MenuManager : MonoBehaviour
         //StartCoroutine(SelectedAnimationWaitForEndOfFrame());
         SelectedButtonOutline();
 
-        if (Input.GetButtonDown("Back_" + GameManager.m_Instance.m_Player1.m_Controller) && canBack)
+        if (!canvases[2].activeSelf && Input.GetButtonDown("Back_" + GameManager.m_Instance.m_Player1.m_Controller) && canBack)
         {
             Back();
         }
