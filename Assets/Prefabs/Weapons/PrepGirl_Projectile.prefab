@@ -33,7 +33,7 @@ GameObject:
   - 54: {fileID: 5497006}
   - 114: {fileID: 11456602}
   - 114: {fileID: 11484624}
-  - 114: {fileID: 11476154}
+  - 114: {fileID: 11420688}
   m_Layer: 14
   m_Name: PrepGirl_Projectile
   m_TagString: OneDamage
@@ -259,6 +259,18 @@ TrailRenderer:
       rgba: 16777215
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
+--- !u!114 &11420688
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 184478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f40b944bad38b6448b08f8da5b7bb12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_KnockBack: 30
 --- !u!114 &11456602
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -272,19 +284,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LifeTimer: 10
   hitVFX: {fileID: 100558, guid: b7e08dbe3e5783544b0cb0b945afc7d0, type: 2}
---- !u!114 &11476154
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 184478}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01e3821d7f3e8ec41a467033ef4553b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_StunTime: 0.1
-  m_KnockBack: 10
 --- !u!114 &11484624
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -18,6 +18,7 @@ public class EnemyAI : MonoBehaviour
  private Vector3 m_KnockBackPosition;
  private float m_KnockBackTime;
  private float m_KnockBackSpeed;
+    public float m_LookUpDis = 5f;
 
     void Start()
     {
@@ -62,7 +63,10 @@ public class EnemyAI : MonoBehaviour
     {
         if (target != null)
         {
-            transform.LookAt(other);
+            if(other.transform.position.y < (transform.position.y + m_LookUpDis) && other.transform.position.y > (transform.position.y - m_LookUpDis))
+            {
+                transform.LookAt(other);
+            }
         }
     }
 

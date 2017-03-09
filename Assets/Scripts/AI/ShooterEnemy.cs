@@ -8,13 +8,14 @@ public class ShooterEnemy : EnemyAI //Inherits from EnemyAI instead of Monobehav
     //NavMeshAgent agent;
 
     //public float m_distance;
-    public float ActivedDis = 20f;
+    //public float ActivedDis = 20f;
     public float ChaseDis = 15f;
-    public float AimDis = 6f;
+    //public float AimDis = 6f;
     public float ShootDis = 10f;
     public float RunAwayDis = 5f;
     public float ChaseSpeed = 0.005f;
     public float RunAwaySpeed = 0.01f;
+    public Transform m_ShotPos;
 
     Vector3 MoveDir;
     Vector3 Flee;
@@ -88,7 +89,7 @@ public class ShooterEnemy : EnemyAI //Inherits from EnemyAI instead of Monobehav
                 transform.position = Vector3.Lerp(transform.position, Flee, RunAwaySpeed);
                 isArrived = false;
             }
-            if (m_Distance > RunAwayDis && m_Distance < ChaseDis)
+            if (m_Distance > RunAwayDis && m_Distance < ShootDis)
             {
                 timer += Time.deltaTime;
                 if (timer > bulletwaitingtime)
@@ -97,7 +98,8 @@ public class ShooterEnemy : EnemyAI //Inherits from EnemyAI instead of Monobehav
                     timer = 0;
                 }
             }
-            if (m_Distance > ChaseDis && m_Distance <= ActivedDis)
+            //if (m_Distance > ChaseDis && m_Distance <= ActivedDis)
+            if (m_Distance > ShootDis && m_Distance <= ChaseDis)
             {
                 chase();
                 isArrived = false;
@@ -113,12 +115,12 @@ public class ShooterEnemy : EnemyAI //Inherits from EnemyAI instead of Monobehav
                     m_IsPlayed = true;
                 }
             }
-            if (m_Distance <= AimDis && m_Distance > RunAwayDis)
+            if (/*m_Distance <= AimDis &&*/ m_Distance > RunAwayDis)
             {
                 agent.Stop();
                 isArrived = true;
             }
-            if (m_Distance > ActivedDis)
+            if (m_Distance > ChaseDis)
             {
                 returnToOrigin();
             }
@@ -150,13 +152,13 @@ public class ShooterEnemy : EnemyAI //Inherits from EnemyAI instead of Monobehav
     {
         if(projectile != null)
         {
-            Rigidbody bullet = (Rigidbody)Instantiate(projectile, transform.position + transform.forward, transform.rotation);
+            Rigidbody bullet = (Rigidbody)Instantiate(projectile, m_ShotPos.position + m_ShotPos.forward, m_ShotPos.rotation);
             bullet.AddForce(transform.forward * bulletImpulse, ForceMode.Impulse);
             //VFX
             if (shootEffect != null)
             {
                 GameObject shootvfx;
-                shootvfx = (GameObject)Instantiate(shootEffect, transform.position, transform.rotation);
+                shootvfx = (GameObject)Instantiate(shootEffect, m_ShotPos.position, m_ShotPos.rotation);
                 Destroy(shootvfx, 0.3f);
             }
             //VFXend
