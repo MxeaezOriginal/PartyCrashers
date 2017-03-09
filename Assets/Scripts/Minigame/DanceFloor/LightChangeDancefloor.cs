@@ -10,11 +10,9 @@ public class LightChangeDancefloor : MonoBehaviour {
 	private Color ColorRight;
 	[SerializeField]
 	private Color ColorWrong;
-
-	[SerializeField]
-	private float scoretime = 4;
-	[SerializeField]
-	private float stoptime = 4;
+    
+	public float scoretime = 4;
+	public float stoptime = 4;
 
 	private Color CurrentColor;
 	public int CurrentColorInt;
