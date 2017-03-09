@@ -327,8 +327,10 @@ public class PlayerController : MonoBehaviour
     void LateUpdate()
     {
         Vector3 pos = Camera.main.WorldToViewportPoint(transform.position);
-        pos.x = Mathf.Clamp01(pos.x);
-        pos.y = Mathf.Clamp01(pos.y);
+        //pos.x = Mathf.Clamp01(pos.x);
+        //pos.y = Mathf.Clamp01(pos.y);
+        pos.x = Mathf.Clamp(pos.x, 0.05f, 0.95f);
+        pos.y = Mathf.Clamp(pos.y, 0.05f, 0.95f);
         transform.position = Camera.main.ViewportToWorldPoint(pos);
     }
 
