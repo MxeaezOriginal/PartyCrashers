@@ -62,9 +62,9 @@ public class HUDManager : MonoBehaviour
         {
             P4_Panel.SetActive(false);
 
-            P1_PanelTransform.anchoredPosition = new Vector2(-130, 20);
+            P1_PanelTransform.anchoredPosition = new Vector2(-135, 20);
             P2_PanelTransform.anchoredPosition = new Vector2(0, 20);
-            P3_PanelTransform.anchoredPosition = new Vector2(130, 20);
+            P3_PanelTransform.anchoredPosition = new Vector2(135, 20);
         }
         if (GameManager.m_Instance.m_Players.Length == 4)
         {
