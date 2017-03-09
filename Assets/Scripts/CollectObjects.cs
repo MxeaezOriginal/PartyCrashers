@@ -7,10 +7,14 @@ public class CollectObjects : MonoBehaviour
     private Player player;
     public PartyBar partyBar;
 
+    public GameObject scoreCounter;
+
     public float duration = 1f;
 
     void Start()
     {
+        scoreCounter = GameObject.Find("P1_Panel/Score");
+
         player = gameObject.GetComponent<Player>();
         if (GameManager.m_Instance.m_PartyBar != null)
         {
