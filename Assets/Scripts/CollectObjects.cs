@@ -47,9 +47,9 @@ public class CollectObjects : MonoBehaviour
 
             other.gameObject.SetActive(false);
         }
-        else if(GameManager.m_Instance.m_GameState == GameManager.GameState.Minigame)
+        else if(GameManager.m_Instance.m_GameState == GameManager.GameState.Minigame && collectible.type == Collectible.Type.Simple)
         {
-            player.m_Score += 10;
+            player.m_Score += 100;
         }
     }
     IEnumerator CountTo(int target)
