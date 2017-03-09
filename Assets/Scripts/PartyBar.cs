@@ -19,6 +19,9 @@ public class PartyBar : MonoBehaviour {
 
     float m_TempTimer;
 
+    //Boss object variable
+    GameObject m_Boss = null;
+
 	// Use this for initialization
 	void Start () {
         m_Bar = GetComponent<Image>();
@@ -54,6 +57,17 @@ public class PartyBar : MonoBehaviour {
 
     void bossPartyBarDrain()
     {
+        m_Boss = GameObject.Find("Boss");
+        if (m_Boss != null)
+        {
+            AdvancedBossAi bossScript = m_Boss.GetComponent<AdvancedBossAi>();
+            EnemyHealth bossHealth = m_Boss.GetComponent<EnemyHealth>();
+            print(bossHealth.m_EnemyHealth);
+            m_Bar.fillAmount = Mathf.Lerp(m_Bar.fillAmount, bossHealth.m_EnemyHealth / (bossScript.m_BaseMaxHealth * bossScript.m_NumOfPlayersHealthMultiplier), m_fillSpeed * Time.deltaTime);
+        }else
+        {
+            m_Boss = GameObject.Find("Boss");
+        }
 
     }
     void dungeonPartyBarDrain()

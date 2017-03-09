@@ -10,7 +10,7 @@ public class AdvancedBossAi : MonoBehaviour
     //Stats
     public float m_BaseMaxHealth;
     public float m_NumOfPlayersHealthMultiplier;
-    private float m_Health; 
+    public float m_Health;
 
     [Range(0.1f, 0.9f)]
     public float m_Difficulty;
