@@ -983,7 +983,7 @@ public class CharacterSelect : MonoBehaviour
             }
         }
         else
-        {
+        { 
             P2.characterSelectIcon.texture = emptyTexture;
             P2.characterName.text = "";
         }
@@ -1022,7 +1022,7 @@ public class CharacterSelect : MonoBehaviour
                     P3.characterName.text = "Mascot";
                     break;
                 case 1:
-                    P3.characterName.text = "Nerd"; ;
+                    P3.characterName.text = "Nerd";;
                     break;
                 case 2:
                     P3.characterName.text = "Bad Boy";
@@ -1033,7 +1033,7 @@ public class CharacterSelect : MonoBehaviour
             }
         }
         else
-        {
+        { 
             P3.characterSelectIcon.texture = emptyTexture;
             P3.characterName.text = "";
         }
@@ -1083,7 +1083,7 @@ public class CharacterSelect : MonoBehaviour
             }
         }
         else
-        {
+        { 
             P4.characterSelectIcon.texture = emptyTexture;
             P4.characterName.text = "";
         }
