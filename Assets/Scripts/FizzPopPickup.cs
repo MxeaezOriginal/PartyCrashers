@@ -30,29 +30,32 @@ public class FizzPopPickup : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<Player>().m_Model == Player.Model.Badboy)
+        if (other.GetComponent<Player>() != null)
         {
-            SFXtoPlay = BadBoyHealthSFX[Random.Range(0, BadBoyHealthSFX.Length)];
-            AudioManager.m_Instance.PushMusic(SFXtoPlay2);           
-        }
+            if (other.GetComponent<Player>().m_Model == Player.Model.Badboy)
+            {
+                SFXtoPlay = BadBoyHealthSFX[Random.Range(0, BadBoyHealthSFX.Length)];
+                AudioManager.m_Instance.PushMusic(SFXtoPlay2);
+            }
 
-        if (other.GetComponent<Player>().m_Model == Player.Model.Goth)
-        {
-            SFXtoPlay = GothHealthSFX[Random.Range(0, GothHealthSFX.Length)];
-            AudioManager.m_Instance.PushMusic(SFXtoPlay2);    
-        }
+            if (other.GetComponent<Player>().m_Model == Player.Model.Goth)
+            {
+                SFXtoPlay = GothHealthSFX[Random.Range(0, GothHealthSFX.Length)];
+                AudioManager.m_Instance.PushMusic(SFXtoPlay2);
+            }
 
-        if (other.GetComponent<Player>().m_Model == Player.Model.Mascot)
-        {
-            Debug.Log("Get");
-            SFXtoPlay = MascotHealthSFX[Random.Range(0, MascotHealthSFX.Length)];
-            AudioManager.m_Instance.PushMusic(SFXtoPlay2);   
-        }
+            if (other.GetComponent<Player>().m_Model == Player.Model.Mascot)
+            {
+                Debug.Log("Get");
+                SFXtoPlay = MascotHealthSFX[Random.Range(0, MascotHealthSFX.Length)];
+                AudioManager.m_Instance.PushMusic(SFXtoPlay2);
+            }
 
-        if (other.GetComponent<Player>().m_Model == Player.Model.Nerd)
-        {
-            SFXtoPlay = NerdHealthSFX[Random.Range(0, NerdHealthSFX.Length)];
-            AudioManager.m_Instance.PushMusic(SFXtoPlay2);       
+            if (other.GetComponent<Player>().m_Model == Player.Model.Nerd)
+            {
+                SFXtoPlay = NerdHealthSFX[Random.Range(0, NerdHealthSFX.Length)];
+                AudioManager.m_Instance.PushMusic(SFXtoPlay2);
+            }
         }
 
         if (other.GetComponent<HeartSystem>() != null)
