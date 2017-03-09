@@ -18,8 +18,8 @@ public class MaterialChangeDanceFloor : MonoBehaviour {
     public Material m_ColorNone;
 
 
-    private float scoretime = 4;
-    private float stoptime = 4;
+    //private float scoretime = 4;
+    //private float stoptime = 4;
 
     private bool stop = false;
 
@@ -32,10 +32,13 @@ public class MaterialChangeDanceFloor : MonoBehaviour {
     //james FX
     public GameObject m_colourchange;
     //James FX
-    
+    private float m_LightChangeScoreTime;
+    private float m_LightChangeStopTime;
 
     void Start()
     {
+        m_LightChangeScoreTime = m_Light.GetComponent<LightChangeDancefloor>().scoretime;
+        m_LightChangeStopTime = m_Light.GetComponent<LightChangeDancefloor>().stoptime;
         m_CurrentFloorColorInt = -2;
         m_DiscoBallON = m_ColorNone;
         if (m_colourchange != null)
@@ -50,7 +53,7 @@ public class MaterialChangeDanceFloor : MonoBehaviour {
         m_GreedColorPercentage = m_Light.GetComponent<LightChangeDancefloor>().GreenColorPercentage;
         if (stop == true)
         {
-            StartCoroutine(Stopedfor(scoretime));
+            StartCoroutine(Stopedfor(m_LightChangeScoreTime));
             if (m_PreviousColorInt != -1)
             {
                 m_DiscoBallLight.material = m_Temp;
@@ -68,11 +71,13 @@ public class MaterialChangeDanceFloor : MonoBehaviour {
             // Light not flashing
             // assigning the color (color shuffle)
             // Getting / Losing point 
-            StartCoroutine(Stopfor(scoretime));
+            //StartCoroutine(Stopfor(scoretime));
+            StartCoroutine(Stopfor(m_LightChangeStopTime));
             // Light flashing
             // Color assigned
             // Cannot get / lose point
-            StartCoroutine(ColorRandomiser(stoptime));
+            //StartCoroutine(ColorRandomiser(stoptime));
+            StartCoroutine(ColorRandomiser(m_LightChangeScoreTime));
 
             m_DiscoBallLight.material = m_DiscoBallON;
             float emission = Mathf.PingPong(Time.time * 1.5f, 1);

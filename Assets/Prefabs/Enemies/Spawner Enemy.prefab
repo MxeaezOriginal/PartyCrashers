@@ -86,6 +86,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: -0.624}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 484034}
   m_RootOrder: 0
@@ -98,6 +99,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 1, z: 0, w: -0.00000016292068}
   m_LocalPosition: {x: -81.71459, y: 1.014129, z: 44.656597}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
   m_Children:
   - {fileID: 402452}
   - {fileID: 22491084}
@@ -326,7 +328,6 @@ MonoBehaviour:
   RunSpeed: 0.02
   spawningEffect: {fileID: 180128, guid: 6586ff0f14125534cae2f5d8f04b7871, type: 2}
   spawnedEffect: {fileID: 176698, guid: a29a954b4afcf814f8f2ab513328e7c1, type: 2}
-  SFXManager: {fileID: 0}
   audioSource: {fileID: 8260382}
   SFX:
   - {fileID: 8300000, guid: 5aa9f96a962cbc24c831cea04e96c6d7, type: 3}
@@ -408,8 +409,9 @@ MonoBehaviour:
   maxRandomPitch: 1
   minRandomPitch: 1
   deathVFX: {fileID: 176698, guid: a29a954b4afcf814f8f2ab513328e7c1, type: 2}
+  hurtVFX: {fileID: 0}
   m_EnemyHealth: 10
-  m_EnemyInvincibleTime: 0.5
+  m_EnemyInvincibleTime: 0.1
   m_Drop: {fileID: 103998, guid: 5153af79980f5c24a8ce38b6f542b25a, type: 2}
   isInvincible: 0
 --- !u!136 &13660046
@@ -479,6 +481,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.9469062, y: 1.6788018, z: 1.8478999}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 22491084}
   m_RootOrder: 0
@@ -496,6 +499,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0.0000018338349, z: 0, w: -1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.0088245, y: 0.06479796, z: 1.0088246}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 22483972}
   m_Father: {fileID: 484034}

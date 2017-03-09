@@ -41,6 +41,7 @@ public class MinigameManager : MonoBehaviour
 
     private void Start()
     {
+        m_MinigameCanvas = GameObject.Find("MinigameCanvas").GetComponent<Canvas>();
         m_PartyBar = GetComponentInChildren<PartyBar>();
         m_CurrentState = EMinigameState.PreGameCountdown;
         m_P1Place = 0;

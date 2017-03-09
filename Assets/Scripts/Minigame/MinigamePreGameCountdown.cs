@@ -25,7 +25,12 @@ public class MinigamePreGameCountdown : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        m_StartCounter[0] = GameObject.Find("Start Counter/3");
+        m_StartCounter[1] = GameObject.Find("Start Counter/2");
+        m_StartCounter[2] = GameObject.Find("Start Counter/1");
+        m_StartCounter[3] = GameObject.Find("Start Counter/GO!");
         m_MinigameManager = GetComponent<MinigameManager>();
+        m_PartyBar = GameObject.Find("PartyBar");
         m_tutorialText = GameObject.Find("Tutorial Text");
         m_IsCoroutineExecuting = false;
 

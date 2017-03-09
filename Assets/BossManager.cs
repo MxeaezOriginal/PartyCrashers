@@ -26,15 +26,16 @@ public class BossManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	    //Move wall
-
-        if(m_backWall.transform.position.z < GetLowestPlayerZ() - 5f && m_backWall.transform.position.z < 33f)
+        if(GetLowestPlayerZ() > 0)
         {
-            m_backWall.transform.position = new Vector3(m_backWall.transform.position.x, m_backWall.transform.position.y, Mathf.Lerp(m_backWall.transform.position.z, GetLowestPlayerZ() - 5f, 0.1f));
+            if (m_backWall.transform.position.z < GetLowestPlayerZ() - 5f && m_backWall.transform.position.z < 33f)
+            {
+                m_backWall.transform.position = new Vector3(m_backWall.transform.position.x, m_backWall.transform.position.y, Mathf.Lerp(m_backWall.transform.position.z, GetLowestPlayerZ() - 5f, 0.1f));
+            }
         }
         //Activate Boss
         if (m_backWall.transform.position.z >= 33f)
         {
-            //boss = GameObject.Find("Boss");
             boss.SetActive(true);
 
         }
