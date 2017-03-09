@@ -14,6 +14,7 @@ public class MinigamePreGameCountdown : MonoBehaviour
 {
     public GameObject[] m_StartCounter = new GameObject[4];
     public GameObject m_PartyBar;
+    public GameObject m_tutorialText;
 
     private MinigameManager m_MinigameManager;
     private bool m_IsCoroutineExecuting;
@@ -22,6 +23,7 @@ public class MinigamePreGameCountdown : MonoBehaviour
     void Start()
     {
         m_MinigameManager = GetComponent<MinigameManager>();
+        m_tutorialText = GameObject.Find("Tutorial Text");
         m_IsCoroutineExecuting = false;
     }
 
@@ -40,12 +42,16 @@ public class MinigamePreGameCountdown : MonoBehaviour
         m_IsCoroutineExecuting = true;
         DisableFeatures();
 
+        //Minigame tutorial text pop-up (Disabled at "GO")
+        yield return new WaitForSeconds(1f);
+        m_tutorialText.GetComponent<Animator>().SetBool("Show", true);
+
+
         //3, 2, 1, GO Countdown
 
         // Initial 1 seconds delay then '3'
         yield return new WaitForSeconds(1);
         m_StartCounter[0].GetComponent<Text>().enabled = true;
-        m_StartCounter[0].transform.GetChild(0).GetComponent<Text>().enabled = true;
 
         // '2'
         yield return new WaitForSeconds(1);
@@ -53,8 +59,6 @@ public class MinigamePreGameCountdown : MonoBehaviour
         m_StartCounter[0].GetComponent<Text>().enabled = false;
         m_StartCounter[1].GetComponent<Text>().enabled = true;
 
-        m_StartCounter[0].transform.GetChild(0).GetComponent<Text>().enabled = false;
-        m_StartCounter[1].transform.GetChild(0).GetComponent<Text>().enabled = true;
 
         // '1'
         yield return new WaitForSeconds(1);
@@ -62,8 +66,6 @@ public class MinigamePreGameCountdown : MonoBehaviour
         m_StartCounter[1].GetComponent<Text>().enabled = false;
         m_StartCounter[2].GetComponent<Text>().enabled = true;
 
-        m_StartCounter[1].transform.GetChild(0).GetComponent<Text>().enabled = false;
-        m_StartCounter[2].transform.GetChild(0).GetComponent<Text>().enabled = true;
 
         // 'GO'
         yield return new WaitForSeconds(1);
@@ -71,14 +73,13 @@ public class MinigamePreGameCountdown : MonoBehaviour
         m_StartCounter[2].GetComponent<Text>().enabled = false;
         m_StartCounter[3].GetComponent<Text>().enabled = true;
 
-        m_StartCounter[2].transform.GetChild(0).GetComponent<Text>().enabled = false;
-        m_StartCounter[3].transform.GetChild(0).GetComponent<Text>().enabled = true;
+        //Disable Tutorial text pop-up
+        m_tutorialText.GetComponent<Animator>().SetBool("Show", false);
 
         // "Erase" 'GO'and reenable features
         yield return new WaitForSeconds(1);
 
         m_StartCounter[3].GetComponent<Text>().enabled = false;
-        m_StartCounter[3].transform.GetChild(0).GetComponent<Text>().enabled = false;
 
         EnableFeatures();
 
