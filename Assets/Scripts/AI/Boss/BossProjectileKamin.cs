@@ -1,43 +1,77 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BossProjectileKamin : MonoBehaviour {
+public class BossProjectileKamin : MonoBehaviour
+{
 
     [HideInInspector]
     public Vector3 m_ProjectileVelocity;
-    public float m_Life;
 
+    public int m_OutTime;
+    public int m_SlowTime;
+    public int m_BackTime;
 
+    private Transform m_FirstPosition;
+    private Vector3 m_StartingVelocity;
+    private Vector3 m_Velocity;
     private int frame;
     private Rigidbody m_Body;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         m_Body = GetComponent<Rigidbody>();
-        m_Body.velocity = m_ProjectileVelocity;
         frame = 0;
-	}
+    }
 
     //Called once object is activated
     void OnEnable()
     {
         frame = 0;
+        m_FirstPosition = gameObject.transform;
+        m_Velocity = m_ProjectileVelocity;
+
     }
 
-	// Update is called once per frame
-	void Update () {
-        m_Body.velocity = m_ProjectileVelocity;
+    // Update is called once per frame
+    void Update()
+    {
+
+        //Manage frame
         frame++;
 
-        if(frame > m_Life)
+        //Update velocity
+        m_Body.velocity = m_Velocity;
+
+        //Begining
+        if (frame <= m_OutTime)
         {
-            gameObject.SetActive(false);
+            m_Velocity = m_ProjectileVelocity;
+            m_StartingVelocity = m_Velocity;
         }
-	}
+        //Slow down
+        if (frame > m_OutTime && frame <= m_OutTime + m_SlowTime)
+        {
+            m_Velocity.x -= m_StartingVelocity.normalized.x * 2f;
+            m_Velocity.z -= m_StartingVelocity.normalized.z * 2f;
+        }
+        //Come back
+        if (frame > m_OutTime + m_SlowTime)
+        {
+            Mathf.Lerp(m_Velocity.x, m_StartingVelocity.x * -1f, 0.1f);
+            Mathf.Lerp(m_Velocity.z, m_StartingVelocity.z * -1f, 0.1f);
+        }
+
+        //Die
+        if (frame > m_OutTime + m_SlowTime + m_BackTime)
+        {
+            //gameObject.SetActive(false);
+        }
+    }
 
     void OnCollisionEnter(Collision other)
     {
-        if(other.gameObject.GetComponent<Player>() != null)
+        if (other.gameObject.GetComponent<Player>() != null)
         {
             PlayerController playerScript = other.gameObject.GetComponent<PlayerController>();
             HeartSystem health = other.gameObject.GetComponent<HeartSystem>();
@@ -46,11 +80,8 @@ public class BossProjectileKamin : MonoBehaviour {
             playerScript.m_Velocity = Vector3.Normalize(transform.position - other.gameObject.transform.position) * knockback;
             //Deal damage
             health.TakeDamage(1);
-
-        }
-        if (other.gameObject.GetComponent<BossProjectileKamin>() == null)
-        {
             gameObject.SetActive(false);
+
         }
 
     }
