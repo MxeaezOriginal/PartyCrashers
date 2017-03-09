@@ -64,10 +64,7 @@ public class MinigameScoreAndTimeTrack : MonoBehaviour
                     }
                 }
 
-                if(!m_IsCoroutineRunning)
-                {
-                    StartCoroutine(UpdateScore());
-                }
+                StartCoroutine(UpdateScore());
             }
             else if(m_MinigameSceneName.Equals("BreakToTheBeat"))
             {
@@ -84,6 +81,11 @@ public class MinigameScoreAndTimeTrack : MonoBehaviour
 
     public IEnumerator UpdateScore()
     {
+        if (m_IsCoroutineRunning)
+        {
+            yield break;
+        }
+
         m_IsCoroutineRunning = true;
 
         yield return new WaitForSeconds(1.0f);
