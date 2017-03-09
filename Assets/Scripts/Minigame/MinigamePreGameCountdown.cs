@@ -9,12 +9,15 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class MinigamePreGameCountdown : MonoBehaviour
 {
     public GameObject[] m_StartCounter = new GameObject[4];
     public GameObject m_PartyBar;
     public GameObject m_tutorialText;
+
+    private string m_MinigameSceneName;
 
     private MinigameManager m_MinigameManager;
     private bool m_IsCoroutineExecuting;
@@ -25,6 +28,8 @@ public class MinigamePreGameCountdown : MonoBehaviour
         m_MinigameManager = GetComponent<MinigameManager>();
         m_tutorialText = GameObject.Find("Tutorial Text");
         m_IsCoroutineExecuting = false;
+
+        m_MinigameSceneName = SceneManager.GetActiveScene().name;
     }
 
     // Update is called once per frame
@@ -34,6 +39,20 @@ public class MinigamePreGameCountdown : MonoBehaviour
             && !m_IsCoroutineExecuting)
         {
             StartCoroutine(RunCountdown());
+        }
+
+
+        if (m_MinigameSceneName.Equals("BallroomBlitz"))
+        {
+            m_tutorialText.GetComponent<Text>().text = "TUTORIAL TEXT POP-UP MESSAGE THAT TEACHES PLAYERS HOW TO PLAY BALLROOM BLITZ";
+        }
+        if (m_MinigameSceneName.Equals("BreakToTheBeat"))
+        {
+            m_tutorialText.GetComponent<Text>().text = "TUTORIAL TEXT POP-UP MESSAGE THAT TEACHES PLAYERS HOW TO PLAY BREAK TO THE BEAT";
+        }
+        if (m_MinigameSceneName.Equals("DanceFloorRumble"))
+        {
+            m_tutorialText.GetComponent<Text>().text = "TUTORIAL TEXT POP-UP MESSAGE THAT TEACHES PLAYERS HOW TO PLAY DANCE FLOOR RUMBLE";
         }
     }
 
@@ -50,7 +69,7 @@ public class MinigamePreGameCountdown : MonoBehaviour
         //3, 2, 1, GO Countdown
 
         // Initial 1 seconds delay then '3'
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(2);
         m_StartCounter[0].GetComponent<Text>().enabled = true;
 
         // '2'

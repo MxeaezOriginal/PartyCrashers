@@ -2,27 +2,52 @@
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class MinigameBossPrompt : MonoBehaviour {
+public class MinigameBossPrompt : MonoBehaviour
+{
 
-    private MinigameManager         m_MinigameManager;
+    private MinigameManager m_MinigameManager;
     private MinigameRewardSelection m_MinigameRewardSelection;
-    private GameObject              m_RewardCanvas;
-    private GameObject              m_BossPromptCanvas;
+    private GameObject m_RewardCanvas;
+    private GameObject m_BossPromptCanvas;
+    public  GameObject m_BossPromptCanvasButtonNO, m_BossPromptCanvasButtonYES;
 
-    public bool                     m_PromptShown;
+    public bool m_PromptShown;
 
     // Use this for initialization
-    void Start ()
+    void Start()
     {
-        m_MinigameManager           = GetComponent<MinigameManager>();
-        m_MinigameRewardSelection   = GetComponent<MinigameRewardSelection>();
+        m_MinigameManager = GetComponent<MinigameManager>();
+        m_MinigameRewardSelection = GetComponent<MinigameRewardSelection>();
 
-        m_RewardCanvas              = m_MinigameManager.m_RewardSelectionCanvas.gameObject;// GameObject.Find("Reward Canvas");
-        m_BossPromptCanvas          = m_MinigameManager.m_BossPromptCanvas.gameObject; // GameObject.Find("BossPrompt Canvas");
+        m_RewardCanvas = m_MinigameManager.m_RewardSelectionCanvas.gameObject;// GameObject.Find("Reward Canvas");
+        m_BossPromptCanvas = m_MinigameManager.m_BossPromptCanvas.gameObject; // GameObject.Find("BossPrompt Canvas");
+
+        m_BossPromptCanvasButtonNO = GameObject.Find("NO");
+        m_BossPromptCanvasButtonYES = GameObject.Find("YES");
     }
-	
-	// Update is called once per frame
-	void Update ()
+
+    void SelectedButtonOutline()
+    {
+        if (m_MinigameRewardSelection.m_ES.currentSelectedGameObject == m_BossPromptCanvasButtonNO)
+        {
+            m_BossPromptCanvasButtonNO.GetComponent<Outline>().enabled = true;
+            m_BossPromptCanvasButtonNO.GetComponent<Animator>().SetBool("Selected", true);
+
+            m_BossPromptCanvasButtonYES.GetComponent<Outline>().enabled = false;
+            m_BossPromptCanvasButtonYES.GetComponent<Animator>().SetBool("Selected", false);
+        }
+        if (m_MinigameRewardSelection.m_ES.currentSelectedGameObject == m_BossPromptCanvasButtonYES)
+        {
+            m_BossPromptCanvasButtonYES.GetComponent<Outline>().enabled = true;
+            m_BossPromptCanvasButtonYES.GetComponent<Animator>().SetBool("Selected", true);
+
+            m_BossPromptCanvasButtonNO.GetComponent<Outline>().enabled = false;
+            m_BossPromptCanvasButtonNO.GetComponent<Animator>().SetBool("Selected", false);
+        }
+    }
+
+    // Update is called once per frame
+    void Update()
     {
         if (m_MinigameManager.GetMinigameState().Equals(MinigameManager.EMinigameState.BossPrompt))
         {
@@ -37,7 +62,9 @@ public class MinigameBossPrompt : MonoBehaviour {
                 m_PromptShown = true;
             }
 
-            if(m_MinigameRewardSelection.m_IsBossFightAnswered)
+            SelectedButtonOutline();
+
+            if (m_MinigameRewardSelection.m_IsBossFightAnswered)
             {
                 //if (GameManager.m_Instance.m_Tutorial == GameManager.Tutorial.Lobby_01 ||
                 //    GameManager.m_Instance.m_Tutorial == GameManager.Tutorial.Lobby_02 ||
@@ -59,16 +86,16 @@ public class MinigameBossPrompt : MonoBehaviour {
                 //}
                 //else
                 //{
-                    if (!m_MinigameRewardSelection.m_IsFightingBoss)
-                    {
-                        GameManager.m_Instance.m_GameState = GameManager.GameState.Dungeon;
-                        SceneManager.LoadScene(Random.Range(1, 6 + 1));
-                    }
-                    else
-                    {
-                        GameManager.m_Instance.m_GameState = GameManager.GameState.Boss;
-                        SceneManager.LoadScene("KaminsBoss");
-                    }
+                if (!m_MinigameRewardSelection.m_IsFightingBoss)
+                {
+                    GameManager.m_Instance.m_GameState = GameManager.GameState.Dungeon;
+                    SceneManager.LoadScene(Random.Range(1, 6 + 1));
+                }
+                else
+                {
+                    GameManager.m_Instance.m_GameState = GameManager.GameState.Boss;
+                    SceneManager.LoadScene("KaminsBoss");
+                }
                 //}
             }
         }
