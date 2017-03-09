@@ -15,6 +15,11 @@ public class BallManager : MonoBehaviour
     private BallPoolManager m_BallPoolManager;
     private bool m_IsCoroutineExecuting;
 
+    //VFX James
+    public GameObject m_explosion;
+   
+    //VFX James
+
     void Start()
     {
         m_IsCoroutineExecuting = false;
@@ -85,8 +90,16 @@ public class BallManager : MonoBehaviour
     public void BombBallExplosion()
     {
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-        
-        foreach(var player in players)
+
+        //vfx Explosion
+        if(m_explosion != null)
+        {
+            GameObject explosion;
+            explosion = (GameObject)Instantiate(m_explosion, gameObject.transform.position, gameObject.transform.rotation);
+        }
+        //vfx Explosion
+
+        foreach (var player in players)
         {
             var playerController = player.GetComponent<PlayerController>();
             m_KnockBackDirection = (player.transform.position - transform.position).normalized;

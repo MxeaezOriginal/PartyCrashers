@@ -15,6 +15,7 @@ GameObject:
   - 54: {fileID: 5435868}
   - 114: {fileID: 11422986}
   - 208: {fileID: 20858104}
+  - 82: {fileID: 8299918}
   m_Layer: 9
   m_Name: Prop_Draw_01
   m_TagString: Untagged
@@ -31,6 +32,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0.000002324581}
   m_LocalPosition: {x: 20.498993, y: -22.762415, z: 154.69597}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 179.9997, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -106,6 +108,80 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.4493256, y: 1.5628171, z: 0.7828598}
   m_Center: {x: 0, y: 0.78140855, z: 0.000011444092}
+--- !u!82 &8299918
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 195134}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!114 &11422986
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -120,8 +196,8 @@ MonoBehaviour:
   m_speed: 0
   m_maxNum: 1
   m_recentNum: 0
-  audioSource: {fileID: 0}
-  MoveSFX: {fileID: 0}
+  audioSource: {fileID: 8299918}
+  MoveSFX: {fileID: 8300000, guid: 3bbd8a108679b1e47a6d7435ae5a8de0, type: 3}
 --- !u!208 &20858104
 NavMeshObstacle:
   m_ObjectHideFlags: 1
