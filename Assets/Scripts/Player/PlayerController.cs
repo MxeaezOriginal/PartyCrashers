@@ -321,6 +321,13 @@ public class PlayerController : MonoBehaviour
             KnockBack = transform.position + KnockBackDirection;
             m_Velocity = KnockBackDirection.normalized * other.GetComponent<BaseLevelProjectile>().m_KnockBack;
         }
+        if (other.gameObject.GetComponent<BaseLevelProjectile>() != null)
+        {
+            KnockBackDirection = transform.position - other.transform.position;
+            KnockBack = transform.position + KnockBackDirection;
+            m_Velocity = KnockBackDirection.normalized * other.GetComponent<BaseLevelProjectile>().m_KnockBack;
+        }
+
     }
 
 
