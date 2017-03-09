@@ -15,6 +15,7 @@ public class MaterialChangeDanceFloor : MonoBehaviour {
 
     public Material m_ColorRight;
     public Material m_ColorWrong;
+    public Material m_ColorNone;
 
 
     private float scoretime = 4;
@@ -36,6 +37,7 @@ public class MaterialChangeDanceFloor : MonoBehaviour {
     void Start()
     {
         m_CurrentFloorColorInt = -2;
+        m_DiscoBallON = m_ColorNone;
         if (m_colourchange != null)
         {
             m_colourchange.SetActive(false);
