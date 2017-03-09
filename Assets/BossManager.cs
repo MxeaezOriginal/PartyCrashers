@@ -10,7 +10,21 @@ public class BossManager : MonoBehaviour {
 
     public GameObject boss;
 
+    public AudioClip[] BadBoySFX;
+    public AudioClip[] GothSFX;
+    public AudioClip[] NerdSFX;
+    public AudioClip[] MascotSFX;
+    public AudioClip SFXtoPlay;
+    public bool m_IsStart = false;
+    private Player player;
     // Use this for initialization
+
+    void Awake()
+    {
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+    }
+
+
     void Start () {
         //Get the number of players
         players = GameManager.m_Instance.m_Players;
@@ -38,6 +52,34 @@ public class BossManager : MonoBehaviour {
         {
             boss.SetActive(true);
 
+            if (!m_IsStart)
+            {
+                if (player.m_Model == Player.Model.Badboy)
+                {
+                    SFXtoPlay = BadBoySFX[Random.Range(0, BadBoySFX.Length)];
+                    AudioManager.m_Instance.PushMusic(SFXtoPlay);
+                }
+
+                if (player.m_Model == Player.Model.Goth)
+                {
+                    SFXtoPlay = GothSFX[Random.Range(0, GothSFX.Length)];
+                    AudioManager.m_Instance.PushMusic(SFXtoPlay);
+                }
+
+                if (player.m_Model == Player.Model.Nerd)
+                {
+                    SFXtoPlay = NerdSFX[Random.Range(0, NerdSFX.Length)];
+                    AudioManager.m_Instance.PushMusic(SFXtoPlay);
+                }
+
+                if (player.m_Model == Player.Model.Mascot)
+                {
+                    SFXtoPlay = MascotSFX[Random.Range(0, MascotSFX.Length)];
+                    AudioManager.m_Instance.PushMusic(SFXtoPlay);
+                }
+
+                m_IsStart = true;
+            }
         }
     }
     GameObject getClosestPlayer()
