@@ -40,7 +40,17 @@ public class FizzyPoP : Ranged
     void Start()
     {
         FizzyCone = transform.FindChild("FizzyGunCone").gameObject;
-        FizzyCone.transform.SetParent(m_FirePoint[1].transform);
+        if (m_FirePoint[0].transform.FindChild("FizzyGunCone") != null)
+        {
+            Destroy(transform.FindChild("FizzyGunCone").gameObject);
+            FizzyCone = m_FirePoint[0].transform.FindChild("FizzyGunCone").gameObject;
+        }
+        else
+        {
+            FizzyCone.transform.SetParent(m_FirePoint[0].transform);
+            FizzyCone.transform.localPosition = new Vector3(0, 0, 0);
+            FizzyCone.transform.localRotation = Quaternion.identity;
+        }
         FizzyCone.GetComponent<Damage>().m_Damage = m_Damage;
         FizzyCone.SetActive(false);
         Player = GetComponentInParent<Player>();
