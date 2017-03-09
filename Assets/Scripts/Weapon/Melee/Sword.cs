@@ -159,7 +159,7 @@ public class Sword : Melee
     {
         m_Player.m_Animator.SetBool("isDashing", true);
         StartCoroutine(setSecondaryAttackFalse());
-        if (m_SecondaryCoolDown <= Time.time - m_Weapon1Cooldown || m_SecondaryCoolDown == 0)
+        if (m_SecondaryCoolDown <= Time.time - m_Weapon2Cooldown || m_SecondaryCoolDown == 0)
         {
             //SFX Start
             //if (audioSource != null)
