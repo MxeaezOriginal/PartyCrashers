@@ -113,6 +113,7 @@ public class FizzyPoP : Ranged
                 ShootSprayGO.transform.parent = m_FirePoint[1].transform.parent.transform.parent;
                 ShootSprayGO.transform.Rotate(new Vector3(-90, 0, 0));
                 ShootSprayGO.transform.localScale = new Vector3(1, 1, 1);
+                ShootSprayGO.transform.localPosition = m_FirePoint[1].transform.localPosition;
                 ShootSprayVFXBool = true;
                 Destroy(ShootSprayGO, (m_SprayTimer - 1f));
 
@@ -148,8 +149,9 @@ public class FizzyPoP : Ranged
                 GameObject FallOffSpray;
                 FallOffSpray = (GameObject)Instantiate(FallOffSprayVFX, m_FirePoint[1].transform.position, transform.rotation);
                 FallOffSpray.transform.parent = m_FirePoint[1].transform.parent.transform.parent;
-                FallOffSpray.transform.Rotate(new Vector3(-90, -90, 0));
+                FallOffSpray.transform.Rotate(new Vector3(-90, 0, 0));
                 FallOffSpray.transform.localScale = new Vector3(1, 1, 1);
+                FallOffSpray.transform.localPosition = m_FirePoint[1].transform.localPosition;
                 ShootSprayFallOffVFXBool = true;
                 Destroy(FallOffSpray, (m_FallOffTimer + 2));
             }
