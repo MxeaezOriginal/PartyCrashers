@@ -14,7 +14,7 @@ GameObject:
   - 65: {fileID: 6509998}
   - 54: {fileID: 5442530}
   - 208: {fileID: 20805162}
-  - 114: {fileID: 11462890}
+  - 114: {fileID: 11458772}
   m_Layer: 9
   m_Name: Clock_Phys
   m_TagString: Untagged
@@ -31,6 +31,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 1, z: 0, w: -0.00000016292068}
   m_LocalPosition: {x: -0, y: 0, z: 29.5}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -106,7 +107,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.0364304, y: 3.4085114, z: 0.8630562}
   m_Center: {x: 0, y: 1.7042557, z: 0.0000019073486}
---- !u!114 &11462890
+--- !u!114 &11458772
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -114,14 +115,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 100916}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b423d4adaaee1cb4786017677ca27f5d, type: 3}
+  m_Script: {fileID: 11500000, guid: c9cb8a13ee5bfe24ba18981c6eb23b84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_speed: 0
-  m_maxNum: 1
-  m_recentNum: 0
-  audioSource: {fileID: 0}
-  MoveSFX: {fileID: 0}
+  speed: 2
 --- !u!208 &20805162
 NavMeshObstacle:
   m_ObjectHideFlags: 1

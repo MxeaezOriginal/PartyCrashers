@@ -10,6 +10,7 @@ public class MenuManager : MonoBehaviour
     [Header("Different Canvases")]
     //In Hir. assign following things
     public GameObject[] canvases;
+    public GameObject creditsText;
 
     [Header("Different 'First Selected' Buttons")]
     public GameObject[] firstSelectedButtons;
@@ -19,7 +20,7 @@ public class MenuManager : MonoBehaviour
 
     [Header("Bools")]
     public bool waitedForADelay;
-    public bool splashActive, mainMenuActive, playActive, settingsActive, creditsActive, exitPromptActive, exitActive;
+    public bool splashActive, mainMenuActive, playActive, settingsActive, creditsActive;
     [Header("'Back' Button Available")]
     public bool canBack;
     Animator anim;
@@ -31,6 +32,7 @@ public class MenuManager : MonoBehaviour
         anim = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Animator>();
         es = GameObject.Find("Main Menu Canvas/EventSystem").GetComponent<EventSystem>();
         characterSelect = GetComponent<CharacterSelect>();
+        creditsText = GameObject.Find("Credits Text");
     }
 
     void Start()
@@ -42,31 +44,49 @@ public class MenuManager : MonoBehaviour
 
     void Update()
     {
-        if (splashActive)
-            StartCoroutine(Splash());
-        else if (mainMenuActive)
-            StartCoroutine(MainMenu());
-        else if (playActive)
-            StartCoroutine(Play());
-        else if (settingsActive)
-            StartCoroutine(Settings());
-        else if (creditsActive)
-            StartCoroutine(Credits());
-        else if (exitPromptActive)
-            Application.Quit();
-
-        //if (canBack && Input.GetButtonDown("Back_" + GameManager.m_Instance.m_Player1.m_Controller)) //PRESS FOR BACK BUTTON
-        //    BackButton();
-
-        //StartCoroutine(SelectedAnimationWaitForEndOfFrame());
         SelectedButtonOutline();
 
-        if (!canvases[2].activeSelf && Input.GetButtonDown("Back_" + GameManager.m_Instance.m_Player1.m_Controller) && canBack)
+        if (splashActive)
         {
-            Back();
+            StartCoroutine(Splash());
+            mainMenuActive = false; playActive = false; settingsActive = false; creditsActive = false;
+            canvases[0].SetActive(true); canvases[1].SetActive(false); canvases[2].SetActive(false); canvases[3].SetActive(false); canvases[4].SetActive(false);
         }
-    }
+        else if (mainMenuActive)
+        {
+            StartCoroutine(MainMenu());
+            ///////////////////
+            splashActive = false; playActive = false; settingsActive = false; creditsActive = false;
+            canvases[0].SetActive(false); canvases[1].SetActive(true); canvases[2].SetActive(false); canvases[3].SetActive(false); canvases[4].SetActive(false);
+        }
+        else if (playActive)
+        {
+            StartCoroutine(Play());
+            ///////////////////
+            splashActive = false; mainMenuActive = false; settingsActive = false; creditsActive = false;
+            canvases[0].SetActive(false); canvases[1].SetActive(false); canvases[2].SetActive(true); canvases[3].SetActive(false); canvases[4].SetActive(false);
+        }
+        else if (settingsActive)
+        {
+            StartCoroutine(Settings());
+            ///////////////////
+            splashActive = false; mainMenuActive = false; playActive = false; creditsActive = false;
+            canvases[0].SetActive(false); canvases[1].SetActive(false); canvases[2].SetActive(false); canvases[3].SetActive(true); canvases[4].SetActive(false);
+        }
+        else if (creditsActive)
+        {
+            StartCoroutine(Credits());
+            ///////////////////
+            splashActive = false; mainMenuActive = false; playActive = false; settingsActive = false;
+            canvases[0].SetActive(false); canvases[1].SetActive(false); canvases[2].SetActive(false); canvases[3].SetActive(false); canvases[4].SetActive(true);
 
+            creditsText.GetComponent<Animator>().SetBool("Show", true);
+        }
+
+        //BACK FROM ANY CANVAS EXCEPT FOR CHAR/R SELECT
+        if (!canvases[2].activeSelf && Input.GetButtonDown("Back_" + GameManager.m_Instance.m_Player1.m_Controller) && canBack)
+            Back();
+    }
     void SelectedButtonOutline()
     {
         for (int i = 0; i < allButtons.Length; i++)
@@ -88,97 +108,57 @@ public class MenuManager : MonoBehaviour
     }
 
     //Main Functions for setting all the bools
-
     IEnumerator Splash()
     {
+        //Setting Animator bools && ES.current.selected
         yield return null; es.SetSelectedGameObject(null); es.enabled = false; es.enabled = true; es.SetSelectedGameObject(firstSelectedButtons[0]); es.firstSelectedGameObject = firstSelectedButtons[0];
-
-        //Setting Animator bools
-        anim.SetBool("Play", false);
-        anim.SetBool("Settings", false);
-        anim.SetBool("Credits", false);
+        anim.SetBool("Play", false); anim.SetBool("Settings", false); anim.SetBool("Credits", false);
 
         //Setting ****Active bool to false to prevent multiple function runs
         splashActive = false;
-
-        //Toggle on and off Canvases
-        canvases[0].SetActive(true);
-        canvases[1].SetActive(false);
-        canvases[2].SetActive(false);
-        canvases[3].SetActive(false);
-        canvases[4].SetActive(false);
     }
     IEnumerator MainMenu()
     {
+        //Setting Animator bools && ES.current.selected
         yield return null; es.SetSelectedGameObject(null); es.enabled = false; es.enabled = true; es.SetSelectedGameObject(firstSelectedButtons[1]); es.firstSelectedGameObject = firstSelectedButtons[1];
-        anim.SetBool("Play", false);
-        anim.SetBool("Settings", false);
-        anim.SetBool("Credits", false);
+        anim.SetBool("Play", false); anim.SetBool("Settings", false); anim.SetBool("Credits", false);
 
+        //Setting ****Active bool to false to prevent multiple function runs
         mainMenuActive = false;
-        canBack = false;
-
-        canvases[0].SetActive(false);
-        canvases[1].SetActive(true);
-        canvases[2].SetActive(false);
-        canvases[3].SetActive(false);
-        canvases[4].SetActive(false);
     }
     IEnumerator Play()
     {
-        anim.SetBool("Play", true);
-        anim.SetBool("Settings", false);
-        anim.SetBool("Credits", false);
+        //Setting Animator bools
+        anim.SetBool("Play", true); anim.SetBool("Settings", false); anim.SetBool("Credits", false);
 
+        //Setting ****Active bool to false to prevent multiple function runs
         playActive = false;
         canBack = true;
-
-        canvases[0].SetActive(false);
-        canvases[1].SetActive(false);
-        canvases[3].SetActive(false);
-        canvases[4].SetActive(false);
-
-        yield return new WaitForSeconds(1.5f);
-        canvases[2].SetActive(true);
+        yield return null;
     }
     IEnumerator Settings()
     {
-        anim.SetBool("Play", false);
-        anim.SetBool("Settings", true);
-        anim.SetBool("Credits", false);
+        //Setting Animator bools
+        anim.SetBool("Play", false); anim.SetBool("Settings", true); anim.SetBool("Credits", false);
 
+        //Setting ****Active bool to false to prevent multiple function runs
         settingsActive = false;
         canBack = true;
-
-        canvases[0].SetActive(false);
-        canvases[1].SetActive(false);
-        canvases[2].SetActive(false);
-        canvases[4].SetActive(false);
-
-        yield return new WaitForSeconds(1.5f);
-        canvases[3].SetActive(true);
 
         yield return null; es.SetSelectedGameObject(null); es.enabled = false; es.enabled = true; es.SetSelectedGameObject(firstSelectedButtons[2]); es.firstSelectedGameObject = firstSelectedButtons[2];
     }
     IEnumerator Credits()
     {
-        anim.SetBool("Play", false);
-        anim.SetBool("Settings", false);
-        anim.SetBool("Credits", true);
+        //Setting Animator bools
+        anim.SetBool("Play", false); anim.SetBool("Settings", false); anim.SetBool("Credits", true);
 
+        //Setting ****Active bool to false to prevent multiple function runs
         creditsActive = false;
         canBack = true;
-
-        canvases[0].SetActive(false);
-        canvases[1].SetActive(false);
-        canvases[2].SetActive(false);
-        canvases[3].SetActive(false);
-
-        yield return new WaitForSeconds(1.5f);
-        canvases[4].SetActive(true);
+        yield return null;
     }
 
-    //Functions assigned to buttons in main menu - SETTING ****Active bool to true;
+    //BUTTON FUNCTIONS
     public void SplashButton()
     {
         mainMenuActive = true;
@@ -249,7 +229,6 @@ public class MenuManager : MonoBehaviour
             }
         }
     }
-
     public void PlayButton()
     {
         playActive = true;
@@ -268,6 +247,7 @@ public class MenuManager : MonoBehaviour
     public void Back()
     {
         mainMenuActive = true;
+
         GameManager.m_Instance.m_NumOfPlayers = 1;
 
         characterSelect.AS.PlayOneShot(characterSelect.SFX[3]);
@@ -311,5 +291,9 @@ public class MenuManager : MonoBehaviour
         characterSelect.P2.characterSelectIcon.texture = characterSelect.emptyTexture;
         characterSelect.P3.characterSelectIcon.texture = characterSelect.emptyTexture;
         characterSelect.P4.characterSelectIcon.texture = characterSelect.emptyTexture;
+    }
+    public void Quit()
+    {
+        Application.Quit();
     }
 }
