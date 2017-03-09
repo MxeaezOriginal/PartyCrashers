@@ -120,8 +120,10 @@ public class WeaponManager : MonoBehaviour
             if(transform.FindChild("Firepoints").FindChild("Firepoint1") != null)
             {
                 GameObject firePoint = transform.FindChild("Firepoints").FindChild("Firepoint1").gameObject;
+                GameObject firePoint2 = transform.FindChild("Firepoints").FindChild("Firepoint2").gameObject;
 
-                newWeapon.GetComponent<Ranged>().setFirePoint(firePoint);
+                newWeapon.GetComponent<Ranged>().setFirePoint(firePoint, 0);
+                newWeapon.GetComponent<Ranged>().setFirePoint(firePoint2, 1);
             }
             else
             {

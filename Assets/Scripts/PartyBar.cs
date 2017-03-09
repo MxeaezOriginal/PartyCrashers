@@ -19,6 +19,9 @@ public class PartyBar : MonoBehaviour {
 
     float m_TempTimer;
 
+    //Boss object variable
+    GameObject m_Boss = null;
+
 	// Use this for initialization
 	void Start () {
         m_Bar = GetComponent<Image>();
@@ -36,16 +39,37 @@ public class PartyBar : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if(GameManager.m_Instance.m_GameState != GameManager.GameState.Minigame)
+        if(SceneManager.GetActiveScene().name == "KaminsBoss")
         {
-            dungeonPartyBarDrain();
-        }
-        else if(GameManager.m_Instance.m_GameState == GameManager.GameState.Minigame)
+            bossPartyBarDrain();
+        }else
         {
-            minigamePartyBarDrain();
+            if (GameManager.m_Instance.m_GameState != GameManager.GameState.Minigame)
+            {
+                dungeonPartyBarDrain();
+            }
+            else if (GameManager.m_Instance.m_GameState == GameManager.GameState.Minigame)
+            {
+                minigamePartyBarDrain();
+            }
         }
     }
 
+    void bossPartyBarDrain()
+    {
+        m_Boss = GameObject.Find("Boss");
+        if (m_Boss != null)
+        {
+            AdvancedBossAi bossScript = m_Boss.GetComponent<AdvancedBossAi>();
+            EnemyHealth bossHealth = m_Boss.GetComponent<EnemyHealth>();
+            print(bossHealth.m_EnemyHealth);
+            m_Bar.fillAmount = Mathf.Lerp(m_Bar.fillAmount, bossHealth.m_EnemyHealth / (bossScript.m_BaseMaxHealth * bossScript.m_NumOfPlayersHealthMultiplier), m_fillSpeed * Time.deltaTime);
+        }else
+        {
+            m_Boss = GameObject.Find("Boss");
+        }
+
+    }
     void dungeonPartyBarDrain()
     {
         //set bar equal to percentage

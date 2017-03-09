@@ -10,7 +10,7 @@ public class AdvancedBossAi : MonoBehaviour
     //Stats
     public float m_BaseMaxHealth;
     public float m_NumOfPlayersHealthMultiplier;
-    private float m_Health;
+    public float m_Health;
 
     [Range(0.1f, 0.9f)]
     public float m_Difficulty;
@@ -166,7 +166,7 @@ public class AdvancedBossAi : MonoBehaviour
         {
             case states.idle: Idle(); break;
             case states.hurt: Hurt(m_DamageTaken, m_StunTime); break;
-            case states.teleport:  Teleport(Mathf.RoundToInt(20 / m_Difficulty), Mathf.RoundToInt(20 / m_Difficulty)); break;
+            case states.teleport:  Teleport(30, 30); break;
             //Attacks
             case states.shoot: m_BulletsToShoot = Mathf.RoundToInt(10 * m_Difficulty); BasicShoot(Mathf.RoundToInt(20 / m_Difficulty), Mathf.RoundToInt(20 / m_Difficulty)); break;
             case states.dash: Dash(Mathf.RoundToInt(30 / m_Difficulty), 10, Mathf.RoundToInt(10 / m_Difficulty)); break;

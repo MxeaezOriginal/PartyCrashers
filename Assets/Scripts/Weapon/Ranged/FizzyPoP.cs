@@ -40,6 +40,8 @@ public class FizzyPoP : Ranged
     void Start()
     {
         FizzyCone = transform.FindChild("FizzyGunCone").gameObject;
+        FizzyCone.transform.SetParent(m_FirePoint[1].transform);
+        FizzyCone.GetComponent<Damage>().m_Damage = m_Damage;
         FizzyCone.SetActive(false);
         Player = GetComponentInParent<Player>();
     }
@@ -97,8 +99,8 @@ public class FizzyPoP : Ranged
             if (!ShootSprayVFXBool)
             {
                 GameObject ShootSprayGO;
-                ShootSprayGO = (GameObject)Instantiate(ShootSprayVFX, VFXFirePoint.transform.position, transform.rotation);
-                ShootSprayGO.transform.parent = gameObject.transform;
+                ShootSprayGO = (GameObject)Instantiate(ShootSprayVFX, m_FirePoint[1].transform.position, transform.rotation);
+                ShootSprayGO.transform.parent = m_FirePoint[1].transform.parent.transform.parent;
                 ShootSprayGO.transform.Rotate(new Vector3(-90, 0, 0));
                 ShootSprayGO.transform.localScale = new Vector3(1, 1, 1);
                 ShootSprayVFXBool = true;
@@ -134,9 +136,9 @@ public class FizzyPoP : Ranged
             if (!ShootSprayFallOffVFXBool)
             {
                 GameObject FallOffSpray;
-                FallOffSpray = (GameObject)Instantiate(FallOffSprayVFX, VFXFirePoint.transform.position, transform.rotation);
-                FallOffSpray.transform.parent = gameObject.transform;
-                FallOffSpray.transform.Rotate(new Vector3(-90, 0, 0));
+                FallOffSpray = (GameObject)Instantiate(FallOffSprayVFX, m_FirePoint[1].transform.position, transform.rotation);
+                FallOffSpray.transform.parent = m_FirePoint[1].transform.parent.transform.parent;
+                FallOffSpray.transform.Rotate(new Vector3(-90, -90, 0));
                 FallOffSpray.transform.localScale = new Vector3(1, 1, 1);
                 ShootSprayFallOffVFXBool = true;
                 Destroy(FallOffSpray, (m_FallOffTimer + 2));
