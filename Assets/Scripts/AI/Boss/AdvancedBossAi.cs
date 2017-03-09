@@ -307,7 +307,7 @@ public class AdvancedBossAi : MonoBehaviour
             transform.localScale = new Vector3(Mathf.Lerp(transform.localScale.x, 0.1f,0.1f), Mathf.Lerp(transform.localScale.y, 0.1f, 0.1f), transform.localScale.z);
 
             //SFX
-            source.PlayOneShot(m_TeleportWindupSound, 1);
+            source.PlayOneShot(m_TeleportWindupSound, 0.3f);
 
         }
         if (frame == framesBeforeTP)
@@ -410,7 +410,7 @@ public class AdvancedBossAi : MonoBehaviour
         if (frame <= windup && frame >= 2)
         {
             //SFX
-            source.PlayOneShot(m_DashWindupSound, 1);
+            source.PlayOneShot(m_DashWindupSound, 0.3f);
             //Apply friction
             Friction(2f);
             //Look at target player
