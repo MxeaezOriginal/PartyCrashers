@@ -34,26 +34,25 @@ public class FizzPopPickup : MonoBehaviour {
         {
             if (other.GetComponent<Player>().m_Model == Player.Model.Badboy)
             {
-                SFXtoPlay = BadBoyHealthSFX[Random.Range(0, BadBoyHealthSFX.Length)];
+                SFXtoPlay2 = BadBoyHealthSFX[Random.Range(0, BadBoyHealthSFX.Length)];
                 AudioManager.m_Instance.PushMusic(SFXtoPlay2);
             }
 
             if (other.GetComponent<Player>().m_Model == Player.Model.Goth)
             {
-                SFXtoPlay = GothHealthSFX[Random.Range(0, GothHealthSFX.Length)];
+                SFXtoPlay2 = GothHealthSFX[Random.Range(0, GothHealthSFX.Length)];
                 AudioManager.m_Instance.PushMusic(SFXtoPlay2);
             }
 
             if (other.GetComponent<Player>().m_Model == Player.Model.Mascot)
             {
-                Debug.Log("Get");
-                SFXtoPlay = MascotHealthSFX[Random.Range(0, MascotHealthSFX.Length)];
+                SFXtoPlay2 = MascotHealthSFX[Random.Range(0, MascotHealthSFX.Length)];
                 AudioManager.m_Instance.PushMusic(SFXtoPlay2);
             }
 
             if (other.GetComponent<Player>().m_Model == Player.Model.Nerd)
             {
-                SFXtoPlay = NerdHealthSFX[Random.Range(0, NerdHealthSFX.Length)];
+                SFXtoPlay2 = NerdHealthSFX[Random.Range(0, NerdHealthSFX.Length)];
                 AudioManager.m_Instance.PushMusic(SFXtoPlay2);
             }
         }
