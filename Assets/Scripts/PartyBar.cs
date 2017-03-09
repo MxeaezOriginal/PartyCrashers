@@ -36,16 +36,26 @@ public class PartyBar : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if(GameManager.m_Instance.m_GameState != GameManager.GameState.Minigame)
+        if(SceneManager.GetActiveScene().name == "KaminsBoss")
         {
-            dungeonPartyBarDrain();
-        }
-        else if(GameManager.m_Instance.m_GameState == GameManager.GameState.Minigame)
+            bossPartyBarDrain();
+        }else
         {
-            minigamePartyBarDrain();
+            if (GameManager.m_Instance.m_GameState != GameManager.GameState.Minigame)
+            {
+                dungeonPartyBarDrain();
+            }
+            else if (GameManager.m_Instance.m_GameState == GameManager.GameState.Minigame)
+            {
+                minigamePartyBarDrain();
+            }
         }
     }
 
+    void bossPartyBarDrain()
+    {
+
+    }
     void dungeonPartyBarDrain()
     {
         //set bar equal to percentage
