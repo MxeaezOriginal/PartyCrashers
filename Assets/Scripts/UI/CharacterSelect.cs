@@ -85,6 +85,9 @@ public class CharacterSelect : MonoBehaviour
 
     MenuManager menuManager;
 
+    public AudioSource AS;
+    public AudioClip[] SFX;
+
 
 
     //TEMP.!
@@ -113,6 +116,8 @@ public class CharacterSelect : MonoBehaviour
         tempPlayerNumbersText[3] = GameObject.Find("Character Select Plate P4/Character Name").GetComponent<Text>();
 
         P1.cooldownCounter = -1; P2.cooldownCounter = -1; P3.cooldownCounter = -1; P4.cooldownCounter = -1;
+
+        AS = GetComponent<AudioSource>();
         //canLockIn = true;
     }
 
@@ -392,24 +397,28 @@ public class CharacterSelect : MonoBehaviour
                 P1Locked = true;
                 playerOneJoined = true;
                 playersLockedIn++;
+                AS.PlayOneShot(SFX[1]);
             }
             if (secondPlayer == PlayerTwo.P1 && !playerTwoJoined)
             {
                 P2Locked = true;
                 playerTwoJoined = true;
                 playersLockedIn++;
+                AS.PlayOneShot(SFX[1]);
             }
             if (thirdPlayer == PlayerThree.P1 && !playerThreeJoined)
             {
                 P3Locked = true;
                 playerThreeJoined = true;
                 playersLockedIn++;
+                AS.PlayOneShot(SFX[1]);
             }
             if (fourthPlayer == PlayerFour.P1 && !playerFourJoined)
             {
                 P4Locked = true;
                 playerFourJoined = true;
                 playersLockedIn++;
+                AS.PlayOneShot(SFX[1]);
             }
             //allowToLock = true;
         }
@@ -420,24 +429,28 @@ public class CharacterSelect : MonoBehaviour
                 P1Locked = true;
                 playerOneJoined = true;
                 playersLockedIn++;
+                AS.PlayOneShot(SFX[1]);
             }
             if (secondPlayer == PlayerTwo.P2 && !playerTwoJoined)
             {
                 P2Locked = true;
                 playerTwoJoined = true;
                 playersLockedIn++;
+                AS.PlayOneShot(SFX[1]);
             }
             if (thirdPlayer == PlayerThree.P2 && !playerThreeJoined)
             {
                 P3Locked = true;
                 playerThreeJoined = true;
                 playersLockedIn++;
+                AS.PlayOneShot(SFX[1]);
             }
             if (fourthPlayer == PlayerFour.P2 && !playerFourJoined)
             {
                 P4Locked = true;
                 playerFourJoined = true;
                 playersLockedIn++;
+                AS.PlayOneShot(SFX[1]);
             }
 
             //allowToLock = true;
@@ -449,24 +462,28 @@ public class CharacterSelect : MonoBehaviour
                 P1Locked = true;
                 playerOneJoined = true;
                 playersLockedIn++;
+                AS.PlayOneShot(SFX[1]);
             }
             if (secondPlayer == PlayerTwo.P3 && !playerTwoJoined)
             {
                 P2Locked = true;
                 playerTwoJoined = true;
                 playersLockedIn++;
+                AS.PlayOneShot(SFX[1]);
             }
             if (thirdPlayer == PlayerThree.P3 && !playerThreeJoined)
             {
                 P3Locked = true;
                 playerThreeJoined = true;
                 playersLockedIn++;
+                AS.PlayOneShot(SFX[1]);
             }
             if (fourthPlayer == PlayerFour.P3 && !playerFourJoined)
             {
                 P4Locked = true;
                 playerFourJoined = true;
                 playersLockedIn++;
+                AS.PlayOneShot(SFX[1]);
             }
             //allowToLock = true;
         }
@@ -477,24 +494,28 @@ public class CharacterSelect : MonoBehaviour
                 P1Locked = true;
                 playerOneJoined = true;
                 playersLockedIn++;
+                AS.PlayOneShot(SFX[1]);
             }
             if (secondPlayer == PlayerTwo.P4 && !playerTwoJoined)
             {
                 P2Locked = true;
                 playerTwoJoined = true;
                 playersLockedIn++;
+                AS.PlayOneShot(SFX[1]);
             }
             if (thirdPlayer == PlayerThree.P4 && !playerThreeJoined)
             {
                 P3Locked = true;
                 playerThreeJoined = true;
                 playersLockedIn++;
+                AS.PlayOneShot(SFX[1]);
             }
             if (fourthPlayer == PlayerFour.P4 && !playerFourJoined)
             {
                 P4Locked = true;
                 playerFourJoined = true;
                 playersLockedIn++;
+                AS.PlayOneShot(SFX[1]);
             }
             //allowToLock = true;
         }
@@ -505,24 +526,28 @@ public class CharacterSelect : MonoBehaviour
                 P1Locked = true;
                 playerOneJoined = true;
                 playersLockedIn++;
+                AS.PlayOneShot(SFX[1]);
             }
             if (secondPlayer == PlayerTwo.Keyboard && !playerTwoJoined)
             {
                 P2Locked = true;
                 playerTwoJoined = true;
                 playersLockedIn++;
+                AS.PlayOneShot(SFX[1]);
             }
             if (thirdPlayer == PlayerThree.Keyboard && !playerThreeJoined)
             {
                 P3Locked = true;
                 playerThreeJoined = true;
                 playersLockedIn++;
+                AS.PlayOneShot(SFX[1]);
             }
             if (fourthPlayer == PlayerFour.Keyboard && !playerFourJoined)
             {
                 P4Locked = true;
                 playerFourJoined = true;
                 playersLockedIn++;
+                AS.PlayOneShot(SFX[1]);
             }
         }
     }
@@ -876,6 +901,7 @@ public class CharacterSelect : MonoBehaviour
                     if (P1.cooldownCounter < Time.time - cooldown || P1.cooldownCounter == -1)
                     {
                         P1.index--;
+                        AS.PlayOneShot(SFX[0]);
 
                         P1.cooldownCounter = Time.time;
                     }
@@ -885,6 +911,7 @@ public class CharacterSelect : MonoBehaviour
                     if (P1.cooldownCounter < Time.time - cooldown || P1.cooldownCounter == -1)
                     {
                         P1.index++;
+                        AS.PlayOneShot(SFX[0]);
 
                         P1.cooldownCounter = Time.time;
                     }
@@ -924,6 +951,7 @@ public class CharacterSelect : MonoBehaviour
                     if (P2.cooldownCounter < Time.time - cooldown || P2.cooldownCounter == -1)
                     {
                         P2.index--;
+                        AS.PlayOneShot(SFX[0]);
 
                         P2.cooldownCounter = Time.time;
                     }
@@ -933,6 +961,7 @@ public class CharacterSelect : MonoBehaviour
                     if (P2.cooldownCounter < Time.time - cooldown || P2.cooldownCounter == -1)
                     {
                         P2.index++;
+                        AS.PlayOneShot(SFX[0]);
 
                         P2.cooldownCounter = Time.time;
                     }
@@ -972,6 +1001,7 @@ public class CharacterSelect : MonoBehaviour
                     if (P3.cooldownCounter < Time.time - cooldown || P3.cooldownCounter == -1)
                     {
                         P3.index--;
+                        AS.PlayOneShot(SFX[0]);
 
                         P3.cooldownCounter = Time.time;
                     }
@@ -981,6 +1011,7 @@ public class CharacterSelect : MonoBehaviour
                     if (P3.cooldownCounter < Time.time - cooldown || P3.cooldownCounter == -1)
                     {
                         P3.index++;
+                        AS.PlayOneShot(SFX[0]);
 
                         P3.cooldownCounter = Time.time;
                     }
@@ -1020,6 +1051,7 @@ public class CharacterSelect : MonoBehaviour
                     if (P4.cooldownCounter < Time.time - cooldown || P4.cooldownCounter == -1)
                     {
                         P4.index--;
+                        AS.PlayOneShot(SFX[0]);
 
                         P4.cooldownCounter = Time.time;
                     }
@@ -1029,6 +1061,7 @@ public class CharacterSelect : MonoBehaviour
                     if (P4.cooldownCounter < Time.time - cooldown || P4.cooldownCounter == -1)
                     {
                         P4.index++;
+                        AS.PlayOneShot(SFX[0]);
 
                         P4.cooldownCounter = Time.time;
                     }

@@ -253,19 +253,24 @@ public class MenuManager : MonoBehaviour
     public void PlayButton()
     {
         playActive = true;
+        characterSelect.AS.PlayOneShot(characterSelect.SFX[2]);
     }
     public void SettingsButton()
     {
         settingsActive = true;
+        characterSelect.AS.PlayOneShot(characterSelect.SFX[2]);
     }
     public void CreditsButton()
     {
         creditsActive = true;
+        characterSelect.AS.PlayOneShot(characterSelect.SFX[2]);
     }
     public void Back()
     {
         mainMenuActive = true;
         GameManager.m_Instance.m_NumOfPlayers = 1;
+
+        characterSelect.AS.PlayOneShot(characterSelect.SFX[3]);
 
         switch (characterSelect.firstPlayer)
         {

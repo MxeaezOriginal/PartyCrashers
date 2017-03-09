@@ -4864,6 +4864,80 @@ Transform:
 GameObject:
   m_PrefabParentObject: {fileID: 102104, guid: 5bdd8bab729e234458c7a027c9a7c51d, type: 2}
   m_PrefabInternal: {fileID: 1388274591}
+--- !u!82 &603025601
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 603025600}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 3
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!114 &603025603
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11034,6 +11108,10 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 11437588, guid: 5bdd8bab729e234458c7a027c9a7c51d, type: 2}
+      propertyPath: SFX.Array.size
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 11446408, guid: 5bdd8bab729e234458c7a027c9a7c51d, type: 2}
       propertyPath: canvases.Array.size
       value: 5
@@ -11526,6 +11604,22 @@ Prefab:
       propertyPath: P4Join
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11437588, guid: 5bdd8bab729e234458c7a027c9a7c51d, type: 2}
+      propertyPath: SFX.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: e5d3e849310fbc546b1c68ee061f5631, type: 3}
+    - target: {fileID: 11437588, guid: 5bdd8bab729e234458c7a027c9a7c51d, type: 2}
+      propertyPath: SFX.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: f0637ce8b30ef484fadbb4914888eeb8, type: 3}
+    - target: {fileID: 11437588, guid: 5bdd8bab729e234458c7a027c9a7c51d, type: 2}
+      propertyPath: SFX.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: d55dfd8a552b29c42a5c3bca582f2d16, type: 3}
+    - target: {fileID: 11437588, guid: 5bdd8bab729e234458c7a027c9a7c51d, type: 2}
+      propertyPath: SFX.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: c37d6d35634ca164e9ccd96d3bd505b3, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5bdd8bab729e234458c7a027c9a7c51d, type: 2}
   m_IsPrefabParent: 0
