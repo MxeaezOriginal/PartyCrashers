@@ -13,7 +13,7 @@ GameObject:
   - 65: {fileID: 6507472}
   - 65: {fileID: 6539442}
   - 54: {fileID: 5467738}
-  - 114: {fileID: 11428194}
+  - 114: {fileID: 11476142}
   m_Layer: 9
   m_Name: SoloCup
   m_TagString: Untagged
@@ -49,7 +49,7 @@ GameObject:
   - 65: {fileID: 6565144}
   - 65: {fileID: 6539188}
   - 54: {fileID: 5432258}
-  - 114: {fileID: 11440842}
+  - 114: {fileID: 11469110}
   m_Layer: 9
   m_Name: SoloCup (3)
   m_TagString: Untagged
@@ -242,23 +242,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 9.082748, y: 11.156199, z: 9.082748}
   m_Center: {x: 2.5217628, y: 5.5685525, z: 0}
---- !u!114 &11428194
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 112204}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b423d4adaaee1cb4786017677ca27f5d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_speed: 0
-  m_maxNum: 1
-  m_recentNum: 0
-  audioSource: {fileID: 0}
-  MoveSFX: {fileID: 0}
---- !u!114 &11440842
+--- !u!114 &11469110
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -266,14 +250,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 144676}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b423d4adaaee1cb4786017677ca27f5d, type: 3}
+  m_Script: {fileID: 11500000, guid: c9cb8a13ee5bfe24ba18981c6eb23b84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_speed: 0
-  m_maxNum: 1
-  m_recentNum: 0
-  audioSource: {fileID: 0}
-  MoveSFX: {fileID: 0}
+  speed: 2
+--- !u!114 &11476142
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 112204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9cb8a13ee5bfe24ba18981c6eb23b84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 2
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
