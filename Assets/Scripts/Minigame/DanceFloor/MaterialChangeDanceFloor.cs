@@ -34,6 +34,7 @@ public class MaterialChangeDanceFloor : MonoBehaviour {
     //James FX
     private float m_LightChangeScoreTime;
     private float m_LightChangeStopTime;
+    private bool updateStatus = false;
 
     void Start()
     {
@@ -49,48 +50,53 @@ public class MaterialChangeDanceFloor : MonoBehaviour {
 
     void Update()
     {
-        m_CurrentFloorColorInt = m_Light.GetComponent<LightChangeDancefloor>().CurrentColorInt;
-        m_GreedColorPercentage = m_Light.GetComponent<LightChangeDancefloor>().GreenColorPercentage;
-        if (stop == true)
+        updateStatus = m_Light.GetComponent<LightChangeDancefloor>().updateOn;
+        if(updateStatus)
         {
-            StartCoroutine(Stopedfor(m_LightChangeScoreTime));
-            if (m_PreviousColorInt != -1)
-            {
-                m_DiscoBallLight.material = m_Temp;
-            }
-            //james VFX
-            if (m_colourchange != null)
-            {
-                m_colourchange.SetActive(false);
-            }
-            //james VFX end
 
-        }
-        if (stop == false)
-        {
-            // Light not flashing
-            // assigning the color (color shuffle)
-            // Getting / Losing point 
-            //StartCoroutine(Stopfor(scoretime));
-            StartCoroutine(Stopfor(m_LightChangeStopTime));
-            // Light flashing
-            // Color assigned
-            // Cannot get / lose point
-            //StartCoroutine(ColorRandomiser(stoptime));
-            StartCoroutine(ColorRandomiser(m_LightChangeScoreTime));
+            m_CurrentFloorColorInt = m_Light.GetComponent<LightChangeDancefloor>().CurrentColorInt;
+            m_GreedColorPercentage = m_Light.GetComponent<LightChangeDancefloor>().GreenColorPercentage;
+            if (stop == true)
+            {
+                StartCoroutine(Stopedfor(m_LightChangeScoreTime));
+                if (m_PreviousColorInt != -1)
+                {
+                    m_DiscoBallLight.material = m_Temp;
+                }
+                //james VFX
+                if (m_colourchange != null)
+                {
+                    m_colourchange.SetActive(false);
+                }
+                //james VFX end
 
-            m_DiscoBallLight.material = m_DiscoBallON;
-            float emission = Mathf.PingPong(Time.time * 1.5f, 1);
-            m_DiscoBallLight.material.SetColor("_EmissionColor", new Color(1f, 1f, 1f) * emission);
-            m_PreviousColorInt = m_CurrentFloorColorInt;
-            m_Temp = m_DiscoBallON;
+            }
+            if (stop == false)
+            {
+                // Light not flashing
+                // assigning the color (color shuffle)
+                // Getting / Losing point 
+                //StartCoroutine(Stopfor(scoretime));
+                StartCoroutine(Stopfor(m_LightChangeStopTime));
+                // Light flashing
+                // Color assigned
+                // Cannot get / lose point
+                //StartCoroutine(ColorRandomiser(stoptime));
+                StartCoroutine(ColorRandomiser(m_LightChangeScoreTime));
+
+                m_DiscoBallLight.material = m_DiscoBallON;
+                float emission = Mathf.PingPong(Time.time * 1.5f, 1);
+                m_DiscoBallLight.material.SetColor("_EmissionColor", new Color(1f, 1f, 1f) * emission);
+                m_PreviousColorInt = m_CurrentFloorColorInt;
+                m_Temp = m_DiscoBallON;
             
-            //james VFX
-            if (m_colourchange != null)
-            {
-                m_colourchange.SetActive(true);
+                //james VFX
+                if (m_colourchange != null)
+                {
+                    m_colourchange.SetActive(true);
+                }
+                //james VFX end
             }
-            //james VFX end
         }
     }
 
@@ -125,4 +131,5 @@ public class MaterialChangeDanceFloor : MonoBehaviour {
         stop = false;
 
     }
+   
 }

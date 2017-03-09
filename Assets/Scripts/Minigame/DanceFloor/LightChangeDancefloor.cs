@@ -25,38 +25,46 @@ public class LightChangeDancefloor : MonoBehaviour {
 
     public int GreenColorPercentage = 20;
 
+    public float gameDelayTime = 4f;
+    public bool updateOn = false;
 
 	// Use this for initialization
 	void Start()
-	{		
-		//CurrentColorNumber = 1;
-		lt = GetComponent<Light>();
+	{
+        updateOn = false;
+        StartCoroutine(updateTrigger(gameDelayTime));
+        //CurrentColorNumber = 1;
+        lt = GetComponent<Light>();
         CurrentColorInt = -1;
 	}
 
 	// Update is called once per frame
 	void Update()
 	{
-		if (stop == true) 
-		{
-			StartCoroutine (Stopedfor (scoretime));
-            if (PreviousColorInt != -1)
-            {
-                lt.color = TempColor;
+        if (updateOn)
+        {
+		    if (stop == true) 
+		    {
+			    StartCoroutine (Stopedfor (scoretime));
+                if (PreviousColorInt != -1)
+                {
+                    lt.color = TempColor;
+                }
             }
+		    if (stop == false) 
+		    {
+			    StartCoroutine(Stopfor(scoretime));
+			    StartCoroutine(ColorRandomiser(stoptime));
+                lt.color = Color.Lerp (CurrentColor, PreviousColor, Mathf.PingPong (Time.time*1.5f, 1));
+                PreviousColorInt = CurrentColorInt;
+                TempColor = CurrentColor;
+                //lt.color = Color.Lerp(CurrentColor, PreviousColor, 1);
+            }
+            //Debug.Log(stop);
+		    //For future reference, to make it only go one direction you will need to raise the variable ie.
+		    // lt.color = Color.Lerp(CurrentColor, PreviousColor,  "0.1 value raised by x until 1");
+
         }
-		if (stop == false) 
-		{
-			StartCoroutine(Stopfor(scoretime));
-			StartCoroutine(ColorRandomiser(stoptime));
-            lt.color = Color.Lerp (CurrentColor, PreviousColor, Mathf.PingPong (Time.time*1.5f, 1));
-            PreviousColorInt = CurrentColorInt;
-            TempColor = CurrentColor;
-            //lt.color = Color.Lerp(CurrentColor, PreviousColor, 1);
-        }
-        //Debug.Log(stop);
-		//For future reference, to make it only go one direction you will need to raise the variable ie.
-		// lt.color = Color.Lerp(CurrentColor, PreviousColor,  "0.1 value raised by x until 1");
 	}
     
 	IEnumerator Stopfor(float wait) 
@@ -92,4 +100,10 @@ public class LightChangeDancefloor : MonoBehaviour {
 			}
 
 	}
+
+    IEnumerator updateTrigger(float t)
+    {
+        yield return new WaitForSeconds(t);
+        updateOn = true;
+    }
 }
