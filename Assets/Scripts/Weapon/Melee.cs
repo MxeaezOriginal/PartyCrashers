@@ -9,5 +9,9 @@ public abstract class Melee : Weapon
     [SerializeField]
     protected GameObject sliceEffect;
   
+    public void setSwordTrigger(GameObject trigger)
+    {
+        swordTrigger = trigger;
+    }
 }
 

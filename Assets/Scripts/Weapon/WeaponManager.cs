@@ -128,6 +128,22 @@ public class WeaponManager : MonoBehaviour
                 Debug.LogError("[WeaponManager] Firepoints/Firepoint1 not found under player");
             }
         }
+        else if (newWeapon.GetComponent<Melee>() != null)
+        {
+            if (transform.FindChild("WeaponHitBox") != null)
+            {
+                GameObject weaponHitBox = transform.FindChild("WeaponHitBox").gameObject;
+                weaponHitBox.GetComponent<Damage>().m_Damage = newWeapon.GetComponent<Melee>().m_Damage;
+                //weaponHitBox.GetComponent<StateEffect>().m_KnockBack = newWeapon.GetComponent<StateEffect>().m_KnockBack;
+                //weaponHitBox.GetComponent<StateEffect>().m_StunTime = newWeapon.GetComponent<StateEffect>().m_StunTime;
+
+                newWeapon.GetComponent<Melee>().setSwordTrigger(weaponHitBox);
+            }
+            else
+            {
+                Debug.LogError("[WeaponManager] WeaponHitBox not found under player");
+            }
+        }
 
         newWeapon.name = child.name;
         m_CurrentWeaponObject = newWeapon;
