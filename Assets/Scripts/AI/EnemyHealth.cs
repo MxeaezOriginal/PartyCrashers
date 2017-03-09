@@ -70,11 +70,8 @@ public class EnemyHealth : MonoBehaviour
     {
         isDamage = true;
         //Debug.Log("Damaged");
-        if (isInvincible == true)
-        {
-        }
-        if (isInvincible == false)
-        {
+        //if (isInvincible == false)
+        //{
             m_EnemyHealth -= health;
             //James Sound Code
            
@@ -109,7 +106,7 @@ public class EnemyHealth : MonoBehaviour
             GameObject SFXtest2 = Instantiate(SFXHit, transform.position, transform.rotation) as GameObject;
 
             //James Sound Code
-        }
+        //}
         if (m_EnemyHealth <= 0)
         {
 			//Kavells VFX code
