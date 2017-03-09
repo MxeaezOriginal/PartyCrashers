@@ -171,7 +171,7 @@ public class AdvancedBossAi : MonoBehaviour
             case states.shoot: m_BulletsToShoot = Mathf.RoundToInt(10 * m_Difficulty); BasicShoot(Mathf.RoundToInt(20 / m_Difficulty), Mathf.RoundToInt(20 / m_Difficulty)); break;
             case states.dash: Dash(Mathf.RoundToInt(30 / m_Difficulty), 10, Mathf.RoundToInt(10 / m_Difficulty)); break;
             case states.earthquake: Earthquake(Mathf.RoundToInt(20 / m_Difficulty), Mathf.RoundToInt(20 / m_Difficulty)); break;
-        }
+        } 
         //Manage frame
         frame++;
         if (frame > 1000000) //Just in case the frame variable gets too big which I doubt it ever will BUT WHATEVER poopy butts stuff
@@ -322,7 +322,8 @@ public class AdvancedBossAi : MonoBehaviour
             {
                 playerPositionsArray[i] = players[i].transform; //Set the index's of the player positions array to the transforms of the respective player objects
             }
-
+            
+            //Teleport Location
             teleportTargetPosition = new Vector3(Random.Range(torches[0].position.x, torches[1].position.x), transform.position.y, Random.Range(torches[0].position.z, torches[2].position.z));
 
             for (int i = 0; i < playerPositionsArray.Length; i++)//Loop through the player positions and if the teleport position is close to a player, move the teleport position. Will keep looping until it's not close to a player
@@ -370,7 +371,15 @@ public class AdvancedBossAi : MonoBehaviour
         if (frame > 20)
         {
             transform.Rotate(0, 0, transform.rotation.z - transform.rotation.z);
-            state = states.idle;
+
+            if(transform.position.x > torches[0].position.x && transform.position.x < torches[1].position.x && transform.position.z < torches[0].position.z && transform.position.z > torches[2].position.z)
+            {
+                state = states.idle;
+            }else
+            {
+                state = states.teleport;
+            }
+                
 
             if (m_HurtEffect.active)
             {
