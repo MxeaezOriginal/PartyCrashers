@@ -34,6 +34,8 @@ public class FizzyPoP : Ranged
     private GameObject FallOffSprayVFX;
     [SerializeField]
     private GameObject VFXFirePoint;
+
+    public GameObject FallOffSprayVFXEarly;
     #endregion
 
     GameObject ShootSprayGO;
@@ -71,31 +73,33 @@ public class FizzyPoP : Ranged
                 m_IsDown = false;
 
                 FizzyCone.SetActive(false);
-                FallOff();
+                FallOffEarly();
                 if (ShootSprayGO != null)
                 {
-                    Destroy(ShootSprayGO, .5f);
+                    Destroy(ShootSprayGO, .2f);
                 }
             }
         }
 
         if (Input.GetButtonUp(Player.m_PrimaryAttack + Player.m_Controller.ToString()))
         {
-            if (m_IsDown)
-            {
-                m_CoolDown = Time.time;
-                m_IsDown = false;
+            m_SprayCooldown = -1;
+            //if (FallOffSpray != null)
+            //{
+            //    Destroy(FallOffSpray);
+            //}
+            //if (m_IsDown)
+            //{
+            //    m_CoolDown = Time.time;
+            //    m_IsDown = false;
 
-                FizzyCone.SetActive(false);
-                if (ShootSprayGO != null)
-                {
-                    Destroy(ShootSprayGO);
-                }
-                if (FallOffSpray != null)
-                {
-                    Destroy(FallOffSpray);
-                }
-            }
+            //    FizzyCone.SetActive(false);
+            //    FallOffEarly();
+            //    if (ShootSprayGO != null)
+            //    {
+            //        Destroy(ShootSprayGO, .05f);
+            //    }
+            //}
         }
 
         // Shoot if Button Down
@@ -176,6 +180,20 @@ public class FizzyPoP : Ranged
     {
         yield return new WaitForSeconds(m_SprayTimer);
         FizzyCone.SetActive(false);
+    }
+
+
+    private void FallOffEarly()
+    {
+        if (FallOffSprayVFX != null)
+        {
+            FallOffSpray = (GameObject)Instantiate(FallOffSprayVFXEarly, m_FirePoint[1].transform.position, transform.rotation);
+            FallOffSpray.transform.parent = m_FirePoint[1].transform.parent.transform.parent;
+            FallOffSpray.transform.Rotate(new Vector3(-90, 0, 0));
+            FallOffSpray.transform.localScale = new Vector3(1, 1, 1);
+            FallOffSpray.transform.localPosition = m_FirePoint[1].transform.localPosition;
+            Destroy(FallOffSpray, 2f);
+        }
     }
 
     private void FallOff()
