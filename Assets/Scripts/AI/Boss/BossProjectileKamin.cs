@@ -15,20 +15,20 @@ public class BossProjectileKamin : MonoBehaviour
     private Vector3 m_StartingVelocity;
     private Vector3 m_Velocity;
     private int frame;
-    private Rigidbody m_Body;
+    public Rigidbody m_Body;
     private Collider col;
 
 
-    AdvancedBossAi boss = GameObject.Find("Boss").GetComponent<AdvancedBossAi>();
-    Transform[] torches;
+    AdvancedBossAi boss;
+    Transform[] m_Torches;
 
     // Use this for initialization
     void Start()
     {
-        torches = boss.torches;
-        m_Body = GetComponent<Rigidbody>();
+        boss = boss = GameObject.Find("Boss").GetComponent<AdvancedBossAi>();
+        m_Velocity = m_ProjectileVelocity;
+        m_Torches = boss.torches;
         frame = 0;
-        m_Body.collisionDetectionMode = CollisionDetectionMode.Discrete;
         col = GetComponent<Collider>();
     }
 
@@ -38,7 +38,6 @@ public class BossProjectileKamin : MonoBehaviour
         frame = 0;
         m_FirstPosition = gameObject.transform;
         m_Velocity = m_ProjectileVelocity;
-
     }
 
     // Update is called once per frame
@@ -63,12 +62,6 @@ public class BossProjectileKamin : MonoBehaviour
             m_Velocity.x -= m_StartingVelocity.normalized.x * 2f;
             m_Velocity.z -= m_StartingVelocity.normalized.z * 2f;
         }
-        //Come back
-        if (frame > m_OutTime + m_SlowTime)
-        {
-            Mathf.Lerp(m_Velocity.x, m_StartingVelocity.x * -1f, 0.1f);
-            Mathf.Lerp(m_Velocity.z, m_StartingVelocity.z * -1f, 0.1f);
-        }
 
         //Die
         if (frame > m_OutTime + m_SlowTime + m_BackTime)
@@ -77,16 +70,16 @@ public class BossProjectileKamin : MonoBehaviour
         }
 
         //Update collision
-        
-        if(transform.position.x > torches[0].position.x && transform.position.x < torches[1].position.x && transform.position.z < torches[0].position.z && transform.position.z > torches[2].position.z)
+
+        if (transform.position.x > m_Torches[0].position.x && transform.position.x < m_Torches[1].position.x && transform.position.z < m_Torches[0].position.z && transform.position.z > m_Torches[2].position.z)
         {
             col.isTrigger = false;
-            
+
         }
         else
         {
             col.isTrigger = true;
-            
+
         }
     }
 
