@@ -126,12 +126,16 @@ public class AdvancedBossAi : MonoBehaviour
         //Projectiles
         for (int i = 0; i < ProjectilesArray.Length; i++)
         {
-            ProjectilesArray[i] = (GameObject)Instantiate(m_Projectile, transform.position, transform.rotation);
+            Instantiate(m_Projectile, transform.position, transform.rotation);
+            GameObject tempProjectile = GameObject.Find("BossProjectile");
+            ProjectilesArray[i] = tempProjectile;
             ProjectilesArray[i].gameObject.SetActive(false);
         }
         for (int i = 0; i < LightningArray.Length; i++)
         {
-            LightningArray[i] = (GameObject)Instantiate(m_Lightning, transform.position, transform.rotation);
+            Instantiate(m_Lightning, transform.position, transform.rotation);
+            GameObject tempLightning = GameObject.Find("BossLightning");
+            LightningArray[i] = tempLightning;
             LightningArray[i].gameObject.SetActive(false);
         }
         //Debug errors
@@ -307,7 +311,7 @@ public class AdvancedBossAi : MonoBehaviour
             transform.localScale = new Vector3(Mathf.Lerp(transform.localScale.x, 0.1f,0.1f), Mathf.Lerp(transform.localScale.y, 0.1f, 0.1f), transform.localScale.z);
 
             //SFX
-            source.PlayOneShot(m_TeleportWindupSound, 0.3f);
+            source.PlayOneShot(m_TeleportWindupSound, 0.1f);
 
         }
         if (frame == framesBeforeTP)
@@ -410,7 +414,7 @@ public class AdvancedBossAi : MonoBehaviour
         if (frame <= windup && frame >= 2)
         {
             //SFX
-            source.PlayOneShot(m_DashWindupSound, 0.3f);
+            source.PlayOneShot(m_DashWindupSound, 0.1f);
             //Apply friction
             Friction(2f);
             //Look at target player

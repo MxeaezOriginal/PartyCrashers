@@ -16,12 +16,20 @@ public class BossProjectileKamin : MonoBehaviour
     private Vector3 m_Velocity;
     private int frame;
     private Rigidbody m_Body;
+    private Collider col;
+
+
+    AdvancedBossAi boss = GameObject.Find("Boss").GetComponent<AdvancedBossAi>();
+    Transform[] torches;
 
     // Use this for initialization
     void Start()
     {
+        torches = boss.torches;
         m_Body = GetComponent<Rigidbody>();
         frame = 0;
+        m_Body.collisionDetectionMode = CollisionDetectionMode.Discrete;
+        col = GetComponent<Collider>();
     }
 
     //Called once object is activated
@@ -65,7 +73,20 @@ public class BossProjectileKamin : MonoBehaviour
         //Die
         if (frame > m_OutTime + m_SlowTime + m_BackTime)
         {
-            //gameObject.SetActive(false);
+            gameObject.SetActive(false);
+        }
+
+        //Update collision
+        
+        if(transform.position.x > torches[0].position.x && transform.position.x < torches[1].position.x && transform.position.z < torches[0].position.z && transform.position.z > torches[2].position.z)
+        {
+            col.isTrigger = false;
+            
+        }
+        else
+        {
+            col.isTrigger = true;
+            
         }
     }
 

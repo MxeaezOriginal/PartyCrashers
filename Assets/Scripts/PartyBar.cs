@@ -62,7 +62,6 @@ public class PartyBar : MonoBehaviour {
         {
             AdvancedBossAi bossScript = m_Boss.GetComponent<AdvancedBossAi>();
             EnemyHealth bossHealth = m_Boss.GetComponent<EnemyHealth>();
-            print(bossHealth.m_EnemyHealth);
             m_Bar.fillAmount = Mathf.Lerp(m_Bar.fillAmount, bossHealth.m_EnemyHealth / (bossScript.m_BaseMaxHealth * bossScript.m_NumOfPlayersHealthMultiplier), m_fillSpeed * Time.deltaTime);
         }else
         {
