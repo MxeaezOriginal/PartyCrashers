@@ -119,6 +119,10 @@ public class Bow : Ranged
         }
     }
 
+    public override void terminate()
+    {
+    }
+
     private void ShootPrimary()
     {
         GameObject bullet;

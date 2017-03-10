@@ -82,6 +82,10 @@ public class RaveGun : Ranged {
         
     }
 
+    public override void terminate()
+    {
+    }
+
     private void shoot()
     {
         GameObject balloon;

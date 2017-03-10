@@ -23,4 +23,6 @@ public abstract class Weapon : MonoBehaviour {
     
     public abstract void primaryAttack();
     public abstract void secondaryAttack();
+
+    public abstract void terminate();
 }

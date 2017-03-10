@@ -134,6 +134,19 @@ public class FizzyPoP : Ranged
         }
     }
 
+    public override void terminate()
+    {
+        if(ShootSprayGO != null)
+        {
+            Destroy(ShootSprayGO);
+        }
+
+        if(FallOffSpray != null)
+        {
+            Destroy(FallOffSpray);
+        }
+    }
+
     private void ShootSpray()
     {
         if (m_IsDown == false)

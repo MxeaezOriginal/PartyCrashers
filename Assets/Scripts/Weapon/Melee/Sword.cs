@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityStandardAssets.ImageEffects;
+using System;
 
 public class Sword : Melee
 {
@@ -73,8 +74,8 @@ public class Sword : Melee
             //SFX Start
             if (audioSource != null && !audioSource.isPlaying)
             {
-                randomPitch = Random.RandomRange(maxRandomPitch, minRandomPitch);
-                slashSFXtoPlay = slashSFX[Random.Range(0, slashSFX.Length)];
+                randomPitch = UnityEngine.Random.Range(maxRandomPitch, minRandomPitch);
+                slashSFXtoPlay = slashSFX[UnityEngine.Random.Range(0, slashSFX.Length)];
                 audioSource.clip = slashSFXtoPlay;
                 audioSource.pitch = randomPitch;
                 audioSource.Play();
@@ -184,6 +185,10 @@ public class Sword : Melee
 
             m_SecondaryCoolDown = Time.time;
         }
+    }
+
+    public override void terminate()
+    {
     }
 
     /*IEnumerator dash()

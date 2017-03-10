@@ -6,7 +6,7 @@ using System.Collections;
 public class WeaponManager : MonoBehaviour
 {
 
-    public enum Weapon
+    public enum EWeapon
     {
         GlowSword,
         WaterBalloonBow,        
@@ -16,9 +16,9 @@ public class WeaponManager : MonoBehaviour
 
     [HideInInspector]
     public GameObject m_CurrentWeaponObject;
-    public Weapon m_CurrentWeapon = Weapon.GlowSword;
+    public EWeapon m_CurrentWeapon = EWeapon.GlowSword;
     [HideInInspector]
-    private Weapon m_ChangeWeapon = Weapon.GlowSword;
+    private EWeapon m_ChangeWeapon = EWeapon.GlowSword;
     public string m_PickupConcactinateString = "_Pickup";
     public float m_DelayBetweenSwaps = 1f;
 
@@ -53,7 +53,7 @@ public class WeaponManager : MonoBehaviour
 
         if (SceneManager.GetActiveScene().name == GameManager.m_Instance.m_LevelToStart)
         {
-             m_CurrentWeapon = (Weapon)Random.Range(0, (int)Weapon.Length);
+             m_CurrentWeapon = (EWeapon)Random.Range(0, (int)EWeapon.Length);
         }
 
         if (GameManager.m_Instance.m_GameState != GameManager.GameState.Minigame)
@@ -79,7 +79,7 @@ public class WeaponManager : MonoBehaviour
         SetWeapon(m_CurrentWeapon);
     }
 
-    public void SetWeapon(Weapon weaponPrefabName)
+    public void SetWeapon(EWeapon weaponPrefabName)
     {
         if (m_WeaponsTransform.FindChild(weaponPrefabName.ToString()) != null)
         {
@@ -106,6 +106,7 @@ public class WeaponManager : MonoBehaviour
 
         if (m_CurrentWeaponObject != null)
         {
+            m_CurrentWeaponObject.GetComponent<Weapon>().terminate();
             Destroy(m_CurrentWeaponObject);
         }
 
@@ -149,7 +150,7 @@ public class WeaponManager : MonoBehaviour
 
         newWeapon.name = child.name;
         m_CurrentWeaponObject = newWeapon;
-        m_CurrentWeapon = (Weapon) System.Enum.Parse(typeof(Weapon), m_CurrentWeaponObject.name);
+        m_CurrentWeapon = (EWeapon) System.Enum.Parse(typeof(EWeapon), m_CurrentWeaponObject.name);
     }
 
     /*public void InstantiateWeapon()
