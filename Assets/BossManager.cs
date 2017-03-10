@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BossManager : MonoBehaviour {
+public class BossManager : MonoBehaviour
+{
 
     //Get the players
     protected GameObject[] players;
@@ -25,7 +26,8 @@ public class BossManager : MonoBehaviour {
     }
 
 
-    void Start () {
+    void Start()
+    {
         //Get the number of players
         players = GameManager.m_Instance.m_Players;
 
@@ -36,11 +38,12 @@ public class BossManager : MonoBehaviour {
             boss.SetActive(false);
         }
     }
-	
-	// Update is called once per frame
-	void Update () {
-	    //Move wall
-        if(GetLowestPlayerZ() > 0)
+
+    // Update is called once per frame
+    void Update()
+    {
+        //Move wall
+        if (GetLowestPlayerZ() > 0)
         {
             if (m_backWall.transform.position.z < GetLowestPlayerZ() - 5f && m_backWall.transform.position.z < 33f)
             {
@@ -110,7 +113,7 @@ public class BossManager : MonoBehaviour {
         float zCurrent = 200f;
         for (int i = 0; i < players.Length; i++)
         {
-            if(zCurrent > players[i].transform.position.z)
+            if (zCurrent > players[i].transform.position.z)
             {
                 zCurrent = players[i].transform.position.z;
             }
