@@ -13,7 +13,7 @@ public class Sword : Melee
     [SerializeField]
     private float smooth = 20f;
     [SerializeField]
-    private float triggerLife = 0.7f;
+    private float triggerLife = 0.25f;
     private float numOfParticles = 0;
     public float m_SecondSlashTime = 0.75f;
 
