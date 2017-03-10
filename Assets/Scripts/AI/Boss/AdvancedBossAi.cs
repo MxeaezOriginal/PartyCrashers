@@ -18,8 +18,8 @@ public class AdvancedBossAi : MonoBehaviour
     //Projectile
     public GameObject m_Projectile;
     public GameObject m_Lightning;
-    private GameObject[] ProjectilesArray = { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null };
-    private GameObject[] LightningArray = { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null };
+    private GameObject[] ProjectilesArray = new GameObject[40];
+    private GameObject[] LightningArray = new GameObject[40];
     public int m_BulletsToShoot = 5;
     private int m_BulletsShot = 0;
     private int m_NumberOfBullets;
@@ -126,16 +126,12 @@ public class AdvancedBossAi : MonoBehaviour
         //Projectiles
         for (int i = 0; i < ProjectilesArray.Length; i++)
         {
-            Instantiate(m_Projectile, transform.position, transform.rotation);
-            GameObject tempProjectile = GameObject.Find("BossProjectile");
-            ProjectilesArray[i] = tempProjectile;
+            ProjectilesArray[i] = (GameObject)Instantiate(m_Projectile, transform.position, transform.rotation);
             ProjectilesArray[i].gameObject.SetActive(false);
         }
         for (int i = 0; i < LightningArray.Length; i++)
         {
-            Instantiate(m_Lightning, transform.position, transform.rotation);
-            GameObject tempLightning = GameObject.Find("BossLightning");
-            LightningArray[i] = tempLightning;
+            LightningArray[i] = (GameObject)Instantiate(m_Lightning, transform.position, transform.rotation);
             LightningArray[i].gameObject.SetActive(false);
         }
         //Debug errors
@@ -164,18 +160,18 @@ public class AdvancedBossAi : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
         //Switch states
         switch (state)
         {
             case states.idle: Idle(); break;
             case states.hurt: Hurt(m_DamageTaken, m_StunTime); break;
-            case states.teleport:  Teleport(30, 30); break;
+            case states.teleport: Teleport(30, 30); break;
             //Attacks
             case states.shoot: m_BulletsToShoot = Mathf.RoundToInt(10 * m_Difficulty); BasicShoot(Mathf.RoundToInt(20 / m_Difficulty), Mathf.RoundToInt(20 / m_Difficulty)); break;
             case states.dash: Dash(Mathf.RoundToInt(30 / m_Difficulty), 10, Mathf.RoundToInt(10 / m_Difficulty)); break;
             case states.earthquake: Earthquake(Mathf.RoundToInt(20 / m_Difficulty), Mathf.RoundToInt(20 / m_Difficulty)); break;
-        } 
+        }
         //Manage frame
         frame++;
         if (frame > 1000000) //Just in case the frame variable gets too big which I doubt it ever will BUT WHATEVER poopy butts stuff
@@ -199,14 +195,15 @@ public class AdvancedBossAi : MonoBehaviour
     void FixedUpdate()
     {
         //Manage position
-        transform.position = new Vector3(transform.position.x, ypos,transform.position.z);
+        transform.position = new Vector3(transform.position.x, ypos, transform.position.z);
         //Make sure scale is fine
-        if(state != states.teleport)transform.localScale = new Vector3(2f, 2f, 2f);
+        if (state != states.teleport) transform.localScale = new Vector3(2f, 2f, 2f);
         //Manage invinvibility
         if (m_Invincible)
         {
             GetComponent<EnemyHealth>().isInvincible = true;
-        }else
+        }
+        else
         {
             GetComponent<EnemyHealth>().isInvincible = false;
         }
@@ -219,7 +216,7 @@ public class AdvancedBossAi : MonoBehaviour
             currentState = state;
         }
         EnemyHealth enemyHealth = GetComponent<EnemyHealth>();
-        if(enemyHealth.m_EnemyHealth != currentHealth)
+        if (enemyHealth.m_EnemyHealth != currentHealth)
         {
             currentHealth = enemyHealth.m_EnemyHealth;
             state = states.hurt;
@@ -255,7 +252,7 @@ public class AdvancedBossAi : MonoBehaviour
         //Look at next player
         GameObject closestPlayer = getClosestPlayer();
         transform.LookAt(closestPlayer.transform.position);
-        
+
         //Friction
         Friction(1f);
 
@@ -281,11 +278,11 @@ public class AdvancedBossAi : MonoBehaviour
             }
             if (m_TeleportEffect.active == false)//teleport
             {
-                if(m_DashEffect != null)
+                if (m_DashEffect != null)
                 {
                     m_DashEffect.SetActive(false);
                 }
-                
+
                 m_TeleportEffect.SetActive(true);
                 m_TeleportEffect.transform.position = transform.position;
             }
@@ -298,7 +295,7 @@ public class AdvancedBossAi : MonoBehaviour
         Colors(Color.blue, Color.white, 0.3f);
         //Look at teh sky
         transform.Rotate(new Vector3(0f, 0f, transform.position.z + 5));
-        if (frame == 3) transform.LookAt(new Vector3(transform.position.x, transform.position.y + 10, transform.position.z)); 
+        if (frame == 3) transform.LookAt(new Vector3(transform.position.x, transform.position.y + 10, transform.position.z));
         //Friction
         Friction(2f);
         //Windup
@@ -308,7 +305,7 @@ public class AdvancedBossAi : MonoBehaviour
             //Rotate Ball
             m_Ball.transform.Rotate(new Vector3(transform.rotation.x - 10, transform.rotation.y, transform.rotation.z));
             //Shrink
-            transform.localScale = new Vector3(Mathf.Lerp(transform.localScale.x, 0.1f,0.1f), Mathf.Lerp(transform.localScale.y, 0.1f, 0.1f), transform.localScale.z);
+            transform.localScale = new Vector3(Mathf.Lerp(transform.localScale.x, 0.1f, 0.1f), Mathf.Lerp(transform.localScale.y, 0.1f, 0.1f), transform.localScale.z);
 
             //SFX
             source.PlayOneShot(m_TeleportWindupSound, 0.1f);
@@ -326,7 +323,7 @@ public class AdvancedBossAi : MonoBehaviour
             {
                 playerPositionsArray[i] = players[i].transform; //Set the index's of the player positions array to the transforms of the respective player objects
             }
-            
+
             //Teleport Location
             teleportTargetPosition = new Vector3(Random.Range(torches[0].position.x, torches[1].position.x), transform.position.y, Random.Range(torches[0].position.z, torches[2].position.z));
 
@@ -345,7 +342,7 @@ public class AdvancedBossAi : MonoBehaviour
                 }
             }
             transform.position = teleportTargetPosition;
-            if(m_DashEffect != null)
+            if (m_DashEffect != null)
             {
                 m_DashEffect.SetActive(true);
             }
@@ -358,11 +355,11 @@ public class AdvancedBossAi : MonoBehaviour
         //Change state
         if (frame > recoverFrames + framesBeforeTP)
         {
-            transform.localScale = new Vector3(2f,2f,2f);
+            transform.localScale = new Vector3(2f, 2f, 2f);
             m_Invincible = false;
             state = states.idle;
         }
-        
+
 
     }
     #region Getting hurt
@@ -370,20 +367,21 @@ public class AdvancedBossAi : MonoBehaviour
     {
         Colors(Color.red, Color.white, 0.07f);
         //Freak the fuck out
-        transform.Rotate(new Vector3(Random.Range( transform.rotation.x - 10, transform.rotation.x + 10f), Random.Range(transform.rotation.y - 10, transform.rotation.y + 10f), Random.Range(transform.rotation.z - 10, transform.rotation.z + 10f)));
+        transform.Rotate(new Vector3(Random.Range(transform.rotation.x - 10, transform.rotation.x + 10f), Random.Range(transform.rotation.y - 10, transform.rotation.y + 10f), Random.Range(transform.rotation.z - 10, transform.rotation.z + 10f)));
         //Leave state
         if (frame > 20)
         {
             transform.Rotate(0, 0, transform.rotation.z - transform.rotation.z);
 
-            if(transform.position.x > torches[0].position.x && transform.position.x < torches[1].position.x && transform.position.z < torches[0].position.z && transform.position.z > torches[2].position.z)
+            if (transform.position.x > torches[0].position.x && transform.position.x < torches[1].position.x && transform.position.z < torches[0].position.z && transform.position.z > torches[2].position.z)
             {
                 state = states.idle;
-            }else
+            }
+            else
             {
                 state = states.teleport;
             }
-                
+
 
             if (m_HurtEffect.active)
             {
@@ -495,7 +493,7 @@ public class AdvancedBossAi : MonoBehaviour
         if (frame < shootFrame)
         {
             m_Ball.transform.Rotate(transform.rotation.x - (frame * 50), transform.rotation.y, transform.rotation.z);
-            
+
         }
 
         //Actually shoot something
