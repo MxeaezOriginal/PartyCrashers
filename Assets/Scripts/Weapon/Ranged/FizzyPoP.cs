@@ -8,8 +8,7 @@ public class FizzyPoP : Ranged
     [Header("Fizzy PoP Gun")]
 
     #region Floats
-    [SerializeField]
-    private float m_SprayTimer = 5f;
+    public float m_SprayTimer = 5f;
     [SerializeField]
     private float m_FallOffTimer = 2f;
     [SerializeField]
@@ -37,6 +36,10 @@ public class FizzyPoP : Ranged
     private GameObject VFXFirePoint;
     #endregion
 
+    GameObject ShootSprayGO;
+    GameObject FallOffSpray;
+    private float m_SprayCooldown;
+
     void Start()
     {
         FizzyCone = transform.FindChild("FizzyGunCone").gameObject;
@@ -58,20 +61,53 @@ public class FizzyPoP : Ranged
 
     void Update()
     {
-        #region Primary Attack
-        // Shoot if Button Down
-        if (m_IsDown)
-            ShootSpray();
-        #endregion
+        m_SprayCooldown -= Time.deltaTime;
 
-        #region Secondary Attack
+        if (m_SprayCooldown < 0)
+        {
+            if (m_IsDown)
+            {
+                m_CoolDown = Time.time;
+                m_IsDown = false;
+
+                FizzyCone.SetActive(false);
+                FallOff();
+                if (ShootSprayGO != null)
+                {
+                    Destroy(ShootSprayGO, .5f);
+                }
+            }
+        }
+
+        if (Input.GetButtonUp(Player.m_PrimaryAttack + Player.m_Controller.ToString()))
+        {
+            if (m_IsDown)
+            {
+                m_CoolDown = Time.time;
+                m_IsDown = false;
+
+                FizzyCone.SetActive(false);
+                if (ShootSprayGO != null)
+                {
+                    Destroy(ShootSprayGO);
+                }
+                if (FallOffSpray != null)
+                {
+                    Destroy(FallOffSpray);
+                }
+            }
+        }
+
         // Shoot if Button Down
+        //if (m_IsDown)
+        //    ShootSpray();
+
+        // Secondary
         if (m_CanHeal)
         {
             ShootHeal();
             Debug.Log("Is Shooting Spray");
         }
-        #endregion
 
     }
 
@@ -80,8 +116,8 @@ public class FizzyPoP : Ranged
     {
         if (m_CoolDown <= Time.time - m_Weapon1Cooldown || m_CoolDown == 0)
         {
+            ShootSpray();
             m_IsDown = true;
-            m_CoolDown = Time.time;
         }
     }
 
@@ -96,32 +132,36 @@ public class FizzyPoP : Ranged
 
     private void ShootSpray()
     {
-        FizzyCone.SetActive(true);
-        StopCoroutine(ShootSprayTimer());
-        StartCoroutine(ShootSprayTimer());
-        m_IsDown = false;
-
-        #region Fizzy Shoot VFX
-        bool ShootSprayVFXBool = false;
-             
-        if (ShootSprayVFX != null)
+        if (m_IsDown == false)
         {
-            if (!ShootSprayVFXBool)
+            m_SprayCooldown = m_SprayTimer;
+
+            FizzyCone.SetActive(true);
+            //StopCoroutine(ShootSprayTimer());
+            //StartCoroutine(ShootSprayTimer());
+            //m_IsDown = false;
+
+            #region Fizzy Shoot VFX
+            //bool ShootSprayVFXBool = false;
+
+            if (ShootSprayVFX != null)
             {
-                GameObject ShootSprayGO;
+                //if (!ShootSprayVFXBool)
+                //{
                 ShootSprayGO = (GameObject)Instantiate(ShootSprayVFX, m_FirePoint[1].transform.position, transform.rotation);
                 ShootSprayGO.transform.parent = m_FirePoint[1].transform.parent.transform.parent;
                 ShootSprayGO.transform.Rotate(new Vector3(-90, 0, 0));
                 ShootSprayGO.transform.localScale = new Vector3(1, 1, 1);
                 ShootSprayGO.transform.localPosition = m_FirePoint[1].transform.localPosition;
-                ShootSprayVFXBool = true;
-                Destroy(ShootSprayGO, (m_SprayTimer - 1f));
+                //ShootSprayVFXBool = true;
+                //Destroy(ShootSprayGO, (m_SprayTimer - 1f));
 
-                StopCoroutine(FallOffTimer());
-                StartCoroutine(FallOffTimer());                
+                //StopCoroutine(FallOffTimer());
+                //StartCoroutine(FallOffTimer());
+                //}
             }
+            #endregion
         }
-        #endregion
     }
 
     private void ShootHeal()
@@ -138,6 +178,19 @@ public class FizzyPoP : Ranged
         FizzyCone.SetActive(false);
     }
 
+    private void FallOff()
+    {
+        if (FallOffSprayVFX != null)
+        {
+            FallOffSpray = (GameObject)Instantiate(FallOffSprayVFX, m_FirePoint[1].transform.position, transform.rotation);
+            FallOffSpray.transform.parent = m_FirePoint[1].transform.parent.transform.parent;
+            FallOffSpray.transform.Rotate(new Vector3(-90, 0, 0));
+            FallOffSpray.transform.localScale = new Vector3(1, 1, 1);
+            FallOffSpray.transform.localPosition = m_FirePoint[1].transform.localPosition;
+            Destroy(FallOffSpray, m_Weapon1Cooldown - 1f);
+        }
+    }
+
     private IEnumerator FallOffTimer()
     {
         bool ShootSprayFallOffVFXBool = false;
@@ -146,7 +199,6 @@ public class FizzyPoP : Ranged
         {
             if (!ShootSprayFallOffVFXBool)
             {
-                GameObject FallOffSpray;
                 FallOffSpray = (GameObject)Instantiate(FallOffSprayVFX, m_FirePoint[1].transform.position, transform.rotation);
                 FallOffSpray.transform.parent = m_FirePoint[1].transform.parent.transform.parent;
                 FallOffSpray.transform.Rotate(new Vector3(-90, 0, 0));
