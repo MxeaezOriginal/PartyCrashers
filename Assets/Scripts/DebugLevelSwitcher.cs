@@ -21,7 +21,7 @@ public class DebugLevelSwitcher : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.F4))
         {
-            SceneManager.LoadScene("Lobby_03");
+            SceneManager.LoadScene("Libraryroom");
         }
         else if (Input.GetKeyDown(KeyCode.F5))
         {
