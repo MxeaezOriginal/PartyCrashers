@@ -30,7 +30,7 @@ public class FizzPopPickup : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<Player>() != null)
+        if (other.GetComponent<Player>() != null && other.GetComponent<Player>().m_State == Player.State.Alive)
         {
             if (other.GetComponent<Player>().m_Model == Player.Model.Badboy)
             {
@@ -57,7 +57,7 @@ public class FizzPopPickup : MonoBehaviour {
             }
         }
 
-        if (other.GetComponent<HeartSystem>() != null)
+        if (other.GetComponent<HeartSystem>() != null && other.GetComponent<Player>().m_State == Player.State.Alive)
         {
             m_HeartSystem = other.GetComponent<HeartSystem>();
             m_HeartSystem.Heal(m_HealValue);

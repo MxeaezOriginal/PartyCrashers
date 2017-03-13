@@ -30,7 +30,7 @@ public class CollectObjects : MonoBehaviour
     {
         Collectible collectible = other.GetComponent<Collectible>();
 
-        if(collectible != null && GameManager.m_Instance.m_GameState == GameManager.GameState.Dungeon)
+        if(collectible != null && GameManager.m_Instance.m_GameState == GameManager.GameState.Dungeon && player.m_State == Player.State.Alive)
         {
             //player.m_Gold += collectible.gold;
             //player.m_Score += 100;
@@ -47,7 +47,7 @@ public class CollectObjects : MonoBehaviour
 
             other.gameObject.SetActive(false);
         }
-        else if(GameManager.m_Instance.m_GameState == GameManager.GameState.Minigame && collectible.type == Collectible.Type.Simple)
+        else if(GameManager.m_Instance.m_GameState == GameManager.GameState.Minigame && collectible.type == Collectible.Type.Simple && player.m_State == Player.State.Alive)
         {
             player.m_Score += 100;
         }
