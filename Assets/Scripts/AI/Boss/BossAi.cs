@@ -81,7 +81,15 @@ public class BossAi : EnemyAI
     private int GetMode = 3;
 
     //BossMovement bossmovement;
-
+    //Boss Sound
+    public AudioSource audioSource;
+    public AudioClip[] BossChargeSFX;
+    public AudioClip[] BossProjectilesSFX;
+    public AudioClip[] BossAimedSFX;
+    public AudioClip BossSFXtoPlay;
+    public float maxRandomPitch;
+    public float minRandomPitch;
+    private float randomPitch;
     //PlayerController playercontroller;
     // Use this for initialization
     void Start()
@@ -159,6 +167,12 @@ public class BossAi : EnemyAI
                     // spawn chasing enemy in random location
                     Debug.Log("Attack Mode 1");
                     BossAttackMode1();
+
+                    randomPitch = Random.RandomRange(maxRandomPitch, minRandomPitch);
+                    audioSource.clip = BossSFXtoPlay;
+                    audioSource.pitch = randomPitch;
+                    audioSource.Play();
+
                     if (Attack)
                     {
                         m_LastAttackTime2 = Time.time;

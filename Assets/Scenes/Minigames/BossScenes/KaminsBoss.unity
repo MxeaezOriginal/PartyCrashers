@@ -1285,6 +1285,10 @@ MonoBehaviour:
   - {fileID: 8300000, guid: b49ce8c7356dabb4da5452e8f2b8f721, type: 3}
   SFXtoPlay: {fileID: 0}
   m_IsStart: 0
+  audioSource: {fileID: 1832744769}
+  BossSFXtoPlay: {fileID: 8300000, guid: c4de229e517364c459e4f3dcab1f7db4, type: 3}
+  maxRandomPitch: 1
+  minRandomPitch: 0.1
 --- !u!4 &1195411389
 Transform:
   m_ObjectHideFlags: 0
@@ -1406,7 +1410,7 @@ Transform:
   m_LocalRotation: {x: 0.68301266, y: 0.18301274, z: -0.18301277, w: 0.6830128}
   m_LocalPosition: {x: 0, y: 3, z: -35.91}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 30, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
@@ -3717,6 +3721,30 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 11485594, guid: 2edce87e14cec124ab01b4373e503d4f, type: 2}
+      propertyPath: hurtSFX.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11460646, guid: 2edce87e14cec124ab01b4373e503d4f, type: 2}
+      propertyPath: BossAutoSFX.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 11460646, guid: 2edce87e14cec124ab01b4373e503d4f, type: 2}
+      propertyPath: BossHurtSFX.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11460646, guid: 2edce87e14cec124ab01b4373e503d4f, type: 2}
+      propertyPath: BossAimedSFX.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 11460646, guid: 2edce87e14cec124ab01b4373e503d4f, type: 2}
+      propertyPath: BossChargeSFX.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 11460646, guid: 2edce87e14cec124ab01b4373e503d4f, type: 2}
+      propertyPath: BossProjectilesSFX.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 474946, guid: 2edce87e14cec124ab01b4373e503d4f, type: 2}
       propertyPath: m_LocalPosition.x
       value: 1.47
@@ -3753,9 +3781,102 @@ Prefab:
       propertyPath: m_TeleportEffect
       value: 
       objectReference: {fileID: 613691430}
+    - target: {fileID: 11485594, guid: 2edce87e14cec124ab01b4373e503d4f, type: 2}
+      propertyPath: deathSFX.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 7402d3d96a455f14286856a47db0ccfc, type: 3}
+    - target: {fileID: 11485594, guid: 2edce87e14cec124ab01b4373e503d4f, type: 2}
+      propertyPath: deathSFX.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 2660e7cb6ba02904099b5cd1054c329f, type: 3}
+    - target: {fileID: 11485594, guid: 2edce87e14cec124ab01b4373e503d4f, type: 2}
+      propertyPath: hurtSFX.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: e4105df595b913241a3720cdb10ca9f4, type: 3}
+    - target: {fileID: 11485594, guid: 2edce87e14cec124ab01b4373e503d4f, type: 2}
+      propertyPath: hurtSFX.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: ef310a4d4d489bc45800e8c0c15ba49a, type: 3}
+    - target: {fileID: 11485594, guid: 2edce87e14cec124ab01b4373e503d4f, type: 2}
+      propertyPath: hurtSFX.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 52e3594cd8300944cbcc876ebc9f7ec2, type: 3}
+    - target: {fileID: 11460646, guid: 2edce87e14cec124ab01b4373e503d4f, type: 2}
+      propertyPath: BossChargeSFX.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 0b0427cbeb63baf4690c0ff2bf80a229, type: 3}
+    - target: {fileID: 11460646, guid: 2edce87e14cec124ab01b4373e503d4f, type: 2}
+      propertyPath: BossChargeSFX.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 9b9b0917979f1844d8dad0632d1dc8e3, type: 3}
+    - target: {fileID: 11460646, guid: 2edce87e14cec124ab01b4373e503d4f, type: 2}
+      propertyPath: BossChargeSFX.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 897e2d8819b88cd46a2a3bd62dae975e, type: 3}
+    - target: {fileID: 11460646, guid: 2edce87e14cec124ab01b4373e503d4f, type: 2}
+      propertyPath: BossAutoSFX.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 141165d9bd9b2a7488b758d58c340ab6, type: 3}
+    - target: {fileID: 11460646, guid: 2edce87e14cec124ab01b4373e503d4f, type: 2}
+      propertyPath: BossAutoSFX.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: daa77b9d99f7f084782d6010782a9059, type: 3}
+    - target: {fileID: 11460646, guid: 2edce87e14cec124ab01b4373e503d4f, type: 2}
+      propertyPath: BossAutoSFX.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 1454ee9b15e8311449ee34ddec59be09, type: 3}
+    - target: {fileID: 11460646, guid: 2edce87e14cec124ab01b4373e503d4f, type: 2}
+      propertyPath: BossAutoSFX.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: 9a45ba66abfc4714f83a50ec663192f0, type: 3}
+    - target: {fileID: 11460646, guid: 2edce87e14cec124ab01b4373e503d4f, type: 2}
+      propertyPath: BossAutoSFX.Array.data[4]
+      value: 
+      objectReference: {fileID: 8300000, guid: 1a7f32151170a7445b195cdddbb49678, type: 3}
+    - target: {fileID: 11460646, guid: 2edce87e14cec124ab01b4373e503d4f, type: 2}
+      propertyPath: BossAimedSFX.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: ae6770f5d76ed4a4e984a1042d2c0c66, type: 3}
+    - target: {fileID: 11460646, guid: 2edce87e14cec124ab01b4373e503d4f, type: 2}
+      propertyPath: BossAimedSFX.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: e42ed9818b30f3245aec0c1436a63197, type: 3}
+    - target: {fileID: 11460646, guid: 2edce87e14cec124ab01b4373e503d4f, type: 2}
+      propertyPath: BossAimedSFX.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 6880727077c85154782b8ddbf7bf5faf, type: 3}
+    - target: {fileID: 11460646, guid: 2edce87e14cec124ab01b4373e503d4f, type: 2}
+      propertyPath: BossAimedSFX.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: 893ff2287e6e9c24da67ab82202cf843, type: 3}
+    - target: {fileID: 11460646, guid: 2edce87e14cec124ab01b4373e503d4f, type: 2}
+      propertyPath: BossHurtSFX.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: e4105df595b913241a3720cdb10ca9f4, type: 3}
+    - target: {fileID: 11460646, guid: 2edce87e14cec124ab01b4373e503d4f, type: 2}
+      propertyPath: BossHurtSFX.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 52e3594cd8300944cbcc876ebc9f7ec2, type: 3}
+    - target: {fileID: 11460646, guid: 2edce87e14cec124ab01b4373e503d4f, type: 2}
+      propertyPath: BossProjectilesSFX.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: c0fde6e827edcde40925ad403306a251, type: 3}
+    - target: {fileID: 11460646, guid: 2edce87e14cec124ab01b4373e503d4f, type: 2}
+      propertyPath: BossProjectilesSFX.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 6dc43a73f4592ad499a4f0aba952b41c, type: 3}
+    - target: {fileID: 11460646, guid: 2edce87e14cec124ab01b4373e503d4f, type: 2}
+      propertyPath: BossProjectilesSFX.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: f2b7439c927b6394195e4396164f6ac2, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2edce87e14cec124ab01b4373e503d4f, type: 2}
   m_IsPrefabParent: 0
+--- !u!82 &1832744769 stripped
+AudioSource:
+  m_PrefabParentObject: {fileID: 8212222, guid: 2edce87e14cec124ab01b4373e503d4f,
+    type: 2}
+  m_PrefabInternal: {fileID: 1832744768}
 --- !u!1001 &1997561473
 Prefab:
   m_ObjectHideFlags: 0
