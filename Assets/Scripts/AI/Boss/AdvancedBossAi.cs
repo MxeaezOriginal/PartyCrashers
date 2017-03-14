@@ -111,7 +111,7 @@ public class AdvancedBossAi : MonoBehaviour
         currentState = state;
 
         //Make surre boss isn't invincible 
-        m_Invincible = false;
+        m_Invincible = true;
         //Set frame to some large negative number so the boss stays in his idle state a bit longer
         frame = -100;
         //Get the number of players
@@ -266,6 +266,10 @@ public class AdvancedBossAi : MonoBehaviour
         //Choose attack
         if (frame > 60 / m_Difficulty)
         {
+            if (m_Invincible)
+            {
+                m_Invincible = false;
+            }
             state = DecideAttack();
         }
 
@@ -576,7 +580,7 @@ public class AdvancedBossAi : MonoBehaviour
         if (frame == windup + 1)
         {
             //SFX
-            source.PlayOneShot(m_ShootSounds[1], 1);
+            source.PlayOneShot(m_ShootSounds[0], 1);
 
             Vector3 targetPosition = getClosestPlayer().transform.position;
             Vector3 pointVectorAngle = new Vector3(targetPosition.x - transform.position.x, 0, targetPosition.x - transform.position.z).normalized;
