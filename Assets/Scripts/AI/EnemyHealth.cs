@@ -18,19 +18,20 @@ public class EnemyHealth : MonoBehaviour
     public GameObject hurtVFX;
     //Kavells VFX code
 
-    public float m_EnemyHealth = 100f;
+    public float m_MaxHealth = 100f;
+    public float m_EnemyHealth;
     public float m_EnemyInvincibleTime = 0.5f;
     public GameObject m_Drop;
     //[HideInInspector]
     public bool isInvincible = false;
     private bool isDamage = false;
 
-    /*
+
     void Start()
     {
-        SFXManager = GetComponent<AudioManager>();
+        m_EnemyHealth = m_MaxHealth;
     }
-    */
+
     void Update()
     {
         if (this.gameObject.name != "Boss")
@@ -83,30 +84,33 @@ public class EnemyHealth : MonoBehaviour
             {
                 randomPitch = 3;
             }
+
+
             if (m_EnemyHealth > 0)
             {
                 SFXtoPlay = hurtSFX[Random.Range(0, hurtSFX.Length)];
                 AudioManager.m_Instance.PushMusic(SFXtoPlay);
             }
+
             else
             {
                 SFXtoPlay = deathSFX[Random.Range(0, deathSFX.Length)];
                 AudioManager.m_Instance.PushMusic(SFXtoPlay);
             }
 
-            if (SFXPlayer != null)
-            {
-                AudioSource source = SFXPlayer.GetComponent<AudioSource>();
-                source.pitch = randomPitch;
-                source.clip = SFXtoPlay;
-                //source.Play();
-                //SFXManager.GetPitch(randomPitch);
-                //SFXManager.PushMusic(SFXtoPlay);
-                //SFXManager.PushMusic(SFXtoPlay);
-            }
+            //if (SFXPlayer != null)
+            //{
+            //    AudioSource source = SFXPlayer.GetComponent<AudioSource>();
+            //    source.pitch = randomPitch;
+            //    source.clip = SFXtoPlay;
+            //    //source.Play();
+            //    //SFXManager.GetPitch(randomPitch);
+            //    //SFXManager.PushMusic(SFXtoPlay);
+            //    //SFXManager.PushMusic(SFXtoPlay);
+            //}
 
             //GameObject SFXtest = Instantiate(SFXPlayer, transform.position, transform.rotation) as GameObject;
-            GameObject SFXtest2 = Instantiate(SFXHit, transform.position, transform.rotation) as GameObject;
+            //GameObject SFXtest2 = Instantiate(SFXHit, transform.position, transform.rotation) as GameObject;
 
             //James Sound Code
         }

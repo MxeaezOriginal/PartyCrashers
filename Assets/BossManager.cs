@@ -20,6 +20,12 @@ public class BossManager : MonoBehaviour
     private Player player;
     // Use this for initialization
 
+    public AudioSource audioSource;
+    public AudioClip BossSFXtoPlay;
+    public float maxRandomPitch;
+    public float minRandomPitch;
+    private float randomPitch;
+
     void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
@@ -80,6 +86,11 @@ public class BossManager : MonoBehaviour
                     SFXtoPlay = MascotSFX[Random.Range(0, MascotSFX.Length)];
                     AudioManager.m_Instance.PushMusic(SFXtoPlay);
                 }
+
+                randomPitch = Random.RandomRange(maxRandomPitch, minRandomPitch);
+                audioSource.clip = BossSFXtoPlay;
+                audioSource.pitch = randomPitch;
+                audioSource.Play();
 
                 m_IsStart = true;
             }

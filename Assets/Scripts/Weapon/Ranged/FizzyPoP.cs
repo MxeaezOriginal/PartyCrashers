@@ -8,6 +8,7 @@ public class FizzyPoP : Ranged
     [Header("Fizzy PoP Gun")]
 
     #region Floats
+    public float m_PlayerRecoil = 50f;
     public float m_SprayTimer = 5f;
     [SerializeField]
     private float m_FallOffTimer = 2f;
@@ -107,11 +108,11 @@ public class FizzyPoP : Ranged
         //    ShootSpray();
 
         // Secondary
-        if (m_CanHeal)
-        {
-            ShootHeal();
-            Debug.Log("Is Shooting Spray");
-        }
+        //if (m_CanHeal)
+        //{
+        //    ShootHeal();
+        //    Debug.Log("Is Shooting Spray");
+        //}
 
     }
 
@@ -129,7 +130,7 @@ public class FizzyPoP : Ranged
     {
         if (m_SecondaryCoolDown <= Time.time - m_Weapon2Cooldown || m_SecondaryCoolDown == 0)
         {
-            m_CanHeal = true;
+            ShootHeal();
             m_SecondaryCoolDown = Time.time;
         }
     }
@@ -183,10 +184,12 @@ public class FizzyPoP : Ranged
 
     private void ShootHeal()
     {
+        PlayerController playerController = transform.GetComponentInParent<PlayerController>();
         GameObject healPrefab;
-        healPrefab = (GameObject)Instantiate(m_LeftTriggerProjectile, m_FirePoint[0].gameObject.transform.position, m_FirePoint[0].gameObject.transform.rotation);
+        healPrefab = (GameObject)Instantiate(m_LeftTriggerProjectile, m_FirePoint[1].gameObject.transform.position + (playerController.transform.forward * 1.3f), m_FirePoint[1].gameObject.transform.rotation);
         healPrefab.GetComponent<Rigidbody>().AddForce(healPrefab.transform.forward * m_ProjectileSpeed02);
-        m_CanHeal = false;
+        playerController.m_Velocity = playerController.transform.forward * (m_PlayerRecoil * -1);
+        //m_CanHeal = false;
     }
 
     private IEnumerator ShootSprayTimer()

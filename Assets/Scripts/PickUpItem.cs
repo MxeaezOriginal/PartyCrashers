@@ -9,7 +9,7 @@ public class PickUpItem : MonoBehaviour
 	 
     void OnTriggerStay(Collider other)
     {
-        if (other.tag == ("Player"))
+        if (other.tag == ("Player") && other.GetComponent<Player>().m_State == Player.State.Alive)
         {
 			//VfX
 			if (getpickupVFX != null) 

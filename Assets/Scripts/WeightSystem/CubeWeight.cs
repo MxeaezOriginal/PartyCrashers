@@ -62,7 +62,7 @@ public class CubeWeight : MonoBehaviour {
     {
         for (int i = 0; i < m_player.Length; i++)
         {
-            if (other.GetComponent<Player>() != null)
+            if (other.GetComponent<Player>() != null && other.GetComponent<Player>().m_State == Player.State.Alive)
             {
                 if (other.GetComponent<Player>().m_Player == m_player[i].GetComponent<Player>().m_Player)
                 {
@@ -77,7 +77,7 @@ public class CubeWeight : MonoBehaviour {
     {
         for (int i = 0; i < m_player.Length; i++)
         {
-            if (other.GetComponent<Player>() != null)
+            if (other.GetComponent<Player>() != null && other.GetComponent<Player>().m_State == Player.State.Alive)
             {
                 if (other.GetComponent<Player>().m_Player == m_player[i].GetComponent<Player>().m_Player)
                 {

@@ -87,6 +87,13 @@ public class AdvancedBossAi : MonoBehaviour
     public AudioClip m_DashWindupSound;
     public AudioClip m_DashSound;
 
+    public AudioClip[] BossChargeSFX;
+    public AudioClip[] BossProjectilesSFX;
+    public AudioClip[] BossAimedSFX;
+    public AudioClip[] BossAutoSFX;
+    //public AudioClip[] BossHurtSFX;
+    public AudioClip BossSFXtoPlay;
+
     private AudioSource source;
 
     // Use this for initialization
@@ -394,6 +401,12 @@ public class AdvancedBossAi : MonoBehaviour
             m_HurtEffect.SetActive(true);
         }
         m_Velocity = Vector3.Normalize(transform.position - getClosestPlayer().transform.position) * 50f;
+
+        ////Sound
+
+        //BossSFXtoPlay = BossHurtSFX[Random.Range(0, BossHurtSFX.Length)];
+        //source.clip = BossSFXtoPlay;
+        //source.Play();
     }
     #endregion
 
@@ -445,6 +458,12 @@ public class AdvancedBossAi : MonoBehaviour
             m_Invincible = false;
             state = states.idle;
         }
+
+        //Sound
+
+        BossSFXtoPlay = BossChargeSFX[Random.Range(0, BossChargeSFX.Length)];
+        source.clip = BossSFXtoPlay;
+        source.Play();
 
     }
     void BasicShoot(int shootFrame, int recoverFrame)
@@ -537,6 +556,12 @@ public class AdvancedBossAi : MonoBehaviour
             state = states.idle;
         }
 
+        //Sound
+
+        BossSFXtoPlay = BossAutoSFX[Random.Range(0, BossAutoSFX.Length)];
+        source.clip = BossSFXtoPlay;
+        source.Play();
+
     }
     void Earthquake(int windup, int recover)
     {
@@ -582,6 +607,12 @@ public class AdvancedBossAi : MonoBehaviour
         {
             state = states.idle;
         }
+
+        //Sound
+
+        BossSFXtoPlay = BossProjectilesSFX[Random.Range(0, BossProjectilesSFX.Length)];
+        source.clip = BossSFXtoPlay;
+        source.Play();
     }
 
     #endregion
@@ -590,6 +621,12 @@ public class AdvancedBossAi : MonoBehaviour
     //This is where the decision making for the target player will happen
     GameObject GetTargetPlayer()
     {
+        //Sound
+
+        BossSFXtoPlay = BossProjectilesSFX[Random.Range(0, BossProjectilesSFX.Length)];
+        source.clip = BossSFXtoPlay;
+        source.Play();
+
         //Right now this whole function is really basic but I'll make it more complicated later
 
         //Get closest player
@@ -612,6 +649,12 @@ public class AdvancedBossAi : MonoBehaviour
         GameObject target;
 
         target = getClosestPlayer();
+
+        //Sound
+
+        BossSFXtoPlay = BossAimedSFX[Random.Range(0, BossAimedSFX.Length)];
+        source.clip = BossSFXtoPlay;
+        source.Play();
 
         return target;
     }
