@@ -19,6 +19,7 @@ public class RandomMeshGenerator : MonoBehaviour {
         GameObject pickup = GameObject.Instantiate(pickupGameObject[randomNum],transform.position,transform.rotation) as GameObject;
         pickup.transform.localScale = new Vector3(scaleValue, scaleValue, scaleValue);
         pickup.transform.parent = transform;
+
     }
 
 }
