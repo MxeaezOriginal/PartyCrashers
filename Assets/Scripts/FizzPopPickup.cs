@@ -36,63 +36,60 @@ public class FizzPopPickup : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-        if(timer > .1f)
+        if (other.GetComponent<Player>() != null)
         {
-            if (other.GetComponent<Player>() != null)
+            if (other.GetComponent<Player>().m_Model == Player.Model.Badboy)
             {
-                if (other.GetComponent<Player>().m_Model == Player.Model.Badboy)
-                {
-                    SFXtoPlay2 = BadBoyHealthSFX[Random.Range(0, BadBoyHealthSFX.Length)];
-                    AudioManager.m_Instance.PushMusic(SFXtoPlay2);
-                }
-
-                if (other.GetComponent<Player>().m_Model == Player.Model.Goth)
-                {
-                    SFXtoPlay2 = GothHealthSFX[Random.Range(0, GothHealthSFX.Length)];
-                    AudioManager.m_Instance.PushMusic(SFXtoPlay2);
-                }
-
-                if (other.GetComponent<Player>().m_Model == Player.Model.Mascot)
-                {
-                    SFXtoPlay2 = MascotHealthSFX[Random.Range(0, MascotHealthSFX.Length)];
-                    AudioManager.m_Instance.PushMusic(SFXtoPlay2);
-                }
-
-                if (other.GetComponent<Player>().m_Model == Player.Model.Nerd)
-                {
-                    SFXtoPlay2 = NerdHealthSFX[Random.Range(0, NerdHealthSFX.Length)];
-                    AudioManager.m_Instance.PushMusic(SFXtoPlay2);
-                }
+                SFXtoPlay2 = BadBoyHealthSFX[Random.Range(0, BadBoyHealthSFX.Length)];
+                AudioManager.m_Instance.PushMusic(SFXtoPlay2);
             }
 
-            if (other.GetComponent<HeartSystem>() != null)
+            if (other.GetComponent<Player>().m_Model == Player.Model.Goth)
             {
-                m_HeartSystem = other.GetComponent<HeartSystem>();
-                m_HeartSystem.Heal(m_HealValue);
-                m_HeartSystem.UpdateHearts();
-
-                //sound
-                SFXtoPlay = SFX[Random.Range(0, SFX.Length)];
-
-		    	//VfX
-		    	if (usepickupVFX != null) 
-		    	{
-		    		GameObject getHeal;
-		    		getHeal = (GameObject)Instantiate (usepickupVFX, other.transform.position, transform.rotation);
-		    		Destroy (getHeal, 0.5f);
-		    	}
-		    	//VFX end
-
-                if (SFXPlayer != null)
-                {
-                    AudioSource source = SFXPlayer.GetComponent<AudioSource>();
-                    source.clip = SFXtoPlay;
-                }
-                GameObject SFXtest = Instantiate(SFXPlayer, transform.position, transform.rotation) as GameObject;
-                //sound end
-
-                gameObject.SetActive(false);
+                SFXtoPlay2 = GothHealthSFX[Random.Range(0, GothHealthSFX.Length)];
+                AudioManager.m_Instance.PushMusic(SFXtoPlay2);
             }
+
+            if (other.GetComponent<Player>().m_Model == Player.Model.Mascot)
+            {
+                SFXtoPlay2 = MascotHealthSFX[Random.Range(0, MascotHealthSFX.Length)];
+                AudioManager.m_Instance.PushMusic(SFXtoPlay2);
+            }
+
+            if (other.GetComponent<Player>().m_Model == Player.Model.Nerd)
+            {
+                SFXtoPlay2 = NerdHealthSFX[Random.Range(0, NerdHealthSFX.Length)];
+                AudioManager.m_Instance.PushMusic(SFXtoPlay2);
+            }
+        }
+
+        if (other.GetComponent<HeartSystem>() != null)
+        {
+            m_HeartSystem = other.GetComponent<HeartSystem>();
+            m_HeartSystem.Heal(m_HealValue);
+            m_HeartSystem.UpdateHearts();
+
+            //sound
+            SFXtoPlay = SFX[Random.Range(0, SFX.Length)];
+
+			//VfX
+			if (usepickupVFX != null) 
+			{
+				GameObject getHeal;
+				getHeal = (GameObject)Instantiate (usepickupVFX, other.transform.position, transform.rotation);
+				Destroy (getHeal, 0.5f);
+			}
+			//VFX end
+
+            if (SFXPlayer != null)
+            {
+                AudioSource source = SFXPlayer.GetComponent<AudioSource>();
+                source.clip = SFXtoPlay;
+            }
+            GameObject SFXtest = Instantiate(SFXPlayer, transform.position, transform.rotation) as GameObject;
+            //sound end
+
+            gameObject.SetActive(false);
         }
     }
 
