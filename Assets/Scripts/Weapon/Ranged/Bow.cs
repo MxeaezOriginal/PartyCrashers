@@ -26,54 +26,24 @@ public class Bow : Ranged
     #endregion
     #region Components
     private Player Player;
-    private GameObject Laser;
+    [SerializeField]
+    private GameObject m_FullChargeVFX;
+    private GameObject FullChargeVFX;
     #endregion
-    #region VFX
-    [Header("FX")]
-    [SerializeField]
-    private GameObject m_PrimaryFlashVFX;
-    [SerializeField]
-    private GameObject m_SecondaryFlashVFX;
-    [SerializeField]
-    private GameObject m_ChargingVFX;
-    [SerializeField]
-    private GameObject m_ChargedVFX;
-    [SerializeField]
-    private GameObject m_LaserBeamVFX;
-    #endregion
-    #region SFX
-    private AudioManager SFXManager;
-    private GameObject SFXPlayer;
-    private AudioClip[] SFXlowcharge;
-    private AudioClip[] SFXmedcharge;
-    private AudioClip[] SFXhighcharge;
-    private AudioClip SFXtoPlay;
-    #endregion
-
-    #region Test
-    //[Header("Test Components")]
-    #endregion
-
+    
     void start()
     {
         Player = GetComponent<Player>();
-        Laser = transform.FindChild("laser").gameObject;
-
-        m_ChargingVFX.gameObject.SetActive(false);
-        m_ChargedVFX.gameObject.SetActive(false);
-
-        //Test 
-        //m_bulletsLeft = m_MaxBullets;
     }
 
     private void Update()
     {
-        //ChargeVFX();
-       
+        
+        
         #region Primary Attack
         Bullets();
         if (m_CanFirePrimary)
-            ShootPrimary();
+            ShootPrimary();                    
         #endregion
 
         #region Secondary Attack
@@ -85,15 +55,28 @@ public class Bow : Ranged
     private void Bullets()
     {
         timer += Time.deltaTime;
-
         if (m_bulletsLeft < m_MaxBullets)
         {
-            if(timer >= BulletRegenTimer)
+            if (timer >= BulletRegenTimer)
             {
                 timer = 0.0f;
-                m_bulletsLeft ++;
+                m_bulletsLeft++;
             }
         }
+
+        #region VFX
+        if (m_bulletsLeft == m_MaxBullets)
+        {
+            if (!FullChargeVFX)
+            {
+                FullChargeVFX = Instantiate(m_FullChargeVFX, transform.position, transform.rotation) as GameObject;
+                FullChargeVFX.transform.parent = gameObject.transform;
+                FullChargeVFX.transform.localScale = new Vector3(1, 1, 1);
+            }
+        }
+        else
+            Destroy(FullChargeVFX);
+        #endregion
     }
 
     public override void primaryAttack()
@@ -147,24 +130,4 @@ public class Bow : Ranged
         else
             Debug.Log("Bullet doesn't have a Damage Component.");
     }
-
-    //private void ChargeVFX()
-    //{
-    //    if (m_ChargingVFX != null && m_ChargedVFX != null)
-    //    {
-    //        if (m_ChargeTimer > 0 && m_ChargeTimer < m_MaxChargeTimer)
-    //            m_ChargingVFX.gameObject.SetActive(true);
-    //        else if (m_ChargeTimer >= m_MaxChargeTimer)
-    //        {
-    //            m_ChargingVFX.gameObject.SetActive(false);
-    //            m_ChargedVFX.gameObject.SetActive(true);
-    //        }
-    //        else
-    //        {
-    //            m_ChargingVFX.gameObject.SetActive(false);
-    //            m_ChargedVFX.gameObject.SetActive(false);
-    //        }
-    //    }
-    //}
-
 }    // End
