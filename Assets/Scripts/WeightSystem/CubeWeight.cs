@@ -21,7 +21,10 @@ public class CubeWeight : MonoBehaviour {
         //rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
         rb.isKinematic = true;
         //sfx start
-        audioSource.clip = MoveSFX;
+        if (audioSource != null)
+        {
+            audioSource.clip = MoveSFX;
+        }
         //sfx end
     }
 	
@@ -38,13 +41,17 @@ public class CubeWeight : MonoBehaviour {
                     if(!rb.isKinematic)
                     {
                         rb.AddForce((transform.position - m_player[i].transform.position) * m_speed);
-                        //SFX Start
-                        if(!audioSource.isPlaying)
+                        if(audioSource != null)
                         {
-                            audioSource.Play();
+                            //SFX Start
+                            if (!audioSource.isPlaying)
+                            {
+                                audioSource.Play();
+                            }
+                            //SFX END
                         }
-                        //SFX END
-                            
+
+
 
                     }
                 }            
