@@ -23,6 +23,7 @@ public class Bow : Ranged
     #region Bools
     private bool m_CanFirePrimary = false;
     private bool m_CanFireSecondary = false;
+    private bool m_InitBullets = true;
     #endregion
     #region Components
     private Player Player;
@@ -37,9 +38,7 @@ public class Bow : Ranged
     }
 
     private void Update()
-    {
-        
-        
+    {       
         #region Primary Attack
         Bullets();
         if (m_CanFirePrimary)
@@ -54,6 +53,12 @@ public class Bow : Ranged
 
     private void Bullets()
     {
+        if(m_InitBullets)
+        {
+            m_InitBullets = false;
+            m_bulletsLeft = m_MaxBullets;
+        }
+
         timer += Time.deltaTime;
         if (m_bulletsLeft < m_MaxBullets)
         {
