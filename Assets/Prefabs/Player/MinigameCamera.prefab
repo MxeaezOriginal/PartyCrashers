@@ -30,6 +30,8 @@ GameObject:
   - 114: {fileID: 11462140}
   - 114: {fileID: 11468942}
   - 82: {fileID: 8264802}
+  - 114: {fileID: 11421650}
+  - 114: {fileID: 11425602}
   m_Layer: 0
   m_Name: MinigameCamera
   m_TagString: MainCamera
@@ -56,10 +58,10 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 119766}
-  m_LocalRotation: {x: -0.4852719, y: -0.0034584012, z: 0.0028791795, w: -0.87435174}
-  m_LocalPosition: {x: 0, y: 28, z: -20}
+  m_LocalRotation: {x: 0.2885065, y: 0.0043395883, z: -0.0019360569, w: 0.9574662}
+  m_LocalPosition: {x: -0.76, y: 22.65, z: -27.72}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 58.061497, y: 0.3524, z: -0.1818}
+  m_LocalEulerAnglesHint: {x: 33.5378, y: 0.4944, z: -0.0828}
   m_Children:
   - {fileID: 476134}
   m_Father: {fileID: 0}
@@ -186,6 +188,40 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 119766}
   m_Enabled: 1
+--- !u!114 &11421650
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 119766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c17a664134eb954aa7219d2d88c3bfb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LookupTexture: {fileID: 2800000, guid: c3fdaef179f0ad0448d330d74232e520, type: 3}
+  Amount: 0.398
+  ForceCompatibility: 0
+  Shader2D: {fileID: 4800000, guid: b5b3d4fe7139a7141be9b1475ea1127f, type: 3}
+  Shader3D: {fileID: 4800000, guid: c356d31be0868c94d8c3eb943516cb8a, type: 3}
+  Filter: 16
+--- !u!114 &11425602
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 119766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed84fd8415f461e44bbe842e911c859b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  threshold: 0.131
+  intensity: 0.66
+  blurSize: 0.25
+  blurIterations: 2
+  blurType: 0
+  fastBloomShader: {fileID: 4800000, guid: 68a00c837b82e4c6d92e7da765dc5f1d, type: 3}
 --- !u!114 &11462140
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -197,13 +233,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba4a60fbdc162d54692b12c54f20257c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotation: {x: 60, y: 0, z: 0}
-  height: 15
-  distanceOffset: 10
+  rotation: {x: 55, y: 0, z: 0}
   y: 0
   mPosition: {x: 0, y: 0, z: 0}
   m_Zoom: 0
   m_ZoomAmount: 2
+  m_MaxZoom: 30
+  m_LerpAmount: 3
   players: []
 --- !u!114 &11468942
 MonoBehaviour:
@@ -218,7 +254,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audio: {fileID: 8264802}
   BGMList:
-  - {fileID: 8300000, guid: 2921d9e0b70bd7447a01a52268447409, type: 3}
+  - {fileID: 8300000, guid: 9a9f62c9d6675d24094771c1eb093800, type: 3}
   swaptest: 0
 --- !u!124 &12410492
 Behaviour:
