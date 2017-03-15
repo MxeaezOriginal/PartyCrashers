@@ -43,7 +43,7 @@ public class MinigameScoreAndTimeTrack : MonoBehaviour
         if(m_MinigameManager.GetMinigameState() == MinigameManager.EMinigameState.ScoreAndTimeTrack 
             && !m_IsCoroutineRunning)
         {
-            if (m_PartyBar.m_Current < 0.0f)
+            if (m_PartyBar.m_Current <= 0.0f)
             {
                 m_MinigameManager.UpdateMinigameState();
                 return;

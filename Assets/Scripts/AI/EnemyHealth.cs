@@ -27,7 +27,7 @@ public class EnemyHealth : MonoBehaviour
     private bool isDamage = false;
 
 
-    void Start()
+    void Awake()
     {
         m_EnemyHealth = m_MaxHealth;
     }
