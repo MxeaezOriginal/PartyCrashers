@@ -34,6 +34,7 @@ GameObject:
   - 114: {fileID: 11456602}
   - 114: {fileID: 11484624}
   - 114: {fileID: 11420688}
+  - 114: {fileID: 11431084}
   m_Layer: 14
   m_Name: PrepGirl_Projectile
   m_TagString: OneDamage
@@ -50,7 +51,6 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -12.754997, y: 2.5, z: 7.2118955}
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 479206}
   m_Father: {fileID: 0}
@@ -64,7 +64,6 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 4, y: 4, z: 4}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 467914}
   m_RootOrder: 0
@@ -271,6 +270,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_KnockBack: 30
+--- !u!114 &11431084
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 184478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 715664b92a25bee4bab0bb605fa3eb3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scaleValue: 3
+  pickupGameObject:
+  - {fileID: 100000, guid: 934d8d145abb6924c8dfdaf82740f44e, type: 2}
+  - {fileID: 100000, guid: 14504d6f73247474f8f7a8ac85869103, type: 2}
+  - {fileID: 100000, guid: 5e2b4fa844dd05343bfe591ec96ab321, type: 2}
+  - {fileID: 100000, guid: 8f8452b315a49dd4c9641eebf9f859b4, type: 2}
+  - {fileID: 100000, guid: c95a4721375d5ae45933bd51e2bc2b38, type: 2}
+  - {fileID: 100000, guid: 8c91f72fc0d3da64b83f3722f5499eb4, type: 2}
+  - {fileID: 100000, guid: 99ca740306135a94dad6c215a2718cfa, type: 2}
+  - {fileID: 100000, guid: c97d41452b7045f4aab68f18b791c40e, type: 2}
+  - {fileID: 100000, guid: 9cc0f42bfc3f76f4398a580af76e10c9, type: 2}
+  - {fileID: 100000, guid: ddbb139c6a1f47546bf73094e564271b, type: 2}
+  - {fileID: 100000, guid: 6484e5045a8079f4f9fdf12620aaefe1, type: 2}
+  - {fileID: 100000, guid: b73c90e0a81d19d46a4f470437c4688c, type: 2}
 --- !u!114 &11456602
 MonoBehaviour:
   m_ObjectHideFlags: 1
