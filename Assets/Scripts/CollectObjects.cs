@@ -32,32 +32,35 @@ public class CollectObjects : MonoBehaviour
     {
         Collectible collectible = other.GetComponent<Collectible>();
 
-        if(collectible != null && GameManager.m_Instance.m_GameState == GameManager.GameState.Dungeon && player.m_State == Player.State.Alive)
+        if (collectible != null)
         {
-            //player.m_Gold += collectible.gold;
-            //player.m_Score += 100;
-
-
-            StopCoroutine("CountTo");
-
-            player.m_Score += m_PointsToCollect;
-            m_PointsToCollect = 100;
-            StartCoroutine("CountTo");
-
-            partyBar.m_Current += collectible.gold;
-            partyBar.partybarLogo.SetBool("Gain", true);
-            //partyBar.partybarLogo.SetBool("Drain", false);
-
-            if (collectible.type == Collectible.Type.Death)
+            if (GameManager.m_Instance.m_GameState == GameManager.GameState.Dungeon && player.m_State == Player.State.Alive)
             {
-                //lose health
-            }
+                //player.m_Gold += collectible.gold;
+                //player.m_Score += 100;
 
-            other.gameObject.SetActive(false);
-        }
-        else if(GameManager.m_Instance.m_GameState == GameManager.GameState.Minigame && collectible.type == Collectible.Type.Simple && player.m_State == Player.State.Alive)
-        {
-            player.m_Score += 100;
+
+                StopCoroutine("CountTo");
+
+                player.m_Score += m_PointsToCollect;
+                m_PointsToCollect = 100;
+                StartCoroutine("CountTo");
+
+                partyBar.m_Current += collectible.gold;
+                partyBar.partybarLogo.SetBool("Gain", true);
+                //partyBar.partybarLogo.SetBool("Drain", false);
+
+                if (collectible.type == Collectible.Type.Death)
+                {
+                    //lose health
+                }
+
+                other.gameObject.SetActive(false);
+            }
+            else if (GameManager.m_Instance.m_GameState == GameManager.GameState.Minigame && collectible.type == Collectible.Type.Simple && player.m_State == Player.State.Alive)
+            {
+                player.m_Score += 100;
+            }
         }
     }
     IEnumerator CountTo()
