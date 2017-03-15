@@ -2,10 +2,15 @@
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class EndCanvas : MonoBehaviour
 {
     public bool activated;
+    public bool gameWon;
+    public string winText;
+    public string loseText;
+
     Canvas endCanvas;
     Button backToMainMenuButton;
 
@@ -14,7 +19,7 @@ public class EndCanvas : MonoBehaviour
 
     void Awake()
     {
-        endCanvas = GameObject.Find("End Canvas").GetComponent<Canvas>();
+        endCanvas = GetComponent<Canvas>();
         backToMainMenuButton = transform.GetChild(1).GetComponent<Button>();
 
         ES = GameObject.Find("EventSystem").GetComponent<EventSystem>();
@@ -23,15 +28,10 @@ public class EndCanvas : MonoBehaviour
 
     void Update()
     {
-        if(!activated)
-        {
-            endCanvas.enabled = false;
-            foreach (GameObject player in GameManager.m_Instance.m_Players)
-            {
-                player.GetComponent<PlayerController>().m_CantMove = false;
-            }
-        }
-        else
+        if (Input.GetKey(KeyCode.Tab))
+            activated = true;
+
+        if (activated)
         {
             endCanvas.enabled = true;
             foreach (GameObject player in GameManager.m_Instance.m_Players)
@@ -39,19 +39,23 @@ public class EndCanvas : MonoBehaviour
                 player.GetComponent<PlayerController>().m_CantMove = true;
             }
 
+            //SIM.submitButton = ("Submit_" + GameManager.m_Instance.m_Player1.m_Controller);
 
-            SIM.horizontalAxis = ("Horizontal_" + GameManager.m_Instance.m_Player1.m_Controller);
-            SIM.verticalAxis = ("Vertical_" + GameManager.m_Instance.m_Player1.m_Controller);
-            SIM.submitButton = ("Submit_" + GameManager.m_Instance.m_Player1.m_Controller);
+            //ES.enabled = false;
+            //ES.enabled = true;
 
-            ES.enabled = false;
-            ES.enabled = true;
+            GetComponentInChildren<Button>().enabled = true;
             ES.SetSelectedGameObject(backToMainMenuButton.gameObject);
+
+            if (gameWon)
+                transform.GetChild(0).GetComponent<Text>().text = winText;
+            else
+                transform.GetChild(0).GetComponent<Text>().text = loseText;
         }
     }
 
     public void BackToMainMenu()
     {
-        print("EXIT TO MAIN MENU");
+        SceneManager.LoadScene("MainMenu");
     }
 }
