@@ -60,6 +60,7 @@ public class FizzyPoP : Ranged
         FizzyCone.GetComponent<Damage>().m_Damage = m_Damage;
         FizzyCone.SetActive(false);
         Player = GetComponentInParent<Player>();
+        m_FirePoint[1].transform.position = transform.FindChild("FirePoint").transform.position;
     }
 
     void Update()

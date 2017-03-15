@@ -401,7 +401,7 @@ public class Player : MonoBehaviour
                         gothClone.transform.parent = m_PlayerObject.gameObject.transform;
                         gothClone.transform.localPosition = new Vector3(0, 0, 0);
                         gothClone.transform.localRotation = Quaternion.identity;
-                        gothClone.transform.localScale = new Vector3(1, 1, 1);
+                        gothClone.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
                         StartCoroutine(waitThenSetPlayerOutline(gothClone, m_Model));
                         gothClone.name = "Model";
                         m_Animator = gothClone.GetComponent<Animator>();

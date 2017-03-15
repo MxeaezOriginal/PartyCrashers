@@ -26,7 +26,7 @@ public class WeaponManager : MonoBehaviour
     public GameObject[] m_WeaponPrefabPickups;
     private Dictionary<string, GameObject> m_Weapons = new Dictionary<string, GameObject>();
     private Transform m_WeaponsTransform;
-    private Player player;
+    private Player m_Player;
 
     //PickupSound
     public int maxChance;
@@ -40,7 +40,7 @@ public class WeaponManager : MonoBehaviour
 
     void Awake()
     {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        m_Player = GetComponent<Player>();
     }
 
     void Start()
@@ -239,25 +239,25 @@ public class WeaponManager : MonoBehaviour
                 ChanceNumber = Random.Range(0, maxChance);
                 if (ChanceNumber == Chance)
                 {
-                    if (player.m_Model == Player.Model.Badboy)
+                    if (m_Player.m_Model == Player.Model.Badboy)
                     {
                         SFXtoPlay = BadBoySFX[Random.Range(0, BadBoySFX.Length)];
                         AudioManager.m_Instance.PushMusic(SFXtoPlay);
                     }
 
-                    if (player.m_Model == Player.Model.Goth)
+                    if (m_Player.m_Model == Player.Model.Goth)
                     {
                         SFXtoPlay = GothSFX[Random.Range(0, GothSFX.Length)];
                         AudioManager.m_Instance.PushMusic(SFXtoPlay);
                     }
 
-                    if (player.m_Model == Player.Model.Nerd)
+                    if (m_Player.m_Model == Player.Model.Nerd)
                     {
                         SFXtoPlay = NerdSFX[Random.Range(0, NerdSFX.Length)];
                         AudioManager.m_Instance.PushMusic(SFXtoPlay);
                     }
 
-                    if (player.m_Model == Player.Model.Mascot)
+                    if (m_Player.m_Model == Player.Model.Mascot)
                     {
                         SFXtoPlay = MascotSFX[Random.Range(0, MascotSFX.Length)];
                         AudioManager.m_Instance.PushMusic(SFXtoPlay);
