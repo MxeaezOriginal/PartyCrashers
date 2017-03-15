@@ -12,6 +12,8 @@ GameObject:
   - 23: {fileID: 2300000}
   - 65: {fileID: 6513450}
   - 54: {fileID: 5495964}
+  - 65: {fileID: 6557136}
+  - 114: {fileID: 11494250}
   m_Layer: 0
   m_Name: Items_Plank_01
   m_TagString: Untagged
@@ -25,10 +27,10 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_LocalRotation: {x: 0.51560813, y: 0.69566077, z: -0.4838887, w: 0.12671304}
-  m_LocalPosition: {x: -4.01, y: 2.85, z: 107.48}
-  m_LocalScale: {x: 2, y: 2, z: 5}
-  m_LocalEulerAnglesHint: {x: 53.505398, y: -147.1408, z: 90}
+  m_LocalRotation: {x: -0.05441681, y: 0.7050099, z: 0.05441682, w: 0.70500976}
+  m_LocalPosition: {x: -2.165, y: 3.137, z: 110}
+  m_LocalScale: {x: 10, y: 2, z: 5}
+  m_LocalEulerAnglesHint: {x: -8.8274, y: 90, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -42,7 +44,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: dc043a9656f81bc488510dcda2b382ab, type: 2}
+  - {fileID: 2100000, guid: 4df4c4d3b8bcbb34992f316d3ade67be, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -92,6 +94,34 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.18572332, y: 0.130343, z: 1.6250497}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &6557136
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.25, y: 0.25, z: 1.75}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &11494250
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b423d4adaaee1cb4786017677ca27f5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_speed: 0
+  m_maxNum: 1
+  m_recentNum: 0
+  audioSource: {fileID: 0}
+  MoveSFX: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
