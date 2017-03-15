@@ -224,7 +224,8 @@ public class PlayerController : MonoBehaviour
             //    m_Player.m_Animator.SetFloat("Horizontal", m_Velocity.x);
             //    Debug.Log(m_Player.transform.forward);
             //}
-            Debug.Log(m_Player.transform.forward);
+
+            //For Walk/Strafe animation
             if (m_Player.m_Animator != null)
             {
                 if ((m_Player.transform.forward.x >= -7f && m_Player.transform.forward.x <= .7f

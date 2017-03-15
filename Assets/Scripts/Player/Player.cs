@@ -285,10 +285,15 @@ public class Player : MonoBehaviour
     {
         // if (GameManager.m_Instance.m_GameState == GameManager.GameState.Dungeon)
         //{
-        var vel = gameObject.GetComponent<PlayerController>().m_Velocity.normalized;
-        Vector3 tempLocation = m_Location;
-        tempLocation.x -= vel.x * 20.0f;
-        tempLocation.z -= vel.z * 20.0f;
+        //var vel = gameObject.GetComponent<PlayerController>().m_Velocity.normalized;
+        //Vector3 tempLocation = m_Location;
+        //tempLocation.x -= vel.x * 20.0f;
+        //tempLocation.z -= vel.z * 20.0f;
+        NavMeshHit hit;
+        if(NavMesh.SamplePosition(transform.position, out hit, 100f, -1))
+        {
+            transform.position = hit.position;
+        }
 
         m_State = State.Dead;
         if(m_Score != 0)
@@ -296,7 +301,7 @@ public class Player : MonoBehaviour
         gameObject.layer = 11;
         m_IsDead = true;
         updateModel();
-        transform.position = tempLocation;
+        //transform.position = tempLocation;
         stun(0.1f);
         m_PlayerController.m_Velocity.y = 0;
         m_RespawnHealth.initialize();
