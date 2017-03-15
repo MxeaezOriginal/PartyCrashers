@@ -140,6 +140,7 @@ public class PartyBar : MonoBehaviour {
         {
             ++GameManager.m_Instance.m_Tutorial;
         }*/
+        GameManager.m_Instance.m_LastLevelPlayed = SceneManager.GetActiveScene().name;
 
         SceneManager.LoadScene(Random.Range(7, 9 + 1));
     }

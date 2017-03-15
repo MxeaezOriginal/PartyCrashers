@@ -255,4 +255,17 @@ public class FizzyPoP : Ranged
             Debug.Log("Bullet doesn't have a Damage Component");
         }
     }
+
+    void OnDestroy()
+    {
+        if (ShootSprayGO != null)
+        {
+            Destroy(ShootSprayGO);
+        }
+
+        if (FallOffSpray != null)
+        {
+            Destroy(FallOffSpray);
+        }
+    }
 }
