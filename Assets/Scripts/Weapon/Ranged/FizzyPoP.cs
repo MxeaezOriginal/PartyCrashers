@@ -27,7 +27,7 @@ public class FizzyPoP : Ranged
     #endregion
 
     #region Components
-    private Player Player;
+    private Player m_Player;
     private GameObject FizzyCone;
     [SerializeField]
     private GameObject ShootSprayVFX;
@@ -59,8 +59,7 @@ public class FizzyPoP : Ranged
         }
         FizzyCone.GetComponent<Damage>().m_Damage = m_Damage;
         FizzyCone.SetActive(false);
-        Player = GetComponentInParent<Player>();
-        m_FirePoint[1].transform.position = transform.FindChild("FirePoint").transform.position;
+        m_Player = GetComponentInParent<Player>();
     }
 
     void Update()
@@ -83,7 +82,7 @@ public class FizzyPoP : Ranged
             }
         }
 
-        if (Input.GetButtonUp(Player.m_PrimaryAttack + Player.m_Controller.ToString()))
+        if (Input.GetButtonUp(m_Player.m_PrimaryAttack + m_Player.m_Controller.ToString()))
         {
             m_SprayCooldown = -1;
             //if (FallOffSpray != null)
@@ -171,7 +170,10 @@ public class FizzyPoP : Ranged
                 ShootSprayGO.transform.parent = m_FirePoint[1].transform.parent.transform.parent;
                 //ShootSprayGO.transform.Rotate(new Vector3(-90, 0, 0));
                 ShootSprayGO.transform.localScale = new Vector3(1, 1, 1);
-                ShootSprayGO.transform.localPosition = m_FirePoint[1].transform.localPosition;
+                if (m_Player.m_Model == Player.Model.Mascot)
+                    ShootSprayGO.transform.localPosition = m_FirePoint[2].transform.localPosition;
+                else
+                    ShootSprayGO.transform.localPosition = m_FirePoint[1].transform.localPosition;
                 //ShootSprayVFXBool = true;
                 //Destroy(ShootSprayGO, (m_SprayTimer - 1f));
 
@@ -208,42 +210,45 @@ public class FizzyPoP : Ranged
             FallOffSpray.transform.parent = m_FirePoint[1].transform.parent.transform.parent;
             //FallOffSpray.transform.Rotate(new Vector3(0, 0, 0));
             FallOffSpray.transform.localScale = new Vector3(1, 1, 1);
-            FallOffSpray.transform.localPosition = m_FirePoint[1].transform.localPosition;
+            if(m_Player.m_Model == Player.Model.Mascot)
+                FallOffSpray.transform.localPosition = m_FirePoint[2].transform.localPosition;
+            else
+                FallOffSpray.transform.localPosition = m_FirePoint[1].transform.localPosition;
             Destroy(FallOffSpray, 2f);
         }
     }
 
-    private void FallOff()
-    {
-        if (FallOffSprayVFX != null)
-        {
-            FallOffSpray = (GameObject)Instantiate(FallOffSprayVFX, m_FirePoint[1].transform.position, transform.GetComponentInParent<Player>().transform.rotation);
-            FallOffSpray.transform.parent = m_FirePoint[1].transform.parent.transform.parent;
-            //FallOffSpray.transform.Rotate(new Vector3(-90, 0, 0));
-            FallOffSpray.transform.localScale = new Vector3(1, 1, 1);
-            FallOffSpray.transform.localPosition = m_FirePoint[1].transform.localPosition;
-            Destroy(FallOffSpray, m_Weapon1Cooldown - 1f);
-        }
-    }
+    //private void FallOff()
+    //{
+    //    if (FallOffSprayVFX != null)
+    //    {
+    //        FallOffSpray = (GameObject)Instantiate(FallOffSprayVFX, m_FirePoint[1].transform.position, transform.GetComponentInParent<Player>().transform.rotation);
+    //        FallOffSpray.transform.parent = m_FirePoint[1].transform.parent.transform.parent;
+    //        //FallOffSpray.transform.Rotate(new Vector3(-90, 0, 0));
+    //        FallOffSpray.transform.localScale = new Vector3(1, 1, 1);
+    //        FallOffSpray.transform.localPosition = m_FirePoint[1].transform.localPosition;
+    //        Destroy(FallOffSpray, m_Weapon1Cooldown - 1f);
+    //    }
+    //}
 
-    private IEnumerator FallOffTimer()
-    {
-        bool ShootSprayFallOffVFXBool = false;
-        yield return new WaitForSeconds(m_SprayTimer - 1.5f);
-        if (FallOffSprayVFX != null)
-        {
-            if (!ShootSprayFallOffVFXBool)
-            {
-                FallOffSpray = (GameObject)Instantiate(FallOffSprayVFX, m_FirePoint[1].transform.position, transform.rotation);
-                FallOffSpray.transform.parent = m_FirePoint[1].transform.parent.transform.parent;
-                FallOffSpray.transform.Rotate(new Vector3(-90, 0, 0));
-                FallOffSpray.transform.localScale = new Vector3(1, 1, 1);
-                FallOffSpray.transform.localPosition = m_FirePoint[1].transform.localPosition;
-                ShootSprayFallOffVFXBool = true;
-                Destroy(FallOffSpray, (m_FallOffTimer + 2));
-            }
-        }
-    }
+    //private IEnumerator FallOffTimer()
+    //{
+    //    bool ShootSprayFallOffVFXBool = false;
+    //    yield return new WaitForSeconds(m_SprayTimer - 1.5f);
+    //    if (FallOffSprayVFX != null)
+    //    {
+    //        if (!ShootSprayFallOffVFXBool)
+    //        {
+    //            FallOffSpray = (GameObject)Instantiate(FallOffSprayVFX, m_FirePoint[1].transform.position, transform.rotation);
+    //            FallOffSpray.transform.parent = m_FirePoint[1].transform.parent.transform.parent;
+    //            FallOffSpray.transform.Rotate(new Vector3(-90, 0, 0));
+    //            FallOffSpray.transform.localScale = new Vector3(1, 1, 1);
+    //            FallOffSpray.transform.localPosition = m_FirePoint[1].transform.localPosition;
+    //            ShootSprayFallOffVFXBool = true;
+    //            Destroy(FallOffSpray, (m_FallOffTimer + 2));
+    //        }
+    //    }
+    //}
 
     private void assignDamage(GameObject bullet)
     {
