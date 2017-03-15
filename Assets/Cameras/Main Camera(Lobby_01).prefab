@@ -15,6 +15,9 @@ GameObject:
   - 114: {fileID: 11407766}
   - 114: {fileID: 11416100}
   - 82: {fileID: 8222724}
+  - 114: {fileID: 11469860}
+  - 114: {fileID: 11483162}
+  - 114: {fileID: 11404472}
   m_Layer: 0
   m_Name: Main Camera(Lobby_01)
   m_TagString: MainCamera
@@ -186,6 +189,33 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 142220}
   m_Enabled: 1
+--- !u!114 &11404472
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 142220}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 390397f02bff7644ab045efd81d0d720, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  QualityLevel: 1
+  AutoRegisterObjs: 1
+  OverlayCameras: []
+  CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  QualitySteps: 1
+  MotionScale: 3
+  CameraMotionMult: 1.5
+  MinVelocity: 5
+  MaxVelocity: 10
+  DepthThreshold: 0.001
+  WorkerThreads: 0
+  SystemThreadPool: 0
+  ForceCPUOnly: 0
+  DebugMode: 0
 --- !u!114 &11407766
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -197,7 +227,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba4a60fbdc162d54692b12c54f20257c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotation: {x: 60, y: 0, z: 0}
+  rotation: {x: 55, y: 0, z: 0}
   y: 0
   mPosition: {x: 0, y: 0, z: 0}
   m_Zoom: 0
@@ -220,6 +250,40 @@ MonoBehaviour:
   BGMList:
   - {fileID: 8300000, guid: d8bc1732dd6993145a624c542e8722a9, type: 3}
   swaptest: 0
+--- !u!114 &11469860
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 142220}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed84fd8415f461e44bbe842e911c859b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  threshold: 0.265
+  intensity: 0.761
+  blurSize: 1
+  blurIterations: 1
+  blurType: 1
+  fastBloomShader: {fileID: 4800000, guid: 68a00c837b82e4c6d92e7da765dc5f1d, type: 3}
+--- !u!114 &11483162
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 142220}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bade397de0db6634686b451e10dc2edc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Shader: {fileID: 4800000, guid: 1025d512948837641802921c41526fd1, type: 3}
+  Mode: 0
+  Color: {r: 1, g: 0, b: 0, a: 1}
+  Center: {x: 0.5, y: 0.5}
+  Sharpness: 57.3
+  Darkness: 28
 --- !u!124 &12408190
 Behaviour:
   m_ObjectHideFlags: 1
