@@ -26,6 +26,7 @@ public class MinigameResultSummary : MonoBehaviour
 
     bool neonTurnedOn;
     public Image[] resultBarNeonTopImage = new Image[4];
+    public Animator[] resultBarNeonTopAnimator = new Animator[4];
 
     // Methods
 
@@ -43,6 +44,11 @@ public class MinigameResultSummary : MonoBehaviour
         m_P2Bar = GameObject.Find("P2_Panel/Slider").GetComponent<Slider>();
         m_P3Bar = GameObject.Find("P3_Panel/Slider").GetComponent<Slider>();
         m_P4Bar = GameObject.Find("P4_Panel/Slider").GetComponent<Slider>();
+
+        resultBarNeonTopAnimator[0] = GameObject.Find("P1_Panel/Slider/Handle Slide Area/Handle").GetComponent<Animator>();
+        resultBarNeonTopAnimator[1] = GameObject.Find("P2_Panel/Slider/Handle Slide Area/Handle").GetComponent<Animator>();
+        resultBarNeonTopAnimator[2] = GameObject.Find("P3_Panel/Slider/Handle Slide Area/Handle").GetComponent<Animator>();
+        resultBarNeonTopAnimator[3] = GameObject.Find("P4_Panel/Slider/Handle Slide Area/Handle").GetComponent<Animator>();
 
         //m_FirstDelay = 3.5f;
         //m_SecondDelay = 2.0f * m_FirstDelay;
@@ -186,10 +192,10 @@ public class MinigameResultSummary : MonoBehaviour
 
     void TurnNeonOn()
     {
-        resultBarNeonTopImage[0].GetComponent<Animator>().SetBool("TurnOn", true);
-        resultBarNeonTopImage[1].GetComponent<Animator>().SetBool("TurnOn", true);
-        resultBarNeonTopImage[2].GetComponent<Animator>().SetBool("TurnOn", true);
-        resultBarNeonTopImage[3].GetComponent<Animator>().SetBool("TurnOn", true);
+        resultBarNeonTopAnimator[0].GetComponent<Animator>().SetBool("TurnOn", true);
+        resultBarNeonTopAnimator[1].GetComponent<Animator>().SetBool("TurnOn", true);
+        resultBarNeonTopAnimator[2].GetComponent<Animator>().SetBool("TurnOn", true);
+        resultBarNeonTopAnimator[3].GetComponent<Animator>().SetBool("TurnOn", true);
 
         StartCoroutine(DelayBeforeUpdatingMinigameState());
     }
