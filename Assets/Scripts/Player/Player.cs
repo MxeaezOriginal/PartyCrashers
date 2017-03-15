@@ -80,6 +80,7 @@ public class Player : MonoBehaviour
     private CharacterController m_CharController;
     private WeaponManager m_WeaponManager;
     private RespawnHealth m_RespawnHealth;
+    private PlayerController m_PlayerController;
 
     //Input
     public string m_PrimaryAttack = "Primary_";
@@ -136,6 +137,7 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         m_Heart = GetComponent<HeartSystem>();
         m_CharController = GetComponent<CharacterController>();
+        m_PlayerController = GetComponent<PlayerController>();
         m_WeaponManager = GetComponent<WeaponManager>();
         m_RespawnHealth = GetComponent<RespawnHealth>();
 
@@ -296,6 +298,7 @@ public class Player : MonoBehaviour
         updateModel();
         transform.position = tempLocation;
         stun(0.1f);
+        m_PlayerController.m_Velocity.y = 0;
         m_RespawnHealth.initialize();
         //SFX Start
         if (m_State == State.Alive)
