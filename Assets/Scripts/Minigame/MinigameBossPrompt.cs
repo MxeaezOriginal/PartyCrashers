@@ -89,12 +89,12 @@ public class MinigameBossPrompt : MonoBehaviour
                 if (!m_MinigameRewardSelection.m_IsFightingBoss)
                 {
                     GameManager.m_Instance.m_GameState = GameManager.GameState.Dungeon;
-                    int randInt = Random.Range(2, 6 + 1);
+                    int randInt = Random.Range(2, 5 + 1);
 
                   
                     while (SceneManager.GetSceneAt(randInt).name == GameManager.m_Instance.m_LastLevelPlayed)
                     {
-                        randInt = Random.Range(2, 6 + 1);
+                        randInt = Random.Range(2, 5 + 1);
                     }
                     SceneManager.LoadScene(randInt);
                 }
