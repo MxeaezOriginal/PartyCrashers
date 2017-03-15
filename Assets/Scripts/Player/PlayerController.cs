@@ -219,9 +219,27 @@ public class PlayerController : MonoBehaviour
                 m_Velocity.x = 0f;
             }
 
+            //if (m_Player.m_Animator != null)
+            //{
+            //    m_Player.m_Animator.SetFloat("Horizontal", m_Velocity.x);
+            //    Debug.Log(m_Player.transform.forward);
+            //}
+            Debug.Log(m_Player.transform.forward);
             if (m_Player.m_Animator != null)
             {
-                m_Player.m_Animator.SetFloat("Horizontal", m_Velocity.x);
+                if ((m_Player.transform.forward.x >= -7f && m_Player.transform.forward.x <= .7f
+                    && m_Player.transform.forward.z >= .7f) ||
+                    (m_Player.transform.forward.x >= -7f && m_Player.transform.forward.x <= .7f
+                    && m_Player.transform.forward.z <= -.7f))
+                {
+                    m_Player.m_Animator.SetFloat("Horizontal", m_Velocity.x);
+                    m_Player.m_Animator.SetFloat("Vertical", m_Velocity.z);
+                }
+                else
+                {
+                    m_Player.m_Animator.SetFloat("Horizontal", m_Velocity.z);
+                    m_Player.m_Animator.SetFloat("Vertical", m_Velocity.x);
+                }
             }
 
 
@@ -249,10 +267,10 @@ public class PlayerController : MonoBehaviour
                 m_Velocity.z = 0f;
             }
 
-            if (m_Player.m_Animator != null)
-            {
-                m_Player.m_Animator.SetFloat("Vertical", m_Velocity.z);
-            }
+            //if (m_Player.m_Animator != null)
+            //{
+            //    m_Player.m_Animator.SetFloat("Vertical", m_Velocity.z);
+            //}
 
             //Rotate / Aim
 
