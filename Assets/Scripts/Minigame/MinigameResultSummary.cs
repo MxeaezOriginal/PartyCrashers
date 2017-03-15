@@ -143,7 +143,7 @@ public class MinigameResultSummary : MonoBehaviour
         if (m_MinigameManager.m_FirstFadingCanvas.alpha >= 0.6f)
             StartCoroutine(DelayBeforeRaisingResultBar());
 
-        //ScreenFading();
+        ScreenFading();
     }
 
     void SetPlayerPlace()
@@ -318,20 +318,20 @@ public class MinigameResultSummary : MonoBehaviour
         }
     }
 
-    //void ScreenFading()
-    //{
-    //    if (m_MinigameManager.m_SecondFadingCanvas.alpha < 0.6f)
-    //    {
-    //        m_MinigameManager.m_SecondFadingCanvas.alpha += Time.deltaTime / m_MinigameManager.m_FadeTime;
-    //    }
-    //    else
-    //    {
-    //        m_MinigameManager.m_DelayToShowRewards -= Time.deltaTime;
-    //        if (m_MinigameManager.m_DelayToShowRewards < 0.0f)
-    //        {
-    //            // Going to the Reward Selection Minigame state;
-    //            m_MinigameManager.UpdateMinigameState();
-    //        }
-    //    }
-    //}
+    void ScreenFading()
+    {
+        if (m_MinigameManager.m_SecondFadingCanvas.alpha < 0.6f)
+        {
+            m_MinigameManager.m_SecondFadingCanvas.alpha += Time.deltaTime / m_MinigameManager.m_FadeTime;
+        }
+        else
+        {
+            m_MinigameManager.m_DelayToShowRewards -= Time.deltaTime;
+            if (m_MinigameManager.m_DelayToShowRewards < 0.0f)
+            {
+                // Going to the Reward Selection Minigame state;
+                m_MinigameManager.UpdateMinigameState();
+            }
+        }
+    }
 }
