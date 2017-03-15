@@ -214,22 +214,18 @@ public class MinigameResultSummary : MonoBehaviour
         {
 
             case 1:
-                print("ASDF");
                 m_P1Bar.value = Mathf.Lerp(m_P1Bar.value, ResultBarAmount(GameManager.m_Instance.m_Players[0].GetComponent<Player>().m_Score, 0, m_MaxScore, 0, 1), m_Speed * Time.deltaTime);
                 break;
             case 2:
-                print("ASDF2");
                 m_P1Bar.value = Mathf.Lerp(m_P1Bar.value, ResultBarAmount(GameManager.m_Instance.m_Players[0].GetComponent<Player>().m_Score, 0, m_MaxScore, 0, 1), m_Speed * Time.deltaTime);
                 m_P2Bar.value = Mathf.Lerp(m_P2Bar.value, ResultBarAmount(GameManager.m_Instance.m_Players[1].GetComponent<Player>().m_Score, 0, m_MaxScore, 0, 1), m_Speed * Time.deltaTime);
                 break;
             case 3:
-                print("ASDF3");
                 m_P1Bar.value = Mathf.Lerp(m_P1Bar.value, ResultBarAmount(GameManager.m_Instance.m_Players[0].GetComponent<Player>().m_Score, 0, m_MaxScore, 0, 1), m_Speed * Time.deltaTime);
                 m_P2Bar.value = Mathf.Lerp(m_P2Bar.value, ResultBarAmount(GameManager.m_Instance.m_Players[1].GetComponent<Player>().m_Score, 0, m_MaxScore, 0, 1), m_Speed * Time.deltaTime);
                 m_P3Bar.value = Mathf.Lerp(m_P3Bar.value, ResultBarAmount(GameManager.m_Instance.m_Players[2].GetComponent<Player>().m_Score, 0, m_MaxScore, 0, 1), m_Speed * Time.deltaTime);
                 break;
             case 4:
-                print("ASDF4");
                 m_P1Bar.value = Mathf.Lerp(m_P1Bar.value, ResultBarAmount(GameManager.m_Instance.m_Players[0].GetComponent<Player>().m_Score, 0, m_MaxScore, 0, 1), m_Speed * Time.deltaTime);
                 m_P2Bar.value = Mathf.Lerp(m_P2Bar.value, ResultBarAmount(GameManager.m_Instance.m_Players[1].GetComponent<Player>().m_Score, 0, m_MaxScore, 0, 1), m_Speed * Time.deltaTime);
                 m_P3Bar.value = Mathf.Lerp(m_P3Bar.value, ResultBarAmount(GameManager.m_Instance.m_Players[2].GetComponent<Player>().m_Score, 0, m_MaxScore, 0, 1), m_Speed * Time.deltaTime);
