@@ -107,6 +107,7 @@ GameObject:
   - 54: {fileID: 5459974}
   - 114: {fileID: 11422840}
   - 114: {fileID: 11404732}
+  - 114: {fileID: 11443784}
   m_Layer: 8
   m_Name: WeaponHitBox
   m_TagString: Untagged
@@ -215,6 +216,7 @@ GameObject:
   - 114: {fileID: 11413658}
   - 114: {fileID: 11417288}
   - 82: {fileID: 8202542}
+  - 114: {fileID: 11448850}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -795,6 +797,17 @@ MonoBehaviour:
   playerCurrentColor: {r: 0, g: 0, b: 0, a: 0}
   playerDamageIndacator: {r: 1, g: 1, b: 1, a: 1}
   FlashCheck: 1
+--- !u!114 &11443784
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 131262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f71736e93543fa43a184d0c9fdbe8f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11444636
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -816,6 +829,18 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+--- !u!114 &11448850
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 179692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f71736e93543fa43a184d0c9fdbe8f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Knockback: 25
 --- !u!114 &11448878
 MonoBehaviour:
   m_ObjectHideFlags: 1

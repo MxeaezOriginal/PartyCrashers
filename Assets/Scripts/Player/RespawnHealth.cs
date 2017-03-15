@@ -67,7 +67,7 @@ public class RespawnHealth : MonoBehaviour
             m_Player.m_State = Player.State.Alive;
             m_Player.m_IsDead = false;
             m_Player.updateModel();
-            Debug.Log("Updated Model");
+            //Debug.Log("Updated Model");
             //SFX Start
             if (SFXPlayer != null)
             {

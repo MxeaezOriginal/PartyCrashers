@@ -56,10 +56,11 @@ public class WeaponManager : MonoBehaviour
              m_CurrentWeapon = (EWeapon)Random.Range(0, (int)EWeapon.Length);
         }
 
-        if (GameManager.m_Instance.m_GameState != GameManager.GameState.Minigame)
+        if (GameManager.m_Instance.m_GameState == GameManager.GameState.Minigame)
         {
-            initialize();
+            m_CurrentWeapon = EWeapon.GlowSword;
         }
+        initialize();
     }
 
     private void Update()

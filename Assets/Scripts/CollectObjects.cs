@@ -11,6 +11,8 @@ public class CollectObjects : MonoBehaviour
 
     public float duration = 1f;
 
+    private int m_PointsToCollect = 0;
+
     void Start()
     {
         scoreCounter = GameObject.Find("P1_Panel/Score");
@@ -35,8 +37,12 @@ public class CollectObjects : MonoBehaviour
             //player.m_Gold += collectible.gold;
             //player.m_Score += 100;
 
+
             StopCoroutine("CountTo");
-            StartCoroutine("CountTo", player.m_Score + 100);
+
+            player.m_Score += m_PointsToCollect;
+            m_PointsToCollect = 100;
+            StartCoroutine("CountTo");
 
             partyBar.m_Current += collectible.gold;
             partyBar.partybarLogo.SetBool("Gain", true);
@@ -54,15 +60,18 @@ public class CollectObjects : MonoBehaviour
             player.m_Score += 100;
         }
     }
-    IEnumerator CountTo(int target)
+    IEnumerator CountTo()
     {
-        int start = player.m_Score;
-        for (float timer = 0; timer < duration; timer += Time.deltaTime)
+        //int start = player.m_Score;
+        int temp = m_PointsToCollect;
+        for (int i = 0; i < temp; i += 1)
         {
-            float progress = timer / duration;
-            player.m_Score = (int)Mathf.Lerp(start, target, progress);
+            //float progress = timer / duration;
+            //player.m_Score = (int)Mathf.Lerp(start, target, progress);
+            player.m_Score += 1;
+            m_PointsToCollect -= 1;
             yield return null;
         }
-        player.m_Score = target;
+        //player.m_Score = target;
     }
 }
