@@ -55,7 +55,7 @@ public class AudioManager : MonoBehaviour {
             //m_RandomMusicList.Add(ac);
             //m_AudioSource.clip = ac;
             //m_AudioSource.pitch = m_pitch;
-            AudioSource.PlayClipAtPoint(ac, Camera.main.transform.position);
+            m_AudioSource.PlayOneShot(ac, 1);
             m_IsPlaying = true;
             m_DelayCounter = m_DelayTime;
         }
