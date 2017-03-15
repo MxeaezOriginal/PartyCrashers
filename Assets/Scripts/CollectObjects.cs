@@ -39,6 +39,8 @@ public class CollectObjects : MonoBehaviour
             StartCoroutine("CountTo", player.m_Score + 100);
 
             partyBar.m_Current += collectible.gold;
+            partyBar.partybarLogo.SetBool("Gain", true);
+            //partyBar.partybarLogo.SetBool("Drain", false);
 
             if (collectible.type == Collectible.Type.Death)
             {
