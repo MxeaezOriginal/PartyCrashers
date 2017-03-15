@@ -92,7 +92,7 @@ public class MinigameBossPrompt : MonoBehaviour
                     int randInt = Random.Range(2, 5 + 1);
 
                   
-                    while (SceneManager.GetSceneAt(randInt).name == GameManager.m_Instance.m_LastLevelPlayed)
+                    while (randInt == GameManager.m_Instance.m_LastLevelPlayedIndex)
                     {
                         randInt = Random.Range(2, 5 + 1);
                     }

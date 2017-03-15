@@ -66,7 +66,7 @@ public class GameManager : MonoBehaviour
     public PartyBar m_PartyBar;
 
     public string m_LevelToStart;
-    public string m_LastLevelPlayed;
+    public int m_LastLevelPlayedIndex;
 
     // Use this for initialization
     void Awake()
