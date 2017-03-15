@@ -135,4 +135,12 @@ public class Bow : Ranged
         else
             Debug.Log("Bullet doesn't have a Damage Component.");
     }
+
+    void OnDestroy()
+    {
+        if(FullChargeVFX != null)
+        {
+            Destroy(FullChargeVFX);
+        }
+    }
 }    // End

@@ -273,5 +273,6 @@ public class FizzyPoP : Ranged
         {
             Destroy(FallOffSpray);
         }
+        FizzyCone.SetActive(false);
     }
 }

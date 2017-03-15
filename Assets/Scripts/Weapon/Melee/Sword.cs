@@ -212,4 +212,11 @@ public class Sword : Melee
         yield return new WaitForSeconds(.1f);
         m_Player.m_Animator.SetBool("isDashing", false);
     }
+
+    void OnDestroy()
+    {
+        sliceEffect.SetActive(false);
+        swordTrigger.SetActive(false);
+        m_DashCooldown = 0;
+    }
 }
