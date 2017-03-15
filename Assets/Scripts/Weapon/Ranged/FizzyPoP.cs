@@ -166,9 +166,9 @@ public class FizzyPoP : Ranged
             {
                 //if (!ShootSprayVFXBool)
                 //{
-                ShootSprayGO = (GameObject)Instantiate(ShootSprayVFX, m_FirePoint[1].transform.position, transform.rotation);
+                ShootSprayGO = (GameObject)Instantiate(ShootSprayVFX, m_FirePoint[1].transform.position, transform.GetComponentInParent<Player>().transform.rotation);
                 ShootSprayGO.transform.parent = m_FirePoint[1].transform.parent.transform.parent;
-                ShootSprayGO.transform.Rotate(new Vector3(-90, 0, 0));
+                //ShootSprayGO.transform.Rotate(new Vector3(-90, 0, 0));
                 ShootSprayGO.transform.localScale = new Vector3(1, 1, 1);
                 ShootSprayGO.transform.localPosition = m_FirePoint[1].transform.localPosition;
                 //ShootSprayVFXBool = true;
@@ -203,9 +203,9 @@ public class FizzyPoP : Ranged
     {
         if (FallOffSprayVFX != null)
         {
-            FallOffSpray = (GameObject)Instantiate(FallOffSprayVFXEarly, m_FirePoint[1].transform.position, transform.rotation);
+            FallOffSpray = (GameObject)Instantiate(FallOffSprayVFXEarly, m_FirePoint[1].transform.position, transform.GetComponentInParent<Player>().transform.rotation);
             FallOffSpray.transform.parent = m_FirePoint[1].transform.parent.transform.parent;
-            FallOffSpray.transform.Rotate(new Vector3(-90, 0, 0));
+            //FallOffSpray.transform.Rotate(new Vector3(0, 0, 0));
             FallOffSpray.transform.localScale = new Vector3(1, 1, 1);
             FallOffSpray.transform.localPosition = m_FirePoint[1].transform.localPosition;
             Destroy(FallOffSpray, 2f);
@@ -216,9 +216,9 @@ public class FizzyPoP : Ranged
     {
         if (FallOffSprayVFX != null)
         {
-            FallOffSpray = (GameObject)Instantiate(FallOffSprayVFX, m_FirePoint[1].transform.position, transform.rotation);
+            FallOffSpray = (GameObject)Instantiate(FallOffSprayVFX, m_FirePoint[1].transform.position, transform.GetComponentInParent<Player>().transform.rotation);
             FallOffSpray.transform.parent = m_FirePoint[1].transform.parent.transform.parent;
-            FallOffSpray.transform.Rotate(new Vector3(-90, 0, 0));
+            //FallOffSpray.transform.Rotate(new Vector3(-90, 0, 0));
             FallOffSpray.transform.localScale = new Vector3(1, 1, 1);
             FallOffSpray.transform.localPosition = m_FirePoint[1].transform.localPosition;
             Destroy(FallOffSpray, m_Weapon1Cooldown - 1f);
