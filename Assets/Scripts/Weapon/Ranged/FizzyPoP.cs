@@ -65,7 +65,7 @@ public class FizzyPoP : Ranged
     void Update()
     {
         m_SprayCooldown -= Time.deltaTime;
-
+       
         if (m_SprayCooldown < 0)
         {
             if (m_IsDown)
@@ -188,7 +188,7 @@ public class FizzyPoP : Ranged
         GameObject healPrefab;
         healPrefab = (GameObject)Instantiate(m_LeftTriggerProjectile, m_FirePoint[1].gameObject.transform.position + (playerController.transform.forward * 1.3f), m_FirePoint[1].gameObject.transform.rotation);
         healPrefab.GetComponent<Rigidbody>().AddForce(healPrefab.transform.forward * m_ProjectileSpeed02);
-        playerController.m_Velocity = playerController.transform.forward * (m_PlayerRecoil * -1);
+        playerController.m_Velocity = playerController.transform.forward.normalized * (m_PlayerRecoil * -1);
         //m_CanHeal = false;
     }
 

@@ -115,7 +115,7 @@ public class WeaponManager : MonoBehaviour
         newWeapon.transform.parent = child.gameObject.transform;
         newWeapon.transform.localPosition = new Vector3(0, 0, 0);
         newWeapon.transform.localRotation = Quaternion.identity;
-        newWeapon.transform.localScale = m_Weapons[weapon.name].transform.localScale;
+        //newWeapon.transform.localScale = m_Weapons[weapon.name].transform.localScale;
 
         if(newWeapon.GetComponent<Ranged>() != null)
         {
