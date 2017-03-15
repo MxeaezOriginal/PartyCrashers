@@ -67,7 +67,7 @@ public class CubeWeight : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-        for (int i = 0; i < m_player.Length; i++)
+        for (int i = 0; i < GameManager.m_Instance.m_Players.Length; i++)
         {
             if (other.GetComponent<Player>() != null && other.GetComponent<Player>().m_State == Player.State.Alive)
             {
