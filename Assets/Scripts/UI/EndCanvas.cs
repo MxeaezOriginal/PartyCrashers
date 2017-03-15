@@ -24,12 +24,15 @@ public class EndCanvas : MonoBehaviour
 
         ES = GameObject.Find("EventSystem").GetComponent<EventSystem>();
         SIM = GameObject.Find("EventSystem").GetComponent<StandaloneInputModule>();
+
+        if (ES == null)
+            Debug.Log("YOU ARE MISSING EVENTSYSTEM GAMEOBJECT IN THIS SCENE; ADD IT");
     }
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.Tab))
-            activated = true;
+        //if (Input.GetKey(KeyCode.Tab))
+        //    activated = true;
 
         if (activated)
         {
