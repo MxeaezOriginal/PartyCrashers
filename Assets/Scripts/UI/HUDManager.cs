@@ -5,12 +5,16 @@ using System.Collections;
 
 public class HUDManager : MonoBehaviour
 {
-    //Player HUD Panels
+    [Header ("HUD Panels")]
     public GameObject P1_Panel, P2_Panel, P3_Panel, P4_Panel;
-    //RectTransofrm of these panels
+    [Header("Panel Transforms")]
     public RectTransform P1_PanelTransform, P2_PanelTransform, P3_PanelTransform, P4_PanelTransform;
-    //Score Counters
+    [Header("Score Counters")]
     public Text P1_ScoreCounter, P2_ScoreCounter, P3_ScoreCounter, P4_ScoreCounter;
+    [Header("Player Portrait Images")]
+    public Image[] playerPortraitImages = new Image[4];
+    [Header("Portrait Sprites")]
+    public Sprite[] portraitSprites = new Sprite[4];
 
     void Start()
     {
@@ -30,9 +34,15 @@ public class HUDManager : MonoBehaviour
             P2_ScoreCounter = GameObject.Find("P2_Panel/Score").GetComponent<Text>();
             P3_ScoreCounter = GameObject.Find("P3_Panel/Score").GetComponent<Text>();
             P4_ScoreCounter = GameObject.Find("P4_Panel/Score").GetComponent<Text>();
+
+            playerPortraitImages[0] = GameObject.Find("P1_Panel/Portrait BG/Portrait Image").GetComponent<Image>();
+            playerPortraitImages[1] = GameObject.Find("P2_Panel/Portrait BG/Portrait Image").GetComponent<Image>();
+            playerPortraitImages[2] = GameObject.Find("P3_Panel/Portrait BG/Portrait Image").GetComponent<Image>();
+            playerPortraitImages[3] = GameObject.Find("P4_Panel/Portrait BG/Portrait Image").GetComponent<Image>();
         }
 
         UpdateUIPanels();
+        UpdatePortraitImages();
     }
 
     void Update()
@@ -69,6 +79,74 @@ public class HUDManager : MonoBehaviour
         if (GameManager.m_Instance.m_Players.Length == 4)
         {
             return;
+        }
+    }
+
+    void UpdatePortraitImages()
+    {
+        //P1 PORTRAIT
+        switch(GameManager.m_Instance.m_Player1.model)
+        {
+            case Player.Model.Mascot:
+                playerPortraitImages[0].sprite = portraitSprites[0];
+                break;
+            case Player.Model.Nerd:
+                playerPortraitImages[0].sprite = portraitSprites[1];
+                break;
+            case Player.Model.Badboy:
+                playerPortraitImages[0].sprite = portraitSprites[2];
+                break;
+            case Player.Model.Goth:
+                playerPortraitImages[0].sprite = portraitSprites[3];
+                break;
+        }
+        //P2 PORTRAIT
+        switch (GameManager.m_Instance.m_Player2.model)
+        {
+            case Player.Model.Mascot:
+                playerPortraitImages[1].sprite = portraitSprites[0];
+                break;
+            case Player.Model.Nerd:
+                playerPortraitImages[1].sprite = portraitSprites[1];
+                break;
+            case Player.Model.Badboy:
+                playerPortraitImages[1].sprite = portraitSprites[2];
+                break;
+            case Player.Model.Goth:
+                playerPortraitImages[1].sprite = portraitSprites[3];
+                break;
+        }
+        //P3 PORTRAIT
+        switch (GameManager.m_Instance.m_Player3.model)
+        {
+            case Player.Model.Mascot:
+                playerPortraitImages[2].sprite = portraitSprites[0];
+                break;
+            case Player.Model.Nerd:
+                playerPortraitImages[2].sprite = portraitSprites[1];
+                break;
+            case Player.Model.Badboy:
+                playerPortraitImages[2].sprite = portraitSprites[2];
+                break;
+            case Player.Model.Goth:
+                playerPortraitImages[2].sprite = portraitSprites[3];
+                break;
+        }
+        //P4 PORTRAIT
+        switch (GameManager.m_Instance.m_Player4.model)
+        {
+            case Player.Model.Mascot:
+                playerPortraitImages[3].sprite = portraitSprites[0];
+                break;
+            case Player.Model.Nerd:
+                playerPortraitImages[3].sprite = portraitSprites[1];
+                break;
+            case Player.Model.Badboy:
+                playerPortraitImages[3].sprite = portraitSprites[2];
+                break;
+            case Player.Model.Goth:
+                playerPortraitImages[3].sprite = portraitSprites[3];
+                break;
         }
     }
 
