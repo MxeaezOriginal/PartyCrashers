@@ -323,7 +323,6 @@ public class GameManager : MonoBehaviour
             Debug.Log("Error: Instantiated player doesn't have a Player Component");
         }
     }
-
     void findPartyBar()
     {
         if (GameObject.Find("PartyBar") != null)
