@@ -184,7 +184,7 @@ public class MinigameResultSummary : MonoBehaviour
     {
         if (!neonTurnedOn)
         {
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(1f);
             neonTurnedOn = true;
             TurnNeonOn();
         }
@@ -330,7 +330,7 @@ public class MinigameResultSummary : MonoBehaviour
             if (m_MinigameManager.m_DelayToShowRewards < 0.0f)
             {
                 // Going to the Reward Selection Minigame state;
-                m_MinigameManager.UpdateMinigameState();
+                //m_MinigameManager.UpdateMinigameState();
             }
         }
     }

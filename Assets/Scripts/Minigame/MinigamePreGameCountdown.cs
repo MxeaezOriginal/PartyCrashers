@@ -49,15 +49,15 @@ public class MinigamePreGameCountdown : MonoBehaviour
 
         if (m_MinigameSceneName.Equals("BallroomBlitz"))
         {
-            m_tutorialText.GetComponent<Text>().text = "TUTORIAL TEXT POP-UP MESSAGE THAT TEACHES PLAYERS HOW TO PLAY BALLROOM BLITZ";
+            m_tutorialText.GetComponent<Text>().text = "Balls knock you off the Platform/nYellow Balls will stun you, stopping you from dodging, and White balls will explode Knocking everyone back";
         }
         if (m_MinigameSceneName.Equals("BreakToTheBeat"))
         {
-            m_tutorialText.GetComponent<Text>().text = "TUTORIAL TEXT POP-UP MESSAGE THAT TEACHES PLAYERS HOW TO PLAY BREAK TO THE BEAT";
+            m_tutorialText.GetComponent<Text>().text = "Eat as much food as you can while avoiding the flower vases";
         }
         if (m_MinigameSceneName.Equals("DanceFloorRumble"))
         {
-            m_tutorialText.GetComponent<Text>().text = "TUTORIAL TEXT POP-UP MESSAGE THAT TEACHES PLAYERS HOW TO PLAY DANCE FLOOR RUMBLE";
+            m_tutorialText.GetComponent<Text>().text = "Stand on the green tiles to gain points";
         }
     }
 
