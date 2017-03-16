@@ -49,7 +49,7 @@ public class LightFlash : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("SFX audio not set for: " + gameObject.name);
+            //Debug.LogWarning("SFX audio not set for: " + gameObject.name);
         }
         //sound code
         Invoke("changeColor", colorSwapTime);
