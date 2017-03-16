@@ -71,25 +71,28 @@ public class CubeWeight : MonoBehaviour {
         {
             if (other.GetComponent<Player>() != null && other.GetComponent<Player>().m_State == Player.State.Alive)
             {
-                if (other.GetComponent<Player>().m_Player == m_player[i].GetComponent<Player>().m_Player)
-                {
-                    is_touched[i] = true;
-                    m_recentNum++;
-                }
+                    if (other.GetComponent<Player>().m_Player == GameManager.m_Instance.m_Players[i].GetComponent<Player>().m_Player)
+                    {
+                        is_touched[i] = true;
+                        m_recentNum++;
+                    }
             }
         }
     }
 
     void OnTriggerExit(Collider other)
     {
-        for (int i = 0; i < m_player.Length; i++)
+        if (m_player != null)
         {
-            if (other.GetComponent<Player>() != null && other.GetComponent<Player>().m_State == Player.State.Alive)
+            for (int i = 0; i < m_player.Length; i++)
             {
-                if (other.GetComponent<Player>().m_Player == m_player[i].GetComponent<Player>().m_Player)
+                if (other.GetComponent<Player>() != null && other.GetComponent<Player>().m_State == Player.State.Alive)
                 {
-                    is_touched[i] = false;
-                    m_recentNum--;
+                    if (other.GetComponent<Player>().m_Player == GameManager.m_Instance.m_Players[i].GetComponent<Player>().m_Player)
+                    {
+                        is_touched[i] = false;
+                        m_recentNum--;
+                    }
                 }
             }
         }

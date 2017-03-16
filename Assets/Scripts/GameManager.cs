@@ -213,11 +213,11 @@ public class GameManager : MonoBehaviour
         for (int i = 1; i <= m_Instance.m_NumOfPlayers; ++i)
         {
             string player = "P" + i;
-            if (GameObject.Find("Players").transform.FindChild(player) != null)
+            if (GameObject.Find("Players") != null)
             {
-                GameObject playerParent = GameObject.Find("Players").transform.FindChild(player).gameObject;
+                    GameObject playerParent = GameObject.Find("Players").transform.FindChild(player).gameObject;
 
-                InstantiatePlayer(playerParent, player);
+                    InstantiatePlayer(playerParent, player);
             }
         }
 

@@ -12,7 +12,10 @@ public class Triggereneemyspawner : MonoBehaviour {
         enemyOn = false;
         while( Enemy.Length >= (I + 1) )
         {
-            Enemy[I].SetActive( false );
+            if (Enemy[I] != null)
+            {
+                Enemy[I].SetActive(false);
+            }
             I++;
         }
 

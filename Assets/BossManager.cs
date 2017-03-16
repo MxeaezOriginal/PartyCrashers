@@ -26,11 +26,6 @@ public class BossManager : MonoBehaviour
     public float minRandomPitch;
     private float randomPitch;
 
-    void Awake()
-    {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-    }
-
 
     void Start()
     {
@@ -63,6 +58,7 @@ public class BossManager : MonoBehaviour
 
             if (!m_IsStart)
             {
+                player = GameManager.m_Instance.m_Players[Random.Range(0, GameManager.m_Instance.m_Players.Length - 1)].GetComponent<Player>();
                 if (player.m_Model == Player.Model.Badboy)
                 {
                     SFXtoPlay = BadBoySFX[Random.Range(0, BadBoySFX.Length)];
@@ -88,9 +84,16 @@ public class BossManager : MonoBehaviour
                 }
 
                 randomPitch = Random.RandomRange(maxRandomPitch, minRandomPitch);
-                audioSource.clip = BossSFXtoPlay;
-                audioSource.pitch = randomPitch;
-                audioSource.Play();
+                if (audioSource != null)
+                {
+                    audioSource.clip = BossSFXtoPlay;
+                    audioSource.pitch = randomPitch;
+                    audioSource.Play();
+                }
+                else
+                {
+                    Debug.LogWarning("AudioSource not set on boss");
+                }
 
                 m_IsStart = true;
             }

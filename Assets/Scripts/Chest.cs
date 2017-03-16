@@ -22,7 +22,8 @@ public class Chest : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        animator.enabled = false;
+        if(animator != null)
+            animator.enabled = false;
     }
 
     // Update is called once per frame

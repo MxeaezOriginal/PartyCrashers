@@ -24,7 +24,8 @@ public class LightFlash : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        lt.color  = (arrayOfColors[I]);
+        if(I < arrayOfColors.Length)
+            lt.color  = (arrayOfColors[I]);
 
 
     }
@@ -40,9 +41,16 @@ public class LightFlash : MonoBehaviour
             I = 0;
         }
         //sound code
-        SFXtoPlay = SFX[Random.Range(0, SFX.Length)];
-        audioSource.clip = SFXtoPlay;
-        audioSource.Play();
+        if (SFX.Length > 0)
+        {
+            SFXtoPlay = SFX[Random.Range(0, SFX.Length)];
+            audioSource.clip = SFXtoPlay;
+            audioSource.Play();
+        }
+        else
+        {
+            Debug.LogWarning("SFX audio not set for: " + gameObject.name);
+        }
         //sound code
         Invoke("changeColor", colorSwapTime);
 

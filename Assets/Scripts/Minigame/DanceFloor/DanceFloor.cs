@@ -49,7 +49,8 @@ public class DanceFloor : MonoBehaviour {
 
         for (int i = 0; i < GameManager.m_Instance.m_NumOfPlayers; ++i)
         {
-            m_MinigameScoreAndTimeTrack.m_RawTime[i] = 0.0f;
+            if(i < m_MinigameScoreAndTimeTrack.m_RawTime.Length)
+                m_MinigameScoreAndTimeTrack.m_RawTime[i] = 0.0f;
         }
     }
 	

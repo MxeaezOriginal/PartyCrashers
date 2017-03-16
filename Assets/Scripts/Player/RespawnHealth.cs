@@ -92,6 +92,5 @@ public class RespawnHealth : MonoBehaviour
     {
         yield return new WaitForSeconds(.05f);
         m_WeaponManager.initialize();
-        Debug.Log("Initialized Manager");
     }
 }

@@ -46,7 +46,7 @@ public class HeartSystem : MonoBehaviour
 
     void Awake()
     {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        player = GetComponent<Player>();
     }
 
     void Start()
@@ -227,7 +227,7 @@ public class HeartSystem : MonoBehaviour
     {
         if (curHealth <= 0)
         {
-            print("Oh no cupcake, you died!");
+            //print("Oh no cupcake, you died!");
             return true;
         }
         return false;

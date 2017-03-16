@@ -35,10 +35,17 @@ public class TrapAnimation : MonoBehaviour {
             }
 
             randomPitch = Random.RandomRange(maxRandomPitch, minRandomPitch);
-            SFXtoPlay = DoorSFX[Random.Range(0, DoorSFX.Length)];
-            audioSource.clip = SFXtoPlay;
-            audioSource.pitch = randomPitch;
-            audioSource.Play();
+            if (DoorSFX.Length > 0)
+            {
+                SFXtoPlay = DoorSFX[Random.Range(0, DoorSFX.Length)];
+                audioSource.clip = SFXtoPlay;
+                audioSource.pitch = randomPitch;
+                audioSource.Play();
+            }
+            else
+            {
+                Debug.LogWarning("Audio not set for TrapAnimation under: " + gameObject.name);
+            }
         }
 
 

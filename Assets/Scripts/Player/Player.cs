@@ -278,7 +278,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            Debug.Log("Error: Current Weapon is NULL");
+            //Debug.Log("Error: Current Weapon is NULL");
         }
     }
 
@@ -296,11 +296,11 @@ public class Player : MonoBehaviour
             transform.position = hit.position;
         }
 
-        m_State = State.Dead;
         if(m_Score != 0)
         m_Score /= 2;
         gameObject.layer = 11;
         m_IsDead = true;
+        m_State = State.Dead;
         updateModel();
         //transform.position = tempLocation;
         stun(0.1f);
