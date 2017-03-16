@@ -59,7 +59,7 @@ public class BossManager : MonoBehaviour
         //Activate Boss
         if (m_backWall.transform.position.z >= 33f)
         {
-            //boss.SetActive(true);
+            boss.SetActive(true);
 
             if (!m_IsStart)
             {
