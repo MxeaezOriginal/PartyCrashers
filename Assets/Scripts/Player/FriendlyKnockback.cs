@@ -4,6 +4,9 @@ using System.Collections;
 public class FriendlyKnockback : MonoBehaviour {
 
     public float m_Knockback = 25f;
+    //VFX
+    public GameObject KnockbackFX;
+    //VFX END
 
     void OnTriggerStay(Collider collider)
     {
@@ -15,8 +18,16 @@ public class FriendlyKnockback : MonoBehaviour {
 
                 Vector3 direction = (otherPlayerController.transform.position - transform.position).normalized;
 
-                if(otherPlayerController != transform.GetComponentInParent<PlayerController>())
+                if (otherPlayerController != transform.GetComponentInParent<PlayerController>())
+                {
                     otherPlayerController.m_Velocity = direction * m_Knockback;
+                    if (KnockbackFX != null)
+                    {
+                        GameObject Knockbackvfx;
+                        Knockbackvfx = (GameObject)Instantiate(KnockbackFX, transform.position, transform.rotation);
+                        Destroy(Knockbackvfx, 0.5f);
+                    }
+                }
             }
         }
     }
