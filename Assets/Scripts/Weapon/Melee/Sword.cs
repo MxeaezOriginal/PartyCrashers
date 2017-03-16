@@ -18,6 +18,8 @@ public class Sword : Melee
     private float numOfParticles = 0;
     public float m_SecondSlashTime = 0.75f;
 
+    public GameObject followEffect;
+
     [SerializeField]
     public bool attack { get; private set; }
 
@@ -175,6 +177,7 @@ public class Sword : Melee
             //SFX END
             attack = true;
             m_DashCooldown = m_DashTime;
+            followEffect.SetActive(true);
            
             if(DashVFX != null)
             {
@@ -211,6 +214,7 @@ public class Sword : Melee
     {
         yield return new WaitForSeconds(.1f);
         m_Player.m_Animator.SetBool("isDashing", false);
+        followEffect.SetActive(false);
     }
 
     void OnDestroy()
