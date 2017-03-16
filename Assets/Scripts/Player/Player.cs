@@ -291,7 +291,7 @@ public class Player : MonoBehaviour
         //tempLocation.x -= vel.x * 20.0f;
         //tempLocation.z -= vel.z * 20.0f;
         NavMeshHit hit;
-        if(NavMesh.SamplePosition(transform.position, out hit, 100f, -1))
+        if(NavMesh.SamplePosition(transform.position, out hit, 1000f, -1))
         {
             transform.position = hit.position;
         }
