@@ -53,7 +53,8 @@ public class EnemyHealth : MonoBehaviour
     {
         Destroy(gameObject);
 
-        Instantiate(m_Drop, gameObject.transform.position, gameObject.transform.rotation);
+        if (m_Drop != null)
+            Instantiate(m_Drop, gameObject.transform.position, gameObject.transform.rotation);
 
         for (int i = 0; i < GameManager.m_Instance.m_Players.Length; ++i)
         {
