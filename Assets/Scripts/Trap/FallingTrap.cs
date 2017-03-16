@@ -76,7 +76,7 @@ public class FallingTrap : MonoBehaviour {
 
     void OnCollisionEnter(Collision other)
     {
-        if(other.gameObject.GetComponent<Player>() != null)
+        if(other.gameObject.GetComponent<Player>() != null && !other.gameObject.GetComponent<Player>().m_IsDead)
         {
             //SFX
             if (audioSource != null)
@@ -85,8 +85,8 @@ public class FallingTrap : MonoBehaviour {
                 audioSource.clip = SFXtoPlay;
                 audioSource.Play();
             }
-
             //SFX End
+
             m_Heart = other.gameObject.GetComponent<HeartSystem>();
             m_Heart.TakeDamage(m_Damage);
             m_Heart.UpdateHearts();
