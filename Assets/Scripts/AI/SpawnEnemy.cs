@@ -166,8 +166,8 @@ public class SpawnEnemy : EnemyAI // Inherits from EnemyAI now instead of Monobe
 			GameObject spawnedvfx;
 			spawningvfx = (GameObject)Instantiate (spawningEffect, transform.position, transform.rotation);
 			spawnedvfx = (GameObject)Instantiate (spawnedEffect, enemy.transform.position, transform.rotation);
-			Destroy (spawningvfx, 0.3f);
-			Destroy (spawnedvfx, 0.3f);
+			Destroy (spawningvfx, 2f);
+			Destroy (spawnedvfx, 2f);
 		}
         //VFXend
         //SFX

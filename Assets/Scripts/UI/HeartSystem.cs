@@ -196,7 +196,7 @@ public class HeartSystem : MonoBehaviour
             {
                 GameObject takeDamage;
                 takeDamage = (GameObject)Instantiate(deathVFX, transform.position, transform.rotation);
-                Destroy(takeDamage, 1f);
+                Destroy(takeDamage, 5f);
             }
             //Kavells VFX code
         }
