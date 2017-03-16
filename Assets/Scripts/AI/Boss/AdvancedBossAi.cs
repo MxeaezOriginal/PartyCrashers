@@ -98,9 +98,14 @@ public class AdvancedBossAi : MonoBehaviour
     //End screen 
     public Canvas endCanvas;
 
+    public int HurtTimer = 100;
+    private int currentHurt;
+
     // Use this for initialization
     void Start()
     {
+        //Set hurt timer
+        currentHurt = HurtTimer;
         //Set audio source
         source = GetComponent<AudioSource>();
         //Set the y position
@@ -167,7 +172,6 @@ public class AdvancedBossAi : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         //Switch states
         if (!PlayersAreDead())
         {
@@ -182,7 +186,8 @@ public class AdvancedBossAi : MonoBehaviour
                 case states.dash: Dash(Mathf.RoundToInt(30 / m_Difficulty), 10, Mathf.RoundToInt(10 / m_Difficulty)); break;
                 case states.earthquake: Earthquake(Mathf.RoundToInt(20 / m_Difficulty), Mathf.RoundToInt(20 / m_Difficulty)); break;
             }
-        }else
+        }
+        else
         {
             Idle();
         }
@@ -191,6 +196,11 @@ public class AdvancedBossAi : MonoBehaviour
         if (frame > 1000000) //Just in case the frame variable gets too big which I doubt it ever will BUT WHATEVER poopy butts stuff
         {
             frame = 0;
+        }
+        if (currentHurt > 0)
+        {
+            currentHurt -= 1;
+            m_Invincible = true;
         }
 
         //Call the move function so the guy actually moves based on it's velocity
@@ -239,6 +249,10 @@ public class AdvancedBossAi : MonoBehaviour
         //Make sure scale is fine
         if (state != states.teleport) transform.localScale = new Vector3(2f, 2f, 2f);
         //Manage invinvibility
+        if (currentHurt > 0)
+        {
+            m_Invincible = true;
+        }
         if (m_Invincible)
         {
             GetComponent<EnemyHealth>().isInvincible = true;
@@ -437,7 +451,7 @@ public class AdvancedBossAi : MonoBehaviour
             */
         }
         transform.Rotate(transform.rotation.x + Random.Range(0f, 120f), transform.rotation.y + Random.Range(0f, 120f), transform.rotation.z + Random.Range(0f, 120f));
-        
+
         m_Velocity = Vector3.Normalize(transform.position - getClosestPlayer().transform.position) * 50f;
 
         ////Sound
@@ -662,11 +676,6 @@ public class AdvancedBossAi : MonoBehaviour
     //This is where the decision making for the target player will happen
     GameObject GetTargetPlayer()
     {
-        //Sound
-
-        BossSFXtoPlay = BossProjectilesSFX[Random.Range(0, BossProjectilesSFX.Length)];
-        source.clip = BossSFXtoPlay;
-        source.Play();
 
         //Right now this whole function is really basic but I'll make it more complicated later
 
@@ -690,12 +699,6 @@ public class AdvancedBossAi : MonoBehaviour
         GameObject target;
 
         target = getClosestPlayer();
-
-        //Sound
-
-        BossSFXtoPlay = BossAimedSFX[Random.Range(0, BossAimedSFX.Length)];
-        source.clip = BossSFXtoPlay;
-        source.Play();
 
         return target;
     }
@@ -767,38 +770,17 @@ public class AdvancedBossAi : MonoBehaviour
     }
     GameObject getClosestPlayer()
     {
-        float distance = 0f;
+        float distance = 1000000000000f;
         GameObject target = null;
         for (int i = 0; i < players.Length; i++)
         {
-            if (i == 0)
+            Player playerScript = players[i].GetComponent<Player>();
+            if (!playerScript.m_IsDead)
             {
-                Player playerScript = players[i].GetComponent<Player>();
-                if (!playerScript.m_IsDead)
+                if (Vector3.Distance(players[i].transform.position, transform.position) < distance)
                 {
                     distance = Vector3.Distance(players[i].transform.position, transform.position);
                     target = players[i];
-                }
-                else
-                {
-                    continue;
-                }
-
-            }
-            else
-            {
-                Player playerScript = players[i].GetComponent<Player>();
-                if (!playerScript.m_IsDead)
-                {
-                    if (Vector3.Distance(players[i].transform.position, transform.position) < distance)
-                    {
-                        distance = Vector3.Distance(players[i].transform.position, transform.position);
-                        target = players[i];
-                    }
-                }
-                else
-                {
-                    continue;
                 }
             }
         }
