@@ -171,15 +171,22 @@ public class AdvancedBossAi : MonoBehaviour
     {
 
         //Switch states
-        switch (state)
+        if (!PlayersAreDead())
         {
-            case states.idle: Idle(); break;
-            case states.hurt: Hurt(m_DamageTaken, m_StunTime); break;
-            case states.teleport: Teleport(30, 30); break;
-            //Attacks
-            case states.shoot: m_BulletsToShoot = Mathf.RoundToInt(10 * m_Difficulty); BasicShoot(Mathf.RoundToInt(20 / m_Difficulty), Mathf.RoundToInt(20 / m_Difficulty)); break;
-            case states.dash: Dash(Mathf.RoundToInt(30 / m_Difficulty), 10, Mathf.RoundToInt(10 / m_Difficulty)); break;
-            case states.earthquake: Earthquake(Mathf.RoundToInt(20 / m_Difficulty), Mathf.RoundToInt(20 / m_Difficulty)); break;
+
+            switch (state)
+            {
+                case states.idle: Idle(); break;
+                case states.hurt: Hurt(m_DamageTaken, m_StunTime); break;
+                case states.teleport: Teleport(30, 30); break;
+                //Attacks
+                case states.shoot: m_BulletsToShoot = Mathf.RoundToInt(10 * m_Difficulty); BasicShoot(Mathf.RoundToInt(20 / m_Difficulty), Mathf.RoundToInt(20 / m_Difficulty)); break;
+                case states.dash: Dash(Mathf.RoundToInt(30 / m_Difficulty), 10, Mathf.RoundToInt(10 / m_Difficulty)); break;
+                case states.earthquake: Earthquake(Mathf.RoundToInt(20 / m_Difficulty), Mathf.RoundToInt(20 / m_Difficulty)); break;
+            }
+        }else
+        {
+            state = states.idle;
         }
         //Manage frame
         frame++;
@@ -212,7 +219,7 @@ public class AdvancedBossAi : MonoBehaviour
             canvasScript.activated = true;
             canvasScript.gameWon = false;
         }
-        
+
     }
     bool PlayersAreDead()
     {
@@ -286,7 +293,10 @@ public class AdvancedBossAi : MonoBehaviour
         Colors(Color.green, Color.green, 1f);
         //Look at next player
         GameObject closestPlayer = getClosestPlayer();
-        transform.LookAt(closestPlayer.transform.position);
+        if (closestPlayer != null)
+        {
+            transform.LookAt(closestPlayer.transform.position);
+        }
 
         //Friction
         Friction(1f);
@@ -450,6 +460,7 @@ public class AdvancedBossAi : MonoBehaviour
         frame++;
 
         GameObject playerToTarget = GetTargetPlayer();
+
         m_DashTarget = playerToTarget.transform;
 
 
@@ -504,96 +515,98 @@ public class AdvancedBossAi : MonoBehaviour
         #region Target the player
         //Get Player to shoot at and target where the player is going 
         GameObject player = GetTargetPlayer();
-        Vector3 pPosition = player.transform.position;
-        float shootSpeed = 22f;
-        Vector3 bv = (pPosition - transform.position).normalized * shootSpeed;
-        float distance = Vector3.Magnitude(pPosition - transform.position);
-
-
-        PlayerController p = player.GetComponent<PlayerController>();
-        Vector3 pVelocity = new Vector3(p.m_Velocity.x, 0f, p.m_Velocity.z);
-
-        float velocityDistance = Vector3.Magnitude((pPosition + pVelocity) - transform.position);
-
-        Vector3 BossPlayerVector = pPosition - transform.position;
-        float BossToPlayerPositionTime = BossPlayerVector.magnitude / shootSpeed;
-
-        float totalTime = BossToPlayerPositionTime * (pVelocity.magnitude - shootSpeed);
-        float totalDistance = shootSpeed * totalTime;
-
-        Vector3 totalVector = totalDistance * BossPlayerVector.normalized;
-
-        float AnswerDistance = totalVector.magnitude - BossPlayerVector.magnitude;
-
-        Vector3 shootTarget = transform.position + BossPlayerVector + (pVelocity * BossToPlayerPositionTime);
-
-        Vector3 targetPosition;
-
-        if (pVelocity.magnitude > 1f) //If the players velocity is bigger than 1, aim at the shoot target
+        if (player != null)
         {
-            transform.LookAt(shootTarget);
-            targetPosition = shootTarget;
-        }
-        else //Otherwise just aim at the player
-        {
-            transform.LookAt(pPosition);
-            targetPosition = pPosition;
-        }
-        #endregion
-        //Windup
-        if (frame < shootFrame)
-        {
-            m_Ball.transform.Rotate(transform.rotation.x - (frame * 50), transform.rotation.y, transform.rotation.z);
+            Vector3 pPosition = player.transform.position;
+            float shootSpeed = 22f;
+            Vector3 bv = (pPosition - transform.position).normalized * shootSpeed;
+            float distance = Vector3.Magnitude(pPosition - transform.position);
 
-        }
 
-        //Actually shoot something
+            PlayerController p = player.GetComponent<PlayerController>();
+            Vector3 pVelocity = new Vector3(p.m_Velocity.x, 0f, p.m_Velocity.z);
 
-        if (frame == shootFrame)
-        {
+            float velocityDistance = Vector3.Magnitude((pPosition + pVelocity) - transform.position);
 
-            //SFX
-            source.PlayOneShot(m_ShootSounds[0], 1);
+            Vector3 BossPlayerVector = pPosition - transform.position;
+            float BossToPlayerPositionTime = BossPlayerVector.magnitude / shootSpeed;
 
-            transform.LookAt(shootTarget);
-            m_BulletsShot += 1; //Increase number of bullets shot
-            for (int i = 0; i < LightningArray.Length; i++)
+            float totalTime = BossToPlayerPositionTime * (pVelocity.magnitude - shootSpeed);
+            float totalDistance = shootSpeed * totalTime;
+
+            Vector3 totalVector = totalDistance * BossPlayerVector.normalized;
+
+            float AnswerDistance = totalVector.magnitude - BossPlayerVector.magnitude;
+
+            Vector3 shootTarget = transform.position + BossPlayerVector + (pVelocity * BossToPlayerPositionTime);
+
+            Vector3 targetPosition;
+
+            if (pVelocity.magnitude > 1f) //If the players velocity is bigger than 1, aim at the shoot target
             {
-                if (LightningArray[i].active == false)
-                {
-                    LightningArray[i].SetActive(true);
-                    LightningArray[i].transform.position = transform.position + (targetPosition - transform.position).normalized * 3;
-                    LightningArray[i].transform.position = new Vector3(LightningArray[i].transform.position.x, LightningArray[i].transform.position.y + 5.3f, LightningArray[i].transform.position.z);
-
-
-                    Vector3 direction = (new Vector3(targetPosition.x, 0, targetPosition.z) - new Vector3(transform.position.x, 0, transform.position.z).normalized);
-                    Vector3 projectileVelocity = (targetPosition - transform.position).normalized * shootSpeed;
-
-                    BossLightningKamin script = LightningArray[i].GetComponent<BossLightningKamin>();
-                    script.m_ProjectileVelocity = projectileVelocity;
-                    break;
-                }
+                transform.LookAt(shootTarget);
+                targetPosition = shootTarget;
+            }
+            else //Otherwise just aim at the player
+            {
+                transform.LookAt(pPosition);
+                targetPosition = pPosition;
+            }
+            #endregion
+            //Windup
+            if (frame < shootFrame)
+            {
+                m_Ball.transform.Rotate(transform.rotation.x - (frame * 50), transform.rotation.y, transform.rotation.z);
 
             }
+
+            //Actually shoot something
+
+            if (frame == shootFrame)
+            {
+
+                //SFX
+                source.PlayOneShot(m_ShootSounds[0], 1);
+
+                transform.LookAt(shootTarget);
+                m_BulletsShot += 1; //Increase number of bullets shot
+                for (int i = 0; i < LightningArray.Length; i++)
+                {
+                    if (LightningArray[i].active == false)
+                    {
+                        LightningArray[i].SetActive(true);
+                        LightningArray[i].transform.position = transform.position + (targetPosition - transform.position).normalized * 3;
+                        LightningArray[i].transform.position = new Vector3(LightningArray[i].transform.position.x, LightningArray[i].transform.position.y + 5.3f, LightningArray[i].transform.position.z);
+
+
+                        Vector3 direction = (new Vector3(targetPosition.x, 0, targetPosition.z) - new Vector3(transform.position.x, 0, transform.position.z).normalized);
+                        Vector3 projectileVelocity = (targetPosition - transform.position).normalized * shootSpeed;
+
+                        BossLightningKamin script = LightningArray[i].GetComponent<BossLightningKamin>();
+                        script.m_ProjectileVelocity = projectileVelocity;
+                        break;
+                    }
+
+                }
+            }
+            if (frame > recoverFrame)
+            {
+                frame = 0;
+            }
+
+            //Change state
+            if (m_BulletsShot >= 10 * m_Difficulty)
+            {
+                m_BulletsShot = 0;
+                state = states.idle;
+            }
+
+            //Sound
+
+            BossSFXtoPlay = BossAutoSFX[Random.Range(0, BossAutoSFX.Length)];
+            source.clip = BossSFXtoPlay;
+            source.Play();
         }
-        if (frame > recoverFrame)
-        {
-            frame = 0;
-        }
-
-        //Change state
-        if (m_BulletsShot >= 10 * m_Difficulty)
-        {
-            m_BulletsShot = 0;
-            state = states.idle;
-        }
-
-        //Sound
-
-        BossSFXtoPlay = BossAutoSFX[Random.Range(0, BossAutoSFX.Length)];
-        source.clip = BossSFXtoPlay;
-        source.Play();
-
     }
     void Earthquake(int windup, int recover)
     {
@@ -770,6 +783,10 @@ public class AdvancedBossAi : MonoBehaviour
                     distance = Vector3.Distance(players[i].transform.position, transform.position);
                     target = players[i];
                 }
+                else
+                {
+                    continue;
+                }
 
             }
             else
@@ -782,6 +799,10 @@ public class AdvancedBossAi : MonoBehaviour
                         distance = Vector3.Distance(players[i].transform.position, transform.position);
                         target = players[i];
                     }
+                }
+                else
+                {
+                    continue;
                 }
             }
         }
