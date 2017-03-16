@@ -274,6 +274,7 @@ public class AdvancedBossAi : MonoBehaviour
         {
             currentHealth = enemyHealth.m_EnemyHealth;
             state = states.hurt;
+
             frame = 0;
         }
     }
@@ -887,5 +888,5 @@ public class AdvancedBossAi : MonoBehaviour
         mat.SetColor("_EmissionColor", finalColor);
         ballMat.SetColor("_EmissionColor", finalColor);
     }
-
+    //FML
 }
