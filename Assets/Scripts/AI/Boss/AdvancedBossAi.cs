@@ -204,6 +204,7 @@ public class AdvancedBossAi : MonoBehaviour
             canvasScript.gameWon = true;
             this.gameObject.SetActive(false);
         }
+        //Please kill me
         //All players die
         if (PlayersAreDead())
         {
@@ -861,7 +862,7 @@ public class AdvancedBossAi : MonoBehaviour
         {
             //Hit player
             PlayerController playerScript = other.gameObject.GetComponent<PlayerController>();
-            if (m_Velocity.magnitude > 10f)
+            if (m_Velocity.magnitude > 10f && state == states.dash)
             {
                 playerScript.m_Velocity = new Vector3(0f, 30f, 0f);
                 HeartSystem health = other.gameObject.GetComponent<HeartSystem>();
