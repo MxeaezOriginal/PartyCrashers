@@ -78,7 +78,8 @@ public class MinigameManager : MonoBehaviour
                 m_CurrentState = EMinigameState.BossPrompt;
                 break;
             default:
-                Debug.LogAssertion("[Minigame Manager] Invalid state update");
+                //Debug.LogAssertion("[Minigame Manager] Invalid state update");
+                m_CurrentState = EMinigameState.BossPrompt;
                 break;
         }
     }
