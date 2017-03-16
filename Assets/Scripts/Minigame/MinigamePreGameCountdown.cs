@@ -49,7 +49,7 @@ public class MinigamePreGameCountdown : MonoBehaviour
 
         if (m_MinigameSceneName.Equals("BallroomBlitz"))
         {
-            m_tutorialText.GetComponent<Text>().text = "Balls knock you off the Platform/nYellow Balls will stun you, stopping you from dodging, and White balls will explode Knocking everyone back";
+            m_tutorialText.GetComponent<Text>().text = "Avoid the balls, and try and stay on the platform. The White Balls will explode knocking everyone back";
         }
         if (m_MinigameSceneName.Equals("BreakToTheBeat"))
         {
