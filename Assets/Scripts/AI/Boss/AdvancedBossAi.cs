@@ -202,7 +202,7 @@ public class AdvancedBossAi : MonoBehaviour
             EndCanvas canvasScript = endCanvas.GetComponent<EndCanvas>();
             canvasScript.activated = true;
             canvasScript.gameWon = true;
-            //this.gameObject.SetActive(false);
+            this.gameObject.SetActive(false);
         }
         //All players die
         if (PlayersAreDead())
