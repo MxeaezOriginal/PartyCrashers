@@ -295,11 +295,15 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                float camDifference = Camera.main.transform.position.y - transform.position.y;
+                Vector3 playerPositionOnScreen = Camera.main.WorldToScreenPoint(transform.position);
+                Vector3 mousePositionOnScreen = Input.mousePosition;
+                Vector3 direction = mousePositionOnScreen - playerPositionOnScreen;
 
-                Vector3 direction = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, camDifference));
+                //float camDifference = Camera.main.transform.position.y - transform.position.y;
+                
+                //Vector3 direction = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, camDifference));
 
-                transform.LookAt(new Vector3(direction.x, transform.position.y, direction.z));
+                transform.LookAt(new Vector3(direction.x, transform.position.y, direction.y));
 
             }
 
