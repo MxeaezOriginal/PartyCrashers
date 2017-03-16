@@ -131,4 +131,15 @@ public class BossManager : MonoBehaviour
         }
         return zCurrent;
     }
+
+    void OnTriggerEnter(Collider col)
+    {
+        if(boss.active == false)
+        {
+            if (col.gameObject.GetComponent<Player>() != null)
+            {
+                boss.active = true;
+            }
+        }
+    }
 }

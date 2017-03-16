@@ -11,7 +11,7 @@ public class MinigameResultSummary : MonoBehaviour
 
     private Slider m_P1Bar, m_P2Bar, m_P3Bar, m_P4Bar;
     private float m_Speed = 2.0f;
-    private int m_MaxScore = 7000;
+    private int m_MaxScore;
 
     private bool m_IsScoreSorted;
 
@@ -57,6 +57,8 @@ public class MinigameResultSummary : MonoBehaviour
 
     void Update()
     {
+        m_MaxScore = m_MinigameManager.m_ScorePlace1;
+
         if (m_MinigameManager.GetMinigameState() == MinigameManager.EMinigameState.ResultSummary)
         {
             foreach (GameObject player in GameManager.m_Instance.m_Players)

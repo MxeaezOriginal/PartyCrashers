@@ -12,7 +12,7 @@ public class AdvancedBossAi : MonoBehaviour
     public float m_NumOfPlayersHealthMultiplier;
     public float m_Health;
 
-    [Range(0.1f, 0.9f)]
+    [Range(0.4f, 0.9f)]
     public float m_Difficulty;
 
     //Projectile
@@ -93,8 +93,10 @@ public class AdvancedBossAi : MonoBehaviour
     public AudioClip[] BossAutoSFX;
     //public AudioClip[] BossHurtSFX;
     public AudioClip BossSFXtoPlay;
-
     private AudioSource source;
+
+    //End screen 
+    public Canvas endCanvas;
 
     // Use this for initialization
     void Start()
@@ -191,13 +193,38 @@ public class AdvancedBossAi : MonoBehaviour
 
         //Manage difficulty
         ManageDifficulty();
+
         //Dies
         EnemyHealth enemyHealth = GetComponent<EnemyHealth>();
         if (enemyHealth.m_EnemyHealth <= 0)
         {
-            //Load main menu
-            SceneManager.LoadScene(0);
+            //End canvas
+            EndCanvas canvasScript = endCanvas.GetComponent<EndCanvas>();
+            canvasScript.activated = true;
+            canvasScript.gameWon = true;
+            //this.gameObject.SetActive(false);
         }
+        //All players die
+        if (PlayersAreDead())
+        {
+            EndCanvas canvasScript = endCanvas.GetComponent<EndCanvas>();
+            canvasScript.activated = true;
+            canvasScript.gameWon = false;
+        }
+        
+    }
+    bool PlayersAreDead()
+    {
+        for (int i = 0; i < players.Length; i++)
+        {
+            Player playerScript = players[i].GetComponent<Player>();
+            if (!playerScript.m_IsDead)
+            {
+                return false;
+            }
+
+        }
+        return true;
     }
     void FixedUpdate()
     {
@@ -719,9 +746,9 @@ public class AdvancedBossAi : MonoBehaviour
     {
         EnemyHealth enemyHealthScript = GetComponent<EnemyHealth>();
         m_Difficulty = GetPlayersTotalHealthRatio() / (enemyHealthScript.m_EnemyHealth / (m_BaseMaxHealth * m_NumOfPlayersHealthMultiplier));
-        if (m_Difficulty < 0.1)
+        if (m_Difficulty < 0.6)
         {
-            m_Difficulty = 0.1f;
+            m_Difficulty = 0.6f;
         }
         if (m_Difficulty > 0.9)
         {
@@ -736,15 +763,24 @@ public class AdvancedBossAi : MonoBehaviour
         {
             if (i == 0)
             {
-                distance = Vector3.Distance(players[i].transform.position, transform.position);
-                target = players[i];
-            }
-            else
-            {
-                if (Vector3.Distance(players[i].transform.position, transform.position) < distance)
+                Player playerScript = players[i].GetComponent<Player>();
+                if (!playerScript.m_IsDead)
                 {
                     distance = Vector3.Distance(players[i].transform.position, transform.position);
                     target = players[i];
+                }
+
+            }
+            else
+            {
+                Player playerScript = players[i].GetComponent<Player>();
+                if (!playerScript.m_IsDead)
+                {
+                    if (Vector3.Distance(players[i].transform.position, transform.position) < distance)
+                    {
+                        distance = Vector3.Distance(players[i].transform.position, transform.position);
+                        target = players[i];
+                    }
                 }
             }
         }

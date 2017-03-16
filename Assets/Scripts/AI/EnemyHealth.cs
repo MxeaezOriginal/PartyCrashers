@@ -124,7 +124,11 @@ public class EnemyHealth : MonoBehaviour
 				Destroy (takeDamage, 1f);
 			}
 			//Kavells VFX code
-            Kill();
+            if(gameObject.GetComponent<AdvancedBossAi>() == null)
+            {
+                Kill();
+            }
+            
         }
         else
         {
