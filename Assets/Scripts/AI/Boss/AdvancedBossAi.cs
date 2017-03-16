@@ -12,7 +12,7 @@ public class AdvancedBossAi : MonoBehaviour
     public float m_NumOfPlayersHealthMultiplier;
     public float m_Health;
 
-    [Range(0.1f, 0.9f)]
+    [Range(0.4f, 0.9f)]
     public float m_Difficulty;
 
     //Projectile
@@ -719,9 +719,9 @@ public class AdvancedBossAi : MonoBehaviour
     {
         EnemyHealth enemyHealthScript = GetComponent<EnemyHealth>();
         m_Difficulty = GetPlayersTotalHealthRatio() / (enemyHealthScript.m_EnemyHealth / (m_BaseMaxHealth * m_NumOfPlayersHealthMultiplier));
-        if (m_Difficulty < 0.1)
+        if (m_Difficulty < 0.3)
         {
-            m_Difficulty = 0.1f;
+            m_Difficulty = 0.3f;
         }
         if (m_Difficulty > 0.9)
         {
