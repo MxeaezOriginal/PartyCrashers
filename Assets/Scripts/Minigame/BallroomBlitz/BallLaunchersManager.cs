@@ -24,6 +24,11 @@ public class BallLaunchersManager : MonoBehaviour
     private float               m_FireRange;            // Fire range for launchers.
     private bool                m_IsCoroutineExecuting;
 
+
+    //VFX
+    public GameObject cannonfireFX;
+   //VFX
+
     void Start()
     {
         SetBallLaunchers();
@@ -180,6 +185,15 @@ public class BallLaunchersManager : MonoBehaviour
             ball.SetActive(true);
             ball.transform.position = m_BallLaunchers[launcherID].position;
             ball.transform.rotation = m_BallLaunchers[launcherID].rotation;
+
+            //VFX
+            if (cannonfireFX != null)
+            {
+                GameObject firevfx;
+                firevfx = (GameObject)Instantiate(cannonfireFX, m_BallLaunchers[launcherID].position, m_BallLaunchers[launcherID].rotation);
+                Destroy(firevfx, 0.5f);
+            }
+            //VFX
 
             // Depending on the type of the ball, set speed and material
             float randomNumber = Random.Range(0.0f, 1.0f);
