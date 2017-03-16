@@ -57,7 +57,7 @@ public class CollectObjects : MonoBehaviour
 
                 other.gameObject.SetActive(false);
             }
-            else if (GameManager.m_Instance.m_GameState == GameManager.GameState.Minigame && collectible.type == Collectible.Type.Simple && player.m_State == Player.State.Alive)
+            else if (GameManager.m_Instance.m_GameState == GameManager.GameState.Minigame && collectible.type == Collectible.Type.Simple && player.m_State == Player.State.Alive && partyBar.m_Current > 0.0f)
             {
                 player.m_Score += 100;
             }

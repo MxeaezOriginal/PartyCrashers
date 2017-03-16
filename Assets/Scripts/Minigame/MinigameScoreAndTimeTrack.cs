@@ -81,7 +81,7 @@ public class MinigameScoreAndTimeTrack : MonoBehaviour
 
     public IEnumerator UpdateScore()
     {
-        if (m_IsCoroutineRunning)
+        if (m_IsCoroutineRunning || m_MinigameManager.GetMinigameState() != MinigameManager.EMinigameState.ScoreAndTimeTrack)
         {
             yield break;
         }
