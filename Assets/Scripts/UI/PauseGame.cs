@@ -30,7 +30,6 @@ public class PauseGame : MonoBehaviour
     {
         if (GameObject.Find("Pause Menu/EventSystem") != null)
             es = GameObject.Find("Pause Menu/EventSystem").GetComponent<EventSystem>();
-
     }
     // Update is called once per frame
     void Update()
