@@ -52,7 +52,10 @@ public class BallManager : MonoBehaviour
                     }
                     break;
                 case EBallType.Stun:
-                    other.GetComponent<Player>().stun(m_StunTime);
+                    if (!other.GetComponent<Player>().m_IsDead)
+                    {
+                        other.GetComponent<Player>().stun(m_StunTime);
+                    }
                     break;
                 case EBallType.Bomb:
                     BombBallExplosion();
@@ -101,14 +104,18 @@ public class BallManager : MonoBehaviour
 
         foreach (var player in players)
         {
-            var playerController = player.GetComponent<PlayerController>();
-            m_KnockBackDirection = (player.transform.position - transform.position).normalized;
+            // check if player is not a pinata
+            if(!player.GetComponent<Player>().m_IsDead)
+            {
+                var playerController = player.GetComponent<PlayerController>();
+                m_KnockBackDirection = (player.transform.position - transform.position).normalized;
 
-            // Check if player is stunned
-            if (playerController.m_CantMove)
-                playerController.m_CantMove = false;
+                // Check if player is stunned
+                if (playerController.m_CantMove)
+                    playerController.m_CantMove = false;
 
-            playerController.m_Velocity = m_KnockBackDirection * m_KnockBackIntensity;
+                playerController.m_Velocity = m_KnockBackDirection * m_KnockBackIntensity;
+            }
         }
 
         if (gameObject.activeInHierarchy)
