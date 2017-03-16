@@ -9,6 +9,7 @@ public class BallManager : MonoBehaviour
     public float m_StunTime;
 
     public float m_KnockBackIntensity;
+    public float m_BombKnockBackIntensity;
 
     private Vector3 m_KnockBackDirection;
     private EBallType m_BallType;
@@ -114,7 +115,7 @@ public class BallManager : MonoBehaviour
                 if (playerController.m_CantMove)
                     playerController.m_CantMove = false;
 
-                playerController.m_Velocity = m_KnockBackDirection * m_KnockBackIntensity;
+                playerController.m_Velocity = m_KnockBackDirection * m_BombKnockBackIntensity;
             }
         }
 
