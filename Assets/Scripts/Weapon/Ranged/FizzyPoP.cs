@@ -37,6 +37,13 @@ public class FizzyPoP : Ranged
     private GameObject VFXFirePoint;
 
     public GameObject FallOffSprayVFXEarly;
+
+    //SFX
+    public AudioSource audioSource;
+    public GameObject SecondarySFXPlayer;
+    public AudioClip SecondarySFX;
+    
+    //SFX END
     #endregion
 
     GameObject ShootSprayGO;
@@ -75,6 +82,9 @@ public class FizzyPoP : Ranged
 
                 FizzyCone.SetActive(false);
                 FallOffEarly();
+                //SFX
+                audioSource.mute = true;
+                //SFX End
                 if (ShootSprayGO != null)
                 {
                     Destroy(ShootSprayGO, .2f);
@@ -85,14 +95,19 @@ public class FizzyPoP : Ranged
         if (Input.GetButtonUp(m_Player.m_PrimaryAttack + m_Player.m_Controller.ToString()))
         {
             m_SprayCooldown = -1;
-            //if (FallOffSpray != null)
-            //{
-            //    Destroy(FallOffSpray);
-            //}
-            //if (m_IsDown)
-            //{
-            //    m_CoolDown = Time.time;
-            //    m_IsDown = false;
+            //SFX
+            audioSource.mute = true;
+            //SFX End
+
+
+        //if (FallOffSpray != null)
+        //{
+        //    Destroy(FallOffSpray);
+        //}
+        //if (m_IsDown)
+        //{
+        //    m_CoolDown = Time.time;
+        //    m_IsDown = false;
 
             //    FizzyCone.SetActive(false);
             //    FallOffEarly();
@@ -123,6 +138,8 @@ public class FizzyPoP : Ranged
         {
             ShootSpray();
             m_IsDown = true;
+
+           
         }
     }
 
@@ -155,6 +172,11 @@ public class FizzyPoP : Ranged
             m_SprayCooldown = m_SprayTimer;
 
             FizzyCone.SetActive(true);
+
+            //SFX
+            audioSource.mute = false;
+            //SFX End
+
             //StopCoroutine(ShootSprayTimer());
             //StartCoroutine(ShootSprayTimer());
             //m_IsDown = false;
@@ -192,6 +214,17 @@ public class FizzyPoP : Ranged
         healPrefab = (GameObject)Instantiate(m_LeftTriggerProjectile, m_FirePoint[1].gameObject.transform.position + (playerController.transform.forward * 1.3f), m_FirePoint[1].gameObject.transform.rotation);
         healPrefab.GetComponent<Rigidbody>().AddForce(healPrefab.transform.forward * m_ProjectileSpeed02);
         playerController.m_Velocity = playerController.transform.forward.normalized * (m_PlayerRecoil * -1);
+
+        //SFX Start
+        if (SecondarySFX != null)
+        {
+            AudioSource source = SecondarySFXPlayer.GetComponent<AudioSource>();
+            source.clip = SecondarySFX;
+            GameObject SFXtest = Instantiate(SecondarySFXPlayer, transform.position, transform.rotation) as GameObject;
+        }
+
+       
+        //SFX End
         //m_CanHeal = false;
     }
 

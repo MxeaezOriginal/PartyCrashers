@@ -52,6 +52,7 @@ GameObject:
   - 23: {fileID: 2303066}
   - 114: {fileID: 11464802}
   - 114: {fileID: 11416694}
+  - 82: {fileID: 8214076}
   m_Layer: 8
   m_Name: FizzyGun
   m_TagString: Untagged
@@ -334,6 +335,80 @@ MeshCollider:
   serializedVersion: 2
   m_Convex: 0
   m_Mesh: {fileID: 4300000, guid: 8bec7e7bfc1edd340ba020ea2988fcc2, type: 3}
+--- !u!82 &8214076
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 155076}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 38dcfec91f2b69e4b9e57f5a301524fe, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 1
+  Spatialize: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!95 &9535332
 Animator:
   serializedVersion: 3
@@ -366,8 +441,10 @@ MonoBehaviour:
   m_Damage: 1
   m_Weapon1Cooldown: 1
   m_Weapon2Cooldown: 1
-  m_PrimarySounds: []
-  m_SecondarySounds: []
+  m_PrimarySounds:
+  - {fileID: 8300000, guid: 38dcfec91f2b69e4b9e57f5a301524fe, type: 3}
+  m_SecondarySounds:
+  - {fileID: 8300000, guid: 52ab6adc543fc534b94a9ff793fb46d6, type: 3}
   m_SoundsOnHit: []
   m_RightTriggerProjectile: {fileID: 0}
   m_LeftTriggerProjectile: {fileID: 145366, guid: 4a4f4968e409ebf48b4413abc44cbfd1,
@@ -391,6 +468,9 @@ MonoBehaviour:
   FallOffSprayVFX: {fileID: 147976, guid: 628b51554bec1f0449abc21365700561, type: 2}
   VFXFirePoint: {fileID: 185152}
   FallOffSprayVFXEarly: {fileID: 145336, guid: 031131d3cf05cb5429926ace91c2880e, type: 2}
+  audioSource: {fileID: 8214076}
+  SecondarySFXPlayer: {fileID: 190056, guid: 06a0abf2b12fa4d45a97c94d98d1d2cf, type: 2}
+  SecondarySFX: {fileID: 8300000, guid: 52ab6adc543fc534b94a9ff793fb46d6, type: 3}
 --- !u!114 &11446070
 MonoBehaviour:
   m_ObjectHideFlags: 1
