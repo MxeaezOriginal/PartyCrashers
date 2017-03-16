@@ -151,7 +151,7 @@ public class PartyBar : MonoBehaviour
         }*/
         GameManager.m_Instance.m_LastLevelPlayedIndex = SceneManager.GetActiveScene().buildIndex;
 
-        SceneManager.LoadScene(Random.Range(5, 7 + 1));
+        SceneManager.LoadScene(Random.Range(6, 8));
     }
 
     //void RewardsAndLoadBackToGame()
