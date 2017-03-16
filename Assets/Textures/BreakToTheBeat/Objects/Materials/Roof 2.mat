@@ -6,11 +6,11 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Neon_3
-  m_Shader: {fileID: 45, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: _DETAIL_MULX2 _EMISSION _NORMALMAP _PARALLAXMAP _SPECGLOSSMAP
+  m_Name: Roof 2
+  m_Shader: {fileID: 4800000, guid: dcb079b5a21b6c94e829848181aa6d7e, type: 3}
+  m_ShaderKeywords: _EMISSION _SHADOW_OFF
   m_LightmapFlags: 2
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 2000
   stringTagMap: {}
   m_SavedProperties:
     serializedVersion: 2
@@ -19,49 +19,49 @@ Material:
         first:
           name: _MainTex
         second:
-          m_Texture: {fileID: 2800000, guid: 016c4b95157e5ec4386858eaf93cf8f6, type: 3}
-          m_Scale: {x: 2.3, y: -2}
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
         first:
           name: _BumpMap
         second:
-          m_Texture: {fileID: 2800000, guid: d4ab84848814f0f41a30604d195d3837, type: 3}
+          m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
         first:
           name: _DetailNormalMap
         second:
-          m_Texture: {fileID: 2800000, guid: 70e83e753ff845c45855533d57de913d, type: 3}
+          m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
         first:
           name: _ParallaxMap
         second:
-          m_Texture: {fileID: 2800000, guid: 71b491ea874eb4645a6303f800503df8, type: 3}
+          m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
         first:
           name: _OcclusionMap
         second:
-          m_Texture: {fileID: 2800000, guid: c8a6162cc3d672241b5c9e8d35f9831a, type: 3}
+          m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
         first:
           name: _EmissionMap
         second:
-          m_Texture: {fileID: 2800000, guid: a90f7704c40a8a64880acedd9d4fcfbb, type: 3}
-          m_Scale: {x: 2.3, y: -2}
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
         first:
           name: _DetailMask
         second:
-          m_Texture: {fileID: 2800000, guid: e20347b833da5974dabc2d7dadb06814, type: 3}
+          m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
@@ -69,7 +69,7 @@ Material:
           name: _DetailAlbedoMap
         second:
           m_Texture: {fileID: 0}
-          m_Scale: {x: 2.3, y: -2}
+          m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
         first:
@@ -82,7 +82,7 @@ Material:
         first:
           name: _SpecGlossMap
         second:
-          m_Texture: {fileID: 2800000, guid: d37b5f894414cd54a8efb89ab6bc59cd, type: 3}
+          m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
     m_Floats:
@@ -100,8 +100,12 @@ Material:
         second: 0.5
       data:
         first:
+          name: _Outline
+        second: 0.0043
+      data:
+        first:
           name: _Parallax
-        second: 0.0588
+        second: 0.02
       data:
         first:
           name: _ZWrite
@@ -109,11 +113,11 @@ Material:
       data:
         first:
           name: _Glossiness
-        second: 0.5
+        second: 0.675
       data:
         first:
           name: _BumpScale
-        second: 7.58
+        second: 1
       data:
         first:
           name: _OcclusionStrength
@@ -133,17 +137,21 @@ Material:
       data:
         first:
           name: _Metallic
-        second: 0
+        second: 0.064
     m_Colors:
       data:
         first:
           name: _EmissionColor
-        second: {r: 0, g: 1.1724133, b: 2, a: 1}
+        second: {r: 0.01773358, g: 0.45764816, b: 0.60294116, a: 1}
       data:
         first:
           name: _Color
-        second: {r: 1, g: 1, b: 1, a: 1}
+        second: {r: 0.7793107, g: 0, b: 1, a: 1}
       data:
         first:
           name: _SpecColor
-        second: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+        second: {r: 0, g: 1, b: 0.08965492, a: 1}
+      data:
+        first:
+          name: _OutlineColor
+        second: {r: 0, g: 0, b: 0, a: 1}

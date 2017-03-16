@@ -7,9 +7,9 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Alum 2
-  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: 45, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: _EMISSION
-  m_LightmapFlags: 1
+  m_LightmapFlags: 2
   m_CustomRenderQueue: -1
   stringTagMap: {}
   m_SavedProperties:
@@ -78,6 +78,13 @@ Material:
           m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _SpecGlossMap
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
     m_Floats:
       data:
         first:
@@ -102,7 +109,7 @@ Material:
       data:
         first:
           name: _Glossiness
-        second: 0.5
+        second: 0.675
       data:
         first:
           name: _BumpScale
@@ -126,13 +133,17 @@ Material:
       data:
         first:
           name: _Metallic
-        second: 0
+        second: 0.064
     m_Colors:
       data:
         first:
           name: _EmissionColor
-        second: {r: 0.07058822, g: 0.41268408, b: 0.6156863, a: 1}
+        second: {r: 0.01773358, g: 0.45764816, b: 0.60294116, a: 1}
       data:
         first:
           name: _Color
-        second: {r: 0.6985294, g: 0.07190742, b: 0.39602202, a: 1}
+        second: {r: 1, g: 0.5661765, b: 0.7905678, a: 1}
+      data:
+        first:
+          name: _SpecColor
+        second: {r: 0, g: 1, b: 0.08965492, a: 1}
