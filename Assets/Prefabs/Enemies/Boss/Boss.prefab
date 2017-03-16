@@ -226,7 +226,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 114930}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.47, y: 1.571, z: 65.85}
+  m_LocalPosition: {x: 2.16, y: 2.4684203, z: 65.55}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -919,13 +919,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SFXPlayer: {fileID: 0}
-  SFXHit: {fileID: 0}
+  SFXHit: {fileID: 195836, guid: 7692547688d6ee948b960174207d6042, type: 2}
   hurtSFX:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 8300000, guid: 9fe19463c3fdb9a4c96cef68d7dfe37d, type: 3}
+  - {fileID: 8300000, guid: 3fa45ec16582b9a4682b55107f4bd01a, type: 3}
+  - {fileID: 8300000, guid: 251c49a12a5038640854d9b2722a8c2b, type: 3}
   deathSFX:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 8300000, guid: 8559df5ca4cd0a14483de64015b19545, type: 3}
+  - {fileID: 8300000, guid: 6fe18b2fdb6f7eb4691361eaeafe9895, type: 3}
+  - {fileID: 8300000, guid: b9482f2892fe21e4fa8667b84b43f68e, type: 3}
   maxRandomPitch: 1
   minRandomPitch: 3
   deathVFX: {fileID: 198072, guid: 34975b126bf83044cbda8d5c9b6423e8, type: 2}
@@ -946,7 +948,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3421a50265e8ee742ae99691c162de8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_BaseMaxHealth: 20
+  m_BaseMaxHealth: 60
   m_NumOfPlayersHealthMultiplier: 1.85
   m_Health: 0
   m_Difficulty: 0.9
@@ -954,8 +956,8 @@ MonoBehaviour:
   m_Lightning: {fileID: 101060, guid: 6fc29249f6f38034ab91b47409668c53, type: 2}
   m_BulletsToShoot: 5
   m_HurtEffect: {fileID: 123786}
-  m_TeleportEffect: {fileID: 0}
-  m_DashEffect: {fileID: 0}
+  m_TeleportEffect: {fileID: 135702, guid: d31f5ae855e006f46b888ecd06727cbb, type: 2}
+  m_DashEffect: {fileID: 119552, guid: 9c453dedd1a1d3848abd460641bff245, type: 2}
   m_Friction: 1
   m_Ball: {fileID: 191992}
   m_Face: {fileID: 125664}
@@ -965,31 +967,32 @@ MonoBehaviour:
   - {fileID: 462678, guid: 542a73bc9afb51947ab1f1087341ae24, type: 2}
   m_TeleportWindupSound: {fileID: 8300000, guid: bd0b0c9099a0603499ca78480357496e,
     type: 3}
-  m_TeleportSound: {fileID: 8300000, guid: b69e64262d9be744096870168dc06374, type: 3}
+  m_TeleportSound: {fileID: 8300000, guid: 029958daee9914b479f538b0535945d0, type: 3}
   m_ShootSounds:
   - {fileID: 8300000, guid: 816993f1222b68f429b81277e14bfc79, type: 3}
   - {fileID: 8300000, guid: 2667b0c0cb13a63459163ff97224ebb8, type: 3}
   m_DashWindupSound: {fileID: 8300000, guid: 724f48b86a0f3034ab5ec74e2d67f942, type: 3}
   m_DashSound: {fileID: 8300000, guid: b17f2802ec975ce498a724c5cf6fc501, type: 3}
   BossChargeSFX:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 8300000, guid: ad89bc10bc4bc9045be9f113e84f5afb, type: 3}
+  - {fileID: 8300000, guid: 6ecf52ae33f5ca84aa04708b5ea5678d, type: 3}
+  - {fileID: 8300000, guid: a1764eca07f37a348bd74e27ab3d95c8, type: 3}
   BossProjectilesSFX:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 8300000, guid: 7860570a5020aa64e90d0f9dac85a407, type: 3}
+  - {fileID: 8300000, guid: b4dca08e91926704b9c7b1c3287ef8fd, type: 3}
+  - {fileID: 8300000, guid: a915a91fc50e472449728f1cf8fcbc66, type: 3}
   BossAimedSFX:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 8300000, guid: 67786f0258e36324bb1f549c5f73ef42, type: 3}
+  - {fileID: 8300000, guid: 20d5585c36b1880429af4741b42c1069, type: 3}
+  - {fileID: 8300000, guid: d42e4d206cd7f8a4f883e2556812799f, type: 3}
+  - {fileID: 8300000, guid: 77e7ff8176f99b148a8c29932f65383d, type: 3}
+  - {fileID: 8300000, guid: 5d6270960bf87094c8c68d01e9eb8309, type: 3}
   BossAutoSFX:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 8300000, guid: fba95d75f55f4e14f918ffe8eab36ece, type: 3}
+  - {fileID: 8300000, guid: 9dd486833efd5fd4f8adc45524168e41, type: 3}
+  - {fileID: 8300000, guid: b9ce8d4cfcc340c489d4aabb8b238346, type: 3}
+  - {fileID: 8300000, guid: 514e46727e7f0cd4d8b61ed0bff639d8, type: 3}
+  - {fileID: 8300000, guid: aee9d59dbaee4084e96587dd8fa4affc, type: 3}
   BossSFXtoPlay: {fileID: 0}
 --- !u!135 &13572738
 SphereCollider:

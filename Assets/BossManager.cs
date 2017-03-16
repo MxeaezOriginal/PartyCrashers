@@ -59,7 +59,7 @@ public class BossManager : MonoBehaviour
         //Activate Boss
         if (m_backWall.transform.position.z >= 33f)
         {
-            boss.SetActive(true);
+            //boss.SetActive(true);
 
             if (!m_IsStart)
             {
@@ -130,5 +130,16 @@ public class BossManager : MonoBehaviour
             }
         }
         return zCurrent;
+    }
+
+    void OnTriggerEnter(Collider col)
+    {
+        if(boss.active == false)
+        {
+            if (col.gameObject.GetComponent<Player>() != null)
+            {
+                boss.active = true;
+            }
+        }
     }
 }
