@@ -327,7 +327,6 @@ public class GameManager : MonoBehaviour
     {
         if (GameObject.Find("PartyBar") != null)
         {
-            Debug.Log("Partybar Found.");
             GameManager.m_Instance.m_PartyBar = GameObject.Find("PartyBar").GetComponentInChildren<PartyBar>();
         }
         else

@@ -219,7 +219,6 @@ public class MenuManager : MonoBehaviour
             {
                 int players = ++GameManager.m_Instance.m_NumOfPlayers;
                 characterSelect.AssignController(Player.Controller.Keyboard);
-                Debug.Log("Player " + players + " has Joined!");
                 inputModule.submitButton = "Submit_Keyboard";
                 inputModule.horizontalAxis = "Horizontal_Keyboard";
                 inputModule.verticalAxis = "Vertical_Keyboard";

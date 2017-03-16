@@ -302,7 +302,6 @@ public class WeaponManager : MonoBehaviour
             if(child.name.Equals("Weapon"))
             {
                 m_WeaponsTransform = child;
-                Debug.Log("Weapons Transform found under: " + child.name);
                 break;
             }
             findWeaponRecursive(child);
