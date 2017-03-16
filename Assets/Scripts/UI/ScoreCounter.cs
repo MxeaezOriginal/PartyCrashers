@@ -27,7 +27,8 @@ public class ScoreCounter : MonoBehaviour
 
     void Update()
     {
-        textTarget.text = score.ToString();
+        if(textTarget != null)
+            textTarget.text = score.ToString();
 
         if (Input.GetKey(KeyCode.Space))
         {

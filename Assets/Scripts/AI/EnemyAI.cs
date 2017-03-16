@@ -63,10 +63,10 @@ public class EnemyAI : MonoBehaviour
     {
         if (target != null)
         {
-            if(other.transform.position.y < (transform.position.y + m_LookUpDis) && other.transform.position.y > (transform.position.y - m_LookUpDis))
-            {
-                transform.LookAt(other);
-            }
+            //if(other.transform.position.y < (transform.position.y + m_LookUpDis) && other.transform.position.y > (transform.position.y - m_LookUpDis))
+            //{
+                transform.LookAt(new Vector3(other.transform.position.x, transform.position.y, other.transform.position.z));
+            //}
         }
     }
 

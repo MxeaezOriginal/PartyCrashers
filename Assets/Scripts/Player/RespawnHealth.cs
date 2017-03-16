@@ -50,10 +50,10 @@ public class RespawnHealth : MonoBehaviour
         }
     }
 
-    public void initialize()
+    public void initialize(float respawnTime)
     {
-        m_CurrentHealth = m_MaxHealth * m_RespawnCount;
-        m_RespawnTime = m_Player.m_RespawnTime;
+        m_CurrentHealth = m_MaxHealth;
+        m_RespawnTime = respawnTime;
         m_Counter = Time.time;
     }
 
@@ -78,10 +78,7 @@ public class RespawnHealth : MonoBehaviour
 
             GameObject SFXtest = Instantiate(SFXPlayer, transform.position, transform.rotation) as GameObject;
             //SFX End
-            if (GameManager.m_Instance.m_GameState != GameManager.GameState.Minigame)
-            {
-                StartCoroutine(waitBeforeInitializeWeapon());
-            }
+            StartCoroutine(waitBeforeInitializeWeapon());
             m_RespawnCount++;
         }
     }

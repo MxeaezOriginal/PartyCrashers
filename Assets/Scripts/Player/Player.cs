@@ -70,6 +70,7 @@ public class Player : MonoBehaviour
     public bool m_IsDead;
     public State m_State;
     public float m_RespawnTime;
+    public float m_RespawnTimeMinigame;
     public float m_CheckLocationCooldown;
     //To hold location every x seconds to respawn to
     public Vector3 m_Location;
@@ -304,7 +305,7 @@ public class Player : MonoBehaviour
         //transform.position = tempLocation;
         stun(0.1f);
         m_PlayerController.m_Velocity.y = 0;
-        m_RespawnHealth.initialize();
+        m_RespawnHealth.initialize(m_RespawnTime);
         //SFX Start
         if (m_State == State.Alive)
         {
@@ -346,7 +347,7 @@ public class Player : MonoBehaviour
         updateModel();
         transform.position = new Vector3(0.0f, 0.0f);
         stun(0.2f);
-        m_RespawnHealth.initialize();
+        m_RespawnHealth.initialize(m_RespawnTimeMinigame);
     }
 
     public void updateModel()
