@@ -53,7 +53,7 @@ public class AdvancedBossAi : MonoBehaviour
     private bool attackerLeft = true;
     private float currentHealth;
     //Effects
-    public GameObject m_HurtEffect;
+    //public GameObject m_HurtEffect;
     public GameObject m_TeleportEffect;
     public GameObject m_DashEffect;
 
@@ -129,8 +129,10 @@ public class AdvancedBossAi : MonoBehaviour
         m_Body = GetComponent<Rigidbody>();
 
         //Effect
+        /*
         Instantiate(m_HurtEffect, transform.position, transform.rotation);
         m_HurtEffect.SetActive(false);
+        */
 
         //Projectiles
         for (int i = 0; i < ProjectilesArray.Length; i++)
@@ -151,10 +153,6 @@ public class AdvancedBossAi : MonoBehaviour
         if (m_Lightning == null)
         {
             Debug.LogError("Lightning object not assigned to boss");
-        }
-        if (m_HurtEffect == null)
-        {
-            Debug.LogError("Hurt effect object not assigned to boss");
         }
         if (m_TeleportEffect == null)//teleport
         {
@@ -186,7 +184,7 @@ public class AdvancedBossAi : MonoBehaviour
             }
         }else
         {
-            state = states.idle;
+            Idle();
         }
         //Manage frame
         frame++;
@@ -302,7 +300,7 @@ public class AdvancedBossAi : MonoBehaviour
         Friction(1f);
 
         //Choose attack
-        if (frame > 60 / m_Difficulty)
+        if (frame > 20 / m_Difficulty)
         {
             if (m_Invincible)
             {
@@ -431,17 +429,15 @@ public class AdvancedBossAi : MonoBehaviour
                 state = states.teleport;
             }
 
-
+            /*
             if (m_HurtEffect.active)
             {
                 m_HurtEffect.SetActive(false);
             }
+            */
         }
         transform.Rotate(transform.rotation.x + Random.Range(0f, 120f), transform.rotation.y + Random.Range(0f, 120f), transform.rotation.z + Random.Range(0f, 120f));
-        if (m_HurtEffect.active == false)
-        {
-            m_HurtEffect.SetActive(true);
-        }
+        
         m_Velocity = Vector3.Normalize(transform.position - getClosestPlayer().transform.position) * 50f;
 
         ////Sound
