@@ -14,7 +14,10 @@ public class HeartSystem : MonoBehaviour
     public static HeartSystem m_Instance;
 
     public Image[] heartImages = new Image[7];
-    public Sprite[] heartSprites = new Sprite[3];
+    public Sprite[] P1heartSprites = new Sprite[3];
+    public Sprite[] P2heartSprites = new Sprite[3];
+    public Sprite[] P3heartSprites = new Sprite[3];
+    public Sprite[] P4heartSprites = new Sprite[3];
 
     private Player player;
 	//kavells new code for feedback effects
@@ -83,33 +86,126 @@ public class HeartSystem : MonoBehaviour
     {
         if (GameManager.m_Instance.m_GameState == GameManager.GameState.Dungeon)
         {
-            bool empty = false;
-            int i = 0;
-
-            foreach (Image image in heartImages)
+            switch(GetComponent<Player>().m_Player)
             {
-                if (empty)
-                {
-                    image.sprite = heartSprites[0];//0 is an empty heart.
-                }
-                else
-                {
-                    i++;
-                    if (curHealth >= i * healthPerHeart)
-                    {
-                        image.sprite = heartSprites[heartSprites.Length - 1];//.Length - 1 is a full heart
-                    }
-                    else
-                    {
-                        int currentHeartHealth = (int)(healthPerHeart - (healthPerHeart * i - curHealth));
-                        int healthPerImage = healthPerHeart / (heartSprites.Length - 1);
-                        int imageIndex = currentHeartHealth / healthPerImage;
+                case Player.PLAYER.P1:
+                    bool emptyP1 = false;
+                    int iP1 = 0;
 
-                        image.sprite = heartSprites[imageIndex];
-                        empty = true;
+                    foreach (Image image in heartImages)
+                    {
+                        if (emptyP1)
+                        {
+                            image.sprite = P1heartSprites[0];//0 is an empty heart.
+                        }
+                        else
+                        {
+                            iP1++;
+                            if (curHealth >= iP1 * healthPerHeart)
+                            {
+                                image.sprite = P1heartSprites[P1heartSprites.Length - 1];//.Length - 1 is a full heart
+                            }
+                            else
+                            {
+                                int currentHeartHealth = (int)(healthPerHeart - (healthPerHeart * iP1 - curHealth));
+                                int healthPerImage = healthPerHeart / (P1heartSprites.Length - 1);
+                                int imageIndex = currentHeartHealth / healthPerImage;
+
+                                image.sprite = P1heartSprites[imageIndex];
+                                emptyP1 = true;
+                            }
+                        }
                     }
-                }
+                    break;
+                case Player.PLAYER.P2:
+                    bool emptyP2 = false;
+                    int iP2 = 0;
+
+                    foreach (Image image in heartImages)
+                    {
+                        if (emptyP2)
+                        {
+                            image.sprite = P2heartSprites[0];//0 is an empty heart.
+                        }
+                        else
+                        {
+                            iP2++;
+                            if (curHealth >= iP2 * healthPerHeart)
+                            {
+                                image.sprite = P2heartSprites[P2heartSprites.Length - 1];//.Length - 1 is a full heart
+                            }
+                            else
+                            {
+                                int currentHeartHealth = (int)(healthPerHeart - (healthPerHeart * iP2 - curHealth));
+                                int healthPerImage = healthPerHeart / (P2heartSprites.Length - 1);
+                                int imageIndex = currentHeartHealth / healthPerImage;
+
+                                image.sprite = P2heartSprites[imageIndex];
+                                emptyP1 = true;
+                            }
+                        }
+                    }
+                    break;
+                case Player.PLAYER.P3:
+                    bool emptyP3 = false;
+                    int iP3 = 0;
+
+                    foreach (Image image in heartImages)
+                    {
+                        if (emptyP3)
+                        {
+                            image.sprite = P3heartSprites[0];//0 is an empty heart.
+                        }
+                        else
+                        {
+                            iP3++;
+                            if (curHealth >= iP3 * healthPerHeart)
+                            {
+                                image.sprite = P3heartSprites[P3heartSprites.Length - 1];//.Length - 1 is a full heart
+                            }
+                            else
+                            {
+                                int currentHeartHealth = (int)(healthPerHeart - (healthPerHeart * iP3 - curHealth));
+                                int healthPerImage = healthPerHeart / (P3heartSprites.Length - 1);
+                                int imageIndex = currentHeartHealth / healthPerImage;
+
+                                image.sprite = P3heartSprites[imageIndex];
+                                emptyP1 = true;
+                            }
+                        }
+                    }
+                    break;
+                case Player.PLAYER.P4:
+                    bool emptyP4 = false;
+                    int iP4 = 0;
+
+                    foreach (Image image in heartImages)
+                    {
+                        if (emptyP4)
+                        {
+                            image.sprite = P4heartSprites[0];//0 is an empty heart.
+                        }
+                        else
+                        {
+                            iP4++;
+                            if (curHealth >= iP4 * healthPerHeart)
+                            {
+                                image.sprite = P4heartSprites[P4heartSprites.Length - 1];//.Length - 1 is a full heart
+                            }
+                            else
+                            {
+                                int currentHeartHealth = (int)(healthPerHeart - (healthPerHeart * iP4 - curHealth));
+                                int healthPerImage = healthPerHeart / (P4heartSprites.Length - 1);
+                                int imageIndex = currentHeartHealth / healthPerImage;
+
+                                image.sprite = P4heartSprites[imageIndex];
+                                emptyP1 = true;
+                            }
+                        }
+                    }
+                    break;
             }
+            
         }
     }
 
