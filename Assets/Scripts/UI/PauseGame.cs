@@ -60,6 +60,7 @@ public class PauseGame : MonoBehaviour
             BackButton();
 
         //PRESS START P1-4 + KEYBOARD
+        
         if (GameManager.m_Instance.m_Player1.m_Controller == Player.Controller.P1 || GameManager.m_Instance.m_Player2.m_Controller == Player.Controller.P1 ||
             GameManager.m_Instance.m_Player3.m_Controller == Player.Controller.P1 || GameManager.m_Instance.m_Player4.m_Controller == Player.Controller.P1)
         {
@@ -69,6 +70,7 @@ public class PauseGame : MonoBehaviour
                 PauseMenu();
             }
         }
+        
         if (GameManager.m_Instance.m_Player1.m_Controller == Player.Controller.P2 || GameManager.m_Instance.m_Player2.m_Controller == Player.Controller.P2 ||
     GameManager.m_Instance.m_Player3.m_Controller == Player.Controller.P2 || GameManager.m_Instance.m_Player4.m_Controller == Player.Controller.P2)
         {
@@ -96,6 +98,8 @@ GameManager.m_Instance.m_Player3.m_Controller == Player.Controller.P4 || GameMan
                 PauseMenu();
             }
         }
+        
+  
         if (GameManager.m_Instance.m_Player1.m_Controller == Player.Controller.Keyboard || GameManager.m_Instance.m_Player2.m_Controller == Player.Controller.Keyboard ||
 GameManager.m_Instance.m_Player3.m_Controller == Player.Controller.Keyboard || GameManager.m_Instance.m_Player4.m_Controller == Player.Controller.Keyboard)
         {
@@ -110,6 +114,7 @@ GameManager.m_Instance.m_Player3.m_Controller == Player.Controller.Keyboard || G
             canBack = false;
 
     }
+
     void Pause()
     {
         pauseActive = false;
@@ -162,7 +167,7 @@ GameManager.m_Instance.m_Player3.m_Controller == Player.Controller.Keyboard || G
     public void PauseMenu()
     {
 
-        for (int i = 0; i < GameManager.m_Instance.m_NumOfPlayers; i++)//MIGHT REDO AS ARRAY SIZE IF CAUSES ERRORS
+        for (int i = 0; i < GameManager.m_Instance.m_NumOfPlayers; i++)
         {
             GameManager.m_Instance.m_Players[i].GetComponent<PlayerController>().m_CantMove = true;
         }
