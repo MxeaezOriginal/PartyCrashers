@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 public class MinigameBossPrompt : MonoBehaviour
 {
@@ -12,10 +13,13 @@ public class MinigameBossPrompt : MonoBehaviour
     public  GameObject m_BossPromptCanvasButtonNO, m_BossPromptCanvasButtonYES;
 
     public bool m_PromptShown;
+    EventSystem es;
 
     // Use this for initialization
     void Start()
     {
+        es = GameObject.Find("EventSystem").GetComponent<EventSystem>();
+
         m_MinigameManager = GetComponent<MinigameManager>();
         m_MinigameRewardSelection = GetComponent<MinigameRewardSelection>();
 
@@ -49,6 +53,9 @@ public class MinigameBossPrompt : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (es.currentSelectedGameObject == null)
+            es.SetSelectedGameObject(m_BossPromptCanvasButtonNO);
+
         if (m_MinigameManager.GetMinigameState().Equals(MinigameManager.EMinigameState.BossPrompt))
         {
             if (!m_PromptShown)
