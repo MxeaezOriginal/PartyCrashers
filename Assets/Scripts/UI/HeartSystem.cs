@@ -123,7 +123,7 @@ public class HeartSystem : MonoBehaviour
 		{
 			GameObject takeDamage;
 			takeDamage = (GameObject)Instantiate (takeHitEffect, transform.position, Random.rotation);
-			Destroy (takeDamage, 0.5f);
+			Destroy (takeDamage, 1.5f);
 		}
             
         if(curHealth > 2)
