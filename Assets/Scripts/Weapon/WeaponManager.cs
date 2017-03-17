@@ -82,21 +82,24 @@ public class WeaponManager : MonoBehaviour
 
     public void SetWeapon(EWeapon weaponPrefabName)
     {
-        if (m_WeaponsTransform.FindChild(weaponPrefabName.ToString()) != null)
+        if (m_WeaponsTransform != null)
         {
-            GameObject child = m_WeaponsTransform.FindChild(weaponPrefabName.ToString()).gameObject;
-            if (m_Weapons.ContainsKey(weaponPrefabName.ToString()))
+            if (m_WeaponsTransform.FindChild(weaponPrefabName.ToString()) != null)
             {
-                InstantiateWeapon(m_Weapons[weaponPrefabName.ToString()], child, false);
+                GameObject child = m_WeaponsTransform.FindChild(weaponPrefabName.ToString()).gameObject;
+                if (m_Weapons.ContainsKey(weaponPrefabName.ToString()))
+                {
+                    InstantiateWeapon(m_Weapons[weaponPrefabName.ToString()], child, false);
+                }
+                else
+                {
+                    Debug.LogError("Could not find key with that Weapon name under the m_Weapons dictionary");
+                }
             }
             else
             {
-                Debug.LogError("Could not find key with that Weapon name under the m_Weapons dictionary");
+                Debug.LogError("Could not find GameObject with that Weapon name under player");
             }
-        }
-        else
-        {
-            Debug.LogError("Could not find GameObject with that Weapon name under player");
         }
     }
 

@@ -380,9 +380,9 @@ public class Player : MonoBehaviour
                         mascotClone.transform.localRotation = Quaternion.identity;
                         mascotClone.transform.localScale = new Vector3(1, 1, 1);
                         //mascotClone.transform.FindChild("lionGeo").GetComponent<Renderer>().material.SetColor("_OutlineColor", playerOneColor);
-                        StartCoroutine(waitThenSetPlayerOutline(mascotClone, m_Model));
                         mascotClone.name = "Model";
                         m_Animator = mascotClone.GetComponent<Animator>();
+                        StartCoroutine(waitThenSetPlayerOutline(mascotClone, m_Model));
                         break;
                     case Player.Model.Nerd:
                         GameObject nerdClone = Instantiate(GameManager.m_Instance.m_NerdPrefab, transform.position, Quaternion.identity) as GameObject;
@@ -390,10 +390,10 @@ public class Player : MonoBehaviour
                         nerdClone.transform.localPosition = new Vector3(0, 0, 0);
                         nerdClone.transform.localRotation = Quaternion.identity;
                         nerdClone.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
-                        StartCoroutine(waitThenSetPlayerOutline(nerdClone, m_Model));
                         nerdClone.name = "Model";
                         Debug.Log("CheekO");
                         m_Animator = nerdClone.GetComponent<Animator>();
+                        StartCoroutine(waitThenSetPlayerOutline(nerdClone, m_Model));
                         break;
                     case Player.Model.Badboy:
                         GameObject badBoyClone = Instantiate(GameManager.m_Instance.m_BadboyPrefab, transform.position, Quaternion.identity) as GameObject;
@@ -401,9 +401,9 @@ public class Player : MonoBehaviour
                         badBoyClone.transform.localPosition = new Vector3(0, 0, 0);
                         badBoyClone.transform.localRotation = Quaternion.identity;
                         badBoyClone.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
-                        StartCoroutine(waitThenSetPlayerOutline(badBoyClone, m_Model));
                         badBoyClone.name = "Model";
                         m_Animator = badBoyClone.GetComponent<Animator>();
+                        StartCoroutine(waitThenSetPlayerOutline(badBoyClone, m_Model));
                         break;
                     case Player.Model.Goth:
                         GameObject gothClone = Instantiate(GameManager.m_Instance.m_GothPrefab, transform.position, Quaternion.identity) as GameObject;
@@ -411,9 +411,9 @@ public class Player : MonoBehaviour
                         gothClone.transform.localPosition = new Vector3(0, 0, 0);
                         gothClone.transform.localRotation = Quaternion.identity;
                         gothClone.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
-                        StartCoroutine(waitThenSetPlayerOutline(gothClone, m_Model));
                         gothClone.name = "Model";
                         m_Animator = gothClone.GetComponent<Animator>();
+                        StartCoroutine(waitThenSetPlayerOutline(gothClone, m_Model));
                         break;
                         //case Player.Model.Pinata:
                         //    GameObject pinataClone = Instantiate(GameManager.m_Instance.m_PinataPrefab, transform.position, Quaternion.identity) as GameObject;
@@ -436,16 +436,19 @@ public class Player : MonoBehaviour
 
     IEnumerator waitThenSetPlayerOutline(GameObject modelObject, Model model)
     {
-        yield return new WaitForSeconds(1f);
+        yield return null;
 
-        if(model == Model.Mascot)
+        if (modelObject != null)
         {
-            modelObject.transform.FindChild("lionGeo").GetComponent<Renderer>().material.SetColor("_OutlineColor", playerCurrentColor);
-        }
-        else if(model != Model.Pinata)
-        {
-            modelObject.transform.FindChild("Human_Head").GetComponent<Renderer>().material.SetColor("_OutlineColor", playerCurrentColor);
-            modelObject.transform.FindChild("Human_Body").GetComponent<Renderer>().material.SetColor("_OutlineColor", playerCurrentColor);
+            if (model == Model.Mascot)
+            {
+                modelObject.transform.FindChild("lionGeo").GetComponent<Renderer>().material.SetColor("_OutlineColor", playerCurrentColor);
+            }
+            else if (model != Model.Pinata)
+            {
+                modelObject.transform.FindChild("Human_Head").GetComponent<Renderer>().material.SetColor("_OutlineColor", playerCurrentColor);
+                modelObject.transform.FindChild("Human_Body").GetComponent<Renderer>().material.SetColor("_OutlineColor", playerCurrentColor);
+            }
         }
     }
 
